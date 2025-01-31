@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: 32A852
 --- DISPLAY_NAME: Fanworks
 --- PREFIX: fnwk
---- VERSION: 1.3.2
+--- VERSION: 0.1
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1317a]
 
 local mod_path = SMODS.current_mod.path
@@ -17,7 +17,7 @@ fnwk_enabled = copy_table(fnwk_config)
 
 local hook_list = {
 	"card",
-	"UI_definitions",
+	-- "UI_definitions",
 }
 
 function recursiveEnumerate(folder)
@@ -65,7 +65,7 @@ end
 
 local conf_fanworks = {
 	jokersToLoad = {
-		-- Common
+		--[[
 		'twoface',
 		'newjoker',
 		'depressedbrother',
@@ -151,62 +151,40 @@ local conf_fanworks = {
 		'frich',
 		'bunji',
 		'tetris',
+		--]]
 
 		-- fanworks
 		'streetlit_resil',
 		'theaquarium',
 	},
 	consumablesToLoad = {
+		--[[
 		--Spectral
 		'quixotic',
 		'protojoker',
-	},
-	vhsToLoad = {
+		--]]
 	},
 	standsToLoad = {
 	},
 	packsToLoad = {
 	},
 	decksToLoad = {
-		'vine',
+		-- 'vine',
 	},
 	challengesToLoad = {
-		'tucker',
+		-- 'tucker',
 	},
 	blindsToLoad = {
+		--[[
 		'hog',
 		'tray',
 		'vod',
 		'finger',
 		'mochamike',
+		--]]
 	},
 	trophiesToLoad = {}
 }
-
-local twoPointO = false
-
-if twoPointO then
-	conf_fanworks.vhsToLoad = {
-		'blackspine',
-		'doubledown',
-		'topslots',
-		'donbeveridge',
-		'tbone',
-	}
-	conf_fanworks.standsToLoad = {
-		'moodyblues',
-		'tohth',
-	}
-	conf_fanworks.consumablesToLoad[#conf_fanworks.consumablesToLoad+1] = 'arrow'
-	conf_fanworks.jokersToLoad[#conf_fanworks.jokersToLoad+1] = 'tetris'
-	conf_fanworks.decksToLoad[#conf_fanworks.decksToLoad+1] = 'wheel'
-	conf_fanworks.packsToLoad = {
-		'analog1',
-		'analog2',
-		'analog3',
-		'analog4',
-	}
-end
 
 local start = Game.start_run
 function Game:start_run(args)
@@ -248,21 +226,6 @@ if fnwk_enabled['enableTrophies'] then
 	end
 else
 	G.loadTrophies = false
-end
-
--- Talisman compat
-to_big = to_big or function(num)
-	return num
-end
-
--- unused
-function getCardPosition(card)
-	for i = 1, #G.jokers.cards do
-		if G.jokers.cards[i] == card then
-			return i
-		end
-	end
-	return nil
 end
 
 function containsKey(table, key)
@@ -524,70 +487,7 @@ end
 
 SMODS.Atlas({ key = 'fnwk_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
 
-if twoPointO and #conf_fanworks.vhsToLoad > 0 then
-	G.C.VHS = HEX('a2615e')
-
-	SMODS.ConsumableType{
-		key = "VHS",
-		primary_colour = G.C.VHS,
-		secondary_colour = G.C.VHS,
-		collection_rows = { 8, 8 },
-		shop_rate = 1,
-		loc_txt = {},
-		default = "c_fnwk_blackspine",
-		can_stack = false,
-		can_divide = false,
-	}
-
-	SMODS.UndiscoveredSprite{
-		key = "VHS",
-		atlas = "fnwk_undiscovered",
-		pos = { x = 0, y = 0 }
-	}
-
-	G.FUNCS.tape_activate = function(card)
-		if not card.config.center.activation then return end
-		if card.ability.activated then
-			card.ability.activated = false
-			play_sound('fnwk_vhsclose', 0.9 + math.random()*0.1, 0.4)
-		else
-			card.ability.tape_move = 9
-			card.ability.sleeve_move = -9
-			card.ability.activated = true
-			play_sound('fnwk_vhsopen', 0.9 + math.random()*0.1, 0.4)
-		end
-	end
-
-	G.FUNCS.destroy_tape = function(card, delay, ach, silent)
-		G.E_MANAGER:add_event(Event({
-			trigger = 'after',
-			delay = delay,
-			func = function()
-				if not silent then
-					play_sound('tarot1')
-				end
-				card.T.r = -0.2
-				card:juice_up(0.3, 0.4)
-				card.states.drag.is = true
-				card.children.center.pinch.x = true
-				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-											 func = function()
-												 G.consumeables:remove_card(card)
-												 card:remove()
-												 card = nil
-												 return true
-											 end
-				}))
-				if ach then
-					check_for_unlock({ type = ach })
-				end
-				return true
-			end
-		}))
-	end
-end
-
-if twoPointO and #conf_fanworks.standsToLoad > 0 then
+if #conf_fanworks.standsToLoad > 0 then
 	G.C.Stand = HEX('b85f8e')
 	SMODS.ConsumableType{
 		key = "Stand",
@@ -609,17 +509,10 @@ if twoPointO and #conf_fanworks.standsToLoad > 0 then
 end
 
 -- Load Jokers
-for i, v in ipairs(conf_fanworks.jokersToLoad) do
-	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
-	local enabled = false
-	if jokerInfo.streamer then
-		if ((jokerInfo.streamer == 'vinny' or 'othervinny') and fnwk_enabled['enableVinkers'])
-				or (jokerInfo.streamer == 'joel' and fnwk_enabled['enableJoelkers'])
-				or ((jokerInfo.streamer == 'other' or 'othervinny') and fnwk_enabled['enableOtherJokers']) then
-			enabled = true
-		end
-	end
-	if enabled then
+
+if fnwk_enabled['enableJokers'] then
+	for i, v in ipairs(conf_fanworks.jokersToLoad) do
+		local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
 		jokerInfo.key = v
 		jokerInfo.atlas = v
 		local atlasKey = v
@@ -672,9 +565,7 @@ end
 for i, v in ipairs(conf_fanworks.consumablesToLoad) do
 	loadConsumable(v)
 end
-for i, v in ipairs(conf_fanworks.vhsToLoad) do
-	loadConsumable(v)
-end
+
 for i, v in ipairs(conf_fanworks.standsToLoad) do
 	loadConsumable(v)
 end
@@ -697,7 +588,7 @@ for i, v in ipairs(conf_fanworks.packsToLoad) do
 	SMODS.Atlas({ key = v, path ="packs/" .. v .. ".png", px = pack.width or 71, py = pack.height or  95 })
 end
 
-
+--[[
 if fnwk_enabled['enableDecks'] then
 	for i, v in ipairs(conf_fanworks.decksToLoad) do
 		local deckInfo = assert(SMODS.load_file("decks/" .. v .. ".lua"))()
@@ -755,6 +646,7 @@ if fnwk_enabled['enableBosses'] then
 		SMODS.Atlas({ key = v, atlas_table = "ANIMATION_ATLAS", path = "blinds/" .. v .. ".png", px = 34, py = 34, frames = 21, })
 	end
 end
+
 for i, v in ipairs(conf_fanworks.trophiesToLoad) do
 	local trophyInfo = assert(SMODS.load_file("achievements/" .. v))()
 
@@ -776,6 +668,7 @@ for i, v in ipairs(conf_fanworks.trophiesToLoad) do
 end
 
 SMODS.Atlas({ key = 'fnwk_achievements', path = "fnwk_achievements.png", px = 66, py = 66})
+--]]
 
 local card_drawRef = Card.draw
 function Card.draw(self, layer)
@@ -808,6 +701,7 @@ function externalPsuedorandom(chance, total)
 	return randomNumber <= chance
 end
 
+--[[
 ach_checklists = {
 	band = {
 		4,
@@ -898,6 +792,7 @@ if fnwk_enabled['enableSkins'] then
 		G.C.SO_2[suit] = c
 	end
 end
+--]]
 
 G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
 
@@ -922,12 +817,15 @@ local main_menuRef = Game.main_menu
 function Game:main_menu(change_context)
 	main_menuRef(self, change_context)
 
+	--[[
 	if fnwk_enabled['enableChallenges'] then
 		fnwk_tucker_addBanned()
 	end
+	--]]
 
 end
 
+--[[
 -- Mod Icon in Mods tab
 SMODS.Atlas({
 	key = "modicon",
@@ -992,9 +890,9 @@ if AltTexture and TexturePack then
 			'fnwk_tarot',
 		},
 		loc_txt = {
-			name = 'Fanworks Malverk Compatibility',
+			name = 'Cardsauce Malverk Compatibility',
 			text = {
-				"Enables the Fanworks reskins of the Suit Color",
+				"Enables the Cardsauce reskins of the Suit Color",
 				"Jokers + 2 Tarot cards to work with Malverk!",
 			}
 		}
@@ -1590,16 +1488,7 @@ if fnwk_enabled['enableSkins'] then
 		posStyle = "collab"
 	}
 end
-
-SMODS.Sound({
-	key = "vhsopen",
-	path = "vhsopen.ogg",
-})
-
-SMODS.Sound({
-	key = "vhsclose",
-	path = "vhsclose.ogg",
-})
+--]]
 
 G.FUNCS.reset_trophies = function(e)
 	local warning_text = e.UIBox:get_UIE_by_ID('warn')
@@ -1665,16 +1554,7 @@ local fnwkConfigTabs = function() return {
 					{n=G.UIT.T, config={text = localize("vs_options_sub"), scale = text_scale*0.5, colour = G.C.GREEN, shadow = true}},
 				}},]]--
 			}}
-			if localize("vs_options_muteWega") then
-				fnwk_opts.nodes[#fnwk_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
-					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-						create_toggle({n=G.UIT.T, label = localize("vs_options_muteWega"), ref_table = fnwk_config, ref_value = 'muteWega' })
-					}},
-					{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-						{n=G.UIT.T, config={text = localize("vs_options_muteWega_desc"), scale = text_scale*0.35, colour = G.C.JOKER_GREY, shadow = true}}
-					}},
-				}}
-			end
+			--[[
 			if localize("vs_options_resetTrophies_r") then
 				fnwk_opts.nodes[#fnwk_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
 					{n=G.UIT.R, config={align = "cm", minw = 0.5, maxw = 2, minh = 0.6, padding = 0, r = 0.1, hover = true, colour = G.C.RED, button = "reset_trophies", shadow = true, focus_args = {nav = 'wide'}}, nodes={
@@ -1685,6 +1565,7 @@ local fnwkConfigTabs = function() return {
 					}},
 				}}
 			end
+			--]]
 			fnwk_opts.nodes[#fnwk_opts.nodes+1] = {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
 				{n=G.UIT.T, config={id = 'warn', text = localize('ph_click_confirm'), scale = 0.4, colour = G.C.CLEAR}}
 			}}
@@ -1709,12 +1590,10 @@ local fnwkConfigTabs = function() return {
 
 SMODS.current_mod.extra_tabs = fnwkConfigTabs
 
-
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
-		'enableVinkers',
-		'enableJoelkers',
-		'enableOtherJokers',
+		'enableJokers',
+		--[[
 		'enableSpectrals',
 		'enableBosses',
 		'enableDecks',
@@ -1722,6 +1601,7 @@ SMODS.current_mod.config_tab = function()
 		'enableChallenges',
 		'enableTrophies',
 		'enableTarotSkins',
+		--]]
 	}
 	local left_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
@@ -1750,6 +1630,7 @@ SMODS.current_mod.config_tab = function()
 	}
 end
 
+--[[
 vs_credit_1 = "BarrierTrio/Gote"
 vs_credit_2 = "DPS2004"
 vs_credit_3 = "SagaciousCejai"
@@ -2055,3 +1936,4 @@ SMODS.current_mod.credits_tab = function()
 		}}
 	}}
 end
+--]]

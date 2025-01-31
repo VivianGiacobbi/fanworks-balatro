@@ -217,14 +217,8 @@ return {
 				["1"]="Fullsauce",
 			},
         },
-		labels = {
-			vhs = "VHS Tape",
-			stand = "Stands"
-		},
 		dictionary = {
-			k_vhs = "VHS Tape",
 			k_stand = "Stand",
-			b_vhs_cards = "VHS Tapes",
 			b_stand_cards = "Stands",
 			b_and_activate = "& Activate",
 			b_activate = "Activate",
@@ -237,26 +231,17 @@ return {
 			vs_credits6 = "Special Thanks",
 			vs_credits7 = "Music",
 			vs_options_sub = "(Restart required to apply)",
-			vs_options_muteWega = "Mute WAAUGGHGHHHHGHH",
-			vs_options_muteWega_desc = "Check this box to mute WAAUGGHGHHHHGHH's screams",
-			vs_options_enableVinkers = "Vinny-centric Jokers",
-			vs_options_enableJoelkers = "Joel-centric Jokers",
-			vs_options_enableOtherJokers = "Other Jokers",
+			vs_options_enableJokers = "Jokers",
 			vs_options_enableSpectrals = "Spectral Cards",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableBosses = "Boss Blinds",
 			vs_options_enableSkins = "Custom Playing Cards",
 			vs_options_enableChallenges = "Challenges",
-			vs_options_enableMusic = "Fanworks Music",
 			vs_options_enableTrophies = "Fanworks Achievements",
 			vs_options_enableLogo = "Main Menu Logo",
-			vs_options_enableColors = "Custom Colors",
 			vs_options_enableTarotSkins = "Tarot Card Reskins",
-			vs_options_enableEasterEggs = "Easter Eggs",
 			vs_options_resetTrophies_r = "Reset Achievements",
 			vs_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
-			vs_options_chadNova_r = "Undo Chadnova",
-			vs_options_chadNova_desc = "Click this button to undo the consequences of your actions",
 			vs_collab_credits = {
 				Hearts = {
 					collab_AU = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
@@ -278,34 +263,6 @@ return {
 					collab_CYP = "King, Queen and Jack by Jazz_Jen",
 				}
 			},
-			b_set_colors = "Colors",
-			b_color_selector = "Background Colors",
-			b_color_selector_outer = "Main Menu Outer Swirl",
-			b_color_selector_inner = "Main Menu Inner Swirl",
-			b_color_selector_game = "Small/Big Blind Color",
-			b_color_selector_game_2 = "Endless Mode Color",
-			b_color_selector_hex = "Enter HEX Code",
-			b_color_selector_paste_hex = {"Paste"},
-			b_color_selector_hex_set = {"Apply Colors"},
-			ml_color_selector_opt={
-				"Default (Cardsauce)",
-				"Default (Balatro)",
-				"Darkshroom",
-				"Vineshroom",
-				"Fullsauce",
-				"Extrasauce",
-				"Twitch Clips",
-				"Fren",
-				"Jabroni",
-				"Uzumaki",
-				"Custom (ex: FFFFFF)"
-			},
-			b_music_selector = "Soundtrack",
-			ml_music_selector_opt={
-				"Cardsauce OST by Bassclefff",
-				"Balatro OST by LouisF"
-			},
-			b_color_selector_desc = "(Click colors to update swirl)",
 			ph_armageddon = "Annihilated by Odio",
 			ph_saved_vague = "Saved by Joker",
 			k_upgrade_double_ex = "Double Upgrade!",
@@ -349,9 +306,6 @@ return {
 			k_sts_wild = "Deification",
 			k_disguy_1 = "BLS BLAY GAME BINTY!!!",
 			k_disguy_2 = "ONLY 20 MINOOT!!!",
-			k_analog_pack = "Analog Pack",
-			k_jumbo_analog_pack = "Jumbo Analog Pack",
-			k_mega_analog_pack = "Mega Analog Pack",
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
 		},
@@ -568,16 +522,6 @@ return {
 	},
 	descriptions = {
 		Blind = {
-			bl_final_vessel = {
-				text = {
-					"HEY WALL",
-				},
-			},
-			bl_wall = {
-				text = {
-					"THAT'S THE WALL BROTHER",
-				},
-			},
 			bl_fnwk_hog = {
 				name="The Hog",
 				text={
@@ -619,48 +563,12 @@ return {
 			},
 		},
 		Other = {
-			undiscovered_vhs={
-				name="Not Discovered",
-				text={
-					"Purchase this card in",
-					"an unseeded run to",
-					"learn what it does",
-				},
-			},
 			undiscovered_stand={
 				name="Not Discovered",
 				text={
 					"Purchase this card in",
 					"an unseeded run to",
 					"learn what it does",
-				},
-			},
-			p_fnwk_analog1={
-				name = 'Analog Pack',
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2#{C:vhs} VHS Tapes{}",
-				},
-			},
-			p_fnwk_analog2={
-				name = 'Analog Pack',
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:vhs} VHS Tapes{}",
-				},
-			},
-			p_fnwk_analog3={
-				name = 'Jumbo Analog Pack',
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:vhs} VHS Tapes{}",
-				},
-			},
-			p_fnwk_analog4={
-				name = 'Mega Analog Pack',
-				text = {
-					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:vhs} VHS Tapes{}",
 				},
 			},
 			wheel2 = {
@@ -670,19 +578,6 @@ return {
 					"{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
 					"{C:dark_edition}Polychrome{} edition",
 					"to a random {C:attention}Joker",
-				},
-			},
-			vhs_activation = {
-				name = "VHS Activation",
-				text = {
-					"When clicking the use button,",
-					"this {C:vhs}VHS Tape's{} Joker-like ability",
-					"will become {C:attention}activated{}, and it",
-					"won't immediately disappear.",
-					"This activation state can be {C:attention}toggled{},",
-					"and when its ability is used up, the",
-					"tape is then {C:attention}destroyed.",
-
 				},
 			},
 			stand_info = {
