@@ -11,7 +11,7 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
-	streamer = "other",
+	fanwork = "Streetlight Pursuit",
 }
 
 SMODS.Atlas({ key = "resil", path ="jokers/streetlit_resil.png", px = 71, py = 95 })
