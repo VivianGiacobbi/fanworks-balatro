@@ -1,0 +1,15 @@
+return {
+	['muteWega'] = false,
+	["resetTrophies"] = nil,
+	['enableVinkers'] = true,
+	['enableJoelkers'] = true,
+	['enableOtherJokers'] = true,
+	['enableSpectrals'] = true,
+	['enableDecks'] = true,
+	['enableBosses'] = true,
+	['enableSkins'] = true,
+	['enableChallenges'] = true,
+	['enableTrophies'] = true,
+	['enableTarotSkins'] = true,
+	['enableEasterEggs'] = true,
+}

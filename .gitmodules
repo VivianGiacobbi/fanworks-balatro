@@ -1,0 +1,6 @@
+[submodule "LuaNES"]
+	path = LuaNES
+	url = https://github.com/nico-abram/LuaNES.git
+[submodule "jokers/LuaNES"]
+	path = jokers/LuaNES
+	url = https://github.com/nico-abram/LuaNES.git
