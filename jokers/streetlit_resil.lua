@@ -51,6 +51,25 @@ function jokerInfo.calculate(self, card, context)
 		if card.ability.extra.state == 'default' then
 			card.ability.extra.state = 'sacrifice'
 
+			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlit_resil', 'rif')
+			newJoker:set_edition({negative = true}, true, true)
+
+			newJoker.config.center.eternal_compat = true
+			newJoker:set_eternal(true)
+			newJoker.config.center.eternal_compat = false
+
+			
+			newJoker.ability.extra.state = 'hidden'
+			newJoker.ability.extra.lastEdition = card.edition and card.edition.type or nil
+
+			newJoker.ability.extra.form = 'resil2'
+			updateSprite(newJoker)
+
+			newJoker:add_to_deck()
+			G.jokers:emplace(newJoker)
+			newJoker:start_materialize()
+			G.GAME.joker_buffer = 0
 			-- create specific tarot subset to synergize with vampire
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit  then
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -65,30 +84,6 @@ function jokerInfo.calculate(self, card, context)
 					return true
 				end}))  
 			end
-			
-			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			G.E_MANAGER:add_event(Event({
-				func = function() 
-					local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlit_resil', 'rif')
-					newJoker:set_edition({negative = true}, true, true)
-
-					newJoker.config.center.eternal_compat = true
-					newJoker:set_eternal(true)
-					newJoker.config.center.eternal_compat = false
-
-					
-					newJoker.ability.extra.state = 'hidden'
-					newJoker.ability.extra.lastEdition = card.edition and card.edition.type or nil
-
-					newJoker.ability.extra.form = 'resil2'
-					updateSprite(newJoker)
-
-					newJoker:add_to_deck()
-					G.jokers:emplace(newJoker)
-					newJoker:start_materialize()
-					G.GAME.joker_buffer = 0
-				return true
-			end}))
 		end
 	end
 
