@@ -3,7 +3,7 @@
 --- MOD_ID: Fanworks
 --- MOD_AUTHOR: [BarrierTrio/Gote & TheWinterComet]
 --- MOD_DESCRIPTION: A mod inspired by the JoJo's Bizarre Fanworks Discord Server!
---- BADGE_COLOUR: 32A852
+--- BADGE_COLOUR: DD85B4
 --- DISPLAY_NAME: Fanworks
 --- PREFIX: fnwk
 --- VERSION: 0.1
@@ -16,7 +16,10 @@ fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
 
 local hook_list = {
-	"card",
+	'card',
+	'cardarea',
+	'common_events',
+	'game'
 	-- "UI_definitions",
 }
 
@@ -156,6 +159,9 @@ local conf_fanworks = {
 		-- fanworks
 		'streetlit_resil',
 		-- 'theaquarium',
+		'joestar_evasive',
+		'rust_secluded',
+		'joestar_creaking'
 	},
 	consumablesToLoad = {
 		--[[
@@ -526,6 +532,13 @@ if fnwk_enabled['enableJokers'] then
 			jokerInfo.soul_pos = { x = 2, y = 0 }
 		end
 
+		if jokerInfo.fanwork then
+			jokerInfo.no_mod_badges = true
+			jokerInfo.set_badges = function(self, card, badges)
+				badges[#badges+1] = create_badge(localize('ba_'..jokerInfo.fanwork), HEX(localize('co_'..jokerInfo.fanwork)), G.C.WHITE, 1)
+			end
+		end
+
 		local joker = SMODS.Joker(jokerInfo)
 		for k_, v_ in pairs(joker) do
 			if type(v_) == 'function' then
@@ -793,6 +806,7 @@ if fnwk_enabled['enableSkins'] then
 	end
 end
 --]]
+
 
 G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
 

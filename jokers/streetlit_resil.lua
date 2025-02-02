@@ -12,7 +12,7 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
-	fanwork = 'Streetlight Pursuit',
+	fanwork = 'streetlight',
 }
 
 SMODS.Atlas({ key = 'resil', path ='jokers/streetlit_resil.png', px = 71, py = 95 })
@@ -40,6 +40,10 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.cardarea ~= G.jokers then
+		return
+	end
+
 	-- sets this value so it won't regenerate upon being sold
 	-- amanda just lets herself get sold out
 	if (context.selling_self or card.debuff) and not context.blueprint then
@@ -87,7 +91,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.end_of_round and not context.blueprint then	
+	if context.end_of_round and context.individual and not context.blueprint then	
 		-- avoid regenerating if there's not an available slot
 		-- I.E. the player used Judgement during a run
 		if card.ability.extra.state == 'hidden' then

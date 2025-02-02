@@ -306,8 +306,17 @@ return {
 			k_sts_wild = "Deification",
 			k_disguy_1 = "BLS BLAY GAME BINTY!!!",
 			k_disguy_2 = "ONLY 20 MINOOT!!!",
+			k_discount = "Discount!",
+			k_discount_apply = "Discounted!",
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
+
+			ba_plancks = "Planck's Creek",
+			co_plancks = 'A2DCB4',
+			ba_streetlight = "Streetlight Pursuit",
+			co_streetlight = '139194',
+			ba_bluebolt = "Bluebolt Incarnation",
+			co_bluebolt = '6FD0F2'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -1647,6 +1656,31 @@ return {
 					"When played hand is a {C:attention}Pair{}",
 					"both cards become {C:attention}Steel{}"
 				},
+			},
+			j_fnwk_rust_secluded = {
+				name = "Secluded Rust Joker",
+				text = {
+					"Cards with {C:attention}Diamond{} suit",
+					"are drawn face down and",
+					"retriggered when scored",
+				}
+			},
+			j_fnwk_joestar_creaking = {
+				name = "Creaking Bjoestar",
+				text = {
+					"'Teach me how to be a {C:attention}yo-yo master!{}' he",
+					"cried. But the {C:attention}Yo-Yo Man{} did not answer.",
+					"He just kept on {X:mult,C:white}yo-ing{}."
+				}
+			},
+			j_fnwk_joestar_evasive = {
+				name = "Evasive Joestar",
+				text = {
+					"Reduces the cost of each item in",
+					"the next shop by {C:money}$1{} for each {C:attention}Blind{}",
+					"skipped, resets when exiting the shop",
+					"{C:inactive}Current discount: {C:money}#1#$#2#{}",
+				}
 			}
 		},
 		VHS = {
