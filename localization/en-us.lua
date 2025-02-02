@@ -1627,7 +1627,7 @@ return {
 			j_fnwk_streetlit_resil = {
 				name = "Resilient Streetlit Joker",
 				text = {
-					"When this card is {C:attention}sacrificed{},",
+					"When this Joker is {C:attention}sacrificed{},",
 					"create an enhancement-granting {C:purple}Tarot{}",
 					"card. This Joker can {C:attention}regenerate{} into an",
 					"empty slot when a {C:attention}Blind{} is defeated",

@@ -155,7 +155,7 @@ local conf_fanworks = {
 
 		-- fanworks
 		'streetlit_resil',
-		'theaquarium',
+		-- 'theaquarium',
 	},
 	consumablesToLoad = {
 		--[[

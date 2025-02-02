@@ -2,8 +2,9 @@ local jokerInfo = {
 	name = 'Resilient Streetlit Joker',
 	config = {
 		extra = {
-			form = "resil",
-			beingSold = false,
+			form = 'resil',
+			state = 'default',
+			lastEdition = nil,
 		}
 	},
 	rarity = 2,
@@ -11,16 +12,16 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
-	fanwork = "Streetlight Pursuit",
+	fanwork = 'Streetlight Pursuit',
 }
 
-SMODS.Atlas({ key = "resil", path ="jokers/streetlit_resil.png", px = 71, py = 95 })
-SMODS.Atlas({ key = "resil2", path ="jokers/streetlit_resil2.png", px = 71, py = 95 })
+SMODS.Atlas({ key = 'resil', path ='jokers/streetlit_resil.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'resil2', path ='jokers/streetlit_resil2.png', px = 71, py = 95 })
 
 local function updateSprite(card)
 	if card.ability.extra.form then
 		if card.config.center.atlas ~= card.ability.extra.form then
-			card.config.center.atlas = "fnwk_"..card.ability.extra.form
+			card.config.center.atlas = 'fnwk_'..card.ability.extra.form
 			card:set_sprites(card.config.center)
 		end
 	end
@@ -39,19 +40,36 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.selling_self and not context.blueprint then
-		card.ability.extra.beingSold = true
+	-- sets this value so it won't regenerate upon being sold
+	-- amanda just lets herself get sold out
+	if (context.selling_self or card.debuff) and not context.blueprint then
+		card.ability.extra.state = 'selling'
 		return
 	end
-	if context.joker_destroyed and not context.blueprint then
-		if context.end_of_round and not G.GAME.lastResil then
-			-- this case means that the card's effect either failed to activate because of a debuff
-			-- or it destroyed itself when trying to regenerate due to no space
-			card.ability.extra.form = 'resil'
-			updateSprite(card)
-		elseif not card.ability.extra.beingSold and not card.debuff then 
-			G.GAME.lastResil = {edition = card.edition and card.edition.type or nil}
 
+	if context.joker_destroyed and not context.blueprint then
+		if card.ability.extra.state == 'default' then
+			card.ability.extra.state = 'sacrifice'
+
+			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlit_resil', 'rif')
+			newJoker:set_edition({negative = true}, true, true)
+
+			newJoker.config.center.eternal_compat = true
+			newJoker:set_eternal(true)
+			newJoker.config.center.eternal_compat = false
+
+			
+			newJoker.ability.extra.state = 'hidden'
+			newJoker.ability.extra.lastEdition = card.edition and card.edition.type or nil
+
+			newJoker.ability.extra.form = 'resil2'
+			updateSprite(newJoker)
+
+			newJoker:add_to_deck()
+			G.jokers:emplace(newJoker)
+			newJoker:start_materialize()
+			G.GAME.joker_buffer = 0
 			-- create specific tarot subset to synergize with vampire
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit  then
 				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -59,83 +77,68 @@ function jokerInfo.calculate(self, card, context)
 				local get_tarot = pseudorandom_element(tarot_subset, pseudoseed('resil'))
 				G.E_MANAGER:add_event(Event({
 					func = function() 
-						local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, get_tarot, 'car')
-						card:add_to_deck()
-						G.consumeables:emplace(card)
+						local newTarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, get_tarot, 'car')
+						newTarot:add_to_deck()
+						G.consumeables:emplace(newTarot)
 						G.GAME.consumeable_buffer = 0
 					return true
 				end}))  
 			end
-			
-			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			G.E_MANAGER:add_event(Event({
-				func = function() 
-					local card = create_card('Joker', G.jokers, nil, 2, nil, nil, 'j_fnwk_streetlit_resil', 'rif')
-					card:set_edition({negative = true}, true, true)
-
-					card.config.center.eternal_compat = true
-					card:set_eternal(true)
-					card.config.center.eternal_compat = false
-
-					card.ability.extra.form = 'resil2'
-					updateSprite(card)
-
-					card:add_to_deck()
-					G.jokers:emplace(card)
-					card:start_materialize()
-					G.GAME.joker_buffer = 0
-					updateSprite(card)
-				return true
-			end}))
 		end
-		
-		card.ability.extra.beingSold = false
 	end
 
-	if context.end_of_round and not context.blueprint and G.GAME.lastResil then
+	if context.end_of_round and not context.blueprint then	
 		-- avoid regenerating if there's not an available slot
 		-- I.E. the player used Judgement during a run
-		if #G.jokers.cards + G.GAME.joker_buffer >= G.jokers.config.card_limit then
-			G.E_MANAGER:add_event(Event({func = function()
-				card:start_dissolve(nil, false)
-				return true 
-			end}))
-			return
-		else
-			-- recreate the resil
-			local lastResil = G.GAME.lastResil
+		if card.ability.extra.state == 'hidden' then
+			card.ability.extra.state = 'retire'
+			if #G.jokers.cards + G.GAME.joker_buffer >= G.jokers.config.card_limit then
+				G.E_MANAGER:add_event(Event({func = function()
+					card:start_dissolve(nil, false)
+					return true 
+				end}))
+			else
+				-- recreate the resil
+				card.config.center.eternal_compat = true
+				card:set_eternal(false)
+				card.config.center.eternal_compat = false
 
-			card.config.center.eternal_compat = true
-			card:set_eternal(false)
-			card.config.center.eternal_compat = false
-			card:set_edition({negative = false}, true, true)
+				local lastEdition = card.ability.extra.lastEdition
+				if not lastEdition then
+					card:set_edition({negative = false}, true, true)
+				else
+					if lastEdition == "foil" then
+						card:set_edition({foil = true}, true, true)
+					elseif lastEdition == "holo" then
+						card:set_edition({holo = true}, true, true)
+					elseif lastEdition == "polychrome" then
+						card:set_edition({polychrome = true}, true, true)
+					elseif lastEdition == "negative" then
+						card:set_edition({negative = true}, true, true)
+					end
+				end			
 
-			if lastResil['edition'] then
-				if lastResil['edition'] == "foil" then
-					card:set_edition({foil = true}, true, true)
-				elseif lastResil['edition'] == "holo" then
-					card:set_edition({holo = true}, true, true)
-				elseif lastResil['edition'] == "polychrome" then
-					card:set_edition({polychrome = true}, true, true)
-				elseif lastResil['edition'] == "negative" then
-					card:set_edition({negative = true}, true, true)
-				end
-			end			
+				card:juice_up()
+				play_sound('tarot2')
 
-			card:juice_up()
-			play_sound('tarot2')
+				card.ability.extra.state = 'default'
+				card.ability.extra.form = 'resil'
+				updateSprite(card)
+			end
 		end
-
-		card.ability.extra.form = 'resil'
-		updateSprite(card)
-		G.GAME.lastResil = nil
-	end
+	end	
 end
 
 function jokerInfo.update(self, card)
-	if G.screenwipe then
+	if card.area and card.area.config.type == "shop" then
+		card.ability.extra.form = 'resil'
 		updateSprite(card)
 	end
+
+	if card.area and card.area.config.collection and self.discovered then
+        card.ability.extra.form = 'resil'
+		updateSprite(card)
+    end
 end
 
 return jokerInfo
