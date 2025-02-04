@@ -313,10 +313,14 @@ return {
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
-			ba_streetlight = "Streetlight Pursuit",
+			ba_streetlight = 'Streetlight Pursuit',
 			co_streetlight = '139194',
 			ba_bluebolt = "Bluebolt Incarnation",
-			co_bluebolt = '6FD0F2'
+			co_bluebolt = '6FD0F2',
+			ba_moscow = 'Moscow Calling',
+			co_moscow = '44AA6C',
+			ba_sunshine = 'Sunshine Deluxe!!',
+			co_sunshine = 'FF3C00'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -1633,7 +1637,7 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
-			j_fnwk_streetlit_resil = {
+			j_fnwk_streetlight_resil = {
 				name = "Resilient Streetlit Joker",
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
@@ -1643,21 +1647,39 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_fnwk_streetlit_resil2 = {
+			j_fnwk_streetlight_resil2 = {
 				name = "Resilient Streetlit Joker",
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
 				},
 			},
-			j_fnwk_theaquarium = {
+			j_fnwk_streetlight_pinstripe = {
+				name = "Pinstripe Joker",
+				text = {
+					"Earn {C:money}$1{} for each {C:attention}Lucky Card{} in",
+					"your {C:attention}full deck{} at end of round,",
+					"but Lucky Cards never pay out",
+					"{C:inactive}(Current discount: {}{C:money}$#1#{}{C:inactive}){}",
+				},
+			},
+			j_fnwk_spirit_aquarium = {
 				name = "1: The Aquarium",
 				text = {
 					"When played hand is a {C:attention}Pair{}",
 					"both cards become {C:attention}Steel{}"
 				},
 			},
-			j_fnwk_rust_secluded = {
+			j_fnwk_bluebolt_jokestar = {
+				name = "Evasive Jokestar",
+				text = {
+					"Reduces the cost of each item in",
+					"the next shop by {C:money}$1{} for each {C:attention}Blind{}",
+					"skipped, resets when exiting the shop",
+					"{C:inactive}(Currently: {}{C:money}#1#$#2#{}{C:inactive}){}",
+				}
+			},
+			j_fnwk_bluebolt_secluded = {
 				name = "Secluded Rust Joker",
 				text = {
 					"Cards with {C:attention}Diamond{} suit",
@@ -1665,23 +1687,56 @@ return {
 					"retriggered when scored",
 				}
 			},
-			j_fnwk_joestar_creaking = {
-				name = "Creaking Bjoestar",
+			j_fnwk_plancks_jokestar = {
+				name = "Creaking Bjokestar",
 				text = {
 					"'Teach me how to be a {C:attention}yo-yo master!{}' he",
 					"cried. But the {C:attention}Yo-Yo Man{} did not answer.",
 					"He just kept on {X:mult,C:white}yo-ing{}."
 				}
 			},
-			j_fnwk_joestar_evasive = {
-				name = "Evasive Joestar",
+			j_fnwk_plancks_unsure = {
+				name = "Unsure Creaking Joker",
 				text = {
-					"Reduces the cost of each item in",
-					"the next shop by {C:money}$1{} for each {C:attention}Blind{}",
-					"skipped, resets when exiting the shop",
-					"{C:inactive}Current discount: {C:money}#1#$#2#{}",
+					"Dummy Text",
 				}
-			}
+			},
+			j_fnwk_plancks_skeptic = {
+				name = "Skeptic Creaking Joker",
+				text = {
+					"Dummy Text",
+				}
+			},
+			j_fnwk_plancks_crazy = {
+				name = "Crazy Creaking Joker",
+				text = {
+					"Dummy Text",
+				}
+			},
+			j_fnwk_moscow_mule = {
+				name = "Moscow Mule",
+				text = {
+					"{C:attention}Sex!!{}",
+				}
+			},
+			j_fnwk_sunshine_laconic = {
+				name = "Laconic Joker",
+				text = {
+					"This Joker gains {C:chips}+10{} chips",
+					"for each {C:attention}consecutive{} played",
+					"hand of {C:attention}3 or less{} cards",
+					"{C:inactive}(currently{} {C:chips}+#1#{} {C:inactive}chips){}",
+				}
+			},
+			j_fnwk_sunshine_funkadelic = {
+				name = "Funkadelic Joker",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if played hand contains",
+					"a scoring {V:1}#2#{} card and a",
+					"scoring {V:2}#3#{} card",
+                    "{s:0.8}Suits change every round{}",
+				}
+			},
 		},
 		VHS = {
 			c_fnwk_blackspine = {

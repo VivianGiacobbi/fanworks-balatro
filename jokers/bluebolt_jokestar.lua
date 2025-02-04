@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Evasive Joestar',
+	name = 'Evasive Jokestar',
 	config = {
         extra = {
             currentDiscount = 0

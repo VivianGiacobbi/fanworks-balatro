@@ -15,8 +15,8 @@ local jokerInfo = {
 	fanwork = 'streetlight',
 }
 
-SMODS.Atlas({ key = 'resil', path ='jokers/streetlit_resil.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'resil2', path ='jokers/streetlit_resil2.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'resil', path ='jokers/streetlight_resil.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'resil2', path ='jokers/streetlight_resil2.png', px = 71, py = 95 })
 
 local function updateSprite(card)
 	if card.ability.extra.form then
@@ -30,9 +30,9 @@ end
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 	if card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = "j_fnwk_streetlit_"..card.ability.extra.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+		full_UI_table.name = localize{type = 'name', key = "j_fnwk_streetlight_"..card.ability.extra.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
-	localize{type = 'descriptions', key = "j_fnwk_streetlit_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
+	localize{type = 'descriptions', key = "j_fnwk_streetlight_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -56,7 +56,7 @@ function jokerInfo.calculate(self, card, context)
 			card.ability.extra.state = 'sacrifice'
 
 			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlit_resil', 'rif')
+			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'rif')
 			newJoker:set_edition({negative = true}, true, true)
 
 			newJoker.config.center.eternal_compat = true

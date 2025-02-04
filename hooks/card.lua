@@ -55,3 +55,41 @@ Card.start_dissolve = function(self, dissolve_colours, silent, dissolve_time_fac
         eval_card(self, {cardarea = G.jokers, joker_destroyed = true, removed = self})
     end
 end
+
+Card.get_chip_mult = function(self)
+    if self.debuff then return 0 end
+    if self.ability.set == 'Joker' then return 0 end
+    if self.ability.effect == "Lucky Card" then 
+        if not G.GAME.lucky_cancels and pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then
+            self.lucky_trigger = true
+            return self.ability.mult
+        else
+            return 0
+        end
+    else  
+        return self.ability.mult
+    end
+end
+
+Card.get_p_dollars = function(self)
+    if self.debuff then return 0 end
+    local ret = 0
+    if self.seal == 'Gold' then
+        ret = ret +  3
+    end
+    if self.ability.p_dollars > 0 then
+        if self.ability.effect == "Lucky Card" then 
+            if not G.GAME.lucky_cancels and pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then
+                self.lucky_trigger = true
+                ret = ret + self.ability.p_dollars
+            end
+        else 
+            ret = ret + self.ability.p_dollars
+        end
+    end
+    if ret > 0 then 
+        G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + ret
+        G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+    end
+    return ret
+end

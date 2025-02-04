@@ -19,7 +19,8 @@ local hook_list = {
 	'card',
 	'cardarea',
 	'common_events',
-	'game'
+	'game',
+	'state_events',
 	-- "UI_definitions",
 }
 
@@ -156,12 +157,24 @@ local conf_fanworks = {
 		'tetris',
 		--]]
 
-		-- fanworks
-		'streetlit_resil',
-		-- 'theaquarium',
-		'joestar_evasive',
-		'rust_secluded',
-		'joestar_creaking'
+		-- streetlight pursuit
+		'streetlight_resil',
+		'streetlight_pinstripe',
+		-- spirit lines
+		-- 'spirit_aquarium',
+		-- bluebolt incarnation
+		'bluebolt_jokestar',
+		'bluebolt_secluded',
+		-- planck's creek
+		'plancks_jokestar',
+		'plancks_unsure',
+		'plancks_skeptic',
+		'plancks_crazy',
+		-- moscow calling
+		'moscow_mule',
+		-- sunshine deluxe
+		'sunshine_laconic',
+		'sunshine_funkadelic',
 	},
 	consumablesToLoad = {
 		--[[
@@ -214,6 +227,15 @@ G.foodjokers = {
 	'j_fnwk_fantabulous',
 	'j_fnwk_crudeoil',
 	'j_fnwk_grannycream',
+}
+
+G.women = {
+	'j_lusty_joker',
+	'j_hack',
+	'j_blueprint',
+	'j_brainstorm',
+	'j_drivers_license',
+	'j_shoot_the_moon',
 }
 
 function G.FUNCS.is_food(key)
@@ -806,6 +828,26 @@ if fnwk_enabled['enableSkins'] then
 	end
 end
 --]]
+
+SMODS.Enhancement:take_ownership('m_lucky',
+	{
+		loc_vars = function(self, info_queue, card)
+			-- Add tooltips by appending to info_queue
+			-- all keys in this return table are optional
+			local normal = G.GAME.lucky_cancels and 0 or G.GAME.probabilities.normal
+			return {
+				vars = {
+					normal,
+					self.config.mult,
+					5,
+					self.config.p_dollars,
+					15,
+				},
+			}
+		end,
+	},
+	true
+)
 
 
 G.TITLE_SCREEN_CARD = G.P_CARDS.C_A
