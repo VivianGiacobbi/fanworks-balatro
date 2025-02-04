@@ -1,5 +1,5 @@
 local jokerInfo = {
-    name = 'Creeking Bjoestar',
+    name = 'Creeking Bjokestar',
     config = {
         extra = {
             mult = 8,
