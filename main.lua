@@ -175,6 +175,7 @@ local conf_fanworks = {
 		-- sunshine deluxe
 		'sunshine_laconic',
 		'sunshine_funkadelic',
+		'sunshine_reliable',
 	},
 	consumablesToLoad = {
 		--[[

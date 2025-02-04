@@ -1737,6 +1737,14 @@ return {
                     "{s:0.8}Suits change every round{}",
 				}
 			},
+			j_fnwk_sunshine_reliable = {
+				name = "Ol' Reliable",
+				text = {
+					"{C:mult}+#1#{} mult for each time",
+					"played {C:attention}poker hand{} has",
+					"been played {C:attention}this round{}",
+				}
+			},
 		},
 		VHS = {
 			c_fnwk_blackspine = {

@@ -202,3 +202,82 @@ end_round = function()
       end
     }))
   end
+
+new_round = function()
+    G.RESET_JIGGLES = nil
+    delay(0.4)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+            G.GAME.current_round.discards_left = math.max(0, G.GAME.round_resets.discards + G.GAME.round_bonus.discards)
+            G.GAME.current_round.hands_left = (math.max(1, G.GAME.round_resets.hands + G.GAME.round_bonus.next_hands))
+            G.GAME.current_round.hands_played = 0
+            G.GAME.current_round.discards_used = 0
+            G.GAME.current_round.reroll_cost_increase = 0
+            G.GAME.current_round.used_packs = {}
+            G.GAME.hands_at_round_start = {
+                ['Five of a Kind'] = G.GAME.hands['Five of a Kind'].played,
+                ['Flush Five'] = G.GAME.hands['Flush Five'].played,
+                ['Flush House'] = G.GAME.hands['Flush House'].played,
+                ['Flush'] = G.GAME.hands['Flush'].played,
+                ['Four of a Kind'] = G.GAME.hands['Four of a Kind'].played,
+                ['Full House'] = G.GAME.hands['Full House'].played,
+                ['High Card'] = G.GAME.hands['High Card'].played,
+                ['Pair'] = G.GAME.hands['Pair'].played,
+                ['Straight Flush'] = G.GAME.hands['Straight Flush'].played,
+                ['Straight'] = G.GAME.hands['Straight'].played,
+                ['Three of a Kind'] = G.GAME.hands['Three of a Kind'].played,
+                ['Two Pair'] = G.GAME.hands['Two Pair'].played,
+            }
+
+            for k, v in pairs(G.GAME.hands) do 
+                v.played_this_round = 0
+            end
+
+            for k, v in pairs(G.playing_cards) do
+                v.ability.wheel_flipped = nil
+            end
+
+            local chaos = find_joker('Chaos the Clown')
+            G.GAME.current_round.free_rerolls = #chaos
+            calculate_reroll_cost(true)
+
+            G.GAME.round_bonus.next_hands = 0
+            G.GAME.round_bonus.discards = 0
+
+            local blhash = ''
+            if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then
+                G.GAME.round_resets.blind_states.Small = 'Current'
+                G.GAME.current_boss_streak = 0
+                blhash = 'S'
+            elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then
+                G.GAME.round_resets.blind_states.Big = 'Current'
+                G.GAME.current_boss_streak = 0
+                blhash = 'B'
+            else
+                G.GAME.round_resets.blind_states.Boss = 'Current'
+                blhash = 'L'
+            end
+            G.GAME.subhash = (G.GAME.round_resets.ante)..(blhash)
+
+            G.GAME.blind:set_blind(G.GAME.round_resets.blind)
+            
+            for i = 1, #G.jokers.cards do
+                G.jokers.cards[i]:calculate_joker({setting_blind = true, blind = G.GAME.round_resets.blind})
+            end
+            delay(0.4)
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    G.STATE = G.STATES.DRAW_TO_HAND
+                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                    G.deck:hard_set_T()
+                    G.STATE_COMPLETE = false
+                    return true
+                end
+            }))
+            return true
+            end
+        }))
+end
