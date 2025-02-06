@@ -1,3 +1,7 @@
+function containsKey(table, key)
+	return table[key] ~= nil
+end
+
 local banned = {}
 
 local function fnwkJokerCheck(k)
