@@ -27,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
                 colour = G.C.CHIPS,
 				card = card
 			}
-		else 
+		elseif card.ability.extra.chips > 0 then
             card.ability.extra.chips = 0
             return {
                 card = card,
