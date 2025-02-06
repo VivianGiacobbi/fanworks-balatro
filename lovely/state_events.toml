@@ -1,0 +1,40 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+if next(find_joker('Splash')) then
+    scoring_hand[i] = G.play.cards[i]
+'''
+position = "at"
+payload = '''
+if next(find_joker('Splash')) then
+    scoring_hand[i] = G.play.cards[i]
+elseif next(find_joker('Creaking Bjokestar')) then
+    local id = G.play.cards[i]:get_id()
+    if id == 2 or id == 3 or id == 5 or id == 8 or id == 14 then
+        local inside = false
+        for j=1, #scoring_hand do
+            if scoring_hand[j] == G.play.cards[i] then
+                inside = true
+            end
+        end
+        if not inside then
+            scoring_hand[#scoring_hand+1] = G.play.cards[i]
+        end
+    end'''
+match_indent = true
+times = 1
+
+# end_round()
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''reset_idol_card()'''
+position = "before"
+payload = '''reset_funkadelic()'''
+match_indent = true
+times = 1

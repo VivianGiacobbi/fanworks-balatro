@@ -1641,9 +1641,9 @@ return {
 				name = "Resilient Streetlit Joker",
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
-					"create an enhancement-granting {C:purple}Tarot{}",
-					"card. This Joker can {C:attention}regenerate{} into an",
-					"empty slot when a {C:attention}Blind{} is defeated",
+					"create an {C:attention}Enhancement{}-granting",
+					"{C:purple}Tarot{} card, {C:attention}regenerates{} when",
+					"a {C:attention}Blind{} is defeated",
 					"{C:inactive}(Must have room){}",
 				},
 			},
@@ -1659,8 +1659,8 @@ return {
 				text = {
 					"Earn {C:money}$1{} for each {C:attention}Lucky Card{} in",
 					"your {C:attention}full deck{} at end of round,",
-					"but Lucky Cards never pay out",
-					"{C:inactive}(Current discount: {}{C:money}$#1#{}{C:inactive}){}",
+					"{C:attention}Lucky Cards{} never pay out",
+					"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
 				},
 			},
 			j_fnwk_spirit_aquarium = {
@@ -1673,26 +1673,30 @@ return {
 			j_fnwk_bluebolt_jokestar = {
 				name = "Evasive Jokestar",
 				text = {
-					"Reduces the cost of each item in",
-					"the next shop by {C:money}$1{} for each {C:attention}Blind{}",
-					"skipped, resets when exiting the shop",
-					"{C:inactive}(Currently: {}{C:money}#1#$#2#{}{C:inactive}){}",
+					"Reduces the {C:money}cost{} of each",
+					"shop item by {C:money}$1{} for each",
+					"{C:attention}Blind{} skipped, resets when",
+					"exiting the shop",
+					"{C:inactive}(Currently {}{C:money}#1#$#2#{}{C:inactive}){}",
 				}
 			},
 			j_fnwk_bluebolt_secluded = {
 				name = "Secluded Rust Joker",
 				text = {
-					"Cards with {C:attention}Diamond{} suit",
-					"are drawn face down and",
+					"Cards with {C:diamonds}Diamond{} suit",
+					"are drawn {C:attention}face down{} and",
 					"retriggered when scored",
 				}
 			},
 			j_fnwk_plancks_jokestar = {
 				name = "Creaking Bjokestar",
 				text = {
-					"'Teach me how to be a {C:attention}yo-yo master!{}' he",
-					"cried. But the {C:attention}Yo-Yo Man{} did not answer.",
-					"He just kept on {X:mult,C:white}yo-ing{}."
+					"Played {C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{},",
+					"and {C:attention}8s{} always score, this",
+					"Joker gains {X:mult,C:white}X#2#{} mult for",
+					"each played hand that",
+					"contains {C:attention}all five ranks{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				}
 			},
 			j_fnwk_plancks_unsure = {
