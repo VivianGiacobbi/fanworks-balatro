@@ -232,10 +232,12 @@ return {
 			vs_credits7 = "Music",
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_enableJokers = "Jokers",
-			vs_options_enableSpectrals = "Spectral Cards",
+			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
+			vs_options_enableConsumables = "New Consumables",
+			vs_options_enableConsumableTweaks = "New Consumables",
 			vs_options_enableBosses = "Boss Blinds",
-			vs_options_enableSkins = "Custom Playing Cards",
+			vs_options_enableSkins = "Playing Card Skins",
 			vs_options_enableChallenges = "Challenges",
 			vs_options_enableTrophies = "Fanworks Achievements",
 			vs_options_enableLogo = "Main Menu Logo",
@@ -308,6 +310,8 @@ return {
 			k_disguy_2 = "ONLY 20 MINOOT!!!",
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
+			k_nope_ex = "Not God's Plan!",
+
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
 

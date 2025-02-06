@@ -1,3 +1,23 @@
+SMODS.Enhancement:take_ownership('m_lucky',
+	{
+		loc_vars = function(self, info_queue, card)
+			-- Add tooltips by appending to info_queue
+			-- all keys in this return table are optional
+			local normal = G.GAME.lucky_cancels and 0 or G.GAME.probabilities.normal
+			return {
+				vars = {
+					normal,
+					self.config.mult,
+					5,
+					self.config.p_dollars,
+					15,
+				},
+			}
+		end,
+	},
+	true
+)
+
 local jokerInfo = {
 	name = 'Pinstripe Joker',
 	config = {
