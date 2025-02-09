@@ -1,0 +1,68 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# CardArea:draw_card_from()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if area == G.discard then
+    card.T.r = 0
+end'''
+position = "after"
+payload = '''
+
+SMODS.calculate_context({pre_draw = true, drawn = card})'''
+match_indent = true
+times = 1
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+function CardArea:emplace(card, location, stay_flipped)'''
+position = "at"
+payload = '''
+function CardArea:emplace(card, location, stay_flipped, created, copied)'''
+match_indent = true
+times = 1
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped then
+    card:flip()
+end
+if self == G.hand and stay_flipped then 
+    card.ability.wheel_flipped = true
+end'''
+position = "at"
+payload = '''
+if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped and not card.joker_force_facedown then
+    card:flip()
+end
+if self == G.hand and stay_flipped and not card.joker_force_facedown then 
+    card.ability.wheel_flipped = true
+end
+card.joker_force_facedown = nil'''
+match_indent = true
+times = 1
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''self:align_cards()'''
+position = "after"
+payload = '''
+if card.ability.set == 'Joker' and created and not copied then
+    for i=1, #G.jokers.cards do
+        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, new_joker = card})
+    end
+end'''
+match_indent = true
+times = 1

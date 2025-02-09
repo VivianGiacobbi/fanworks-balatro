@@ -30,7 +30,7 @@ function jokerInfo.calculate(self, card, context)
 		elseif card.ability.extra.chips > 0 then
             card.ability.extra.chips = 0
             return {
-                card = card,
+                card = context.blueprint_card or card,
                 message = localize('k_reset')
             }
 		end

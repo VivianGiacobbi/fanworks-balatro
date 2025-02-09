@@ -1,0 +1,18 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Tag:apply_to_run()
+[[patches]]
+[patches.pattern]
+target = "tag.lua"
+pattern = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'top')
+card:add_to_deck()
+G.jokers:emplace(card)'''
+position = "at"
+payload = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'top')
+card:add_to_deck()
+G.jokers:emplace(card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+
