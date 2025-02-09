@@ -1,8 +1,9 @@
 return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
+	['enableStands'] = true,
 	['enableConsumables'] = true,
-	['enableQueerEdition'] = true,
+	['enableQueer'] = true,
 	['enableConsumableTweaks'] = true,
 	['enableDecks'] = true,
 	['enableBosses'] = true,

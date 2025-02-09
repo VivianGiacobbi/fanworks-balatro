@@ -1,5 +1,5 @@
 local deckInfo = {
-    name = 'Vine Deck',
+    name = 'DISC Deck',
     config = {},
     unlocked = false,
     discovered = false,
@@ -13,5 +13,15 @@ local deckInfo = {
     end,
     unlock_condition = {type = 'win_deck', deck = 'b_green'}
 }
+
+function deckInfo.apply(self, back)
+    -- unclear stand code
+    --[[
+    if G.GAME.selected_back.effect.center.key == "b_fnwk_disc" then
+        G.GAME.unlimited_stands = true
+    end
+    G.GAME.max_stands = G.GAME.modifiers.max_stands or 1
+    --]]
+end
 
 return deckInfo

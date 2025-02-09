@@ -3,9 +3,8 @@ function containsKey(table, key)
 end
 
 local banned = {}
-
 local function fnwkJokerCheck(k)
-    if not containsKey(banned, k) then
+    if not banned[k] then
         if starts_with(k, "j_") then
             if not starts_with(k, "j_fnwk_") then
                 banned[#banned+1] = { id = k }

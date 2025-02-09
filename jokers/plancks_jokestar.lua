@@ -7,7 +7,7 @@ local jokerInfo = {
         }
     },
     rarity = 2,
-    cost = 3,
+    cost = 7,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -32,12 +32,12 @@ function jokerInfo.calculate(self, card, context)
             end
         end
         card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod	
-        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}, colour = G.C.MULT})
+        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.x_mult}}, colour = G.C.MULT})
     end
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff and card.ability.extra.x_mult > 1 then
 		return {
             message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-            card = card,
+            card = context.blueprint_card or card,
             Xmult_mod = card.ability.extra.x_mult,
         }
 	end

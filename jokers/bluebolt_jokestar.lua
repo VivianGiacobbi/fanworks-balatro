@@ -6,7 +6,7 @@ local jokerInfo = {
         }
     },
 	rarity = 1,
-	cost = 8,
+	cost = 6,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
                 return true 
             end}))
             return {
-                card = card,
+                card = context.blueprint_card or card,
                 message = localize('k_reset')
             }
         end

@@ -4,7 +4,7 @@ local jokerInfo = {
 		extra = 1
 	},
 	rarity = 2,
-	cost = 7,
+	cost = 8,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
@@ -34,7 +34,7 @@ function jokerInfo.calculate(self, card, context)
 				return {
 					message = localize('k_again_ex'),
 					repetitions = retriggers,
-					card = card
+					card = context.blueprint_card or card
 				}
 			end
 		end
