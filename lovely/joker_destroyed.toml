@@ -1,0 +1,28 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a central "joker_destroyed" context
+#
+
+# Card:start_dissolve()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.E_MANAGER:add_event(Event({
+    trigger = 'after',
+    blockable = false,
+    delay =  1.051*dissolve_time,
+}))'''
+position = "after"
+payload = '''
+
+if G.jokers and self.ability.set == 'Joker' then
+    for i=1, #G.jokers.cards do
+        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_destroyed = true, removed = self})
+    end
+end'''
+match_indent = true
+times = 1

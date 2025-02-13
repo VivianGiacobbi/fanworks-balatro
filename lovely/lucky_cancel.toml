@@ -1,0 +1,28 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch to add the ability to cancel lucky cards without setting the game's
+# probability normal
+#
+
+# Card:get_chip_mult()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then'''
+position = "at"
+payload = '''if not G.GAME.lucky_cancels and pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then'''
+match_indent = true
+times = 1
+
+# Card:get_p_dollars()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then'''
+position = "at"
+payload = '''if not G.GAME.lucky_cancels and pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then'''
+match_indent = true
+times = 1

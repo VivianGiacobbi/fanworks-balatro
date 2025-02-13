@@ -1,0 +1,48 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch for Throwback to work like other jokers whose values are computed at runtimes
+#
+
+# Card:update()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Throwback' then
+    self.ability.x_mult = 1 + G.GAME.skips*self.ability.extra
+end'''
+position = "at"
+payload = ''''''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''card_eval_status_text(self, 'extra', nil, nil, nil, {
+    message = localize{type = 'variable', key = 'a_xmult', vars = {self.ability.x_mult}},
+        colour = G.C.RED,
+    card = self
+})'''
+position = "at"
+payload = '''card_eval_status_text(self, 'extra', nil, nil, nil, {
+    message = localize{type = 'variable', key = 'a_xmult', vars = {G.GAME.skips * self.ability.extra + 1}},
+        colour = G.C.RED,
+    card = self
+})'''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif self.ability.name == 'Throwback' then loc_vars = {self.ability.extra, self.ability.x_mult}'''
+position = "at"
+payload = '''elseif self.ability.name == 'Throwback' then loc_vars = {self.ability.extra, 1 + self.ability.extra * G.GAME.skips}'''
+match_indent = true
+times = 1
+

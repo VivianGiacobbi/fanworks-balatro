@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch to add an extra shader effect to toggle with an ability property
+#
+
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+    self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
+    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+        self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
+    end'''
+position = "at"
+payload = '''
+if self.ability.make_vortex and (self.config.center.discovered or self.bypass_discovery_center) then
+    self.children.center:draw_shader('booster', nil, self.ARGS.send_to_shader)
+elseif (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+    self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
+    if self.children.front and self.ability.effect ~= 'Stone Card' then
+        self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
+    end'''
+match_indent = true
+times = 1
+
+

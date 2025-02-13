@@ -1,0 +1,118 @@
+[manifest]
+version = "1.0.0"
+priority = 10
+
+#
+# Patches jokers that use inconsistent "Xmult" property
+#
+
+# init_item_prototypes()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''j_ramen=            {order = 100,  unlocked = true, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 2, cost = 6, name = "Ramen",set = "Joker", config = {Xmult = 2, extra = 0.01}, pos = {x=2,y=15}},'''
+position = "at"
+payload = '''j_ramen=            {order = 100,  unlocked = true, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 2, cost = 6, name = "Ramen",set = "Joker", config = {extra = { x_mult = 2, x_mult_mod = 0.01}}, pos = {x=2,y=15}},'''
+match_indent = true
+times = 1
+
+# Card:generate_UIBox_ability_table()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif self.ability.name == 'Ramen' then loc_vars = {self.ability.x_mult, self.ability.extra}'''
+position = "at"
+payload = '''elseif self.ability.name == 'Ramen' then loc_vars = {self.ability.extra.x_mult, self.ability.extra.x_mult_mod}'''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.x_mult - self.ability.extra <= 1 then'''
+position = "at"
+payload = '''if self.ability.extra.x_mult - self.ability.extra.x_mult_mod <= 1 then'''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.ability.x_mult = self.ability.x_mult - self.ability.extra
+return {
+    delay = 0.2,
+    card = self,
+    message = localize{type='variable',key='a_xmult_minus',vars={self.ability.extra}},
+    colour = G.C.RED
+}'''
+position = "at"
+payload = '''self.ability.extra.x_mult = self.ability.extra.x_mult - self.ability.extra.x_mult_mod
+return {
+    delay = 0.2,
+    card = self,
+    message = localize{type='variable',key='a_xmult_minus',vars={self.ability.extra.x_mult}},
+    colour = G.C.RED
+}'''
+match_indent = true
+times = 1
+
+# init_item_prototypes()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''j_duo=              {order = 131,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Duo", pos = {x=5,y=4}, set = "Joker", effect = "X1.5 Mult", cost_mult = 1.0, config = {Xmult = 2, type = 'Pair'}, unlock_condition = {type = 'win_no_hand', extra = 'Pair'}},
+j_trio=             {order = 132,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Trio", pos = {x=6,y=4}, set = "Joker", effect = "X2 Mult", cost_mult = 1.0, config = {Xmult = 3, type = 'Three of a Kind'}, unlock_condition = {type = 'win_no_hand', extra = 'Three of a Kind'}},
+j_family=           {order = 133,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Family", pos = {x=7,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {Xmult = 4, type = 'Four of a Kind'}, unlock_condition = {type = 'win_no_hand', extra = 'Four of a Kind'}},
+j_order=            {order = 134,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Order", pos = {x=8,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {Xmult = 3, type = 'Straight'}, unlock_condition = {type = 'win_no_hand', extra = 'Straight'}},
+j_tribe=            {order = 135,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Tribe", pos = {x=9,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {Xmult = 2, type = 'Flush'}, unlock_condition = {type = 'win_no_hand', extra = 'Flush'}},'''
+position = "at"
+payload = '''j_duo=              {order = 131,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Duo", pos = {x=5,y=4}, set = "Joker", effect = "X1.5 Mult", cost_mult = 1.0, config = {type = 'Pair', extra = 2}, unlock_condition = {type = 'win_no_hand', extra = 'Pair'}},
+j_trio=             {order = 132,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Trio", pos = {x=6,y=4}, set = "Joker", effect = "X2 Mult", cost_mult = 1.0, config = {type = 'Three of a Kind', extra = 3}, unlock_condition = {type = 'win_no_hand', extra = 'Three of a Kind'}},
+j_family=           {order = 133,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Family", pos = {x=7,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {type = 'Four of a Kind', extra = 4}, unlock_condition = {type = 'win_no_hand', extra = 'Four of a Kind'}},
+j_order=            {order = 134,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Order", pos = {x=8,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {type = 'Straight', extra = 3}, unlock_condition = {type = 'win_no_hand', extra = 'Straight'}},
+j_tribe=            {order = 135,  unlocked = false, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = true, rarity = 3, cost = 8, name = "The Tribe", pos = {x=9,y=4}, set = "Joker", effect = "X3 Mult", cost_mult = 1.0, config = {type = 'Flush', extra = 2}, unlock_condition = {type = 'win_no_hand', extra = 'Flush'}},'''
+match_indent = true
+times = 1
+
+# Card:generate_UIBox_ability_table()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif self.ability.name == 'The Duo' or self.ability.name == 'The Trio'
+    or self.ability.name == 'The Family' or self.ability.name == 'The Order' or self.ability.name == 'The Tribe' then loc_vars = {self.ability.x_mult, localize(self.ability.type, 'poker_hands')}'''
+position = "at"
+payload = '''elseif self.ability.name == 'The Duo' or self.ability.name == 'The Trio'
+    or self.ability.name == 'The Family' or self.ability.name == 'The Order' or self.ability.name == 'The Tribe' then loc_vars = {self.ability.extra, localize(self.ability.type, 'poker_hands')}'''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Steel Joker' and self.ability.steel_tally > 0 then'''
+position = "before"
+payload = '''
+if self.ability.name == 'Ramen' then
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.extra.x_mult}},
+        Xmult_mod = self.ability.extra.x_mult, 
+        colour = G.C.MULT
+    }
+end
+if (self.ability.name == 'The Duo'
+or self.ability.name == 'The Trio'
+or self.ability.name == 'The Family'
+or self.ability.name == 'The Order'
+or self.ability.name == 'The Tribe') and next(context.poker_hands[self.ability.type]) then
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.extra}},
+        Xmult_mod = self.ability.extra, 
+        colour = G.C.MULT
+    }
+end
+'''
+match_indent = true
+times = 1

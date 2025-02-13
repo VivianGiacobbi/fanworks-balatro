@@ -1,0 +1,78 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch for Swashbuckler to work like other jokers whose values are computed at runtimes
+#
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Swashbuckler' and self.ability.mult > 0 then
+    return {
+        message = localize{type='variable',key='a_mult',vars={self.ability.mult}},
+        mult_mod = self.ability.mult
+    }
+end'''
+position = "at"
+payload = '''
+if self.ability.name == 'Swashbuckler' then
+    local sell_cost = 0
+    for i = 1, #G.jokers.cards do
+        if G.jokers.cards[i] ~= self and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
+            sell_cost = sell_cost + G.jokers.cards[i].sell_cost
+        end
+    end
+    if sell_cost > 0 then
+        return {
+            message = localize{type='variable',key='a_mult',vars={sell_cost}},
+            mult_mod = sell_cost
+        }
+    end
+end'''
+match_indent = true
+times = 1
+
+# Card:update()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Swashbuckler' then
+    local sell_cost = 0
+    for i = 1, #G.jokers.cards do
+        if G.jokers.cards[i] ~= self and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
+            sell_cost = sell_cost + G.jokers.cards[i].sell_cost
+        end
+    end
+    self.ability.mult = sell_cost
+end'''
+position = "at"
+payload = ''''''
+match_indent = true
+times = 1
+
+# Card:generate_UIBox_ability_table()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif self.ability.name == 'Swashbuckler' then loc_vars = {self.ability.mult}'''
+position = "at"
+payload = '''
+elseif self.ability.name == 'Swashbuckler' then 
+    if not G.jokers then
+        loc_vars = { 0 }
+    else
+        local sell_cost = 0
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i] ~= self and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
+                sell_cost = sell_cost + G.jokers.cards[i].sell_cost
+            end
+        end
+        loc_vars = {sell_cost}
+    end'''
+match_indent = true
+times = 1

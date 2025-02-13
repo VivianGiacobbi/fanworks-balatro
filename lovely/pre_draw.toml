@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a "pre_draw" context
+#
+
+# CardArea:draw_card_from()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if area == G.discard then
+    card.T.r = 0
+end'''
+position = "after"
+payload = '''
+
+SMODS.calculate_context({pre_draw = true, drawn = card})'''
+match_indent = true
+times = 1
+

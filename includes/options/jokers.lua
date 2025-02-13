@@ -25,7 +25,11 @@ local jokersToLoad = {
     -- rockhard in a funky place
     'rockhard_rebirth',
     'rockhard_peppers',
-    'rockhard_trans'
+    'rockhard_trans',
+	-- rubicon crossroads
+	'rubicon_bone',
+	'rubicon_moonglass',
+	'rubicon_infidel',
 }
 
 if not fnwk_enabled['enableJokers'] then

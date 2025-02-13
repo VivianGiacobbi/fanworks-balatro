@@ -10,6 +10,7 @@ local includes = {
 	'credits',
 
 	-- object hooks
+	'hooks/card',
 	'hooks/common_events',
 
 	-- option files
@@ -21,10 +22,10 @@ local includes = {
 	'options/consumables',
 
 	--- might require functionality
-	'options/achievements',
-	'options/bosses',
-	'options/challenges',
-	'options/decks',
+	-- 'options/achievements',
+	-- 'options/bosses',
+	-- 'options/challenges',
+	-- 'options/decks',
 
 	-- cosmetic
 	'options/queer',
@@ -39,6 +40,11 @@ for _, module in ipairs(includes) do
 		sendDebugMessage("[Fanworks] Loaded module: " .. module)
 	end
 end
+
+SMODS.Shader({
+	key = 'glow',
+	path = 'glow.fs',
+})
 
 -- Mod Icon in Mods tab
 SMODS.Atlas({

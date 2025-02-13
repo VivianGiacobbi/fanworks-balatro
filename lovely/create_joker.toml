@@ -1,0 +1,116 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a unified "create_joker" context
+# as opposed to buying or copying
+#
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''card:set_card_area(self)
+self:set_ranks()
+self:align_cards()'''
+position = "after"
+payload = '''
+if card.ability.set == 'Joker' and created and not copied then
+    for i=1, #G.jokers.cards do
+        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, new_joker = card})
+    end
+end'''
+match_indent = true
+times = 1
+
+# Game:update_shop()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''G.shop_jokers:emplace(create_card_for_shop(G.shop_jokers))'''
+position = "at"
+payload = '''G.shop_jokers:emplace(create_card_for_shop(G.shop_jokers), nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# Tag:apply_to_run()
+[[patches]]
+[patches.pattern]
+target = "tag.lua"
+pattern = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'top')
+card:add_to_deck()
+G.jokers:emplace(card)'''
+position = "at"
+payload = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'top')
+card:add_to_deck()
+G.jokers:emplace(card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# change_shop_size()
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.shop_jokers:emplace(create_card_for_shop(G.shop_jokers))'''
+position = "at"
+payload = '''G.shop_jokers:emplace(create_card_for_shop(G.shop_jokers), nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# Card:calculate_joker()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'rif')
+card:add_to_deck()
+G.jokers:emplace(card)'''
+position = "at"
+payload = '''local card = create_card('Joker', G.jokers, nil, 0, nil, nil, nil, 'rif')
+card:add_to_deck()
+G.jokers:emplace(card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# Card:use_consumeable()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local card = create_card('Joker', G.jokers, self.ability.name == 'The Soul', nil, nil, nil, nil, self.ability.name == 'Judgement' and 'jud' or 'sou')
+card:add_to_deck()
+G.jokers:emplace(card)'''
+position = "at"
+payload = '''local card = create_card('Joker', G.jokers, self.ability.name == 'The Soul', nil, nil, nil, nil, self.ability.name == 'Judgement' and 'jud' or 'sou')
+card:add_to_deck()
+G.jokers:emplace(card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# Card:use_consumeable()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local card = create_card('Joker', G.jokers, nil, 0.99, nil, nil, nil, 'wra')
+card:add_to_deck()
+G.jokers:emplace(card)'''
+position = "at"
+payload = '''local card = create_card('Joker', G.jokers, nil, 0.99, nil, nil, nil, 'wra')
+card:add_to_deck()
+G.jokers:emplace(card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+
+# G.FUNCS.reroll_shop
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+local new_shop_card = create_card_for_shop(G.shop_jokers)
+G.shop_jokers:emplace(new_shop_card)'''
+position = "at"
+payload = '''
+local new_shop_card = create_card_for_shop(G.shop_jokers)
+G.shop_jokers:emplace(new_shop_card, nil, nil, true, false)'''
+match_indent = true
+times = 1
+

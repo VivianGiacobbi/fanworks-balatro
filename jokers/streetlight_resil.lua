@@ -1,11 +1,10 @@
 local jokerInfo = {
 	name = 'Resilient Streetlit Joker',
 	config = {
-		extra = {
-			form = 'resil',
-			state = 'default',
-			lastEdition = nil,
-		}
+		extra = {},
+		form = 'resil',
+		state = 'default',
+		lastEdition = nil,
 	},
 	rarity = 2,
 	cost = 8,
@@ -19,10 +18,11 @@ SMODS.Atlas({ key = 'resil', path ='jokers/streetlight_resil.png', px = 71, py =
 SMODS.Atlas({ key = 'resil2', path ='jokers/streetlight_resil2.png', px = 71, py = 95 })
 
 local function updateSprite(card)
-	if card.ability.extra.form then
-		if card.config.center.atlas ~= card.ability.extra.form then
-			card.config.center.atlas = 'fnwk_'..card.ability.extra.form
+	if card.ability.form then
+		if card.config.center.atlas ~= card.ability.form then
+			card.config.center.atlas = 'fnwk_'..card.ability.form
 			card:set_sprites(card.config.center)
+			card.config.center.atlas = 'fnwk_resil'
 		end
 	end
 end
@@ -30,9 +30,9 @@ end
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 	if card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = "j_fnwk_streetlight_"..card.ability.extra.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+		full_UI_table.name = localize{type = 'name', key = "j_fnwk_streetlight_"..card.ability.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
-	localize{type = 'descriptions', key = "j_fnwk_streetlight_"..card.ability.extra.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
+	localize{type = 'descriptions', key = "j_fnwk_streetlight_"..card.ability.form or self.key, set = self.set, nodes = desc_nodes, vars = {}}
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -40,20 +40,16 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea ~= G.jokers then
-		return
-	end
-
 	-- sets this value so it won't regenerate upon being sold
 	-- amanda just lets herself get sold out
 	if (context.selling_self or card.debuff) and not context.blueprint then
-		card.ability.extra.state = 'selling'
+		card.ability.state = 'selling'
 		return
 	end
 
-	if context.joker_destroyed and not context.blueprint then
-		if card.ability.extra.state == 'default' then
-			card.ability.extra.state = 'sacrifice'
+	if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card and not context.blueprint then
+		if card.ability.state == 'default' then
+			card.ability.state = 'sacrifice'
 
 			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
 			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'rif')
@@ -64,10 +60,10 @@ function jokerInfo.calculate(self, card, context)
 			newJoker.config.center.eternal_compat = false
 
 			
-			newJoker.ability.extra.state = 'hidden'
-			newJoker.ability.extra.lastEdition = card.edition and card.edition.type or nil
+			newJoker.ability.state = 'hidden'
+			newJoker.ability.lastEdition = card.edition and card.edition.type or nil
 
-			newJoker.ability.extra.form = 'resil2'
+			newJoker.ability.form = 'resil2'
 			updateSprite(newJoker)
 
 			newJoker:add_to_deck()
@@ -94,8 +90,8 @@ function jokerInfo.calculate(self, card, context)
 	if context.end_of_round and context.individual and not context.blueprint then	
 		-- avoid regenerating if there's not an available slot
 		-- I.E. the player used Judgement during a run
-		if card.ability.extra.state == 'hidden' then
-			card.ability.extra.state = 'retire'
+		if card.ability.state == 'hidden' then
+			card.ability.state = 'retire'
 			if #G.jokers.cards + G.GAME.joker_buffer >= G.jokers.config.card_limit then
 				G.E_MANAGER:add_event(Event({func = function()
 					card:start_dissolve(nil, false)
@@ -107,7 +103,7 @@ function jokerInfo.calculate(self, card, context)
 				card:set_eternal(false)
 				card.config.center.eternal_compat = false
 
-				local lastEdition = card.ability.extra.lastEdition
+				local lastEdition = card.ability.lastEdition
 				if not lastEdition then
 					card:set_edition({negative = false}, true, true)
 				else
@@ -125,8 +121,8 @@ function jokerInfo.calculate(self, card, context)
 				card:juice_up()
 				play_sound('tarot2')
 
-				card.ability.extra.state = 'default'
-				card.ability.extra.form = 'resil'
+				card.ability.state = 'default'
+				card.ability.form = 'resil'
 				updateSprite(card)
 			end
 		end
@@ -135,12 +131,12 @@ end
 
 function jokerInfo.update(self, card)
 	if card.area and card.area.config.type == "shop" then
-		card.ability.extra.form = 'resil'
+		card.ability.form = 'resil'
 		updateSprite(card)
 	end
 
 	if card.area and card.area.config.collection and self.discovered then
-        card.ability.extra.form = 'resil'
+        card.ability.form = 'resil'
 		updateSprite(card)
     end
 end

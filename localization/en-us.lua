@@ -73,6 +73,7 @@ return {
 			k_level_up_ex5 = "Level Up x5!",
 			k_plus_fool = "Fool!",
 			k_revived = "Revived!",
+			k_glass_ex = "Glass!",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -88,7 +89,9 @@ return {
 			ba_sunshine = 'Sunshine Deluxe!!',
 			co_sunshine = 'FF3C00',
 			ba_rockhard = 'Rockhard in a Funky Place',
-			co_rockhard = 'B4EDFA'
+			co_rockhard = 'B4EDFA',
+			ba_rubicon = 'Rubicon Crossroads',
+			co_rubicon = 'EFD407'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -710,6 +713,29 @@ return {
 					"Create a {C:dark_edition}Negative{} {C:tarot}Fool{}",
 					"card if played hand is",
 					"the round's {C:attention}final hand{}",
+				}
+			},
+			j_fnwk_rubicon_bone = {
+				name = "Bone Crossed Joker",
+				text = {
+					"All {C:attention}face cards{} are",
+					"considered {C:attention}Queens{}",
+				}
+			},
+			j_fnwk_rubicon_moonglass = {
+				name = "Moonglass Crossed Joker",
+				text = {
+					"{C:green}#1# in #2#{} chance cards with",
+                    "{C:spades}Spade{} suit become {C:attention}Glass{}",
+                    "cards when scored",
+				}
+			},
+			j_fnwk_rubicon_infidel = {
+				name = "Infidel Jokestar",
+				text = {
+					"{V:1}#1#{} and {V:2}#2#",
+                    "count as the same suit,",
+                    "{s:0.8}Suits change every round{}"
 				}
 			},
 		},
