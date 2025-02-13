@@ -1,0 +1,39 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds support for infidel joker's suit effect
+#
+
+# Game:start_run()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if next(find_joker('Smeared Joker')) and (self.base.suit == 'Hearts' or self.base.suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
+    return true
+end'''
+position = "at"
+payload = '''local smeared = next(find_joker('Smeared Joker'))
+local infidel = next(find_joker('Infidel Jokestar'))
+if infidel and smeared then
+    if not ((G.GAME.infidel_suits['Hearts'] and G.GAME.infidel_suits['Diamonds'])
+    or (G.GAME.infidel_suits['Spades'] and G.GAME.infidel_suits['Clubs'])) then
+        return true
+    end
+end
+if smeared and (self.base.suit == 'Hearts' or self.base.suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
+    return true
+end 
+
+if infidel then
+    local infidelSuits = {}
+    for k, v in pairs(G.GAME.infidel_suits) do
+        infidelSuits[#infidelSuits+1] = k
+    end
+    if (self.base.suit == infidelSuits[1] or self.base.suit == infidelSuits[2]) and (suit == infidelSuits[1] or suit == infidelSuits[2]) then
+        return true
+    end
+end'''
+match_indent = true
+times = 2

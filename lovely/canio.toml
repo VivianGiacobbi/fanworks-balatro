@@ -1,0 +1,66 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch for Canio to make it consistent with other xmult jokers internally
+#
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.ability.caino_xmult = self.ability.caino_xmult + faces*self.ability.extra'''
+position = "at"
+payload = '''self.ability.x_mult = self.ability.x_mult + faces*self.ability.extra'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.ability.caino_xmult = self.ability.caino_xmult + face_cards*self.ability.extra'''
+position = "at"
+payload = '''self.ability.x_mult = self.ability.x_mult + face_cards*self.ability.extra'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif self.ability.name == 'Caino' then loc_vars = {self.ability.extra, self.ability.caino_xmult}'''
+position = "at"
+payload = '''elseif self.ability.name == 'Caino' then loc_vars = {self.ability.extra, self.ability.x_mult}'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Caino' and self.ability.caino_xmult > 1 then 
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.caino_xmult}},
+        Xmult_mod = self.ability.caino_xmult
+    }
+end'''
+position = "at"
+payload = '''if self.ability.name == 'Caino' and self.ability.x_mult > 1 then 
+    return {
+        message = localize{type='variable',key='a_xmult',vars={self.ability.x_mult}},
+        Xmult_mod = self.ability.x_mult
+    }
+end'''
+match_indent = true
+times = 1
+
+# Card:set_ability()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Caino' then 
+    self.ability.caino_xmult = 1
+end'''
+position = "at"
+payload = ''''''
+match_indent = true
+times = 1

@@ -1,0 +1,25 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a "start shop" context
+#
+
+# Game:update_shop()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+for i = 1, #G.GAME.tags do
+    G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
+end'''
+position = "at"
+payload = '''
+for i = 1, #G.GAME.tags do
+    G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
+end
+SMODS.calculate_context({start_shop = true})
+'''
+match_indent = true
+times = 1

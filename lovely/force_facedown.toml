@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch to let jokers force facedown draws, rather than just bosses
+#
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+function CardArea:emplace(card, location, stay_flipped)'''
+position = "at"
+payload = '''
+function CardArea:emplace(card, location, stay_flipped, created, copied)'''
+match_indent = true
+times = 1
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped then
+    card:flip()
+end
+if self == G.hand and stay_flipped then 
+    card.ability.wheel_flipped = true
+end'''
+position = "at"
+payload = '''
+if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped and not card.joker_force_facedown then
+    card:flip()
+end
+if self == G.hand and stay_flipped and not card.joker_force_facedown then 
+    card.ability.wheel_flipped = true
+end
+card.joker_force_facedown = nil'''
+match_indent = true
+times = 1
+
+# draw_card()
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(to, card)'''
+position = "at"
+payload = '''local stay_flipped = (G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(to, card)) or card.joker_force_facedown'''
+match_indent = true
+times = 1

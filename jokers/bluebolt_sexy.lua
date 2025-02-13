@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Evasive Jokestar',
+	name = 'Sexy Rust Joker',
 	config = {
         extra = {
             women = {

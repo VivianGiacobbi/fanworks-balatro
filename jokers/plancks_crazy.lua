@@ -19,19 +19,19 @@ local jokerInfo = {
 }
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.joker_destroyed and context.removed ~= card and context.removed.ability.name ~= 'Crazy Creaking Joker' then
-		if context.removed.ability.chips or context.removed.ability.mult or context.removed.ability.x_mult or context.removed.ability.extra then
-			if context.removed.config.chips ~= context.removed.ability.chips 
-				or context.removed.config.mult ~= context.removed.ability.mult
-				or context.removed.config.x_mult ~= context.removed.ability.x_mult
-				or not deep_compare(context.removed.config.extra, context.removed.ability.extra) then
-				card.ability.extra.saved_abilities[context.removed.ability.name] = {
-					chips = context.removed.ability.chips,
-					mult = context.removed.ability.mult,
-					x_mult = context.removed.ability.x_mult,
-					extra = context.removed.ability.extra
-				}
-			end
+    if context.cardarea == G.jokers and context.joker_destroyed and context.removed ~= card and context.removed.ability.name ~= 'Crazy Creaking Joker' then	
+		local chips_diff =  context.removed.ability.chips ~= 0 and context.removed.config.center.config.chips ~= context.removed.ability.chips
+		local mult_diff = context.removed.ability.mult ~= 0 and context.removed.config.center.config.mult ~= context.removed.ability.mult
+		local x_mult_diff = context.removed.ability.x_mult ~= 1 and context.removed.config.center.config.x_mult ~= context.removed.ability.x_mult
+		local extra_val_diff = context.removed.ability.extra_value ~= 0 and context.removed.config.center.config.extra_value ~= context.removed.ability.extra_value
+		local extra_diff = not deep_compare(context.removed.config.center.config.extra, context.removed.ability.extra)
+		if chips_diff or mult_diff or x_mult_diff or extra_val_diff or extra_diff then
+			card.ability.extra.saved_abilities[context.removed.ability.name] = {}
+			if chips_diff then card.ability.extra.saved_abilities[context.removed.ability.name].chips = context.removed.ability.chips end
+			if mult_diff then card.ability.extra.saved_abilities[context.removed.ability.name].mult = context.removed.ability.mult end
+			if x_mult_diff then card.ability.extra.saved_abilities[context.removed.ability.name].x_mult = context.removed.ability.x_mult end
+			if extra_val_diff then card.ability.extra.saved_abilities[context.removed.ability.name].extra_val = context.removed.ability.extra_value end
+			if extra_diff then card.ability.extra.saved_abilities[context.removed.ability.name].extra = context.removed.ability.extra end
 		end
 	end
 
@@ -40,11 +40,13 @@ function jokerInfo.calculate(self, card, context)
 			context.new_joker.ability.extra.saved_abilities = card.ability.extra.saved_abilities
 		elseif card.ability.extra.saved_abilities[context.new_joker.ability.name] then
 			local saved_ability = card.ability.extra.saved_abilities[context.new_joker.ability.name]
-			context.new_joker.ability.chips = saved_ability.chips
-			context.new_joker.ability.mult = saved_ability.mult
-			context.new_joker.ability.x_mult = saved_ability.x_mult
-			context.new_joker.ability.extra = saved_ability.extra
+			if saved_ability.chips then context.new_joker.ability.chips = saved_ability.chips end
+			if saved_ability.mult then context.new_joker.ability.mult = saved_ability.mult end
+			if saved_ability.x_mult then context.new_joker.ability.x_mult = saved_ability.x_mult end
+			if saved_ability.extra_val then context.new_joker.ability.extra_value = saved_ability.extra_val end
+			if saved_ability.extra then context.new_joker.ability.extra = saved_ability.extra end
 			card.ability.extra.saved_abilities[context.new_joker.ability.name] = nil
+			context.new_joker:set_cost()
 
 			G.E_MANAGER:add_event(Event({
 				blockable = false,
