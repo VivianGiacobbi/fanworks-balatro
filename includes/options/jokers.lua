@@ -30,6 +30,12 @@ local jokersToLoad = {
 	'rubicon_bone',
 	'rubicon_moonglass',
 	'rubicon_infidel',
+	-- jojopolis
+	'jojopolis_jordan',
+	--gotequest
+	'gq_lambiekins',
+	--doubledown
+	'dd_clark',
 }
 
 if not fnwk_enabled['enableJokers'] then
