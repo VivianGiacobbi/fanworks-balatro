@@ -91,7 +91,13 @@ return {
 			ba_rockhard = 'Rockhard in a Funky Place',
 			co_rockhard = 'B4EDFA',
 			ba_rubicon = 'Rubicon Crossroads',
-			co_rubicon = 'EFD407'
+			co_rubicon = 'EFD407',
+			ba_gotequest = 'Gotequest',
+			co_gotequest = 'F38AC7',
+			ba_jojopolis = 'JoJopolis',
+			co_jojopolis = 'D56F15',
+			ba_doubledown = 'Double Down',
+			co_doubledown = '0000FF',
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -736,6 +742,28 @@ return {
 					"{V:1}#1#{} and {V:2}#2#",
                     "count as the same suit,",
                     "{s:0.8}Suits change every round{}"
+				}
+			},
+			j_fnwk_gq_lambiekins = {
+				name = "Ms. Lambiekins",
+				text = {
+					"Played {C:attention}Lucky Cards{}",
+                    "earn {C:money}$1{} when scored"
+				}
+			},
+			j_fnwk_jojopolis_jordan = {
+				name = "Extendable Jokestar",
+				text = {
+					"{C:mult}+#1#{} Mult for each card above",
+					"above {C:attention}#3#{} in your full deck",
+					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
+				}
+			},
+			j_fnwk_dd_clark = {
+				name = "Acerbic Fencer",
+				text = {
+					"When round begins, add a",
+					"random {C:attention}Face Card{} to your hand"
 				}
 			},
 		},
