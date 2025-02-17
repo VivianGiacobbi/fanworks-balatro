@@ -4,7 +4,7 @@ local jokerInfo = {
 		extra = {
 			chips = 0,
             chips_mod = 10,
-		}
+		},
 	},
 	rarity = 1,
 	cost = 4,
@@ -30,7 +30,7 @@ function jokerInfo.calculate(self, card, context)
 		elseif card.ability.extra.chips > 0 then
             card.ability.extra.chips = 0
             return {
-                card = context.blueprint_card or card,
+                card = card,
                 message = localize('k_reset')
             }
 		end

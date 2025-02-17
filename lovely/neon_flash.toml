@@ -1,0 +1,61 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds the ability to flash the screen with a full flash
+#
+
+# Game.draw()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if G.AA_CANVAS then 
+    love.graphics.push()
+        love.graphics.scale(1/G.CANV_SCALE)
+        love.graphics.draw(G.AA_CANVAS, 0, 0)
+    love.graphics.pop()
+end'''
+position = "after"
+payload = '''
+love.graphics.setCanvas()
+love.graphics.scale(G.CANV_SCALE)
+love.graphics.setShader()
+
+if G.NEON_FLASH then
+    love.graphics.push()
+    G.NEON_FLASH:translate_container()
+    G.NEON_FLASH:draw()
+    love.graphics.pop()
+end'''
+match_indent = true
+times = 1
+
+# Game:main_menu()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''UIBox{
+    definition = 
+    {n=G.UIT.ROOT, config={align = "cm", colour = G.C.UI.TRANSPARENT_DARK}, nodes={
+        {n=G.UIT.T, config={text = G.VERSION, scale = 0.3, colour = G.C.UI.TEXT_LIGHT}}
+    }}, 
+    config = {align="tri", offset = {x=0,y=0}, major = G.ROOM_ATTACH, bond = 'Weak'}
+}'''
+position = "after"
+payload = '''G.NEON_FLASH = Sprite(0,0, G.ROOM.T.w*2, G.ROOM.T.h*4, G.ASSET_ATLAS['fnwk_screen'], {x = 0, y = 0})
+G.NEON_VALS = { AMT = 0, MAX = 1000 } 
+G.NEON_FLASH:define_draw_steps({{
+	shader = 'fnwk_neon_flash',
+	send = {
+		{name = 'flash', ref_table = G.NEON_VALS, ref_value = 'AMT'},
+        {name = 'flash_max', ref_table = G.NEON_VALS, ref_value = 'MAX'},
+	}}})
+G.NEON_FLASH:set_alignment({
+    major = G.ROOM_ATTACH,
+	type = 'cm',
+	offset = {x=0,y=0}
+})
+'''
+match_indent = true
+times = 1

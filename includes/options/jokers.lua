@@ -4,7 +4,11 @@ local jokersToLoad = {
     --]]
 
     -- streetlight pursuit
+	'streetlight_fledgling',
     'streetlight_resil',
+	'streetlight_indulgent',
+	'streetlight_methodical',
+	'streetlight_industrious',
     'streetlight_pinstripe',
     -- spirit lines
     -- 'spirit_aquarium',

@@ -1,0 +1,42 @@
+local jokerInfo = {
+	name = 'Fledgling Streetlit Joker',
+	config = {
+		extra = {
+			chips = 0,
+			chips_mod = 15,
+		},
+	},
+	rarity = 1,
+	cost = 5,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = false,
+	fanwork = 'streetlight',
+}
+
+function jokerInfo.loc_vars(self, info_queue, card) 
+    return { vars = { card.ability.extra.chips_mod, card.ability.extra.chips } }
+end
+
+function jokerInfo.calculate(self, card, context)
+	if context.cardarea == G.jokers then
+		if context.joker_main and not card.debuff and card.ability.extra.chips > 0 then
+			return {
+				message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
+				chip_mod = card.ability.extra.chips, 
+				colour = G.C.CHIPS
+			}
+		end
+
+		if not context.blueprint and context.after and G.GAME.current_round.hands_played == 0 and G.GAME.blind.chips > context.total_hand_chips then
+			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
+			return {
+				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+				chip_mod = card.ability.extra.chips, 
+				colour = G.C.CHIPS
+			}
+		end
+	end
+end
+
+return jokerInfo

@@ -3,11 +3,11 @@ local jokerInfo = {
 	config = {
         extra = {
             currentDiscount = 0
-        }
+        },
     },
 	rarity = 1,
 	cost = 6,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'bluebolt'
@@ -20,15 +20,15 @@ end
 
 function jokerInfo.calculate(self, card, context)
 
-    if context.skip_blind then
+    if context.skip_blind and not context.blueprint then
         card.ability.extra.currentDiscount = card.ability.extra.currentDiscount + 1
-        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_discount')})
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount')})
     end
 
-    if context.cardarea == G.jokers and context.start_shop then
+    if context.cardarea == G.jokers and context.start_shop and not context.blueprint then
         G.GAME.inflation = G.GAME.inflation - card.ability.extra.currentDiscount
         if card.ability.extra.currentDiscount ~= 0 then
-        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_discount_apply'), colour = G.C.MONEY})
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount_apply'), colour = G.C.MONEY})
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, 
             
             func = function()
@@ -40,7 +40,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
 
-    if context.cardarea == G.jokers and context.ending_shop then
+    if context.cardarea == G.jokers and context.ending_shop and not context.blueprint then
         if card.ability.extra.currentDiscount ~= 0 then
         G.GAME.inflation = G.GAME.inflation + card.ability.extra.currentDiscount
         card.ability.extra.currentDiscount = 0
@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
                 return true 
             end}))
             return {
-                card = context.blueprint_card or card,
+                card = card,
                 message = localize('k_reset')
             }
         end

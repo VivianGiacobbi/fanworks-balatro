@@ -4,7 +4,7 @@ local jokerInfo = {
 		extra = {
 			hands_at_start = {},
             mult_mod = 6,
-		}
+		},
 	},
 	rarity = 1,
 	cost = 4,
