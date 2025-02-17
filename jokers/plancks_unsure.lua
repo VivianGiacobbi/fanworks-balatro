@@ -1,6 +1,7 @@
 local jokerInfo = {
 	name = 'Unsure Creaking Joker',
-	config = {},
+	config = {
+	},
 	rarity = 2,
 	cost = 7,
 	blueprint_compat = true,

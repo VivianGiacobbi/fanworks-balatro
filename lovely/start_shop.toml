@@ -11,14 +11,17 @@ priority = 0
 [patches.pattern]
 target = "game.lua"
 pattern = '''
-for i = 1, #G.GAME.tags do
-    G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
-end'''
+        for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
+        end
+    end
+'''
 position = "at"
 payload = '''
-for i = 1, #G.GAME.tags do
-    G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
-end
+        for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'shop_final_pass'})
+        end
+    end
 SMODS.calculate_context({start_shop = true})
 '''
 match_indent = true

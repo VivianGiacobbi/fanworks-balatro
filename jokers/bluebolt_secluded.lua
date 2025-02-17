@@ -1,7 +1,7 @@
 local jokerInfo = {
 	name = 'Secluded Rust Joker',
 	config = {
-		extra = 1
+		extra = 1,
 	},
 	rarity = 2,
 	cost = 8,

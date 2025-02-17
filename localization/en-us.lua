@@ -74,6 +74,11 @@ return {
 			k_plus_fool = "Fool!",
 			k_revived = "Revived!",
 			k_glass_ex = "Glass!",
+			k_method_1 = "One Step!",
+			k_method_2 = "Two Step!",
+			k_method_3 = "Three Step!",
+			k_method_4 = "Let's Dance!",
+			k_brienne = "Rewritten!",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -583,6 +588,15 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
 				},
 			},
+			j_fnwk_streetlight_fledgling = {
+				name = "Fledgling Streetlit Joker",
+				text = {
+					"This Joker gains {C:chips}+#1#{} Chips",
+					"if {C:attention}first hand{} of round",
+					"doesn't win the {C:attention}Blind{}",
+					"{C:inactive}(Currently {}{C:chips}+#2#{}{C:inactive} Chips){}",
+				},
+			},
 			j_fnwk_streetlight_resil = {
 				name = "Resilient Streetlit Joker",
 				text = {
@@ -598,6 +612,32 @@ return {
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
+				},
+			},
+			j_fnwk_streetlight_indulgent = {
+				name = "Indulgent Streetlit Joker",
+				text = {
+					"This Joker gains {X:mult,C:white}X#1#{} Mult",
+					"if you spend at least {C:money}$#2#{} {C:inactive}[#3#]{}",
+					"before {C:attention}exiting{} the shop",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#4#{} {C:inactive}Mult){}"
+				},
+			},
+			j_fnwk_streetlight_methodical = {
+				name = "Methodical Streetlit Joker",
+				text = {
+					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
+					"upgrade played {C:attention}poker hand{}",
+				},
+			},
+			j_fnwk_streetlight_industrious = {
+				name = "Industrious Streetlit Joker",
+				text = {
+					"If played hand is a {C:attention}Full{}",
+					"{C:attention}House{}, convert the {C:attention}ranks{}",
+					"of the {C:attention}Pair{} into the ranks",
+					"of the {C:attention}Three of a Kind{}",
+					"after scoring",
 				},
 			},
 			j_fnwk_streetlight_pinstripe = {
