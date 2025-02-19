@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+    info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
     return { vars = { card.ability.extra.money } }
 end
 
@@ -28,16 +28,19 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.individual and context.cardarea == G.play and not card.debuff then
-        if context.other_card.ability.effect == "Lucky Card" then
-            ease_dollars(to_big(card.ability.extra.money))
-			return {
-				message = localize('$')..card.ability.extra.money,
-				colour = G.C.MONEY,
-				card = card
-			}
-        end
+    if not context.individual or not context.cardarea == G.play or card.debuff then
+        return
     end
+    if context.other_card.ability.effect ~= "Lucky Card" then
+        return
+    end
+
+    ease_dollars(to_big(card.ability.extra.money))
+    return {
+        message = localize('$')..card.ability.extra.money,
+        colour = G.C.MONEY,
+        card = card
+    }
 end
 
 return jokerInfo

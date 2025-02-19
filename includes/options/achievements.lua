@@ -7,7 +7,7 @@ end
 
 
 G.loadTrophies = true
-for s in recursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
+for s in RecursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
 	trophiesToLoad[#trophiesToLoad + 1] = s:gsub(path_pattern_replace .. "/achievements/", "")
 end
 
@@ -99,7 +99,7 @@ function G.FUNCS.ach_characters_check()
 end
 
 function G.FUNCS.ach_vineshroom_check()
-	if ends_with(G.SETTINGS.CUSTOM_DECK.Collabs.Clubs, 'vineshroom') or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_PC" or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_WF" then
+	if StringEndsWith(G.SETTINGS.CUSTOM_DECK.Collabs.Clubs, 'vineshroom') or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_PC" or G.SETTINGS.CUSTOM_DECK.Collabs.Clubs == "collab_WF" then
 		check_for_unlock({ type = "skin_vineshroom" })
 	end
 end
@@ -119,7 +119,7 @@ G.FUNCS.reset_trophies = function(e)
 	else
 		G.FUNCS.wipe_on()
 		for k, v in pairs(SMODS.Achievements) do
-			if starts_with(k, 'ach_fnwk_') then
+			if StringStartsWith(k, 'ach_fnwk_') then
 				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
 				G.ACHIEVEMENTS[k].earned = nil
 			end

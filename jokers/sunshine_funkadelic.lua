@@ -14,6 +14,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_fizzy", set = "Other"}
 	if G.GAME and not G.GAME.current_funky_suits then
 		reset_funkadelic()
 	end

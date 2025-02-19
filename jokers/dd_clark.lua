@@ -12,7 +12,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "guestartist0", set = "Other"}
+    info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -41,6 +41,7 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}
     card.ability.lucky_tally = 0
     if G.playing_cards then 
         for k, v in pairs(G.playing_cards) do

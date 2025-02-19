@@ -12,6 +12,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
 
     if G.GAME and not G.GAME.infidel_suits then
         reset_infidel()

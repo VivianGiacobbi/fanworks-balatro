@@ -4,7 +4,7 @@ local trophyInfo = {
     unlock_condition = function(self, args)
         local all = true
         for k, v in pairs(SMODS.Achievements) do
-            if starts_with(k, 'ach_fnwk_') then
+            if StringStartsWith(k, 'ach_fnwk_') then
                 if k ~= 'ach_fnwk_big_meat' and not v.earned then
                     all = false
                 end

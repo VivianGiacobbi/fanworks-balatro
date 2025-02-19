@@ -11,6 +11,10 @@ local jokerInfo = {
 	fanwork = 'bluebolt'
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_winter", set = "Other"}
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers and context.pre_draw then
 		if context.drawn:is_suit('Diamonds') then
@@ -18,26 +22,25 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.repetition and not card.debuff then
-		if context.cardarea == G.play then
-			local retriggers = 0
+	if not context.repetition or not context.cardarea == G.play or card.debuff then
+		return
+	end
 
-			if context.other_card:is_suit('Diamonds') then
-				retriggers = card.ability.extra
-			end
+	local retriggers = 0
+	if context.other_card:is_suit('Diamonds') then
+		retriggers = card.ability.extra
+	end
 
-			if context.other_card:get_id() == 11 then
-				retriggers = retriggers + 1
-			end
-			
-			if retriggers > 0 then
-				return {
-					message = localize('k_again_ex'),
-					repetitions = retriggers,
-					card = context.blueprint_card or card
-				}
-			end
-		end
+	if context.other_card:get_id() == 11 then
+		retriggers = retriggers + 1
+	end
+	
+	if retriggers > 0 then
+		return {
+			message = localize('k_again_ex'),
+			repetitions = retriggers,
+			card = context.blueprint_card or card
+		}
 	end
 end
 
