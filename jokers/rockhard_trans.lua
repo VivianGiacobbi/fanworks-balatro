@@ -11,6 +11,10 @@ local jokerInfo = {
 	fanwork = 'rockhard',
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.after and context.cardarea == G.jokers and G.GAME.current_round.hands_left == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

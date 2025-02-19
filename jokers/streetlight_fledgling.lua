@@ -14,7 +14,8 @@ local jokerInfo = {
 	fanwork = 'streetlight',
 }
 
-function jokerInfo.loc_vars(self, info_queue, card) 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}
     return { vars = { card.ability.extra.chips_mod, card.ability.extra.chips } }
 end
 

@@ -12,6 +12,7 @@ local includes = {
 	-- object hooks
 	'hooks/card',
 	'hooks/common_events',
+	'hooks/UI_definitions',
 
 	-- option files
 	--- jokers are required for some following files so include them first

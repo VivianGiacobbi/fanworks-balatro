@@ -18,7 +18,7 @@ position = "after"
 payload = '''
 if card.ability.set == 'Joker' and created and not copied then
     for i=1, #G.jokers.cards do
-        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, new_joker = card})
+        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, card = card})
     end
 end'''
 match_indent = true

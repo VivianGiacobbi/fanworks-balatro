@@ -40,7 +40,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-        
+    info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}       
     return { 
 		vars = {
 			card.ability.extra.x_mult_mod,
@@ -98,11 +98,10 @@ function update_jokers_glow(card, removed)
 	
 	-- reset the area it was moved from
 	if (card.ability.glow_area and card.ability.glow_area ~= card.area) or (card.ability.glow_area and removed) then
-		sendDebugMessage('Removed: '..tostring(removed))
 		for i=1, #card.ability.glow_area.cards do
-			sendDebugMessage('Resetting '..i)
 			card.ability.glow_area.cards[i].ability.glow = nil
 			card.ability.glow_area.cards[i].no_shadow = false
+			card.ability.glow_area.cards[i].children.glow_sprite:remove()
 			card.ability.glow_area.cards[i].children.glow_sprite = nil
 		end
 	end
@@ -143,7 +142,9 @@ function update_jokers_glow(card, removed)
 		local dist_mod = (card.ability.extra.max_dist - dist + 1)
 		local glow_card = card.ability.glow_area.cards[i]
 		if i ~= card.ability.glow_idx and dist <= card.ability.extra.max_dist then
-			local glow = 1 + (card.ability.extra.glow_step * fact(dist_mod))
+			if glow_card.children.glow_sprite then glow_card.children.glow_sprite:remove() end
+			
+			local glow = 1 + (card.ability.extra.glow_step * Fact(dist_mod))
 			glow_card.ability.glow = glow
 			glow_card.no_shadow = true
 
@@ -177,6 +178,9 @@ function update_jokers_glow(card, removed)
 			glow_card.children.glow_sprite:align_to_major()
 			glow_card.children.glow_sprite.custom_draw = true
 		else
+			if glow_card.children.glow_sprite then
+				glow_card.children.glow_sprite:remove()
+			end
 			glow_card.children.glow_sprite = nil
 			glow_card.ability.glow = nil
 			glow_card.no_shadow = false

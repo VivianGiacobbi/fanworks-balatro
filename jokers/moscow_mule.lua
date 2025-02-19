@@ -9,4 +9,9 @@ local jokerInfo = {
 	fanwork = "moscow",
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_poul", set = "Other"}
+end
+
+
 return jokerInfo

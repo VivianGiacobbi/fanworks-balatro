@@ -10,4 +10,8 @@ local jokerInfo = {
 	fanwork = 'rubicon',
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
+end
+
 return jokerInfo

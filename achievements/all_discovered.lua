@@ -6,7 +6,7 @@ local trophyInfo = {
             local fnwkJokers = 0
             local fnwkDiscovered = 0
             for k, v in pairs(SMODS.Centers) do
-                if starts_with(k, 'j_fnwk_') then
+                if StringStartsWith(k, 'j_fnwk_') then
                     fnwkJokers = fnwkJokers + 1
                     if v.discovered == true then
                         fnwkDiscovered = fnwkDiscovered + 1

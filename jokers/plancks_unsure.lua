@@ -10,6 +10,10 @@ local jokerInfo = {
 	fanwork = "plancks",
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_coop", set = "Other"}
+end
+
 function jokerInfo.calculate(self, card, context)
 	if context.repetition and context.cardarea == G.play and not card.debuff and not context.other_card.debuff then
 		if context.other_card:get_id() < 11 and context.other_card.ability.effect ~= "Base" then

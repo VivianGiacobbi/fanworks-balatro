@@ -1,5 +1,130 @@
 return {
 	misc = {
+		quips = {
+			mqt_1 = {
+				"Always nice to meet",
+				"another doll~",
+			},
+			mqt_2 = {
+				"I see somebody used",
+				"a Strength tarot on",
+				"you, hon~",
+			},
+			mqt_3 = {
+				"A town inside you?",
+				"How queer~",
+			},
+			mq_1 = {
+				"Hey gorgeous, buy",
+				"you a drink?~",
+			},
+			mq_2 = {
+				"Nice top deck,",
+				"can't wait to see",
+				"it discarded~",
+			},
+			mq_3 = {
+				"Your place or",
+				"mine, hon?~",
+			},
+			mq_4 = {
+				"Color me straight",
+				"flushed, darling~",
+			},
+			mq_5 = {
+				"Ain't you just",
+				"a snack~"
+			},
+			mq_6 = {
+				"I've got a fucket",
+				"of dickin'...?"
+			},
+			mq_7 = {
+				"You'd look cuter",
+				"in my bed~"
+			},
+			mq_8 = {
+				"Do you like...",
+				"jazz?"
+			},
+			mq_9 = {
+				"God, please be a",
+				"lesbian this time."
+			},
+			mq_10 = {
+				"Welp... not a",
+				"lesbian... *sigh*"
+			},
+			mq_11 = {
+				"The dyke's got",
+				"girls to catch~"
+			},
+			mq_12 = {
+				"So... wanna",
+				"make out~"
+			},
+			mq_13 = {
+				"What's a place like",
+				"you doing in a girl",
+				"like this? Wait..."
+			},
+			mq_14 = {
+				"Wanna play Legos and",
+				"watch telenovelas?",
+			},
+			mq_15 = {
+				"Hey there, kitten",
+				"Who's a good girl?~",
+			},
+			mq_16 = {
+				"I can be your",
+				"mommy, hon~",
+			},
+			mq_17 = {
+				"Wait you want",
+				"me to put this",
+				"out on you?",
+			},
+			mq_18 = {
+				"I'll show you a",
+				"good time, dear~",
+			},
+			mq_19 = {
+				"Don't be a",
+				"stranger~",
+			},
+			mq_j_fnwk_gq_lambiekins_1 = {
+				"...............",
+				"...Good Enough.",
+			},
+			mq_j_fnwk_gq_lambiekins_2 = {
+				"...I'm lonely",
+				"tonight.",
+			},
+			mq_j_egg = {
+				"We all find out",
+				"someday, hon~",
+			},
+			mq_j_fnwk_bluebolt_secluded = {
+				"Hangin' in there,",
+				"Princess?",
+			},
+			mq_j_fnwk_bluebolt_jokestar = {
+				"Well if it ain't",
+				"the Shocker Boy!",
+			},
+			mq_j_fnwk_bluebolt_tuned = {
+				"Any good",
+				"albums lately?",
+			},
+			mq_j_fnwk_bluebolt_sexy = {
+				"Mmm, I'd do me~",
+			},
+			mq_j_fnwk_bluebolt_impaired = {
+				"Don't be a",
+				"stranger~",
+			},
+		},
 		collabs = {
 			Spades={
 				["1"]="Twitch Clips",
@@ -18,7 +143,6 @@ return {
 			k_stand = "Stand",
 			b_stand_cards = "Stands",
 			b_and_activate = "& Activate",
-			b_activate = "Activate",
 			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
@@ -62,7 +186,6 @@ return {
 					collab_CYP = "King, Queen and Jack by Jazz_Jen",
 				}
 			},
-			ph_saved_vague = "Saved by Joker",
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
@@ -79,6 +202,8 @@ return {
 			k_method_3 = "Three Step!",
 			k_method_4 = "Let's Dance!",
 			k_brienne = "Rewritten!",
+			k_tuned_x = "XMult!",
+			k_tuned_m = "+Mult",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -111,206 +236,18 @@ return {
 			ch_c_fnwk_tucker = {"All Non-{C:clubs}Fanworks{} Jokers are banned"}
 		},
 		achievement_names = {
-			ach_fnwk_discover_fisheye = "As You Know...",
-			ach_fnwk_discover_cousinsclub = "You Gotta Come to Club Club.",
-			ach_fnwk_discover_disguy = "BLS BLAY BALABRO BINTY",
-			ach_fnwk_discover_greenneedle = "Brainstorm",
-			ach_fnwk_discover_twoface = "Walrus mmmmmmm",
-			ach_fnwk_discover_garbage = "They Don't Give a Damn",
-			ach_fnwk_discover_sohappy = "I'm So Happy For You",
-			ach_fnwk_discover_kings = "Cursed in the Name of the LORD",
-			ach_fnwk_discover_chad = "Why Is He Here...",
-			ach_fnwk_discover_code = "Alyx!",
-			ach_fnwk_discover_chrome = "Hey Jahnny!",
-			ach_fnwk_discover_shrimp = "I'm Ready, You Ready?",
-			ach_fnwk_discover_kerosene = "Throw Another on the Fire",
-			ach_fnwk_discover_werewolves = "Never Going To Happen",
-			ach_fnwk_discover_supper = "Shoutouts to SupperMarioBroth",
-			ach_fnwk_discover_red = "Red-Blooded Italian",
-			ach_fnwk_discover_miracle = "Johnny's Fault",
-			ach_fnwk_discover_pep = "Secret Hoppin'",
-			ach_fnwk_discover_grey = "Milky Way!",
-			ach_fnwk_discover_meat = "EEEEYEOW!",
-			ach_fnwk_discover_sponge = "Negativity Soak",
-			ach_fnwk_discover_claus = "16-Hit Combo",
-			ach_fnwk_discover_speed = "~~~~~~~~~~~~~~~",
-			ach_fnwk_discover_disturbed = "Creative Exercise",
-			ach_fnwk_discover_reyn = "Reyn Time",
-			ach_fnwk_discover_bsf = "Great Pretender",
-			ach_fnwk_discover_roger = "Like He Would Have Wanted",
-			ach_fnwk_discover_odio = "Lord of All Demons",
-			ach_fnwk_discover_btc = "Fake Rarity",
-			ach_fnwk_discover_watto = "I'm A Watto",
-			ach_fnwk_discover_muppet = "Could Become a Habit",
-			ach_fnwk_discover_dontmind = "Hmmm, What To Play...",
-			ach_fnwk_discover_crack = "It's Not Cool",
-			ach_fnwk_discover_charity = "Compassionate Card",
-			ach_fnwk_discover_roche = "We Meet Again, My Friend!",
-			ach_fnwk_discover_new = "Wiseau Serious?",
-			ach_fnwk_discover_pivot = "Never Too Late",
-			ach_fnwk_discover_speen = "RÖTATE",
-			ach_fnwk_discover_diaper = "I'm Vetoing That Bit",
-			ach_fnwk_discover_blast = "Emmanuel in Chat",
-			ach_fnwk_discover_dink = "Hua Ha!",
-			ach_fnwk_discover_deathcard = "Say Cheese!",
-			ach_fnwk_discover_hell = "290",
-			ach_fnwk_discover_epoch = "Good Morning, Crono",
-			ach_fnwk_discover_gnorts = "Rettegrof",
-			ach_fnwk_discover_al = "See It All",
-			ach_fnwk_discover_pacman = "Drugs Are Bad",
-			ach_fnwk_discover_purple = "I Do What I Want",
-			ach_fnwk_discover_fantabulous = "I Feel Fantastic",
-			ach_fnwk_discover_joeycastle = "SHIT CANNON",
-			ach_fnwk_discover_grand = "Nourish the Blood",
-			ach_fnwk_discover_voice = "maarrrio̸̊oò̶o̿̀o͚͂ooo",
-			ach_fnwk_discover_beginners = "Join Me At The Table",
-			ach_fnwk_discover_rotten = "It Degrades, Douglath",
-			ach_fnwk_discover_ten = "I Did All That For YOU!?!?",
-			ach_fnwk_discover_rapture = "I've Been A Good Christian!",
-			ach_fnwk_discover_killjester = "Well Worth It",
-			ach_fnwk_discover_villains = "Magic Bullet",
-			ach_fnwk_discover_meteor = "Did Sephiroth... Do This?",
-			ach_fnwk_discover_dud = "A DUHD!?",
-			ach_fnwk_discover_koffing = "NOT CLICKBAIT",
-			ach_fnwk_discover_frich = "FINE DINING",
-			ach_fnwk_discover_bunji = "Lemme Just Say This... Yum",
-			ach_fnwk_discover_crudeoil = "I CAN'T STOP",
-			ach_fnwk_discover_grannycream = "Heat n' Sip",
-			ach_fnwk_discover_sts = "ResidentSleeper",
-			ach_fnwk_discover_bjbros = "*Chain Attack OST Plays*",
-			ach_fnwk_discover_drippy = "The Dripping Tap",
-
 			ach_fnwk_activate_quixotic = "From Some Place Even Higher",
-			ach_fnwk_flip_sosad = "I'm Unhappy When You're Happy",
-			ach_fnwk_activate_roche = "You Earned It, Big Boy!",
 			ach_fnwk_fuckingkill_jimbo = "NOOOOOO HOW COULD YOU",
-			ach_fnwk_high_one = "All You Need Is One",
-			ach_fnwk_defeat_hog = "The Hawg Strikes Again",
-			ach_fnwk_miracle_inherit = "Recessive Genes",
-			ach_fnwk_reno_colors = "Headin' On Back",
-			ach_fnwk_skin_vineshroom = "thwomp.mp3",
-			ach_fnwk_skin_characters = "The Gang's All Here",
-			ach_fnwk_defeat_tray = "One Third Tray of: Chips!",
-			ach_fnwk_defeat_vod = "The Final Cut",
-			ach_fnwk_supreme_ascend = "Supreme Ascendancy",
 			ach_fnwk_defeat_finger = "Handy",
-			ach_fnwk_defeat_mochamike = "Put Your Deck Away",
-			ach_fnwk_triple_seven = "Triple Seven",
-
-			ach_fnwk_discover_vincenzo = "Step Right In",
-			ach_fnwk_discover_quarterdumb = "Drown In It",
-			ach_fnwk_purchase_dink = "VERY Expensive.",
-			ach_fnwk_final_odio = "MEGALOMANIA",
 			ach_fnwk_win_vine = "Growing Free",
-			ach_fnwk_the_band = "The Band",
-			ach_fnwk_chadley_power = "The Power of Chadnova",
-			ach_fnwk_red_convert = "Pro-lapsed Gamer",
-			ach_fnwk_five_deathcard = "Ouroboros",
-			ach_fnwk_ult_choomera = "Ultimate Choomera",
-			ach_fnwk_sts_allforms = "Art of Heartbreak",
-
 			ach_fnwk_all_discovered = "Card Addict",
 			ach_fnwk_big_meat = "The Big Meat",
 		},
 		achievement_descriptions = {
-			ach_fnwk_discover_fisheye = "Discover Fisheye",
-			ach_fnwk_discover_cousinsclub = "Discover Cousin's Club",
-			ach_fnwk_discover_disguy = "Discover DIS JOAKERRR",
-			ach_fnwk_discover_greenneedle = "Discover Green Needle",
-			ach_fnwk_discover_twoface = "Discover Two-Faced Joker",
-			ach_fnwk_discover_garbage = "Discover Garbage Hand",
-			ach_fnwk_discover_sohappy = "Discover I'm So Happy",
-			ach_fnwk_discover_kings = "Discover 2 Kings 2:23-24",
-			ach_fnwk_discover_chad = "Discover No No No No No No No No No No",
-			ach_fnwk_discover_code = "Discover Industry Code",
-			ach_fnwk_discover_chrome = "Discover Chromed Up",
-			ach_fnwk_discover_shrimp = "Discover Shrimp Joker",
-			ach_fnwk_discover_kerosene = "Discover Kerosene",
-			ach_fnwk_discover_werewolves = "Discover That's Werewolves",
-			ach_fnwk_discover_supper = "Discover WAAUGGHGHHHHGHH",
-			ach_fnwk_discover_red = "Discover Why Are You Red?",
-			ach_fnwk_discover_miracle = "Discover Miracle of Life",
-			ach_fnwk_discover_pep = "Discover Pepperoni Secret",
-			ach_fnwk_discover_grey = "Discover Grey Joker",
-			ach_fnwk_discover_meat = "Discover Meat",
-			ach_fnwk_discover_sponge = "Discover Depressed Brother",
-			ach_fnwk_discover_claus = "Discover Masked Joker",
-			ach_fnwk_discover_speed = "Discover Speed Joker",
-			ach_fnwk_discover_disturbed = "Discover Disturbed Joker",
-			ach_fnwk_discover_reyn = "Discover Bunch of Jokers",
-			ach_fnwk_discover_bsf = "Discover Be Someone Forever",
-			ach_fnwk_discover_roger = "Discover Mr. Roger",
-			ach_fnwk_discover_odio = "Discover Odious Joker",
-			ach_fnwk_discover_btc = "Discover Business Trading Card",
-			ach_fnwk_discover_watto = "Discover Let Fate Decide",
-			ach_fnwk_discover_muppet = "Discover Movin' Right Along",
-			ach_fnwk_discover_dontmind = "Discover Don't Mind If I Do",
-			ach_fnwk_discover_crack = "Discover This Is Crack",
-			ach_fnwk_discover_charity = "Discover Charity Stream",
-			ach_fnwk_discover_roche = "Discover Motorcyclist Joker",
-			ach_fnwk_discover_new = "Discover The NEW Joker!",
-			ach_fnwk_discover_pivot = "Discover Pivyot",
-			ach_fnwk_discover_speen = "Discover SPEEEEEEN",
-			ach_fnwk_discover_diaper = "Discover Diaper Joker",
-			ach_fnwk_discover_blast = "Discover Emmanuel Blast",
-			ach_fnwk_discover_dink = "Discover Very Expensive Joker",
-			ach_fnwk_discover_deathcard = "Discover Deathcard",
-			ach_fnwk_discover_hell = "Discover Running Hell",
-			ach_fnwk_discover_epoch = "Discover Wings Of Time",
-			ach_fnwk_discover_gnorts = "Discover Rekoj Gnorts",
-			ach_fnwk_discover_al = "Discover Another Light",
-			ach_fnwk_discover_pacman = "Discover PAC-MAN Incident",
-			ach_fnwk_discover_purple = "Discover The Purple Joker",
-			ach_fnwk_discover_fantabulous = "Discover Fantabulous Joker",
-			ach_fnwk_discover_joeycastle = "Discover Joey's Castle",
-			ach_fnwk_discover_grand = "Discover 7 Funny Story",
-			ach_fnwk_discover_voice = "Discover Choicest Voice",
-			ach_fnwk_discover_beginners = "Discover Beginner's Luck",
-			ach_fnwk_discover_rotten = "Discover Rotten Joker",
-			ach_fnwk_discover_ten = "Discover 10 ARROWS!?!?",
-			ach_fnwk_discover_rapture = "Discover Rapture",
-			ach_fnwk_discover_killjester = "Discover Kill Jester",
-			ach_fnwk_discover_villains = "Discover Jokers of Circumstance",
-			ach_fnwk_discover_meteor = "Discover Meteor",
-			ach_fnwk_discover_dud = "Discover The Dud",
-			ach_fnwk_discover_koffing = "Discover That Fucking Koffing Again",
-			ach_fnwk_discover_frich = "Discover Gourmand of Faramore",
-			ach_fnwk_discover_bunji = "Discover Scourge Of Pantsylvania",
-			ach_fnwk_discover_crudeoil = "Discover Crude Oil",
-			ach_fnwk_discover_grannycream = "Discover Granny Cream",
-			ach_fnwk_discover_sts = "Discover Murder the Monolith",
-			ach_fnwk_discover_bjbros = "Discover Blowzo Brothers",
-			ach_fnwk_discover_drippy = "Discover Dripping Joker",
-
 			ach_fnwk_activate_quixotic = "Use a Quixotic Card",
-			ach_fnwk_flip_sosad = "Win a round with I'm So Happy, causing it to flip to I'm So Sad",
-			ach_fnwk_activate_roche = "Receive a gift from Motorcyclist Joker",
 			ach_fnwk_fuckingkill_jimbo = "Fucking kill Jimbo",
-			ach_fnwk_high_one = "Have 2 High Card enhancing Jokers in your Joker slots",
-			ach_fnwk_defeat_hog = "Defeat The Hog",
-			ach_fnwk_miracle_inherit = "Use Miracle of Life to create a child that inherits an Enhancement, Seal, or Edition",
-			ach_fnwk_reno_colors = "Set the title screen colors to black and red",
-			ach_fnwk_skin_vineshroom = "Customize your deck to use the Classic Vineshroom for the Ace of Clubs",
-			ach_fnwk_skin_characters = "Customize your deck to include all of the Vinesauce characters",
-			ach_fnwk_defeat_tray = "Defeat The Tray",
-			ach_fnwk_defeat_vod = "Defeat The Vod",
-			ach_fnwk_supreme_ascend = "Have Rapture at or above +30 Mult and 2 Kings 2:23-24 in your Joker slots",
 			ach_fnwk_defeat_finger = "Defeat The Finger",
-			ach_fnwk_defeat_mochamike = "Defeat Mocha Mike",
-			ach_fnwk_triple_seven = "Have all 3 Final Fantasy Jokers in your Joker Slots",
-
-			ach_fnwk_discover_vincenzo = "Discover Vincenzo",
-			ach_fnwk_discover_quarterdumb = "Discover Quarterdumb",
-			ach_fnwk_purchase_dink = "Purchase Very Expensive Joker at a price of at least $60",
-			ach_fnwk_final_odio = "Reach the final form of Odious Joker, Armageddon",
 			ach_fnwk_win_vine = "Win a run with Vine Deck on any difficulty",
-			ach_fnwk_the_band = "Have 4 Red Vox Jokers in your Joker slots",
-			ach_fnwk_chadley_power = "Harness but a fraction of Chadley's secret power",
-			ach_fnwk_red_convert = "Use Why Are You Red? to turn a Poker Hand into a Secret Hand",
-			ach_fnwk_five_deathcard = "Purchase the same Deathcard from the shop 5 times in a single run",
-			ach_fnwk_ult_choomera = "Play a hand of 5 scoring Steel Cards with Chromed Up and Masked Joker",
-			ach_fnwk_sts_allforms = "Use all Murder the Monolith forms in a single run",
-
 			ach_fnwk_all_discovered = "Discover All Fanworks Jokers",
 			ach_fnwk_big_meat = "Unlock every Fanworks Achievement",
 		}
@@ -393,188 +330,72 @@ return {
 					"{C:stand}Stand{} in your consumables."
 				},
 			},
-			guestartist0 = {
+			artist_gote = {
 				name = "Artist",
 				text = {
 					"{E:1}BarrierTrio/Gote{}",
 				},
 			},
-			guestartist1 = {
+			artist_cejai = {
 				name = "Artist",
 				text = {
 					"{E:1}SagaciousCejai{}",
 				},
 			},
-			guestartist2 = {
-				name = "Coding",
-				text = {
-					"{E:1}DPS2004{}",
-				},
-			},
-			guestartist3 = {
-				name = "Coding",
-				text = {
-					"{E:1}Nether{}",
-				},
-			},
-			guestartist4 = {
-				name = "Coding",
-				text = {
-					"{E:1}Mysthaps{}",
-				},
-			},
-			guestartist5 = {
-				name = "Voice Acting",
-				text = {
-					"{E:1}AmtraxVA{}",
-				},
-			},
-			guestartist7 = {
-				name = "Coding",
-				text = {
-					"{E:1}Numbuh214{}",
-				},
-			},
-			guestartist8 = {
+			artist_coop = {
 				name = "Artist",
 				text = {
-					"{E:1}Keku{}",
+					"{E:1}Cauthen Currie{}",
 				},
 			},
-			guestartist9 = {
+			artist_fizzy = {
 				name = "Artist",
 				text = {
-					"{E:1}Gappie{}",
+					"{E:1}FizzyWizard{}",
 				},
 			},
-			guestartist10 = {
+			artist_mal = {
 				name = "Artist",
 				text = {
-					"{E:1}Arthur Effgus{}",
+					"{E:1}qrowscant{}",
 				},
 			},
-			guestartist11 = {
+			artist_winter = {
 				name = "Artist",
 				text = {
-					"{E:1}FenixSeraph{}",
+					"{E:1}TheWinterComet{}",
 				},
 			},
-			guestartist12 = {
+			artist_cream = {
 				name = "Artist",
 				text = {
-					"{E:1}WhimsyCherry{}",
+					"{E:1}CreamSodaCrossroads{}",
 				},
 			},
-			guestartist13 = {
+			artist_cringe = {
 				name = "Artist",
 				text = {
-					"{E:1}Lyzerus{}",
+					"{E:1}Stupisms{}",
 				},
 			},
-			guestartist14 = {
+			artist_poul = {
 				name = "Artist",
 				text = {
-					"{E:1}Global-Trance{}",
+					"{E:1}Poul Shmidt{}",
 				},
 			},
-			guestartist15 = {
+			artist_leafy = {
 				name = "Artist",
 				text = {
-					"{E:1}BardVergil{}",
+					"{E:1}Leafgilly{}",
 				},
 			},
-			guestartist16 = {
+			artist_piano = {
 				name = "Artist",
 				text = {
-					"{E:1}GuffNFluff{}",
+					"{E:1}Pianolote{}",
 				},
 			},
-			guestartist17 = {
-				name = "Artist",
-				text = {
-					"{E:1}Jazz_Jen{}",
-				},
-			},
-			guestartist18 = {
-				name = "Artist",
-				text = {
-					"{E:1}sinewuui{}",
-				},
-			},
-			guestartist19 = {
-				name = "Artist",
-				text = {
-					"{E:1}Akai{}",
-				},
-			},
-			guestartist20 = {
-				name = "Artist",
-				text = {
-					"{E:1}Swizik{}",
-				},
-			},
-			guestartist21 = {
-				name = "Artist",
-				text = {
-					"{E:1}Burdrehnar{}",
-				},
-			},
-			guestartist22 = {
-				name = "Artist",
-				text = {
-					"{E:1}Crisppyboat{}",
-				},
-			},
-			guestartist23 = {
-				name = "Artist",
-				text = {
-					"{E:1}Crisppyboat{}",
-				},
-			},
-			guestartist24 = {
-				name = "Artist",
-				text = {
-					"{E:1}Alli{}",
-				},
-			},
-			guestartist25 = {
-				name = "Artist",
-				text = {
-					"{E:1}Lyman{}",
-				},
-			},
-			drippyforce = {
-				name = "Forced in the mod by",
-				text = {
-					"{E:1}SinCityAssassin{}",
-				},
-			},
-			rogernote = {
-				name = "Conversion Table",
-				text = {
-					"5 {C:attention}fingers{} =",
-					"1 {C:attention}hand{}",
-				},
-			},
-			diapernote = {
-				name = "Author's Note",
-				text = {
-					"I'm not drawing",
-					"this one.",
-					"Fuck you.",
-				},
-			},
-			disabled_note = {
-				name = "BROKEN JOKER!",
-				text = {
-					"This joker has been",
-					"disabled for the time being.",
-					"The modding tools are not",
-					"being nice with its ability.",
-					"It's broken as hell.",
-					"Sorry! -Cardsauce Team",
-				},
-			}
 		},
 		Joker = {
 			j_fnwk_tetris = {
@@ -666,12 +487,31 @@ return {
 					"{C:inactive}(Currently {}{C:money}#1#$#2#{}{C:inactive}){}",
 				}
 			},
+			j_fnwk_bluebolt_sexy = {
+				name = "Sexy Joker",
+				text = {
+					"{C:chips}+#1# chips{} if played hand is",
+					"a {C:attention}Pair{}, {C:attention}Three of a Kind{}, or",
+					"{C:attention}Four of a Kind{}, multiplied by",
+					"the amount of {C:attention}certain jokers{}",
+					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+				}
+			},
 			j_fnwk_bluebolt_secluded = {
-				name = "Secluded Rust Joker",
+				name = "Secluded Joker",
 				text = {
 					"Cards with {C:diamonds}Diamond{} suit",
 					"are drawn {C:attention}face down{} and",
 					"retriggered when scored",
+				}
+			},
+			j_fnwk_bluebolt_tuned = {
+				name = "Tuned Joker",
+				text = {
+					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
+					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
+					"the {C:attention}leftmost{} Joker slot",
+					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{} {C:inactive}#5#){}"
 				}
 			},
 			j_fnwk_plancks_jokestar = {
@@ -791,7 +631,7 @@ return {
                     "earn {C:money}$1{} when scored"
 				}
 			},
-			j_fnwk_jojopolis_jordan = {
+			j_fnwk_jojopolis_jokestar = {
 				name = "Extendable Jokestar",
 				text = {
 					"{C:mult}+#1#{} Mult for each card above",
@@ -839,14 +679,6 @@ return {
 					"{C:clubs}Fanworks{} Jokers appear",
 					"{C:attention}3x{} more often",
 					"Start run with {C:attention}#1#{}",
-				},
-			},
-			b_fnwk_wheel = {
-				name = "Wheel Deck",
-				text = {
-					"Start run with {C:purple}Crystal Ball{}",
-					"After each {C:attention}Boss Blind,{} ",
-					"gain a {C:vhs}Black Spine{}",
 				},
 			},
 		},

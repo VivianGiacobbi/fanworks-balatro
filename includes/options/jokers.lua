@@ -14,7 +14,9 @@ local jokersToLoad = {
     -- 'spirit_aquarium',
     -- bluebolt incarnation
     'bluebolt_jokestar',
+	'bluebolt_sexy',
     'bluebolt_secluded',
+	'bluebolt_tuned',
     -- planck's creek
     'plancks_jokestar',
     'plancks_unsure',
@@ -35,7 +37,7 @@ local jokersToLoad = {
 	'rubicon_moonglass',
 	'rubicon_infidel',
 	-- jojopolis
-	'jojopolis_jordan',
+	'jojopolis_jokestar',
 	--gotequest
 	'gq_lambiekins',
 	--doubledown

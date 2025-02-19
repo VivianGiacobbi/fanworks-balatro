@@ -14,6 +14,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_winter", set = "Other"}
     local sign = card.ability.extra.currentDiscount > 0 and '-' or ''
     return { vars = {sign, card.ability.extra.currentDiscount}}
 end

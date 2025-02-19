@@ -12,5 +12,5 @@ end
 
 -- Load Consumables
 for i, v in ipairs(consumablesToLoad) do
-    loadConsumable(v)
+    LoadConsumable(v)
 end

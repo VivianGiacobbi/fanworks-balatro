@@ -5,8 +5,8 @@ end
 local banned = {}
 local function fnwkJokerCheck(k)
     if not banned[k] then
-        if starts_with(k, "j_") then
-            if not starts_with(k, "j_fnwk_") then
+        if StringStartsWith(k, "j_") then
+            if not StringStartsWith(k, "j_fnwk_") then
                 banned[#banned+1] = { id = k }
             end
         end
