@@ -1,5 +1,5 @@
 local decksToLoad = {
-    -- 'vine',
+    'fanworks',
 }
 
 if not fnwk_enabled['enableDecks'] then

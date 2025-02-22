@@ -4,6 +4,8 @@ fnwk_enabled = copy_table(fnwk_config)
 
 SMODS.optional_features.quantum_enhancements = true
 
+G.C.FANWORKS = HEX('DD85B4')
+
 local includes = {
 	-- includes utility functions required for following files
 	'utility',
@@ -12,6 +14,7 @@ local includes = {
 	-- object hooks
 	'hooks/card',
 	'hooks/common_events',
+	'hooks/misc_functions',
 	'hooks/UI_definitions',
 
 	-- option files
@@ -26,13 +29,12 @@ local includes = {
 	-- 'options/achievements',
 	-- 'options/bosses',
 	-- 'options/challenges',
-	-- 'options/decks',
+	'options/decks',
 
 	-- cosmetic
 	'options/queer',
 	'options/skins',
 }
-
 
 for _, module in ipairs(includes) do
 	local init, error = NFS.load(SMODS.current_mod.path .. "includes/" .. module ..".lua")
@@ -92,12 +94,12 @@ SMODS.current_mod.config_tab = function()
 		'enableQueer',
 		'enableTarotSkins',
 		'enableConsumableTweaks',
+		'enableDecks',
 		--[[
 		'enableTrophies',
 		'enableConsumables',
 		'enableStands',
 		'enableBosses',
-		'enableDecks',
 		'enableSkins',
 		'enableChallenges',
 		--]]

@@ -51,6 +51,40 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	}
 end
 
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.no_shadow = true
+	local glow_atlas = G.ASSET_ATLAS['fnwk_glow_3']
+	local scale_x = glow_atlas.px / card.children.center.atlas.px
+	local scale_y = glow_atlas.py / card.children.center.atlas.py
+	local glow_width = card.T.w * scale_x
+	local glow_height = card.T.h * scale_y
+	local x_offset = (glow_width - card.T.w) / 2
+	local y_offset = (glow_height - card.T.h) / 2
+
+	card.children.glow_sprite = Sprite(
+		card.T.x - x_offset,
+		card.T.y - y_offset,
+		glow_width,
+		glow_height,
+		glow_atlas,
+		card.children.center.config.pos
+	)
+	card.children.glow_sprite:set_role({
+		role_type = 'Minor',
+		major = card,
+		offset = { x = -x_offset, y = -y_offset },
+		xy_bond = 'Strong',
+		wh_bond = 'Weak',
+		r_bond = 'Strong',
+		scale_bond = 'Weak',
+		draw_major = card
+	})
+	card.children.glow_sprite:align_to_major()
+	card.children.glow_sprite:define_draw_steps({
+		{shader = 'dissolve'},
+	})
+end
+
 function jokerInfo.calculate(self, card, context)
 
 	if context.joker_main and context.cardarea == G.jokers and not card.debuff and card.ability.extra.x_mult > 1 then
@@ -85,6 +119,10 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+
+	if card.area and card.area.config.collection then
+		return
+	end
 
 	G.NEON_VALS.AMT = G.NEON_VALS.AMT + 0.0001	
 	update_jokers_glow(card)
@@ -176,7 +214,9 @@ function update_jokers_glow(card, removed)
 				draw_major = glow_card
 			})
 			glow_card.children.glow_sprite:align_to_major()
-			glow_card.children.glow_sprite.custom_draw = true
+			glow_card.children.glow_sprite:define_draw_steps({
+				{shader = 'dissolve'},
+			})
 		else
 			if glow_card.children.glow_sprite then
 				glow_card.children.glow_sprite:remove()

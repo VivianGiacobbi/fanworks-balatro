@@ -10,6 +10,7 @@ local jokersToLoad = {
 	'streetlight_methodical',
 	'streetlight_industrious',
     'streetlight_pinstripe',
+	'streetlight_cabinet',
     -- spirit lines
     -- 'spirit_aquarium',
     -- bluebolt incarnation
@@ -33,9 +34,11 @@ local jokersToLoad = {
     'rockhard_peppers',
     'rockhard_trans',
 	-- rubicon crossroads
-	'rubicon_bone',
-	'rubicon_moonglass',
 	'rubicon_infidel',
+	'rubicon_film',
+	'rubicon_moonglass',
+	'rubicon_bone',
+
 	-- jojopolis
 	'jojopolis_jokestar',
 	--gotequest

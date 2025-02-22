@@ -1,6 +1,7 @@
 [submodule "LuaNES"]
 	path = LuaNES
 	url = https://github.com/nico-abram/LuaNES.git
-[submodule "jokers/LuaNES"]
-	path = jokers/LuaNES
+
+[submodule "includes/LuaNES"]
+	path = includes/LuaNES
 	url = https://github.com/nico-abram/LuaNES.git
