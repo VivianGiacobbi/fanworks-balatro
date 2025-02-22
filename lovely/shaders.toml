@@ -48,17 +48,4 @@ end'''
 match_indent = true
 times = 1
 
-# Card:draw()
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if center.set == 'Default' or center.set == 'Enhanced' and not center.replace_base_card then'''
-position = "before"
-payload = '''if self.children.glow_sprite then
-    self.children.glow_sprite:draw_shader('dissolve')
-end'''
-match_indent = true
-times = 1
-
-
 

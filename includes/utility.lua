@@ -2,6 +2,15 @@ local mod_path = SMODS.current_mod.path
 usable_path = mod_path:match("Mods/[^/]+")
 path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the foot, why doesn't lua just have a str.replace
 
+function table.clear(t)
+    for k in pairs(t) do
+        t[k] = nil
+    end
+end
+
+function math.lerp(a,b,t) 
+	return (1-t)*a + t*b 
+end
 
 function RecursiveEnumerate(folder)
 	local fileTree = ""

@@ -204,6 +204,9 @@ return {
 			k_brienne = "Rewritten!",
 			k_tuned_x = "XMult!",
 			k_tuned_m = "+Mult",
+			k_cabinet_start = "Game Start!",
+			k_cabinet_lose = "Game Over!",
+			k_cabinet_win = "Lucky You!",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -470,6 +473,13 @@ return {
 					"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
 				},
 			},
+			j_fnwk_streetlight_cabinet = {
+				name = "Cabinet Man",
+				text = {
+					"Play a {C:attention}game{},",
+					"win a {C:attention}prize{}",
+				},
+			},
 			j_fnwk_spirit_aquarium = {
 				name = "1: The Aquarium",
 				text = {
@@ -624,6 +634,15 @@ return {
                     "{s:0.8}Suits change every round{}"
 				}
 			},
+			j_fnwk_rubicon_film = {
+				name = "Film Crossed Joker",
+				text = {
+					"This Joker gains the",
+                    "{C:chips}Chips{} of each {C:attention}playing{}",
+					"{C:attention}card{} scored this round",
+					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
+				}
+			},
 			j_fnwk_gq_lambiekins = {
 				name = "Ms. Lambiekins",
 				text = {
@@ -673,12 +692,13 @@ return {
 			},
 		},
 		Back = {
-			b_fnwk_vine = {
-				name = "Vine Deck",
+			b_fnwk_fanworks = {
+				name = "Fanworks Deck",
 				text = {
-					"{C:clubs}Fanworks{} Jokers appear",
-					"{C:attention}3x{} more often",
-					"Start run with {C:attention}#1#{}",
+					"Start run with the",
+					"{C:attention, T:v_overstock_norm}#1#{} voucher,",
+					"{C:fanworks}Fanworks{} Jokers appear",
+					"{C:attention}#2#X{} more often",
 				},
 			},
 		},

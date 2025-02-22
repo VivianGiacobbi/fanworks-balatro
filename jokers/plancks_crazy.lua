@@ -7,7 +7,7 @@ local jokerInfo = {
 			},
 			minDis = 0,
 			maxDis = 0.4,
-			mod = 0.08,
+			mod = 0.2,
 		},
 	},
 	rarity = 3,
@@ -91,7 +91,7 @@ function jokerInfo.update(self, card, dt)
 	end
 
 	if card.ability.extra.direction > 0 and card.ability.extra.lerp < 1 then
-		card.ability.extra.lerp = card.ability.extra.lerp + dt * card.ability.extra.mod
+		card.ability.extra.lerp = card.ability.extra.lerp + G.real_dt * card.ability.extra.mod
 		local ease = EaseInOutSin(card.ability.extra.lerp)
 		card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 		if (card.ability.extra.lerp >= 1) then
@@ -101,7 +101,7 @@ function jokerInfo.update(self, card, dt)
 	end
 
 	if card.ability.extra.direction < 0 and card.ability.extra.lerp > 0 then
-		card.ability.extra.lerp = card.ability.extra.lerp - dt * card.ability.extra.mod
+		card.ability.extra.lerp = card.ability.extra.lerp - G.real_dt * card.ability.extra.mod
 		local ease = EaseInOutSin(card.ability.extra.lerp)
 		card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 		if (card.ability.extra.lerp <= 0) then
