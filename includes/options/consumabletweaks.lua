@@ -4,16 +4,6 @@ end
 
 SMODS.Consumable:take_ownership('c_hermit',
     {
-        config = {
-            extra = 20,
-        },
-        loc_vars = function(self, info_queue, card)
-            return {
-                vars = {
-                    self.config.extra
-                }
-            } 	
-        end,
         use = function(self, card, area, copier)
             if card.ability.name == 'The Hermit' then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()

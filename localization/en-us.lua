@@ -217,25 +217,70 @@ return {
 			ba_streetlight = 'Streetlight Pursuit',
 			co_streetlight = '139194',
 			ba_bluebolt = "Bluebolt Incarnation",
-			co_bluebolt = '6FD0F2',
+			co_bluebolt = '3BC2EF',
 			ba_moscow = 'Moscow Calling',
 			co_moscow = '44AA6C',
 			ba_sunshine = 'Sunshine Deluxe!!',
 			co_sunshine = 'FF3C00',
 			ba_rockhard = 'Rockhard in a Funky Place',
-			co_rockhard = 'B4EDFA',
+			co_rockhard = '8DDDEF',
 			ba_rubicon = 'Rubicon Crossroads',
 			co_rubicon = 'EFD407',
 			ba_gotequest = 'Gotequest',
-			co_gotequest = 'F38AC7',
+			co_gotequest = 'E0779F',
 			ba_jojopolis = 'JoJopolis',
 			co_jojopolis = 'D56F15',
-			ba_spiritlines = 'Spirit Lines',
-			co_spiritlines = 'FF00F9',
-			ba_doubledown = 'Double Down',
-			co_doubledown = '0000FF',
-			ba_loveonce = 'Love Once Buried',
-			co_loveonce = 'FFA4CB'
+			ba_spirit = 'Spirit Lines',
+			co_spirit = 'FF60FF',
+			ba_industry = 'Industry Baby',
+			co_industry = 'CA4ED3',
+			ba_double = 'Double Down',
+			co_double = '0000FF',
+			ba_love = 'Love Once Buried',
+			co_love = 'E7B2D4',
+			ba_coi = 'Cost of Information',
+			co_coi = 'FFFFFF',
+			te_coi = '365156',
+			ba_iron = 'Iron Touch',
+			co_iron = 'FF2828',
+			ba_lighted = 'The Lighted Stage',
+			co_lighted = '90EF58',
+			ba_whiplash = 'Whiplash Riot',
+			co_whiplash = 'B982FF',
+			ba_asap = 'A$AP Mob Feedback',
+			co_asap = '9818BD',
+			ba_bones = 'Bones to Blades',
+			co_bones = 'EEDC99',
+			ba_crimson = 'Crimson Jungle',
+			co_crimson = 'FFB74B',
+			ba_culture = 'Culture Shock',
+			co_culture = '3690FF',
+			ba_jspec = 'JoJoSpectacle',
+			co_jspec = '3A5055',
+			te_jspec = 'FFFFFF',
+			ba_noman = "No Man's Army",
+			co_noman = 'EB9C58',
+			ba_last = 'Last Hope Army',
+			co_last = 'E8A686',
+			ba_mania = 'JOJOMANIA',
+			co_mania = 'CC3366',
+			ba_careless = 'Careless Cargo',
+			co_careless = 'BF5532',
+			ba_city = 'City Living',
+			co_city = 'A3AEFF',
+			ba_glass = 'Glass Lariats',
+			co_glass = 'B1FFE6',
+			ba_scepter = 'The Scepter Files',
+			co_scepter = 'E74C3C',
+			ba_apocryphal = 'Apocryphal Prophecy',
+			co_apocryphal = 'DE0155',
+			ba_stalk = 'Stalk Forest Club',
+			co_stalk = '86C09B',
+			ba_neon = 'Neon Soul',
+			co_neon = '900000',
+			ba_thorny = 'Thorny Mob Rules',
+			co_thorny = 'D4D4D4',
+			te_thorny = '365156',
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -404,6 +449,105 @@ return {
 					"{E:1}Pianolote{}",
 				},
 			},
+			artist_fool = {
+				name = "Artists",
+				text = {
+					"{E:1}Plusgal{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_magician = {
+				name = "Artists",
+				text = {
+					"{E:1}Doopo{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_priestess = {
+				name = "Artists",
+				text = {
+					"{E:1}Cauthen Currie{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_emperor = {
+				name = "Artists",
+				text = {
+					"{E:1}Monky4Real{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_chariot = {
+				name = "Artists",
+				text = {
+					"{E:1}GarPlatinum{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_justice = {
+				name = "Artists",
+				text = {
+					"{E:1}CreamSodaCrossroads{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_hermit = {
+				name = "Artists",
+				text = {
+					"{E:1}MildlyAnxious{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_wheel = {
+				name = "Artists",
+				text = {
+					"{E:1}AlgebraFalcon{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_hanged = {
+				name = "Artists",
+				text = {
+					"{E:1}Cody Savoie{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_death = {
+				name = "Artists",
+				text = {
+					"{E:1}Stupisms{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_devil = {
+				name = "Artists",
+				text = {
+					"{E:1}Polygonate{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_star = {
+				name = "Artists",
+				text = {
+					"{E:1}AllShaftsFall{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_sun = {
+				name = "Artists",
+				text = {
+					"{E:1}Pianolote{},",
+					"{E:1}Leafgilly{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			},
+			artist_world = {
+				name = "Artists",
+				text = {
+					"{E:1}sadlyandroid{},",
+					"{E:1}BarrierTrio/Gote{}"
+				}
+			}
 		},
 		Joker = {
 			j_fnwk_tetris = {
