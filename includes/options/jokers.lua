@@ -26,13 +26,17 @@ local jokersToLoad = {
     -- moscow calling
     'moscow_mule',
     -- sunshine deluxe
+	'sunshine_duo',
     'sunshine_laconic',
     'sunshine_funkadelic',
     'sunshine_reliable',
     -- rockhard in a funky place
     'rockhard_rebirth',
-    'rockhard_peppers',
+    -- 'rockhard_peppers',
     'rockhard_trans',
+	'rockhard_nameless',
+	'rockhard_alfie',
+	'rockhard_numbers',
 	-- rubicon crossroads
 	'rubicon_infidel',
 	'rubicon_film',
@@ -43,8 +47,12 @@ local jokersToLoad = {
 	'jojopolis_jokestar',
 	--gotequest
 	'gq_lambiekins',
+	--spirit lines
+	'spiritlines_halves',
 	--doubledown
-	'dd_clark',
+	'doubledown_clark',
+	--love once buried
+	'loveonce_jokestar',
 }
 
 if not fnwk_enabled['enableJokers'] then

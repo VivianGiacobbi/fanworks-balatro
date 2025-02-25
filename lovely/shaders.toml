@@ -48,4 +48,72 @@ end'''
 match_indent = true
 times = 1
 
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+    if not center.no_rank then
+        local rank = SMODS.Ranks[self.base.value] or {}
+        if rank.draw and type(rank.draw) == 'function' then
+            rank:draw(self, layer)
+        end
+    end
+end'''
+position = "after"
+payload = '''
+if self.ability.water_time then
+    local cursor_pos = {}
+    cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+    cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+    local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
+    local shader_args = {}
+    local hovering = (self.hover_tilt or 0)
+
+    shader_args[1] = { name = 'time', val = self.ability.water_time}
+    shader_args[2] = { name = 'water', val = G.ASSET_ATLAS['fnwk_water_nameless'].image}
+    shader_args[3] = { name = 'mouse_screen_pos', val = cursor_pos }
+    shader_args[4] = { name = 'screen_scale', val = screen_scale }
+    shader_args[5] = { name = 'hovering', val = hovering }
+    self.children.center:draw_shader('fnwk_water_mask', nil, shader_args, false, nil, nil, nil, nil, nil, true)
+end'''
+match_indent = true
+times = 1
+
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+        if not center.no_rank then
+            local rank = SMODS.Ranks[self.base.value] or {}
+            if rank.draw and type(rank.draw) == 'function' then
+                rank:draw(self, layer)
+            end
+        end
+    end'''
+position = "after"
+payload = '''
+if self.children.bloom then
+    local cursor_pos = {}
+    cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+    cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+    local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
+    local hovering = (self.hover_tilt or 0)
+    local bloom_args = {
+        self.children.bloom.glow_size,
+        self.children.bloom.glow_intensity,
+        self.children.bloom.glow_threshold,
+    }
+    local shader_args = {}
+
+    shader_args[1] = { name = 'bloom', val = bloom_args}
+    shader_args[2] = { name = 'mouse_screen_pos', val = cursor_pos }
+    shader_args[3] = { name = 'screen_scale', val = screen_scale }
+    shader_args[4] = { name = 'hovering', val = hovering }
+    self.children.bloom:draw_shader('fnwk_bloom', nil, shader_args, false, nil, nil, nil, nil, nil, true)
+end'''
+match_indent = true
+times = 1
+
 
