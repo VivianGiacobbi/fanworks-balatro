@@ -46,13 +46,13 @@ local jokersToLoad = {
 	-- jojopolis
 	'jojopolis_jokestar',
 	--gotequest
-	'gq_lambiekins',
+	'gotequest_lambiekins',
 	--spirit lines
-	'spiritlines_halves',
+	'spirit_halves',
 	--doubledown
-	'doubledown_clark',
+	'double_clark',
 	--love once buried
-	'loveonce_jokestar',
+	'love_jokestar',
 }
 
 if not fnwk_enabled['enableJokers'] then
@@ -77,7 +77,10 @@ for i, v in ipairs(jokersToLoad) do
 	if jokerInfo.fanwork then
 		jokerInfo.no_mod_badges = true
 		jokerInfo.set_badges = function(self, card, badges)
-			badges[#badges+1] = create_badge(localize('ba_'..jokerInfo.fanwork), HEX(localize('co_'..jokerInfo.fanwork)), G.C.WHITE, 1)
+			local title = localize('ba_'..jokerInfo.fanwork)
+			local color = HEX(localize('co_'..jokerInfo.fanwork))
+			local text = G.localization.misc.dictionary['te_'..jokerInfo.fanwork] and HEX(localize('te_'..jokerInfo.fanwork)) or G.C.WHITE
+			badges[#badges+1] = create_badge(title, color, text, 1)
 		end
 	end
 

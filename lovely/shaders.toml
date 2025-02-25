@@ -32,7 +32,7 @@ if center.draw and type(center.draw) == 'function' then
 end'''
 position = "after"
 payload = '''
-if self.ability.glow then
+if self.config.center.discovered and self.ability.glow then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
     cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
@@ -62,7 +62,7 @@ pattern = '''
 end'''
 position = "after"
 payload = '''
-if self.ability.water_time then
+if self.config.center.discovered and self.ability.water_time then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
     cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
@@ -94,7 +94,7 @@ pattern = '''
     end'''
 position = "after"
 payload = '''
-if self.children.bloom then
+if self.config.center.discovered and self.children.bloom then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
     cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE

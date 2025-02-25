@@ -29,6 +29,10 @@ SMODS.Atlas({ key = 'film_overlay', path ='jokers/rubicon_film_overlay.png', px 
 SMODS.Atlas({ key = 'film_underlay', path ='jokers/rubicon_film_underlay.png', px = 71, py = 95 })
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	if not card.config.center.discovered then
+        return
+    end
+
 	card.ability.scroll.update_rate = 1 / card.ability.scroll.fps
 	card.ability.scroll.update_timer = 0
 	card.ability.scroll.mod = card.ability.scroll.scale / card.ability.scroll.frames
@@ -118,7 +122,9 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-
+	if not card.config.center.discovered then
+        return
+    end
 	if not card.children.film_underlay or not card.children.film_underlay.sprite_pos then 
 		return 
 	end

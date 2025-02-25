@@ -77,6 +77,9 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+	if not card.config.center.discovered then
+        return
+    end
 	if not card.ability.extra.initialized then
 		card.ability.extra.direction = 1
 		card.ability.extra.lerp = 0
@@ -92,8 +95,7 @@ function jokerInfo.update(self, card, dt)
 
 	if card.ability.extra.direction > 0 and card.ability.extra.lerp < 1 then
 		card.ability.extra.lerp = card.ability.extra.lerp + G.real_dt * card.ability.extra.mod
-		local ease = EaseInOutSin(card.ability.extra.lerp)
-		card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
+		
 		if (card.ability.extra.lerp >= 1) then
 			card.ability.extra.lerp = 1
 			card.ability.extra.direction = -1
@@ -102,14 +104,15 @@ function jokerInfo.update(self, card, dt)
 
 	if card.ability.extra.direction < 0 and card.ability.extra.lerp > 0 then
 		card.ability.extra.lerp = card.ability.extra.lerp - G.real_dt * card.ability.extra.mod
-		local ease = EaseInOutSin(card.ability.extra.lerp)
-		card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 		if (card.ability.extra.lerp <= 0) then
 			card.ability.extra.lerp = 0
 			card.ability.extra.direction = 1
 			card.ability.extra.initialized = false
 		end
 	end
+
+	local ease = EaseInOutSin(card.ability.extra.lerp)
+	card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 end
 
 return jokerInfo
