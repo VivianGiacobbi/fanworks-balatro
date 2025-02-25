@@ -9,9 +9,11 @@ G.C.FANWORKS = HEX('DD85B4')
 local includes = {
 	-- includes utility functions required for following files
 	'utility',
+	'shaders',
 	'credits',
 
 	-- object hooks
+	'hooks/game',
 	'hooks/card',
 	'hooks/common_events',
 	'hooks/misc_functions',
@@ -44,16 +46,6 @@ for _, module in ipairs(includes) do
 	end
 end
 
-SMODS.Shader({
-	key = 'glow',
-	path = 'glow.fs',
-})
-
-SMODS.Shader({
-	key = 'neon_flash',
-	path = 'neon_flash.fs',
-})
-
 
 -- Mod Icon in Mods tab
 SMODS.Atlas({
@@ -61,14 +53,9 @@ SMODS.Atlas({
 	path = "fnwk_icon.png",
 	px = 32,
 	py = 32
-}):register()
+})
 
-SMODS.Atlas({
-	key = "screen",
-	path = "screen.png",
-	px = 1920,
-	py = 1080
-}):register()
+
 
 function G.FUNCS.fnwk_restart()
 

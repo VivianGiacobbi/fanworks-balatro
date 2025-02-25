@@ -207,6 +207,7 @@ return {
 			k_cabinet_start = "Game Start!",
 			k_cabinet_lose = "Game Over!",
 			k_cabinet_win = "Lucky You!",
+			k_pack_replaced = "Replaced!",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -229,8 +230,12 @@ return {
 			co_gotequest = 'F38AC7',
 			ba_jojopolis = 'JoJopolis',
 			co_jojopolis = 'D56F15',
+			ba_spiritlines = 'Spirit Lines',
+			co_spiritlines = 'FF00F9',
 			ba_doubledown = 'Double Down',
 			co_doubledown = '0000FF',
+			ba_loveonce = 'Love Once Buried',
+			co_loveonce = 'FFA4CB'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -561,6 +566,14 @@ return {
 					"{C:attention}Sex!!{}",
 				}
 			},
+			j_fnwk_sunshine_duo = {
+				name = "Dynamic Duo",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if played hand",
+					"contains a scoring {C:attention}King{}",
+					"and {C:attention}Queen{}",
+				}
+			},
 			j_fnwk_sunshine_laconic = {
 				name = "Laconic Joker",
 				text = {
@@ -611,6 +624,32 @@ return {
 					"the round's {C:attention}final hand{}",
 				}
 			},
+			j_fnwk_rockhard_nameless = {
+				name = "Endless Nameless",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult",
+					"every time you {C:planet}upgrade{}",
+					"a poker hand",
+					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_rockhard_alfie = {
+				name = "Alfie",
+				text = {
+					"{C:money}Refund{} the first skipped",
+					"{C:attention}Booster Pack{} each shop",
+					"and spawn another",
+				}
+			},
+			j_fnwk_rockhard_numbers = {
+				name = "High Numbers",
+				text = {
+					"This Joker gains {X:mult,C:white}X#1#{} Mult",
+					"for every {C:tarot}Death{}, {C:tarot}Hanged Man{},",
+					"or {C:spectral}Cryptid{} used this run",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#2#{} {C:inactive}Mult){}"
+				}
+			},
 			j_fnwk_rubicon_bone = {
 				name = "Bone Crossed Joker",
 				text = {
@@ -658,11 +697,27 @@ return {
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
 			},
-			j_fnwk_dd_clark = {
+			j_fnwk_spiritlines_halves = {
+				name = "The Halves",
+				text = {
+					"If played hand is a {C:attention}Pair{},",
+					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
+				}
+			},
+			j_fnwk_doubledown_clark = {
 				name = "Acerbic Fencer",
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
+				}
+			},
+			j_fnwk_loveonce_jokestar = {
+				name = "Prideful Jokestar",
+				text = {
+					"This Joker gains {C:mult}+#2#{} Mult",
+					"if played hand causes the",
+					"score to {C:attention}catch fire{}",
+					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}"
 				}
 			},
 		},

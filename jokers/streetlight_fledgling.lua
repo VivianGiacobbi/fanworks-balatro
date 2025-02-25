@@ -29,7 +29,7 @@ function jokerInfo.calculate(self, card, context)
 			}
 		end
 
-		if not context.blueprint and context.after and G.GAME.current_round.hands_played == 0 and G.GAME.blind.chips > context.total_hand_chips then
+		if not context.blueprint and context.after and G.GAME.current_round.hands_played == 0 and G.GAME.blind.chips > hand_chips*mult then
 			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
 			return {
 				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},

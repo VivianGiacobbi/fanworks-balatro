@@ -88,7 +88,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.play and context.individual and not context.debuff and not context.other_card.debuff then
+	if context.cardarea == G.play and context.individual and not context.debuff and not context.other_card.debuff and not context.blueprint then
 		local individual_chips = context.other_card.base.nominal + context.other_card.ability.bonus + context.other_card.ability.perma_bonus
 		card.ability.extra.chips = card.ability.extra.chips + individual_chips
 		if individual_chips > 0 then
@@ -108,7 +108,7 @@ function jokerInfo.calculate(self, card, context)
 		}
 	end
 
-	if context.end_of_round and context.cardarea == G.jokers then
+	if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
 		card.ability.extra.chips = 0
 		return {
 			card = card,
