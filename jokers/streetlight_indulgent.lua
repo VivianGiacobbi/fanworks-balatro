@@ -52,6 +52,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	if not card.config.center.discovered then
+        return
+    end
+
 	card.no_shadow = true
 	local glow_atlas = G.ASSET_ATLAS['fnwk_glow_3']
 	local scale_x = glow_atlas.px / card.children.center.atlas.px
@@ -119,6 +123,9 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+	if not card.config.center.discovered then
+        return
+    end
 
 	if card.area and card.area.config.collection then
 		return

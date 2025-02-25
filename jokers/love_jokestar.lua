@@ -1,6 +1,6 @@
-SMODS.Atlas({ key = 'neonsign_1', path = 'jokers/loveonce_jokestar_sign_1.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/loveonce_jokestar_sign_2.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/loveonce_jokestar_sign_3.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'neonsign_1', path = 'jokers/love_jokestar_sign_1.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
 
 local jokerInfo = {
     key = 'j_fnwk_loveonce_jokestar',
@@ -9,7 +9,18 @@ local jokerInfo = {
         extra = {
             mult = 0,
             mult_mod = 4,
-        }
+        },
+        fizzle_timer = 0,
+        fizzle_check = 0.18,
+        fizzle_limit = 0.13,
+        base_fizzle_chance = 0.025,
+        consecutive_mod = 15,
+        fizzle_chance = 0.025,
+        consecutive_limit = 2,
+        consecutive_fizzles = 0,
+        glow_intensity = 4,
+        glow_threshold = 0.95,
+        glow_size = 0.95,
     },
 	rarity = 2,
 	cost = 6,
@@ -86,6 +97,10 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.update(self, card, dt)
+    if not card.config.center.discovered then
+        return
+    end
+
 
     if card.ability.fizzled then
         if card.ability.fizzle_timer < card.ability.fizzle_limit then 
@@ -156,6 +171,10 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
+    if not card.config.center.discovered then
+        return
+    end
+    
     if not (card.children.bloom1 and card.children.bloom2 and card.children.bloom3) then
         return
     end

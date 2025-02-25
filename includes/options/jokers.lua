@@ -46,13 +46,13 @@ local jokersToLoad = {
 	-- jojopolis
 	'jojopolis_jokestar',
 	--gotequest
-	'gq_lambiekins',
+	'gotequest_lambiekins',
 	--spirit lines
-	'spiritlines_halves',
+	'spirit_halves',
 	--doubledown
-	'doubledown_clark',
+	'double_clark',
 	--love once buried
-	'loveonce_jokestar',
+	'love_jokestar',
 }
 
 if not fnwk_enabled['enableJokers'] then
