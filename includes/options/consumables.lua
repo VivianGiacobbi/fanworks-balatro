@@ -1,9 +1,6 @@
 local consumablesToLoad = {
-    --[[
     --Spectral
-    'quixotic',
-    'protojoker',
-    --]]
+    'spec_stonemask',
 }
 
 if not fnwk_enabled['enableConsumables'] then

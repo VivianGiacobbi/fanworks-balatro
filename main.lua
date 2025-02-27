@@ -3,6 +3,7 @@ fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
 
 SMODS.optional_features.quantum_enhancements = true
+SMODS.optional_features.cardareas.unscored = true
 
 G.C.FANWORKS = HEX('DD85B4')
 

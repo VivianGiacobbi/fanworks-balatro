@@ -24,10 +24,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.update(self, card, dt)
-    if not card.config.center.discovered then
-        return
-    end
-    
     card.ability.water_time = card.ability.water_time + G.real_dt
 end
 

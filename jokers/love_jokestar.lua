@@ -37,18 +37,21 @@ end
 
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.final_scoring_step then
-        if hand_chips*mult > G.GAME.blind.chips then
-            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
-        end
-
+    
+    if context.cardarea == G.jokers and context.joker_main then
         if card.ability.extra.mult > 0 then
             return {
 				message = localize{ type='variable', key='a_mult', vars = {card.ability.extra.mult} },
                 mult_mod = card.ability.extra.mult,
 				colour = G.C.MULT
 			}
+        end
+    end
+    
+    if context.cardarea == G.jokers and context.final_scoring_step then
+        if hand_chips*mult > G.GAME.blind.chips then
+            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.MULT})
         end
     end
 end

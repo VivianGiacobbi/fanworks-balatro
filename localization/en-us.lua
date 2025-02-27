@@ -208,6 +208,7 @@ return {
 			k_cabinet_lose = "Game Over!",
 			k_cabinet_win = "Lucky You!",
 			k_pack_replaced = "Replaced!",
+			k_boney = "Bad to the Bone!",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -255,7 +256,7 @@ return {
 			co_crimson = 'FFB74B',
 			ba_culture = 'Culture Shock',
 			co_culture = '3690FF',
-			ba_jspec = 'JoJoSpectacle',
+			ba_jspec = 'JOJOSPECTACLE',
 			co_jspec = '3A5055',
 			te_jspec = 'FFFFFF',
 			ba_noman = "No Man's Army",
@@ -449,10 +450,16 @@ return {
 					"{E:1}Pianolote{}",
 				},
 			},
+			artist_shaft = {
+				name = "Artist",
+				text = {
+					"{E:1}AllShaftsFall{}",
+				},
+			},
 			artist_fool = {
 				name = "Artists",
 				text = {
-					"{E:1}Plusgal{},",
+					"{E:1}plusgal{},",
 					"{E:1}BarrierTrio/Gote{}"
 				}
 			},
@@ -687,8 +694,8 @@ return {
 			j_fnwk_plancks_unsure = {
 				name = "Unsure Creaking Joker",
 				text = {
-					"Retriggers all {C:attention}Enhanced{}",
-					"{C:attention}numbered{} cards",
+					"Retrigger all scored",
+					"{C:attention}Enhanced numbered{} cards",
 				}
 			},
 			j_fnwk_plancks_skeptic = {
@@ -826,7 +833,7 @@ return {
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
 				}
 			},
-			j_fnwk_gq_lambiekins = {
+			j_fnwk_gotequest_lambiekins = {
 				name = "Ms. Lambiekins",
 				text = {
 					"Played {C:attention}Lucky Cards{}",
@@ -841,21 +848,21 @@ return {
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
 			},
-			j_fnwk_spiritlines_halves = {
+			j_fnwk_spirit_halves = {
 				name = "The Halves",
 				text = {
 					"If played hand is a {C:attention}Pair{},",
 					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
 				}
 			},
-			j_fnwk_doubledown_clark = {
+			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
 				}
 			},
-			j_fnwk_loveonce_jokestar = {
+			j_fnwk_love_jokestar = {
 				name = "Prideful Jokestar",
 				text = {
 					"This Joker gains {C:mult}+#2#{} Mult",
@@ -864,6 +871,32 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}"
 				}
 			},
+			j_fnwk_lighted_square = {
+				name = "Square Biz Killer",
+				text = {
+					"If played hand is {C:attention}#1#{}",
+					"cards, {C:attention}destroy{} the",
+					"last card {C:attention}after{} scoring"
+				}
+			},
+			j_fnwk_iron_boney = {
+				name = "Joker M.",
+				text = {
+					"This Joker {C:attention}replaces{} another",
+					"owned Joker when {C:attention}destroyed{}",
+					"or {C:attention}sold{} and gains {X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}"
+				}
+			},
+		},
+		Spectral = {
+			c_fnwk_spec_stonemask = {
+				name = "Stone Mask",
+				text = {
+					"Give a random Joker",
+					"{C:dark_edition}Holographic{} and {C:attention}Eternal{}"
+				}
+			}
 		},
 		Stand = {
 			c_fnwk_moodyblues = {

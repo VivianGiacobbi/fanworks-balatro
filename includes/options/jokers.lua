@@ -53,6 +53,10 @@ local jokersToLoad = {
 	'double_clark',
 	--love once buried
 	'love_jokestar',
+	-- lighted state
+	'lighted_square',
+	-- iron touch
+	'iron_boney'
 }
 
 if not fnwk_enabled['enableJokers'] then

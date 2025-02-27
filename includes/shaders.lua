@@ -7,3 +7,6 @@ SMODS.Shader({ key = 'water_mask', path = 'water.fs' })
 SMODS.Atlas({ key = 'water_nameless', path = 'mask.png', px = 71, py = 95 })
 
 SMODS.Shader({ key = 'bloom', path = 'bloom.fs' })
+
+SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
+SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
