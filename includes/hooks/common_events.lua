@@ -23,3 +23,11 @@ function reset_infidel()
         [suits[2]] = true,
     }
 end
+
+function batch_level_up(card, hands, amount)
+    amount = amount or 1
+    for k, v in pairs(hands) do
+        level_up_hand(card, k, true, amount)
+    end
+    SMODS.calculate_context({hand_upgraded = true, upgraded = hands, amount = amount})
+end

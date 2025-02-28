@@ -209,6 +209,8 @@ return {
 			k_cabinet_win = "Lucky You!",
 			k_pack_replaced = "Replaced!",
 			k_boney = "Bad to the Bone!",
+			k_kunst_hm = "Hm......",
+			k_kunst_acceptable = '...Acceptable',
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -886,6 +888,21 @@ return {
 					"owned Joker when {C:attention}destroyed{}",
 					"or {C:attention}sold{} and gains {X:mult,C:white}X#2#{} Mult",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_jspec_joepie = {
+				name = "Joepiegee",
+				text = {
+					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
+					"lowest level {C:attention}basic poker hand{}",
+					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
+				}
+			},
+			j_fnwk_jspec_kunst = {
+				name = "Kunst",
+				text = {
+					"When {C:attention}Boss Blind{} is defeated,",
+					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
 				}
 			},
 		},

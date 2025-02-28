@@ -56,7 +56,10 @@ local jokersToLoad = {
 	-- lighted state
 	'lighted_square',
 	-- iron touch
-	'iron_boney'
+	'iron_boney',
+	-- jojospectacle,
+	'jspec_joepie',
+	'jspec_kunst',
 }
 
 if not fnwk_enabled['enableJokers'] then

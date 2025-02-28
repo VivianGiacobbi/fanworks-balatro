@@ -1,5 +1,4 @@
 local consumInfo = {
-    key = 'c_fnwk_spec_stonemask',
     name = 'Stone Mask',
     set = "Spectral",
     cost = 4,

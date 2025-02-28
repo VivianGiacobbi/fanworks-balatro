@@ -6,7 +6,6 @@ local jokerInfo = {
             mult = 0,
             mult_mod = 1
         },
-        black_hole_count = 0,
         water_time = 0
     },
 	rarity = 1,
@@ -35,28 +34,13 @@ function jokerInfo.calculate(self, card, context)
         }
     end
     
-    if (context.cardarea == G.jokers and context.hand_upgraded) and not card.debuff and not context.blueprint then
-        if context.other_card.ability.name == 'Black Hole' then
-            card.ability.black_hole_count = card.ability.black_hole_count + 1
-            if card.ability.black_hole_count == 1 then
-                local levels = card.ability.extra.mult_mod * 12
-                card.ability.extra.mult = card.ability.extra.mult + levels
-                return {
-                    card = card,
-                    message = localize{type='variable',key='a_mult',vars={levels}}
-                }
-            end
+    if (context.cardarea == G.jokers and context.hand_upgraded) and not card.debuff and not context.blueprint then        
+        local count = 0
+        for k, v in pairs(context.upgraded) do
+            count = count + 1
         end
-
-        if card.ability.black_hole_count > 0 then
-            if card.ability.black_hole_count == 12 then
-                card.ability.black_hole_count = 0
-            end
-            return
-        end
-        
-        local levels = card.ability.extra.mult_mod * context.amount
-        card.ability.extra.mult = card.ability.extra.mult + levels
+        local levels = card.ability.extra.mult_mod * context.amount * count
+        card.ability.extra.mult = card.ability.extra.mult + levels 
         return {
             card = card,
             message = localize{type='variable',key='a_mult',vars={levels}}
