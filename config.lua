@@ -1,6 +1,7 @@
 return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
+	['enableAltArt'] = false,
 	['enableStands'] = true,
 	['enableConsumables'] = true,
 	['enableQueer'] = true,

@@ -60,6 +60,24 @@ local jokersToLoad = {
 	-- jojospectacle,
 	'jspec_joepie',
 	'jspec_kunst',
+	'jspec_ilsa',
+}
+
+local alt_jokers = {
+    ['love_jokestar'] = true,
+    ['plancks_crazy'] = true,
+	['plancks_jokestar'] = true,
+    ['plancks_skeptic'] = true,
+    ['plancks_unsure'] = true,
+    ['rockhard_alfie'] = true,
+    ['rockhard_nameless'] = true,
+    ['rockhard_numbers'] = true,
+    ['rockhard_rebirth'] = true,
+    ['streetlight_fledgling'] = true,
+    ['streetlight_indulgent'] = true,
+    ['streetlight_industrious'] = true,
+    ['streetlight_methodical'] = true,
+    ['streetlight_resil'] = true
 }
 
 if not fnwk_enabled['enableJokers'] then
@@ -98,5 +116,17 @@ for i, v in ipairs(jokersToLoad) do
 		end
 	end
 
-	SMODS.Atlas({ key = atlasKey, path ="jokers/" .. atlasKey .. ".png", px = jokerInfo.width or 71, py = jokerInfo.height or  95 })
+	SMODS.Atlas({ key = atlasKey, path = "jokers/" .. atlasKey .. ".png", px = jokerInfo.width or 71, py = jokerInfo.height or  95 })
+	if alt_jokers[v] then
+		SMODS.Atlas({ key = atlasKey..'_alt', path = "jokers/" .. atlasKey .. '_alt'.. ".png", px = 71, py = 95 })
+	end
+
+end
+
+
+function G.FUNCS.fnwk_apply_alts()
+	fnwk_enabled = copy_table(fnwk_config)
+    for k, v in pairs(alt_jokers) do
+		G.P_CENTERS['j_fnwk_'..k].atlas = 'fnwk_'..k..(fnwk_enabled['enableAltArt'] and '_alt' or '')
+    end
 end

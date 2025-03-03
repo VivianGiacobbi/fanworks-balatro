@@ -153,6 +153,7 @@ return {
 			vs_credits7 = "Music",
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_enableJokers = "Jokers",
+			vs_options_enableAltArt = "Alt Joker Art",
 			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableConsumables = "New Consumables",
@@ -589,7 +590,7 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_fnwk_streetlight_resil2 = {
+			j_fnwk_streetlight_resil_regen = {
 				name = "Resilient Streetlit Joker",
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
@@ -903,6 +904,14 @@ return {
 				text = {
 					"When {C:attention}Boss Blind{} is defeated,",
 					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
+				}
+			},
+			j_fnwk_jspec_ilsa = {
+				name = "Ilsa",
+				text = {
+					"Cards with an {C:attention}Edition{}",
+					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+					"and {C:dark_edition}Polychrome{}"
 				}
 			},
 		},

@@ -30,7 +30,8 @@ position = "after"
 payload = '''
 if card.ability.set == 'Joker' and created and not copied then
     for i=1, #G.jokers.cards do
-        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, card = card})
+        local eval, post = eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, card = card})
+        SMODS.trigger_effects({eval, post}, G.jokers.cards[i])
     end
 end'''
 match_indent = true

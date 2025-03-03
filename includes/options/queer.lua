@@ -97,7 +97,7 @@ SMODS.Joker:take_ownership('j_bootstraps',
         }
     }
 },
-trues
+true
 )
 
 SMODS.Consumable:take_ownership('c_wheel_of_fortune',

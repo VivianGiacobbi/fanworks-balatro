@@ -92,16 +92,68 @@ SMODS.current_mod.config_tab = function()
 		'enableChallenges',
 		--]]
 	}
-	local left_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
-	local right_settings = { n = G.UIT.C, config = { align = "tm", padding = 0.05 }, nodes = {} }
+	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
+	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
+	local left_count = 0
+	local right_count = 0
+
 	for i, k in ipairs(ordered_config) do
-		if #right_settings.nodes < #left_settings.nodes then
-			right_settings.nodes[#right_settings.nodes + 1] = create_toggle({ label = localize("vs_options_"..ordered_config[i]), ref_table = fnwk_config, ref_value = ordered_config[i], callback = G.FUNCS.fnwk_restart})
+		if right_count < left_count then
+			local main_node = create_toggle({
+				label = localize("vs_options_"..ordered_config[i]),
+				w = 1,
+				ref_table = fnwk_config,
+				ref_value = ordered_config[i],
+				callback = G.FUNCS.fnwk_restart
+			})
+			main_node.config.align = 'tr'
+			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
+			right_settings.nodes[#right_settings.nodes + 1] = main_node
+			right_count = right_count + 1
+			
+			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
+				local opt_node = create_toggle({
+					label = localize("vs_options_enableAltArt"),
+					w = 1, 
+					ref_table = fnwk_config,
+					ref_value = 'enableAltArt',
+					callback = G.FUNCS.fnwk_apply_alts
+				})
+				opt_node.config.align = 'tr'
+				right_settings.nodes[#right_settings.nodes + 1] = opt_node
+				right_settings.nodes[#right_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
+				right_count = right_count + 1
+			end
 		else
-			left_settings.nodes[#left_settings.nodes + 1] = create_toggle({ label = localize("vs_options_"..ordered_config[i]), ref_table = fnwk_config, ref_value = ordered_config[i], callback = G.FUNCS.fnwk_restart})
+			local main_node = create_toggle({
+				label = localize("vs_options_"..ordered_config[i]),
+				w = 1,
+				ref_table = fnwk_config,
+				ref_value = ordered_config[i],
+				callback = G.FUNCS.fnwk_restart
+			})
+			main_node.config.align = 'tr'
+			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
+			left_settings.nodes[#left_settings.nodes + 1]  = main_node
+			left_count = left_count + 1
+
+			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
+				local opt_node = create_toggle({
+					label = localize("vs_options_enableAltArt"),
+					w = 1, 
+					ref_table = fnwk_config,
+					ref_value = 'enableAltArt',
+					callback = G.FUNCS.fnwk_apply_alts
+				})
+				opt_node.config.align = 'tr'
+				left_settings.nodes[#left_settings.nodes + 1] = opt_node
+				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
+				left_count = left_count + 1
+			end
 		end
 	end
-	local fnwk_config_ui = { n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = { left_settings, right_settings } }
+
+	local fnwk_config_ui = { n = G.UIT.R, config = { align = "tm", padding = 0.25 }, nodes = { left_settings, right_settings } }
 	return {
 		n = G.UIT.ROOT,
 		config = {
