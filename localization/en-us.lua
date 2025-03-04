@@ -212,6 +212,7 @@ return {
 			k_boney = "Bad to the Bone!",
 			k_kunst_hm = "Hm......",
 			k_kunst_acceptable = '...Acceptable',
+			k_enhanced = 'Enhanced!',
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -457,6 +458,24 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}AllShaftsFall{}",
+				},
+			},
+			artist_tos = {
+				name = "Artist",
+				text = {
+					"{E:1}TOS{}",
+				},
+			},
+			artist_jester = {
+				name = "Artist",
+				text = {
+					"{E:1}Jester{}",
+				},
+			},
+			artist_gar = {
+				name = "Artist",
+				text = {
+					"{E:1}GarPlatinum{}",
 				},
 			},
 			artist_fool = {
@@ -717,7 +736,9 @@ return {
 			j_fnwk_moscow_mule = {
 				name = "Moscow Mule",
 				text = {
-					"{C:attention}Sex!!{}",
+					"{C:green}#1# in #2#{} chance for {C:attention}Unenhanced{}",
+					"cards to gain a random",
+					"{C:attention}Enhancement{} when scored",
 				}
 			},
 			j_fnwk_sunshine_duo = {
@@ -912,6 +933,36 @@ return {
 					"Cards with an {C:attention}Edition{}",
 					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
 					"and {C:dark_edition}Polychrome{}"
+				}
+			},
+			j_fnwk_fanworks_tos = {
+				name = "TOS",
+				text = {
+					"Each played {C:attention}3{} of",
+					"{C:spades}Spades{} gives {C:chips}+#1#{}",
+					"Chips when scored",
+				}
+			},
+			j_fnwk_fanworks_jester = {
+				name = "Bizarre Jester",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"create a random {C:fanworks}Fanworks{} Joker",
+				}
+			},
+			j_fnwk_scepter_card = {
+				name = "Speedwagon Foundation Card",
+				text = {
+					"Played {C:attention}face cards{} have",
+					"a {C:green}#1# in #2#{} chance to give",
+					"{C:mult}+#3#{} Mult when scored",
+				}
+			},
+			j_fnwk_crimson_golden = {
+				name = "Golden Heart",
+				text = {
+					"{C:attention}Gold Cards{} give {C:mult}+#1#{} Mult",
+					"when scored",
 				}
 			},
 		},

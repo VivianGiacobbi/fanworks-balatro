@@ -155,7 +155,7 @@ function jokerInfo.calculate(self, card, context)
 
                 -- immediately replace with boney, forgoing any animation
                 G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                local new_joker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_iron_boney', 'rif')
+                local new_joker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_iron_boney', 'bon')
 
                 -- set boney's new abilities
                 new_joker:add_to_deck()

@@ -164,3 +164,19 @@ SMODS.Tag:take_ownership('tag_polychrome',
 },
 true
 )
+
+SMODS.Joker:take_ownership('j_fnwk_jspec_ilsa',
+{
+    loc_txt = {
+        ['en-us'] = {
+            name = "Ilsa",
+            text = {
+                "Cards with an {C:attention}Edition{}",
+                "act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+                "and {C:dark_edition}Queer{}"
+            }
+        },
+    }
+},
+true
+)

@@ -61,6 +61,13 @@ local jokersToLoad = {
 	'jspec_joepie',
 	'jspec_kunst',
 	'jspec_ilsa',
+	-- fanworks
+	'fanworks_tos',
+	'fanworks_jester',
+	-- scepter files
+	'scepter_card',
+	-- crimson jungle
+	'crimson_golden',
 }
 
 local alt_jokers = {

@@ -62,7 +62,7 @@ function jokerInfo.calculate(self, card, context)
 			card.ability.state = 'sacrifice'
 
 			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'rif')
+			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'resilient')
 			newJoker:set_edition({negative = true}, true, true)
 
 			newJoker.config.center.eternal_compat = true

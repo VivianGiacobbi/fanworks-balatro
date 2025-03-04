@@ -216,6 +216,9 @@ local jokerInfo = {
     fanwork = 'streetlight',
 }
 
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+
+end
 
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
@@ -384,7 +387,7 @@ function jokerInfo.update(self, card, dt)
                 delay = 0.4,
                 func = function()
                     G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                    local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_indulgent', 'rif')
+                    local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_indulgent', 'resilient')
                     newJoker:add_to_deck()
                     G.jokers:emplace(newJoker)
                     newJoker:start_materialize()
