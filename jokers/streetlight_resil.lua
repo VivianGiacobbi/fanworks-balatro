@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Resilient Streetlit Joker',
 	config = {
 		extra = {},
-		form = 'resil',
+		form = 'normal',
 		state = 'default',
 		lastEdition = nil,
 	},
@@ -14,15 +14,17 @@ local jokerInfo = {
 	fanwork = 'streetlight',
 }
 
-SMODS.Atlas({ key = 'resil', path ='jokers/streetlight_resil.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'resil2', path ='jokers/streetlight_resil2.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'streetlight_resil_regen', path ='jokers/streetlight_resil_regen.png', px = 71, py = 95 })
 
 local function updateSprite(card)
 	if card.ability.form then
-		if card.config.center.atlas ~= card.ability.form then
-			card.config.center.atlas = 'fnwk_'..card.ability.form
-			card:set_sprites(card.config.center)
-			card.config.center.atlas = 'fnwk_resil'
+		if card.ability.form == 'regen' then
+			card.children.center.atlas = 'fnwk_streetlight_resil_regen'
+			card:set_sprites(card.children.center)
+			card.children.center.atlas = card.config.center.atlas
+		else
+			card.children.center.atlas = card.config.center.atlas
+			card:set_sprites(card.children.center)
 		end
 	end
 end
@@ -32,11 +34,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+	local info_key = 'j_fnwk_streetlight_resil'
+	if card.ability.form == 'regen' then
+		info_key = info_key..'_regen'
+	end
 	if card.config.center.discovered then
 		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = "j_fnwk_streetlight_"..card.ability.form or self.key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
+		full_UI_table.name = localize{type = 'name', key = info_key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
 	end
-	localize{type = 'descriptions', key = "j_fnwk_streetlight_"..card.ability.form or self.key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card)}
+	localize{type = 'descriptions', key = info_key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card)}
 end
 
 function jokerInfo.add_to_deck(self, card)
@@ -56,7 +62,7 @@ function jokerInfo.calculate(self, card, context)
 			card.ability.state = 'sacrifice'
 
 			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'rif')
+			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'resilient')
 			newJoker:set_edition({negative = true}, true, true)
 
 			newJoker.config.center.eternal_compat = true
@@ -67,7 +73,7 @@ function jokerInfo.calculate(self, card, context)
 			newJoker.ability.state = 'hidden'
 			newJoker.ability.lastEdition = card.edition and card.edition.type or nil
 
-			newJoker.ability.form = 'resil2'
+			newJoker.ability.form = 'regen'
 			updateSprite(newJoker)
 
 			newJoker:add_to_deck()
@@ -126,23 +132,11 @@ function jokerInfo.calculate(self, card, context)
 				play_sound('tarot2')
 
 				card.ability.state = 'default'
-				card.ability.form = 'resil'
+				card.ability.form = 'normal'
 				updateSprite(card)
 			end
 		end
 	end	
-end
-
-function jokerInfo.update(self, card)
-	if card.area and card.area.config.type == "shop" then
-		card.ability.form = 'resil'
-		updateSprite(card)
-	end
-
-	if card.area and card.area.config.collection and self.discovered then
-        card.ability.form = 'resil'
-		updateSprite(card)
-    end
 end
 
 return jokerInfo

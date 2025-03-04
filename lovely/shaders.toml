@@ -12,7 +12,7 @@ priority = 0
 target = "card.lua"
 pattern = '''if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
     self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
-    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+    if self.children.front and (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
         self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
     end'''
 position = "before"
@@ -115,5 +115,41 @@ if self.config.center.discovered and self.children.bloom then
 end'''
 match_indent = true
 times = 1
+
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if type(v.draw) == 'function' then
+    v:draw(self, layer)
+else
+    self.children.center:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+        self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+    end
+end'''
+position = "at"
+payload = '''if type(v.draw) == 'function' then
+    v:draw(self, layer)
+elseif not self.children.center.custom_draw then
+    self.children.center:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
+        self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+    end
+end'''
+match_indent = true
+times = 1
+
+# Card:draw()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''elseif not self.greyed then'''
+position = "at"
+payload = '''elseif not self.config.center.custom_draw and not self.greyed then'''
+match_indent = true
+times = 1
+
+
 
 

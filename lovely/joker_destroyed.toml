@@ -21,7 +21,8 @@ payload = '''
 
 if G.jokers and self.ability.set == 'Joker' then
     for i=1, #G.jokers.cards do
-        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_destroyed = true, removed = self})
+        local eval, post = eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_destroyed = true, removed = self})
+        SMODS.trigger_effects({eval, post}, self)
     end
 end'''
 match_indent = true

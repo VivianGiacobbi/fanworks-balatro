@@ -1,11 +1,23 @@
 [manifest]
 version = "1.0.0"
-priority = 0
+priority = 20
 
 #
 # Adds a unified "create_joker" context
 # as opposed to buying or copying
 #
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+function CardArea:emplace(card, location, stay_flipped)'''
+position = "at"
+payload = '''
+function CardArea:emplace(card, location, stay_flipped, created, copied, index)'''
+match_indent = true
+times = 1
 
 # CardArea:emplace()
 [[patches]]
@@ -18,8 +30,31 @@ position = "after"
 payload = '''
 if card.ability.set == 'Joker' and created and not copied then
     for i=1, #G.jokers.cards do
-        eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, card = card})
+        local eval, post = eval_card(G.jokers.cards[i], {cardarea = G.jokers, joker_created = true, card = card})
+        SMODS.trigger_effects({eval, post}, G.jokers.cards[i])
     end
+end'''
+match_indent = true
+times = 1
+
+
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''if location == 'front' or self.config.type == 'deck' then 
+    table.insert(self.cards, 1, card)
+else
+    self.cards[#self.cards+1] = card
+end'''
+position = "at"
+payload = '''
+if index then
+    table.insert(self.cards, index, card)
+elseif location == 'front' or self.config.type == 'deck' then 
+    table.insert(self.cards, 1, card)
+else
+    self.cards[#self.cards+1] = card
 end'''
 match_indent = true
 times = 1

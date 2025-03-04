@@ -153,6 +153,7 @@ return {
 			vs_credits7 = "Music",
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_enableJokers = "Jokers",
+			vs_options_enableAltArt = "Alt Joker Art",
 			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableConsumables = "New Consumables",
@@ -208,6 +209,10 @@ return {
 			k_cabinet_lose = "Game Over!",
 			k_cabinet_win = "Lucky You!",
 			k_pack_replaced = "Replaced!",
+			k_boney = "Bad to the Bone!",
+			k_kunst_hm = "Hm......",
+			k_kunst_acceptable = '...Acceptable',
+			k_enhanced = 'Enhanced!',
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -255,7 +260,7 @@ return {
 			co_crimson = 'FFB74B',
 			ba_culture = 'Culture Shock',
 			co_culture = '3690FF',
-			ba_jspec = 'JoJoSpectacle',
+			ba_jspec = 'JOJOSPECTACLE',
 			co_jspec = '3A5055',
 			te_jspec = 'FFFFFF',
 			ba_noman = "No Man's Army",
@@ -449,10 +454,34 @@ return {
 					"{E:1}Pianolote{}",
 				},
 			},
+			artist_shaft = {
+				name = "Artist",
+				text = {
+					"{E:1}AllShaftsFall{}",
+				},
+			},
+			artist_tos = {
+				name = "Artist",
+				text = {
+					"{E:1}TOS{}",
+				},
+			},
+			artist_jester = {
+				name = "Artist",
+				text = {
+					"{E:1}Jester{}",
+				},
+			},
+			artist_gar = {
+				name = "Artist",
+				text = {
+					"{E:1}GarPlatinum{}",
+				},
+			},
 			artist_fool = {
 				name = "Artists",
 				text = {
-					"{E:1}Plusgal{},",
+					"{E:1}plusgal{},",
 					"{E:1}BarrierTrio/Gote{}"
 				}
 			},
@@ -580,7 +609,7 @@ return {
 					"{C:inactive}(Must have room){}",
 				},
 			},
-			j_fnwk_streetlight_resil2 = {
+			j_fnwk_streetlight_resil_regen = {
 				name = "Resilient Streetlit Joker",
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
@@ -687,8 +716,8 @@ return {
 			j_fnwk_plancks_unsure = {
 				name = "Unsure Creaking Joker",
 				text = {
-					"Retriggers all {C:attention}Enhanced{}",
-					"{C:attention}numbered{} cards",
+					"Retrigger all scored",
+					"{C:attention}Enhanced numbered{} cards",
 				}
 			},
 			j_fnwk_plancks_skeptic = {
@@ -707,7 +736,9 @@ return {
 			j_fnwk_moscow_mule = {
 				name = "Moscow Mule",
 				text = {
-					"{C:attention}Sex!!{}",
+					"{C:green}#1# in #2#{} chance for {C:attention}Unenhanced{}",
+					"cards to gain a random",
+					"{C:attention}Enhancement{} when scored",
 				}
 			},
 			j_fnwk_sunshine_duo = {
@@ -826,7 +857,7 @@ return {
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
 				}
 			},
-			j_fnwk_gq_lambiekins = {
+			j_fnwk_gotequest_lambiekins = {
 				name = "Ms. Lambiekins",
 				text = {
 					"Played {C:attention}Lucky Cards{}",
@@ -841,21 +872,21 @@ return {
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
 			},
-			j_fnwk_spiritlines_halves = {
+			j_fnwk_spirit_halves = {
 				name = "The Halves",
 				text = {
 					"If played hand is a {C:attention}Pair{},",
 					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
 				}
 			},
-			j_fnwk_doubledown_clark = {
+			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
 				}
 			},
-			j_fnwk_loveonce_jokestar = {
+			j_fnwk_love_jokestar = {
 				name = "Prideful Jokestar",
 				text = {
 					"This Joker gains {C:mult}+#2#{} Mult",
@@ -864,6 +895,85 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}"
 				}
 			},
+			j_fnwk_lighted_square = {
+				name = "Square Biz Killer",
+				text = {
+					"If played hand is {C:attention}#1#{}",
+					"cards, {C:attention}destroy{} the",
+					"last card {C:attention}after{} scoring"
+				}
+			},
+			j_fnwk_iron_boney = {
+				name = "Joker M.",
+				text = {
+					"This Joker {C:attention}replaces{} another",
+					"owned Joker when {C:attention}destroyed{}",
+					"or {C:attention}sold{} and gains {X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_jspec_joepie = {
+				name = "Joepiegee",
+				text = {
+					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
+					"lowest level {C:attention}basic poker hand{}",
+					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
+				}
+			},
+			j_fnwk_jspec_kunst = {
+				name = "Kunst",
+				text = {
+					"When {C:attention}Boss Blind{} is defeated,",
+					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
+				}
+			},
+			j_fnwk_jspec_ilsa = {
+				name = "Ilsa",
+				text = {
+					"Cards with an {C:attention}Edition{}",
+					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+					"and {C:dark_edition}Polychrome{}"
+				}
+			},
+			j_fnwk_fanworks_tos = {
+				name = "TOS",
+				text = {
+					"Each played {C:attention}3{} of",
+					"{C:spades}Spades{} gives {C:chips}+#1#{}",
+					"Chips when scored",
+				}
+			},
+			j_fnwk_fanworks_jester = {
+				name = "Bizarre Jester",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"create a random {C:fanworks}Fanworks{} Joker",
+				}
+			},
+			j_fnwk_scepter_card = {
+				name = "Speedwagon Foundation Card",
+				text = {
+					"Played {C:attention}face cards{} have",
+					"a {C:green}#1# in #2#{} chance to give",
+					"{C:mult}+#3#{} Mult when scored",
+				}
+			},
+			j_fnwk_crimson_golden = {
+				name = "Golden Heart",
+				text = {
+					"{C:attention}Gold Cards{} give {C:mult}+#1#{} Mult",
+					"when scored",
+				}
+			},
+		},
+		Spectral = {
+			c_fnwk_spec_stonemask = {
+				name = "Stone Mask",
+				text = {
+					"Give a random Joker",
+					"{C:dark_edition}Holographic{} and {C:attention}Eternal{}"
+				}
+			}
 		},
 		Stand = {
 			c_fnwk_moodyblues = {

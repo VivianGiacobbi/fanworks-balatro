@@ -110,6 +110,10 @@ function EaseInOutSin(x)
 	return -(math.cos(math.pi * x) - 1) / 2
 end
 
+function EaseInOutQuart(x) 
+	return x < 0.5 and 8 * x * x * x * x or 1 - (-2 * x + 2)^4 / 2;
+end
+
 --[[
    Author: Julio Manuel Fernandez-Diaz
    Date:   January 12, 2007

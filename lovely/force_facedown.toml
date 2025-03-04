@@ -11,18 +11,6 @@ priority = 0
 [patches.pattern]
 target = "cardarea.lua"
 pattern = '''
-function CardArea:emplace(card, location, stay_flipped)'''
-position = "at"
-payload = '''
-function CardArea:emplace(card, location, stay_flipped, created, copied)'''
-match_indent = true
-times = 1
-
-# CardArea:emplace()
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = '''
 if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped then
     card:flip()
 end

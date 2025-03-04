@@ -6,7 +6,7 @@ local blindsToLoad = {
     'mochamike',
 }
 
-if not fnwk_enabled['enableBosses'] then
+if not fnwk_enabled['enableAltArt'] then
 	return
 end
 

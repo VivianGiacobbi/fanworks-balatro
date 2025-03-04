@@ -1,0 +1,46 @@
+local jokerInfo = {
+    key = 'j_fnwk_fanworks_jester',
+	name = 'Bizarre Jester',
+	config = {},
+	rarity = 1,
+	cost = 3,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
+}
+
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_jester", set = "Other"}
+end
+
+function jokerInfo.calculate(self, card, context)
+    if not context.setting_blind or (context.blueprint_card or card).getting_sliced then
+        return
+    end
+
+    if #G.jokers.cards + G.GAME.joker_buffer >= G.jokers.config.card_limit then
+        return
+    end
+
+    G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+    G.E_MANAGER:add_event(Event({
+        func = function() 
+            local old_banned = copy_table(G.GAME.banned_keys)
+            for k, v in pairs(G.P_CENTERS) do
+                if not StringStartsWith(k, "j_fnwk_") then
+                    G.GAME.banned_keys[k] = true
+                end
+            end
+            local card = create_card('Joker', G.jokers, nil, nil, nil, nil, nil, 'jes')
+            card:add_to_deck()
+            G.jokers:emplace(card)
+            card:start_materialize()
+            G.GAME.joker_buffer = 0
+            G.GAME.banned_key = old_banned
+            return true
+        end
+    }))   
+    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_joker'), colour = G.C.FANWORKS}) 
+end
+
+return jokerInfo

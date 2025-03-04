@@ -14,9 +14,10 @@ pattern = '''update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, dela
     delay(1.3)
 end'''
 position = "at"
-payload = '''update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level=G.GAME.hands[hand].level})
+payload = '''   update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level=G.GAME.hands[hand].level})
+    SMODS.calculate_context({hand_upgraded = true, upgraded = {hand}, amount = amount})
     delay(1.3)
-end
-SMODS.calculate_context({hand_upgraded = true, upgraded = hand, amount = amount, other_card = card})'''
+end'''
 match_indent = true
 times = 1
+
