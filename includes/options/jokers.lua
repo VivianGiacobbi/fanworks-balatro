@@ -39,10 +39,10 @@ local jokersToLoad = {
 	'rockhard_numbers',
 	-- rubicon crossroads
 	'rubicon_infidel',
+	'rubicon_fishy',
 	'rubicon_film',
 	'rubicon_moonglass',
 	'rubicon_bone',
-
 	-- jojopolis
 	'jojopolis_jokestar',
 	--gotequest
@@ -55,6 +55,8 @@ local jokersToLoad = {
 	'love_jokestar',
 	-- lighted state
 	'lighted_square',
+	-- culture shock
+	'culture_adaptable',
 	-- iron touch
 	'iron_boney',
 	-- jojospectacle,
@@ -68,6 +70,8 @@ local jokersToLoad = {
 	'scepter_card',
 	-- crimson jungle
 	'crimson_golden',
+	-- golden generation
+	'golden_generation'
 }
 
 local alt_jokers = {

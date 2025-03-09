@@ -96,7 +96,7 @@ position = "at"
 payload = '''self.edition = {}
 self.edition.others = {}
 local all_types = {[edition_type] = true}
-if force_ilsa or next(find_joker('Ilsa')) then
+if force_ilsa or next(SMODS.find_card('j_fnwk_jspec_ilsa')) then
     all_types['holo'] = true
     all_types['foil'] = true
     all_types['polychrome'] = true

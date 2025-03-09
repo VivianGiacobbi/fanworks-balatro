@@ -1,0 +1,207 @@
+
+
+local jokerInfo = {
+	name = 'Indulgent Streetlit Joker',
+	config = {
+		extra = {
+            mult = 4,
+			x_mult = 1,
+		},
+        form = 'garc'
+	},
+	rarity = 2,
+	cost = 12,
+	blueprint_compat = true,
+	eternal_compat = true,
+	perishable_compat = true,
+	fanwork = 'crimson',
+}
+
+local function transform_sludgemass(card)
+
+end
+
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}       
+    return { 
+		vars = {
+			card.ability.extra.x_mult
+		}
+	}
+end
+
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	if not card.config.center.discovered then
+        return
+    end
+
+	card.no_shadow = true
+	local glow_atlas = G.ASSET_ATLAS['fnwk_glow_3']
+	local scale_x = glow_atlas.px / card.children.center.atlas.px
+	local scale_y = glow_atlas.py / card.children.center.atlas.py
+	local glow_width = card.T.w * scale_x
+	local glow_height = card.T.h * scale_y
+	local x_offset = (glow_width - card.T.w) / 2
+	local y_offset = (glow_height - card.T.h) / 2
+
+	card.children.glow_sprite = Sprite(
+		card.T.x - x_offset,
+		card.T.y - y_offset,
+		glow_width,
+		glow_height,
+		glow_atlas,
+		card.children.center.config.pos
+	)
+	card.children.glow_sprite:set_role({
+		role_type = 'Minor',
+		major = card,
+		offset = { x = -x_offset, y = -y_offset },
+		xy_bond = 'Strong',
+		wh_bond = 'Weak',
+		r_bond = 'Strong',
+		scale_bond = 'Weak',
+		draw_major = card
+	})
+	card.children.glow_sprite:align_to_major()
+	card.children.glow_sprite:define_draw_steps({
+		{shader = 'dissolve'},
+	})
+end
+
+function jokerInfo.calculate(self, card, context)
+
+	if context.joker_main and context.cardarea == G.jokers and not card.debuff and card.ability.extra.x_mult > 1 then
+		return {
+            message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+            card = context.blueprint_card or card,
+            Xmult_mod = card.ability.extra.x_mult,
+        }
+	end
+	
+	if not context.blueprint and context.cardarea == G.jokers and context.ending_shop then
+		card.ability.extra.current_spend = 0
+	end
+
+	if not context.blueprint and card.ability.extra.current_spend < card.ability.extra.spend_val then
+		if context.cardarea == G.jokers and context.buying_card then 
+			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
+		elseif context.cardarea == G.jokers and context.open_booster then
+			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
+		end
+
+		if card.ability.extra.current_spend >= card.ability.extra.spend_val then
+			card.ability.extra.current_spend = card.ability.extra.spend_val
+			card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+			return {
+				card = card,
+				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+				colour = G.C.RED
+			}
+		end
+	end
+end
+
+function jokerInfo.update(self, card, dt)
+	if not card.config.center.discovered then
+        return
+    end
+
+	if card.area and card.area.config.collection then
+		return
+	end
+
+	G.NEON_VALS.AMT = G.NEON_VALS.AMT + 0.0001	
+	update_jokers_glow(card)
+end
+
+function jokerInfo.remove_from_deck(self, card, from_debuff)
+	update_jokers_glow(card, true)
+end
+
+function update_jokers_glow(card, removed)
+	
+	-- reset the area it was moved from
+	if not card.area or (card.area ~= G.jokers and card.area ~= G.shop_jokers and card.area ~= G.pack_cards) then
+		return
+	end
+	
+	local joker_idx = 1
+	local area_changed = #card.area.cards ~= (card.ability.old_glow_cards and #card.ability.old_glow_cards or -1)
+	for i=1, #card.area.cards do
+		if card.area.cards[i] == card then joker_idx = i end
+		if not area_changed and card.area.cards[i].ID ~= card.ability.old_glow_cards[i] then
+			area_changed = true
+		end
+	end
+	
+	-- don't do potentially expensive sprite creation if nothing has changed
+	if not area_changed and card.ability.glow_area == card.area and joker_idx == card.ability.glow_idx then
+		return
+	end
+
+	card.ability.glow_area = card.area
+	card.ability.glow_idx = joker_idx
+
+	if card.ability.glow_area then
+		card.ability.old_glow_cards = {}
+		for i=1, #card.ability.glow_area.cards do
+			card.ability.old_glow_cards[#card.ability.old_glow_cards+1] = card.ability.glow_area.cards[i].ID
+		end
+	end
+	
+
+	for i=1, #card.ability.glow_area.cards do
+		local dist = math.abs(card.ability.glow_idx - i)
+		local dist_mod = (card.ability.extra.max_dist - dist + 1)
+		local glow_card = card.ability.glow_area.cards[i]
+		if i ~= card.ability.glow_idx and dist <= card.ability.extra.max_dist then
+			if glow_card.children.glow_sprite then glow_card.children.glow_sprite:remove() end
+			
+			local glow = 1 + (card.ability.extra.glow_step * Fact(dist_mod))
+			glow_card.ability.glow = glow
+			glow_card.no_shadow = true
+
+
+			local scale_x = G.ASSET_ATLAS['fnwk_glow_'..dist_mod].px / glow_card.children.center.atlas.px
+			local scale_y = G.ASSET_ATLAS['fnwk_glow_'..dist_mod].py / glow_card.children.center.atlas.py
+			if glow_card.ability.set ~= 'Joker' then scale_x = scale_x * 0.9 end
+			local glow_width = glow_card.T.w * scale_x
+			local glow_height = glow_card.T.h * scale_y
+			local x_offset = (glow_width - glow_card.T.w) / 2
+			local y_offset = (glow_height - glow_card.T.h) / 2
+			
+			glow_card.children.glow_sprite = Sprite(
+				glow_card.T.x - x_offset,
+				glow_card.T.y - y_offset,
+				glow_width,
+				glow_height,
+				G.ASSET_ATLAS['fnwk_glow_'..dist_mod],
+				glow_card.children.center.config.pos
+			)
+			glow_card.children.glow_sprite:set_role({
+				role_type = 'Minor',
+				major = glow_card,
+				offset = { x = -x_offset, y = -y_offset },
+				xy_bond = 'Strong',
+				wh_bond = 'Weak',
+				r_bond = 'Strong',
+				scale_bond = 'Weak',
+				draw_major = glow_card
+			})
+			glow_card.children.glow_sprite:align_to_major()
+			glow_card.children.glow_sprite:define_draw_steps({
+				{shader = 'dissolve'},
+			})
+		else
+			if glow_card.children.glow_sprite then
+				glow_card.children.glow_sprite:remove()
+			end
+			glow_card.children.glow_sprite = nil
+			glow_card.ability.glow = nil
+			glow_card.no_shadow = false
+		end
+	end
+end
+
+
+return jokerInfo

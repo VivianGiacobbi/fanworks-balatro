@@ -63,8 +63,9 @@ function jokerInfo.calc_dollar_bonus(self, card)
             end
         end
     end
-
-    return card.ability.lucky_tally
+    if card.ability.lucky_tally > 0 then
+        return card.ability.lucky_tally
+    end
 end
 
 function jokerInfo.remove_from_deck(self, card)

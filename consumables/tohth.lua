@@ -11,8 +11,8 @@ local consumInfo = {
 
 -- Modified Code from Jimbo's Pack
 local create_tohth_cardarea = function(card, cards)
-    if not tohth_cards then
-        tohth_cards = CardArea(
+    if not predict_area then
+        predict_area = CardArea(
                 0,
                 0,
                 (math.min(card.ability.preview,#cards) * G.CARD_W)*0.5,
@@ -21,7 +21,7 @@ local create_tohth_cardarea = function(card, cards)
     end
     for i = 1, #cards do
         local card = copy_card(cards[i], nil, nil, G.playing_card)
-        tohth_cards:emplace(card)
+        predict_area:emplace(card)
     end
     return {
         n=G.UIT.R, config = {
@@ -32,7 +32,7 @@ local create_tohth_cardarea = function(card, cards)
                 n=G.UIT.C,
                 config = {align = "cm", padding = 0.2},
                 nodes={
-                    {n=G.UIT.O, config = {padding = 0.2, object = tohth_cards}},
+                    {n=G.UIT.O, config = {padding = 0.2, object = predict_area}},
                 }
             }
         },

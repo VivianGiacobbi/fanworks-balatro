@@ -15,7 +15,7 @@ pattern = '''if next(find_joker('Smeared Joker')) and (self.base.suit == 'Hearts
 end'''
 position = "at"
 payload = '''local smeared = next(find_joker('Smeared Joker'))
-local infidel = next(find_joker('Infidel Jokestar'))
+local infidel = next(SMODS.find_card('j_fnwk_rubicon_infidel'))
 if infidel and smeared then
     if not ((G.GAME.infidel_suits['Hearts'] and G.GAME.infidel_suits['Diamonds'])
     or (G.GAME.infidel_suits['Spades'] and G.GAME.infidel_suits['Clubs'])) then

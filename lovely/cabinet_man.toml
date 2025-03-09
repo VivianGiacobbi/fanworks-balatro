@@ -1,0 +1,90 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds rendering for Cabinet Man
+#
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if (self.OVERLAY_MENU) or (not self.F_HIDE_BG) then
+    if self.OVERLAY_MENU and self.OVERLAY_MENU ~= self.CONTROLLER.dragging.target then
+        love.graphics.push()
+        self.OVERLAY_MENU:translate_container()
+        self.OVERLAY_MENU:draw()
+        love.graphics.pop()
+    end
+end'''
+position = "after"
+payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
+    love.graphics.setColor(1,1,1,1)
+
+    local width = G.EMU.video.res.width
+    local height = G.EMU.video.res.height
+    for i=1, width * height do
+        local x = (i - 1) % width
+        local y = math.floor((i - 1) / width) % height
+        local px = G.EMU.nes.cpu.ppu.output_pixels[i]
+        G.EMU.video.image_data:setPixel(x + 1, y + 1, px[1], px[2], px[3], 1)
+    end
+    G.EMU.video.image:replacePixels(G.EMU.video.image_data)
+
+    love.graphics.setColor(1,1,1,1)
+
+    local cabinet_atlas = G.ASSET_ATLAS['fnwk_cabinet_overlay']
+    local screen_res = { x = love.graphics.getWidth(), y = love.graphics.getHeight() }
+    local scale = screen_res.y * 0.75 / width
+    local in_x_pos = screen_res.x / 2 - width * scale * 1.08 / 2
+    local in_y_pos = screen_res.y / 2 - height * scale * 1.08 / 2
+    local out_x_pos = screen_res.x / 2 - cabinet_atlas.px * scale / 2
+    local out_y_pos = screen_res.y / 2 - cabinet_atlas.py * scale / 2
+
+    if G.EMU.game.timers.startup_timer and G.EMU.game.timers.startup_timer.time > 0 then
+        local max_lerp = (G.EMU.game.timers.startup_timer.sub_count + 1) / G.EMU.game.timers.startup_timer.subtimers
+        local lerp_val = G.EMU.game.timers.startup_timer.sub_time /  G.EMU.game.timers.startup_timer.sub_limit * max_lerp
+        in_x_pos = math.lerp(G.EMU.game.start_pos.x, in_x_pos, lerp_val)
+        in_y_pos = math.lerp(G.EMU.game.start_pos.y, in_y_pos, lerp_val)
+        out_x_pos = math.lerp(G.EMU.game.start_pos.x, out_x_pos, lerp_val)
+        out_y_pos = math.lerp(G.EMU.game.start_pos.y, out_y_pos, lerp_val)
+        scale = math.lerp(0, scale, lerp_val)
+    end
+
+    G.SHADERS['CRT']:send('distortion_fac', {1.0 + 0.07, 1.0 + 0.1})
+    G.SHADERS['CRT']:send('scale_fac', {1.0 - 0.008, 1.0 - 0.008})
+    G.SHADERS['CRT']:send('feather_fac', 0.01)
+    G.SHADERS['CRT']:send('bloom_fac', 0)
+    G.SHADERS['CRT']:send('time', 400 + G.TIMERS.REAL)
+    G.SHADERS['CRT']:send('noise_fac', 0.001)
+    G.SHADERS['CRT']:send('crt_intensity', 0.06)
+    G.SHADERS['CRT']:send('glitch_intensity', 0)
+    G.SHADERS['CRT']:send('scanlines', G.EMU.video.res.height * 5)
+    G.SHADERS['CRT']:send('mouse_screen_pos', {screen_res.x/2, screen_res.y/2})
+    G.SHADERS['CRT']:send('screen_scale', G.TILESCALE*G.TILESIZE)
+    G.SHADERS['CRT']:send('hovering', 1)
+    love.graphics.setShader( G.SHADERS['CRT'])
+
+    love.graphics.draw(
+        G.EMU.video.image,
+        in_x_pos,
+        in_y_pos,
+        0,
+        scale * 1.08,
+        scale * 1.08
+    )
+
+    love.graphics.setShader()
+    love.graphics.draw(
+        cabinet_atlas.image,
+        out_x_pos,
+        out_y_pos,
+        0,
+        scale,
+        scale
+    )
+    G.EMU.drawn = true
+end'''
+match_indent = true
+times = 1
+

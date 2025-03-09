@@ -19,6 +19,12 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra.enhance_chance} }
 end
 
+
+function jokerInfo.add_to_deck(self, card, from_debuff)
+    local predicted_seed =  pseudorandom(pseudoseed('mule_roll', ''))
+	sendDebugMessage('predicted_seed: '.. predicted_seed)
+end
+
 function jokerInfo.calculate(self, card, context)
 	if not (context.individual and context.cardarea == G.play) then
 		return
@@ -31,7 +37,9 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 	
-	if pseudorandom(pseudoseed('mule_roll')) < G.GAME.probabilities.normal / card.ability.extra.enhance_chance then
+	local seed_result = pseudorandom(pseudoseed('mule_roll'))
+	sendDebugMessage('actual seed: '..seed_result)
+	if seed_result < G.GAME.probabilities.normal / card.ability.extra.enhance_chance then
 		local change_card = context.other_card
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',

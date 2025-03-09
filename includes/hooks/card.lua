@@ -1,7 +1,7 @@
 local base_get_id = Card.get_id
 function Card:get_id()
     local id = base_get_id(self)
-    if next(find_joker('Bone Crossed Joker')) and (id == 11 or id == 13) then
+    if next(SMODS.find_card('j_fnwk_rubicon_bone')) and (id == 11 or id == 13) then
         return 12
     end
     return id
@@ -74,6 +74,25 @@ function Card:say_quip(iter, not_first, def_speed)
             self:say_quip(iter-1, true, def_speed)
         return true  
     end}), 'tutorial')
+end
+
+local ref_card_hover = Card.hover
+function Card:hover()
+    ref_card_hover(self)
+    if self.ability.set == 'Booster' then
+        sendDebugMessage('started hover')
+        SMODS.calculate_context({hovering_booster = true, booster = self})
+    end
+end
+
+local ref_card_stop_hover = Card.stop_hover
+function Card:stop_hover()
+    ref_card_stop_hover(self)
+    if self.ability.set == "Booster" then
+        sendDebugMessage('stopped hover')
+        SMODS.calculate_context({stopped_hovering = true, booster = self})
+        return
+    end
 end
 
 function SMODS.calculate_quantum_editions(card, effects, context)

@@ -286,6 +286,8 @@ return {
 			ba_thorny = 'Thorny Mob Rules',
 			co_thorny = 'D4D4D4',
 			te_thorny = '365156',
+			ba_golden = 'Golden Generation',
+			co_golden = 'BC9E49'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -308,7 +310,20 @@ return {
 			ach_fnwk_win_vine = "Win a run with Vine Deck on any difficulty",
 			ach_fnwk_all_discovered = "Discover All Fanworks Jokers",
 			ach_fnwk_big_meat = "Unlock every Fanworks Achievement",
-		}
+		},
+		poker_hands = {
+			fnwk_fibonacci = 'Fibonacci',
+			fnwk_flush_fib = 'Flush Fib',
+		},
+		poker_hand_descriptions = {
+			fnwk_fibonacci = {
+				'5 cards that follow the Fibonacci sequence',
+			},
+			fnwk_flush_fib = {
+				"5 cards that follow the Fibonacci sequence",
+				"with all cards sharing the same suit",
+			}
+		},
 	},
 	descriptions = {
 		Blind = {
@@ -476,6 +491,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}GarPlatinum{}",
+				},
+			},
+			artist_reda = {
+				name = "Artist",
+				text = {
+					"{E:1}Redastrin{}",
 				},
 			},
 			artist_fool = {
@@ -699,17 +720,15 @@ return {
 					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
 					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
 					"the {C:attention}leftmost{} Joker slot",
-					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{} {C:inactive}#5#){}"
+					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{}{C:inactive}#5#){}"
 				}
 			},
 			j_fnwk_plancks_jokestar = {
 				name = "Creaking Bjokestar",
 				text = {
-					"Played {C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{},",
-					"and {C:attention}8s{} always score, this",
-					"Joker gains {X:mult,C:white}X#2#{} mult for",
-					"each played hand that",
-					"contains {C:attention}all five ranks{}",
+					"{C:inactive}Unlocks Fibonacci poker hands{}", 
+					"This Joker gains {X:mult,C:white}X#2#{} Mult if",
+					"played hand contains a {C:attention}Fibonacci{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				}
 			},
@@ -723,7 +742,8 @@ return {
 			j_fnwk_plancks_skeptic = {
 				name = "Skeptic Creaking Joker",
 				text = {
-					"Dummy Text",
+					"{C:attention}Predicts{} the cards inside",
+					"a hovered {C:attention}booster pack{}",
 				}
 			},
 			j_fnwk_plancks_crazy = {
@@ -848,6 +868,13 @@ return {
                     "{s:0.8}Suits change every round{}"
 				}
 			},
+			j_fnwk_rubicon_fishy = {
+				name = "Fishy Jokestar",
+				text = {
+					"Retrigger all scored",
+					"{C:attention}Enhancement{} effects"
+				}
+			},
 			j_fnwk_rubicon_film = {
 				name = "Film Crossed Joker",
 				text = {
@@ -912,6 +939,14 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				}
 			},
+			j_fnwk_culture_adaptable = {
+				name = "Adaptable Jokestar",
+				text = {
+					"{C:mult}+#1#{} Mult for each {C:attention}Enhanced{}",
+					"card in your full deck",
+					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
+				}
+			},
 			j_fnwk_jspec_joepie = {
 				name = "Joepiegee",
 				text = {
@@ -963,6 +998,15 @@ return {
 				text = {
 					"{C:attention}Gold Cards{} give {C:mult}+#1#{} Mult",
 					"when scored",
+				}
+			},
+			j_fnwk_golden_generation = {
+				name = "Golden Generation",
+				text = {
+					"Earn {C:money}$#1#{} for each other",
+					"{C:fanworks}Fanworks{} {C:attention}Joker{} in your",
+					"{C:attention}roster{} at end of round",
+					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
 				}
 			},
 		},
