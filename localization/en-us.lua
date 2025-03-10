@@ -291,7 +291,9 @@ return {
 			ba_golden = 'Golden Generation',
 			co_golden = 'BC9E49',
 			ba_mdv = 'My Digital Venus',
-			co_mdv = 'B01983'
+			co_mdv = 'B01983',
+			ba_jojojidai = 'Jojojidai',
+			co_jojojidai = '27407C'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -977,7 +979,7 @@ return {
 				name = "Ilsa",
 				text = {
 					"Cards with an {C:attention}Edition{}",
-					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+					"also act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
 					"and {C:dark_edition}Polychrome{}"
 				}
 			},
@@ -1032,6 +1034,14 @@ return {
 				text = {
 					"{C:attention}Balance{} the {C:chips}Chips{} and {C:mult}Mult{}",
 					"of the next {C:attention}#1#{} hands"
+				}
+			},
+			j_fnwk_jojojidai_soldiers = {
+				name = "Soldiers of Fortune",
+				text = {
+					"This Joker gives {X:mult,C:white}X#1#{} Mult for",
+					"each {C:red}-1{} hand size below {C:attention}#2#{}",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#3#{} {C:inactive}Mult){}"
 				}
 			},
 		},

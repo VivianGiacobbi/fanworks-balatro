@@ -90,7 +90,9 @@ local jokersToLoad = {
 	
 	-- my digital venus
 	'mdv_shock',
-	
+
+	-- jojojidai
+	'jojojidai_soldiers',
 	
 	-- jojospectacle,
 	'jspec_joepie',
