@@ -5,7 +5,7 @@ local jokerInfo = {
     },
 	rarity = 1,
 	cost = 4,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
 	fanwork = 'double',
@@ -16,6 +16,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+    if context.blueprint then
+        return
+    end
+    
     if context.first_hand_drawn then
         G.E_MANAGER:add_event(Event({
             func = function() 

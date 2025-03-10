@@ -23,7 +23,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    balance_score(card)
+    balance_score(context.blueprint_card or card)
 end
 
 return jokerInfo

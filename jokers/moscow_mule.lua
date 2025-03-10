@@ -49,7 +49,7 @@ function jokerInfo.calculate(self, card, context)
 
 		return {
 			message = localize('k_enhanced'),
-			card = card,
+			card = context.blueprint_card or card,
 		}
 	end
 end

@@ -50,14 +50,15 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.blueprint then return end
 	-- sets this value so it won't regenerate upon being sold
 	-- amanda just lets herself get sold out
-	if (context.selling_self or card.debuff) and not context.blueprint then
+	if (context.selling_self or card.debuff) then
 		card.ability.state = 'selling'
 		return
 	end
 
-	if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card and not context.blueprint then
+	if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card then
 		if card.ability.state == 'default' then
 			card.ability.state = 'sacrifice'
 
@@ -97,7 +98,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.end_of_round and context.individual and not context.blueprint then	
+	if context.end_of_round and context.individual then	
 		-- avoid regenerating if there's not an available slot
 		-- I.E. the player used Judgement during a run
 		if card.ability.state == 'hidden' then

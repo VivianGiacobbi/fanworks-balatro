@@ -20,6 +20,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+
+    if context.blueprint then
+        return
+    end
+    
     if context.destroy_card and not card.debuff and #context.full_hand == card.ability.extra.hand_size then
         local destroy = context.full_hand[#context.full_hand]
         if context.cardarea == G.play then

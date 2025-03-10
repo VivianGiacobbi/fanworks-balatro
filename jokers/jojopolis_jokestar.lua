@@ -21,6 +21,7 @@ function jokerInfo.calculate(self, card, context)
 		return {
 			message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra*(G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0))}},
 			mult_mod = card.ability.extra, 
+            card = context.blueprint_card or card
 		}
 	end
 end

@@ -52,7 +52,6 @@ function jokerInfo.calculate(self, card, context)
                 }
             )
         end
-
     end
 
     if context.cardarea == G.jokers and context.joker_main then

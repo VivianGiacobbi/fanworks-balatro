@@ -42,7 +42,8 @@ function jokerInfo.calculate(self, card, context)
 		return {
 			message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
 			chip_mod = card.ability.extra.chips, 
-			colour = G.C.CHIPS
+			colour = G.C.CHIPS,
+			card = context.blueprint_card or card
 		}
 	end
 end

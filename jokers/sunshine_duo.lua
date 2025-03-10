@@ -31,7 +31,6 @@ function jokerInfo.calculate(self, card, context)
 				queens = queens + 1
 			end
 		end
-		sendDebugMessage('kings: '..kings..' | queens: '..queens)
 
 		if kings > 0 and queens > 0 then
 			return {

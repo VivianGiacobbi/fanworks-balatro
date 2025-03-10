@@ -19,6 +19,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+    if context.blueprint then return end
     if G.GAME.current_round.packs_rerolled == 0 and context.cardarea == G.jokers and context.open_booster then         
         card.ability.last_booster_cost = context.card.cost
         card.ability.last_booster_pos = context.card.ability.booster_pos

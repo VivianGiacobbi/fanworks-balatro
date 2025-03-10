@@ -21,7 +21,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.cardarea == G.jokers then
-		if context.joker_main and not card.debuff and card.ability.extra.chips > 0 then
+		if context.joker_main and not card.debuff and card.ability.extra.chips > 0 and not context.blueprint then
 			return {
 				message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
 				colour = G.C.CHIPS
@@ -33,7 +33,8 @@ function jokerInfo.calculate(self, card, context)
 			return {
 				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
 				chip_mod = card.ability.extra.chips, 
-				colour = G.C.CHIPS
+				colour = G.C.CHIPS,
+				card = context.blueprint_card or card
 			}
 		end
 	end

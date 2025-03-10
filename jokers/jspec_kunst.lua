@@ -49,38 +49,40 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
+    local juice_card = context.blueprint_card or card
+
     update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname=localize('k_all_hands'),chips = '...', mult = '...', level=''})
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
         play_sound('tarot1')
-        card:juice_up(0.8, 0.1)
+        juice_card:juice_up(0.8, 0.1)
         attention_text({
             text = localize('k_kunst_hm'),
             scale = 1, 
             hold = 0.7,
             backdrop_colour = G.C.FILTER,
             align = 'bm',
-            major = card,
-            offset = {x = 0, y = 0.05*card.T.h}
+            major = juice_card,
+            offset = {x = 0, y = 0.05*juice_card.T.h}
         })
         G.TAROT_INTERRUPT_PULSE = true
         return true end }))
     update_hand_text({delay = 0}, {mult = '+', StatusText = true})
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
         play_sound('tarot1')
-        card:juice_up(0.8, 0.1)
+        juice_card:juice_up(0.8, 0.1)
         return true end }))
     update_hand_text({delay = 0}, {chips = '+', StatusText = true})
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
         play_sound('tarot1')
-        card:juice_up(0.8, 0.1)
+        juice_card:juice_up(0.8, 0.1)
         attention_text({
             text = localize('k_kunst_acceptable'),
             scale = 1, 
             hold = 0.7,
             backdrop_colour = G.C.FILTER,
             align = 'bm',
-            major = card,
-            offset = {x = 0, y = 0.05*card.T.h}
+            major =  juice_card,
+            offset = {x = 0, y = 0.05* juice_card.T.h}
         })
         G.TAROT_INTERRUPT_PULSE = nil
         return true end }))

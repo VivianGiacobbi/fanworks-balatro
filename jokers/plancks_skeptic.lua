@@ -145,6 +145,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.blueprint then return end
 	if not context.cardarea == G.jokers then
 		return
 	end

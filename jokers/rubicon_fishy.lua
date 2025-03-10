@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
 
     local enhancement = context.other_card:calculate_enhancement(context)
     if enhancement then
-        SMODS.trigger_effects({{ehancement = enhancement}}, context.other_card)
+        SMODS.trigger_effects({{enhancement = enhancement}}, context.other_card)
     end
 
     if next(return_table) then

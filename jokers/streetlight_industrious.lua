@@ -15,6 +15,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.blueprint then return end
 	if context.cardarea == G.jokers then
 		if context.final_scoring_step and next(context.poker_hands['Full House']) then
 			local rank = context.poker_hands["Three of a Kind"][1][1]:get_id()

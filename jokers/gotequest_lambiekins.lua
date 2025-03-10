@@ -39,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
     return {
         message = localize('$')..card.ability.extra.money,
         colour = G.C.MONEY,
-        card = card
+        card = context.blueprint_card or card
     }
 end
 

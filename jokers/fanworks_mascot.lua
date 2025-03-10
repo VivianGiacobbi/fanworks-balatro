@@ -16,6 +16,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+    if context.blueprint then
+        return
+    end
     if context.check_enhancement and context.cardarea == G.jokers then
 		if context.other_card.config.center.key == 'm_lucky' then
             return {

@@ -98,12 +98,14 @@ function jokerInfo.calculate(self, card, context)
             Xmult_mod = card.ability.extra.x_mult,
         }
 	end
+
+	if context.blueprint then return end
 	
-	if not context.blueprint and context.cardarea == G.jokers and context.ending_shop then
+	if context.cardarea == G.jokers and context.ending_shop then
 		card.ability.extra.current_spend = 0
 	end
 
-	if not context.blueprint and card.ability.extra.current_spend < card.ability.extra.spend_val then
+	if card.ability.extra.current_spend < card.ability.extra.spend_val then
 		if context.cardarea == G.jokers and context.buying_card then 
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
 		elseif context.cardarea == G.jokers and context.open_booster then

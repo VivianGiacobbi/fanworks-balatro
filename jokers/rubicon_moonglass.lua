@@ -37,7 +37,7 @@ function jokerInfo.calculate(self, card, context)
                 message = localize('k_glass_ex'),
                 sound = 'highlight2',
                 colour = G.C.GREY,
-                card = card
+                card = context.blueprint_card or card
             } 
         end
     end

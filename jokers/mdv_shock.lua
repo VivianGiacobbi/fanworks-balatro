@@ -21,17 +21,17 @@ end
 
 
 function jokerInfo.calculate(self, card, context)
-	if not context.cardarea == G.jokers or card.debuff then
+	if not context.cardarea == G.jokers or card.debuff or context.blueprint then
         return
     end
 
-	if context.joker_main and not context.blueprint then
+	if context.joker_main then
 		balance_score(card)
 		card.ability.extra.hands_count = card.ability.extra.hands_count - 1
 		return
 	end
 
-	if context.after and not context.blueprint then
+	if context.after then
 		if card.ability.extra.hands_count <= 0 then 
 			G.E_MANAGER:add_event(Event({
 				func = function()

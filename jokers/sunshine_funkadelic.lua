@@ -51,7 +51,8 @@ function jokerInfo.calculate(self, card, context)
 		if suits[G.GAME.current_funky_suits[1]] > 0 and suits[G.GAME.current_funky_suits[2]] > 0 then
 			return {
 				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-				Xmult_mod = card.ability.extra.x_mult
+				Xmult_mod = card.ability.extra.x_mult,
+				card = context.blueprint_card or card
 			}
 		end
 	end

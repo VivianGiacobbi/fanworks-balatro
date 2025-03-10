@@ -21,7 +21,11 @@ end
 
 function jokerInfo.calculate(self, card, context)
 
-    if context.skip_blind and not context.blueprint then
+    if context.blueprint then
+        return
+    end
+
+    if context.skip_blind then
         card.ability.extra.currentDiscount = card.ability.extra.currentDiscount + 1
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount')})
     end

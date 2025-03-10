@@ -19,7 +19,7 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 4,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'bluebolt'

@@ -4,6 +4,7 @@ local jokersToLoad = {
     --]]
 
 	-- fanworks
+	'fanworks_jogarc',
 	'fanworks_tos',
 	'fanworks_jester',
 	'fanworks_mascot',
@@ -93,6 +94,9 @@ local jokersToLoad = {
 
 	-- jojojidai
 	'jojojidai_soldiers',
+
+	-- lipstick_vogue
+	'lipstick_ego',
 	
 	-- jojospectacle,
 	'jspec_joepie',

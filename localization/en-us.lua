@@ -124,7 +124,137 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
+			gwq_1 = {
+				"Burunyu~~!"
+			},
+            gwq_2 = {
+				"Dori dori",
+				"dori~~ :3"
+			},
+            gwq_3 = {
+				"Janjanjan~~!"
+			},
+            gwq_4 = {
+				"Gyahoo!!"
+			},
+			gwq_5 = {
+				"Gyahahoo!!"
+			},
+            gwq_6 = {
+				"Nyah nyah!"
+			},
+            gwq_7 = {
+				"Just shuffled deck [IMG]"
+			},
+            gwq_8 = {
+				"Your prize is",
+				"the gyood feeling",
+				"associated with",
+				"winning!"
+			},
+			gwq_9 = {
+				"I LOVE MY WIFE!!"
+			},
+			gwq_10 = {
+				"Jimbo, get",
+				"the hon-nya."
+			},
+			gwq_11 = {
+				"IM GYOING INTO",
+				"LABOOOOOOOOR!"
+			},
+			gwq_12 = {
+				"Nya, that wasn't",
+				"gar-d at all!"
+			},
+            glq_1 = {
+				"NYAAAA?!"
+			},
+            glq_2 = {
+				"Behnueh..."
+			},
+            glq_3 = {
+				"Gyafuugh..."
+			},
+            glq_4 = {
+				"You ca~nyat kill",
+				"me in a way that",
+				"matters!",
+			},
+            glq_5 = {
+				"Pipe bomb! Nyah!"
+			},
+            glq_6 = {
+				"[This quote has",
+				"been canceled for",
+				"racial sensitivity",
+				"reasons]"
+			},
+            glq_7 = {
+				"Looks like it",
+				"wasn't in the",
+				"gards for us."
+			},
+            glq_8 = {
+				"Aw sludge..."
+			},
+            glq_9 = {
+				"To bad!"
+			},
+            glq_10 = {
+				"ALRIGHT, YOU WANNA",
+				"KNOW FINE?! I ADMIT",
+				"IT, I DON'T KNOW",
+				"BALATRO WORKS!"
+			},
+			glq_11 = {
+				"143.765.266.779",
+				"",
+				"+955 0533 701 91 61",
+				"",
+				"VISA, 4485811442881930, 5/24, 690"
+			},
+			glq_12 = {
+				"Yes, she's biased!",
+				"And a boss blind!"
+			},
+			glq_13 = {
+				"Hey man in my",
+				"defence, Balatro",
+				"has a lot of jokers"
+			},
+			glq_14 = {
+				"I have so many",
+				"dunnies but this",
+				"gets added?"
+			},
+			glq_15 = {
+				"Get in the metal",
+				"box, the sumo",
+				"wrestlers will",
+				"arrive shortly."
+			},
+			glq_16 = {
+				"Get it twisted. If you wock in you can do anything.",
+				"Youw actions impact nothing. Youw fate is pwedetewmined.",
+				"The onwy thing you can change is youw weaction to it",
+				"You can do anything you set youw mind to. The wowwd is",
+				"a pwaygwound designed fow you and onwy you. If you wait",
+				"90 minutes to wake up to dwink youw fiwst cup of coffee",
+				"nothing can stop you. If you duct tape youw mouth when",
+				"you faww asweep nothing can stop you. You awe a pawn in",
+				"a univewse chess match. You mean nothing to god if they",
+				"even exist. You’we a wounding ewwow. You’we two pennies",
+				"on a fowtune 500 company’s bawance sheet. They don’t cawe",
+				"about you in the swightest. Evewyone gets what they desewve",
+				"in wife. If you put effowt in you can achieve anything.",
+				"Successfuw peopwe awe bettew peopwe. The ciwcumstances of",
+				"youw biwth detewmine whewe you awe going to go. Nothing",
+				"ewse mattews at aww. You’we own wevew of education. Youw",
+				"attitude. Youw wevew of effowt. Youw cwedentiaws."
+			},
 		},
+
 		collabs = {
 			Spades={
 				["1"]="Twitch Clips",
@@ -293,7 +423,9 @@ return {
 			ba_mdv = 'My Digital Venus',
 			co_mdv = 'B01983',
 			ba_jojojidai = 'Jojojidai',
-			co_jojojidai = '27407C'
+			co_jojojidai = '27407C',
+			ba_lipstick = 'Lipstick Vogue',
+			co_lipstick = '8B2939'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -983,6 +1115,12 @@ return {
 					"and {C:dark_edition}Polychrome{}"
 				}
 			},
+			j_fnwk_fanworks_jogarc = {
+				name = "Jogarc",
+				text = {
+					"{C:mult}+#1#{} Mult...?",
+				}
+			},
 			j_fnwk_fanworks_tos = {
 				name = "TOS",
 				text = {
@@ -1040,8 +1178,15 @@ return {
 				name = "Soldiers of Fortune",
 				text = {
 					"This Joker gives {X:mult,C:white}X#1#{} Mult for",
-					"each {C:red}-1{} hand size below {C:attention}#2#{}",
+					"each {C:attention}1{} hand size below {C:attention}#2#{}",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#3#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_lipstick_ego = {
+				name = "Ego Joker",
+				text = {
+					"Earn {C:money}$#1#{} each time",
+					"a card is {C:attention}destroyed{}"
 				}
 			},
 		},

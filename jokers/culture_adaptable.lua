@@ -39,6 +39,7 @@ function jokerInfo.calculate(self, card, context)
         return {
             message = localize { type = 'variable', key = 'a_mult', vars = {enhanced * card.ability.extra} },
             mult_mod = enhanced * card.ability.extra,
+            card = context.blueprint_card or card
         }
     end
 end
