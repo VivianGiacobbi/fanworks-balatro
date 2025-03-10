@@ -2,6 +2,7 @@ return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
 	['enableAltArt'] = false,
+	['enableSkepticStaticSeed'] = false,
 	['enableStands'] = true,
 	['enableConsumables'] = true,
 	['enableQueer'] = true,

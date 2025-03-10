@@ -15,3 +15,18 @@ function G.UIDEF.jok_speech_bubble(text_key, loc_vars, extra)
     }}
     return t
 end
+
+function G.UIDEF.predict_card_ui(cardarea)
+    return {
+        n = G.UIT.ROOT,
+        config = {align = "cm", minh = 1, r = 0.3, padding = 0.07, minw = 1, colour = G.C.JOKER_GREY, shadow = true},
+        nodes = {{
+            n = G .UIT.C,
+            config = {align = "cm", minh = 1, r = 0.2, padding = 0.1, minw = 1, colour = G.C.L_BLACK},
+            nodes = {{
+                n = G.UIT.O,
+                config = {object = cardarea}
+            }}
+        }}
+    }
+end

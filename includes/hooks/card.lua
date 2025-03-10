@@ -76,11 +76,36 @@ function Card:say_quip(iter, not_first, def_speed)
     end}), 'tutorial')
 end
 
+function Card:show_predict_ui(cardarea, align)
+    if self.children.predict_ui then 
+        self.children.predict_ui:remove()     
+    end
+
+    self.children.predict_ui = UIBox{
+        definition = G.UIDEF.predict_card_ui(cardarea),
+        config = { align = align or 'bm', offset = { x=0, y=0 }, parent = self}
+    }
+    self.children.predict_ui:set_role{
+        major = self,
+        role_type = 'Minor',
+        xy_bond = 'Weak',
+        r_bond = 'Weak',
+    }
+end
+
+function Card:remove_predict_ui()
+    if not self.children.predict_ui then 
+        return
+    end
+
+    self.children.predict_ui:remove()     
+    self.children.predict_ui = nil
+end
+
 local ref_card_hover = Card.hover
 function Card:hover()
     ref_card_hover(self)
     if self.ability.set == 'Booster' then
-        sendDebugMessage('started hover')
         SMODS.calculate_context({hovering_booster = true, booster = self})
     end
 end
@@ -89,7 +114,6 @@ local ref_card_stop_hover = Card.stop_hover
 function Card:stop_hover()
     ref_card_stop_hover(self)
     if self.ability.set == "Booster" then
-        sendDebugMessage('stopped hover')
         SMODS.calculate_context({stopped_hovering = true, booster = self})
         return
     end

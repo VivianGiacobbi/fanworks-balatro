@@ -154,6 +154,7 @@ return {
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_enableJokers = "Jokers",
 			vs_options_enableAltArt = "Alt Joker Art",
+			vs_options_enableSkepticStaticSeed = "Skeptic Static Seed",
 			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableConsumables = "New Consumables",
@@ -213,6 +214,7 @@ return {
 			k_kunst_hm = "Hm......",
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
+			k_zap_ex = 'Zap!',
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -287,7 +289,9 @@ return {
 			co_thorny = 'D4D4D4',
 			te_thorny = '365156',
 			ba_golden = 'Golden Generation',
-			co_golden = 'BC9E49'
+			co_golden = 'BC9E49',
+			ba_mdv = 'My Digital Venus',
+			co_mdv = 'B01983'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -497,6 +501,12 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}Redastrin{}",
+				},
+			},
+			artist_durandal = {
+				name = "Artist",
+				text = {
+					"{E:1}Durandal{}",
 				},
 			},
 			artist_fool = {
@@ -744,6 +754,7 @@ return {
 				text = {
 					"{C:attention}Predicts{} the cards inside",
 					"a hovered {C:attention}booster pack{}",
+					"{C:inactive,s:0.65}#1#{}"
 				}
 			},
 			j_fnwk_plancks_crazy = {
@@ -1007,6 +1018,13 @@ return {
 					"{C:fanworks}Fanworks{} {C:attention}Joker{} in your",
 					"{C:attention}roster{} at end of round",
 					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
+				}
+			},
+			j_fnwk_mdv_shock = {
+				name = "Shock Humor",
+				text = {
+					"{C:attention}Balance{} the {C:chips}Chips{} and {C:mult}Mult{}",
+					"of the next {C:attention}#1#{} hands"
 				}
 			},
 		},

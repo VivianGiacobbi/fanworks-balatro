@@ -21,7 +21,7 @@ payload = '''if G.GAME.pseudorandom.predict_mode or predict_seed then
     if not G.GAME.pseudorandom.predict_mode or not G.GAME.pseudorandom.predicts[key] then
         _pseed = pseudohash(key..(predict_seed or G.GAME.pseudorandom.seed or ''))
         G.GAME.pseudorandom.predicts[key] = {
-            value = _pseed,
+            value = G.GAME.pseudorandom[key] or _pseed,
             pos = 0
         }
     end

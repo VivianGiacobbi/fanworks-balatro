@@ -71,7 +71,9 @@ local jokersToLoad = {
 	-- crimson jungle
 	'crimson_golden',
 	-- golden generation
-	'golden_generation'
+	'golden_generation',
+	-- my digital venus
+	'mdv_shock',
 }
 
 local alt_jokers = {
@@ -98,7 +100,7 @@ end
 for i, v in ipairs(jokersToLoad) do
 	local jokerInfo = assert(SMODS.load_file("jokers/" .. v .. ".lua"))()
 	jokerInfo.key = v
-	jokerInfo.atlas = v
+	jokerInfo.atlas = v..((alt_jokers[v] and fnwk_enabled['enableAltArt']) and '_alt' or '')
 	local atlasKey = v
 	if jokerInfo.texture then
 		atlasKey = jokerInfo.texture
@@ -140,4 +142,8 @@ function G.FUNCS.fnwk_apply_alts()
     for k, v in pairs(alt_jokers) do
 		G.P_CENTERS['j_fnwk_'..k].atlas = 'fnwk_'..k..(fnwk_enabled['enableAltArt'] and '_alt' or '')
     end
+end
+
+function G.FUNCS.fnwk_set_skeptic()
+	fnwk_enabled = copy_table(fnwk_config)
 end
