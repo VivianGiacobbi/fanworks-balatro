@@ -817,7 +817,7 @@ return {
 			j_fnwk_rockhard_peppers = {
 				name = "Sgt Pepper's",
 				text = {
-					"All {C:attention}Enhanced Cards{} act",
+					"All {C:attention}Enhanced Cards{} also act",
 					"as {C:attention}Wild Cards{} as well as",
 					"their current {C:attention}Enhancement{}",
 				}
@@ -999,8 +999,8 @@ return {
 			j_fnwk_fanworks_mascot = {
 				name = "Server Mascot",
 				text = {
-					"{C:attention}Glass Cards{} act as {C:attention}Lucky Cards{}",
-					"{C:attention}Lucky Cards{} act as {C:attention}Glass Cards{}",
+					"{C:attention}Glass Cards{} also act as {C:attention}Lucky Cards{},",
+					"{C:attention}Lucky Cards{} also act as {C:attention}Glass Cards{}",
 				}
 			},
 			j_fnwk_scepter_card = {

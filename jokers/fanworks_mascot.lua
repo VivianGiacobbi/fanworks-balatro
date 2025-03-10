@@ -17,11 +17,11 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.check_enhancement and context.cardarea == G.jokers then
-		if context.other_card.ability.name == 'Lucky Card' then
+		if context.other_card.config.center.key == 'm_lucky' then
             return {
                 ['m_glass'] = true,
             }
-        elseif context.other_card.ability.name == 'Glass Card' then
+        elseif context.other_card.config.center.key == 'm_glass' then
             return {
                 ['m_lucky'] = true,
             }
