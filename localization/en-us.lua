@@ -817,9 +817,9 @@ return {
 			j_fnwk_rockhard_peppers = {
 				name = "Sgt Pepper's",
 				text = {
-					"All {C:attention}Enhanced Cards{} are treated",
-					"as {C:attention}Wild Cards{} as well as their",
-					"current {C:attention}Enhancement{}",
+					"All {C:attention}Enhanced Cards{} act",
+					"as {C:attention}Wild Cards{} as well as",
+					"their current {C:attention}Enhancement{}",
 				}
 			},
 			j_fnwk_rockhard_trans = {
@@ -959,7 +959,7 @@ return {
 				}
 			},
 			j_fnwk_jspec_joepie = {
-				name = "Joepiegee",
+				name = "Joepiejee",
 				text = {
 					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
 					"lowest level {C:attention}basic poker hand{}",
@@ -994,6 +994,13 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected,",
 					"create a random {C:fanworks}Fanworks{} Joker",
+				}
+			},
+			j_fnwk_fanworks_mascot = {
+				name = "Server Mascot",
+				text = {
+					"{C:attention}Glass Cards{} act as {C:attention}Lucky Cards{}",
+					"{C:attention}Lucky Cards{} act as {C:attention}Glass Cards{}",
 				}
 			},
 			j_fnwk_scepter_card = {

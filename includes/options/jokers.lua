@@ -3,6 +3,61 @@ local jokersToLoad = {
     'tetris',
     --]]
 
+	-- fanworks
+	'fanworks_tos',
+	'fanworks_jester',
+	'fanworks_mascot',
+
+	-- jojopolis
+	'jojopolis_jokestar',
+
+	-- moscow calling
+    'moscow_mule',
+
+	-- crimson jungle
+	'crimson_golden',
+		
+	-- gotequest
+	'gotequest_lambiekins',
+
+	-- culture shock
+	'culture_adaptable',
+	
+	-- planck's creek
+	'plancks_jokestar',
+	'plancks_unsure',
+	'plancks_skeptic',
+	'plancks_crazy',
+	
+
+	-- rockhard in a funky place
+    'rockhard_rebirth',
+    -- 'rockhard_peppers',
+    'rockhard_trans',
+	'rockhard_nameless',
+	'rockhard_alfie',
+	'rockhard_numbers',
+
+	-- iron touch
+	'iron_boney',
+
+	-- lighted state
+	'lighted_square',
+
+	-- spirit lines
+	'spirit_halves',
+	-- 'spirit_aquarium',
+
+	-- double down
+	'double_clark',
+
+	-- rubicon crossroads
+	'rubicon_infidel',
+	'rubicon_fishy',
+	'rubicon_film',
+	'rubicon_moonglass',
+	'rubicon_bone',
+
     -- streetlight pursuit
 	'streetlight_fledgling',
     'streetlight_resil',
@@ -11,69 +66,36 @@ local jokersToLoad = {
 	'streetlight_industrious',
     'streetlight_pinstripe',
 	'streetlight_cabinet',
-    -- spirit lines
-    -- 'spirit_aquarium',
-    -- bluebolt incarnation
+
+	-- bluebolt incarnation
     'bluebolt_jokestar',
 	'bluebolt_sexy',
     'bluebolt_secluded',
 	'bluebolt_tuned',
-    -- planck's creek
-    'plancks_jokestar',
-    'plancks_unsure',
-    'plancks_skeptic',
-    'plancks_crazy',
-    -- moscow calling
-    'moscow_mule',
-    -- sunshine deluxe
+
+	-- sunshine deluxe
 	'sunshine_duo',
-    'sunshine_laconic',
-    'sunshine_funkadelic',
-    'sunshine_reliable',
-    -- rockhard in a funky place
-    'rockhard_rebirth',
-    -- 'rockhard_peppers',
-    'rockhard_trans',
-	'rockhard_nameless',
-	'rockhard_alfie',
-	'rockhard_numbers',
-	-- rubicon crossroads
-	'rubicon_infidel',
-	'rubicon_fishy',
-	'rubicon_film',
-	'rubicon_moonglass',
-	'rubicon_bone',
-	-- jojopolis
-	'jojopolis_jokestar',
-	--gotequest
-	'gotequest_lambiekins',
-	--spirit lines
-	'spirit_halves',
-	--doubledown
-	'double_clark',
+	'sunshine_laconic',
+	'sunshine_funkadelic',
+	'sunshine_reliable',
+
+	-- scepter files
+	'scepter_card',
+    
+    -- golden generation
+	'golden_generation',
+	
 	--love once buried
 	'love_jokestar',
-	-- lighted state
-	'lighted_square',
-	-- culture shock
-	'culture_adaptable',
-	-- iron touch
-	'iron_boney',
+	
+	-- my digital venus
+	'mdv_shock',
+	
+	
 	-- jojospectacle,
 	'jspec_joepie',
 	'jspec_kunst',
-	'jspec_ilsa',
-	-- fanworks
-	'fanworks_tos',
-	'fanworks_jester',
-	-- scepter files
-	'scepter_card',
-	-- crimson jungle
-	'crimson_golden',
-	-- golden generation
-	'golden_generation',
-	-- my digital venus
-	'mdv_shock',
+	'jspec_ilsa',	
 }
 
 local alt_jokers = {

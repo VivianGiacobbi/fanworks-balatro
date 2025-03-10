@@ -36,8 +36,8 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     local cabinet_atlas = G.ASSET_ATLAS['fnwk_cabinet_overlay']
     local screen_res = { x = love.graphics.getWidth(), y = love.graphics.getHeight() }
     local scale = screen_res.y * 0.75 / width
-    local in_x_pos = screen_res.x / 2 - width * scale * 1.08 / 2
-    local in_y_pos = screen_res.y / 2 - height * scale * 1.08 / 2
+    local in_x_pos = screen_res.x / 2 - width * scale / 2
+    local in_y_pos = screen_res.y / 2 - height * scale / 2
     local out_x_pos = screen_res.x / 2 - cabinet_atlas.px * scale / 2
     local out_y_pos = screen_res.y / 2 - cabinet_atlas.py * scale / 2
 
@@ -52,12 +52,12 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     end
 
     G.SHADERS['CRT']:send('distortion_fac', {1.0 + 0.07, 1.0 + 0.1})
-    G.SHADERS['CRT']:send('scale_fac', {1.0 - 0.008, 1.0 - 0.008})
+    G.SHADERS['CRT']:send('scale_fac', {0.95, 0.95})
     G.SHADERS['CRT']:send('feather_fac', 0.01)
-    G.SHADERS['CRT']:send('bloom_fac', 0)
+    G.SHADERS['CRT']:send('bloom_fac', 1)
     G.SHADERS['CRT']:send('time', 400 + G.TIMERS.REAL)
     G.SHADERS['CRT']:send('noise_fac', 0.001)
-    G.SHADERS['CRT']:send('crt_intensity', 0.06)
+    G.SHADERS['CRT']:send('crt_intensity', 0.02)
     G.SHADERS['CRT']:send('glitch_intensity', 0)
     G.SHADERS['CRT']:send('scanlines', G.EMU.video.res.height * 5)
     G.SHADERS['CRT']:send('mouse_screen_pos', {screen_res.x/2, screen_res.y/2})
@@ -68,10 +68,10 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     love.graphics.draw(
         G.EMU.video.image,
         in_x_pos,
-        in_y_pos,
+        in_y_pos + 3,
         0,
-        scale * 1.08,
-        scale * 1.08
+        scale,
+        scale
     )
 
     love.graphics.setShader()
