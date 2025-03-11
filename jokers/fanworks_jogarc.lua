@@ -53,7 +53,7 @@ local function try_transform_sludgemass(card, added_card)
 	card.ability.water_time = 0
 	card.ability.form = 'sludge'
 	card:juice_up(0.8)
-	play_sound('fnwk_sludge')
+	play_sound('fnwk_sludge', 1, 0.5)
 end
 
 local function try_revert_sludgemass(card, removed_card)
@@ -79,7 +79,7 @@ local function try_revert_sludgemass(card, removed_card)
 	card.ability.form = 'garc'
 	card.ability.water_time = nil
 	card:juice_up(0.4)
-	play_sound('fnwk_gyahoo')
+	play_sound('fnwk_gyahoo', 1, 0.5)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)

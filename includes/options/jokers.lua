@@ -12,6 +12,9 @@ local jokersToLoad = {
 	-- jojopolis
 	'jojopolis_jokestar',
 
+	-- city living
+	'city_neet',
+
 	-- moscow calling
     'moscow_mule',
 
@@ -85,6 +88,9 @@ local jokersToLoad = {
     
     -- golden generation
 	'golden_generation',
+
+	-- cold iron streets,
+	'cis_jokestar',
 	
 	--love once buried
 	'love_jokestar',

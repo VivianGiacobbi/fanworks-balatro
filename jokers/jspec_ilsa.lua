@@ -142,7 +142,6 @@ function jokerInfo.draw(self, card, layer)
     star_1.T.x = card_offset_x + (math.cos(star_1_alpha) * card.T.w / 2 * 0.6) - star_1.T.w / 2
     star_1.T.y = card_offset_y + (math.sin(star_1_alpha) * card.T.h / 2 * 0.6) - star_1.T.h / 2
 
-
     star_2.T.x = card_offset_x + (math.cos(star_2_alpha) * card.T.w / 2 * 0.9) - star_2.T.w / 2
     star_2.T.y = card_offset_y + (math.sin(star_2_alpha) * card.T.h / 2 * 0.9) - star_2.T.h / 2
 

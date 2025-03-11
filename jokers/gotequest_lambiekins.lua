@@ -31,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
     if not context.individual or not context.cardarea == G.play or card.debuff then
         return
     end
-    if context.other_card.ability.effect ~= "Lucky Card" then
+    if not SMODS.has_enhancement(v, 'm_lucky') then
         return
     end
 

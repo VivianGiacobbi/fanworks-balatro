@@ -1,3 +1,5 @@
+SMODS.Shader({ key = 'basic', path = 'basic.fs' })
+
 SMODS.Shader({ key = 'glow', path = 'glow.fs' })
 
 SMODS.Shader({ key = 'neon_flash', path = 'neon_flash.fs' })

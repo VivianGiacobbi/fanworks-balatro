@@ -1,6 +1,6 @@
 local jokerInfo = {
     key = 'j_fnwk_jojojidai_soldiers',
-    name = 'Soldiers of Fortune',
+    name = 'Jokers of Fortune',
     config = {
         extra = {
             x_mult_mod = 1,

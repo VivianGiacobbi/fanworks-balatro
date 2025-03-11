@@ -425,7 +425,10 @@ return {
 			ba_jojojidai = 'Jojojidai',
 			co_jojojidai = '27407C',
 			ba_lipstick = 'Lipstick Vogue',
-			co_lipstick = '8B2939'
+			co_lipstick = '8B2939',
+			ba_cis = 'Cold Iron Streets',
+			co_cis = 'DEF7FB',
+			te_cis = '5BA1B2'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -1183,7 +1186,7 @@ return {
 				}
 			},
 			j_fnwk_jojojidai_soldiers = {
-				name = "Soldiers of Fortune",
+				name = "Jokers of Fortune",
 				text = {
 					"This Joker gives {X:mult,C:white}X#1#{} Mult for",
 					"each {C:attention}1{} hand size below {C:attention}#2#{}",
@@ -1195,6 +1198,21 @@ return {
 				text = {
 					"Earn {C:money}$#1#{} each time",
 					"a card is {C:attention}destroyed{}"
+				}
+			},
+			j_fnwk_city_neet = {
+				name = "NEET Jokestar",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if no other Jokers",
+					"are {C:attention}named{} \"Joker\" or \"Jokestar\"",
+				}
+			},
+			j_fnwk_cis_jokestar = {
+				name = "Ice-Cold Jokestar",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"Destroyed after score",
+					"{C:attention}catches fire #2#{} time#3#",
 				}
 			},
 		},
