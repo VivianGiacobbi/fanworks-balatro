@@ -17,6 +17,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra } }
 end
 
+function jokerInfo.in_pool(self, args)
+    for _, v in ipairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, 'm_gold') then
+            return true
+        end
+    end
+end
+
 function jokerInfo.calculate(self, card, context)
     if not (context.individual and context.cardarea == G.play) then
 		return

@@ -1121,6 +1121,14 @@ return {
 					"{C:mult}+#1#{} Mult...?",
 				}
 			},
+			j_fnwk_fanworks_jogarc_sludge = {
+				name = "Sludgemass",
+				text = {
+					"{X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}Sargomet cells and{}",
+					"{C:inactive}sludge do not mix well...{}"
+				}
+			},
 			j_fnwk_fanworks_tos = {
 				name = "TOS",
 				text = {

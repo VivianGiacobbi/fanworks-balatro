@@ -21,7 +21,7 @@ end
 
 function jokerInfo.in_pool(self, args)
     for _, v in ipairs(G.playing_cards) do
-        if v.ability.effect == "Lucky Card" then
+        if SMODS.has_enhancement(v, 'm_lucky') then
             return true
         end
     end
