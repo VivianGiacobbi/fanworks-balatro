@@ -26,6 +26,9 @@ local jokersToLoad = {
 
 	-- culture shock
 	'culture_adaptable',
+
+	-- glass lariats
+	'glass_jokestar',
 	
 	-- planck's creek
 	'plancks_jokestar',

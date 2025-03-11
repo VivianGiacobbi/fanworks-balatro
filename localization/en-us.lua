@@ -1215,6 +1215,15 @@ return {
 					"{C:attention}catches fire #2#{} time#3#",
 				}
 			},
+			j_fnwk_glass_jokestar = {
+				name = "Starry-Eyed Jokestar",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult each",
+					"time a card is {C:attention}destroyed{} or",
+					"{C:attention}added{} to your deck",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive}){}"
+				}
+			},
 		},
 		Spectral = {
 			c_fnwk_spec_stonemask = {

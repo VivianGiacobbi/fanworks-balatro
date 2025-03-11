@@ -43,7 +43,6 @@ function get_fibonacci(hand)
 		elseif SMODS.has_no_rank(hand[i]) then
 			value = 0
 		end
-		sendDebugMessage('card value: '..value)
 		
 		vals[#vals+1] = value
 	end
@@ -57,7 +56,6 @@ function get_fibonacci(hand)
 	local prev_1 = vals[1]
 	local prev_2 = 0
 	for i=1, #vals do
-		sendDebugMessage(prev_1..' + '..prev_2..' = '.. vals[i])
 		sum = prev_1 + prev_2
 		
 		if vals[i] ~= sum then
@@ -68,7 +66,6 @@ function get_fibonacci(hand)
 		prev_1 = vals[i] == 0 and 1 or vals[i]
 	end
 
-	sendDebugMessage('sending full hand')
 	local t = {}
 	for i=1, #hand do
 		t[#t+1] = hand[i]
