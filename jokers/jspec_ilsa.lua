@@ -1,5 +1,5 @@
-SMODS.Atlas({ key = 'jspec_ilsa_sun', path = 'jokers/jspec_ilsa_sun.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'jspec_ilsa_star', path = 'jokers/jspec_ilsa_star.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'jspec_ilsa_sun', path = 'jokers/jspec_ilsa_sun.png', px = 17, py = 17 })
+SMODS.Atlas({ key = 'jspec_ilsa_star', path = 'jokers/jspec_ilsa_star.png', px = 11, py = 11 })
 
 local jokerInfo = {
 	key = 'j_fnwk_jspec_ilsa',
@@ -33,36 +33,71 @@ end
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
     local role = {
 		role_type = 'Major',
-		major = card,
-		offset = { x = 0, y = 0 },
-		xy_bond = 'Weak',
-		wh_bond = 'Strong',
-		r_bond = 'Strong',
-		scale_bond = 'Strong',
-		draw_major = card,
+        draw_major = card,
     }
 
+    local center_atlas = G.ASSET_ATLAS['fnwk_jspec_ilsa']
+    local sun_atlas = G.ASSET_ATLAS['fnwk_jspec_ilsa_sun']
     card.children.ilsa_sun = Sprite(
         card.T.x,
         card.T.y,
-        card.T.w,
-        card.T.h,
-        G.ASSET_ATLAS['fnwk_jspec_ilsa_sun'],
+        card.T.w * (sun_atlas.px / center_atlas.px),
+        card.T.h * (sun_atlas.py / center_atlas.py),
+        sun_atlas,
         { x = 0, y = 0 }
     )	
 	card.children.ilsa_sun:set_role(role)
-    card.children.ilsa_sun.custom_draw = true
+    card.children.ilsa_sun:define_draw_steps({
+		{shader = 'dissolve', shadow_height = 0.1},
+        {shader = 'dissolve'}
+	})
 
-    card.children.ilsa_star = Sprite(
+    local star_atlas = G.ASSET_ATLAS['fnwk_jspec_ilsa_star']
+    card.children.ilsa_star_1 = Sprite(
         card.T.x,
         card.T.y,
-        card.T.w,
-        card.T.h,
-        G.ASSET_ATLAS['fnwk_jspec_ilsa_star'],
+        card.T.w * (star_atlas.px / center_atlas.px),
+        card.T.h * (star_atlas.py / center_atlas.py),
+        star_atlas,
         { x = 0, y = 0 }
     )	
-	card.children.ilsa_star:set_role(role)
-    card.children.ilsa_star.custom_draw = true
+	card.children.ilsa_star_1:set_role(role)
+    card.children.ilsa_star_1:define_draw_steps({
+		{shader = 'dissolve', shadow_height = 0.1},
+        {shader = 'dissolve'}
+	})
+
+    card.children.ilsa_star_2 = Sprite(
+        card.T.x,
+        card.T.y,
+        card.T.w * (star_atlas.px / center_atlas.px),
+        card.T.h * (star_atlas.py / center_atlas.py),
+        star_atlas,
+        { x = 0, y = 0 }
+    )	
+	card.children.ilsa_star_2:set_role(role)
+    card.children.ilsa_star_2:define_draw_steps({
+		{shader = 'dissolve', shadow_height = 0.1},
+        {shader = 'dissolve'}
+	})
+
+    card.children.particles = Particles(
+        card.T.x, 
+        card.T.y, 
+        0, 
+        0, 
+        {
+            timer_type = 'TOTAL',
+            timer = 0.1,
+            scale = 0.2,
+            speed = 0,
+            r_vel = 0,
+            fade_alpha = 0.5,
+            lifespan = 0.3,
+            colours = {{1,1,1,0.8}},
+            attach = card.children.ilsa_star_1,
+            fill = true,
+        })
 end
 
 
@@ -87,25 +122,31 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not (card.config.center.discovered or card.bypass_discovery_center) or not (card.children.ilsa_star and card.children.ilsa_sun) then
+    if not (card.config.center.discovered or card.bypass_discovery_center) then
         return
     end
 
-    local offset_timer = G.TIMERS.REAL + 1 - (math.pi/2)
-    local scale_mod = 0.08 + 0.02 * math.sin(1.8 * offset_timer) + 0.00 * math.sin((offset_timer - math.floor(offset_timer)) * math.pi * 14) * (1 - (offset_timer - math.floor(offset_timer)))^3
-    local star_rotate = (G.TIMERS.REAL * 0.7) % (2 * math.pi)
-    local sun_rotate = (G.TIMERS.REAL * 0.15) % (2 * math.pi)
-
-    card.children.ilsa_star:draw_shader('dissolve', 0, nil, nil, card.children.center, scale_mod * 0.75, star_rotate, nil, 0.1 + 0.03 * math.sin(1.8 * offset_timer), nil, 0.6)
-    card.children.ilsa_star:draw_shader('dissolve', nil, nil, nil, card.children.center, scale_mod * 2, star_rotate)
-
-    card.children.ilsa_sun:draw_shader('dissolve', 0, nil, nil, card.children.center, scale_mod * 1.25, sun_rotate, nil, 0.1 + 0.03 * math.sin(1.8 * offset_timer), nil, 0.6)
-    card.children.ilsa_sun:draw_shader('dissolve', nil, nil, nil, card.children.center, scale_mod * 2, sun_rotate)
-    local edition = card.edition and G.P_CENTERS[card.edition.key] or nil
-    if edition and edition.apply_to_float then 
-        card.children.ilsa_star:draw_shader(edition.shader, nil, nil, nil, card.children.center, scale_mod * 0.75, star_rotate)
-        card.children.ilsa_sun:draw_shader(edition.shader, nil, nil, nil, card.children.center, scale_mod * 2, sun_rotate)
+    if not (card.children.ilsa_star_1 and card.children.ilsa_star_2 and card.children.ilsa_sun) then
+        return
     end
+
+    local star_1 = card.children.ilsa_star_1
+    local star_2 = card.children.ilsa_star_2
+    local sun = card.children.ilsa_sun
+    local star_1_alpha = (G.TIMERS.REAL + 1) * 1.6 % (2 * math.pi)
+    local star_2_alpha = (G.TIMERS.REAL + 5) * 1.4 % (2 * math.pi)
+    local sun_alpha = (G.TIMERS.REAL + 3) * 0.8 % (2 * math.pi)
+
+    local card_offset_x = card.T.x + card.T.w / 2
+    local card_offset_y = card.T.y + card.T.h / 2
+    star_1.T.x = card_offset_x + (math.cos(star_1_alpha) * card.T.w / 2 * 0.6) - star_1.T.w / 2
+    star_1.T.y = card_offset_y + (math.sin(star_1_alpha) * card.T.h / 2 * 0.6) - star_1.T.h / 2
+
+    star_2.T.x = card_offset_x + (math.cos(star_2_alpha) * card.T.w / 2 * 0.9) - star_2.T.w / 2
+    star_2.T.y = card_offset_y + (math.sin(star_2_alpha) * card.T.h / 2 * 0.9) - star_2.T.h / 2
+
+    sun.T.x = card_offset_x + (math.cos(sun_alpha) * card.T.w / 2 * 0.8) - sun.T.w / 2
+    sun.T.y = card_offset_y + (math.sin(sun_alpha) * card.T.h / 2 * 0.8) - sun.T.h / 2 
 end
 
 return jokerInfo

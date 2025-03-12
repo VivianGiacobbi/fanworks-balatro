@@ -21,7 +21,7 @@ end
 
 function jokerInfo.in_pool(self, args)
     for _, v in ipairs(G.playing_cards) do
-        if v.ability.effect == "Lucky Card" then
+        if SMODS.has_enhancement(v, 'm_lucky') then
             return true
         end
     end
@@ -31,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
     if not context.individual or not context.cardarea == G.play or card.debuff then
         return
     end
-    if context.other_card.ability.effect ~= "Lucky Card" then
+    if not SMODS.has_enhancement(v, 'm_lucky') then
         return
     end
 
@@ -39,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
     return {
         message = localize('$')..card.ability.extra.money,
         colour = G.C.MONEY,
-        card = card
+        card = context.blueprint_card or card
     }
 end
 

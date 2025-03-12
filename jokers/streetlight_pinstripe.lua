@@ -19,10 +19,10 @@ SMODS.Enhancement:take_ownership('m_lucky',
 )
 
 local jokerInfo = {
+    key = 'j_fnwk_streetlight_pinstripe',
 	name = 'Pinstripe Joker',
 	config = {
         extra = {},
-        lucky_tally = 0,
     },
 	rarity = 3,
 	cost = 12,
@@ -31,6 +31,23 @@ local jokerInfo = {
 	perishable_compat = true,
 	fanwork = 'streetlight',
 }
+
+local function get_lucky_tally()
+    local lucky_tally = 0
+
+    if not G.playing_cards then
+        return lucky_tally
+    end
+    if G.playing_cards then 
+        for k, v in pairs(G.playing_cards) do
+            if SMODS.has_enhancement(v, 'm_lucky') then 
+                lucky_tally =  lucky_tally + 1
+            end
+        end
+    end
+
+    return lucky_tally
+end
 
 function jokerInfo.add_to_deck(self, card)
     if G.GAME.lucky_cancels then
@@ -41,30 +58,17 @@ function jokerInfo.add_to_deck(self, card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}
-    card.ability.lucky_tally = 0
-    if G.playing_cards then 
-        for k, v in pairs(G.playing_cards) do
-            if v.config.center == G.P_CENTERS.m_lucky then 
-                card.ability.lucky_tally = card.ability.lucky_tally + 1
-            end
-        end
-    end
         
-    return { vars = {card.ability.lucky_tally}}
+    return { vars = {get_lucky_tally()}}
 end
 
 function jokerInfo.calc_dollar_bonus(self, card)
-    card.ability.lucky_tally = 0
-    if G.playing_cards then 
-        for k, v in pairs(G.playing_cards) do
-            if v.config.center == G.P_CENTERS.m_lucky then 
-                card.ability.lucky_tally = card.ability.lucky_tally + 1
-            end
-        end
+    local tally = get_lucky_tally()
+    if tally > 0 then
+        return tally
     end
-
-    return card.ability.lucky_tally
 end
 
 function jokerInfo.remove_from_deck(self, card)

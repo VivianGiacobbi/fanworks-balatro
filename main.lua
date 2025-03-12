@@ -112,17 +112,29 @@ SMODS.current_mod.config_tab = function()
 			right_count = right_count + 1
 			
 			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
-				local opt_node = create_toggle({
+				local art_node = create_toggle({
 					label = localize("vs_options_enableAltArt"),
 					w = 1, 
 					ref_table = fnwk_config,
 					ref_value = 'enableAltArt',
 					callback = G.FUNCS.fnwk_apply_alts
 				})
-				opt_node.config.align = 'tr'
-				right_settings.nodes[#right_settings.nodes + 1] = opt_node
-				right_settings.nodes[#right_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
+				art_node.config.align = 'tr'
+				right_settings.nodes[#right_settings.nodes + 1] = art_node
 				right_count = right_count + 1
+
+				local skeptic_node = create_toggle({
+					label = localize("vs_options_enableSkepticStaticSeed"),
+					w = 1, 
+					ref_table = fnwk_config,
+					ref_value = 'enableSkepticStaticSeed',
+					callback = G.FUNCS.fnwk_set_skeptic
+				})
+				skeptic_node.config.align = 'tr'
+				right_settings.nodes[#right_settings.nodes + 1] = skeptic_node
+				right_count = right_count + 1
+
+				right_settings.nodes[#right_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
 			end
 		else
 			local main_node = create_toggle({
@@ -138,17 +150,29 @@ SMODS.current_mod.config_tab = function()
 			left_count = left_count + 1
 
 			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
-				local opt_node = create_toggle({
+				local art_node = create_toggle({
 					label = localize("vs_options_enableAltArt"),
 					w = 1, 
 					ref_table = fnwk_config,
 					ref_value = 'enableAltArt',
 					callback = G.FUNCS.fnwk_apply_alts
 				})
-				opt_node.config.align = 'tr'
-				left_settings.nodes[#left_settings.nodes + 1] = opt_node
-				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
+				art_node.config.align = 'tr'
+				left_settings.nodes[#left_settings.nodes + 1] = art_node				
 				left_count = left_count + 1
+
+				local skeptic_node = create_toggle({
+					label = localize("vs_options_enableSkepticStaticSeed"),
+					w = 1, 
+					ref_table = fnwk_config,
+					ref_value = 'enableSkepticStaticSeed',
+					callback = G.FUNCS.fnwk_set_skeptic
+				})
+				skeptic_node.config.align = 'tr'
+				left_settings.nodes[#left_settings.nodes + 1] = skeptic_node
+				left_count = left_count + 1
+
+				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
 			end
 		end
 	end

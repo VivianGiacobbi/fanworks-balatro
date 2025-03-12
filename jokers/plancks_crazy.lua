@@ -23,6 +23,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.blueprint then return end
     if context.cardarea == G.jokers and context.joker_destroyed and context.removed ~= card and context.removed.ability.name ~= 'Crazy Creaking Joker' then	
 		local chips_diff =  context.removed.ability.chips ~= 0 and context.removed.config.center.config.chips ~= context.removed.ability.chips
 		local mult_diff = context.removed.ability.mult ~= 0 and context.removed.config.center.config.mult ~= context.removed.ability.mult

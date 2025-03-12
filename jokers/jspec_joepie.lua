@@ -1,6 +1,6 @@
 local jokerInfo = {
 	key = 'j_fnwk_jspec_joepie',
-    name = 'Joepiegee',
+    name = 'Joepiejee',
 	config = {
         extra = {
             h_mod = 1,

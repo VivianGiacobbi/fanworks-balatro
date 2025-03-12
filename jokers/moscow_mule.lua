@@ -31,7 +31,9 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 	
-	if pseudorandom(pseudoseed('mule_roll')) < G.GAME.probabilities.normal / card.ability.extra.enhance_chance then
+	local seed_result = pseudorandom(pseudoseed('mule_roll'))
+	sendDebugMessage('actual seed: '..seed_result)
+	if seed_result < G.GAME.probabilities.normal / card.ability.extra.enhance_chance then
 		local change_card = context.other_card
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
@@ -47,7 +49,7 @@ function jokerInfo.calculate(self, card, context)
 
 		return {
 			message = localize('k_enhanced'),
-			card = card,
+			card = context.blueprint_card or card,
 		}
 	end
 end

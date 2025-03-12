@@ -20,6 +20,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.blueprint then return end
 	if context.cardarea == G.jokers then
 		if context.discard and card.ability.extra.current_hands > 0 then
 			card.ability.extra.current_hands = 0
@@ -29,7 +30,7 @@ function jokerInfo.calculate(self, card, context)
             }
 		end
 
-		if not context.blueprint and context.before then
+		if context.before then
 			card.ability.extra.current_hands = card.ability.extra.current_hands + 1
 			if card.ability.extra.current_hands >= card.ability.extra.hands_val then
 				card.ability.extra.current_hands = 0

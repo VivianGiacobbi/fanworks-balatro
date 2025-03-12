@@ -21,7 +21,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rubicon',s
+	fanwork = 'rubicon',
 }
 
 SMODS.Atlas({ key = 'film_base', path ='jokers/rubicon_film.png', px = 71, py = 95 })
@@ -108,7 +108,8 @@ function jokerInfo.calculate(self, card, context)
 		return {
 			message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
 			chip_mod = card.ability.extra.chips, 
-			colour = G.C.CHIPS
+			colour = G.C.CHIPS,
+			card = context.blueprint_card or card
 		}
 	end
 

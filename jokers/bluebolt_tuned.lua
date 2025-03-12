@@ -15,11 +15,11 @@ local jokerInfo = {
 			mult = 10,
 			x_mult = 1.5
 		},
-		tune_mode = 'none',
+		tuned_mode = 'none',
 	},
 	rarity = 1,
 	cost = 4,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'bluebolt'

@@ -66,9 +66,9 @@ end
 
 function jokerInfo.calculate(self, card, context)
     
-    if (context.buying_card and context.card.ability.set == 'Joker') or (context.joker_created and context.card.area == G.jokers) then
+    if (context.buying_card and context.card.ability.set == 'Joker') or (context.joker_created and context.card.area == G.jokers) and not context.blueprint then
             
-        if context.card == self then
+        if context.card == card then
             return
         end
         local results = find_women(card, context.card.config.center.key)
@@ -136,7 +136,8 @@ function jokerInfo.calculate(self, card, context)
     return {
         message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips * mod} },
         chip_mod = card.ability.extra.chips * mod, 
-        colour = G.C.CHIPS
+        colour = G.C.CHIPS,
+        card = context.blueprint_card or card
     }
 end
 

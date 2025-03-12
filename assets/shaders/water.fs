@@ -13,12 +13,10 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
     float x = (sin(time + 25 * texture_coords.x + 30 * texture_coords.y) + sin(-time + 20 * texture_coords.x + 35 * texture_coords.y + 1)) / 2;
     float y = (sin( time + 25 * texture_coords.x + 30 * texture_coords.y) + sin(-time + 16 * texture_coords.x + 3 * texture_coords.y + 1.5)) / 2;
 
-    vec2 wc  = (texture_coords + vec2(x,y) * 0.020);
+    vec2 wc  = (texture_coords + vec2(x,y) * 0.015);
+    vec4 ret = Texel(water, wc);
 
-    vec4 light = Texel(water, wc);
-    vec4 dark  = Texel(water, wc + 0.3);
-
-    return mix(mix(pixel, pixel * 0.9, dark), pixel * 2.2, light);
+    return ret;
 }
 #endif
 

@@ -12,6 +12,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_glass
     info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
     return { vars = {G.GAME.probabilities.normal, card.ability.extra}}
 end
@@ -36,7 +37,7 @@ function jokerInfo.calculate(self, card, context)
                 message = localize('k_glass_ex'),
                 sound = 'highlight2',
                 colour = G.C.GREY,
-                card = card
+                card = context.blueprint_card or card
             } 
         end
     end

@@ -39,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
     return {
         mult = card.ability.extra.mult,
         colour = G.C.RED,
-        card = card
+        card = context.blueprint_card or card
     }
 end
 

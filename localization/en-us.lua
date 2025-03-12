@@ -124,7 +124,135 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
+			gwq_1 = {
+				"Burunyu~~!"
+			},
+            gwq_2 = {
+				"Dori dori",
+				"dori~~ :3"
+			},
+            gwq_3 = {
+				"Janjanjan~~!"
+			},
+            gwq_4 = {
+				"Gyahoo!!"
+			},
+			gwq_5 = {
+				"Gyahahoo!!"
+			},
+            gwq_6 = {
+				"Nyah nyah!"
+			},
+            gwq_7 = {
+				"Just shuffled deck [IMG]"
+			},
+            gwq_8 = {
+				"Your prize is",
+				"the gyood feeling",
+				"associated with",
+				"winning!"
+			},
+			gwq_9 = {
+				"I LOVE MY WIFE!!"
+			},
+			gwq_10 = {
+				"Jimbo, get",
+				"the hon-nya."
+			},
+			gwq_11 = {
+				"IM GYOING INTO",
+				"LABOOOOOOOOOOOR!"
+			},
+			gwq_12 = {
+				"Nya, that wasn't",
+				"gar-d at all!"
+			},
+            glq_1 = {
+				"NYAAAA?!"
+			},
+            glq_2 = {
+				"Behnueh..."
+			},
+            glq_3 = {
+				"Gyafuugh..."
+			},
+            glq_4 = {
+				"You ca~nyat kill",
+				"me in a way that",
+				"matters!",
+			},
+            glq_5 = {
+				"Pipe bomb! Nyah!"
+			},
+            glq_6 = {
+				"[This quote has",
+				"been canceled for",
+				"racial sensitivity",
+				"reasons]"
+			},
+            glq_7 = {
+				"Looks like it",
+				"wasn't in the",
+				"gards for us."
+			},
+            glq_8 = {
+				"Aw sludge..."
+			},
+            glq_9 = {
+				"To bad!"
+			},
+            glq_10 = {
+				"ALRIGHT, YOU WANNA",
+				"KNOW FINE?! I ADMIT",
+				"IT, I DON'T KNOW",
+				"BALATRO WORKS!"
+			},
+			glq_11 = {
+				"143.765.266.779",
+				"+955 0533 701 91 61",
+				"VISA, 4485811442881930, 5/24, 690"
+			},
+			glq_12 = {
+				"Yes, she's biased!",
+				"And a boss blind!"
+			},
+			glq_13 = {
+				"Hey man in my",
+				"defence, Balatro",
+				"has a lot of jokers"
+			},
+			glq_14 = {
+				"I have so many",
+				"dunnies but this",
+				"gets added?"
+			},
+			glq_15 = {
+				"Get in the metal",
+				"box, the sumo",
+				"wrestlers will",
+				"arrive shortly."
+			},
+			glq_16 = {
+				"Get it twisted. If you wock in you can do anything.",
+				"Youw actions impact nothing. Youw fate is pwedetewmined.",
+				"The onwy thing you can change is youw weaction to it",
+				"You can do anything you set youw mind to. The wowwd is",
+				"a pwaygwound designed fow you and onwy you. If you wait",
+				"90 minutes to wake up to dwink youw fiwst cup of coffee",
+				"nothing can stop you. If you duct tape youw mouth when",
+				"you faww asweep nothing can stop you. You awe a pawn in",
+				"a univewse chess match. You mean nothing to god if they",
+				"even exist. You’we a wounding ewwow. You’we two pennies",
+				"on a fowtune 500 company’s bawance sheet. They don’t cawe",
+				"about you in the swightest. Evewyone gets what they desewve",
+				"in wife. If you put effowt in you can achieve anything.",
+				"Successfuw peopwe awe bettew peopwe. The ciwcumstances of",
+				"youw biwth detewmine whewe you awe going to go. Nothing",
+				"ewse mattews at aww. You’we own wevew of education. Youw",
+				"attitude. Youw wevew of effowt. Youw cwedentiaws."
+			},
 		},
+
 		collabs = {
 			Spades={
 				["1"]="Twitch Clips",
@@ -154,6 +282,7 @@ return {
 			vs_options_sub = "(Restart required to apply)",
 			vs_options_enableJokers = "Jokers",
 			vs_options_enableAltArt = "Alt Joker Art",
+			vs_options_enableSkepticStaticSeed = "Skeptic Static Seed",
 			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
 			vs_options_enableConsumables = "New Consumables",
@@ -213,6 +342,7 @@ return {
 			k_kunst_hm = "Hm......",
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
+			k_zap_ex = 'Zap!',
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -254,8 +384,8 @@ return {
 			co_whiplash = 'B982FF',
 			ba_asap = 'A$AP Mob Feedback',
 			co_asap = '9818BD',
-			ba_bones = 'Bones to Blades',
-			co_bones = 'EEDC99',
+			ba_bone = 'Bone to Blades',
+			co_bone = 'EEDC99',
 			ba_crimson = 'Crimson Jungle',
 			co_crimson = 'FFB74B',
 			ba_culture = 'Culture Shock',
@@ -286,6 +416,17 @@ return {
 			ba_thorny = 'Thorny Mob Rules',
 			co_thorny = 'D4D4D4',
 			te_thorny = '365156',
+			ba_golden = 'Golden Generation',
+			co_golden = 'BC9E49',
+			ba_mdv = 'My Digital Venus',
+			co_mdv = 'B01983',
+			ba_jojojidai = 'Jojojidai',
+			co_jojojidai = '27407C',
+			ba_lipstick = 'Lipstick Vogue',
+			co_lipstick = '8B2939',
+			ba_cis = 'Cold Iron Streets',
+			co_cis = 'DEF7FB',
+			te_cis = '5BA1B2'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -308,7 +449,20 @@ return {
 			ach_fnwk_win_vine = "Win a run with Vine Deck on any difficulty",
 			ach_fnwk_all_discovered = "Discover All Fanworks Jokers",
 			ach_fnwk_big_meat = "Unlock every Fanworks Achievement",
-		}
+		},
+		poker_hands = {
+			fnwk_fibonacci = 'Fibonacci',
+			fnwk_flush_fib = 'Flush Fib',
+		},
+		poker_hand_descriptions = {
+			fnwk_fibonacci = {
+				'5 cards that follow the Fibonacci sequence',
+			},
+			fnwk_flush_fib = {
+				"5 cards that follow the Fibonacci sequence",
+				"with all cards sharing the same suit",
+			}
+		},
 	},
 	descriptions = {
 		Blind = {
@@ -476,6 +630,18 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}GarPlatinum{}",
+				},
+			},
+			artist_reda = {
+				name = "Artist",
+				text = {
+					"{E:1}Redastrin{}",
+				},
+			},
+			artist_durandal = {
+				name = "Artist",
+				text = {
+					"{E:1}Durandal{}",
 				},
 			},
 			artist_fool = {
@@ -699,17 +865,15 @@ return {
 					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
 					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
 					"the {C:attention}leftmost{} Joker slot",
-					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{} {C:inactive}#5#){}"
+					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{}{C:inactive}#5#){}"
 				}
 			},
 			j_fnwk_plancks_jokestar = {
 				name = "Creaking Bjokestar",
 				text = {
-					"Played {C:attention}Aces{}, {C:attention}2s{}, {C:attention}3s{}, {C:attention}5s{},",
-					"and {C:attention}8s{} always score, this",
-					"Joker gains {X:mult,C:white}X#2#{} mult for",
-					"each played hand that",
-					"contains {C:attention}all five ranks{}",
+					"{C:inactive}Unlocks Fibonacci poker hands{}", 
+					"This Joker gains {X:mult,C:white}X#2#{} Mult if",
+					"played hand contains a {C:attention}Fibonacci{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				}
 			},
@@ -723,7 +887,9 @@ return {
 			j_fnwk_plancks_skeptic = {
 				name = "Skeptic Creaking Joker",
 				text = {
-					"Dummy Text",
+					"{C:attention}Predicts{} the cards inside",
+					"a hovered {C:attention}booster pack{}",
+					"{C:inactive,s:0.65}#1#{}"
 				}
 			},
 			j_fnwk_plancks_crazy = {
@@ -786,9 +952,9 @@ return {
 			j_fnwk_rockhard_peppers = {
 				name = "Sgt Pepper's",
 				text = {
-					"All {C:attention}Enhanced Cards{} are treated",
-					"as {C:attention}Wild Cards{} as well as their",
-					"current {C:attention}Enhancement{}",
+					"All {C:attention}Enhanced Cards{} also act",
+					"as {C:attention}Wild Cards{} as well as",
+					"their current {C:attention}Enhancement{}",
 				}
 			},
 			j_fnwk_rockhard_trans = {
@@ -848,6 +1014,13 @@ return {
                     "{s:0.8}Suits change every round{}"
 				}
 			},
+			j_fnwk_rubicon_fishy = {
+				name = "Fishy Jokestar",
+				text = {
+					"Retrigger all scored",
+					"{C:attention}Enhancement{} effects"
+				}
+			},
 			j_fnwk_rubicon_film = {
 				name = "Film Crossed Joker",
 				text = {
@@ -870,6 +1043,15 @@ return {
 					"{C:mult}+#1#{} Mult for each card above",
 					"above {C:attention}#3#{} in your full deck",
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
+				}
+			},
+			j_fnwk_bone_destroyer = {
+				name = "Destroyer of Worlds",
+				text = {
+					"Played {C:attention}Queens{} give",
+					"{X:mult,C:white}X#1#{} Mult when scored,",
+					"{C:attention}Queens{} gain {X:mult,C:white}X#2#{} Mult",
+					"per {C:attention}reroll{} in the shop",
 				}
 			},
 			j_fnwk_spirit_halves = {
@@ -912,8 +1094,16 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				}
 			},
+			j_fnwk_culture_adaptable = {
+				name = "Adaptable Jokestar",
+				text = {
+					"{C:mult}+#1#{} Mult for each {C:attention}Enhanced{}",
+					"card in your full deck",
+					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
+				}
+			},
 			j_fnwk_jspec_joepie = {
-				name = "Joepiegee",
+				name = "Joepiejee",
 				text = {
 					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
 					"lowest level {C:attention}basic poker hand{}",
@@ -931,8 +1121,22 @@ return {
 				name = "Ilsa",
 				text = {
 					"Cards with an {C:attention}Edition{}",
-					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+					"also act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
 					"and {C:dark_edition}Polychrome{}"
+				}
+			},
+			j_fnwk_fanworks_jogarc = {
+				name = "Jogarc",
+				text = {
+					"{C:mult}+#1#{} Mult...?",
+				}
+			},
+			j_fnwk_fanworks_jogarc_sludge = {
+				name = "Sludgemass",
+				text = {
+					"{X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}Sargomet cells and{}",
+					"{C:inactive}sludge do not mix well...{}"
 				}
 			},
 			j_fnwk_fanworks_tos = {
@@ -950,6 +1154,13 @@ return {
 					"create a random {C:fanworks}Fanworks{} Joker",
 				}
 			},
+			j_fnwk_fanworks_mascot = {
+				name = "Server Mascot",
+				text = {
+					"{C:attention}Glass Cards{} also act as {C:attention}Lucky Cards{},",
+					"{C:attention}Lucky Cards{} also act as {C:attention}Glass Cards{}",
+				}
+			},
 			j_fnwk_scepter_card = {
 				name = "Speedwagon Foundation Card",
 				text = {
@@ -963,6 +1174,61 @@ return {
 				text = {
 					"{C:attention}Gold Cards{} give {C:mult}+#1#{} Mult",
 					"when scored",
+				}
+			},
+			j_fnwk_golden_generation = {
+				name = "Golden Generation",
+				text = {
+					"Earn {C:money}$#1#{} for each other",
+					"{C:fanworks}Fanworks{} {C:attention}Joker{} in your",
+					"{C:attention}roster{} at end of round",
+					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
+				}
+			},
+			j_fnwk_mdv_shock = {
+				name = "Shock Humor",
+				text = {
+					"{C:attention}Balance{} the {C:chips}Chips{} and {C:mult}Mult{}",
+					"of the next {C:attention}#1#{} hands"
+				}
+			},
+			j_fnwk_jojojidai_soldiers = {
+				name = "Jokers of Fortune",
+				text = {
+					"This Joker gives {X:mult,C:white}X#1#{} Mult for",
+					"each {C:attention}1{} hand size below {C:attention}#2#{}",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#3#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_lipstick_ego = {
+				name = "Ego Joker",
+				text = {
+					"Earn {C:money}$#1#{} each time",
+					"a card is {C:attention}destroyed{}"
+				}
+			},
+			j_fnwk_city_neet = {
+				name = "NEET Jokestar",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if no other Jokers",
+					"are {C:attention}named{} \"Joker\" or \"Jokestar\"",
+				}
+			},
+			j_fnwk_cis_jokestar = {
+				name = "Ice-Cold Jokestar",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"Destroyed after score",
+					"{C:attention}catches fire #2#{} time#3#",
+				}
+			},
+			j_fnwk_glass_jokestar = {
+				name = "Starry-Eyed Jokestar",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult each",
+					"time a card is {C:attention}destroyed{} or",
+					"{C:attention}added{} to your deck",
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive}){}"
 				}
 			},
 		},

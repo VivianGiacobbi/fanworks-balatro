@@ -131,8 +131,12 @@ function jokerInfo.calculate(self, card, context)
             Xmult_mod = card.ability.extra.x_mult,
         }
 	end
+
+    if context.blueprint then
+        return
+    end
     
-    if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card and not card.debuff and not context.blueprint then
+    if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,
