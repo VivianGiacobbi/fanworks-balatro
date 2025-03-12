@@ -12,6 +12,9 @@ local jokersToLoad = {
 	-- jojopolis
 	'jojopolis_jokestar',
 
+	-- bone to blades
+	'bone_destroyer',
+
 	-- city living
 	'city_neet',
 

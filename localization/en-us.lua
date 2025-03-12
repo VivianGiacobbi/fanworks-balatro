@@ -161,7 +161,7 @@ return {
 			},
 			gwq_11 = {
 				"IM GYOING INTO",
-				"LABOOOOOOOOR!"
+				"LABOOOOOOOOOOOR!"
 			},
 			gwq_12 = {
 				"Nya, that wasn't",
@@ -209,9 +209,7 @@ return {
 			},
 			glq_11 = {
 				"143.765.266.779",
-				"",
 				"+955 0533 701 91 61",
-				"",
 				"VISA, 4485811442881930, 5/24, 690"
 			},
 			glq_12 = {
@@ -386,8 +384,8 @@ return {
 			co_whiplash = 'B982FF',
 			ba_asap = 'A$AP Mob Feedback',
 			co_asap = '9818BD',
-			ba_bones = 'Bones to Blades',
-			co_bones = 'EEDC99',
+			ba_bone = 'Bone to Blades',
+			co_bone = 'EEDC99',
 			ba_crimson = 'Crimson Jungle',
 			co_crimson = 'FFB74B',
 			ba_culture = 'Culture Shock',
@@ -1045,6 +1043,15 @@ return {
 					"{C:mult}+#1#{} Mult for each card above",
 					"above {C:attention}#3#{} in your full deck",
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
+				}
+			},
+			j_fnwk_bone_destroyer = {
+				name = "Destroyer of Worlds",
+				text = {
+					"Played {C:attention}Queens{} give",
+					"{X:mult,C:white}X#1#{} Mult when scored,",
+					"{C:attention}Queens{} gain {X:mult,C:white}X#2#{} Mult",
+					"per {C:attention}reroll{} in the shop",
 				}
 			},
 			j_fnwk_spirit_halves = {

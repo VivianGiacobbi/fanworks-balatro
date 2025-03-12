@@ -12,6 +12,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
+    fanwork = 'glass',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -49,7 +50,7 @@ function jokerInfo.calculate(self, card, context)
     card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * count
     return {
         message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
-        card = context.blueprint_card or card,
+        card = card,
         color = G.C.MULT,
     }
 end
