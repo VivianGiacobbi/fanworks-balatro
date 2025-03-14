@@ -60,6 +60,7 @@ local jokersToLoad = {
 
 	-- double down
 	'double_clark',
+	'double_devastation',
 
 	-- rubicon crossroads
 	'rubicon_infidel',
