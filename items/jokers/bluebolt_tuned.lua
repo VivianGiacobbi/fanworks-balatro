@@ -1,10 +1,10 @@
 SMODS.Sound({
-	key = "breaking",
-	path = "breaking.ogg",
+	key = "crocodile",
+	path = "crocodile.ogg",
 })
 SMODS.Sound({
-	key = "saul",
-	path = "saul.ogg",
+	key = "carry_on",
+	path = "carry_on.ogg",
 })
 
 local jokerInfo = {
@@ -55,7 +55,7 @@ local function update_tuned_mode(card)
 		card_eval_status_text(card, 'extra', nil, nil, nil, {
 			message = localize('k_tuned_m'),
 			colour = G.C.RED,
-			sound = 'fnwk_breaking',
+			sound = 'fnwk_crocodile',
 			extra = {
 				instant = true
 			}
@@ -69,7 +69,7 @@ local function update_tuned_mode(card)
 		card_eval_status_text(card, 'extra', nil, nil, nil, {
 			message = localize('k_tuned_x'),
 			colour = G.C.RED,
-			sound = 'fnwk_saul',
+			sound = 'fnwk_carry_on',
 			extra = {
 				instant = true
 			}

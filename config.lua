@@ -1,16 +1,16 @@
 return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
-	['enableAltArt'] = false,
-	['enableSkepticStaticSeed'] = false,
 	['enableStands'] = true,
 	['enableConsumables'] = true,
+	['enableDecks'] = true,
+	['enableBlinds'] = false,
+	['enableChallenges'] = false,
+	['enableAchievements'] = false,
+	['enableAltArt'] = false,
+	['enableSkepticStaticSeed'] = false,
+	
 	['enableQueer'] = true,
 	['enableConsumableTweaks'] = true,
-	['enableDecks'] = true,
-	['enableBosses'] = true,
-	['enableSkins'] = true,
-	['enableChallenges'] = true,
-	['enableTrophies'] = true,
 	['enableTarotSkins'] = true,
 }

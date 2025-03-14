@@ -3,7 +3,7 @@ SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px =
 SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
 
 local jokerInfo = {
-    key = 'j_fnwk_loveonce_jokestar',
+    key = 'j_fnwk_love_jokestar',
 	name = 'Prideful Jokestar',
 	config = {
         extra = {

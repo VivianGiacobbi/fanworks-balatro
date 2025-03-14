@@ -25,28 +25,46 @@ function RecursiveEnumerate(folder)
 	return fileTree
 end
 
-function LoadConsumable(v)
-	local consumInfo = assert(SMODS.load_file("consumables/" .. v .. ".lua"))()
+function LoadItem(file_key, item_type, no_badges)
+	local key = string.lower(item_type)..'s'
+	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
-	if (consumInfo.set == "Spectral") or (consumInfo.set == "Stand") or (consumInfo.set == "Tarot") then
-		consumInfo.key = consumInfo.key or v
-		consumInfo.atlas = v
-
-		consumInfo.pos = { x = 0, y = 0 }
-		if consumInfo.hasSoul then
-			consumInfo.pos = { x = 1, y = 0 }
-			consumInfo.soul_pos = { x = 2, y = 0 }
+	info.key = info.key or file_key
+	if item_type ~= 'Challenge' then
+		info.atlas = file_key
+		info.pos = { x = 0, y = 0 }
+		if info.hasSoul then
+			info.pos = { x = 1, y = 0 }
+			info.soul_pos = { x = 2, y = 0 }
 		end
-
-		local consum = SMODS.Consumable(consumInfo)
-		for k_, v_ in pairs(consum) do
-			if type(v_) == 'function' then
-				consum[k_] = consumInfo[k_]
-			end
-		end
-
-		SMODS.Atlas({ key = v, path ="consumables/" .. v .. ".png", px = consum.width or 71, py = consum.height or  95 })
 	end
+
+	if not no_badges and info.fanwork then
+		info.no_mod_badges = true
+		info.set_badges = function(self, card, badges)
+			local title = localize('ba_'..info.fanwork)
+			local color = HEX(localize('co_'..info.fanwork))
+			local text = G.localization.misc.dictionary['te_'..info.fanwork] and HEX(localize('te_'..info.fanwork)) or G.C.WHITE
+			badges[#badges+1] = create_badge(title, color, text, 1)
+		end
+	end
+
+	if item_type == 'Blind' and info.color then
+		info.boss_colour = info.color
+		info.color = nil
+	end
+
+	local smods_item = item_type
+	if item_type == 'Stand' then smods_item = 'Consumable' end
+	if item_type == 'Deck' then smods_item = 'Back' end
+	local new_item = SMODS[smods_item](info)
+	for k_, v_ in pairs(new_item) do
+		if type(v_) == 'function' then
+			new_item[k_] = info[k_]
+		end
+	end
+
+	SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
 end
 
 function StringStartsWith(str, start)

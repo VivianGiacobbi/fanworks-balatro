@@ -132,7 +132,7 @@ function jokerInfo.draw(self, card, layer)
     G.SHADERS['fnwk_speed_lines']:send('line_falloff', 0.5)
     G.SHADERS['fnwk_speed_lines']:send('mask_size', 0.53)
     G.SHADERS['fnwk_speed_lines']:send('mask_edge', 0.38)
-    G.SHADERS['fnwk_speed_lines']:send('speed', 10)
+    G.SHADERS['fnwk_speed_lines']:send('speed', 5.5)
 
     love.graphics.setShader(G.SHADERS['fnwk_speed_lines'], G.SHADERS['fnwk_speed_lines'])
     card.children.action_lines:draw_self()
@@ -148,7 +148,7 @@ function jokerInfo.draw(self, card, layer)
     G.SHADERS['fnwk_speed_lines']:send('line_falloff', 1)
     G.SHADERS['fnwk_speed_lines']:send('mask_size', 0.4)
     G.SHADERS['fnwk_speed_lines']:send('mask_edge', 0.28)
-    G.SHADERS['fnwk_speed_lines']:send('speed', 16)
+    G.SHADERS['fnwk_speed_lines']:send('speed', 8)
 
     card.children.action_lines_2:draw_self()
 

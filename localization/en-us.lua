@@ -270,7 +270,6 @@ return {
 		dictionary = {
 			k_stand = "Stand",
 			b_stand_cards = "Stands",
-			b_and_activate = "& Activate",
 			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
@@ -285,6 +284,7 @@ return {
 			vs_options_enableSkepticStaticSeed = "Skeptic Static Seed",
 			vs_options_enableQueer = "Enable Queer Edition",
 			vs_options_enableDecks = "Decks",
+			vs_options_enableVouchers = "Vouchers",
 			vs_options_enableConsumables = "New Consumables",
 			vs_options_enableConsumableTweaks = "ConsumableTweaks",
 			vs_options_enableBosses = "Boss Blinds",
@@ -333,7 +333,7 @@ return {
 			k_method_4 = "Let's Dance!",
 			k_brienne = "Rewritten!",
 			k_tuned_x = "XMult!",
-			k_tuned_m = "+Mult",
+			k_tuned_m = "+Mult!",
 			k_cabinet_start = "Game Start!",
 			k_cabinet_lose = "Game Over!",
 			k_cabinet_win = "Lucky You!",
@@ -343,9 +343,6 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
-
-			b_activate = "ACTIVATE",
-			b_pull = "PULL",
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
@@ -1240,6 +1237,23 @@ return {
 					"{C:dark_edition}Holographic{} and {C:attention}Eternal{}"
 				}
 			}
+		},
+		Voucher = {
+			v_fnwk_rubicon_kitty = {
+				name = "Demon Kitty",
+				text = {
+					"{C:dark_edition}Negative{} cards appear",
+					"{C:attention}#1#X{} more often"
+				}
+			},
+			v_fnwk_rubicon_parade = {
+				name = "Black Parade",
+				text = {
+                    "After defeating each",
+                    "{C:attention}Boss Blind{}, gain a",
+                    "{C:attention,T:tag_double}#1#{}"
+                }
+			},
 		},
 		Stand = {
 			c_fnwk_moodyblues = {

@@ -1,15 +1,9 @@
 SMODS.Shader({ key = 'basic', path = 'basic.fs' })
-
 SMODS.Shader({ key = 'glow', path = 'glow.fs' })
-
 SMODS.Shader({ key = 'neon_flash', path = 'neon_flash.fs' })
 SMODS.Atlas({ key = "screen", path = "screen.png", px = 1920, py = 1080})
-
 SMODS.Shader({ key = 'water_mask', path = 'water.fs' })
-
 SMODS.Shader({ key = 'bloom', path = 'bloom.fs' })
-
 SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
 SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
-
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
