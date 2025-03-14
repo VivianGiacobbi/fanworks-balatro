@@ -539,6 +539,12 @@ return {
 					"{C:stand}Stand{} in your consumables."
 				},
 			},
+			artist_notdaedalus = {
+				name = "Artist",
+				text = {
+					"{E:1}NotDaedalus{}",
+				},
+			},
 			artist_gote = {
 				name = "Artist",
 				text = {
@@ -1063,6 +1069,13 @@ return {
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
+				}
+			},
+			j_fnwk_double_devastation = {
+				name = "The Devastation",
+				text = {
+                    "{C:mult}+#2#{} Mult,",
+                    "{C:attention}-#1#{} hand size",
 				}
 			},
 			j_fnwk_love_jokestar = {
