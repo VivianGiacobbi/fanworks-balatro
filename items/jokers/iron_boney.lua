@@ -1,7 +1,6 @@
 SMODS.Atlas({ key = 'boney_stencil', path = 'jokers/iron_boney_stencil.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'boney_top_mask', path = 'jokers/iron_boney_top_mask.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'boney_bottom_mask', path = 'jokers/iron_boney_bottom_mask.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'boney_backing', path = 'jokers/iron_boney_backing.png', px = 71, py = 95 })
 
 SMODS.Sound({key = "bad_to_the_bone", path = "bad_to_the_bone.ogg"})
 
@@ -64,7 +63,7 @@ function jokerInfo.update(self, card, dt)
         card.config.center.pos = { x = 0, y = 0}
         card.children.boned:set_role(role)
         card.children.boned.custom_draw = true
-        card.children.backing = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS['fnwk_boney_backing'], card.config.center.pos)
+        card.children.backing = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS['fnwk_iron_boney'], {x = 1, y = 0})
         card.children.backing:set_role(role)
         card.children.backing.custom_draw = true
 
@@ -144,13 +143,11 @@ function jokerInfo.calculate(self, card, context)
                 local rand_set = {}
                 for i=1, #G.jokers.cards do
                     if G.jokers.cards[i] ~= card then
-                        sendDebugMessage('adding')
                         rand_set[#rand_set+1] = i
                     end
                 end
                 
                 if #rand_set == 0 then
-                    sendDebugMessage('returning early')
                     return true
                 end
              

@@ -11,7 +11,6 @@ local includes = {
 	-- includes utility functions required for following files
 	'utility',
 	'shaders',
-	'credits',
 
 	-- object hooks
 	'hooks/game',
@@ -19,24 +18,22 @@ local includes = {
 	'hooks/common_events',
 	'hooks/misc_functions',
 	'hooks/UI_definitions',
+	'hooks/smods',
 
 	-- option files
 	--- jokers are required for some following files so include them first
-	'options/jokers',
-	'options/stands',
-	'options/tarot',
-	'options/consumabletweaks',
-	'options/consumables',
+	'ui',
+	'items',
+	'tarot_reskins',
+	'consumable_tweaks',
 
 	--- might require functionality
 	-- 'options/achievements',
-	-- 'options/bosses',
+	-- 'options/blinds',
 	-- 'options/challenges',
-	'options/decks',
 
 	-- cosmetic
-	'options/queer',
-	'options/skins',
+	'queer',
 }
 
 for _, module in ipairs(includes) do
@@ -45,153 +42,5 @@ for _, module in ipairs(includes) do
 		local data = init()
 		sendDebugMessage("[Fanworks] Loaded module: " .. module)
 	end
-end
-
-
--- Mod Icon in Mods tab
-SMODS.Atlas({
-	key = "modicon",
-	path = "fnwk_icon.png",
-	px = 32,
-	py = 32
-})
-
-
-
-function G.FUNCS.fnwk_restart()
-
-	local settingsMatch = true
-	for k, v in pairs(fnwk_enabled) do
-		if v ~= fnwk_config[k] then
-			settingsMatch = false
-		end
-	end
-	
-	if settingsMatch then
-		sendDebugMessage('Settings match')
-		SMODS.full_restart = 0
-	else
-		sendDebugMessage('Settings mismatch, restart required')
-		SMODS.full_restart = 1
-	end
-end
-
-SMODS.current_mod.config_tab = function()
-	local ordered_config = {
-		'enableJokers',
-		'enableQueer',
-		'enableTarotSkins',
-		'enableConsumableTweaks',
-		'enableDecks',
-		--[[
-		'enableTrophies',
-		'enableConsumables',
-		'enableStands',
-		'enableBosses',
-		'enableSkins',
-		'enableChallenges',
-		--]]
-	}
-	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
-	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
-	local left_count = 0
-	local right_count = 0
-
-	for i, k in ipairs(ordered_config) do
-		if right_count < left_count then
-			local main_node = create_toggle({
-				label = localize("vs_options_"..ordered_config[i]),
-				w = 1,
-				ref_table = fnwk_config,
-				ref_value = ordered_config[i],
-				callback = G.FUNCS.fnwk_restart
-			})
-			main_node.config.align = 'tr'
-			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
-			right_settings.nodes[#right_settings.nodes + 1] = main_node
-			right_count = right_count + 1
-			
-			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
-				local art_node = create_toggle({
-					label = localize("vs_options_enableAltArt"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableAltArt',
-					callback = G.FUNCS.fnwk_apply_alts
-				})
-				art_node.config.align = 'tr'
-				right_settings.nodes[#right_settings.nodes + 1] = art_node
-				right_count = right_count + 1
-
-				local skeptic_node = create_toggle({
-					label = localize("vs_options_enableSkepticStaticSeed"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableSkepticStaticSeed',
-					callback = G.FUNCS.fnwk_set_skeptic
-				})
-				skeptic_node.config.align = 'tr'
-				right_settings.nodes[#right_settings.nodes + 1] = skeptic_node
-				right_count = right_count + 1
-
-				right_settings.nodes[#right_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
-			end
-		else
-			local main_node = create_toggle({
-				label = localize("vs_options_"..ordered_config[i]),
-				w = 1,
-				ref_table = fnwk_config,
-				ref_value = ordered_config[i],
-				callback = G.FUNCS.fnwk_restart
-			})
-			main_node.config.align = 'tr'
-			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
-			left_settings.nodes[#left_settings.nodes + 1]  = main_node
-			left_count = left_count + 1
-
-			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
-				local art_node = create_toggle({
-					label = localize("vs_options_enableAltArt"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableAltArt',
-					callback = G.FUNCS.fnwk_apply_alts
-				})
-				art_node.config.align = 'tr'
-				left_settings.nodes[#left_settings.nodes + 1] = art_node				
-				left_count = left_count + 1
-
-				local skeptic_node = create_toggle({
-					label = localize("vs_options_enableSkepticStaticSeed"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableSkepticStaticSeed',
-					callback = G.FUNCS.fnwk_set_skeptic
-				})
-				skeptic_node.config.align = 'tr'
-				left_settings.nodes[#left_settings.nodes + 1] = skeptic_node
-				left_count = left_count + 1
-
-				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
-			end
-		end
-	end
-
-	local fnwk_config_ui = { n = G.UIT.R, config = { align = "tm", padding = 0.25 }, nodes = { left_settings, right_settings } }
-	return {
-		n = G.UIT.ROOT,
-		config = {
-			emboss = 0.05,
-			minh = 6,
-			r = 0.1,
-			minw = 10,
-			align = "cm",
-			padding = 0.05,
-			colour = G.C.BLACK,
-		},
-		nodes = {
-			fnwk_config_ui
-		}
-	}
 end
 
