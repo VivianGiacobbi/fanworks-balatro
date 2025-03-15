@@ -46,7 +46,6 @@ SMODS.PokerHand {
 }
 
 local jokerInfo = {
-    key = 'j_fnwk_plancks_jokestar',
     name = 'Creaking Bjokestar',
     config = {
         extra = {

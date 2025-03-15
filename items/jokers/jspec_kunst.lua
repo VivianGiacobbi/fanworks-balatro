@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_jspec_kunst',
     name = 'Kunst',
 	config = {
         extra = {

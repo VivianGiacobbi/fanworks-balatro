@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_lipstick_ego',
 	name = 'Ego Joker',
 	config = {
         extra = {

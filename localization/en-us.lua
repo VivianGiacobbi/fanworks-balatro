@@ -343,6 +343,7 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
+			k_repeat_ex = 'Repeat!',
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',

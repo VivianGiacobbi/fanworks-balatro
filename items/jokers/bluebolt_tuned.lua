@@ -8,7 +8,6 @@ SMODS.Sound({
 })
 
 local jokerInfo = {
-	key = 'j_fnwk_bluebolt_tuned',
 	name = 'Tuned Rust Joker',
 	config = {
 		extra = {
@@ -19,7 +18,7 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 4,
-	blueprint_compat = true,
+	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'bluebolt'
@@ -70,9 +69,6 @@ local function update_tuned_mode(card)
 			message = localize('k_tuned_x'),
 			colour = G.C.RED,
 			sound = 'fnwk_carry_on',
-			extra = {
-				instant = true
-			}
 		})
 	else
 		if card.ability.tuned_mode == 'none' then
@@ -81,9 +77,6 @@ local function update_tuned_mode(card)
 		card.ability.tuned_mode = 'none'
 		card_eval_status_text(card, 'extra', nil, nil, nil, {
 			message = localize('k_reset'),
-			extra = {
-				instant = true
-			}
 		})
 	end
 end
@@ -118,6 +111,10 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
+
+	if context.blueprint then
+		return
+	end
 	if not context.cardarea == G.jokers or not context.joker_main or card.debuff then
 		return
 	end

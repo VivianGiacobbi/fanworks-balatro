@@ -1,9 +1,8 @@
 local jokerInfo = {
-    key = 'j_fnwk_spiritlines_halves',
 	name = 'The Halves',
 	config = {},
-	rarity = 1,
-	cost = 4,
+	rarity = 2,
+	cost = 6,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,

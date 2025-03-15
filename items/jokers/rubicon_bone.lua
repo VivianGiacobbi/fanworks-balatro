@@ -2,8 +2,8 @@
 local jokerInfo = {
 	name = 'Bone Crossed Joker',
 	config = {},
-	rarity = 3,
-	cost = 11,
+	rarity = 2,
+	cost = 8,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,

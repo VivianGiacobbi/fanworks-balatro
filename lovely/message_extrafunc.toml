@@ -1,0 +1,14 @@
+[manifest]
+version = "1.0.0"
+priority = 30
+
+# card_eval_status_text()
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''local extrafunc = nil'''
+position = "at"
+payload = '''local extrafunc = extra and extra.func or nil'''
+match_indent = true
+times = 1
+

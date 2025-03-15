@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_rockhard_numbers',
 	name = 'High Numbers',
 	config = {
         extra = {

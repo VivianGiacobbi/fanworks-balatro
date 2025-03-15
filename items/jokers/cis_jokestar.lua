@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_cis_jokestar',
     name = 'Ice-Cold Jokestar',
     config = {
         extra = {

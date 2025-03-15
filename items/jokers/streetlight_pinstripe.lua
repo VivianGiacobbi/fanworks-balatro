@@ -19,7 +19,6 @@ SMODS.Enhancement:take_ownership('m_lucky',
 )
 
 local jokerInfo = {
-    key = 'j_fnwk_streetlight_pinstripe',
 	name = 'Pinstripe Joker',
 	config = {
         extra = {},

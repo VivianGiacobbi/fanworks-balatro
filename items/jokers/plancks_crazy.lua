@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_plancks_crazy',
 	name = 'Crazy Creaking Joker',
 	config = {
 		extra = {

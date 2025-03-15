@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_fanworks_jester',
 	name = 'Bizarre Jester',
 	config = {},
 	rarity = 1,
