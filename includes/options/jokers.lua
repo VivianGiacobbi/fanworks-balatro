@@ -57,6 +57,7 @@ local jokersToLoad = {
 	-- spirit lines
 	'spirit_halves',
 	-- 'spirit_aquarium',
+	'spirit_gambler',
 
 	-- double down
 	'double_clark',

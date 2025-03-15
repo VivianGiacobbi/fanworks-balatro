@@ -343,6 +343,10 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
+			f_hit = 'Hit.',
+			f_bust = "Bust.",
+			f_wp = 'Well Played.',
+			f_nd = "No Dice.",
 
 			b_activate = "ACTIVATE",
 			b_pull = "PULL",
@@ -1067,6 +1071,14 @@ return {
 					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
 				}
 			},
+			j_fnwk_spirit_gambler = {
+				name = "The Gambler",
+				text = {
+					"Levelel up played hand if",
+					"total {c:chips}chips{} scored are",
+					"#1# or less. (#2#)"
+				}
+			},
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
@@ -1289,6 +1301,6 @@ return {
 					"{C:attention}#2#X{} more often",
 				},
 			},
-		},
-	},
+		}
+	}
 }
