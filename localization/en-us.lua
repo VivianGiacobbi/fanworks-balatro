@@ -1076,6 +1076,14 @@ return {
 					"#1# or less. (#2#)"
 				}
 			},
+			j_fnwk_spirit_valentino = {
+				name = "Corpse Crimelord",
+				text = {
+					'Gain +1 {C:attention} Joker Slots{}',
+					'for every digit of {C:money}money{}',
+					'you have.'
+				}
+			},
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {

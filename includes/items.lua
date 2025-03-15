@@ -55,6 +55,7 @@ local items_to_load = {
 		'spirit_halves',
 		-- 'spirit_aquarium',
 		'spirit_gambler',
+		'spirit_valentino',
 
 		-- double down
 		'double_clark',
