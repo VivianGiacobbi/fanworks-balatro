@@ -344,10 +344,10 @@ return {
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
-			f_hit = 'Hit.',
-			f_bust = "Bust.",
-			f_wp = 'Well Played.',
-			f_nd = "No Dice.",
+			f_hit = 'Hit!',
+			f_bust = "Bust!",
+			f_wp = 'Well Played!',
+			f_nd = "No Dice!",
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
@@ -1072,9 +1072,9 @@ return {
 			j_fnwk_spirit_gambler = {
 				name = "The Gambler",
 				text = {
-					"Levelel up played hand if",
-					"total {c:chips}chips{} scored are",
-					"#1# or less. (#2#)"
+					"{C:planet}Upgrade{} played poker hand if",
+					"total {C:chips}chip{} value of scored",
+					"cards is {C:attention}#1#{} or fewer ",
 				}
 			},
 			j_fnwk_double_clark = {

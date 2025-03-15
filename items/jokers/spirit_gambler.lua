@@ -15,17 +15,17 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.play and context.individual then
+    if context.cardarea == G.play and context.individual and card.ability.extra.chips <= 21 then
         local individual_chips = context.other_card.base.nominal + context.other_card.ability.bonus + context.other_card.ability.perma_bonus
         card.ability.extra.chips = card.ability.extra.chips + individual_chips
         if card.ability.extra.chips <= 21 then
             return {
-                message = localize("f_hit"),
+                message = localize('f_hit'),
                 card = card,
             }
         else
             return {
-                message = localize("f_bust"),
+                message = localize('f_bust'),
                 card = card,
             }
         end
@@ -33,14 +33,15 @@ function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.joker_main then
         if card.ability.extra.chips <= 21 then
             card.ability.extra.chips = 0
+            update_hand_text({nopulse = true, delay = 0}, {mult = 0, chips = 0, level = '', handname = ''})
             return{
-                message = localize("f_wp"),
+                message = localize('f_wp'),
                 level_up = 1
             }
         else
             card.ability.extra.chips = 0
             return{
-                message = localize("f_nd"),
+                message = localize('f_nd'),
             }
         end
     end
