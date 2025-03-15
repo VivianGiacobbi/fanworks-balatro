@@ -19,6 +19,10 @@ local function get_dollar_digits ()
     return slots
 end
 
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    card:set_rental(true)
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_notdaedalus", set = "Other"}
     return { vars = { card.ability.extra.money, card.ability.extra.slots} }
