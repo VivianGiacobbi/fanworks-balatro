@@ -20,10 +20,12 @@ payload = '''if G.GAME.pseudorandom.predict_mode or predict_seed then
     local _pseed = 0
     if not G.GAME.pseudorandom.predict_mode or not G.GAME.pseudorandom.predicts[key] then
         _pseed = pseudohash(key..(predict_seed or G.GAME.pseudorandom.seed or ''))
-        G.GAME.pseudorandom.predicts[key] = {
-            value = G.GAME.pseudorandom[key] or _pseed,
-            pos = 0
-        }
+        if G.GAME.pseudorandom.predict_mode then
+            G.GAME.pseudorandom.predicts[key] = {
+                value = G.GAME.pseudorandom[key] or _pseed,
+                pos = 0
+            }
+        end
     end
     
     if G.GAME.pseudorandom.predict_mode then
