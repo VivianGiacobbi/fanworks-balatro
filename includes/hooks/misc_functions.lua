@@ -23,6 +23,7 @@ loc_colour = function(_c, _default)
 	  legendary = G.C.RARITY[4],
 	  enhanced = G.C.SECONDARY_SET.Enhanced,
 	  fanworks = G.C.FANWORKS,
+	  stand = G.C.STAND,
 	}
 	return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
 end
@@ -127,4 +128,64 @@ function balance_score(card)
     }))
 
     delay(0.6)
+end
+
+G.FUNCS.reset_trophies = function(e)
+	local warning_text = e.UIBox:get_UIE_by_ID('warn')
+	if warning_text.config.colour ~= G.C.WHITE then
+		warning_text:juice_up()
+		warning_text.config.colour = G.C.WHITE
+		warning_text.config.shadow = true
+		e.config.disable_button = true
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
+			play_sound('tarot2', 0.76, 0.4);return true end}))
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
+			e.config.disable_button = nil;return true end}))
+		play_sound('tarot2', 1, 0.4)
+	else
+		G.FUNCS.wipe_on()
+		for k, v in pairs(SMODS.Achievements) do
+			if StringStartsWith(k, 'ach_fnwk_') then
+				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
+				G.ACHIEVEMENTS[k].earned = nil
+			end
+		end
+		G:save_settings()
+		G.E_MANAGER:add_event(Event({
+			delay = 1,
+			func = function()
+				G.FUNCS.wipe_off()
+				return true
+			end
+		}))
+	end
+end
+
+function G.FUNCS.fnwk_apply_alts()
+	fnwk_enabled = copy_table(fnwk_config)
+    for k, v in pairs(alt_jokers) do
+		G.P_CENTERS['j_fnwk_'..k].atlas = 'fnwk_'..k..(fnwk_enabled['enableAltArt'] and '_alt' or '')
+    end
+end
+
+function G.FUNCS.fnwk_set_skeptic()
+	fnwk_enabled = copy_table(fnwk_config)
+end
+
+function G.FUNCS.fnwk_restart()
+
+	local settingsMatch = true
+	for k, v in pairs(fnwk_enabled) do
+		if v ~= fnwk_config[k] then
+			settingsMatch = false
+		end
+	end
+	
+	if settingsMatch then
+		sendDebugMessage('Settings match')
+		SMODS.full_restart = 0
+	else
+		sendDebugMessage('Settings mismatch, restart required')
+		SMODS.full_restart = 1
+	end
 end

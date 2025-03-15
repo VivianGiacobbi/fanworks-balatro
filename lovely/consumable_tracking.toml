@@ -12,7 +12,7 @@ target = "game.lua"
 pattern = '''reset_idol_card()
 reset_mail_rank()'''
 position = "before"
-payload = '''self.GAME.run_collectables = {}
+payload = '''self.GAME.run_consumeables = {}
 '''
 match_indent = true
 times = 1
@@ -22,12 +22,11 @@ times = 1
 target = "card.lua"
 pattern = '''if not copier then set_consumeable_usage(self) end'''
 position = "after"
-payload = '''if G.GAME.run_collectables[self.config.center_key] then
-    G.GAME.run_collectables[self.config.center_key] = G.GAME.run_collectables[self.config.center_key] + 1
+payload = '''if G.GAME.run_consumeables[self.config.center_key] then
+    G.GAME.run_consumeables[self.config.center_key] = G.GAME.run_consumeables[self.config.center_key] + 1
 else 
-    G.GAME.run_collectables[self.config.center_key] = 1
+    G.GAME.run_consumeables[self.config.center_key] = 1
 end
-sendDebugMessage(self.config.center_key..': '..G.GAME.run_collectables[self.config.center_key])
 '''
 match_indent = true
 times = 1

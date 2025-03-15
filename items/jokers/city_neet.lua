@@ -1,9 +1,3 @@
-SMODS.Atlas({ key = 'city_neet_bkg', path ='jokers/city_neet_bkg.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'city_neet_layer1', path ='jokers/city_neet_layer1.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'city_neet_layer2', path ='jokers/city_neet_layer2.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'city_neet_layer3', path ='jokers/city_neet_layer3.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'city_neet_fore', path ='jokers/city_neet_fore.png', px = 71, py = 95 })
-
 local jokerInfo = {
 	key = 'j_fnwk_city_neet',
 	name = 'NEET Jokestar',
@@ -53,17 +47,14 @@ end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
     local t = {x = card.T.x, y = card.T.y, w = card.T.w, h = card.T.h}
-    local offset = {x = 0, y = 0}
     local major_role = {
-		role_type = 'Minor',
-        major = card,
+		role_type = 'Major',
         draw_major = card,
-        xy_bond = 'Weak',
-        r_bond = 'Strong',
     }
 
     -- foreground
-    card.children.city_bkg = Sprite(t.x, t.y, t.w, t.h, G.ASSET_ATLAS['fnwk_city_neet_bkg'], offset)
+    local atlas = G.ASSET_ATLAS['fnwk_city_neet']
+    card.children.city_bkg = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 3, y = 0})
 	card.children.city_bkg:set_role({
 		role_type = 'Minor',
 		major = card,
@@ -77,22 +68,22 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	card.children.city_bkg.custom_draw = true
 
     -- first layer
-	card.children.city_layer1 = Sprite(t.x, t.y, t.w, t.h, G.ASSET_ATLAS['fnwk_city_neet_layer1'], offset)
+	card.children.city_layer1 = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 4, y = 0})
 	card.children.city_layer1:set_role(major_role)
     card.children.city_layer1.custom_draw = true
 
     -- second layer
-    card.children.city_layer2 = Sprite(t.x, t.y, t.w, t.h, G.ASSET_ATLAS['fnwk_city_neet_layer2'], offset)
+    card.children.city_layer2 = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 5, y = 0})
 	card.children.city_layer2:set_role(major_role)
 	card.children.city_layer2.custom_draw = true
 
     -- third layer
-    card.children.city_layer3 = Sprite(t.x, t.y, t.w, t.h, G.ASSET_ATLAS['fnwk_city_neet_layer3'], offset)
+    card.children.city_layer3 = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 6, y = 0})
 	card.children.city_layer3:set_role(major_role)
 	card.children.city_layer3.custom_draw = true
     
     -- foreground
-    card.children.city_fg = Sprite(t.x, t.y, t.w, t.h, G.ASSET_ATLAS['fnwk_city_neet_fore'], offset)
+    card.children.city_fg = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 7, y = 0})
 	card.children.city_fg:set_role({
 		role_type = 'Minor',
 		major = card,
@@ -175,15 +166,21 @@ function jokerInfo.draw(self, card, layer)
     card.children.city_bkg:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
 
     -- first layer
-    card.children.city_layer1.VT.x = card.T.x + scroll_dist * card.ability.layer1_mod
+    card.children.city_layer1.T = copy_table(card.T)
+    card.children.city_layer1.VT = copy_table(card.VT)
+    card.children.city_layer1.VT.x = card.VT.x + scroll_dist * card.ability.layer1_mod
 	card.children.city_layer1:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
 
     -- second layer
-    card.children.city_layer2.VT.x = card.T.x + scroll_dist * card.ability.layer2_mod
+    card.children.city_layer2.T = copy_table(card.T)
+    card.children.city_layer2.VT = copy_table(card.VT)
+    card.children.city_layer2.VT.x = card.VT.x + scroll_dist * card.ability.layer2_mod
     card.children.city_layer2:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
 
     -- third layer
-    card.children.city_layer3.VT.x = card.T.x + scroll_dist * card.ability.layer3_mod
+    card.children.city_layer3.T = copy_table(card.T)
+    card.children.city_layer3.VT = copy_table(card.VT)
+    card.children.city_layer3.VT.x = card.VT.x + scroll_dist * card.ability.layer3_mod
     card.children.city_layer3:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
     
     -- foreground

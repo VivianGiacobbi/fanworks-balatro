@@ -1,0 +1,197 @@
+local items_to_load = {
+	Joker = {
+		-- fanworks
+		'fanworks_jogarc',
+		'fanworks_tos',
+		'fanworks_jester',
+		'fanworks_mascot',
+
+		-- jojopolis
+		'jojopolis_jokestar',
+
+		-- bone to blades
+		'bone_destroyer',
+
+		-- city living
+		'city_neet',
+
+		-- moscow calling
+		'moscow_mule',
+
+		-- crimson jungle
+		'crimson_golden',
+			
+		-- gotequest
+		'gotequest_lambiekins',
+
+		-- culture shock
+		'culture_adaptable',
+
+		-- glass lariats
+		'glass_jokestar',
+
+		-- planck's creek
+		'plancks_jokestar',
+		'plancks_unsure',
+		'plancks_skeptic',
+		'plancks_crazy',
+
+
+		-- rockhard in a funky place
+		'rockhard_rebirth',
+		-- 'rockhard_peppers',
+		'rockhard_trans',
+		'rockhard_nameless',
+		'rockhard_alfie',
+		'rockhard_numbers',
+
+		-- iron touch
+		'iron_boney',
+
+		-- lighted state
+		'lighted_square',
+
+		-- spirit lines
+		'spirit_halves',
+		-- 'spirit_aquarium',
+
+		-- double down
+		'double_clark',
+		'double_devastation',
+
+		-- rubicon crossroads
+		'rubicon_infidel',
+		'rubicon_fishy',
+		'rubicon_film',
+		'rubicon_moonglass',
+		'rubicon_bone',
+
+		-- streetlight pursuit
+		'streetlight_fledgling',
+		'streetlight_resil',
+		'streetlight_indulgent',
+		'streetlight_methodical',
+		'streetlight_industrious',
+		'streetlight_pinstripe',
+		'streetlight_cabinet',
+
+		-- bluebolt incarnation
+		'bluebolt_jokestar',
+		'bluebolt_sexy',
+		'bluebolt_secluded',
+		'bluebolt_tuned',
+
+		-- sunshine deluxe
+		'sunshine_duo',
+		'sunshine_laconic',
+		'sunshine_funkadelic',
+		'sunshine_reliable',
+
+		-- scepter files
+		'scepter_card',
+
+		-- golden generation
+		'golden_generation',
+
+		-- cold iron streets,
+		'cis_jokestar',
+
+		--love once buried
+		'love_jokestar',
+
+		-- my digital venus
+		'mdv_shock',
+
+		-- jojojidai
+		'jojojidai_soldiers',
+
+		-- lipstick_vogue
+		'lipstick_ego',
+
+		-- jojospectacle,
+		'jspec_joepie',
+		'jspec_kunst',
+		'jspec_ilsa',	
+	},
+
+	Consumable = {
+		'spec_stonemask',
+	},
+	
+	Deck = {
+		'fanworks',
+	},
+
+	Voucher = {
+		'rubicon_kitty',
+    	'rubicon_parade'
+	},
+
+	Challenge = {
+		--'tucker',
+	},
+
+	Blind = {
+		--'hog',
+		--'tray',
+		--'vod',
+		--'finger',
+		--'mochamike',
+	},
+
+	Stand = {
+
+	}
+}
+
+local alt_jokers = {
+    ['love_jokestar'] = true,
+    ['plancks_crazy'] = true,
+	['plancks_jokestar'] = true,
+    ['plancks_skeptic'] = true,
+    ['plancks_unsure'] = true,
+    ['rockhard_alfie'] = true,
+    ['rockhard_nameless'] = true,
+    ['rockhard_numbers'] = true,
+    ['rockhard_rebirth'] = true,
+    ['streetlight_fledgling'] = true,
+    ['streetlight_indulgent'] = true,
+    ['streetlight_industrious'] = true,
+    ['streetlight_methodical'] = true,
+    ['streetlight_resil'] = true
+}
+
+for k, v in pairs(items_to_load) do
+	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
+		for i = 1, #v do
+			LoadItem(v[i], k)
+
+			if k == 'Joker' and alt_jokers[v[i]] then
+				SMODS.Atlas({ key = v[i]..'_alt', path = "jokers/" .. v[i] .. '_alt'.. ".png", px = 71, py = 95 })
+			end
+		end
+	end
+end
+
+-- Stand Consumable
+SMODS.Atlas({ key = 'fnwk_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
+if items_to_load.Stand and #items_to_load.Stand > 0 then
+    G.C.STAND = HEX('b85f8e')
+    SMODS.ConsumableType {
+        key = "Stand",
+        primary_colour = G.C.STAND,
+        secondary_colour = G.C.STAND,
+        collection_rows = { 8, 8 },
+        shop_rate = 0,
+        loc_txt = {},
+        default = "c_fnwk_blackspine",
+        can_stack = false,
+        can_divide = false,
+    }
+
+    SMODS.UndiscoveredSprite {
+        key = "Stand",
+        atlas = "fnwk_undiscovered",
+        pos = { x = 0, y = 0 }
+    }
+end

@@ -1,4 +1,5 @@
 local jokerInfo = {
+	key = 'j_fnwk_plancks_crazy',
 	name = 'Crazy Creaking Joker',
 	config = {
 		extra = {
@@ -20,6 +21,34 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_coop", set = "Other"}
+end
+
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	if not card.config.center.discovered then
+        return
+    end
+
+    card.children.center:set_sprite_pos({x = 1, y = 0})   
+	card.children.center.custom_draw = true
+    card.children.patsy_overlay = Sprite(
+        card.T.x,
+        card.T.y,
+        card.T.w,
+        card.T.h,
+        G.ASSET_ATLAS['fnwk_plancks_crazy'],
+        { x = 0, y = 0}
+    )
+	card.children.patsy_overlay:set_role({
+		role_type = 'Minor',
+		major = card,
+		offset = { x = 0, y = 0 },
+		xy_bond = 'Strong',
+		wh_bond = 'Strong',
+		r_bond = 'Strong',
+		scale_bond = 'Strong',
+		draw_major = card
+	})
+	card.children.patsy_overlay.custom_draw = true
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -89,7 +118,7 @@ function jokerInfo.update(self, card, dt)
 		card.ability.extra.disRange = card.ability.extra.maxDis - card.ability.extra.minDis
 		card.dissolve = 0.15
 		card.forceID = math.random() * 1000
-		card.dissolve_colours = {G.C.GREY, G.C.WHITE, G.C.CLEAR, G.C.CLEAR, G.C.JOKER_GREY}
+		card.dissolve_colours = { HEX('3F5959BB'), HEX('3B5D63DC'), HEX('29484F'), HEX('29484F'), G.C.JOKER_GREY}
 
 		card.ability.extra.initialized = true
 	end
@@ -114,6 +143,26 @@ function jokerInfo.update(self, card, dt)
 
 	local ease = EaseInOutSin(card.ability.extra.lerp)
 	card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
+end
+
+function jokerInfo.draw(self, card, layer)
+    if not card.config.center.discovered or not card.children.patsy_overlay then
+        return
+    end
+
+    local cursor_pos = {}
+    cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+    cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+    local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
+    local hovering = (card.hover_tilt or 0)
+
+    G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
+    G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
+    G.SHADERS['fnwk_basic']:send('hovering', hovering)
+    love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
+    card.children.center:draw_self()
+
+	card.children.patsy_overlay:draw_shader('dissolve')
 end
 
 return jokerInfo

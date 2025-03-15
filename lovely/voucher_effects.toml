@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a "pre_draw" context
+#
+
+# G.FUNCS.evaluate_round()
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''G.GAME.selected_back:trigger_effect({context = 'eval'})'''
+position = "after"
+payload = '''for i=1, #G.vouchers.cards do
+    sendDebugMessage('calling for vouchers')
+    local eval = eval_card(G.vouchers.cards[i], {cardarea = G.vouchers, cash_out = true})
+    SMODS.calculate_effect(eval, G.vouchers.cards[i])
+end
+'''
+match_indent = true
+times = 1
