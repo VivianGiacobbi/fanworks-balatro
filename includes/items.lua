@@ -54,9 +54,11 @@ local items_to_load = {
 		-- spirit lines
 		'spirit_halves',
 		-- 'spirit_aquarium',
+		'spirit_gambler',
 
 		-- double down
 		'double_clark',
+		'double_devastation',
 
 		-- rubicon crossroads
 		'rubicon_infidel',

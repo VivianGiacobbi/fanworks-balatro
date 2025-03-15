@@ -2,7 +2,6 @@ SMODS.Atlas({ key = 'blank', path ='jokers/blank.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'noise', path ='noise.png', px = 128, py = 128 })
 
 local jokerInfo = {
-    key = 'j_fnwk_bone_destroyer',
 	name = 'Destroyer of Worlds',
 	config = {
         extra = {

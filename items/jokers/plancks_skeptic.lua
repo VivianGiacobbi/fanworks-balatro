@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_plancks_skeptic',
 	name = 'Skeptic Creaking Joker',
 	config = {
 		hovered_boosters = {}

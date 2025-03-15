@@ -15,8 +15,8 @@ SMODS.Consumable:take_ownership('c_fool', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         local fool_c = G.GAME.last_tarot_planet and G.P_CENTERS[G.GAME.last_tarot_planet] or nil
-        local last_tarot_planet = fool_c and localize{type = 'name_text', key = foolcard.config.center.key, set = foolcard.config.center.set} or localize('k_none')
-        local colour = (not fool_c or foolcard.config.center.name == 'The Fool') and G.C.RED or G.C.GREEN
+        local last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
+        local colour = (not fool_c or fool_c.name == 'The Fool') and G.C.RED or G.C.GREEN
         main_end = {
             {n=G.UIT.C, config={align = "bm", padding = 0.02}, nodes={
                 {n=G.UIT.C, config={align = "m", colour = colour, r = 0.05, padding = 0.05}, nodes={
@@ -24,7 +24,7 @@ SMODS.Consumable:take_ownership('c_fool', {
                 }}
             }}
         }
-        if not (not fool_c or foolcard.config.center.name == 'The Fool') then
+        if not (not fool_c or fool_c.name == 'The Fool') then
             info_queue[#info_queue+1] = fool_c
         end
 
@@ -42,9 +42,9 @@ SMODS.Consumable:take_ownership('c_fool', {
 SMODS.Consumable:take_ownership('c_magician', { 
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_magician", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_asap')
@@ -58,7 +58,7 @@ SMODS.Consumable:take_ownership('c_high_priestess', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_priestess", set = "Other"}
-        return { vars = {card.config.center.config.planets} }
+        return { vars = {card.ability.planets} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_plancks')
@@ -71,9 +71,9 @@ SMODS.Consumable:take_ownership('c_high_priestess', {
 SMODS.Consumable:take_ownership('c_empress', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} } 
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} } 
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_sunshine')
@@ -87,7 +87,7 @@ SMODS.Consumable:take_ownership('c_emperor', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_emperor", set = "Other"}
-        return { vars = {card.config.center.config.tarots}}
+        return { vars = {card.ability.tarots}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_last')
@@ -100,9 +100,9 @@ SMODS.Consumable:take_ownership('c_emperor', {
 SMODS.Consumable:take_ownership('c_heirophant', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} } 
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} } 
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_moscow')
@@ -115,9 +115,9 @@ SMODS.Consumable:take_ownership('c_heirophant', {
 SMODS.Consumable:take_ownership('c_lovers', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_gotequest')
@@ -130,9 +130,9 @@ SMODS.Consumable:take_ownership('c_lovers', {
 SMODS.Consumable:take_ownership('c_chariot', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_chariot", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_crimson')
@@ -145,9 +145,9 @@ SMODS.Consumable:take_ownership('c_chariot', {
 SMODS.Consumable:take_ownership('c_justice', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_justice", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_rubicon')
@@ -161,7 +161,7 @@ SMODS.Consumable:take_ownership('c_hermit', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_hermit", set = "Other"}
-        return { vars = {card.config.center.config.extra}}
+        return { vars = {card.ability.extra}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_city')
@@ -178,7 +178,7 @@ SMODS.Consumable:take_ownership('c_wheel_of_fortune', {
         info_queue[#info_queue+1] = G.P_CENTERS.e_holo
         info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome 
         info_queue[#info_queue+1] = {key = "artist_wheel", set = "Other"}
-        return { vars = {G.GAME.probabilities.normal, card.config.center.config.extra} }
+        return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_jojopolis')
@@ -192,7 +192,7 @@ SMODS.Consumable:take_ownership('c_strength', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted}}
+        return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_neon')
@@ -206,7 +206,7 @@ SMODS.Consumable:take_ownership('c_hanged_man', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_hanged", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted}}
+        return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_lighted')
@@ -220,7 +220,7 @@ SMODS.Consumable:take_ownership('c_death', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_death", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted}}
+        return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_rockhard')
@@ -243,7 +243,7 @@ SMODS.Consumable:take_ownership('c_temperance', {
         end
         
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.extra, math.min(card.config.center.config.extra, _money)} }
+        return { vars = {card.ability.extra, math.min(card.ability.extra, _money)} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_coi')
@@ -256,9 +256,9 @@ SMODS.Consumable:take_ownership('c_temperance', {
 SMODS.Consumable:take_ownership('c_devil', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_devil", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_spirit')
@@ -271,9 +271,9 @@ SMODS.Consumable:take_ownership('c_devil', {
 SMODS.Consumable:take_ownership('c_tower', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS[card.config.center.config.mod_conv]
+        info_queue[#info_queue+1] = G.P_CENTERS[card.ability.mod_conv]
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.config.center.config.mod_conv}} }
+        return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_mania')
@@ -287,7 +287,7 @@ SMODS.Consumable:take_ownership('c_star', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_star", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted,  localize(card.config.center.config.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.config.center.config.suit_conv]}}}
+        return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_culture')
@@ -301,7 +301,7 @@ SMODS.Consumable:take_ownership('c_moon', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted,  localize(card.config.center.config.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.config.center.config.suit_conv]}}}
+        return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_iron')
@@ -315,7 +315,7 @@ SMODS.Consumable:take_ownership('c_sun', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_sun", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted,  localize(card.config.center.config.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.config.center.config.suit_conv]}}}
+        return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_streetlight')
@@ -342,7 +342,7 @@ SMODS.Consumable:take_ownership('c_world', {
     atlas = 'fnwk_tarotreskins',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = "artist_world", set = "Other"}
-        return { vars = {card.config.center.config.max_highlighted,  localize(card.config.center.config.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.config.center.config.suit_conv]}}}
+        return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
         local title = localize('ba_thorny')

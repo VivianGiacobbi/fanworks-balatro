@@ -18,7 +18,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.individual or not context.cardarea == G.play or card.debuff or context.other_card.debuff then
+    if not (context.individual and context.cardarea == G.play) or card.debuff or context.other_card.debuff then
         return
     end
 

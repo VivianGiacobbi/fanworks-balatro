@@ -343,6 +343,11 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
+			k_repeat_ex = 'Repeat!',
+			f_hit = 'Hit!',
+			f_bust = "Bust!",
+			f_wp = 'Well Played!',
+			f_nd = "No Dice!",
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
@@ -537,6 +542,12 @@ return {
 					"If you have no more room for {C:stand}Stands{}",
 					"and get a new one, it will replace the leftmost",
 					"{C:stand}Stand{} in your consumables."
+				},
+			},
+			artist_notdaedalus = {
+				name = "Artist",
+				text = {
+					"{E:1}NotDaedalus{}",
 				},
 			},
 			artist_gote = {
@@ -1058,11 +1069,26 @@ return {
 					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
 				}
 			},
+			j_fnwk_spirit_gambler = {
+				name = "The Gambler",
+				text = {
+					"{C:planet}Upgrade{} played poker hand if",
+					"total {C:chips}chip{} value of scored",
+					"cards is {C:attention}#1#{} or fewer ",
+				}
+			},
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
+				}
+			},
+			j_fnwk_double_devastation = {
+				name = "The Devastation",
+				text = {
+                    "{C:mult}+#2#{} Mult,",
+                    "{C:attention}-#1#{} hand size",
 				}
 			},
 			j_fnwk_love_jokestar = {
@@ -1290,6 +1316,6 @@ return {
 					"{C:attention}#2#X{} more often",
 				},
 			},
-		},
-	},
+		}
+	}
 }

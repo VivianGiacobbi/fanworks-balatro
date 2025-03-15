@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_streetlight_industrious',
 	name = 'Industrious Streetlit Joker',
 	config = {},
 	rarity = 2,

@@ -24,15 +24,15 @@ function jokerInfo.calculate(self, card, context)
 		if context.joker_main and not card.debuff and card.ability.extra.chips > 0 and not context.blueprint then
 			return {
 				message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
-				colour = G.C.CHIPS
+				colour = G.C.CHIPS,
+				chip_mod = card.ability.extra.chips, 
 			}
 		end
 
 		if not context.blueprint and context.after and G.GAME.current_round.hands_played == 0 and G.GAME.blind.chips > hand_chips*mult then
 			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
 			return {
-				message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
-				chip_mod = card.ability.extra.chips, 
+				message = localize('k_upgrade_ex'),
 				colour = G.C.CHIPS,
 				card = context.blueprint_card or card
 			}

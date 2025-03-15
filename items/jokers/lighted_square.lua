@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_lighted_square',
 	name = 'Square Biz Killer',
 	config = {
         extra = {

@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_glass_jokestar',
 	name = 'Starry-Eyed Jokestar',
 	config = {
         extra = {
