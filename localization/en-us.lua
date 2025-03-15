@@ -344,6 +344,10 @@ return {
 			k_enhanced = 'Enhanced!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
+			f_hit = 'Hit.',
+			f_bust = "Bust.",
+			f_wp = 'Well Played.',
+			f_nd = "No Dice.",
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
@@ -1065,6 +1069,14 @@ return {
 					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
 				}
 			},
+			j_fnwk_spirit_gambler = {
+				name = "The Gambler",
+				text = {
+					"Levelel up played hand if",
+					"total {c:chips}chips{} scored are",
+					"#1# or less. (#2#)"
+				}
+			},
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
@@ -1304,6 +1316,6 @@ return {
 					"{C:attention}#2#X{} more often",
 				},
 			},
-		},
-	},
+		}
+	}
 }

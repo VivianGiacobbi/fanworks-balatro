@@ -23,7 +23,6 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-    
     if context.cardarea == G.jokers and context.joker_main then
         return {
             message = localize{type='variable', key='a_mult', vars = {card.ability.extra.a_mult} },
