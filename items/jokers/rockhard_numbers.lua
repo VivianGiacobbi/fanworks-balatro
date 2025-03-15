@@ -21,7 +21,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     end
     local cryptids = G.GAME.run_consumeables['c_cryptid'] or 0
     local deaths = G.GAME.run_consumeables['c_death'] or 0
-    local hung_men = G.GAME.consumeables['c_hanged_man'] or 0
+    local hung_men = G.GAME.run_consumeables['c_hanged_man'] or 0
     return { 
         vars = { 
             card.ability.extra.x_mult_mod, 
