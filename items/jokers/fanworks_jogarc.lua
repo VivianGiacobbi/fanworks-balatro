@@ -12,7 +12,6 @@ SMODS.Atlas({ key = 'fanworks_jogarc_mask', path = 'jokers/fanworks_jogarc_mask.
 SMODS.Atlas({ key = '100', path = '100.png', px = 64, py = 64 })
 
 local jokerInfo = {
-	key = 'j_fnwk_fanworks_jogarc',
 	name = 'Jogarc',
 	config = {
 		extra = {

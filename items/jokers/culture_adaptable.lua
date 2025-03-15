@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_culture_adaptable',
 	name = 'Adaptable Jokestar',
 	config = {
         extra = 2

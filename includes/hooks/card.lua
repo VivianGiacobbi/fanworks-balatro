@@ -1,7 +1,7 @@
 local base_get_id = Card.get_id
 function Card:get_id()
     local id = base_get_id(self)
-    if next(SMODS.find_card('j_fnwk_rubicon_bone')) and (id == 11 or id == 13) then
+    if not self.debuff and next(SMODS.find_card('j_fnwk_rubicon_bone')) and (id == 11 or id == 13) then
         return 12
     end
     return id

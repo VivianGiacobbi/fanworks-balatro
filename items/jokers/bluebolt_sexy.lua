@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_bluebolt_sexy',
     name = 'Sexy Rust Joker',
 	config = {
         extra = {

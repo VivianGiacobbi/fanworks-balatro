@@ -2,7 +2,6 @@ SMODS.Atlas({ key = 'jspec_ilsa_sun', path = 'jokers/jspec_ilsa_sun.png', px = 1
 SMODS.Atlas({ key = 'jspec_ilsa_star', path = 'jokers/jspec_ilsa_star.png', px = 11, py = 11 })
 
 local jokerInfo = {
-	key = 'j_fnwk_jspec_ilsa',
     name = 'Ilsa',
 	config = {},
 	rarity = 4,

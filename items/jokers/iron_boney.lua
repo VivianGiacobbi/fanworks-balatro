@@ -5,7 +5,6 @@ SMODS.Atlas({ key = 'boney_bottom_mask', path = 'jokers/iron_boney_bottom_mask.p
 SMODS.Sound({key = "bad_to_the_bone", path = "bad_to_the_bone.ogg"})
 
 local jokerInfo = {
-	key = 'j_fnwk_iron_boney',
     name = 'Joker M.',
 	config = {
         extra = {

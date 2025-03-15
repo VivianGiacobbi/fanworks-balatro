@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_golden_generation',
 	name = 'Golden Generation',
 	config = {
         extra = 2,

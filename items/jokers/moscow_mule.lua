@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_moscow_mule',
 	name = 'Moscow Mule',
 	config = {
 		extra = {

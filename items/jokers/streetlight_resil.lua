@@ -19,12 +19,12 @@ SMODS.Atlas({ key = 'streetlight_resil_regen', path ='jokers/streetlight_resil_r
 local function updateSprite(card)
 	if card.ability.form then
 		if card.ability.form == 'regen' then
-			card.children.center.atlas = 'fnwk_streetlight_resil_regen'
-			card:set_sprites(card.children.center)
-			card.children.center.atlas = card.config.center.atlas
+			local old_atlas = card.config.center.atlas
+			card.config.center.atlas = 'fnwk_streetlight_resil_regen'
+			card:set_sprites(card.config.center)
+			card.config.center.atlas = old_atlas
 		else
-			card.children.center.atlas = card.config.center.atlas
-			card:set_sprites(card.children.center)
+			card:set_sprites(card.config.center)
 		end
 	end
 end
@@ -63,23 +63,23 @@ function jokerInfo.calculate(self, card, context)
 			card.ability.state = 'sacrifice'
 
 			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'resilient')
-			newJoker:set_edition({negative = true}, true, true)
+			local new_joker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'resilient')
+			new_joker:set_edition({negative = true}, true, true)
 
-			newJoker.config.center.eternal_compat = true
-			newJoker:set_eternal(true)
-			newJoker.config.center.eternal_compat = false
+			new_joker.config.center.eternal_compat = true
+			new_joker:set_eternal(true)
+			new_joker.config.center.eternal_compat = false
 
 			
-			newJoker.ability.state = 'hidden'
-			newJoker.ability.lastEdition = card.edition and card.edition.type or nil
+			new_joker.ability.state = 'hidden'
+			new_joker.ability.lastEdition = card.edition and card.edition.type or nil
 
-			newJoker.ability.form = 'regen'
-			updateSprite(newJoker)
+			new_joker.ability.form = 'regen'
+			updateSprite(new_joker)
 
-			newJoker:add_to_deck()
-			G.jokers:emplace(newJoker)
-			newJoker:start_materialize()
+			new_joker:add_to_deck()
+			new_joker:hard_set_T(card.T.x, card.T.y, card.T.w, card.T.h)
+			G.jokers:emplace(new_joker)
 			G.GAME.joker_buffer = 0
 			-- create specific tarot subset to synergize with vampire
 			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit  then
@@ -95,6 +95,10 @@ function jokerInfo.calculate(self, card, context)
 					return true
 				end}))  
 			end
+
+			-- hopefully interrupting the dissolve wont fuck things up?
+			card:remove()
+			new_joker:juice_up()
 		end
 	end
 

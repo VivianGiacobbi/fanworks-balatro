@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_mdv_shock',
 	name = 'Shock Humor',
 	config = {
 		extra = {

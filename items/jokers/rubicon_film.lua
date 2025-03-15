@@ -1,6 +1,5 @@
 
 local jokerInfo = {
-	key = 'j_fnwk_rubicon_film',
 	name = 'Film Crossed Joker',
 	config = {
 		extra = {
