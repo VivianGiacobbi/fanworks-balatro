@@ -1,0 +1,35 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a "pre_draw" context
+#
+
+# checks for acerbic fencer unlock
+# set_base()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.base = {'''
+position = "before"
+payload = '''local old_id = nil
+if self.base then old_id = self.base.id end'''
+match_indent = true
+times = 1
+
+# set_base()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.playing_card and not initial then check_for_unlock({type = 'modify_deck'}) end'''
+position = "after"
+payload = '''if old_id then sendDebugMessage('old: '..old_id..' | new: '..self.base.id) end
+if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
+    check_for_unlock({type = 'queen_to_king'})
+end'''
+match_indent = true
+times = 1
+
+
+

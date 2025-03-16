@@ -5,7 +5,7 @@ local jokerInfo = {
 	config = {
         extra = {
             mult = 0,
-            mult_mod = 2
+            mult_mod = 1
         },
         water_time = 0,
         water_atlas = 'fnwk_rockhard_nameless_mask'
