@@ -8,10 +8,12 @@ local jokerInfo = {
 			minDis = 0,
 			maxDis = 0.4,
 			mod = 0.2,
+			unlock_sell_count = 20
 		},
 	},
 	rarity = 3,
 	cost = 9,
+	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -20,6 +22,18 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_coop", set = "Other"}
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+	return { vars = {card.ability.extra.unlock_sell_count}}
+end
+
+function jokerInfo.check_for_unlock(self, args)
+	if not args or args.type ~= 'twenty_jokers_sold' then
+		return false
+	end
+
+	return true
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)

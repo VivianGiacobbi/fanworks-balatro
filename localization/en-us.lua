@@ -348,6 +348,29 @@ return {
 			f_bust = "Bust!",
 			f_wp = 'Well Played!',
 			f_nd = "No Dice!",
+			k_toilet1 = 'poop',
+            k_toilet2 = 'peeing ahhhh',
+            k_toilet3 = {
+				text = {
+					'pee pee poo poo',
+					'hahahaha'
+				}
+            },
+            k_toilet4 = {
+				text = {
+					"Kinda hoping we",
+                	"can change this",
+                	"channel's name soon"
+				}
+                
+            },
+            k_toilet5 = {
+				text = {
+					"can everyone leave",
+					"I need to use the sink",
+				}
+            },
+			k_flush = 'Flushed!',
 
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
@@ -905,6 +928,9 @@ return {
 				text = {
 					"Jokers retain {C:attention}scaling abilities{}",
 					"after being destroyed or sold",
+				},
+				unlock = {
+					"Sell {C:attention}#1#{} Jokers in one run"
 				}
 			},
 			j_fnwk_moscow_mule = {
@@ -997,6 +1023,10 @@ return {
 					"for every {C:tarot}Death{}, {C:tarot}Hanged Man{},",
 					"or {C:spectral}Cryptid{} used this run",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#2#{} {C:inactive}Mult){}"
+				},
+				unlock = {
+					"Have {C:attention}#1#{} of the {C:attention}exact same{}",
+					"card in your deck"
 				}
 			},
 			j_fnwk_rubicon_bone = {
@@ -1060,6 +1090,11 @@ return {
 					"{X:mult,C:white}X#1#{} Mult when scored,",
 					"{C:attention}Queens{} gain {X:mult,C:white}X#2#{} Mult",
 					"per {C:attention}reroll{} in the shop",
+				},
+				unlock = {
+					"Turn every {C:attention}Queen{}",
+					"in your deck into",
+					"a {C:attention}Steel{} card"
 				}
 			},
 			j_fnwk_spirit_halves = {
@@ -1082,6 +1117,9 @@ return {
 				text = {
 					"When round begins, add a",
 					"random {C:attention}Face Card{} to your hand"
+				},
+				unlock = {
+					"Turn a {C:attention}Queen{} into a {C:attention}King{}"
 				}
 			},
 			j_fnwk_double_devastation = {
@@ -1182,6 +1220,14 @@ return {
 				text = {
 					"{C:attention}Glass Cards{} also act as {C:attention}Lucky Cards{},",
 					"{C:attention}Lucky Cards{} also act as {C:attention}Glass Cards{}",
+				}
+			},
+			j_fnwk_fanworks_bathroom = {
+				name = "#1#the-bathroom",
+				text = {
+					"If played hand is a",
+					"{C:attention}Flush{}, destroy a random",
+					"card held in hand",
 				}
 			},
 			j_fnwk_scepter_card = {

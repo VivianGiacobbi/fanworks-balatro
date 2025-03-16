@@ -10,6 +10,7 @@ local jokerInfo = {
         },
         action_time = 0,
     },
+    unlocked = false,
 	rarity = 3,
 	cost = 8,
 	blueprint_compat = true,
@@ -21,6 +22,28 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
     return { vars = { card.ability.extra.x_mult, card.ability.extra.x_mult_mod} }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if not G.playing_cards then
+        return false
+    end
+    
+    local num_queens = 0
+    for _, v in ipairs(G.playing_cards) do
+        if v:get_id() == 12 then
+            num_queens = num_queens + 1
+            if not SMODS.has_enhancement(v, 'm_steel') then
+                return false
+            end
+        end
+    end
+
+    if num_queens < 1 then
+        return false
+    end
+
+    return true
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)

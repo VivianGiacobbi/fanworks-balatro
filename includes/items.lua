@@ -112,7 +112,10 @@ local items_to_load = {
 		-- jojospectacle,
 		'jspec_joepie',
 		'jspec_kunst',
-		'jspec_ilsa',	
+		'jspec_ilsa',
+		
+		-- shit realm
+		'fanworks_bathroom'
 	},
 
 	Consumable = {

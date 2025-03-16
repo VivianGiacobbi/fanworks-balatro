@@ -5,6 +5,7 @@ local jokerInfo = {
     },
 	rarity = 1,
 	cost = 4,
+    unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -13,6 +14,18 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if not G.playing_cards then
+        return false
+    end
+    
+    if not args or args.type ~= 'queen_to_king' then
+        return false
+    end
+
+    return true
 end
 
 function jokerInfo.calculate(self, card, context)

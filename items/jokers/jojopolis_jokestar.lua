@@ -17,9 +17,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.joker_main and context.cardarea == G.jokers and to_big(card.ability.extra*(G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0)) > to_big(0) then
+    if context.joker_main and context.cardarea == G.jokers and card.ability.extra*(G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0) > 0 then
 		return {
-			message = localize{type='variable',key='a_mult',vars={to_big(card.ability.extra*(G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0))}},
+			message = localize{type='variable',key='a_mult',vars={card.ability.extra*(G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0)}},
 			mult_mod = card.ability.extra, 
             card = context.blueprint_card or card
 		}

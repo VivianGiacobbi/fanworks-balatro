@@ -54,7 +54,7 @@ times = 1
 target = "card.lua"
 pattern = '''if card.ability.invis_rounds then card.ability.invis_rounds = 0 end'''
 position = "at"
-payload = '''if card.ability.extra.invis_rounds then card.ability.extra.invis_rounds = 0 end
+payload = '''if type(card.ability.extra) == 'table' and card.ability.extra.invis_rounds then card.ability.extra.invis_rounds = 0 end
 self.ability.extra.invis_rounds = 0'''
 match_indent = true
 times = 1

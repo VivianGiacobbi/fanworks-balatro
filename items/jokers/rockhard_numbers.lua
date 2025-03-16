@@ -2,11 +2,13 @@ local jokerInfo = {
 	name = 'High Numbers',
 	config = {
         extra = {
-            x_mult_mod = 0.25
+            x_mult_mod = 0.25,
+            unlock_count = 4,
         },
     },
 	rarity = 3,
 	cost = 9,
+    unlocked = false,
     hasSoul = true,
 	blueprint_compat = true,
 	eternal_compat = true,
@@ -28,6 +30,32 @@ function jokerInfo.loc_vars(self, info_queue, card)
             1 + card.ability.extra.x_mult_mod * (cryptids + deaths + hung_men)
         }
     }
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = { card.ability.extra.unlock_count}}
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if not G.playing_cards then
+        return false
+    end
+    
+    local card_identity_table = {}
+    for _, v in ipairs(G.playing_cards) do
+        local key = v.config.card_key
+
+        key = key..'_'..v.config.center.key
+        if v.seal then key = key..'_'..v.seal end
+        if v.edition then key = key..'_'..v.edition.type end
+        if not card_identity_table[key] then card_identity_table[key] = 0 end
+        card_identity_table[key] = card_identity_table[key] + 1
+        if (card_identity_table[key] >= 4) then
+            return true
+        end
+    end
+
+    return false
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -29,7 +29,7 @@ function LoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
-	info.key = info.key or file_key
+	info.key = file_key
 	if item_type ~= 'Challenge' then
 		info.atlas = file_key
 		info.pos = { x = 0, y = 0 }
