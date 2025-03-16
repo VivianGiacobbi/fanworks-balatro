@@ -24,12 +24,37 @@ times = 1
 target = "card.lua"
 pattern = '''if self.playing_card and not initial then check_for_unlock({type = 'modify_deck'}) end'''
 position = "after"
-payload = '''if old_id then sendDebugMessage('old: '..old_id..' | new: '..self.base.id) end
-if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
+payload = '''if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
     check_for_unlock({type = 'queen_to_king'})
 end'''
 match_indent = true
 times = 1
+
+
+# crazy creaking unlock
+# set_base()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''self.deck:shuffle()
+self.deck:hard_set_T()'''
+position = "after"
+payload = '''G.GAME.jokers_sold = 0'''
+match_indent = true
+times = 1
+
+# set_base()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''inc_career_stat('c_jokers_sold', 1)'''
+position = "after"
+payload = '''G.GAME.jokers_sold = G.GAME.jokers_sold + 1
+if G.GAME.jokers_sold >= 20 then check_for_unlock({type = 'twenty_jokers_sold'}) end'''
+match_indent = true
+times = 1
+
+
 
 
 

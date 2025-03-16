@@ -928,6 +928,9 @@ return {
 				text = {
 					"Jokers retain {C:attention}scaling abilities{}",
 					"after being destroyed or sold",
+				},
+				unlock = {
+					"Sell {C:attention}#1#{} Jokers in one run"
 				}
 			},
 			j_fnwk_moscow_mule = {
@@ -1020,6 +1023,10 @@ return {
 					"for every {C:tarot}Death{}, {C:tarot}Hanged Man{},",
 					"or {C:spectral}Cryptid{} used this run",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#2#{} {C:inactive}Mult){}"
+				},
+				unlock = {
+					"Have {C:attention}#1#{} of the {C:attention}exact same{}",
+					"card in your deck"
 				}
 			},
 			j_fnwk_rubicon_bone = {
