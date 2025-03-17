@@ -93,13 +93,14 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
-			mq_j_fnwk_gotequest_lambiekins_1 = {
-				"...............",
-				"...Good Enough.",
+			mq_j_fnwk_gq_lambiekins_1 = {
+				"What a cute",
+				"little plushie!",
 			},
-			mq_j_fnwk_gotequest_lambiekins_2 = {
-				"...I'm lonely",
-				"tonight.",
+			mq_j_fnwk_gq_lambiekins_2 = {
+				"I'm not doing anything",
+				"that could be considered",
+				"problematic with this.",
 			},
 			mq_j_egg = {
 				"We all find out",
@@ -1164,7 +1165,7 @@ return {
 				name = "Square Biz Killer",
 				text = {
 					"If played hand is {C:attention}#1#{}",
-					"cards, {C:attention}destroy{} the",
+					"scoring cards, {C:attention}destroy{} the",
 					"last card {C:attention}after{} scoring"
 				}
 			},
