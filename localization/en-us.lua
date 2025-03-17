@@ -1154,7 +1154,7 @@ return {
 				name = "Square Biz Killer",
 				text = {
 					"If played hand is {C:attention}#1#{}",
-					"cards, {C:attention}destroy{} the",
+					"scoring cards, {C:attention}destroy{} the",
 					"last card {C:attention}after{} scoring"
 				}
 			},

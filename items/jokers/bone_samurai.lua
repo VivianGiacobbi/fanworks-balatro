@@ -28,21 +28,35 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.individual or not context.cardarea == G.play or card.debuff then
-        return
-    end
-    if SMODS.has_enhancement(v, 'm_stone') then
-            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+
+    if context.debuffed then return end
+
+    if context.cardarea == G.jokers and context.joker_main and card.ability.extra.mult > 0 then
         return {
-            message = localize('k_upgrade_ex'),
-            card = card,
+            message = localize{type='variable', key='a_mult', vars = {card.ability.extra.mult} },
+            mult_mod = card.ability.extra.mult,
+            colour = G.C.MULT,
+            card = context.blueprint_card or card
         }
     end
 
+    if context.cardarea ~= G.play or context.blueprint then return end
+
+    if context.destroy_card and SMODS.has_enhancement(context.destroy_card, 'm_stone') and not card.debuff and not context.destroy_card.debuff then
+            return {
+                delay = 0.45, 
+                remove = true,
+            }
+    end
+
+    if context.individual and not context.other_card.debuff and SMODS.has_enhancement(context.other_card, 'm_stone') then
+        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
     return {
-        mult = card.ability.extra.mult,
-        card = context.blueprint_card or card
+        message = localize('k_upgrade_ex'),
+        card = card,
     }
+end
+
 end
 
 return jokerInfo
