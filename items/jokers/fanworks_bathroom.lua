@@ -3,23 +3,29 @@ SMODS.Sound({key = "flush", path = "flush.ogg"})
 SMODS.Sound({key = "fart_reverb", path = "fart_reverb.ogg"})
 
 local jokerInfo = {
-    key = 'j_fnwk_fanworks_bathroom',
 	name = '#the-bathroom',
 	config = {},
 	rarity = 2,
 	cost = 6,
+    unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
+    fanwork = 'fanworks',
 }
-
 
 function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { '#' } }
 end
 
-function jokerInfo.check_for_unlock(self, args)
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+    local discovered, total = CheckFanworksDiscoveries(self)
+    return { vars = { discovered, total } }
+end
 
+function jokerInfo.check_for_unlock(self, args)
+    local discovered, total = CheckFanworksDiscoveries(self)
+    return discovered == total
 end
 
 function jokerInfo.calculate(self, card, context)

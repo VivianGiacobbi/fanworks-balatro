@@ -372,6 +372,8 @@ return {
             },
 			k_flush = 'Flushed!',
 
+			ba_fanworks = 'Fanworks',
+			co_fanworks = 'DD85B4',
 			ba_plancks = "Planck's Creek",
 			co_plancks = 'A2DCB4',
 			ba_streetlight = 'Streetlight Pursuit',
@@ -395,7 +397,7 @@ return {
 			ba_industry = 'Industry Baby',
 			co_industry = 'CA4ED3',
 			ba_double = 'Double Down',
-			co_double = '0000FF',
+			co_double = '1956FF',
 			ba_love = 'Love Once Buried',
 			co_love = 'E7B2D4',
 			ba_coi = 'Cost of Information',
@@ -1169,6 +1171,9 @@ return {
 					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
 					"lowest level {C:attention}basic poker hand{}",
 					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
+				},
+				unlock = {
+					"?????"
 				}
 			},
 			j_fnwk_jspec_kunst = {
@@ -1176,6 +1181,9 @@ return {
 				text = {
 					"When {C:attention}Boss Blind{} is defeated,",
 					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
+				},
+				unlock = {
+					"?????"
 				}
 			},
 			j_fnwk_jspec_ilsa = {
@@ -1184,6 +1192,9 @@ return {
 					"Cards with an {C:attention}Edition{}",
 					"also act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
 					"and {C:dark_edition}Polychrome{}"
+				},
+				unlock = {
+					"?????"
 				}
 			},
 			j_fnwk_fanworks_jogarc = {
@@ -1228,6 +1239,11 @@ return {
 					"If played hand is a",
 					"{C:attention}Flush{}, destroy a random",
 					"card held in hand",
+				},
+				unlock = {
+					"Discover {C:attention}every other{}",
+					"{C:fanworks}Fanworks{} card",
+					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
 			j_fnwk_scepter_card = {

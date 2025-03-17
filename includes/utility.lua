@@ -8,6 +8,11 @@ function table.clear(t)
     end
 end
 
+--- Linear interpolation of a to b, given time t
+--- @param a number Value to lerp from
+--- @param b number Value to lerp to
+--- @param t number Lerp/time variable, between 0 and 1
+--- @return number # Interpolated value between a and b
 function math.lerp(a,b,t) 
 	return (1-t)*a + t*b 
 end
@@ -25,6 +30,10 @@ function RecursiveEnumerate(folder)
 	return fileTree
 end
 
+--- Load an item definition using SMODS
+--- @param file_key string file name to load within the "Items" directory, excluding file extension
+--- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
+--- @param no_badges boolean Whether or not to display mod badges on this item
 function LoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
@@ -39,7 +48,9 @@ function LoadItem(file_key, item_type, no_badges)
 		end
 	end
 
-	if not no_badges and info.fanwork then
+	if no_badges then
+		info.no_mod_badges = true
+	elseif info.fanwork then
 		info.no_mod_badges = true
 		info.set_badges = function(self, card, badges)
 			local title = localize('ba_'..info.fanwork)
@@ -67,20 +78,55 @@ function LoadItem(file_key, item_type, no_badges)
 	SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
 end
 
+--- Checks total discovered cards that use the 'fnwk_' mod prefix
+--- @param exclude table An SMODS object to exclude from the count (usually the one calling the check)
+--- @return integer discovered Number of currently discovered cards
+--- @return integer total Total number of fanworks cards
+function CheckFanworksDiscoveries(exclude)
+    local count = 0
+    local discovered = 0
+    for k, v in pairs(G.P_CENTERS) do
+        if string.sub(k, 3, 6) == 'fnwk' and k ~= exclude.config.key then
+            count = count + 1
+            if v.config.discovered then
+                discovered = discovered + 1
+            end
+        end
+    end
+
+    return discovered, count
+end
+
+--- Checks if a string starts with a specified substring
+--- @param str string String to check
+--- @param start string Substring to search for within str
+--- @return boolean # If the string starts with the substring
 function StringStartsWith(str, start)
 	return string.sub(str, 1, #start) == start
 end
 
+--- Checks if a string ends with a specified substring
+--- @param str string String to check
+--- @param ending string Substring to search for within str
+--- @return boolean # If the string end with the substring
 function StringEndsWith(str, ending)
 	return string.sub(str, -#ending) == ending
 end
 
+--- Finds a substring within a given string, not case sensitive
+--- @param str string String to check
+--- @param substring string Substring to search for within str
+--- @return boolean # If the substring is found anywhere within str
 function ContainsString(str, substring)
 	local lowerStr = string.lower(str)
 	local lowerSubstring = string.lower(substring)
 	return string.find(lowerStr, lowerSubstring, 1, true) ~= nil
 end
 
+--- Searches for a value (not a key) within a table
+--- @param table table Table to search for a given value
+--- @param element any Value to search within the table
+--- @return boolean # If the table contains at least one instance of this value
 function table.contains(table, element)
 	for _, value in pairs(table) do
 		if value == element then
@@ -90,6 +136,10 @@ function table.contains(table, element)
 	return false
 end
 
+--- Deep compares the values of tables, rather than their memory IDs
+--- @param tbl1 string First table
+--- @param tbl2 string Second table
+--- @return boolean # If every key and value on the table is identical
 function DeepCompare(tbl1, tbl2)
 	if tbl1 == tbl2 then
 		return true
@@ -124,130 +174,36 @@ function DeepCompare(tbl1, tbl2)
 	return false
 end
 
+--- Sine Wave easing function both in and out
+--- @param x string Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
 function EaseInOutSin(x)
 	return -(math.cos(math.pi * x) - 1) / 2
 end
 
+--- x^4 easing function both in and out
+--- @param x string Value to ease (between 0 and 1)
+--- @return number # Eased value between 0 and 1
 function EaseInOutQuart(x) 
 	return x < 0.5 and 8 * x * x * x * x or 1 - (-2 * x + 2)^4 / 2;
 end
 
---[[
-   Author: Julio Manuel Fernandez-Diaz
-   Date:   January 12, 2007
-   (For Lua 5.1)
-   
-   Modified slightly by RiciLake to avoid the unnecessary table traversal in tablecount()
 
-   Formats tables with cycles recursively to any depth.
-   The output is returned as a string.
-   References to other tables are shown as values.
-   Self references are indicated.
-
-   The string returned is "Lua code", which can be procesed
-   (in the case in which indent is composed by spaces or "--").
-   Userdata and function keys and values are shown as strings,
-   which logically are exactly not equivalent to the original code.
-
-   This routine can serve for pretty formating tables with
-   proper indentations, apart from printing them:
-
-      print(table.show(t, "t"))   -- a typical use
-   
-   Heavily based on "Saving tables with cycles", PIL2, p. 113.
-
-   Arguments:
-      t is the table.
-      name is the name of the table (optional)
-      indent is a first indentation (optional).
---]]
-
-function table.show(t, name, indent)
-	local cart     -- a container
-	local autoref  -- for self references
- 
-	--[[ counts the number of elements in a table
-	local function tablecount(t)
-	   local n = 0
-	   for _, _ in pairs(t) do n = n+1 end
-	   return n
-	end
-	]]
-	-- (RiciLake) returns true if the table is empty
-	local function isemptytable(t) return next(t) == nil end
- 
-	local function basicSerialize (o)
-	   local so = tostring(o)
-	   if type(o) == "function" then
-		  local info = debug.getinfo(o, "S")
-		  -- info.name is nil because o is not a calling level
-		  if info.what == "C" then
-			 return string.format("%q", so .. ", C function")
-		  else 
-			 -- the information is defined through lines
-			 return string.format("%q", so .. ", defined in (" ..
-				 info.linedefined .. "-" .. info.lastlinedefined ..
-				 ")" .. info.source)
-		  end
-	   elseif type(o) == "number" or type(o) == "boolean" then
-		  return so
-	   else
-		  return string.format("%q", so)
-	   end
-	end
- 
-	local function addtocart (value, name, indent, saved, field)
-	   indent = indent or ""
-	   saved = saved or {}
-	   field = field or name
- 
-	   cart = cart .. indent .. field
- 
-	   if type(value) ~= "table" then
-		  cart = cart .. " = " .. basicSerialize(value) .. ";\n"
-	   else
-		  if saved[value] then
-			 cart = cart .. " = {}; -- " .. saved[value] 
-						 .. " (self reference)\n"
-			 autoref = autoref ..  name .. " = " .. saved[value] .. ";\n"
-		  else
-			 saved[value] = name
-			 --if tablecount(value) == 0 then
-			 if isemptytable(value) then
-				cart = cart .. " = {};\n"
-			 else
-				cart = cart .. " = {\n"
-				for k, v in pairs(value) do
-				   k = basicSerialize(k)
-				   local fname = string.format("%s[%s]", name, k)
-				   field = string.format("[%s]", k)
-				   -- three spaces between levels
-				   addtocart(v, fname, indent .. "   ", saved, field)
-				end
-				cart = cart .. indent .. "};\n"
-			 end
-		  end
-	   end
-	end
- 
-	name = name or "__unnamed__"
-	if type(t) ~= "table" then
-	   return name .. " = " .. basicSerialize(t)
-	end
-	cart, autoref = "", ""
-	addtocart(t, name, indent)
-	return cart .. autoref
- end
- 
- function Fact (n)
+--- Factorial of non-negative integer
+--- @param n integer
+--- @return number # Factorial of n
+function Fact (n)
 	if n <= 0 then
 	  return 1
 	else
 	  return n * Fact(n-1)
 	end
-  end
+end
 
-  function DeepCopy(orig)
+--- Recursively deep copies a table, rather than returning a table reference
+--- @param orig table Original table to copy
+--- @return table copy Copied table with a unique identity
+function DeepCopy(orig)
 	local orig_type = type(orig)
 	local copy
 	if orig_type == 'table' then
@@ -260,13 +216,4 @@ function table.show(t, name, indent)
 		copy = orig
 	end
 	return copy
-end
-
-function TableToString(tbl)
-    local result = {}
-    for _, line in ipairs(tbl) do
-        local cleanedLine = line:gsub("{.-}", "")
-        table.insert(result, cleanedLine)
-    end
-    return table.concat(result, " ")
 end

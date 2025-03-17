@@ -7,6 +7,7 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
+    fanwork = 'fanworks',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

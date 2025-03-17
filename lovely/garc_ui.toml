@@ -63,7 +63,7 @@ position = "at"
 payload = '''if next(SMODS.find_card('j_fnwk_fanworks_jogarc', true)) then
     Jimbo.children.card.config.center.atlas = 'fnwk_fanworks_jogarc'
     Jimbo.children.card:set_sprites(Jimbo.children.card.config.center)
-    Jimbo:add_speech_bubble('glq_'..math.random(1, 12), nil, {quip = true})
+    Jimbo:add_speech_bubble('glq_16', nil, {quip = true})
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
 end'''

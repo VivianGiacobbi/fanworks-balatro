@@ -7,6 +7,7 @@ local jokerInfo = {
 	rarity = 4,
 	cost = 20,
     hasSoul = true,
+    unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
@@ -30,6 +31,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    if not card.config.center.discovered then
+        return
+    end
+
     local role = {
 		role_type = 'Major',
         draw_major = card,
