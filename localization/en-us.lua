@@ -1085,6 +1085,15 @@ return {
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
 			},
+			j_fnwk_bone_samurai = {
+				name = "Samurai Crackdown",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult per",
+					"scoring {C:attention}Stone Card{} played,",
+					"then {C:attention}destroys{} them",
+					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+				}
+			},
 			j_fnwk_bone_destroyer = {
 				name = "Destroyer of Worlds",
 				text = {

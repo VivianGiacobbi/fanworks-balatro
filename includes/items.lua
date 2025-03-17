@@ -10,6 +10,7 @@ local items_to_load = {
 		'jojopolis_jokestar',
 
 		-- bone to blades
+		'bone_samurai',
 		'bone_destroyer',
 
 		-- city living
