@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Patch to allow Lovely to detect when your money changes.
+#
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''play_sound('coin1')'''
+position = "after"
+payload = '''SMODS.calculate_context({change_dollars = true})'''
+match_indent = true
+times = 1

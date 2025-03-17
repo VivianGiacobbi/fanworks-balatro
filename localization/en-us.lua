@@ -1124,6 +1124,14 @@ return {
 					"cards is {C:attention}#1#{} or fewer ",
 				}
 			},
+			j_fnwk_spirit_valentino = {
+				name = "Corpse Crimelord",
+				text = {
+					'Gain +1 {C:attention} Joker Slots{}',
+					'for every digit of {C:money}money{}',
+					'you have.'
+				}
+			},
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
