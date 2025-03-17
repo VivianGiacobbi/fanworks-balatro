@@ -12,8 +12,17 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.m_wild
     info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
     return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
+end
+
+function jokerInfo.in_pool(self, args)
+    for _, v in ipairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, 'm_wild') then
+            return true
+        end
+    end
 end
 
 function jokerInfo.calculate(self, card, context)
