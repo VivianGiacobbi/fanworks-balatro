@@ -10,6 +10,7 @@ local items_to_load = {
 		'jojopolis_jokestar',
 
 		-- bone to blades
+		'bone_samurai',
 		'bone_destroyer',
 
 		-- city living
@@ -55,6 +56,7 @@ local items_to_load = {
 		'spirit_halves',
 		-- 'spirit_aquarium',
 		'spirit_gambler',
+		'spirit_valentino',
 
 		-- double down
 		'double_clark',

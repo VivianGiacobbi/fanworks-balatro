@@ -4,7 +4,7 @@ local jokerInfo = {
 		hovered_boosters = {}
 	},
 	rarity = 2,
-	cost = 12,
+	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,

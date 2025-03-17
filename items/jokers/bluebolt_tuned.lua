@@ -17,7 +17,7 @@ local jokerInfo = {
 		tuned_mode = 'none',
 	},
 	rarity = 1,
-	cost = 4,
+	cost = 6,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,

@@ -1085,6 +1085,15 @@ return {
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
 			},
+			j_fnwk_bone_samurai = {
+				name = "Samurai Crackdown",
+				text = {
+					"This Joker gains {C:mult}+#1#{} Mult per",
+					"scoring {C:attention}Stone Card{} played,",
+					"then {C:attention}destroys{} them",
+					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+				}
+			},
 			j_fnwk_bone_destroyer = {
 				name = "Destroyer of Worlds",
 				text = {
@@ -1112,6 +1121,14 @@ return {
 					"{C:planet}Upgrade{} played poker hand if",
 					"total {C:chips}chip{} value of scored",
 					"cards is {C:attention}#1#{} or fewer ",
+				}
+			},
+			j_fnwk_spirit_valentino = {
+				name = "Corpse Crimelord",
+				text = {
+					'Gain +1 {C:attention} Joker Slots{}',
+					'for every digit of {C:money}money{}',
+					'you have.'
 				}
 			},
 			j_fnwk_double_clark = {
