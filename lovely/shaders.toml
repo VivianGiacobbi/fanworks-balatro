@@ -11,10 +11,7 @@ priority = 0
 [patches.pattern]
 target = "card.lua"
 pattern = '''if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
-    self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
-    if self.children.front and (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
-        self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
-    end'''
+    self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)'''
 position = "before"
 payload = '''if self.ability.make_vortex and (self.config.center.discovered or self.bypass_discovery_center) then
     self.children.center:draw_shader('booster', nil, self.ARGS.send_to_shader)
@@ -26,12 +23,12 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''local center = self.config.center
-if center.draw and type(center.draw) == 'function' then
-    center:draw(self, layer)
+pattern = '''if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then
+    self.children.center:draw_shader('voucher', nil, self.ARGS.send_to_shader)
 end'''
 position = "after"
 payload = '''
+
 if self.config.center.discovered and self.ability.glow then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
@@ -52,16 +49,12 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-    if not center.no_rank then
-        local rank = SMODS.Ranks[self.base.value] or {}
-        if rank.draw and type(rank.draw) == 'function' then
-            rank:draw(self, layer)
-        end
-    end
+pattern = '''if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then
+    self.children.center:draw_shader('voucher', nil, self.ARGS.send_to_shader)
 end'''
 position = "after"
 payload = '''
+
 if self.config.center.discovered and self.ability.water_time and self.ability.water_atlas then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
@@ -84,16 +77,12 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''
-        if not center.no_rank then
-            local rank = SMODS.Ranks[self.base.value] or {}
-            if rank.draw and type(rank.draw) == 'function' then
-                rank:draw(self, layer)
-            end
-        end
-    end'''
+pattern = '''if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then
+    self.children.center:draw_shader('voucher', nil, self.ARGS.send_to_shader)
+end'''
 position = "after"
 payload = '''
+
 if self.config.center.discovered and self.children.bloom then
     local cursor_pos = {}
     cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
@@ -112,30 +101,6 @@ if self.config.center.discovered and self.children.bloom then
     shader_args[3] = { name = 'screen_scale', val = screen_scale }
     shader_args[4] = { name = 'hovering', val = hovering }
     self.children.bloom:draw_shader('fnwk_bloom', nil, shader_args, false, nil, nil, nil, nil, nil, true)
-end'''
-match_indent = true
-times = 1
-
-# Card:draw()
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if type(v.draw) == 'function' then
-    v:draw(self, layer)
-else
-    self.children.center:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
-    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
-        self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
-    end
-end'''
-position = "at"
-payload = '''if type(v.draw) == 'function' then
-    v:draw(self, layer)
-elseif not self.children.center.custom_draw then
-    self.children.center:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
-    if self.children.front and self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card then
-        self.children.front:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
-    end
 end'''
 match_indent = true
 times = 1

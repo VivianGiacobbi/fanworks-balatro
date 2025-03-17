@@ -8,23 +8,41 @@ local jokerInfo = {
     },
 	rarity = 3,
 	cost = 10,
+    hasSoul = true,
+    unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
 	fanwork = 'spirit',
 }
 
-local function get_dollar_digits ()
-    local slots = math.ceil(math.log(G.GAME.dollars, 10))
+local function get_dollar_digits()
+    if G.GAME.dollars <= 0 then
+        return 0
+    end
+
+    local slots = math.floor(math.log(G.GAME.dollars, 10)) + 1
     return slots
 end
 
+function jokerInfo.check_for_unlock(self, args)
+    if args.type ~= 'saved_from_death' then
+        return false
+    end
+
+    return true
+end
+
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    if not card.config.center.discovered then
+        return
+    end
+
     card:set_rental(true)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_notdaedalus", set = "Other"}
+    info_queue[#info_queue+1] = {key = "artist_durandal", set = "Other"}
     return { vars = { card.ability.extra.money, card.ability.extra.slots} }
 end
 

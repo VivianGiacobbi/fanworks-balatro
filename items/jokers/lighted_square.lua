@@ -24,27 +24,16 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.destroy_card and not card.debuff and #context.full_hand == card.ability.extra.hand_size then
-        local destroy = context.full_hand[#context.full_hand]
-        if context.cardarea == G.play then
-            if context.destroy_card ~= destroy then
-                return
-            end
-            
-            return {
-                delay = 0.45, 
-                remove = true,
-            }
-        elseif context.cardarea == 'unscored' then
-            if context.destroy_card ~= destroy then
-                return
-            end           
+    if context.destroy_card and not card.debuff and #context.scoring_hand == card.ability.extra.hand_size then
+        local destroy = context.scoring_hand[#context.scoring_hand]
+        if context.destroy_card ~= destroy then
+            return
+        end
 
-            return {
-                delay = 0.45, 
-                remove = true,
-            }
-        end        
+        return {
+            delay = 0.45, 
+            remove = true,
+        }
     end
 end
 

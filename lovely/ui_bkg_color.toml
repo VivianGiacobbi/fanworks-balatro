@@ -10,17 +10,17 @@ priority = 0
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
-pattern = '''final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = loc_colour(part.control.X), r = 0.05, padding = 0.03, res = 0.15}, nodes={
+pattern = '''final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = part.control.B and args.vars.colours[tonumber(part.control.B)] or loc_colour(part.control.X), r = 0.05, padding = 0.03, res = 0.15}, nodes={
     {n=G.UIT.T, config={
-    text = assembled_string,
-    colour = loc_colour(part.control.C or nil),
-    scale = 0.32*(part.control.s and tonumber(part.control.s) or args.scale  or 1)*desc_scale}},
+      text = assembled_string,
+      colour = part.control.V and args.vars.colours[tonumber(part.control.V)] or loc_colour(part.control.C or nil),
+      scale = 0.32*(part.control.s and tonumber(part.control.s) or args.scale  or 1)*desc_scale}},
 }}'''
 position = "at"
-payload = '''final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = loc_colour(part.control.X), r = (assembled_string ~= '' and 0.05 or 0), padding = (assembled_string ~= '' and 0.03 or 0), res = (assembled_string ~= '' and 0.15 or 0)}, nodes={
+payload = '''final_line[#final_line+1] = {n=G.UIT.C, config={align = "m", colour = part.control.B and args.vars.colours[tonumber(part.control.B)] or loc_colour(part.control.X), r = (assembled_string ~= '' and 0.05 or 0), padding = (assembled_string ~= '' and 0.03 or 0), res = (assembled_string ~= '' and 0.15 or 0)}, nodes={
     {n=G.UIT.T, config={
     text = assembled_string,
-    colour = loc_colour(part.control.C or nil),
+    colour = part.control.V and args.vars.colours[tonumber(part.control.V)] or loc_colour(part.control.C or nil),
     scale = 0.32*(part.control.s and tonumber(part.control.s) or args.scale  or 1)*desc_scale}},
 }}'''
 match_indent = true
