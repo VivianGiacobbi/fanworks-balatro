@@ -94,12 +94,13 @@ return {
 				"stranger~",
 			},
 			mq_j_fnwk_gq_lambiekins_1 = {
-				"...............",
-				"...Good Enough.",
+				"What a cute",
+				"little plushie!",
 			},
 			mq_j_fnwk_gq_lambiekins_2 = {
-				"...I'm lonely",
-				"tonight.",
+				"I'm not doing anything",
+				"that could be considered",
+				"problematic with this.",
 			},
 			mq_j_egg = {
 				"We all find out",
