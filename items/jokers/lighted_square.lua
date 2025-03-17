@@ -29,7 +29,7 @@ function jokerInfo.calculate(self, card, context)
         if context.destroy_card ~= destroy then
             return
         end
-        
+
         return {
             delay = 0.45, 
             remove = true,
