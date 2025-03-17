@@ -12,7 +12,7 @@ local jokerInfo = {
 		},
 	},
 	rarity = 3,
-	cost = 9,
+	cost = 6,
 	unlocked = false,
 	blueprint_compat = false,
 	eternal_compat = true,
