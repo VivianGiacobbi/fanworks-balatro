@@ -31,14 +31,16 @@ function jokerInfo.calculate(self, card, context)
     if not context.individual or not context.cardarea == G.play or card.debuff then
         return
     end
-    if not SMODS.has_enhancement(v, 'm_stone') then
-        return
+    if SMODS.has_enhancement(v, 'm_stone') then
+            card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
+        return {
+            message = localize('k_upgrade_ex'),
+            card = card,
+        }
     end
 
-    ease_dollars(to_big(card.ability.extra.money))
     return {
-        message = localize('$')..card.ability.extra.money,
-        colour = G.C.MONEY,
+        mult = card.ability.extra.mult,
         card = context.blueprint_card or card
     }
 end
