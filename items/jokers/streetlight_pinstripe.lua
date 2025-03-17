@@ -63,6 +63,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = {get_lucky_tally()}}
 end
 
+function jokerInfo.in_pool(self, args)
+    for _, v in ipairs(G.playing_cards) do
+        if SMODS.has_enhancement(v, 'm_lucky') then
+            return true
+        end
+    end
+end
+
 function jokerInfo.calc_dollar_bonus(self, card)
     local tally = get_lucky_tally()
     if tally > 0 then

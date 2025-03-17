@@ -6,7 +6,7 @@ local jokerInfo = {
 	config = {
         extra = {
             x_mult = 1,
-            x_mult_mod = 0.05,
+            x_mult_mod = 0.1,
         },
         action_time = 0,
     },

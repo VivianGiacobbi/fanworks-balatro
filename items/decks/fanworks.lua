@@ -11,7 +11,7 @@ local deckInfo = {
 }
 
 function deckInfo.check_for_unlock(self, args)
-    local discovered
+    local discovered = CheckFanworksDiscoveries(self)
 end
 
 function deckInfo.loc_vars(self, info_queue, card)
