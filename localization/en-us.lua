@@ -1173,7 +1173,7 @@ return {
 					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
 				},
 				unlock = {
-					"???"
+					"?????"
 				}
 			},
 			j_fnwk_jspec_kunst = {
@@ -1183,7 +1183,7 @@ return {
 					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
 				},
 				unlock = {
-					"???"
+					"?????"
 				}
 			},
 			j_fnwk_jspec_ilsa = {
@@ -1194,7 +1194,7 @@ return {
 					"and {C:dark_edition}Polychrome{}"
 				},
 				unlock = {
-					"???"
+					"?????"
 				}
 			},
 			j_fnwk_fanworks_jogarc = {
