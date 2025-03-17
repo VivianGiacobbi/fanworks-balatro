@@ -1,4 +1,5 @@
 local jokerInfo = {
+    key = 'j_fnwk_gotequest_lambiekins',
     name = 'Ms. Lambiekins',
     config = {
         extra = {
@@ -28,14 +29,14 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.individual or not context.cardarea == G.play or card.debuff then
+    if not (context.individual and context.cardarea == G.play) or card.debuff then
         return
     end
-    if not SMODS.has_enhancement(v, 'm_lucky') then
+    if not SMODS.has_enhancement(context.other_card, 'm_lucky') then
         return
     end
 
-    ease_dollars(to_big(card.ability.extra.money))
+    ease_dollars(card.ability.extra.money)
     return {
         message = localize('$')..card.ability.extra.money,
         colour = G.C.MONEY,

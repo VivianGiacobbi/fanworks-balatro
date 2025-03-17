@@ -93,11 +93,11 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
-			mq_j_fnwk_gq_lambiekins_1 = {
+			mq_j_fnwk_gotequest_lambiekins_1 = {
 				"...............",
 				"...Good Enough.",
 			},
-			mq_j_fnwk_gq_lambiekins_2 = {
+			mq_j_fnwk_gotequest_lambiekins_2 = {
 				"...I'm lonely",
 				"tonight.",
 			},
