@@ -6,9 +6,13 @@ local deckInfo = {
             'v_overstock_norm',
         },
     },
-    unlocked = true,
+    unlocked = false,
     discovered = true,
 }
+
+function deckInfo.check_for_unlock(self, args)
+    local discovered
+end
 
 function deckInfo.loc_vars(self, info_queue, card)
     return {vars = {localize{type = 'name_text', key = 'v_overstock_norm', set = 'Voucher'}, self.config.extra}}

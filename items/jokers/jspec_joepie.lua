@@ -8,6 +8,7 @@ local jokerInfo = {
     },
 	rarity = 4,
 	cost = 20,
+    unlocked = false,
     hasSoul = true,
 	blueprint_compat = false,
 	eternal_compat = true,

@@ -1,13 +1,17 @@
-
+--- Add effects for non-main editions to an effects table, similar to SMODS.calculate_quantum_enhancements()
+--- @param card table Balatro card table to find extra editions on
+--- @param effects table Balatro effects table, created in eval_card() misc function
+--- @param context table Context able used for eval_card() function
+--- @return boolean # Whether or not any quantum editions were found and calculated
 function SMODS.calculate_quantum_editions(card, effects, context)
     if not card.edition then
-        return
+        return false
     end
 
     context.extra_edition = true
     local extra_editions = SMODS.get_quantum_editions(card)
     if #extra_editions < 1 then
-        return
+        return false
     end
     local old_edition = copy_table(card.edition)
 
@@ -25,8 +29,12 @@ function SMODS.calculate_quantum_editions(card, effects, context)
     
     card.edition = old_edition
     context.extra_edition = nil
+    return true
 end
 
+--- Return any quantum editions from a card
+--- @param card table Balatro card table to find extra editions on
+--- @return table extras An indexed table containing extra editions, formatted like card.edition in vanilla
 function SMODS.get_quantum_editions(card)
     if card.edition.others and next(card.edition.others) then
         local extras = copy_table(card.edition.others)

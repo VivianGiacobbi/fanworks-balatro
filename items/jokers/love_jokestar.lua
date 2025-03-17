@@ -104,7 +104,6 @@ function jokerInfo.update(self, card, dt)
         return
     end
 
-
     if card.ability.fizzled then
         if card.ability.fizzle_timer < card.ability.fizzle_limit then 
             card.ability.fizzle_timer = card.ability.fizzle_timer + G.real_dt
