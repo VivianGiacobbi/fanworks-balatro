@@ -23,6 +23,7 @@ local items_to_load = {
 		'crimson_golden',
 			
 		-- gotequest
+		'gotequest_killing',
 		'gotequest_lambiekins',
 
 		-- culture shock
