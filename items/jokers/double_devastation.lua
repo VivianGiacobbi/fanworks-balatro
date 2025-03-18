@@ -11,6 +11,7 @@ local jokerInfo = {
         glow_lerp = 0,
         glow_max = 1,
         glow_min = 0.40,
+        glow_range = 0.6,
     },
 	rarity = 3,
 	cost = 7,
