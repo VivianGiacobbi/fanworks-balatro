@@ -21,6 +21,7 @@ local items_to_load = {
 
 		-- crimson jungle
 		'crimson_golden',
+		'crimson_bloodletting',
 			
 		-- gotequest
 		'gotequest_killing',
@@ -62,6 +63,9 @@ local items_to_load = {
 		-- double down
 		'double_clark',
 		'double_devastation',
+
+		-- careless cargo
+		'careless_jokestar',
 
 		-- rubicon crossroads
 		'rubicon_infidel',

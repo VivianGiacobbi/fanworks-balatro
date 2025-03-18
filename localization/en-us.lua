@@ -1291,6 +1291,14 @@ return {
 					"when scored",
 				}
 			},
+			j_fnwk_crimson_bloodletting = {
+				name = "Bloodletting Tome",
+				text = {
+					"For every {C:attention}#1#{} cards {C:attention}destroyed{},",
+					"create a {C:attention}King{} of {C:hearts}Hearts{}",
+					"{C:inactive}({}{C:attention}#2#{} {C:inactive}remaining){}"
+				}
+			},
 			j_fnwk_golden_generation = {
 				name = "Golden Generation",
 				text = {
@@ -1344,6 +1352,12 @@ return {
 					"time a card is {C:attention}destroyed{} or",
 					"{C:attention}added{} to your deck",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive}){}"
+				}
+			},
+			j_fnwk_careless_jokestar = {
+				name = "Childish Jokestar",
+				text = {
+					"{C:attention}Booster Packs{} are {C:money}50%{} off",
 				}
 			},
 		},
