@@ -3,7 +3,8 @@ local jokerInfo = {
     name = 'Sexy Rust Joker',
 	config = {
         extra = {
-            chips = 69,
+            base_chips = 69,
+            chips_mod = 30,
             women = {
                 ['j_lusty_joker'] = true,
                 ['j_hack'] = true,
@@ -56,18 +57,28 @@ end
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
     if not G.jokers then
-        return { vars = {card.ability.extra.chips, card.ability.extra.chips} }
+        return { vars = {card.ability.extra.base_chips, card.ability.extra.chips_mod, card.ability.extra.base_chips} }
     end
 
-	local mod = 1
+	local count = 0
     for i=1, #G.jokers.cards do
-        local results = find_women(card, G.jokers.cards[i].config.center.key)
-        if results.junkie or results.t_woman or results.woman then
-            mod = mod + 1
+        if G.jokers.cards[i] ~= card then
+            local results = find_women(card, G.jokers.cards[i].config.center.key)
+            if results.junkie or results.t_woman or results.woman then
+                count = count + 1
+            end
         end
     end
 
-	return { vars = {card.ability.extra.chips, card.ability.extra.chips * mod} }
+    sendDebugMessage()
+
+	return { 
+        vars = {
+            card.ability.extra.base_chips,
+            card.ability.extra.chips_mod,
+            card.ability.extra.base_chips + card.ability.extra.chips_mod * count
+        }
+    }
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -76,10 +87,6 @@ function jokerInfo.calculate(self, card, context)
             
         if context.card == card then
             return
-        end
-
-        for k, v in pairs(card.ability.extra.junkies) do
-            sendDebugMessage(k..': '..v)
         end
 
         local results = find_women(card, context.card.config.center.key)
@@ -91,7 +98,6 @@ function jokerInfo.calculate(self, card, context)
 
         -- find specific quotes
         if results.junkie then
-            sendDebugMessage('junkie spotted')
             speech_key = speech_key..'_'..context.card.config.center.key
             if results.junkie > 1 then
                 speech_key = speech_key..'_'..results.junkie
@@ -107,8 +113,6 @@ function jokerInfo.calculate(self, card, context)
         if results.woman then
             speech_key = speech_key..'_'..math.random(1,19)
         end
-
-        sendDebugMessage(speech_key)
 
         -- maggie says some shit
         card:say_quip(2, nil, true)
@@ -137,17 +141,24 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    local mod = 1
+    if not (context.scoring_name == 'Pair' or context.scoring_name == 'Three of a Kind' or context.scoring_name == 'Four of a Kind') then
+        return
+    end
+
+    local count = 0
     for i=1, #G.jokers.cards do
-        local results = find_women(card, G.jokers.cards[i].config.center.key)
-        if results.junkie or results.t_woman or results.woman then
-            mod = mod + 1
+        if G.jokers.cards[i] ~= card then
+            local results = find_women(card, G.jokers.cards[i].config.center.key)
+            if results.junkie or results.t_woman or results.woman then
+                count = count + 1
+            end
         end
     end
 
+    local total_chips = card.ability.extra.base_chips + card.ability.extra.chips_mod * count
     return {
-        message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips * mod} },
-        chip_mod = card.ability.extra.chips * mod, 
+        message = localize{ type='variable', key='a_chips', vars = {total_chips} },
+        chip_mod = total_chips, 
         colour = G.C.CHIPS,
         card = context.blueprint_card or card
     }

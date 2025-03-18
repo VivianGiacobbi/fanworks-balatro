@@ -878,11 +878,11 @@ return {
 			j_fnwk_bluebolt_sexy = {
 				name = "Sexy Joker",
 				text = {
-					"{C:chips}+#1# chips{} if played hand is",
-					"a {C:attention}Pair{}, {C:attention}Three of a Kind{}, or",
-					"{C:attention}Four of a Kind{}, multiplied by",
-					"the amount of {C:attention}certain jokers{}",
-					"{C:inactive}(Currently{} {C:chips}+#2#{} {C:inactive}Chips){}",
+					"{C:chips}+#1#{} Chips if played hand",
+					"is a {C:attention}Pair{}, {C:attention}Three of a Kind{},",
+					"or {C:attention}Four of a Kind{},",
+					"{C:chips}+#2#{} Chips for each {C:attention}woman{} Joker",
+					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
 				}
 			},
 			j_fnwk_bluebolt_secluded = {
