@@ -109,11 +109,11 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.extra.current_spend = 0
 	end
 
-	if card.ability.extra.current_spend < card.ability.extra.spend_val then
-		if context.cardarea == G.jokers and context.buying_card then 
+	if context.cardarea == G.jokers and card.ability.extra.current_spend < card.ability.extra.spend_val then
+		if context.buying_card or context.open_booster then 
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
-		elseif context.cardarea == G.jokers and context.open_booster then
-			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
+		elseif context.reroll_shop then
+			card.ability.extra.current_spend = card.ability.extra.current_spend + context.cost
 		end
 
 		if card.ability.extra.current_spend >= card.ability.extra.spend_val then
