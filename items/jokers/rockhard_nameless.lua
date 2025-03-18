@@ -1,6 +1,7 @@
 SMODS.Atlas({ key = 'rockhard_nameless_mask', path = 'jokers/rockhard_nameless_mask.png', px = 71, py = 95 })
 
 local jokerInfo = {
+    key = 'j_fnwk_rockhard_nameless',
 	name = 'Endless Nameless',
 	config = {
         extra = {
