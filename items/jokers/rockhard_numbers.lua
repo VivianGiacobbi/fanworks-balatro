@@ -63,7 +63,7 @@ function jokerInfo.calculate(self, card, context)
         if context.consumeable.ability.name == 'Cryptid' 
         or context.consumeable.ability.name == 'Death'
         or context.consumeable.ability.name == 'Hanged Man' then
-            local cryptids = G.GAME.consumeables['c_cryptid'] or 0
+            local cryptids = G.GAME.run_consumeables['c_cryptid'] or 0
             local deaths = G.GAME.run_consumeables['c_death'] or 0
             local hung_men = G.GAME.run_consumeables['c_hanged_man'] or 0
             local total = cryptids + deaths + hung_men
