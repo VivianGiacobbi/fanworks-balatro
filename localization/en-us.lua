@@ -973,9 +973,9 @@ return {
 			j_fnwk_sunshine_reliable = {
 				name = "Ol' Reliable",
 				text = {
-					"{C:mult}+#1#{} mult for each time",
+					"{C:mult}+#1#{} Mult for each time",
 					"played {C:attention}poker hand{} has",
-					"been played {C:attention}this round{}",
+					"been previously played {C:attention}this round{}",
 				}
 			},
 			j_fnwk_rockhard_rebirth = {
@@ -1069,6 +1069,15 @@ return {
                     "{C:chips}Chips{} of each {C:attention}playing{}",
 					"{C:attention}card{} scored this round",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
+				}
+			},
+			j_fnwk_gotequest_killing = {
+				name = "Feel Like Killing It",
+				text = {
+					"This Joker gains {X:mult,C:white}X#1#{} Mult",
+					"for each card {C:attention}destroyed{},",
+					"loses {X:mult,C:white}X#1#{} Mult at end of round",
+					"{C:inactive}(Max {X:mult,C:white}X#2#{} {C:inactive}Mult) (Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)"
 				}
 			},
 			j_fnwk_gotequest_lambiekins = {

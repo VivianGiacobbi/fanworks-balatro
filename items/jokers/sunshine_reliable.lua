@@ -3,7 +3,7 @@ local jokerInfo = {
 	config = {
 		extra = {
 			hands_at_start = {},
-            mult_mod = 6,
+            mult_mod = 8,
 		},
 	},
 	rarity = 1,
