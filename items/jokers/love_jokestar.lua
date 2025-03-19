@@ -189,7 +189,6 @@ function jokerInfo.draw(self, card, layer)
         end
     end
 
-
     local cursor_pos = {}
     cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
     cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE

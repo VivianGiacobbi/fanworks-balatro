@@ -1293,6 +1293,14 @@ return {
 					"when scored",
 				}
 			},
+			j_fnwk_crimson_bloodletting = {
+				name = "Bloodletting Tome",
+				text = {
+					"For every {C:attention}#1#{} cards {C:attention}destroyed{},",
+					"create a {C:attention}King{} of {C:hearts}Hearts{}",
+					"{C:inactive}({}{C:attention}#2#{} {C:inactive}remaining){}"
+				}
+			},
 			j_fnwk_golden_generation = {
 				name = "Golden Generation",
 				text = {
@@ -1354,6 +1362,12 @@ return {
 					"This Joker gains {C:chips}+#2#{} Chips every",
 					"time a {C:attention}Booster Pack{} is opened",
 					"{C:inactive}(Currently {}{C:chips}+#1#{}{C:inactive} Chips){}"
+				}
+			},
+			j_fnwk_careless_jokestar = {
+				name = "Childish Jokestar",
+				text = {
+					"{C:attention}Booster Packs{} are {C:money}50%{} off",
 				}
 			},
 		},
