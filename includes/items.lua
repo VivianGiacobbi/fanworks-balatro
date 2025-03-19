@@ -43,15 +43,16 @@ local items_to_load = {
 		-- rockhard in a funky place
 		'rockhard_rebirth',
 		-- 'rockhard_peppers',
-		'rockhard_trans',
 		'rockhard_nameless',
 		'rockhard_alfie',
+		'rockhard_trans',
 		'rockhard_numbers',
 
 		-- iron touch
 		'iron_boney',
 
-		-- lighted state
+		-- lighted stage
+		'lighted_ge',
 		'lighted_square',
 
 		-- spirit lines
@@ -68,8 +69,8 @@ local items_to_load = {
 		'careless_jokestar',
 
 		-- rubicon crossroads
-		'rubicon_infidel',
 		'rubicon_fishy',
+		'rubicon_infidel',
 		'rubicon_film',
 		'rubicon_moonglass',
 		'rubicon_bone',

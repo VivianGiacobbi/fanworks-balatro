@@ -343,6 +343,7 @@ return {
 			k_kunst_hm = "Hm......",
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
+			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
 			f_hit = 'Hit!',
@@ -1174,6 +1175,14 @@ return {
 			},
 			j_fnwk_lighted_square = {
 				name = "Square Biz Killer",
+				text = {
+					"If played hand is {C:attention}#1#{}",
+					"scoring cards, {C:attention}destroy{} the",
+					"last card {C:attention}after{} scoring"
+				}
+			},
+			j_fnwk_lighted_ge = {
+				name = "Gypsy Eyes",
 				text = {
 					"If played hand is {C:attention}#1#{}",
 					"scoring cards, {C:attention}destroy{} the",
