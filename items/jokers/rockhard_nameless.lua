@@ -15,7 +15,7 @@ local jokerInfo = {
     hasSoul = true,
 	blueprint_compat = true,
 	eternal_compat = true,
-	perishable_compat = true,
+	perishable_compat = false,
 	fanwork = 'rockhard',
 }
 

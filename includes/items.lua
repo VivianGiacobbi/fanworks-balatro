@@ -94,6 +94,9 @@ local items_to_load = {
 		-- scepter files
 		'scepter_card',
 
+		-- yo yo ma
+		'yym_sheet',
+
 		-- golden generation
 		'golden_generation',
 
