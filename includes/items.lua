@@ -228,6 +228,7 @@ local wip_jokers = {
     ['mania_jokestar'] = true,
 	['mania_fragile'] = true,
 	['industry_loyal'] = true,
+	['spirit_gambler'] = true,
 	['double_firewalker'] = true,
 	['stalk_jokestar'] = true,
 	['streetlight_arrow'] = true,
