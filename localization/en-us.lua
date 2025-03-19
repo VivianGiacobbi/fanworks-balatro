@@ -344,6 +344,7 @@ return {
 			k_kunst_hm = "Hm......",
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
+			k_seal = "Seal!",
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
 			f_hit = 'Hit!',
@@ -373,6 +374,7 @@ return {
 				}
             },
 			k_flush = 'Flushed!',
+			k_expired_ex = 'Expired!',
 
 			ba_fanworks = 'Fanworks',
 			co_fanworks = 'DD85B4',
@@ -1296,7 +1298,7 @@ return {
 					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to gain",
 					"a random {C:attention}seal{}",
-					"{C:inactive}({}{C:attention}+#3#{} {C:inactive}remaining){}"
+					"{C:inactive}({}{C:attention}#3#{} {C:inactive}remaining){}"
 				}
 			},
 			j_fnwk_lighted_square = {
@@ -1310,10 +1312,10 @@ return {
 			j_fnwk_mania_jokestar = {
 				name = "Cubist Jokestar",
 				text = {
-					"{C:green}#1# in #2#{} chance for {C:attention}Wild Cards{}",
-					"to give {C:chips}+#3#{} Chips and {C:mult}+#4#{} Mult",
-					"when scored, otherwise they are",
-					"{C:attention}debuffed{}"
+					"{C:green}#1# in #2#{} chance for",
+					"{C:attention}Wild Cards{} to give {C:chips}+#3#{} Chips",
+					"and {C:mult}+#4#{} Mult when scored,",
+					"otherwise they are {C:attention}debuffed{}"
 				}
 			},
 			j_fnwk_mania_fragile = {
