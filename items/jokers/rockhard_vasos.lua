@@ -19,4 +19,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.base, card.ability.extra.base + card.ability.extra.stand_mod}}
 end
 
+function jokerInfo.add_to_deck(self, card, from_debuff)
+	if from_debuff then return end
+	G.consumeables:change_size(card.ability.extra.base)
+end
+
+function jokerInfo.remove_from_deck(self, card, from_debuff)
+	if from_debuff then return end
+	G.consumeables:change_size(-card.ability.extra.base)
+end
+
 return jokerInfo
