@@ -1,6 +1,7 @@
 return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
+	['enableWipJokers'] = false,
 	['enableStands'] = true,
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
@@ -9,7 +10,6 @@ return {
 	['enableAchievements'] = false,
 	['enableAltArt'] = false,
 	['enableSkepticStaticSeed'] = false,
-	
 	['enableQueer'] = true,
 	['enableConsumableTweaks'] = true,
 	['enableTarotSkins'] = true,

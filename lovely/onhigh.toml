@@ -1,0 +1,97 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds functions so From On High can calculate levels using the highest level poker hand
+#
+
+# CardArea:parse_highlighted()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''update_hand_text({immediate = true, nopulse = nil, delay = 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})'''
+position = "after"
+payload = '''if next(SMODS.find_card('j_fnwk_jojopolis_high')) then
+    local highest = 0
+    for k, v in pairs(G.GAME.hands) do
+        if v.level > highest then highest = v.level end
+    end
+    local fake_hand = {
+        level = highest,
+        mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1),
+        chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+    }
+    update_hand_text({immediate = true, nopulse = nil, delay = 0}, {handname=disp_text, level = fake_hand.level, mult = fake_hand.mult, chips = fake_hand.chips})
+end'''
+match_indent = true
+times = 1
+
+# G.FUNCS.evaluate_play()
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''update_hand_text({sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil, volume = 0.4, immediate = true, nopulse = nil,
+            delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})'''
+position = "at"
+payload = '''local effective_hand = {
+    level = G.GAME.hands[text].level,
+    mult = G.GAME.hands[text].mult,
+    chips = G.GAME.hands[text].chips
+}
+local find_onhigh = SMODS.find_card('j_fnwk_jojopolis_high')
+if next(find_onhigh) then
+    local highest = 0
+    for k, v in pairs(G.GAME.hands) do
+        if v.level > highest then highest = v.level end
+    end
+    effective_hand.level = highest
+    effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1)
+    effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.3,
+        func = function()
+            find_onhigh[1]:juice_up()
+            play_sound('generic1')
+            return true
+        end 
+    }))
+end
+
+update_hand_text(
+    {
+        sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil,
+        volume = 0.4,
+        immediate = true,
+        nopulse = nil,
+        delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0
+    },
+    {
+        handname = disp_text,
+        level = effective_hand.level,
+        mult = effective_hand.mult,
+        chips = effective_hand.chips
+    }
+)'''
+match_indent = true
+times = 1
+
+# G.FUNCS.evaluate_play()
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''mult = mod_mult(G.GAME.hands[text].mult)
+hand_chips = mod_chips(G.GAME.hands[text].chips)'''
+position = "at"
+payload = '''mult = mod_mult(effective_hand.mult)
+hand_chips = mod_chips(effective_hand.chips)'''
+match_indent = true
+times = 2
+
+
+
+
+
+
+

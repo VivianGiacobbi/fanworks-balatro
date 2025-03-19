@@ -82,7 +82,7 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.before and context.cardarea == G.jokers and not context.blueprint then
 
-        if not (context.scoring_name == 'fnwk_fibonacci' or context.scoring_name == 'fnwk_flush_fib') then
+        if not next(context.poker_hands['Fibonacci']) then
             return
         end
         card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod	
