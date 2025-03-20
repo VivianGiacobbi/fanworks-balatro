@@ -11,7 +11,7 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = true,
 	height = 80,
-	width = 71
+	width = 71,
 	fanwork = 'lighted'
 }
 
