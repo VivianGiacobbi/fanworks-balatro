@@ -68,6 +68,7 @@ local items_to_load = {
 
 		-- lighted stage
 		'lighted_gypsy',
+		'lighted_ge',
 		'lighted_square',
 
 		-- jojomania
@@ -95,8 +96,8 @@ local items_to_load = {
 		'stalk_jokestar',
 
 		-- rubicon crossroads
-		'rubicon_infidel',
 		'rubicon_fishy',
+		'rubicon_infidel',
 		'rubicon_film',
 		'rubicon_moonglass',
 		'rubicon_bone',
@@ -134,6 +135,9 @@ local items_to_load = {
 
 		-- scepter files
 		'scepter_card',
+
+		-- yo yo ma
+		'yym_sheet',
 
 		-- golden generation
 		'golden_generation',

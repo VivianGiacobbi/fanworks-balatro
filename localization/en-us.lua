@@ -345,6 +345,7 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_seal = "Seal!",
+			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
 			f_hit = 'Hit!',
@@ -457,7 +458,9 @@ return {
 			co_lipstick = '8B2939',
 			ba_cis = 'Cold Iron Streets',
 			co_cis = 'DEF7FB',
-			te_cis = '5BA1B2'
+			te_cis = '5BA1B2',
+			ba_yym = "Yo-Yo Ma's Bizarre RPG",
+			co_yym = '0D8640'
 		},
 		challenge_names = {
 			c_fnwk_tucker = "Tucker's Challenge",
@@ -1206,8 +1209,8 @@ return {
 				name = "Samurai Crackdown",
 				text = {
 					"This Joker gains {C:mult}+#1#{} Mult per",
-					"scoring {C:attention}Stone Card{} played,",
-					"then {C:attention}destroys{} them",
+					"{C:attention}Stone Card{} scored, then",
+					"{C:attention}destroys{} them after scoring",
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
 				}
 			},
@@ -1301,6 +1304,14 @@ return {
 					"{C:inactive}({}{C:attention}#3#{} {C:inactive}remaining){}"
 				}
 			},
+      j_fnwk_lighted_ge = {
+				name = "Gypsy Eyes",
+				text = {
+					"If played hand is {C:attention}#1#{}",
+					"scoring cards, {C:attention}destroy{} the",
+					"last card {C:attention}after{} scoring"
+				}
+			},
 			j_fnwk_lighted_square = {
 				name = "Square Biz Killer",
 				text = {
@@ -1333,9 +1344,8 @@ return {
 					"if you have a {C:fanworks}Stand{},",
 					"each played {C:attention}#1#{} gives",
 					"{C:mult}+#2#{} Mult when scored"
-					
-				}
-			},
+         }
+      },
 			j_fnwk_iron_boney = {
 				name = "Joker M.",
 				text = {
@@ -1391,7 +1401,7 @@ return {
 				name = "Ilsa",
 				text = {
 					"Cards with an {C:attention}Edition{}",
-					"also act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
+					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
 					"and {C:dark_edition}Polychrome{}"
 				},
 				unlock = {
@@ -1538,7 +1548,15 @@ return {
 					"This Joker gains {C:mult}+#1#{} Mult each",
 					"time a card is {C:attention}destroyed{} or",
 					"{C:attention}added{} to your deck",
-					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive}){}"
+					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult){}"
+				}
+			},
+			j_fnwk_yym_sheet = {
+				name = "Character Sheet",
+				text = {
+					"This Joker gains {C:chips}+#2#{} Chips every",
+					"time a {C:attention}Booster Pack{} is opened",
+					"{C:inactive}(Currently {}{C:chips}+#1#{}{C:inactive} Chips){}"
 				}
 			},
 			j_fnwk_careless_jokestar = {
