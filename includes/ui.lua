@@ -10,6 +10,7 @@ SMODS.Atlas({
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableJokers',
+		'enableWipJokers',
 		'enableDecks',
 		'enableVouchers',
 		'enableConsumables',
