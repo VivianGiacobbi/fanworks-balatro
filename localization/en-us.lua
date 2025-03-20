@@ -1272,7 +1272,7 @@ return {
 				}
 			},
 			j_fnwk_double_firewalker = {
-				name = "Acerbic Fencer",
+				name = "The Firewalker",
 				text = {
 					"Creates a {C:dark_edition}Negative{}",
 					"{C:attention}Popcorn{} or {C:attention}Ice Cream{}",
