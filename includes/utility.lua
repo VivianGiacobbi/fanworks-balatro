@@ -38,6 +38,10 @@ function LoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
+	if info.wip and not fnwk_enabled['enableWipJokers'] then
+		return
+	end
+
 	info.key = file_key
 	if item_type ~= 'Challenge' then
 		info.atlas = file_key
@@ -76,6 +80,10 @@ function LoadItem(file_key, item_type, no_badges)
 	end
 
 	SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
+	if info.alt_art then
+		SMODS.Atlas({ key = file_key..'_alt', path = "jokers/" .. file_key .. '_alt'.. ".png", px = 71, py = 95 })
+
+	end
 end
 
 --- Checks total discovered cards that use the 'fnwk_' mod prefix
@@ -216,4 +224,14 @@ function DeepCopy(orig)
 		copy = orig
 	end
 	return copy
+end
+
+--- Find a card key in the G.WOMEN table
+--- @param key string card object key
+--- @return table # Table with three properties, 'junkie, 'trans', and 'cis'. Each will be true or nil if the key is found in each list
+function FindWomen(key) 
+    local junkie = G.WOMEN.junkies[key]
+    local trans = G.WOMEN.trans[key]
+    local cis = G.WOMEN.cis[key]
+    return {junkie = junkie, trans = trans, cis = cis}
 end

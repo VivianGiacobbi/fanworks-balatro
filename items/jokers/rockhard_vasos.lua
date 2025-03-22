@@ -11,7 +11,9 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'rockhard'
+	fanwork = 'rockhard',
+	alt_art = true,
+	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

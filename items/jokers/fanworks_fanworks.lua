@@ -11,7 +11,8 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = false,
-	fanwork = 'fanworks'
+	fanwork = 'fanworks',
+	in_progress = true,
 }
 
 local function tally_fanworks_jokers()

@@ -9,6 +9,7 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = true,
 	fanwork = 'plancks',
+	alt_art = true
 }
 
 local function create_logic(type, legendary, rarity, soulable, forced_key, key_append)
