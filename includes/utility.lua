@@ -38,7 +38,7 @@ function LoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
-	if info.wip and not fnwk_enabled['enableWipJokers'] then
+	if info.in_progress and not fnwk_enabled['enableWipJokers'] then
 		return
 	end
 
