@@ -221,7 +221,6 @@ local wip_jokers = {
 	['jojopolis_high'] = true,
     ['asap_jokestar'] = true,
     ['gotequest_pair'] = true,
-    ['gotequest_headlong'] = true,
     ['gotequest_2hot'] = true,
     ['gotequest_ajorekesr'] = true,
     ['gotequest_will'] = true,

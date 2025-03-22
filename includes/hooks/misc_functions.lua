@@ -189,3 +189,14 @@ function G.FUNCS.fnwk_restart()
 		SMODS.full_restart = 1
 	end
 end
+
+local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
+function G.FUNCS.draw_from_deck_to_hand(self, e)
+	draw_from_deck_to_handref(self, e)
+	if G.GAME.dzrawlin and G.GAME.dzrawlin > 0 then
+		for i = 1, G.GAME.dzrawlin do
+			draw_card(G.deck, G.hand, 100, 'up', true)
+		end
+		G.GAME.dzrawlin = 0
+	end
+end
