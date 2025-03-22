@@ -11,7 +11,7 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = true,
 	height = 80,
-	width = 71
+	width = 71,
 	fanwork = 'lighted'
 }
 
@@ -26,10 +26,6 @@ function jokerInfo.set_sprites(self, card, _front)
 		card.children.center.scale = {x=self.width,y=self.height}
 		card.children.center.scale_mag = math.min(self.width/card.children.center.T.w,self.height/card.children.center.T.h)
 		card.children.center:reset()
-
-		card.children.floating_sprite.scale = {x=self.width,y=self.height}
-		card.children.floating_sprite.scale_mag = math.min(self.width/card.children.floating_sprite.T.w,self.height/card.children.floating_sprite.T.h)
-		card.children.floating_sprite:reset()
 	end
 end
 
