@@ -5,9 +5,15 @@ local items_to_load = {
 		'fanworks_tos',
 		'fanworks_jester',
 		'fanworks_mascot',
+		'fanworks_fanworks',
+		'fanworks_standoff',
 
 		-- jojopolis
 		'jojopolis_jokestar',
+		'jojopolis_high',
+
+		-- a$ap mob feedback
+		'asap_jokestar',
 
 		-- bone to blades
 		'bone_samurai',
@@ -24,7 +30,12 @@ local items_to_load = {
 		'crimson_bloodletting',
 			
 		-- gotequest
+		'gotequest_pair',
 		'gotequest_killing',
+		'gotequest_headlong',
+		'gotequest_2hot',
+		'gotequest_ajorekesr',
+		'gotequest_will',
 		'gotequest_lambiekins',
 
 		-- culture shock
@@ -39,21 +50,30 @@ local items_to_load = {
 		'plancks_skeptic',
 		'plancks_crazy',
 
+		-- last hope army
+		'last_morse',
 
 		-- rockhard in a funky place
 		'rockhard_rebirth',
 		-- 'rockhard_peppers',
 		'rockhard_nameless',
 		'rockhard_alfie',
+		'rockhard_vasos',
 		'rockhard_trans',
 		'rockhard_numbers',
 
 		-- iron touch
+		'iron_sanctuary',
 		'iron_boney',
 
 		-- lighted stage
+		'lighted_gypsy',
 		'lighted_ge',
 		'lighted_square',
+
+		-- jojomania
+		'mania_jokestar',
+		'mania_fragile',
 
 		-- spirit lines
 		'spirit_halves',
@@ -61,12 +81,19 @@ local items_to_load = {
 		'spirit_gambler',
 		'spirit_corpse',
 
+		-- industry baby
+		'industry_loyal',
+
 		-- double down
 		'double_clark',
+		'double_firewalker',
 		'double_devastation',
 
 		-- careless cargo
 		'careless_jokestar',
+
+		-- stalk forest club
+		'stalk_jokestar',
 
 		-- rubicon crossroads
 		'rubicon_fishy',
@@ -81,20 +108,30 @@ local items_to_load = {
 		'streetlight_indulgent',
 		'streetlight_methodical',
 		'streetlight_industrious',
+		'streetlight_arrow',
 		'streetlight_pinstripe',
+		'streetlight_biased',
+		'streetlight_teenage',
 		'streetlight_cabinet',
+
+		-- whiplash riot
+		'whiplash_quiet',
 
 		-- bluebolt incarnation
 		'bluebolt_jokestar',
 		'bluebolt_sexy',
 		'bluebolt_secluded',
 		'bluebolt_tuned',
+		'bluebolt_impaired',
 
 		-- sunshine deluxe
 		'sunshine_duo',
 		'sunshine_laconic',
 		'sunshine_funkadelic',
 		'sunshine_reliable',
+
+		-- no man's army
+		'noman_unknown',
 
 		-- scepter files
 		'scepter_card',
@@ -121,6 +158,8 @@ local items_to_load = {
 		'lipstick_ego',
 
 		-- jojospectacle,
+		'jspec_energetic',
+		'jspec_seal',
 		'jspec_joepie',
 		'jspec_kunst',
 		'jspec_ilsa',
@@ -176,13 +215,46 @@ local alt_jokers = {
     ['streetlight_resil'] = true
 }
 
+local wip_jokers = {
+    ['fanworks_fanworks'] = true,
+    ['fanworks_standoff'] = true,
+	['jojopolis_high'] = true,
+    ['asap_jokestar'] = true,
+    ['gotequest_pair'] = true,
+    ['gotequest_headlong'] = true,
+    ['gotequest_2hot'] = true,
+    ['gotequest_ajorekesr'] = true,
+    ['gotequest_will'] = true,
+    ['last_morse'] = true,
+    ['rockhard_vasos'] = true,
+    ['iron_sanctuary'] = true,
+    ['lighted_gypsy'] = true,
+    ['mania_jokestar'] = true,
+	['mania_fragile'] = true,
+	['industry_loyal'] = true,
+	['spirit_gambler'] = true,
+	['double_firewalker'] = true,
+	['stalk_jokestar'] = true,
+	['streetlight_arrow'] = true,
+	['streetlight_biased'] = true,
+	['streetlight_teenage'] = true,
+	['whiplash_quiet'] = true,
+	['bluebolt_impaired'] = true,
+	['noman_unknown'] = true,
+	['jspec_energetic'] = true,
+	['jspec_seal'] = true,
+}
+
 for k, v in pairs(items_to_load) do
 	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
 		for i = 1, #v do
-			LoadItem(v[i], k)
+			
+			if not wip_jokers[v[i]] or (wip_jokers[v[i]] and fnwk_enabled['enableWipJokers']) then
+				LoadItem(v[i], k)
 
-			if k == 'Joker' and alt_jokers[v[i]] then
-				SMODS.Atlas({ key = v[i]..'_alt', path = "jokers/" .. v[i] .. '_alt'.. ".png", px = 71, py = 95 })
+				if k == 'Joker' and alt_jokers[v[i]] then
+					SMODS.Atlas({ key = v[i]..'_alt', path = "jokers/" .. v[i] .. '_alt'.. ".png", px = 71, py = 95 })
+				end
 			end
 		end
 	end
