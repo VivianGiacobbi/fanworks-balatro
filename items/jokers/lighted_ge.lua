@@ -12,7 +12,8 @@ local jokerInfo = {
 	perishable_compat = true,
 	height = 80,
 	width = 71,
-	fanwork = 'lighted'
+	fanwork = 'lighted',
+	in_progress = true,
 }
 
 

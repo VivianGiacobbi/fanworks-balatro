@@ -191,12 +191,12 @@ function G.FUNCS.fnwk_restart()
 end
 
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
-function G.FUNCS.draw_from_deck_to_hand(self, e)
-	draw_from_deck_to_handref(self, e)
-	if G.GAME.dzrawlin and G.GAME.dzrawlin > 0 then
-		for i = 1, G.GAME.dzrawlin do
-			draw_card(G.deck, G.hand, 100, 'up', true)
-		end
-		G.GAME.dzrawlin = 0
+function G.FUNCS.draw_from_deck_to_hand(e)
+	local hand_limit = e
+	if G.GAME.dzrawlin then
+		hand_limit = #G.deck.cards + #G.hand.cards
 	end
+	
+	SMODS.calculate_context({pre_draw = true})
+	return draw_from_deck_to_handref(hand_limit)
 end

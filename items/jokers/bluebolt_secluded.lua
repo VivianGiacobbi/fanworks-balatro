@@ -16,7 +16,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.pre_draw then
+	if context.cardarea == G.jokers and context.pre_draw and context.individual then
 		if context.drawn:is_suit('Diamonds') then
 			context.drawn.joker_force_facedown = true
 		end

@@ -198,63 +198,10 @@ local items_to_load = {
 	}
 }
 
-local alt_jokers = {
-    ['love_jokestar'] = true,
-    ['plancks_crazy'] = true,
-	['plancks_jokestar'] = true,
-    ['plancks_skeptic'] = true,
-    ['plancks_unsure'] = true,
-    ['rockhard_alfie'] = true,
-    ['rockhard_nameless'] = true,
-    ['rockhard_numbers'] = true,
-    ['rockhard_rebirth'] = true,
-    ['streetlight_fledgling'] = true,
-    ['streetlight_indulgent'] = true,
-    ['streetlight_industrious'] = true,
-    ['streetlight_methodical'] = true,
-    ['streetlight_resil'] = true
-}
-
-local wip_jokers = {
-    ['fanworks_fanworks'] = true,
-    ['fanworks_standoff'] = true,
-	['jojopolis_high'] = true,
-    ['asap_jokestar'] = true,
-    ['gotequest_pair'] = true,
-    ['gotequest_2hot'] = true,
-    ['gotequest_ajorekesr'] = true,
-    ['gotequest_will'] = true,
-    ['last_morse'] = true,
-    ['rockhard_vasos'] = true,
-    ['iron_sanctuary'] = true,
-    ['lighted_gypsy'] = true,
-    ['mania_jokestar'] = true,
-	['mania_fragile'] = true,
-	['industry_loyal'] = true,
-	['spirit_gambler'] = true,
-	['double_firewalker'] = true,
-	['stalk_jokestar'] = true,
-	['streetlight_arrow'] = true,
-	['streetlight_biased'] = true,
-	['streetlight_teenage'] = true,
-	['whiplash_quiet'] = true,
-	['bluebolt_impaired'] = true,
-	['noman_unknown'] = true,
-	['jspec_energetic'] = true,
-	['jspec_seal'] = true,
-}
-
 for k, v in pairs(items_to_load) do
 	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
 		for i = 1, #v do
-			
-			if not wip_jokers[v[i]] or (wip_jokers[v[i]] and fnwk_enabled['enableWipJokers']) then
-				LoadItem(v[i], k)
-
-				if k == 'Joker' and alt_jokers[v[i]] then
-					SMODS.Atlas({ key = v[i]..'_alt', path = "jokers/" .. v[i] .. '_alt'.. ".png", px = 71, py = 95 })
-				end
-			end
+			LoadItem(v[i], k, false)
 		end
 	end
 end

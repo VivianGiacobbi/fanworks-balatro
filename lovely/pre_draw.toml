@@ -17,7 +17,7 @@ end'''
 position = "after"
 payload = '''
 
-SMODS.calculate_context({pre_draw = true, drawn = card})'''
+SMODS.calculate_context({pre_draw = true, individual = true, drawn = card})'''
 match_indent = true
 times = 1
 
