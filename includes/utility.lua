@@ -33,7 +33,7 @@ end
 --- Load an item definition using SMODS
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
---- @param no_badges boolean Whether or not to display mod badges on this item
+--- @param no_badges boolean | nil Whether or not to display mod badges on this item
 function LoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
@@ -87,14 +87,14 @@ function LoadItem(file_key, item_type, no_badges)
 end
 
 --- Checks total discovered cards that use the 'fnwk_' mod prefix
---- @param exclude table An SMODS object to exclude from the count (usually the one calling the check)
+--- @param exclude table | nil An SMODS object to exclude from the count (usually the one calling the check)
 --- @return integer discovered Number of currently discovered cards
 --- @return integer total Total number of fanworks cards
 function CheckFanworksDiscoveries(exclude)
     local count = 0
     local discovered = 0
     for k, v in pairs(G.P_CENTERS) do
-        if string.sub(k, 3, 6) == 'fnwk' and k ~= exclude.config.key then
+        if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.config.key) then
             count = count + 1
             if v.config.discovered then
                 discovered = discovered + 1
@@ -234,4 +234,36 @@ function FindWomen(key)
     local trans = G.WOMEN.trans[key]
     local cis = G.WOMEN.cis[key]
     return {junkie = junkie, trans = trans, cis = cis}
+end
+
+--- Sets a discount for specific cards rather than a
+--- global discount and updates all instanced cards' costs
+--- @param source Card Balatro Card table indicating the source of the discount
+--- @param center_set string | nil Set to limit the discount to ('Booster', 'Tarot', 'Joker', etc)
+function SetCenterDiscount(source, juice, center_set)
+    G.GAME.extra_discounts[source.ID] = {
+		center_set = center_set,
+		discount = source.ability.extra
+	}
+    for _, v in pairs(G.I.CARD) do
+        if v.set_cost then 
+            v:set_cost()
+			if juice and (not center_set or (v.ability and v.ability.set == center_set)) then 
+				v:juice_up()
+			end
+        end
+    end
+	if juice then play_sound('generic1') end
+end
+
+--- Clears any set discounts keyed with source's ID
+--- and updates all instanced cards' costs
+--- @param source Card Balatro Card table indicating the source of the discount
+function ClearCenterDiscountSource(source)
+	G.GAME.extra_discounts[source.ID] = nil
+	for _, v in pairs(G.I.CARD) do
+        if v.set_cost then 
+            v:set_cost()
+        end
+    end
 end

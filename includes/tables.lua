@@ -1,3 +1,4 @@
+--- A table of joker keys considered "women"
 G.WOMEN = {
     cis = {
         ['j_lusty_joker'] = true,

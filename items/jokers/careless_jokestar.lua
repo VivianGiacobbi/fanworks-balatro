@@ -18,27 +18,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-    local old_discount = G.GAME.discount_percent
-    G.GAME.discount_percent = G.GAME.discount_percent + (100 - G.GAME.discount_percent) * card.ability.extra
-    
-    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-        for k, v in pairs(G.I.CARD) do
-            if v.ability and v.ability.set == 'Booster' and v.set_cost then 
-                v:set_cost()
-            end
-        end
-        G.GAME.discount_percent = old_discount
+    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
+        SetCenterDiscount(card, true, 'Booster')
         return true 
     end}))
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
-    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-        for k, v in pairs(G.I.CARD) do
-            if v.ability and v.ability.set == 'Booster' and v.set_cost then 
-                v:set_cost()
-            end
-        end
+    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
+        ClearCenterDiscountSource(card)
         return true 
     end}))
 end

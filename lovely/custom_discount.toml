@@ -1,0 +1,35 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds a run tracker for consumables
+#
+
+# Game:start_run()
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''self.deck:shuffle()
+self.deck:hard_set_T()'''
+position = "after"
+payload = '''G.GAME.extra_discounts = {}'''
+match_indent = true
+times = 1
+
+# Card:set_cost()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))'''
+position = "after"
+payload = '''if G.GAME and G.GAME.extra_discounts then
+    for k,v in pairs(G.GAME.extra_discounts) do
+        if not v.center_set or (v.center_set == self.ability.set) then
+            self.cost = math.max(1, math.floor(self.cost * v.discount))
+        end
+    end
+end'''
+match_indent = true
+times = 1
+
