@@ -47,7 +47,7 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''inc_career_stat('c_patsy_jokers_sold', 1)'''
+pattern = '''inc_career_stat('c_jokers_sold', 1)'''
 position = "after"
 payload = '''G.GAME.patsy_jokers_sold = G.GAME.patsy_jokers_sold + 1
 if G.GAME.patsy_jokers_sold >= 20 then check_for_unlock({type = 'twenty_jokers_sold'}) end'''
