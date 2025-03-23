@@ -1147,7 +1147,7 @@ return {
 					"When you have {C:blue}#1#{} hand",
 					"and {C:red}#2#{} discards remaining,",
 					"draw the {C:attention}rest of your deck{}",
-					"and {C:red}destroy this Joker{}"
+					"{S:1.1,C:red,E:2}self destructs{}"
 				}
 			},
 			j_fnwk_gotequest_2hot = {

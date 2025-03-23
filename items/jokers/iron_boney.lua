@@ -1,3 +1,55 @@
+SMODS.DrawStep {
+    key = 'boney',
+    order = 92,
+    func = function(self)
+        if not self.config.center.discovered then
+            return
+        end
+        
+        if (not self.children.backing or not self.children.boned_bottom or not self.children.boned_top) or self.ability.boned then
+            return
+        end
+    
+        local cursor_pos = {}
+        cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+        cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+        local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
+        local hovering = (self.hover_tilt or 0)
+        
+        G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
+        G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
+        G.SHADERS['fnwk_basic']:send('hovering', hovering)
+        love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
+        self.children.backing:draw_self()
+    
+        -- bottom effect values
+        
+        G.SHADERS['fnwk_boney_bottom']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_bottom_mask'].image)
+        G.SHADERS['fnwk_boney_bottom']:send('mask_mod', self.ability.mask_mod)
+        G.SHADERS['fnwk_boney_bottom']:send("texture_details", self.children.boned_bottom:get_pos_pixel())
+        G.SHADERS['fnwk_boney_bottom']:send("image_details", self.children.boned_bottom:get_image_dims())
+        G.SHADERS['fnwk_boney_bottom']:send('mouse_screen_pos', cursor_pos)
+        G.SHADERS['fnwk_boney_bottom']:send('screen_scale', screen_scale)
+        G.SHADERS['fnwk_boney_bottom']:send('hovering', hovering)
+        love.graphics.setShader(G.SHADERS['fnwk_boney_bottom'], G.SHADERS['fnwk_boney_bottom'])
+        self.children.boned_bottom:draw_self()
+    
+        -- top effect values
+        G.SHADERS['fnwk_boney_top']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_top_mask'].image)
+        G.SHADERS['fnwk_boney_top']:send('stencil', G.ASSET_ATLAS['fnwk_boney_stencil'].image)
+        G.SHADERS['fnwk_boney_top']:send('mask_mod', 1) 
+        G.SHADERS['fnwk_boney_top']:send("texture_details", self.children.boned_top:get_pos_pixel())
+        G.SHADERS['fnwk_boney_top']:send("image_details", self.children.boned_top:get_image_dims())
+        G.SHADERS['fnwk_boney_top']:send('mouse_screen_pos', cursor_pos)
+        G.SHADERS['fnwk_boney_top']:send('screen_scale', screen_scale)
+        G.SHADERS['fnwk_boney_top']:send('hovering', hovering)
+        love.graphics.setShader(G.SHADERS['fnwk_boney_top'], G.SHADERS['fnwk_boney_top'])
+        self.children.boned_top:draw_self()
+    
+        love.graphics.setShader()
+    end,
+}
+
 SMODS.Atlas({ key = 'boney_stencil', path = 'jokers/iron_boney_stencil.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'boney_top_mask', path = 'jokers/iron_boney_top_mask.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'boney_bottom_mask', path = 'jokers/iron_boney_bottom_mask.png', px = 71, py = 95 })
@@ -121,7 +173,7 @@ function jokerInfo.calculate(self, card, context)
             func = function() 
                 local rand_set = {}
                 for i=1, #G.jokers.cards do
-                    if G.jokers.cards[i] ~= card then
+                    if G.jokers.cards[i] ~= card and not G.jokers.cards[i].ability.eternal then
                         rand_set[#rand_set+1] = i
                     end
                 end
@@ -135,13 +187,13 @@ function jokerInfo.calculate(self, card, context)
 
                 -- immediately replace with boney, forgoing any animation
                 G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                local new_joker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_iron_boney', 'bon')
+                local new_joker = copy_card(card)
 
                 -- set boney's new abilities
                 new_joker:add_to_deck()
                 new_joker:hard_set_T(rand_joker.T.x, rand_joker.T.y, rand_joker.T.w, rand_joker.T.h)
                 new_joker.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-                
+
                 local atlas = rand_joker.config.center.atlas and G.ASSET_ATLAS[rand_joker.config.center.atlas] or G.ASSET_ATLAS['Joker']
                 local role = {
                     role_type = 'Minor',
@@ -165,13 +217,9 @@ function jokerInfo.calculate(self, card, context)
                 new_joker.children.backing = Sprite(new_joker.T.x, new_joker.T.y, new_joker.T.w, new_joker.T.h, G.ASSET_ATLAS['fnwk_iron_boney'], {x = 1, y = 0})
                 new_joker.children.backing:set_role(role)
                 new_joker.children.backing.custom_draw = true
-
+                
+                new_joker.ability.initialized = false
                 new_joker.ability.boned = false
-                new_joker.ability.eternal = rand_joker.ability.eternal
-                new_joker.ability.rental = rand_joker.ability.rental
-                for k,v in pairs(SMODS.Stickers) do
-                    new_joker.ability[k] = rand_joker.ability[k]
-                end
 
                 -- place boney
                 G.jokers:emplace(new_joker, nil, nil, nil, nil, rand_idx)
@@ -185,45 +233,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered then
-        return
-    end
     
-    if card.ability.boned then
-        return
-    end
-
-    local cursor_pos = {}
-    cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-    cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-    local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
-    local hovering = (card.hover_tilt or 0)
-    
-    G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_basic']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
-    card.children.backing:draw_self()
-
-    G.SHADERS['fnwk_boney_bottom']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_bottom_mask'].image)
-    G.SHADERS['fnwk_boney_bottom']:send('mask_mod', card.ability.mask_mod)
-    G.SHADERS['fnwk_boney_bottom']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_boney_bottom']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_boney_bottom']:send('hovering', hovering)
-    card.children.boned_bottom:draw_self()
-
-    -- top effect values
-    G.SHADERS['fnwk_boney_top']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_top_mask'].image)
-    G.SHADERS['fnwk_boney_top']:send('stencil', G.ASSET_ATLAS['fnwk_boney_stencil'].image)
-    G.SHADERS['fnwk_boney_top']:send('mask_mod', 1)
-    G.SHADERS['fnwk_boney_top']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_boney_top']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_boney_top']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_boney_top'], G.SHADERS['fnwk_boney_top'])
-
-    -- drawing and clearing
-    card.children.boned_top:draw_self()
-    love.graphics.setShader()
 end
 
 return jokerInfo

@@ -4,12 +4,21 @@
 	#define MY_HIGHP_OR_MEDIUMP mediump
 #endif
 
+// (x = sprite_pos_x, y = sprite_pos_y, b = sprite_width, a = sprite_height) [not normalized]
+extern MY_HIGHP_OR_MEDIUMP vec4 texture_details;
+// (x = width, y = height) for atlas texture [not normalized]
+extern MY_HIGHP_OR_MEDIUMP vec2 image_details;
 extern Image mask_tex;
 extern MY_HIGHP_OR_MEDIUMP float mask_mod;
 
 vec4 effect(vec4 color, Image tex, vec2 tex_coords, vec2 screen_coords) {
-    
-    vec4 pixel = Texel(tex, tex_coords);
+    MY_HIGHP_OR_MEDIUMP vec2 uv = (((tex_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+    MY_HIGHP_OR_MEDIUMP float width_mod = texture_details.b / image_details.x;
+    MY_HIGHP_OR_MEDIUMP float height_mod = texture_details.a / image_details.y;
+    MY_HIGHP_OR_MEDIUMP float x_pos = (uv.x + texture_details.x) * width_mod;
+    MY_HIGHP_OR_MEDIUMP float y_pos = (uv.y + texture_details.y) * height_mod;
+
+    vec4 pixel = Texel(tex, vec2(x_pos, y_pos));
     vec4 mask = Texel(mask_tex, tex_coords);  
     return vec4(pixel.rgb, max(0, pixel.a - (1 - mask.r) - mask_mod));
 }
