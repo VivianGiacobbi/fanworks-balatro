@@ -6,17 +6,6 @@ priority = 0
 # Adds a run tracker for consumables
 #
 
-# Game:start_run()
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''self.deck:shuffle()
-self.deck:hard_set_T()'''
-position = "after"
-payload = '''G.GAME.extra_discounts = {}'''
-match_indent = true
-times = 1
-
 # Card:set_cost()
 [[patches]]
 [patches.pattern]

@@ -9,6 +9,8 @@ local jokerInfo = {
     },
     rarity = 2,
     cost = 6,
+    unlocked = false,
+    unlock_condition = {type = 'discard_custom', card_key = 'H_K', amount = 5},
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -18,6 +20,36 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_gar", set = "Other"}
     return { vars = { card.ability.extra.destroy, card.ability.extra.destroy - card.ability.extra.destroy_count } }
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+    local display_card = G.P_CARDS[self.unlock_condition.card_key]
+    return { 
+        vars = {
+            self.unlock_condition.amount,
+            display_card.value,
+            display_card.suit,
+            colours = {
+                G.C.SUITS[display_card.suit]
+            }
+        },
+    }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then
+        return false
+    end
+
+    local tally = 0
+    for i = 1, #args.cards do
+        local key = SMODS.Suits[args.cards[i].base.suit].card_key..'_'..SMODS.Ranks[args.cards[i].base.value].card_key
+        if key == self.unlock_condition.card_key then
+            tally = tally+1
+        end
+    end
+
+    return tally >= self.unlock_condition.amount
 end
 
 function jokerInfo.calculate(self, card, context)

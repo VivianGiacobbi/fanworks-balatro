@@ -1,4 +1,5 @@
 local jokerInfo = {
+	key = 'j_fnwk_cis_jokestar',
     name = 'Ice-Cold Jokestar',
     config = {
         extra = {
@@ -8,6 +9,8 @@ local jokerInfo = {
     },
     rarity = 1,
     cost = 5,
+	unlocked = false,
+	unlock_condition = {type = 'win_custom', max_novas = 2},
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = true,
@@ -23,6 +26,16 @@ function jokerInfo.loc_vars(self, info_queue, card)
 			card.ability.extra.remaining > 1 and 's' or ''
 		}
 	}
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+	return { vars = {CountGrammar(self.unlock_condition.max_novas)}}
+end
+
+function jokerInfo.check_for_unlock(self, args)
+	if args.type ~= self.unlock_condition.type then return end
+
+	return G.GAME.chip_novas <= self.unlock_condition.max_novas
 end
 
 function jokerInfo.calculate(self, card, context)

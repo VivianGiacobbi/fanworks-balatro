@@ -1,3 +1,24 @@
+SMODS.current_mod.reset_game_globals = function(run_start)
+    if run_start then
+        G.GAME.glass_shatters = 0
+        G.GAME.patsy_jokers_sold = 0
+        G.GAME.owned_jokers = {}
+        G.GAME.extra_discounts = {}
+        G.GAME.run_consumeables = {}
+        G.GAME.chip_novas = 0
+        G.GAME.consecutive_hands = 0
+    end
+
+    G.GAME.current_round.packs_rerolled = 0
+    reset_funkadelic()
+    reset_infidel()
+
+    for k, v in pairs(G.playing_cards) do
+        v.joker_force_facedown = nil
+        v.ability.played_while_flipped = nil
+    end
+end
+
 --- Add effects for non-main editions to an effects table, similar to SMODS.calculate_quantum_enhancements()
 --- @param card table Balatro card table to find extra editions on
 --- @param effects table Balatro effects table, created in eval_card() misc function
@@ -36,7 +57,7 @@ end
 --- @param card table Balatro card table to find extra editions on
 --- @return table extras An indexed table containing extra editions, formatted like card.edition in vanilla
 function SMODS.get_quantum_editions(card)
-    if card.edition.others and next(card.edition.others) then
+    if card.edition.others and nexts(card.edition.others) then
         local extras = copy_table(card.edition.others)
         return extras
     end

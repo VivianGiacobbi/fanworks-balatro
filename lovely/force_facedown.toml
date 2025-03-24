@@ -13,19 +13,15 @@ target = "cardarea.lua"
 pattern = '''
 if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped then
     card:flip()
-end
-if self == G.hand and stay_flipped then 
-    card.ability.wheel_flipped = true
 end'''
 position = "at"
 payload = '''
-if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' and not stay_flipped and not card.joker_force_facedown then
-    card:flip()
-end
-if self == G.hand and stay_flipped and not card.joker_force_facedown then 
-    card.ability.wheel_flipped = true
-end
-card.joker_force_facedown = nil'''
+if card.facing == 'back' and self.config.type ~= 'discard' and self.config.type ~= 'deck' then
+    if card.ability.wheel_flipped then card.ability.played_while_flipped = true end
+    if not stay_flipped then
+        card:flip()
+    end
+end'''
 match_indent = true
 times = 1
 

@@ -856,6 +856,11 @@ return {
 					"of the {C:attention}Three of a Kind{}",
 					"after scoring",
 				},
+				unlock = {
+					"In one hand, earn",
+					"a {C:chips,E:1}Chip score{} in",
+					"{C:attention,E:1}scientific notation{}"
+				}
 			},
 			j_fnwk_streetlight_arrow = {
 				name = "Arrow Shard",
@@ -879,6 +884,10 @@ return {
 					"Play a {C:attention}game{},",
 					"win a {C:attention}prize{}",
 				},
+				unlock = {
+					"Score {C:attention,E:1}#1#{}",
+					"a blind requirement"
+				}
 			},
 			j_fnwk_streetlight_biased = {
 				name = "Biased Joker",
@@ -928,8 +937,12 @@ return {
 				name = "Secluded Joker",
 				text = {
 					"Cards with {C:diamonds}Diamond{} suit",
-					"are drawn {C:attention}face down{} and",
-					"retriggered when scored",
+					"are retriggered when scored",
+					"but stay {C:attention}face down{}",
+				},
+				unlock = {
+					"Play a hand of {C:attention,E:1}5{}",
+					"{C:attention,E:1}face down{} cards"
 				}
 			},
 			j_fnwk_bluebolt_tuned = {
@@ -979,14 +992,15 @@ return {
 					"after being destroyed or sold",
 				},
 				unlock = {
-					"Sell {C:attention}#1#{} Jokers in one run"
+					"Sell {C:attention,E:1}#1#{} Jokers",
+					"in one run"
 				}
 			},
 			j_fnwk_last_morse= {
 				name = "Morse Tapping",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if played hand",
-					"contains exactly {C:attention}#2{}",
+					"contains exactly {C:attention}#2#{}",
 					"{C:attention}scoring ranks{}",
 				},
 			},
@@ -1013,6 +1027,10 @@ return {
 					"for each {C:attention}consecutive{} played",
 					"hand of {C:attention}3 or less{} cards",
 					"{C:inactive}(currently{} {C:chips}+#1#{} {C:inactive}chips){}",
+				},
+				unlock = {
+					"Play the {C:attention,E:1}same{} poker hand",
+					"{C:attention,E:1}#1# consecutive{} times"
 				}
 			},
 			j_fnwk_sunshine_funkadelic = {
@@ -1089,7 +1107,7 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 				unlock = {
-					"Have {C:attention}#1#{} of the {C:attention}exact same{}",
+					"Have {C:attention,E:1}#1#{} of the {C:attention,E:1}exact same{}",
 					"card in your deck"
 				}
 			},
@@ -1132,6 +1150,13 @@ return {
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
 				}
 			},
+			j_fnwk_gotequest_pair = {
+				name = "One True Pair",
+				text = {
+					"Played {C:attention}Pairs{} gain",
+					"{C:chips}each other's{} Chips"
+				}
+			},
 			j_fnwk_gotequest_killing = {
 				name = "Feel Like Killing It",
 				text = {
@@ -1144,9 +1169,9 @@ return {
 			j_fnwk_gotequest_headlong = {
 				name = "Headlong Flight",
 				text = {
-					"When you have {C:blue}#1#{} hand",
-					"and {C:red}#2#{} discards remaining,",
-					"draw the {C:attention}rest of your deck{}",
+					"When you have {C:blue}#1#{} hand and",
+					"{C:red}#2#{} discards remaining, draw",
+					"the {C:attention}rest of your deck{}",
 					"{S:1.1,C:red,E:2}self destructs{}"
 				}
 			},
@@ -1156,6 +1181,10 @@ return {
 					"After played hand causes score",
 					"to {C:attention}catch fire{}, turn a random card",
 					"held in hand into a {C:attention}Steel Card{}"
+				},
+				unlock = {
+					"Make the score {C:attention,E:1}catch fire{}",
+					"{C:attention,E:1}#1#{} in one run"
 				}
 			},
 			j_fnwk_gotequest_ajorekesr = {
@@ -1224,9 +1253,9 @@ return {
 					"per {C:attention}reroll{} in the shop",
 				},
 				unlock = {
-					"Turn every {C:attention}Queen{}",
+					"Turn every {C:attention,E:1}Queen{}",
 					"in your deck into",
-					"a {C:attention}Steel{} card"
+					"a {C:attention,E:1}Steel{} card"
 				}
 			},
 			j_fnwk_spirit_halves = {
@@ -1252,7 +1281,7 @@ return {
 					'{C:money}money{} you have'
 				},
 				unlock = {
-					"Survive {C:attention}death{}"
+					"Survive {C:attention,E:1}death{}"
 				}
 			},
 			j_fnwk_industry_loyal = {
@@ -1269,7 +1298,8 @@ return {
 					"random {C:attention}Face Card{} to your hand"
 				},
 				unlock = {
-					"Turn a {C:attention}Queen{} into a {C:attention}King{}"
+					"Turn a {C:attention,E:1}Queen{}",
+					"into a {C:attention,E:1}King{}"
 				}
 			},
 			j_fnwk_double_firewalker = {
@@ -1319,6 +1349,10 @@ return {
 					"If played hand is {C:attention}#1#{}",
 					"scoring cards, {C:attention}destroy{} the",
 					"last card {C:attention}after{} scoring"
+				},
+				unlock = {
+					"Have {C:attention,E:1}#1#{} {C:attention,E:1}Glass Cards{}",
+					"break in one run",
 				}
 			},
 			j_fnwk_mania_jokestar = {
@@ -1376,6 +1410,10 @@ return {
 					"{C:planet}Blue{} and {C:tarot}Purple{} {C:attention}seals{}",
 					"trigger when {C:attention}scored{}"
 				},
+				unlock = {
+					"Have one of each",
+					"{C:attention,E:1}seal{} in your deck"
+				}
 			},
 			j_fnwk_jspec_joepie = {
 				name = "Joepiejee",
@@ -1385,7 +1423,7 @@ return {
 					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
 				},
 				unlock = {
-					"?????"
+					"{E:1,s:1.3}?????{}"
 				}
 			},
 			j_fnwk_jspec_kunst = {
@@ -1395,7 +1433,7 @@ return {
 					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
 				},
 				unlock = {
-					"?????"
+					"{E:1,s:1.3}?????{}"
 				}
 			},
 			j_fnwk_jspec_ilsa = {
@@ -1406,7 +1444,7 @@ return {
 					"and {C:dark_edition}Polychrome{}"
 				},
 				unlock = {
-					"?????"
+					"{E:1,s:1.3}?????{}"
 				}
 			},
 			j_fnwk_fanworks_jogarc = {
@@ -1469,8 +1507,8 @@ return {
 					"card held in hand",
 				},
 				unlock = {
-					"Discover {C:attention}every other{}",
-					"{C:fanworks}Fanworks{} card",
+					"Discover {C:attention,E:1}every other{}",
+					"{C:fanworks,E:1}Fanworks{} card",
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
@@ -1495,6 +1533,20 @@ return {
 				text = {
 					"{C:attention}Gold Cards{} give {C:mult}+#1#{} Mult",
 					"when scored",
+				}
+			},
+			j_fnwk_crimson_bloodletting = {
+				name = "Bloodletting Tome",
+				text = {
+					"For every {C:attention}#1#{} cards",
+					"{C:attention}destroyed{}, create",
+					"a {C:attention}King{} of {C:hearts}Hearts{}",
+					"{C:inactive}({}{C:attention}#2#{}{C:inactive} remaining){}",
+				},
+				unlock = {
+					"Discard {C:attention,E:1}#1#{}",
+					"{C:attention,E:1}#2#{} of {V:1,E:1}#3#{}",
+					"at once"
 				}
 			},
 			j_fnwk_golden_generation = {
@@ -1541,6 +1593,11 @@ return {
 					"{C:mult}+#1#{} Mult",
 					"Destroyed after score",
 					"{C:attention}catches fire #2#{} time#3#",
+				},
+				unlock = {
+					"Win a run without making",
+					"the score {C:attention,E:1}catch fire{}",
+					"more than {C:attention,E:1}#1#{}"
 				}
 			},
 			j_fnwk_glass_jokestar = {
@@ -1571,7 +1628,12 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
 					"if played hand is a",
-					"{C:attention}Secret Hand{}"
+					"{C:attention}secret hand{}"
+				},
+				unlock = {
+					"Play {C:attention,E:1}#1#{} unique",
+					"{C:attention,E:1}secret poker hands{}",
+					"in one run"
 				}
 			},
 		},
@@ -1635,6 +1697,11 @@ return {
 					"{C:fanworks}Fanworks{} Jokers appear",
 					"{C:attention}#2#X{} more often",
 				},
+				unlock = {
+					"Discover {C:attention,E:1}#2#{}",
+					"{C:fanworks}Fanworks{} cards",
+					"{C:inactive}[#1#/#2#]{}"
+				}
 			},
 		}
 	}
