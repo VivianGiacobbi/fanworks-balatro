@@ -19,7 +19,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
 	return { vars = {card.ability.extra.mult, card.ability.extra.chips}}
 end
 
@@ -32,14 +32,23 @@ function jokerInfo.check_for_unlock(self, args)
 		return false
 	end
 
-	local secret = 0
-	for _, key in ipairs(SMODS.PokerHand.obj_buffer) do
-		if not SMODS.PokerHands[key].visible and G.GAME.hands[key].played > 0 then
-			secret = secret + 1
+	return SecretHandsPlayed() >= self.unlock_condition.secret_num
+end
+
+function jokerInfo.in_pool(self, args)
+	return SecretHandsPlayed() > 0
+end
+
+function jokerInfo.calculate(self, card, context)
+	if context.joker_main and context.cardarea == G.jokers and not card.debuff then
+		if not SMODS.PokerHands[context.scoring_name].visible then
+			return {
+				chips = card.ability.extra.chips,
+				mult = card.ability.extra.mult,
+				card = card
+			}
 		end
 	end
-
-	return secret >= self.unlock_condition.secret_num
 end
 
 return jokerInfo

@@ -1624,7 +1624,7 @@ return {
 				}
 			},
 			j_fnwk_stalk_jokestar = {
-				name = "Investigtive Jokestar",
+				name = "Investigative Jokestar",
 				text = {
 					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
 					"if played hand is a",
