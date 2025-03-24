@@ -334,3 +334,20 @@ function CountGrammar(value, caps_style, spell_numeral)
     
     return ret
 end
+
+--- Finds the number of secret hands played this run
+--- @return integer # Number of secret hands played. 0 if no game is active
+function SecretHandsPlayed()
+	if not G.GAME then
+		return 0
+	end
+
+	local secret = 0
+	for _, key in ipairs(SMODS.PokerHand.obj_buffer) do
+		if not SMODS.PokerHands[key].visible and G.GAME.hands[key].played > 0 then
+			secret = secret + 1
+		end
+	end
+
+	return secret
+end
