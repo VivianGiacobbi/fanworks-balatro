@@ -246,14 +246,7 @@ local wip_jokers = {
 for k, v in pairs(items_to_load) do
 	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
 		for i = 1, #v do
-			
-			if not wip_jokers[v[i]] or (wip_jokers[v[i]] and fnwk_enabled['enableWipJokers']) then
-				LoadItem(v[i], k)
-
-				if k == 'Joker' and alt_jokers[v[i]] then
-					SMODS.Atlas({ key = v[i]..'_alt', path = "jokers/" .. v[i] .. '_alt'.. ".png", px = 71, py = 95 })
-				end
-			end
+			LoadItem(v[i], k, false)
 		end
 	end
 end

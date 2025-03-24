@@ -11,7 +11,8 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	hasSoul = true,
-	fanwork = 'gotequest'
+	fanwork = 'gotequest',
+	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

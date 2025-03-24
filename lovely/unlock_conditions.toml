@@ -39,7 +39,7 @@ target = "game.lua"
 pattern = '''self.deck:shuffle()
 self.deck:hard_set_T()'''
 position = "after"
-payload = '''G.GAME.jokers_sold = 0'''
+payload = '''G.GAME.patsy_jokers_sold = 0'''
 match_indent = true
 times = 1
 
@@ -49,8 +49,8 @@ times = 1
 target = "card.lua"
 pattern = '''inc_career_stat('c_jokers_sold', 1)'''
 position = "after"
-payload = '''G.GAME.jokers_sold = G.GAME.jokers_sold + 1
-if G.GAME.jokers_sold >= 20 then check_for_unlock({type = 'twenty_jokers_sold'}) end'''
+payload = '''G.GAME.patsy_jokers_sold = G.GAME.patsy_jokers_sold + 1
+if G.GAME.patsy_jokers_sold >= 20 then check_for_unlock({type = 'twenty_jokers_sold'}) end'''
 match_indent = true
 times = 1
 

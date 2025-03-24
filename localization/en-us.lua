@@ -376,6 +376,7 @@ return {
             },
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
+			k_dzvalin = 'Dummy Text!',
 
 			ba_fanworks = 'Fanworks',
 			co_fanworks = 'DD85B4',
@@ -1146,7 +1147,7 @@ return {
 					"When you have {C:blue}#1#{} hand",
 					"and {C:red}#2#{} discards remaining,",
 					"draw the {C:attention}rest of your deck{}",
-					"{C:red}self destructs{}"
+					"{S:1.1,C:red,E:2}self destructs{}"
 				}
 			},
 			j_fnwk_gotequest_2hot = {
@@ -1304,7 +1305,7 @@ return {
 					"{C:inactive}({}{C:attention}#3#{} {C:inactive}remaining){}"
 				}
 			},
-      j_fnwk_lighted_ge = {
+     		 j_fnwk_lighted_ge = {
 				name = "Gypsy Eyes",
 				text = {
 					"If played hand is {C:attention}#1#{}",

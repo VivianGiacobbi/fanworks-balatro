@@ -118,3 +118,41 @@ function Card:stop_hover()
         return
     end
 end
+
+local ref_is_face = Card.is_face
+function Card:is_face(from_boss)
+    if not self:get_id() then return end
+    if next(SMODS.find_card('j_fnwk_streetlight_teenage')) then
+        return false
+    end
+
+    return ref_is_face(self, from_boss)
+end
+
+local ref_set_debuff = Card.set_debuff
+function Card:set_debuff(should_debuff)
+    -- can't undebuff something if it has any force debuffs applied
+	if self.force_debuffs and next(self.force_debuffs) then
+        self.debuff = true
+        return
+    end
+
+    return ref_set_debuff(self, should_debuff)
+end
+
+function Card:add_force_debuff(card_source)
+    if not self.force_debuffs then self.force_debuffs = {} end
+    self.force_debuffs[card_source.ID] = true
+    self:set_debuff()
+end
+
+function Card:remove_force_debuff(card_source)
+    if not self.force_debuffs then return end
+    self.force_debuffs[card_source.ID] = false
+    self:set_debuff()
+end
+
+function Card:reset_force_debuffs()
+    self.force_debuffs = nil
+    self:set_debuff()
+end

@@ -12,6 +12,7 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = true,
 	fanwork = 'streetlight',
+	alt_art = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

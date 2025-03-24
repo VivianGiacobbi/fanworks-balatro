@@ -12,6 +12,7 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable_compat = false,
 	fanwork = 'streetlight',
+	alt_art = true
 }
 
 SMODS.Atlas({ key = 'streetlight_resil_regen', path ='jokers/streetlight_resil_regen.png', px = 71, py = 95 })

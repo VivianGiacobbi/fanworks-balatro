@@ -55,8 +55,8 @@ function jokerInfo.calculate(self, card, context)
         local diff = dollar_digits - card.ability.last_digits
         G.jokers.config.card_limit = G.jokers.config.card_limit + diff
         card.ability.last_digits = dollar_digits
-        end
     end
+end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
     card.ability.last_digits = get_dollar_digits()

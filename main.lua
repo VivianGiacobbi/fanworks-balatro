@@ -9,6 +9,7 @@ G.C.FANWORKS = HEX('DD85B4')
 
 local includes = {
 	-- includes utility functions required for following files
+	'tables',
 	'utility',
 	'shaders',
 

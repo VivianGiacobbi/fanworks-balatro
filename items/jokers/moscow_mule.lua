@@ -31,7 +31,6 @@ function jokerInfo.calculate(self, card, context)
 	end
 	
 	local seed_result = pseudorandom(pseudoseed('mule_roll'))
-	sendDebugMessage('actual seed: '..seed_result)
 	if seed_result < G.GAME.probabilities.normal / card.ability.extra.enhance_chance then
 		local change_card = context.other_card
 		G.E_MANAGER:add_event(Event({

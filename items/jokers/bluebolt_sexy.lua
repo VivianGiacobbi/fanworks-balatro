@@ -5,38 +5,6 @@ local jokerInfo = {
         extra = {
             base_chips = 69,
             chips_mod = 30,
-            women = {
-                ['j_lusty_joker'] = true,
-                ['j_hack'] = true,
-                ['j_blueprint'] = true,
-                ['j_brainstorm'] = true,
-                ['j_shoot_the_moon'] = true,
-                ['j_fnwk_plancks_unsure'] = true,
-                ['j_fnwk_rubicon_moonglass'] = true,
-                ['j_fnwk_streetlight_fledgling'] = true,
-                ['j_fnwk_streetlight_indulgent'] = true,
-                ['j_fnwk_streetlight_industrious'] = true,
-                ['j_fnwk_streetlight_methodical'] = true,
-                ['j_fnwk_rubicon_film'] = true,
-                ['j_fnwk_streetlight_resil'] = true,
-                ['j_fnwk_bone_destroyer'] = true,
-                ['j_fnwk_gotequest_killing'] = true,
-                ['j_fnwk_jspec_joepie'] = true,
-                ['j_fnwk_jspec_ilsa'] = true,
-            },
-            trans_women = {
-                ['j_drivers_license'] = true,
-                ['j_fnwk_rockhard_rebirth'] = true,
-            },
-            junkies = {
-                ['j_fnwk_gotequest_lambiekins'] = 2,
-                ['j_egg'] = 1,
-                ['j_fnwk_bluebolt_secluded'] = 1,
-                ['j_fnwk_bluebolt_tuned'] = 1,
-                ['j_fnwk_bluebolt_jokestar'] = 1,
-                ['j_fnwk_bluebolt_sexy'] = 1,
-                ['j_fnwk_bluebolt_impaired'] = 1,
-            }
         }
     },
 	rarity = 1,
@@ -47,13 +15,6 @@ local jokerInfo = {
 	fanwork = 'bluebolt'
 }
 
-local function find_women(card, key) 
-    local junkie = card.ability.extra.junkies[key]
-    local t_woman = card.ability.extra.trans_women[key]
-    local woman = card.ability.extra.women[key]
-    return {junkie = junkie, t_woman = t_woman, woman = woman}
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
     if not G.jokers then
@@ -63,14 +24,12 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = find_women(card, G.jokers.cards[i].config.center.key)
-            if results.junkie or results.t_woman or results.woman then
+            local results = FindWomen(G.jokers.cards[i].config.center.key)
+            if results.junkie or results.trans or results.cis then
                 count = count + 1
             end
         end
     end
-
-    sendDebugMessage()
 
 	return { 
         vars = {
@@ -89,8 +48,8 @@ function jokerInfo.calculate(self, card, context)
             return
         end
 
-        local results = find_women(card, context.card.config.center.key)
-        if not (results.junkie or results.t_woman or results.woman) then
+        local results = FindWomen(context.card.config.center.key)
+        if not (results.junkie or results.trans or results.cis) then
             return
         end
 
@@ -105,12 +64,12 @@ function jokerInfo.calculate(self, card, context)
         end
 
         -- find trans women quotes
-        if results.t_woman then
+        if results.trans then
             speech_key = speech_key..'t_'..math.random(1, 3)
         end
 
         -- find women quotes
-        if results.woman then
+        if results.cis then
             speech_key = speech_key..'_'..math.random(1,19)
         end
 
@@ -148,8 +107,8 @@ function jokerInfo.calculate(self, card, context)
     local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = find_women(card, G.jokers.cards[i].config.center.key)
-            if results.junkie or results.t_woman or results.woman then
+            local results = FindWomen(G.jokers.cards[i].config.center.key)
+            if results.junkie or results.trans or results.cis then
                 count = count + 1
             end
         end
