@@ -1,11 +1,25 @@
-local base_get_id = Card.get_id
+local ref_use_consumable = Card.use_consumeable
+function Card:use_consumeable(area, copier)
+    if G.GAME.run_consumeables[self.config.center_key] then
+        G.GAME.run_consumeables[self.config.center_key] = G.GAME.run_consumeables[self.config.center_key] + 1
+    else 
+        G.GAME.run_consumeables[self.config.center_key] = 1
+    end
+
+    return ref_use_consumable(self, area, copier)
+end
+
+local ref_get_id = Card.get_id
 function Card:get_id()
-    local id = base_get_id(self)
+    local id = ref_get_id(self)
     if not self.debuff and next(SMODS.find_card('j_fnwk_rubicon_bone')) and (id == 11 or id == 13) then
         return 12
     end
     return id
 end
+
+---------- #region quips
+---------- Handles creating textboxes for Maggie's text quips
 
 function Card:add_quip(text_key, align, loc_vars, extra)
     if self.children.quip then 
@@ -75,7 +89,14 @@ function Card:say_quip(iter, not_first, def_speed)
         return true  
     end}), 'tutorial')
 end
+---------- #endregion
 
+---------- #region predict_ui
+---------- Functions to create the prediction UI for Creaking Skeptic Joker
+
+--- Creates a UI box appended as a child to the card, self.children.predict_ui
+--- @param cardarea CardArea A Balatro cardarea table containing cards to display
+--- @param align string Shorthand alignment string ('bm' for bottom middle)
 function Card:show_predict_ui(cardarea, align)
     if self.children.predict_ui then 
         self.children.predict_ui:remove()     
@@ -93,6 +114,7 @@ function Card:show_predict_ui(cardarea, align)
     }
 end
 
+--- Removes the predict_card_ui as a child from this card
 function Card:remove_predict_ui()
     if not self.children.predict_ui then 
         return
@@ -118,6 +140,11 @@ function Card:stop_hover()
         return
     end
 end
+
+---------- #endregion
+
+---------- #region streetlight jokers
+---------- Function hooks for Teenage Gangster and Biased Joker
 
 local ref_is_face = Card.is_face
 function Card:is_face(from_boss)
@@ -155,4 +182,43 @@ end
 function Card:reset_force_debuffs()
     self.force_debuffs = nil
     self:set_debuff()
+end
+---------- #endregion
+
+---------- #region unlock conditions
+---------- function hooks for joker unlock conditions
+local ref_set_base = Card.set_base
+function Card:set_base(card, initial)
+    local old_id = nil
+    if self.base then old_id = self.base.id end
+
+    -- base function call
+    local ret = ref_set_base(self, card, initial)
+
+    if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
+        check_for_unlock({type = 'queen_to_king'})
+    end
+
+    return ret
+end
+
+local ref_sell_card = Card.sell_card
+function Card:sell_card()
+    local ret = ref_sell_card(self)
+
+    if self.ability.set == 'Joker' then 
+        G.GAME.patsy_jokers_sold = G.GAME.patsy_jokers_sold + 1
+        check_for_unlock({type = 'patsy_jokers_sold', amount = G.GAME.patsy_jokers_sold})
+    end
+
+    return ret
+end
+
+--- Tallies glass shatters per run for the sake of Square Biz Killer unlock
+local ref_shatter = Card.shatter
+function Card:shatter()
+    local ret = ref_shatter(self)
+    G.GAME.glass_shatters = G.GAME.glass_shatters + 1
+    check_for_unlock({type = 'run_shattered', total_shattered = G.GAME.glass_shatters})
+    return ret
 end

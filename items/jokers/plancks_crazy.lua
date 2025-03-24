@@ -14,6 +14,7 @@ local jokerInfo = {
 	rarity = 3,
 	cost = 6,
 	unlocked = false,
+	unlock_condition = {type = 'patsy_jokers_sold', amount = 20},
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -30,11 +31,11 @@ function jokerInfo.locked_loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.check_for_unlock(self, args)
-	if not args or args.type ~= 'twenty_jokers_sold' then
+	if args.type ~= self.unlock_condition.type then
 		return false
 	end
 
-	return true
+	return args.amount >= self.unlock_condition.amount
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)

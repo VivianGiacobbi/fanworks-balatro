@@ -1,4 +1,5 @@
 local jokerInfo = {
+	key = 'j_fnwk_sunshine_laconic',
 	name = 'Laconic Joker',
 	config = {
 		extra = {
@@ -8,6 +9,8 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 4,
+	unlocked = false,
+	unlock_condition = {type = 'consecutive_hands', num = 10},
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
@@ -18,6 +21,18 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_fizzy", set = "Other"}
 	return { vars = {card.ability.extra.chips} }
+end
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+	return { vars = {self.unlock_condition.num} }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then
+        return false
+	end
+
+    return args.num_consecutive >= self.unlock_condition.num
 end
 
 function jokerInfo.calculate(self, card, context)

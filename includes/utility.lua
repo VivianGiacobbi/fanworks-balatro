@@ -267,3 +267,70 @@ function ClearCenterDiscountSource(source)
         end
     end
 end
+
+--- Formats a numeral for display. Numerals between 0 and 1 are written out fully
+--- @param n number Numeral to format
+--- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
+function FormatDisplayNumber(n, caps_style)
+	local dict = {
+		[0] = 'zero',
+		[1] = 'one',
+		[2] = 'two',
+		[3] = 'three',
+		[4] = 'four',
+		[5] = 'five',
+		[6] = 'six',
+		[7] = 'seven',
+		[8] = 'eight',
+		[9] = 'nine',
+		[10] = 'ten',
+	}
+	if n < 0 or n > #dict then
+		return n
+	end
+
+	local ret = dict[n]
+	local style = caps_style and string.lower(caps_style) or 'lower'
+	if style == 'upper' then
+		ret = string.upper(ret)
+	elseif style == 'first' then
+		ret = ret:gsub("^%l", string.upper)
+	end
+
+	return ret
+end
+
+--- Formats an integer count for grammatically correct display (once, twice, 3 times, etc)
+--- @param n number integer to format
+--- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
+function CountGrammar(value, caps_style, spell_numeral)
+    caps_style = caps_style and string.lower(caps_style) or 'lower'
+    local ret = ''
+    if value == 1 then
+        ret = 'once'
+    elseif value == 2 then
+        ret = 'twice'
+    else
+        ret = 'times'
+    end
+
+    if caps_style == 'first' then
+        ret = (ret:gsub("^%l", string.upper))
+    elseif caps_style == 'upper' then
+        ret = string.upper(ret)
+    end
+    
+    if value > 2 then
+		local val = value
+		if spell_numeral then
+			val = FormatDisplayNumber(value)
+			if caps_style == 'first' then
+				ret = string.lower(ret)
+				val = val:gsub("^%l", string.upper)
+			end
+		end
+        ret = val..' '..ret
+    end
+    
+    return ret
+end

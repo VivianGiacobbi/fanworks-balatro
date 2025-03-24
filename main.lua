@@ -18,6 +18,7 @@ local includes = {
 	'hooks/game',
 	'hooks/card',
 	'hooks/common_events',
+	'hooks/state_events',
 	'hooks/misc_functions',
 	'hooks/UI_definitions',
 	'hooks/smods',

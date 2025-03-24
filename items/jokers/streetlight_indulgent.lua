@@ -40,6 +40,8 @@ local jokerInfo = {
 	alt_art = true
 }
 
+
+
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}       
     return { 
@@ -51,6 +53,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 		}
 	}
 end
+
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	if not card.config.center.discovered then

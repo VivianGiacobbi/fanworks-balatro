@@ -10,9 +10,11 @@ local jokerInfo = {
         },
         action_time = 0,
     },
-    unlocked = false,
+    
 	rarity = 3,
 	cost = 8,
+    unlocked = false,
+    unlock_condition = {type = 'modify_deck'},
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
@@ -25,15 +27,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.check_for_unlock(self, args)
-    if not G.playing_cards then
+    if args.type ~= self.unlock_condition.type then
         return false
     end
     
     local num_queens = 0
-    for _, v in ipairs(G.playing_cards) do
-        if v:get_id() == 12 then
+    for _, card in ipairs(G.playing_cards) do
+        if card:get_id() == 12 then
             num_queens = num_queens + 1
-            if not SMODS.has_enhancement(v, 'm_steel') then
+            if not SMODS.has_enhancement(card, 'm_steel') then
                 return false
             end
         end

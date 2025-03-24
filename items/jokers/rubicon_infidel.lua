@@ -14,8 +14,8 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
 
-    if G.GAME and not G.GAME.infidel_suits then
-        reset_infidel()
+    if not G.GAME then
+        return {  vars = { 'Clubs', 'Spades', colours = {G.C.SUITS['Clubs'], G.C.SUITS['Spades']}} }
     end
 
     local suits = {}
