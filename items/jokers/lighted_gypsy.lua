@@ -1,5 +1,4 @@
 local jokerInfo = {
-	key = 'j_fnwk_lighted_gypsy',
 	name = 'Gypsy Eyes',
 	config = {
 		extra = {
@@ -7,17 +6,19 @@ local jokerInfo = {
 			remaining = 5,
 		}
 	},
-	rarity = 1,
-	cost = 4,
+	rarity = 2,
+	cost = 8,
 	blueprint_compat = false,
-	eternal_compat = true,
-	perishable = true,
+	eternal_compat = false,
+	perishable_compat = true,
+	height = 80,
+	width = 71,
 	fanwork = 'lighted',
 	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+	info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.remaining}}
 end
 
@@ -33,23 +34,25 @@ function jokerInfo.calculate(self, card, context)
 			return
 		end
 
-		local seed_result = pseudorandom(pseudoseed('gypsy_roll'))
+		local seed_result = pseudorandom(pseudoseed('ge'))
 		if seed_result < G.GAME.probabilities.normal / card.ability.extra.chance then
-			card.ability.extra.remaining = card.ability.extra.remaining - 1
+			if not next(SMODS.find_card('j_csau_bunji')) then
+				card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
+			end
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
 				delay = 0.8,
 				blocking = false,
 				func = function()
-					other_card:set_seal(SMODS.poll_seal({guaranteed = true, type_key = 'gypsy_seal'}), nil, true)
+					other_card:set_seal(SMODS.poll_seal({guaranteed = true, type_key = 'wereputtingslursinbalatro'}), nil, true)
 					other_card:juice_up()
 					return true
 				end
 			}))
 
 			return {
-				message = localize('k_seal'),
-				message_card = context.blueprint_card or card,
+				message = localize('k_ge'),
+				message_card = card,
 			}
 		end
 	end
@@ -78,7 +81,7 @@ function jokerInfo.calculate(self, card, context)
 			end
 		})) 
 		return {
-			message = localize('k_expired_ex'),
+			message = localize('k_drank_ex'),
 			colour = G.C.FILTER,
 			message_card = card
 		}

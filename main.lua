@@ -6,6 +6,7 @@ SMODS.optional_features.quantum_enhancements = true
 SMODS.optional_features.cardareas.unscored = true
 
 G.C.FANWORKS = HEX('DD85B4')
+G.C.STAND = HEX('b85f8e')
 
 local includes = {
 	-- includes utility functions required for following files

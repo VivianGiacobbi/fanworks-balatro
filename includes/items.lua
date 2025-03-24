@@ -67,7 +67,6 @@ local items_to_load = {
 		'iron_boney',
 
 		-- lighted stage
-		'lighted_gypsy',
 		'lighted_ge',
 		'lighted_square',
 
@@ -227,7 +226,6 @@ local wip_jokers = {
     ['last_morse'] = true,
     ['rockhard_vasos'] = true,
     ['iron_sanctuary'] = true,
-    ['lighted_gypsy'] = true,
     ['mania_jokestar'] = true,
 	['mania_fragile'] = true,
 	['industry_loyal'] = true,

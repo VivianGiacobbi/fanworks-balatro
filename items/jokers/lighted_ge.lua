@@ -2,7 +2,8 @@ local jokerInfo = {
 	name = 'Gypsy Eyes',
 	config = {
 		extra = {
-			cardsRemaining = 5
+			chance = 3,
+			remaining = 5,
 		}
 	},
 	rarity = 2,
@@ -16,76 +17,75 @@ local jokerInfo = {
 	in_progress = true,
 }
 
-
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
-	return {vars = { card.ability.extra.cardsRemaining } }
-end
-
-function jokerInfo.set_sprites(self, card, _front)
-	if card.config.center.discovered or card.bypass_discovery_center then
-		card.children.center.scale = {x=self.width,y=self.height}
-		card.children.center.scale_mag = math.min(self.width/card.children.center.T.w,self.height/card.children.center.T.h)
-		card.children.center:reset()
-	end
+	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.remaining}}
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.before and not card.debuff and not context.blueprint then
-		local seal = {
-			[1] = "Gold",
-			[2] = "Red",
-			[3] = "Blue",
-			[4] = "Purple",
-		}
-		local activate = false
-		for k, v in ipairs(context.scoring_hand) do
-			if v:is_face() and not v.seal and (pseudorandom('ge') < G.GAME.probabilities.normal / 3) then
-				activate = true
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						v:juice_up()
-						v:set_seal(seal[pseudorandom('wereputtingslursinbalatro', 1, 4)], nil, true)
-						return true
-					end
-				}))
-			end
+	if context.blueprint or card.debuff then
+		return
+	end
+
+	if not context.repetition and (context.individual and context.cardarea == G.play) and not context.other_card.debuff then
+			
+		local other_card = context.other_card
+		if not other_card:is_face() or other_card.seal or card.ability.extra.remaining <= 0 then
+			return
 		end
-		if activate then
-			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_ge'), colour = G.C.MONEY})
+
+		local seed_result = pseudorandom(pseudoseed('ge'))
+		if seed_result < G.GAME.probabilities.normal / card.ability.extra.chance then
 			if not next(SMODS.find_card('j_csau_bunji')) then
 				card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
 			end
-		end
-
-		if card.ability.extra.cardsRemaining <= 0 then 
 			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = 0.8,
+				blocking = false,
 				func = function()
-					play_sound('tarot1')
-					card.T.r = -0.2
-					card:juice_up(0.3, 0.4)
-					card.states.drag.is = true
-					card.children.center.pinch.x = true
-					G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-						func = function()
-							G.jokers:remove_card(card)
-							card:remove()
-							card = nil
-							return true
-						end
-					}))
+					other_card:set_seal(SMODS.poll_seal({guaranteed = true, type_key = 'wereputtingslursinbalatro'}), nil, true)
+					other_card:juice_up()
 					return true
 				end
 			}))
+
 			return {
-				message = localize('k_drank_ex'),
-				colour = G.C.MONEY
+				message = localize('k_ge'),
+				message_card = card,
 			}
 		end
 	end
+
+
+	if context.after and card.ability.extra.remaining <= 0 then
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				play_sound('tarot1')
+				card.T.r = -0.2
+				card:juice_up(0.3, 0.4)
+				card.states.drag.is = true
+				card.children.center.pinch.x = true
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.3,
+					blockable = false,
+					func = function()
+							G.jokers:remove_card(card)
+							card:remove()
+							card = nil
+						return true 
+					end
+				})) 
+				return true
+			end
+		})) 
+		return {
+			message = localize('k_drank_ex'),
+			colour = G.C.FILTER,
+			message_card = card
+		}
+	end
 end
 
-
-
 return jokerInfo
-	

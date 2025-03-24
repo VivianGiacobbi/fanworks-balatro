@@ -810,7 +810,7 @@ return {
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
 					"if {C:attention}first hand{} of round",
-					"doesn't win the {C:attention}Blind{}",
+					"doesn't {C:attention}catch fire{}",
 					"{C:inactive}(Currently {}{C:chips}+#2#{}{C:inactive} Chips){}",
 				},
 			},
@@ -844,31 +844,29 @@ return {
 				name = "Methodical Streetlit Joker",
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
-					"upgrade played {C:attention}poker hand{}",
+					"level up played {C:attention}poker hand{}",
 				},
 			},
 			j_fnwk_streetlight_industrious = {
 				name = "Industrious Streetlit Joker",
 				text = {
-					"If played hand is a {C:attention}Full{}",
-					"{C:attention}House{}, convert the {C:attention}ranks{}",
-					"of the {C:attention}Pair{} into the ranks",
-					"of the {C:attention}Three of a Kind{}",
-					"after scoring",
+					"If played hand is a {C:attention}Full House{},",
+					"convert the {C:attention}Pair{} into the same rank",
+					"as the {C:attention}Three of a Kind{} after scoring"
 				},
 			},
 			j_fnwk_streetlight_arrow = {
 				name = "Arrow Shard",
 				text = {
 					"Sell this card to",
-					"{C:fanworks}Evolve{} your {C:fanworks}Stand{}",
+					"{C:stand}Evolve{} your {C:stand}Stand{}",
 				},
 			},
 			j_fnwk_streetlight_pinstripe = {
 				name = "Pinstripe Joker",
 				text = {
 					"Earn {C:money}$1{} for each {C:attention}Lucky Card{} in",
-					"your {C:attention}full deck{} at end of round,",
+					"your {C:attention}full deck{} at end of round",
 					"{C:attention}Lucky Cards{} never pay out",
 					"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
 				},
@@ -884,7 +882,7 @@ return {
 				name = "Biased Joker",
 				text = {
 					"Gain {C:money}$#1#{} whenever a",
-					"{C:tarot}Tarot{} card is used,",
+					"{C:tarot}Tarot{} card is used",
 					"All female {C:attention}Jokers{} and",
 					"{C:attention}Queens{} are debuffed",
 				},
@@ -907,10 +905,9 @@ return {
 			j_fnwk_bluebolt_jokestar = {
 				name = "Evasive Jokestar",
 				text = {
-					"Reduces the {C:money}cost{} of each",
-					"shop item by {C:money}$1{} for each",
-					"{C:attention}Blind{} skipped, resets when",
-					"exiting the shop",
+					"Reduces the {C:money}cost{} of each shop item by",
+					"{C:money}$1{} for each {C:attention}Blind{} skipped,",
+					"resets when exiting the shop",
 					"{C:inactive}(Currently {}{C:money}#1#$#2#{}{C:inactive}){}",
 				}
 			},
@@ -951,7 +948,7 @@ return {
 			j_fnwk_plancks_jokestar = {
 				name = "Creaking Bjokestar",
 				text = {
-					"{C:inactive}Unlocks Fibonacci poker hands{}", 
+					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
 					"This Joker gains {X:mult,C:white}X#2#{} Mult if",
 					"played hand contains a {C:attention}Fibonacci{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
@@ -986,8 +983,8 @@ return {
 				name = "Morse Tapping",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if played hand",
-					"contains exactly {C:attention}#2{}",
-					"{C:attention}scoring ranks{}",
+					"contains {C:attention}exactly #2#{}",
+					"scoring {C:attention}ranks{}",
 				},
 			},
 			j_fnwk_moscow_mule = {
@@ -1010,7 +1007,7 @@ return {
 				name = "Laconic Joker",
 				text = {
 					"This Joker gains {C:chips}+10{} chips",
-					"for each {C:attention}consecutive{} played",
+					"per {C:attention}consecutive{} played",
 					"hand of {C:attention}3 or less{} cards",
 					"{C:inactive}(currently{} {C:chips}+#1#{} {C:inactive}chips){}",
 				}
@@ -1052,7 +1049,7 @@ return {
 				name = "Endless Nameless",
 				text = {
 					"This Joker gains {C:mult}+#1#{} Mult",
-					"every time you {C:planet}upgrade{}",
+					"every time you {C:planet}level up{}",
 					"a poker hand",
 					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
 				}
@@ -1066,10 +1063,10 @@ return {
 				}
 			},
 			j_fnwk_rockhard_vasos = {
-				name = "Trans Am",
+				name = "Vasos y Besos",
 				text = {
 					"{C:attention}+#1#{} consumable slot,",
-					"{C:attention}+#2#{} instead if you have a {C:fanworks}Stand{}"
+					"{C:attention}+#2#{} instead if you have a {C:stand}Stand{}"
 				}
 			},
 			j_fnwk_rockhard_trans = {
@@ -1096,23 +1093,23 @@ return {
 			j_fnwk_rubicon_bone = {
 				name = "Bone Crossed Joker",
 				text = {
-					"All {C:attention}face cards{} are",
+					"All {C:attention}face{} cards are",
 					"considered {C:attention}Queens{}",
 				}
 			},
 			j_fnwk_rubicon_moonglass = {
 				name = "Moonglass Crossed Joker",
 				text = {
-					"{C:green}#1# in #2#{} chance cards with",
-                    "{C:spades}Spade{} suit become {C:attention}Glass{}",
-                    "cards when scored",
+					"{C:green}#1# in #2#{} chance for cards with",
+                    "{C:spades}Spade{} suit to become",
+                    "{C:attention}Glass Cards{} when scored",
 				}
 			},
 			j_fnwk_rubicon_infidel = {
 				name = "Infidel Jokestar",
 				text = {
 					"{V:1}#1#{} and {V:2}#2#",
-                    "count as the same suit,",
+                    "count as the same suit",
                     "{s:0.8}Suits change every round{}"
 				}
 			},
@@ -1219,7 +1216,7 @@ return {
 				name = "Destroyer of Worlds",
 				text = {
 					"Played {C:attention}Queens{} give",
-					"{X:mult,C:white}X#1#{} Mult when scored,",
+					"{X:mult,C:white}X#1#{} Mult when scored",
 					"{C:attention}Queens{} gain {X:mult,C:white}X#2#{} Mult",
 					"per {C:attention}reroll{} in the shop",
 				},
@@ -1239,17 +1236,17 @@ return {
 			j_fnwk_spirit_gambler = {
 				name = "The Gambler",
 				text = {
-					"{C:planet}Upgrade{} played poker hand if",
-					"total {C:chips}chip{} value of scored",
-					"cards is {C:attention}#1#{} or fewer ",
+					"Level up played {C:attention}poker hand{} if",
+					"total {C:attention}chip value{} of scored",
+					"cards is {C:attention}#1#{} or fewer",
 				}
 			},
 			j_fnwk_spirit_corpse = {
 				name = "Corpse Crimelord",
 				text = {
-					'{C:dark_edition}+1{} Joker slot for',
-					'every digit of',
-					'{C:money}money{} you have'
+					'{C:dark_edition}+1{} Joker slot for every digit',
+					'of {C:money}money{} you have',
+					'{s:0.8}Always spawns {C:attention}Rental{}{}'
 				},
 				unlock = {
 					"Survive {C:attention}death{}"
@@ -1296,21 +1293,13 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}"
 				}
 			},
-			j_fnwk_lighted_gypsy = {
+			j_fnwk_lighted_ge = {
 				name = "Gypsy Eyes",
 				text = {
 					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to gain",
 					"a random {C:attention}seal{}",
 					"{C:inactive}({}{C:attention}#3#{} {C:inactive}remaining){}"
-				}
-			},
-     		 j_fnwk_lighted_ge = {
-				name = "Gypsy Eyes",
-				text = {
-					"If played hand is {C:attention}#1#{}",
-					"scoring cards, {C:attention}destroy{} the",
-					"last card {C:attention}after{} scoring"
 				}
 			},
 			j_fnwk_lighted_square = {
@@ -1326,15 +1315,15 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance for",
 					"{C:attention}Wild Cards{} to give {C:chips}+#3#{} Chips",
-					"and {C:mult}+#4#{} Mult when scored,",
-					"otherwise they are {C:attention}debuffed{}"
+					"and {C:mult}+#4#{} Mult when scored",
+					"Otherwise, they are {C:attention}debuffed{}"
 				}
 			},
 			j_fnwk_mania_fragile = {
 				name = "Fragile Joker",
 				text = {
 					"Before a {C:attention}Glass Card{}",
-					"breaks, it retriggers,",
+					"breaks, it retriggers",
 					"Add a random {C:attention}Glass Card{}",
 					"to deck afterwards"
 				}
@@ -1342,7 +1331,7 @@ return {
 			j_fnwk_iron_sanctuary = {
 				name = "Sanctuary City",
 				text = {
-					"if you have a {C:fanworks}Stand{},",
+					"if you have a {C:stand}Stand{},",
 					"each played {C:attention}#1#{} gives",
 					"{C:mult}+#2#{} Mult when scored"
          }
@@ -1392,7 +1381,7 @@ return {
 				name = "Kunst",
 				text = {
 					"When {C:attention}Boss Blind{} is defeated,",
-					"{C:planet}upgrade{} every poker hand {C:attention}#1#{}"
+					"level up every poker hand {C:attention}#1#{}"
 				},
 				unlock = {
 					"?????"
@@ -1435,7 +1424,7 @@ return {
 				name = "Bizarre Jester",
 				text = {
 					"When {C:attention}Blind{} is selected,",
-					"create a random {C:fanworks}Fanworks{} Joker",
+					"create a random {C:fanworks}Fanworks{} {C:attention}Joker{}",
 				}
 			},
 			j_fnwk_fanworks_mascot = {
@@ -1449,16 +1438,16 @@ return {
 				name = "Fanworks™",
 				text = {
 					"{C:mult}+#1#{} Mult for each {C:fanworks}Fanworks{}",
-					"Joker owned this run",
+					"{C:attention}Joker{} and {C:stand}Stand{} owned this run",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult){}"
 				}
 			},
 			j_fnwk_fanworks_standoff = {
 				name = "Stand-Off Spreadsheet",
 				text = {
-					"{C:chips}+#1#{} Chips if you do not have a {C:fanworks}Stand{}",
-					"{C:mult}+#2#{} Mult if you have a {C:fanworks}Stand{}",
-					"{X:mult,C:white}X#3#{} Mult if you have an {C:fanworks}Evolved Stand{}",
+					"{C:chips}+#1#{} Chips if you do not have a {C:stand}Stand{}",
+					"{C:mult}+#2#{} Mult if you have a {C:stand}Stand{}",
+					"{X:mult,C:white}X#3#{} Mult if you have an {C:stand}Evolved Stand{}",
 				}
 			},
 			j_fnwk_fanworks_bathroom = {
@@ -1485,7 +1474,7 @@ return {
 			j_fnwk_scepter_card = {
 				name = "Speedwagon Foundation Card",
 				text = {
-					"Played {C:attention}face cards{} have",
+					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to give",
 					"{C:mult}+#3#{} Mult when scored",
 				}
@@ -1501,7 +1490,7 @@ return {
 				name = "Golden Generation",
 				text = {
 					"Earn {C:money}$#1#{} for each other",
-					"{C:fanworks}Fanworks{} {C:attention}Joker{} in your",
+					"{C:fanworks}Fanworks{} {C:attention}Joker{} and {C:stand}Stand{} in your",
 					"{C:attention}roster{} at end of round",
 					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
 				}
@@ -1510,14 +1499,14 @@ return {
 				name = "Shock Humor",
 				text = {
 					"{C:attention}Balance{} the {C:chips}Chips{} and {C:mult}Mult{}",
-					"of the next {C:attention}#1#{} hands"
+					"of the next {C:attention}#1#{} hands played"
 				}
 			},
 			j_fnwk_jojojidai_soldiers = {
 				name = "Jokers of Fortune",
 				text = {
-					"This Joker gives {X:mult,C:white}X#1#{} Mult for",
-					"each {C:attention}1{} hand size below {C:attention}#2#{}",
+					"{X:mult,C:white}X#1#{} Mult for each {C:attention}1{}",
+					"hand size below {C:attention}#2#{} cards",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#3#{} {C:inactive}Mult){}"
 				}
 			},
@@ -1532,7 +1521,7 @@ return {
 				name = "NEET Jokestar",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult if no other Jokers",
-					"are {C:attention}named{} \"Joker\" or \"Jokestar\"",
+					"are {C:attention}titled{} \"Joker\" or \"Jokestar\"",
 				}
 			},
 			j_fnwk_cis_jokestar = {

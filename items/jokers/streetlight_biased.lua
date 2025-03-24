@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Biased Joker',
 	config = {
 		extra = {
-			money = 3
+			money = 2
 		}
 	},
 	rarity = 1,
