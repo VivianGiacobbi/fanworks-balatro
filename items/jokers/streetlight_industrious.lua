@@ -3,6 +3,8 @@ local jokerInfo = {
 	config = {},
 	rarity = 2,
 	cost = 10,
+	unlocked = false,
+    unlock_condition = {type = 'chip_score'},
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -12,6 +14,15 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_leafy", set = "Other"}
+end
+
+
+function jokerInfo.check_for_unlock(self, args)
+	if args.type ~= self.unlock_condition.type then
+		return false
+	end
+
+	return args.chips >= G.E_SWITCH_POINT
 end
 
 function jokerInfo.calculate(self, card, context)

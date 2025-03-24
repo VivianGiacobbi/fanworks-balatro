@@ -148,11 +148,25 @@ local jokerInfo = {
     config = {},
     rarity = 3,
     cost = 10,
+    unlocked = false,
+	unlock_condition = {type = 'chip_nova', mod = 100},
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     fanwork = 'streetlight',
 }
+
+function jokerInfo.locked_loc_vars(self, info_queue, card)
+	return { vars = { CountGrammar(self.unlock_condition.mod)} }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then
+        return false
+	end
+
+    return math.floor(hand_chips*mult) >= G.GAME.blind.chips * self.unlock_condition.mod
+end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
     if G.EMULATOR_RUNNING then

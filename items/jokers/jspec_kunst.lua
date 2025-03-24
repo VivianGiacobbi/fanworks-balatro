@@ -15,33 +15,9 @@ local jokerInfo = {
 	fanwork = 'jspec'
 }
 
-local function count_grammar(value, capital_style)
-    capital_style = capital_style or 'lower'
-    local ret = ''
-    if value == 1 then
-        ret = 'once'
-    elseif value == 2 then
-        ret = 'twice'
-    else
-        ret = 'times'
-    end
-
-    if capital_style == 'first_upper' then
-        ret = (ret:gsub("^%l", ret.upper))
-    elseif capital_style == 'full_upper' then
-        ret = ret.upper(ret)
-    end
-    
-    if value > 2 then
-        ret = value..' '..ret
-    end
-    
-    return ret
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
-    return { vars = { count_grammar(card.ability.extra.upgrade_mod) }}
+    return { vars = { CountGrammar(card.ability.extra.upgrade_mod) }}
 end
 
 function jokerInfo.calculate(self, card, context)

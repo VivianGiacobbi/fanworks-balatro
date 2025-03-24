@@ -6,17 +6,6 @@ priority = 0
 # Patch to list all jokers owned this run
 #
 
-# Game:start_run()
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''self.deck:shuffle()
-self.deck:hard_set_T()'''
-position = "after"
-payload = '''G.GAME.owned_jokers = {}'''
-match_indent = true
-times = 1
-
 # CardArea:emplace()
 [[patches]]
 [patches.pattern]
@@ -24,14 +13,7 @@ target = "cardarea.lua"
 pattern = '''for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].ability.set == 'Joker' then joker_tally = joker_tally + 1 end
 end'''
-position = "at"
-payload = '''
-sendDebugMessage(card.config.center.key)
-G.GAME.owned_jokers[card.config.center.key] = true
-for i = 1, #G.jokers.cards do
-    if G.jokers.cards[i].ability.set == 'Joker' then
-        joker_tally = joker_tally + 1
-    end
-end'''
+position = "before"
+payload = '''G.GAME.owned_jokers[card.config.center.key] = true'''
 match_indent = true
 times = 1
