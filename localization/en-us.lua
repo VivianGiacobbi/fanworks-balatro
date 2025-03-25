@@ -377,6 +377,7 @@ return {
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
 			k_dzvalin = 'Dummy Text!',
+			k_joker_replaced = 'Stand World!',
 
 			ba_fanworks = 'Fanworks',
 			co_fanworks = 'DD85B4',
@@ -693,6 +694,12 @@ return {
 					"{E:1}Durandal{}",
 				},
 			},
+			artist_pink = {
+				name = "Artist",
+				text = {
+					"{E:1}pinkthorne{}",
+				},
+			},
 			artist_fool = {
 				name = "Artists",
 				text = {
@@ -809,8 +816,8 @@ return {
 				name = "Fledgling Streetlit Joker",
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
-					"if {C:attention}first hand{} of round",
-					"doesn't {C:attention}catch fire{}",
+					"if {C:attention}first hand{} of round doesn't",
+					"cause the score to {C:attention}catch fire{}",
 					"{C:inactive}(Currently {}{C:chips}+#2#{}{C:inactive} Chips){}",
 				},
 			},
@@ -914,19 +921,21 @@ return {
 			j_fnwk_bluebolt_jokestar = {
 				name = "Evasive Jokestar",
 				text = {
-					"Reduces the {C:money}cost{} of each shop item by",
-					"{C:money}$1{} for each {C:attention}Blind{} skipped,",
-					"resets when exiting the shop",
+					"Reduces the {C:money}cost{} of each",
+					"shop item by {C:money}$1{} for each",
+					"{C:attention}Blind{} skipped, resets when",
+					"exiting the shop",
 					"{C:inactive}(Currently {}{C:money}#1#$#2#{}{C:inactive}){}",
 				}
 			},
 			j_fnwk_bluebolt_sexy = {
 				name = "Sexy Joker",
 				text = {
-					"{C:chips}+#1#{} Chips if played hand",
-					"is a {C:attention}Pair{}, {C:attention}Three of a Kind{},",
-					"or {C:attention}Four of a Kind{},",
-					"{C:chips}+#2#{} Chips for each {C:attention}woman{} Joker",
+					"{C:chips}+#1#{} Chips if played hand, is a {C:attention}Pair{}",
+					"{C:attention}Three of a Kind{}, or {C:attention}Four of a Kind{}",
+					"{s:0.1} {}",
+					"{C:chips}+#2#{} Chips for each Joker of a",
+					"{C:attention}certain type ;){}",
 					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
 				}
 			},
@@ -934,8 +943,9 @@ return {
 				name = "Secluded Joker",
 				text = {
 					"Cards with {C:diamonds}Diamond{} suit",
-					"are retriggered when scored",
-					"but stay {C:attention}face down{}",
+					"are retriggered when",
+					"scored but stay",
+					"{C:attention}face down{}"
 				},
 				unlock = {
 					"Play a hand of {C:attention,E:1}5{}",
@@ -1033,9 +1043,9 @@ return {
 			j_fnwk_sunshine_funkadelic = {
 				name = "Funkadelic Joker",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult if played hand contains",
-					"a scoring {V:1}#2#{} card and a",
-					"scoring {V:2}#3#{} card",
+					"{X:mult,C:white}X#1#{} Mult if played hand",
+					"contains a scoring {V:1}#2#{} card",
+					"and a scoring {V:2}#3#{} card",
                     "{s:0.8}Suits change every round{}",
 				}
 			},
@@ -1044,7 +1054,8 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult for each time",
 					"played {C:attention}poker hand{} has",
-					"been previously played {C:attention}this round{}",
+					"been previously played",
+					"{C:attention}this round{}",
 				}
 			},
 			j_fnwk_rockhard_rebirth = {
@@ -1083,7 +1094,7 @@ return {
 			j_fnwk_rockhard_vasos = {
 				name = "Vasos y Besos",
 				text = {
-					"{C:attention}+#1#{} consumable slot,",
+					"{C:attention}+#1#{} consumable slot",
 					"{C:attention}+#2#{} instead if you have a {C:stand}Stand{}"
 				}
 			},
@@ -1273,9 +1284,9 @@ return {
 			j_fnwk_spirit_corpse = {
 				name = "Corpse Crimelord",
 				text = {
-					'{C:dark_edition}+1{} Joker slot for every digit',
-					'of {C:money}money{} you have',
-					'{s:0.8}Always spawns {C:attention}Rental{}{}'
+					'{C:dark_edition}+1{} Joker slot for every',
+					'digit of {C:money}money{} you have',
+					'{s:0.8}Always spawns {C:attention,s:0.8}Rental{}{}'
 				},
 				unlock = {
 					"Survive {C:attention,E:1}death{}"
@@ -1291,8 +1302,9 @@ return {
 			j_fnwk_double_clark = {
 				name = "Acerbic Fencer",
 				text = {
-					"When round begins, add a",
-					"random {C:attention}Face Card{} to your hand"
+					"When round begins, add ",
+					"a random {C:attention}Face Card{}",
+					"to your hand"
 				},
 				unlock = {
 					"Turn a {C:attention,E:1}Queen{}",
@@ -1310,7 +1322,7 @@ return {
 			j_fnwk_double_devastation = {
 				name = "The Devastation",
 				text = {
-                    "{C:mult}+#2#{} Mult,",
+                    "{C:mult}+#2#{} Mult",
                     "{C:attention}-#1#{} hand size",
 				}
 			},
@@ -1321,6 +1333,14 @@ return {
 					"if played hand causes the",
 					"score to {C:attention}catch fire{}",
 					"{C:inactive}(Currently {}{C:mult}+#1#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_love_holy = {
+				name = "Holy Yo-Yoker",
+				text = {
+					"This Joker gains {C:chips}+#1#{} Chips",
+                    "per {C:attention}reroll{} in the shop",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
 				}
 			},
 			j_fnwk_lighted_ge = {
@@ -1350,6 +1370,7 @@ return {
 					"{C:green}#1# in #2#{} chance for",
 					"{C:attention}Wild Cards{} to give {C:chips}+#3#{} Chips",
 					"and {C:mult}+#4#{} Mult when scored",
+					"{s:0.1} {}",
 					"Otherwise, they are {C:attention}debuffed{}"
 				}
 			},
@@ -1358,6 +1379,7 @@ return {
 				text = {
 					"Before a {C:attention}Glass Card{}",
 					"breaks, it retriggers",
+					"{s:0.1} {}",
 					"Add a random {C:attention}Glass Card{}",
 					"to deck afterwards"
 				}
@@ -1368,8 +1390,8 @@ return {
 					"if you have a {C:stand}Stand{},",
 					"each played {C:attention}#1#{} gives",
 					"{C:mult}+#2#{} Mult when scored"
-         }
-      },
+				}
+			},
 			j_fnwk_iron_boney = {
 				name = "Joker M.",
 				text = {
@@ -1407,8 +1429,9 @@ return {
 			j_fnwk_jspec_joepie = {
 				name = "Joepiejee",
 				text = {
-					"{C:attention}+#1#{} hand size per {C:planet}level{} of your",
-					"lowest level {C:attention}basic poker hand{}",
+					"{C:attention}+#1#{} hand size per {C:planet}level{}",
+					"of your lowest level",
+					"{C:attention}basic poker hand{}",
 					"{C:inactive}(Currently {}{C:attention}+#2#{} {C:inactive}hand size){}"
 				},
 				unlock = {
@@ -1418,8 +1441,9 @@ return {
 			j_fnwk_jspec_kunst = {
 				name = "Kunst",
 				text = {
-					"When {C:attention}Boss Blind{} is defeated,",
-					"level up every poker hand {C:attention}#1#{}"
+					"When {C:attention}Boss Blind{} is",
+					"defeated, {C:planet}level up{}",
+					"every poker hand {C:attention}#1#{}"
 				},
 				unlock = {
 					"{E:1,s:1.3}?????{}"
@@ -1430,7 +1454,7 @@ return {
 				text = {
 					"Cards with an {C:attention}Edition{}",
 					"act as {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
-					"and {C:dark_edition}Polychrome{}"
+					"and {C:dark_edition}#1#{}"
 				},
 				unlock = {
 					"{E:1,s:1.3}?????{}"
@@ -1542,8 +1566,9 @@ return {
 				name = "Golden Generation",
 				text = {
 					"Earn {C:money}$#1#{} for each other",
-					"{C:fanworks}Fanworks{} {C:attention}Joker{} and {C:stand}Stand{} in your",
-					"{C:attention}roster{} at end of round",
+					"{C:fanworks}Fanworks{} {C:attention}Joker{} and {C:stand}Stand{}",
+					"in your {C:attention}roster{} at",
+					"end of round",
 					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
 				}
 			},
@@ -1572,15 +1597,16 @@ return {
 			j_fnwk_city_neet = {
 				name = "NEET Jokestar",
 				text = {
-					"{X:mult,C:white}X#1#{} Mult if no other Jokers",
-					"are {C:attention}titled{} \"Joker\" or \"Jokestar\"",
+					"{X:mult,C:white}X#1#{} Mult if no other",
+					"Jokers are {C:attention}titled{}",
+					"\"Joker\" or \"Jokestar\"",
 				}
 			},
 			j_fnwk_cis_jokestar = {
 				name = "Ice-Cold Jokestar",
 				text = {
 					"{C:mult}+#1#{} Mult",
-					"Destroyed after score",
+					"{S:1.1,C:red,E:2}Self destructs{} after score",
 					"{C:attention}catches fire #2#{} time#3#",
 				},
 				unlock = {
@@ -1601,15 +1627,17 @@ return {
 			j_fnwk_yym_sheet = {
 				name = "Character Sheet",
 				text = {
-					"This Joker gains {C:chips}+#2#{} Chips every",
-					"time a {C:attention}Booster Pack{} is opened",
+					"This Joker gains {C:chips}+#2#{} Chips",
+					"every time a {C:attention}Booster Pack{}",
+					"is opened",
 					"{C:inactive}(Currently {}{C:chips}+#1#{}{C:inactive} Chips){}"
 				}
 			},
 			j_fnwk_careless_jokestar = {
 				name = "Childish Jokestar",
 				text = {
-					"{C:attention}Booster Packs{} are {C:money}#1#%{} off"
+					"{C:attention}Booster Packs{} are",
+					"{C:money}#1#%{} off"
 				}
 			},
 			j_fnwk_stalk_jokestar = {
@@ -1627,11 +1655,26 @@ return {
 			},
 		},
 		Spectral = {
-			c_fnwk_spec_stonemask = {
+			c_fnwk_spec_stone = {
 				name = "Stone Mask",
 				text = {
 					"Give a random Joker",
 					"{C:dark_edition}Holographic{} and {C:attention}Eternal{}"
+				}
+			},
+			c_fnwk_spec_ichor = {
+				name = "Ichor",
+				text = {
+					"Give a random Joker",
+					"{C:dark_edition}#1#{} and {C:attention}Rental{}"
+				}
+			},
+			c_fnwk_spec_mood = {
+				name = "Mood Indigo",
+				text = {
+					"Convert the {C:attention}leftmost Joker{}",
+					"into a different Joker of the",
+					"same {C:attention}rarity{}, preserving {C:dark_edition}edition{}"
 				}
 			}
 		},

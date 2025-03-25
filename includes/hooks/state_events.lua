@@ -15,7 +15,6 @@ end
 
 local ref_evaluate_play = G.FUNCS.evaluate_play
 G.FUNCS.evaluate_play = function(e)
-
     local last_hand = G.GAME.last_hand_played
     local ret = ref_evaluate_play(e)
     G.E_MANAGER:add_event(Event({

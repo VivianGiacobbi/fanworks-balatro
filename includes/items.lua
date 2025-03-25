@@ -118,10 +118,11 @@ local items_to_load = {
 
 		-- bluebolt incarnation
 		'bluebolt_jokestar',
-		'bluebolt_sexy',
 		'bluebolt_secluded',
-		'bluebolt_tuned',
 		'bluebolt_impaired',
+		'bluebolt_sexy',
+		'bluebolt_tuned',
+		
 
 		-- sunshine deluxe
 		'sunshine_duo',
@@ -146,6 +147,7 @@ local items_to_load = {
 
 		--love once buried
 		'love_jokestar',
+		'love_holy',
 
 		-- my digital venus
 		'mdv_shock',
@@ -168,7 +170,9 @@ local items_to_load = {
 	},
 
 	Consumable = {
-		'spec_stonemask',
+		'spec_stone',
+		'spec_ichor',
+		'spec_mood'
 	},
 	
 	Deck = {
@@ -195,50 +199,6 @@ local items_to_load = {
 	Stand = {
 
 	}
-}
-
-local alt_jokers = {
-    ['love_jokestar'] = true,
-    ['plancks_crazy'] = true,
-	['plancks_jokestar'] = true,
-    ['plancks_skeptic'] = true,
-    ['plancks_unsure'] = true,
-    ['rockhard_alfie'] = true,
-    ['rockhard_nameless'] = true,
-    ['rockhard_numbers'] = true,
-    ['rockhard_rebirth'] = true,
-    ['streetlight_fledgling'] = true,
-    ['streetlight_indulgent'] = true,
-    ['streetlight_industrious'] = true,
-    ['streetlight_methodical'] = true,
-    ['streetlight_resil'] = true
-}
-
-local wip_jokers = {
-    ['fanworks_fanworks'] = true,
-    ['fanworks_standoff'] = true,
-	['jojopolis_high'] = true,
-    ['asap_jokestar'] = true,
-    ['gotequest_pair'] = true,
-    ['gotequest_2hot'] = true,
-    ['gotequest_ajorekesr'] = true,
-    ['gotequest_will'] = true,
-    ['last_morse'] = true,
-    ['rockhard_vasos'] = true,
-    ['iron_sanctuary'] = true,
-    ['mania_jokestar'] = true,
-	['mania_fragile'] = true,
-	['industry_loyal'] = true,
-	['spirit_gambler'] = true,
-	['double_firewalker'] = true,
-	['streetlight_arrow'] = true,
-	['streetlight_biased'] = true,
-	['streetlight_teenage'] = true,
-	['whiplash_quiet'] = true,
-	['bluebolt_impaired'] = true,
-	['noman_unknown'] = true,
-	['jspec_energetic'] = true,
-	['jspec_seal'] = true,
 }
 
 for k, v in pairs(items_to_load) do
