@@ -10,7 +10,7 @@ local jokerInfo = {
 	cost = 5,
 	blueprint_compat = true,
 	eternal_compat = true,
-	perishable = true,
+	perishable = false,
 	fanwork = 'gotequest',
 	in_progress = true,
 }
@@ -18,6 +18,23 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
 	return { vars = {card.ability.extra.chip_mod, card.ability.extra.chips}}
+end
+
+function jokerInfo.calculate(self, card, context)
+    if context.debuffed then return end
+
+    if context.cardarea == G.jokers and context.joker_main and card.ability.extra.mult > 0 then
+        return {
+            message = localize{type='variable', key='a_chips', vars = {card.ability.extra.chips} },
+            mult_mod = card.ability.extra.chips,
+            colour = G.C.CHIPS,
+            card = context.blueprint_card or card
+        }
+    end
+
+    if context.blueprint then return end
+
+    
 end
 
 return jokerInfo

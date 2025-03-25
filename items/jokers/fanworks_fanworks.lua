@@ -10,7 +10,7 @@ local jokerInfo = {
 	cost = 6,
 	blueprint_compat = true,
 	eternal_compat = true,
-	perishable = false,
+	perishable = true,
 	fanwork = 'fanworks',
 	in_progress = true,
 }

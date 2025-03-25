@@ -150,7 +150,7 @@ local jokerInfo = {
     cost = 10,
     unlocked = false,
 	unlock_condition = {type = 'chip_nova', mod = 100},
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
     fanwork = 'streetlight',

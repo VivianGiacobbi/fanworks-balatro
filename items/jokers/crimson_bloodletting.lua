@@ -11,7 +11,7 @@ local jokerInfo = {
     cost = 6,
     unlocked = false,
     unlock_condition = {type = 'discard_custom', card_key = 'H_K', amount = 5},
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
     fanwork = 'crimson',
@@ -53,7 +53,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if card.debuff then
+    if card.debuff or context.blueprint then
         return
     end
     
