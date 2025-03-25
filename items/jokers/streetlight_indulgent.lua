@@ -150,6 +150,9 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
+	if not (next(SMODS.find_card('j_fnwk_streetlight_indulgent'))) then
+		G.NEON_VALS.AMT = 0
+	end
 	update_jokers_glow(card, true)
 end
 
