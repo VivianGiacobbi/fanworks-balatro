@@ -798,6 +798,13 @@ return {
 					"{E:1}sadlyandroid{},",
 					"{E:1}BarrierTrio/Gote{}"
 				}
+			},
+			artist_impulse = {
+				name = "Artists",
+				text = {
+					"{E:1}Monky4Real{},",
+					"{E:1}Cauthen Currie{}"
+				}
 			}
 		},
 		Joker = {
@@ -877,8 +884,10 @@ return {
 			j_fnwk_streetlight_pinstripe = {
 				name = "Pinstripe Joker",
 				text = {
-					"Earn {C:money}$1{} for each {C:attention}Lucky Card{} in",
-					"your {C:attention}full deck{} at end of round",
+					"Earn {C:money}$1{} for each",
+					"{C:attention}Lucky Card{} your {C:attention}full deck{}",
+					"at end of round",
+					"{s:0.1} {}",
 					"{C:attention}Lucky Cards{} never pay out",
 					"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
 				},
@@ -913,7 +922,8 @@ return {
 			j_fnwk_whiplash_quiet = {
 				name = "Quiet Riot",
 				text = {
-					"{C:mult}+#1#{} Mult for each {C:attention}Three of a Kind{}",
+					"{C:mult}+#1#{} Mult for each",
+					"{C:attention}Three of a Kind{}",
 					"played this run",
 					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}",
 				},
@@ -1658,15 +1668,25 @@ return {
 			c_fnwk_spec_stone = {
 				name = "Stone Mask",
 				text = {
-					"Give a random Joker",
-					"{C:dark_edition}Holographic{} and {C:attention}Eternal{}"
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
+				}
+			},
+			c_fnwk_spec_impulse = {
+				name = "Impulse",
+				text = {
+					"Add {C:dark_edition}Foil{} and {C:attention}Perishable{}",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
 				}
 			},
 			c_fnwk_spec_ichor = {
 				name = "Ichor",
 				text = {
-					"Give a random Joker",
-					"{C:dark_edition}#1#{} and {C:attention}Rental{}"
+					"Add {C:dark_edition}#1#{} and {C:attention}Rental{}",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
 				}
 			},
 			c_fnwk_spec_mood = {

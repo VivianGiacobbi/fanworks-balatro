@@ -171,6 +171,7 @@ local items_to_load = {
 
 	Consumable = {
 		'spec_stone',
+		'spec_impulse',
 		'spec_ichor',
 		'spec_mood'
 	},

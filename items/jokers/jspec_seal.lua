@@ -44,22 +44,43 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if context.individual and card.seal == "Purple" and not context.card.debuff then
-		local seals = card:calculate_seal(context)
-		if seals then
-			ret.seals = seals
+	if not (context.cardarea == G.play and context.individual) or context.other_card.debuff then
+		return
+	end
+
+	if context.other_card.seal == "Purple" then
+		context.discard = true
+		context.other_card:calculate_seal(context)
+		for _, v in ipairs(SMODS.find_card('j_csau_shrimp')) do
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after', 
+				delay = 0, 
+				func = function()
+					v:juice_up()
+					return true 
+				end 
+			}))
+			card_eval_status_text(context.other_card, 'extra', nil, nil, nil, {message = localize('k_again_ex')})
+			context.other_card:calculate_seal(context)
 		end
-		SMODS.trigger_effects({ret}, context.card)
+		context.discard = false
     end
 
-	if context.individual and card.seal == "Blue" and not context.card.debuff then
-		local seals = card:calculate_seal(context)
-		if seals then
-			ret.seals = seals
+	if context.other_card.seal == "Blue" then
+		context.other_card:get_end_of_round_effect(context)
+		for _, v in ipairs(SMODS.find_card('j_csau_shrimp')) do
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after', 
+				delay = 0, 
+				func = function()
+					v:juice_up()
+					return true 
+				end 
+			}))
+			card_eval_status_text(context.other_card, 'extra', nil, nil, nil, {message = localize('k_again_ex')})
+			context.other_card:get_end_of_round_effect(context)
 		end
-		SMODS.trigger_effects({ret}, context.card)
     end
-
 end
 
 return jokerInfo

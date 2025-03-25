@@ -4,6 +4,7 @@ local consumInfo = {
     set = "Spectral",
     cost = 4,
     alerted = true,
+    fanwork = 'crimson',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
