@@ -352,6 +352,7 @@ return {
 			f_bust = "Bust!",
 			f_wp = 'Well Played!',
 			f_nd = "No Dice!",
+			k_steel="Steel",
 			k_toilet1 = 'poop',
             k_toilet2 = 'peeing ahhhh',
             k_toilet3 = {
@@ -632,6 +633,13 @@ return {
 				name = "Artist",
 				text = {
 					"{E:1}CreamSodaCrossroads{}",
+				},
+			},
+			artist_creamwinter = {
+				name = "Artists",
+				text = {
+					"{E:1}CreamSodaCrossroads,{}",
+					"{E:1}TheWinterComet{}",
 				},
 			},
 			artist_cringe = {
@@ -1024,8 +1032,8 @@ return {
 			j_fnwk_moscow_mule = {
 				name = "Moscow Mule",
 				text = {
-					"{C:green}#1# in #2#{} chance for {C:attention}Unenhanced{}",
-					"cards to gain a random",
+					"{C:green}#1# in #2#{} chance for each",
+					"{C:attention}Unenhanced{} card to gain a random",
 					"{C:attention}Enhancement{} when scored",
 				}
 			},
@@ -1071,7 +1079,7 @@ return {
 			j_fnwk_rockhard_rebirth = {
 				name = "Rebirth of the Flesh",
 				text = {
-					"{C:green}#1# in #2#{} chance per scored ",
+					"{C:green}#1# in #2#{} chance per scoring",
 					"{C:attention}Wild Card{} to level up",
 					"played {C:attention}poker hand{}",
 				}
@@ -1162,9 +1170,8 @@ return {
 			j_fnwk_rubicon_film = {
 				name = "Film Crossed Joker",
 				text = {
-					"This Joker gains the",
-                    "{C:chips}Chips{} of each {C:attention}playing{}",
-					"{C:attention}card{} scored this round",
+					"This Joker gains the Chips",
+                    "of each card scored {C:attention}this round{}",
 					"{C:inactive}(Currently {}{C:chips}+#1#{} {C:inactive}Chips){}"
 				}
 			},

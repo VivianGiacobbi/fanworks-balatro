@@ -86,7 +86,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
+    info_queue[#info_queue+1] = {key = "artist_creamwinter", set = "Other"}
 	return { vars = {card.ability.extra.chips }}
 end
 

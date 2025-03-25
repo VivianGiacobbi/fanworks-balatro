@@ -12,7 +12,6 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = false,
 	fanwork = 'gotequest',
-	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -23,16 +22,24 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.debuffed then return end
 
-    if context.cardarea == G.jokers and context.joker_main and card.ability.extra.mult > 0 then
+    if context.cardarea == G.jokers and context.joker_main and card.ability.extra.chips > 0 then
         return {
             message = localize{type='variable', key='a_chips', vars = {card.ability.extra.chips} },
-            mult_mod = card.ability.extra.chips,
+            chip_mod = card.ability.extra.chips,
             colour = G.C.CHIPS,
             card = context.blueprint_card or card
         }
     end
 
     if context.blueprint then return end
+
+	if context.discard and not context.other_card.debuff then
+		card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+		return {
+			extra = {focus = card, message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
+			card = card
+		}
+	end
 
     
 end

@@ -38,10 +38,6 @@ function jokerInfo.calculate(self, card, context)
 	if context.pre_draw and G.GAME.dzrawlin and not card.ability.dzvalin_triggered then
 		card.ability.dzvalin_triggered = true
 		G.GAME.dzrawlin = nil
-		return {
-			message = localize('k_dzvalin'),
-			message_card = card
-		}
 	end
 
 	if context.end_of_round and G.GAME.dzrawlin then
