@@ -377,7 +377,7 @@ return {
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
 			k_dzvalin = 'Dummy Text!',
-			k_joker_replaced = 'Stand World!',
+			k_joker_transformed = 'Energy Transformed!',
 
 			ba_fanworks = 'Fanworks',
 			co_fanworks = 'DD85B4',

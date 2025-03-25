@@ -41,7 +41,7 @@ function consumInfo.use(self, card, area, copier)
             G.GAME.joker_buffer = 0
 
             new_joker:juice_up(0.3, 0.5)
-            card_eval_status_text(new_joker, 'extra', nil, nil, nil, {message = localize('k_joker_replaced'), colour = G.C.DARK_EDITION})
+            card_eval_status_text(new_joker, 'extra', nil, nil, nil, {message = localize('k_joker_transformed'), colour = G.C.DARK_EDITION})
             play_sound('polychrome1')
             return true
         end)
