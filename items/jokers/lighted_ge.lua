@@ -1,5 +1,6 @@
 local jokerInfo = {
-	name = 'Gypsy Eyes',
+	key = 'j_fnwk_lighted_ge',
+	name = 'Photograph', -- set to gypsy eyes after inheriting photograph's effects
 	config = {
 		extra = {
 			chance = 3,
@@ -11,15 +12,16 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = true,
-	height = 80,
-	width = 71,
 	fanwork = 'lighted',
-	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.remaining}}
+end
+
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.name = 'Gypsy Eyes'
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -37,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
 		local seed_result = pseudorandom(pseudoseed('ge'))
 		if seed_result < G.GAME.probabilities.normal / card.ability.extra.chance then
 			if not next(SMODS.find_card('j_csau_bunji')) then
-				card.ability.extra.cardsRemaining = card.ability.extra.cardsRemaining - 1
+				card.ability.extra.remaining = card.ability.extra.remaining - 1
 			end
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',

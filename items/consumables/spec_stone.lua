@@ -15,11 +15,12 @@ end
 function consumInfo.use(self, card, area, copier)
     G.E_MANAGER:add_event(Event({
         func = (function()
-            local randomcard = pseudorandom_element(card.ellible_jokers, pseudoseed('stonemask'))
+            local randomcard = pseudorandom_element(G.jokers.cards, pseudoseed('stonemask'))
+            card.ability.perishable = false
             randomcard:set_eternal(true)
             randomcard:set_edition({holo = true}, true)
             card:juice_up(0.3, 0.5)
-            card.ellible_jokers = {}
+            play_sound('gold_seal')
             return true
         end)
     }))
@@ -28,18 +29,10 @@ end
 
 function consumInfo.can_use(self, card)
     if not G.jokers then
-        return
+       return false
     end
 
-    local elligible_jokers = {}
-    for _, v in ipairs(G.jokers.cards) do
-        if not v.edition and not v.ability.eternal and not v.ability.perishable then
-            elligible_jokers[#elligible_jokers+1] = v
-        end
-    end
-
-    card.ellible_jokers = elligible_jokers
-    return #elligible_jokers > 0
+    return #G.jokers.cards > 0
 end
 
 

@@ -11,10 +11,12 @@ local jokerInfo = {
 	fanwork = 'rubicon',
 }
 
+
+
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
 
-    if not G.GAME then
+    if not G.GAME or not G.GAME.infidel_suits then
         return {  vars = { 'Clubs', 'Spades', colours = {G.C.SUITS['Clubs'], G.C.SUITS['Spades']}} }
     end
 
