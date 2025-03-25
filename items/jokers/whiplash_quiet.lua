@@ -2,8 +2,6 @@ local jokerInfo = {
 	name = 'Quiet Riot',
 	config = {
 		extra = {
-			scoring_name = 'Three of a Kind',
-			mult = 0,
 			mult_mod = 3,
 		}
 	},
@@ -13,18 +11,27 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'whiplash',
-	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-	return {
-		vars = {
-			card.ability.extra.mult_mod,
-			card.ability.extra.scoring_name,
-			card.ability.extra.mult_mod * (G.GAME.hands and G.GAME.hands[card.ability.extra.scoring_name].played or 0)
+	return { vars = {card.ability.extra.mult_mod, G.GAME.hands and card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played or 0}}
+end
+
+function jokerInfo.calculate(self, card, context)
+
+	if card.debuff then
+		return
+	end
+
+	if context.cardarea == G.jokers and context.joker_main then
+		return {
+			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played}},
+			card = context.blueprint_card or card,
+			mult_mod = card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played,
 		}
-	}
+	end
+
 end
 
 return jokerInfo

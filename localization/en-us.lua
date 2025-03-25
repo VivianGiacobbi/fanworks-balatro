@@ -906,9 +906,9 @@ return {
 			j_fnwk_whiplash_quiet = {
 				name = "Quiet Riot",
 				text = {
-					"{C:mult}+#1#{} Mult for each {C:attention}#2#{}",
+					"{C:mult}+#1#{} Mult for each {C:attention}Three of a Kind{}",
 					"played this run",
-					"{C:inactive}(Currently {}{C:mult}+#3#{} {C:inactive}Mult){}",
+					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}",
 				},
 			},
 			j_fnwk_bluebolt_jokestar = {

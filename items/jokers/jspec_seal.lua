@@ -6,11 +6,10 @@ local jokerInfo = {
 	cost = 5,
 	unlocked = false,
 	unlock_condition = {type = 'modify_deck'},
-	blueprint_compat = true,
+	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'jspec',
-	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -37,6 +36,30 @@ function jokerInfo.check_for_unlock(self, args)
     end
 
     return false
+end
+
+function jokerInfo.calculate(self, card, context)
+
+	if card.debuff or context.blueprint then
+		return
+	end
+
+	if context.individual and card.seal == "Purple" and not context.card.debuff then
+		local seals = card:calculate_seal(context)
+		if seals then
+			ret.seals = seals
+		end
+		SMODS.trigger_effects({ret}, context.card)
+    end
+
+	if context.individual and card.seal == "Blue" and not context.card.debuff then
+		local seals = card:calculate_seal(context)
+		if seals then
+			ret.seals = seals
+		end
+		SMODS.trigger_effects({ret}, context.card)
+    end
+
 end
 
 return jokerInfo
