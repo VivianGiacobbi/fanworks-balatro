@@ -8,6 +8,25 @@ SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
 SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
 
+SMODS.Shader({
+    key = 'holo',
+    path = 'mod_holo.fs',
+    prefix_config = false
+})
+
+SMODS.Shader({
+    key = 'polychrome',
+    path = 'mod_polychrome.fs',
+    prefix_config = false
+})
+
+SMODS.Shader({
+    key = 'negative',
+    path = 'mod_negative.fs',
+    prefix_config = false
+})
+
+
 SMODS.DrawStep {
     key = 'revived',
     order = 11,

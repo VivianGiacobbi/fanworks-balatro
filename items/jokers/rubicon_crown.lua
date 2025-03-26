@@ -1,6 +1,6 @@
 
 local jokerInfo = {
-	name = 'Bone Crossed Joker',
+	name = 'Crown of Thorns',
 	config = {},
 	rarity = 2,
 	cost = 8,

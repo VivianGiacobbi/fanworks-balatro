@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Resilient Streetlit Joker',
+	name = 'Resilient Joker',
 	config = {
 		extra = {},
 		form = 'normal',

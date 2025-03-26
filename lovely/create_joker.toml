@@ -19,6 +19,19 @@ function CardArea:emplace(card, location, stay_flipped, created, copied, index)'
 match_indent = true
 times = 1
 
+# this second one exists to subsume the above if the Stand Module is found
+# CardArea:emplace()
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+function CardArea:emplace(card, location, stay_flipped, index)'''
+position = "at"
+payload = '''
+function CardArea:emplace(card, location, stay_flipped, created, copied, index)'''
+match_indent = true
+times = 1
+
 # CardArea:emplace()
 [[patches]]
 [patches.pattern]

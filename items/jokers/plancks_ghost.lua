@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Crazy Creaking Joker',
+	name = 'Ghost Girl',
 	config = {
 		extra = {
 			saved_abilities = {
@@ -50,7 +50,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
         card.T.y,
         card.T.w,
         card.T.h,
-        G.ASSET_ATLAS['fnwk_plancks_crazy'],
+        G.ASSET_ATLAS['fnwk_plancks_ghost'],
         { x = 0, y = 0}
     )
 	card.children.patsy_overlay:set_role({

@@ -13,6 +13,7 @@ local jokerInfo = {
 	perishable = true,
 	fanwork = 'iron',
 	in_progress = true,
+	requires_stands = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

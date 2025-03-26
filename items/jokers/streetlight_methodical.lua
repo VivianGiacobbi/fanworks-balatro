@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Methodical Streetlit Joker',
+	name = 'Methodical Joker',
 	config = {
 		extra = {
 			hands_val = 4,

@@ -1,6 +1,22 @@
+SMODS.DrawStep {
+    key = 'rubicon_thnks',
+    order = 9,
+    func = function(self)
+        if not self.config.center.discovered then
+            return
+        end
+        
+        if (not self.children.thnks_overlay or not self.children.thnks_underlay) then
+            return
+        end
+
+		self.children.thnks_underlay:draw_shader('dissolve')
+		self.children.thnks_overlay:draw_shader('dissolve')
+    end,
+}
 
 local jokerInfo = {
-	name = 'Film Crossed Joker',
+	name = 'Thnks fr th Jkrs',
 	config = {
 		extra = {
 			chips = 0
@@ -23,9 +39,9 @@ local jokerInfo = {
 	fanwork = 'rubicon',
 }
 
-SMODS.Atlas({ key = 'film_base', path ='jokers/rubicon_film.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'film_overlay', path ='jokers/rubicon_film_overlay.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'film_underlay', path ='jokers/rubicon_film_underlay.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'thnks_base', path ='jokers/rubicon_thnks.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'thnks_overlay', path ='jokers/rubicon_thnks_overlay.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'thnks_underlay', path ='jokers/rubicon_thnks_underlay.png', px = 71, py = 95 })
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	if not card.config.center.discovered then
@@ -36,17 +52,18 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 	card.ability.scroll.update_timer = 0
 	card.ability.scroll.mod = card.ability.scroll.scale / card.ability.scroll.frames
 
-	local under_atlas = G.ASSET_ATLAS['fnwk_film_underlay']
-	card.children.film_underlay = Sprite(
+	local under_atlas = G.ASSET_ATLAS['fnwk_thnks_underlay']
+	card.children.thnks_underlay = Sprite(
 		card.T.x,
 		card.T.y,
 		card.T.w,
 		card.T.h,
 		under_atlas,
 		{ x = 0, y = 0 }
-	)	
+	)
+	card.children.thnks_underlay.custom_draw = true
 
-	card.children.film_underlay:set_role({
+	card.children.thnks_underlay:set_role({
 		role_type = 'Minor',
 		major = card,
 		offset = { x = 0, y = 0 },
@@ -56,21 +73,18 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		scale_bond = 'Strong',
 		draw_major = card
 	})
-	card.children.film_underlay:define_draw_steps({
-        {shader = 'dissolve'},
-    })
 
 
-	card.children.film_overlay = Sprite(
+	card.children.thnks_overlay = Sprite(
 		card.T.x,
 		card.T.y,
 		card.T.w,
 		card.T.h,
-		G.ASSET_ATLAS['fnwk_film_overlay'],
+		G.ASSET_ATLAS['fnwk_thnks_overlay'],
 		{ x = 0, y = 0 }
 	)
 
-	card.children.film_overlay:set_role({
+	card.children.thnks_overlay:set_role({
 		role_type = 'Minor',
 		major = card,
 		offset = { x = 0, y = 0 },
@@ -80,9 +94,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		scale_bond = 'Strong',
 		draw_major = card
 	})
-	card.children.film_overlay:define_draw_steps({
-        {shader = 'dissolve'},
-    })
+	card.children.thnks_overlay.custom_draw = true
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -125,7 +137,7 @@ function jokerInfo.update(self, card, dt)
 	if not card.config.center.discovered then
         return
     end
-	if not card.children.film_underlay or not card.children.film_underlay.sprite_pos then 
+	if not card.children.thnks_underlay or not card.children.thnks_underlay.sprite_pos then 
 		return 
 	end
 
@@ -139,7 +151,7 @@ function jokerInfo.update(self, card, dt)
 	local scroll_val = card.ability.scroll.current_frame * card.ability.scroll.mod
 	scroll_val = scroll_val + 0.005 * (math.random() * 2 - 1)
 	local jitter = 0 + 0.002 * (math.random() * 2 - 1)
-	card.children.film_underlay:set_sprite_pos({ x = jitter, y = scroll_val })
+	card.children.thnks_underlay:set_sprite_pos({ x = jitter, y = scroll_val })
 end
 
 return jokerInfo

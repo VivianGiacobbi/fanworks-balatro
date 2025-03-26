@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Skeptic Creaking Joker',
+	name = 'Skeptic Joker',
 	config = {
 		hovered_boosters = {}
 	},
