@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Moonglass Crossed Joker',
+	name = 'Moonglass Joker',
 	config = {
         extra = 3
     },

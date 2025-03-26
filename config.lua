@@ -2,7 +2,6 @@ return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
 	['enableWipJokers'] = false,
-	['enableStands'] = true,
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
 	['enableBlinds'] = false,

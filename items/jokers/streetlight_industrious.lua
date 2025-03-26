@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Industrious Streetlit Joker',
+	name = 'Industrious Joker',
 	config = {},
 	rarity = 2,
 	cost = 10,

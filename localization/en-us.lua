@@ -253,24 +253,7 @@ return {
 				"attitude. Youw wevew of effowt. Youw cwedentiaws."
 			},
 		},
-
-		collabs = {
-			Spades={
-				["1"]="Twitch Clips",
-			},
-			Hearts={
-				["1"]="Extrasauce",
-			},
-			Clubs={
-				["1"]="Darkshroom",
-			},
-			Diamonds={
-				["1"]="Fullsauce",
-			},
-        },
 		dictionary = {
-			k_stand = "Stand",
-			b_stand_cards = "Stands",
 			vs_credits1 = "Concepting/Direction",
 			vs_credits2 = "Artists",
 			vs_credits2_2 = "Playing Cards",
@@ -297,27 +280,6 @@ return {
 			vs_options_enableTarotSkins = "Tarot Card Reskins",
 			vs_options_resetTrophies_r = "Reset Achievements",
 			vs_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
-			vs_collab_credits = {
-				Hearts = {
-					collab_AU = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_TBoI = "King by fradavovan | Queen and Jack by CheesyDraws",
-					collab_CL = "King and Queen by BarrierTrio/Gote | King and Jack by SagaciousCejai",
-				},
-				Clubs = {
-					collab_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_STS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_WF = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					fnwk_ds_mascots_VS = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-				},
-				Diamonds = {
-					collab_DTD = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_SV = "King, Queen and Jack by Arthur Effgus",
-				},
-				Spades = {
-					collab_TW = "King by CheesyDraws | Queen by Greeeg | Jack by WhimsyCherry",
-					collab_CYP = "King, Queen and Jack by Jazz_Jen",
-				}
-			},
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
@@ -378,7 +340,7 @@ return {
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
 			k_dzvalin = 'Dummy Text!',
-			k_joker_replaced = 'Stand World!',
+			k_joker_replaced = 'Energy Tranformed!',
 
 			ba_fanworks = 'Fanworks',
 			co_fanworks = 'DD85B4',
@@ -551,41 +513,6 @@ return {
 					"disable it in mod config",
 					"when testing runs"
 				}
-			},
-			undiscovered_stand={
-				name="Not Discovered",
-				text={
-					"Purchase this card in",
-					"an unseeded run to",
-					"learn what it does",
-				},
-			},
-			wheel2 = {
-				name = "The Wheel of Fortune",
-				text = {
-					"{C:green}#1# in 4{} chance to add",
-					"{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
-					"{C:dark_edition}Polychrome{} edition",
-					"to a random {C:attention}Joker",
-				},
-			},
-			stand_info = {
-				name = "Acquiring Stands",
-				text = {
-					"You can only have {C:attention}#1#{} {C:stand}#2#{} at a time",
-					"{C:inactive}(Also limited by consumable slots){}",
-					"If you have no more room for {C:stand}Stands{} and",
-					"get a new one, it will replace the leftmost",
-					"{C:stand}Stand{} in your consumables."
-				},
-			},
-			stand_info_unlimited = {
-				name = "Acquiring Stands",
-				text = {
-					"If you have no more room for {C:stand}Stands{}",
-					"and get a new one, it will replace the leftmost",
-					"{C:stand}Stand{} in your consumables."
-				},
 			},
 			artist_notdaedalus = {
 				name = "Artist",
@@ -828,7 +755,7 @@ return {
 				},
 			},
 			j_fnwk_streetlight_fledgling = {
-				name = "Fledgling Streetlit Joker",
+				name = "Fledgling Joker",
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
 					"if {C:attention}first hand{} of round doesn't",
@@ -837,7 +764,7 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil = {
-				name = "Resilient Streetlit Joker",
+				name = "Resilient Joker",
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
 					"create an {C:attention}Enhancement{}-granting",
@@ -847,14 +774,14 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil_regen = {
-				name = "Resilient Streetlit Joker",
+				name = "Resilient Joker",
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
 				},
 			},
 			j_fnwk_streetlight_indulgent = {
-				name = "Indulgent Streetlit Joker",
+				name = "Indulgent Joker",
 				text = {
 					"This Joker gains {X:mult,C:white}X#1#{} Mult",
 					"if you spend at least {C:money}$#2#{} {C:inactive}[#3#]{}",
@@ -863,14 +790,14 @@ return {
 				},
 			},
 			j_fnwk_streetlight_methodical = {
-				name = "Methodical Streetlit Joker",
+				name = "Methodical Joker",
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
 					"level up played {C:attention}poker hand{}",
 				},
 			},
 			j_fnwk_streetlight_industrious = {
-				name = "Industrious Streetlit Joker",
+				name = "Industrious Joker",
 				text = {
 					"If played hand is a {C:attention}Full House{},",
 					"convert the {C:attention}Pair{} into the same rank",
@@ -996,22 +923,22 @@ return {
 				}
 			},
 			j_fnwk_plancks_unsure = {
-				name = "Unsure Creaking Joker",
+				name = "Unsure Joker",
 				text = {
 					"Retrigger all scored",
 					"{C:attention}Enhanced numbered{} cards",
 				}
 			},
 			j_fnwk_plancks_skeptic = {
-				name = "Skeptic Creaking Joker",
+				name = "Skeptic Joker",
 				text = {
 					"{C:attention}Predicts{} the cards inside",
 					"a hovered {C:attention}booster pack{}",
 					"{C:inactive,s:0.65}#1#{}"
 				}
 			},
-			j_fnwk_plancks_crazy = {
-				name = "Crazy Creaking Joker",
+			j_fnwk_plancks_ghost = {
+				name = "Ghost Girl",
 				text = {
 					"Jokers retain {C:attention}scaling abilities{}",
 					"after being destroyed or sold",
@@ -1137,15 +1064,15 @@ return {
 					"card in your deck"
 				}
 			},
-			j_fnwk_rubicon_bone = {
-				name = "Bone Crossed Joker",
+			j_fnwk_rubicon_crown = {
+				name = "Crown of Thorns",
 				text = {
 					"All {C:attention}face{} cards are",
 					"considered {C:attention}Queens{}",
 				}
 			},
 			j_fnwk_rubicon_moonglass = {
-				name = "Moonglass Crossed Joker",
+				name = "Moonglass Joker",
 				text = {
 					"{C:green}#1# in #2#{} chance for cards with",
                     "{C:spades}Spade{} suit to become",
@@ -1167,8 +1094,8 @@ return {
 					"{C:attention}Enhancement{} effects"
 				}
 			},
-			j_fnwk_rubicon_film = {
-				name = "Film Crossed Joker",
+			j_fnwk_rubicon_thnks = {
+				name = "Thnks fr th Jkrs",
 				text = {
 					"This Joker gains the Chips",
                     "of each card scored {C:attention}this round{}",
@@ -1672,14 +1599,6 @@ return {
 			},
 		},
 		Spectral = {
-			c_fnwk_spec_stone = {
-				name = "Stone Mask",
-				text = {
-					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
-					"to a random Joker, overwriting",
-					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
-				}
-			},
 			c_fnwk_spec_impulse = {
 				name = "Impulse",
 				text = {
@@ -1723,29 +1642,7 @@ return {
 			},
 		},
 		Stand = {
-			c_fnwk_moodyblues = {
-				name = "Moody Blues",
-				text = {
-					"Pauseable {C:vhs}VHS Tapes{} have",
-					"{C:attention}double{} the Running Time",
-				},
-			},
-			c_fnwk_tohth = {
-				name = "Tohth",
-				text = {
-					"The top 5 cards of your deck are shown here!",
-				},
-			},
-		},
-		Tarot = {
-			c_fnwk_arrow = {
-				name = "The Arrow",
-				text = {
-					"Create a random {C:stand}Stand",
-					"{C:inactive}(Must have room or",
-					"{C:inactive}a {C:stand}Stand{}{C:inactive} to {}{C:attention}replace{}{C:inactive}){}",
-				},
-			},
+
 		},
 		Back = {
 			b_fnwk_fanworks = {

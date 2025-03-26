@@ -1,3 +1,7 @@
+local mod_path = SMODS.current_mod.path
+local usable_path = mod_path:match("Mods/[^/]+")
+local path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the foot, why doesn't lua just have a str.replace
+
 local trophiesToLoad = {}
 
 if not fnwk_enabled['enableTrophies'] then

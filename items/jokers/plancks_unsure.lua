@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Unsure Creaking Joker',
+	name = 'Unsure Joker',
 	config = {
 	},
 	rarity = 2,

@@ -19,7 +19,6 @@ SMODS.current_mod.config_tab = function()
 		'enableConsumableTweaks',
 		--[[
 		'enableTrophies',
-		'enableStands',
 		'enableBosses',
 		'enableSkins',
 		'enableChallenges',

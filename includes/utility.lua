@@ -1,7 +1,3 @@
-local mod_path = SMODS.current_mod.path
-usable_path = mod_path:match("Mods/[^/]+")
-path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the foot, why doesn't lua just have a str.replace
-
 function table.clear(t)
     for k in pairs(t) do
         t[k] = nil
@@ -39,6 +35,11 @@ function LoadItem(file_key, item_type, no_badges)
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
 	if info.in_progress and not fnwk_enabled['enableWipJokers'] then
+		return
+	end
+
+	local stands_enabled = next(SMODS.find_mod('stands_mod'))
+	if (info.requires_stands or item_type == 'Stand') and not stands_enabled then
 		return
 	end
 
@@ -206,24 +207,6 @@ function Fact (n)
 	else
 	  return n * Fact(n-1)
 	end
-end
-
---- Recursively deep copies a table, rather than returning a table reference
---- @param orig table Original table to copy
---- @return table copy Copied table with a unique identity
-function DeepCopy(orig)
-	local orig_type = type(orig)
-	local copy
-	if orig_type == 'table' then
-		copy = {}
-		for orig_key, orig_value in next, orig, nil do
-			copy[DeepCopy(orig_key)] = DeepCopy(orig_value)
-		end
-		setmetatable(copy, DeepCopy(getmetatable(orig)))
-	else
-		copy = orig
-	end
-	return copy
 end
 
 --- Find a card key in the G.WOMEN table

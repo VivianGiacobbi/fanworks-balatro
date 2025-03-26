@@ -20,7 +20,7 @@ SMODS.Atlas({
 })
 
 local jokerInfo = {
-	name = 'Indulgent Streetlit Joker',
+	name = 'Indulgent Joker',
 	config = {
 		extra = {
 			x_mult = 1,

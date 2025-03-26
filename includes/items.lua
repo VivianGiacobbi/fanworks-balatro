@@ -48,7 +48,7 @@ local items_to_load = {
 		'plancks_jokestar',
 		'plancks_unsure',
 		'plancks_skeptic',
-		'plancks_crazy',
+		'plancks_ghost',
 
 		-- last hope army
 		'last_morse',
@@ -97,9 +97,9 @@ local items_to_load = {
 		-- rubicon crossroads
 		'rubicon_fishy',
 		'rubicon_infidel',
-		'rubicon_film',
+		'rubicon_thnks',
 		'rubicon_moonglass',
-		'rubicon_bone',
+		'rubicon_crown',
 
 		-- streetlight pursuit
 		'streetlight_fledgling',
@@ -170,7 +170,6 @@ local items_to_load = {
 	},
 
 	Consumable = {
-		'spec_stone',
 		'spec_impulse',
 		'spec_ichor',
 		'spec_mood'
@@ -196,10 +195,6 @@ local items_to_load = {
 		--'finger',
 		--'mochamike',
 	},
-
-	Stand = {
-
-	}
 }
 
 for k, v in pairs(items_to_load) do
@@ -208,27 +203,4 @@ for k, v in pairs(items_to_load) do
 			LoadItem(v[i], k, false)
 		end
 	end
-end
-
--- Stand Consumable
-SMODS.Atlas({ key = 'fnwk_undiscovered', path ="undiscovered.png", px = 71, py = 95 })
-if items_to_load.Stand and #items_to_load.Stand > 0 then
-    G.C.STAND = HEX('b85f8e')
-    SMODS.ConsumableType {
-        key = "Stand",
-        primary_colour = G.C.STAND,
-        secondary_colour = G.C.STAND,
-        collection_rows = { 8, 8 },
-        shop_rate = 0,
-        loc_txt = {},
-        default = "c_fnwk_blackspine",
-        can_stack = false,
-        can_divide = false,
-    }
-
-    SMODS.UndiscoveredSprite {
-        key = "Stand",
-        atlas = "fnwk_undiscovered",
-        pos = { x = 0, y = 0 }
-    }
 end

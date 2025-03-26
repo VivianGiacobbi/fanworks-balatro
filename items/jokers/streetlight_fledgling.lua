@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Fledgling Streetlit Joker',
+	name = 'Fledgling Joker',
 	config = {
 		extra = {
 			chips = 0,
