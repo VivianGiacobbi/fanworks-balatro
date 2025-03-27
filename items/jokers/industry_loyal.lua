@@ -1,7 +1,7 @@
 local jokerInfo = {
+	key = 'j_fnwk_industry_loyal',
 	name = 'Loyal Gambler',
-	config = {
-	},
+	config = {},
 	rarity = 2,
 	cost = 6,
 	blueprint_compat = false,
@@ -12,8 +12,8 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-	if G.GAME and not G.GAME.current_loyal_suit then
-		reset_loyal()
+	if not G.GAME or not G.GAME.current_loyal_suit then
+		return { vars = {'Spades', colours = {G.C.SUITS['Spades']}} }
 	end
 
 	local suit = localize(G.GAME.current_loyal_suit, 'suits_singular')
@@ -21,15 +21,17 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = {suit, colours = {color}} }
 end
 
---[[function jokerInfo.calculate(self, card, context)
+function jokerInfo.calculate(self, card, context)
 	if context.blueprint or card.debuff then return end
+
     if context.check_enhancement and context.cardarea == G.jokers then
-		if context.other_card:is_suit(G.GAME.current_loyal_suit) then
+		if context.other_card.ability.effect ~= "Lucky Card" and context.other_card.ability.effect ~= "Stone Card" and
+		(context.other_card.ability.effect == 'Wild Card' or context.other_card.base.suit == G.GAME.current_loyal_suit) then			
             return {
                 ['m_lucky'] = true,
             }
         end
 	end 
-end]]--
+end
 
 return jokerInfo
