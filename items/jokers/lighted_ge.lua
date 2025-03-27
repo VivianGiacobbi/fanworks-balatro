@@ -21,7 +21,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.ability.name = 'Gypsy Eyes'
+	card.name = 'Gypsy Eyes'
 end
 
 function jokerInfo.calculate(self, card, context)
