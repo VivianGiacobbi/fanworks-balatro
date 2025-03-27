@@ -7,6 +7,13 @@ function reset_funkadelic()
     G.GAME.current_funky_suits[2] = pseudorandom_element(suits, pseudoseed('funk'..G.GAME.round_resets.ante))
 end
 
+function reset_loyal()
+    G.GAME.current_loyal_suit = {'Spades'}
+    local suits = {'Spades','Hearts','Clubs','Diamonds'}
+    local firstIdx = math.floor(pseudorandom('abby'..G.GAME.round_resets.ante) * 4) + 1
+    G.GAME.current_loyal_suit = suits[firstIdx]
+end
+
 function reset_infidel()
 
     local suits = {'Spades','Hearts','Clubs','Diamonds'}

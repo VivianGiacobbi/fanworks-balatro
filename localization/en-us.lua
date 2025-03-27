@@ -1239,8 +1239,9 @@ return {
 			j_fnwk_industry_loyal = {
 				name = "Loyal Gambler",
 				text = {
-					"{C:attention}Lucky Cards{} act as the",
-					"most common suit in hand"
+					"{V:1}#1#s{} count as {C:attention}Lucky Cards{}",
+                    "in addition to current {C:attention}Enhancement{}",
+                    "{s:0.8}suit changes at end of round",
 				},
 			},
 			j_fnwk_double_clark = {
@@ -1356,7 +1357,9 @@ return {
 			j_fnwk_jspec_energetic = {
 				name = "Energetic Joker",
 				text = {
-					"Dummy Text"
+					"{C:mult}+#1#{} Mult for each unused",
+					"{C:red}discard{} this run",
+					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}",
 				},
 			},
 			j_fnwk_jspec_seal = {

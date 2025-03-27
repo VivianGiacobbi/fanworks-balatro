@@ -12,6 +12,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.current_round.packs_rerolled = 0
     reset_funkadelic()
     reset_infidel()
+    reset_loyal()
 
     for k, v in pairs(G.playing_cards) do
         v.joker_force_facedown = nil
