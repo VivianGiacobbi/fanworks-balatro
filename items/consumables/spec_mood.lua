@@ -36,7 +36,7 @@ function consumInfo.use(self, card, area, copier)
 
             new_joker:add_to_deck()
             new_joker:set_edition(replace.edition)
-            G.jokers:emplace(new_joker, nil, nil, nil, nil, 1)
+            G.jokers:emplace(new_joker, nil, nil, true, nil, 1)
 
             replace:remove()
             G.GAME.joker_buffer = 0

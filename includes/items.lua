@@ -166,7 +166,7 @@ local items_to_load = {
 		'jspec_ilsa',
 		
 		-- shit realm
-		'fanworks_bathroom'
+		'fanworks_bathroom',
 	},
 
 	Consumable = {
