@@ -926,7 +926,7 @@ return {
 				name = "Unsure Joker",
 				text = {
 					"Retrigger all scored",
-					"{C:attention}Enhanced numbered{} cards",
+					"{C:attention}Enhanced non-face{} cards",
 				}
 			},
 			j_fnwk_plancks_skeptic = {
@@ -1652,7 +1652,7 @@ return {
 				name = "Fanworks Deck",
 				text = {
 					"Start run with the",
-					"{C:attention, T:v_overstock_norm}#1#{} voucher,",
+					"{C:attention,T:v_overstock_norm}#1#{} voucher,",
 					"{C:fanworks}Fanworks{} Jokers appear",
 					"{C:attention}#2#X{} more often",
 				},

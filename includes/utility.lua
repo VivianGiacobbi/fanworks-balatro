@@ -13,6 +13,9 @@ function math.lerp(a,b,t)
 	return (1-t)*a + t*b 
 end
 
+--- Recursively finds the full file tree at a specified path
+--- @param folder string The folder path to enumerate. Function fails if folder is not an OS directory
+--- @return string fileTree A string, separated by newlines, of all enumerated paths
 function RecursiveEnumerate(folder)
 	local fileTree = ""
 	for _, file in ipairs(love.filesystem.getDirectoryItems(folder)) do

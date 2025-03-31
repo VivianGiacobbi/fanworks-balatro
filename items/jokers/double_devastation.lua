@@ -27,17 +27,26 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-    if not card.config.center.discovered then
-        return
-    end
-
-    card.config.center.pos = { x = 1, y = 0 }
-    card:set_sprites(card.config.center)
-
     card.ability.glow_range = card.ability.glow_max - card.ability.glow_min
     card.ability.glow_intensity = 2.4
     card.ability.glow_threshold = 0.95
     card.ability.glow_size = 1
+
+    card.config.center.pos = { x = 1, y = 0 }
+    card:set_sprites(card.config.center)
+end
+
+function jokerInfo.load(self, card, card_table, other_card)
+    card.config.center.pos = { x = 1, y = 0 }
+    card:set_sprites(card.config.center)
+end
+
+function jokerInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered then
+        return
+    end
+
+    if card.children.dev_glow then card.children.dev_glow:remove() end
 
     local dev_atlas = G.ASSET_ATLAS['fnwk_double_devastation_glow']
 	card.children.dev_glow = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, dev_atlas, { x = 0, y = 0 })	
@@ -53,6 +62,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
     })
     card.children.dev_glow.glow_color = {1, 0.17, 0.20}
     card.children.dev_glow.custom_draw = true
+    card.late_center_draw = true
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
@@ -78,6 +88,7 @@ function jokerInfo.update(self, card, dt)
     if not card.config.center.discovered then
         return
     end
+
     if card.ability.glow_direction > 0 and card.ability.glow_lerp < 1 then
         card.ability.glow_lerp = card.ability.glow_lerp + G.real_dt
 		if (card.ability.glow_lerp >= 1) then

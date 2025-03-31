@@ -143,6 +143,7 @@ function jokerInfo.update(self, card, dt)
                 card.ability.mask_target = 0
                 card.ability.boned = true
                 -- bad to the bone
+                card.late_center_draw = false
 
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_boney'), colour = G.C.DARK_EDITION, sound = 'fnwk_bad_to_the_bone', delay = 1.3, no_juice = true})
                 card:juice_up(1.4)
@@ -220,6 +221,7 @@ function jokerInfo.calculate(self, card, context)
                 
                 new_joker.ability.initialized = false
                 new_joker.ability.boned = false
+                new_joker.late_center_draw = true
 
                 -- place boney
                 G.jokers:emplace(new_joker, nil, nil, nil, nil, rand_idx)
@@ -230,10 +232,6 @@ function jokerInfo.calculate(self, card, context)
         }))
         
 	end
-end
-
-function jokerInfo.draw(self, card, layer)
-    
 end
 
 return jokerInfo
