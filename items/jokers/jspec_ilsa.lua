@@ -28,12 +28,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS['e_foil']
     info_queue[#info_queue+1] = G.P_CENTERS['e_polychrome']
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
-    local ed_str = fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'
-    sendDebugMessage('edition: '..ed_str)
-    -- return { vars = { ed_str } }
+    return { vars = { fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome' } }
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+function jokerInfo.set_sprites(self, card, front)
     if not card.config.center.discovered then
         return
     end
@@ -88,6 +86,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
         {shader = 'dissolve'}
 	})
 
+    --[[
     card.children.particles = Particles(
         card.T.x, 
         card.T.y, 
@@ -105,6 +104,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
             attach = card.children.ilsa_star_1,
             fill = true,
         })
+    --]]
 end
 
 

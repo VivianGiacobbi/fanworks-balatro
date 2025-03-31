@@ -17,7 +17,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if context.repetition and context.cardarea == G.play and not card.debuff and not context.other_card.debuff then
-		if context.other_card:get_id() < 11 and context.other_card.ability.effect ~= "Base" then
+		if not context.other_card:is_face() and context.other_card.ability.effect ~= "Base" then
 			return {
 				message = localize('k_again_ex'),
 				repetitions = 1,

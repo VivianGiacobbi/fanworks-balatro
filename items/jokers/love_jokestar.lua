@@ -3,6 +3,7 @@ SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px =
 SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
 
 local jokerInfo = {
+    key = 'j_fnwk_love_jokestar',
 	name = 'Prideful Jokestar',
 	config = {
         extra = {
@@ -37,7 +38,6 @@ end
 
 
 function jokerInfo.calculate(self, card, context)
-    
     if context.cardarea == G.jokers and context.joker_main then
         if card.ability.extra.mult > 0 then
             return {
@@ -57,7 +57,11 @@ function jokerInfo.calculate(self, card, context)
     end
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+function jokerInfo.set_sprites(self, card, front)
+    if card.children.bloom1 then card.children.bloom1:remove() end
+    if card.children.bloom2 then card.children.bloom2:remove() end
+    if card.children.bloom3 then card.children.bloom3:remove() end
+
     local role = {
 		role_type = 'Minor',
 		major = card,
@@ -67,37 +71,26 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		r_bond = 'Strong',
 		scale_bond = 'Strong',
 		draw_major = card,
-    }
-    card.ability.fizzle_timer = 0
-    card.ability.fizzle_check = 0.18
-    card.ability.fizzle_limit = 0.13
-    card.ability.base_fizzle_chance = 0.025
-    card.ability.consecutive_mod = 15
-    card.ability.fizzle_chance = card.ability.base_fizzle_chance
-    card.ability.consecutive_limit = math.random(1, 4)
-    card.ability.consecutive_fizzles = 0
-
-    card.ability.glow_intensity = 4
-    card.ability.glow_threshold = 0.95
-    card.ability.glow_size = 0.95
+    } 
 
     local sign_atlas_1 = G.ASSET_ATLAS['fnwk_neonsign_1']
-	card.children.bloom1 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_1,{ x = 0, y = 0 })	
+	card.children.bloom1 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_1, { x = 0, y = 0 })	
 	card.children.bloom1:set_role(role)
     card.children.bloom1.glow_color = {1, 0.96, 0}
     card.children.bloom1.custom_draw = true
 
     local sign_atlas_2 = G.ASSET_ATLAS['fnwk_neonsign_2']
-    card.children.bloom2 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_2,{ x = 0, y = 0 })	
+    card.children.bloom2 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_2, { x = 0, y = 0 })	
 	card.children.bloom2:set_role(role)
     card.children.bloom2.glow_color = {0, 0.92, 1}
     card.children.bloom2.custom_draw = true
 
     local sign_atlas_3 = G.ASSET_ATLAS['fnwk_neonsign_3']
-    card.children.bloom3 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_3,{ x = 0, y = 0 })	
+    card.children.bloom3 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_3, { x = 0, y = 0 })	
 	card.children.bloom3:set_role(role)
     card.children.bloom3.glow_color = {1, 0.07, 0.05}
     card.children.bloom3.custom_draw = true
+    card.late_center_draw = true
 end
 
 function jokerInfo.update(self, card, dt)
@@ -106,6 +99,7 @@ function jokerInfo.update(self, card, dt)
     end
 
     if card.ability.fizzled then
+        -- sendDebugMessage(card.ability.fizzle_timer..' < '..card.ability.fizzle_limit)
         if card.ability.fizzle_timer < card.ability.fizzle_limit then 
             card.ability.fizzle_timer = card.ability.fizzle_timer + G.real_dt
             if card.ability.fizzle_timer >= card.ability.fizzle_limit then
@@ -179,6 +173,9 @@ function jokerInfo.draw(self, card, layer)
     end
     
     if not (card.children.bloom1 and card.children.bloom2 and card.children.bloom3) then
+        --sendDebugMessage(tostring(card.children.bloom1))
+        --sendDebugMessage(tostring(card.children.bloom2))
+        --sendDebugMessage(tostring(card.children.bloom3))
         return
     end
 

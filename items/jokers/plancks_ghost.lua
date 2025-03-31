@@ -38,7 +38,7 @@ function jokerInfo.check_for_unlock(self, args)
 	return args.amount >= self.unlock_condition.amount
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+function jokerInfo.set_sprites(self, card, front)
 	if not card.config.center.discovered then
         return
     end
@@ -125,6 +125,7 @@ function jokerInfo.update(self, card, dt)
 	if not card.config.center.discovered then
         return
     end
+
 	if not card.ability.extra.initialized then
 		card.ability.extra.direction = 1
 		card.ability.extra.lerp = 0

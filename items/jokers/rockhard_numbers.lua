@@ -60,6 +60,10 @@ function jokerInfo.check_for_unlock(self, args)
     return false
 end
 
+function jokerInfo.set_sprites(self, card, front)
+    card.late_center_draw = true
+end
+
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.using_consumeable and not context.blueprint then
         if context.consumeable.ability.name == 'Cryptid' 
