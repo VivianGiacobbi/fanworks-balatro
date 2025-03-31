@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Ego Joker',
+	name = 'Joker Von Bronx',
 	config = {
         extra = {
             dollars = 6,

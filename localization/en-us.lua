@@ -755,7 +755,7 @@ return {
 				},
 			},
 			j_fnwk_streetlight_fledgling = {
-				name = "Fledgling Joker",
+				name = "Fledgling Streetlit Joker",
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
 					"if {C:attention}first hand{} of round doesn't",
@@ -764,7 +764,7 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil = {
-				name = "Resilient Joker",
+				name = "Resilient Streetlit Joker",
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
 					"create an {C:attention}Enhancement{}-granting",
@@ -774,14 +774,14 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil_regen = {
-				name = "Resilient Joker",
+				name = "Resilient Streetlit Joker",
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
 				},
 			},
 			j_fnwk_streetlight_indulgent = {
-				name = "Indulgent Joker",
+				name = "Indulgent Streetlit Joker",
 				text = {
 					"This Joker gains {X:mult,C:white}X#1#{} Mult",
 					"if you spend at least {C:money}$#2#{} {C:inactive}[#3#]{}",
@@ -790,14 +790,14 @@ return {
 				},
 			},
 			j_fnwk_streetlight_methodical = {
-				name = "Methodical Joker",
+				name = "Methodical Streetlit Joker",
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
 					"level up played {C:attention}poker hand{}",
 				},
 			},
 			j_fnwk_streetlight_industrious = {
-				name = "Industrious Joker",
+				name = "Industrious Streetlit Joker",
 				text = {
 					"If played hand is a {C:attention}Full House{},",
 					"convert the {C:attention}Pair{} into the same rank",
@@ -926,7 +926,7 @@ return {
 				name = "Unsure Joker",
 				text = {
 					"Retrigger all scored",
-					"{C:attention}Enhanced numbered{} cards",
+					"{C:attention}Enhanced non-face{} cards",
 				}
 			},
 			j_fnwk_plancks_skeptic = {
@@ -1535,7 +1535,7 @@ return {
 				}
 			},
 			j_fnwk_lipstick_ego = {
-				name = "Ego Joker",
+				name = "Joker Von Bronx",
 				text = {
 					"Earn {C:money}$#1#{} each time",
 					"a card is {C:attention}destroyed{}"
