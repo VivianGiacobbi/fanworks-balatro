@@ -8,6 +8,7 @@ local jokerInfo = {
 	perishable = true,
 	fanwork = 'streetlight',
 	in_progress = true,
+	required_stands = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
