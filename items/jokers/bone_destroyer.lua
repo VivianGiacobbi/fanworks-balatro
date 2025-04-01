@@ -50,7 +50,7 @@ end
 
 function jokerInfo.set_sprites(self, card, front)
     -- foreground
-    if not card.config.center.discovered then
+    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 
@@ -131,7 +131,11 @@ end
 
 function jokerInfo.draw(self, card, layer)
 
-    if not card.config.center.discovered or not card.children.action_lines then
+    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
+        return
+    end
+
+    if not not card.children.action_lines  then
         return
     end
 

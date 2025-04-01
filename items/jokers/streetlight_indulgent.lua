@@ -56,7 +56,7 @@ end
 
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	if not card.config.center.discovered then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 
@@ -133,7 +133,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 

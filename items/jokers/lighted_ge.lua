@@ -1,6 +1,6 @@
 local jokerInfo = {
 	key = 'j_fnwk_lighted_ge',
-	name = 'Photograph', -- set to gypsy eyes after inheriting photograph's effects
+	name = 'Gypsy Eyes',
 	config = {
 		extra = {
 			chance = 3,
@@ -21,7 +21,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	card.name = 'Gypsy Eyes'
+	-- card.name = 'Gypsy Eyes' -- removed for now due to a crash
 end
 
 function jokerInfo.calculate(self, card, context)

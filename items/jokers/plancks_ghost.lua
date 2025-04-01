@@ -39,7 +39,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 
@@ -122,7 +122,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 
@@ -162,7 +162,11 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered or not card.children.patsy_overlay then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
+        return
+    end
+
+    if not card.children.patsy_overlay then
         return
     end
 

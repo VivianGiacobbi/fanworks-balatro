@@ -94,7 +94,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.update(self, card, dt)
-    if not card.config.center.discovered then
+    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
 
@@ -168,7 +168,7 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered then
+    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
     
