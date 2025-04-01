@@ -428,10 +428,10 @@ return {
 			co_yym = '0D8640'
 		},
 		challenge_names = {
-			c_fnwk_tucker = "Tucker's Challenge",
+			c_fnwk_beyondcanon = "Beyond Canon",
 		},
 		v_text = {
-			ch_c_fnwk_tucker = {"All Non-{C:clubs}Fanworks{} Jokers are banned"}
+			ch_c_fnwk_beyondcanon = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"}
 		},
 		achievement_names = {
 			ach_fnwk_activate_quixotic = "From Some Place Even Higher",
@@ -1166,7 +1166,7 @@ return {
 			j_fnwk_jojopolis_jokestar = {
 				name = "Extendable Jokestar",
 				text = {
-					"{C:mult}+#1#{} Mult for each card above",
+					"{C:mult}+#1#{} Mult for each card",
 					"above {C:attention}#3#{} in your full deck",
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}

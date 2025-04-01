@@ -134,7 +134,7 @@ local items_to_load = {
 	},
 
 	Challenge = {
-		--'tucker',
+		'beyondcanon',
 	},
 
 	Blind = {
