@@ -16,11 +16,11 @@ SMODS.current_mod.config_tab = function()
 		'enableQueer',
 		'enableTarotSkins',
 		'enableConsumableTweaks',
+		'enableChallenges',
 		--[[
 		'enableTrophies',
 		'enableBosses',
 		'enableSkins',
-		'enableChallenges',
 		--]]
 	}
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
