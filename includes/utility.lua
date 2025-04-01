@@ -100,7 +100,7 @@ function CheckFanworksDiscoveries(exclude)
     for k, v in pairs(G.P_CENTERS) do
         if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.config.key) then
             count = count + 1
-            if v.config.discovered then
+            if v.discovered then
                 discovered = discovered + 1
             end
         end

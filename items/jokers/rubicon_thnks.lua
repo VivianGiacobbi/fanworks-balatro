@@ -34,7 +34,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered then
+	if not card.config.center.discovered and card.area ~= G.shop_jokers then
         return
     end
 
@@ -117,9 +117,10 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
+
 	if not card.children.thnks_underlay or not card.children.thnks_underlay.sprite_pos then 
 		return 
 	end
@@ -139,6 +140,10 @@ end
 
 function jokerInfo.draw(self, card, layer)
 	-- manually draw editions here
+	if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
+        return
+    end
+
 	if card.edition and not card.delay_edition then
 		for k, v in pairs(G.P_CENTER_POOLS.Edition) do
 			if card.edition[v.key:sub(3)] and v.shader then

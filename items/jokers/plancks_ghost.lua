@@ -38,12 +38,19 @@ function jokerInfo.check_for_unlock(self, args)
 	return args.amount >= self.unlock_condition.amount
 end
 
-function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered then
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    if not card.config.center.discovered and card.area ~= G.shop_jokers then
         return
     end
 
     card.children.center:set_sprite_pos({x = 1, y = 0})   
+end
+
+function jokerInfo.set_sprites(self, card, front)
+	if not card.config.center.discovered and card.area ~= G.shop_jokers then
+        return
+    end
+  
 	card.children.center.custom_draw = true
     card.children.patsy_overlay = Sprite(
         card.T.x,
@@ -122,7 +129,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if card.area and card.area.config.collection and not card.config.center.discovered then
         return
     end
 
@@ -162,9 +169,13 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered or not card.children.patsy_overlay then
+    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
         return
     end
+
+	if not card.children.patsy_overlay then
+		return
+	end
 
     local cursor_pos = {}
     cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE

@@ -45,6 +45,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered and (card.area ~= G.shop_jokers or (card.area and card.area.config.collection)) then
+        return
+    end
+
     local t = {x = card.T.x, y = card.T.y, w = card.T.w, h = card.T.h}
     local major_role = {
 		role_type = 'Major',
@@ -115,8 +119,11 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+    if not card.config.center.discovered and (card.area ~= G.shop_jokers or (card.area and card.area.config.collection)) then
+        return
+    end
 
-    if not card.config.center.discovered or not card.ability then
+    if not card.ability then
         return
     end
 
@@ -141,7 +148,11 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered or not card.ability then
+    if not card.config.center.discovered and (card.area ~= G.shop_jokers or (card.area and card.area.config.collection)) then
+        return
+    end
+
+    if not card.ability then
         return
     end
 

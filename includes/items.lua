@@ -1,16 +1,12 @@
 local items_to_load = {
 	Joker = {
 		-- fanworks
-		'fanworks_jogarc',
 		'fanworks_tos',
 		'fanworks_jester',
 		'fanworks_mascot',
-		'fanworks_fanworks',
-		'fanworks_standoff',
 
 		-- jojopolis
 		'jojopolis_jokestar',
-		'jojopolis_high',
 
 		-- a$ap mob feedback
 		'asap_jokestar',
@@ -27,16 +23,10 @@ local items_to_load = {
 
 		-- crimson jungle
 		'crimson_golden',
-		'crimson_bloodletting',
 			
 		-- gotequest
-		'gotequest_pair',
 		'gotequest_killing',
 		'gotequest_headlong',
-		'gotequest_2hot',
-		'gotequest_ajorekesr',
-		'gotequest_will',
-		'gotequest_lambiekins',
 
 		-- culture shock
 		'culture_adaptable',
@@ -45,60 +35,40 @@ local items_to_load = {
 		'glass_jokestar',
 
 		-- planck's creek
-		'plancks_jokestar',
 		'plancks_unsure',
-		'plancks_skeptic',
 		'plancks_ghost',
 
 		-- last hope army
-		'last_morse',
 
 		-- rockhard in a funky place
 		'rockhard_rebirth',
-		-- 'rockhard_peppers',
 		'rockhard_nameless',
-		'rockhard_alfie',
-		'rockhard_vasos',
-		'rockhard_trans',
 		'rockhard_numbers',
 
 		-- iron touch
-		'iron_sanctuary',
 		'iron_boney',
 
 		-- lighted stage
 		'lighted_ge',
-		'lighted_square',
 
 		-- jojomania
-		'mania_jokestar',
-		'mania_fragile',
 
 		-- spirit lines
 		'spirit_halves',
-		-- 'spirit_aquarium',
-		'spirit_gambler',
 		'spirit_corpse',
 
 		-- industry baby
-		'industry_loyal',
 
 		-- double down
 		'double_clark',
-		'double_firewalker',
 		'double_devastation',
 
 		-- careless cargo
-		'careless_jokestar',
 
 		-- stalk forest club
-		'stalk_jokestar',
-
 		-- rubicon crossroads
 		'rubicon_fishy',
-		'rubicon_infidel',
 		'rubicon_thnks',
-		'rubicon_moonglass',
 		'rubicon_crown',
 
 		-- streetlight pursuit
@@ -106,35 +76,23 @@ local items_to_load = {
 		'streetlight_resil',
 		'streetlight_indulgent',
 		'streetlight_methodical',
-		'streetlight_industrious',
-		'streetlight_arrow',
-		'streetlight_pinstripe',
-		'streetlight_biased',
-		'streetlight_teenage',
-		'streetlight_cabinet',
 
 		-- whiplash riot
-		'whiplash_quiet',
 
 		-- bluebolt incarnation
 		'bluebolt_jokestar',
-		'bluebolt_secluded',
-		'bluebolt_impaired',
 		'bluebolt_sexy',
 		'bluebolt_tuned',
-		
+		'bluebolt_secluded',
 
 		-- sunshine deluxe
 		'sunshine_duo',
 		'sunshine_laconic',
 		'sunshine_funkadelic',
-		'sunshine_reliable',
 
 		-- no man's army
-		'noman_unknown',
 
 		-- scepter files
-		'scepter_card',
 
 		-- yo yo ma
 		'yym_sheet',
@@ -142,34 +100,24 @@ local items_to_load = {
 		-- golden generation
 		'golden_generation',
 
-		-- cold iron streets,
-		'cis_jokestar',
+		-- cold iron streets
 
 		--love once buried
 		'love_jokestar',
-		'love_holy',
 
 		-- my digital venus
-		'mdv_shock',
-
 		-- jojojidai
 		'jojojidai_soldiers',
 
 		-- lipstick_vogue
 		'lipstick_ego',
 
-		-- jojospectacle,
-		'jspec_energetic',
-		'jspec_seal',
+		-- jojospectacle
 		'jspec_joepie',
-		'jspec_kunst',
-		'jspec_ilsa',
-		
-		-- shit realm
-		'fanworks_bathroom',
 	},
 
 	Consumable = {
+		'spec_stone',
 		'spec_impulse',
 		'spec_ichor',
 		'spec_mood'

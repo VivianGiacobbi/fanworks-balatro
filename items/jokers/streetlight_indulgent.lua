@@ -55,8 +55,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	if not card.config.center.discovered then
+function jokerInfo.set_sprites(self, card, front)
+	if not card.config.center.discovered and card.area ~= G.shop_jokers then
         return
     end
 
@@ -94,7 +94,6 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.calculate(self, card, context)
-
 	if context.joker_destroyed and context.removed == card then
 		update_jokers_glow(card, true)
 	end
@@ -133,7 +132,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if not card.config.center.discovered and card.area ~= G.shop_jokers then
         return
     end
 

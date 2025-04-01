@@ -1602,6 +1602,14 @@ return {
 			},
 		},
 		Spectral = {
+			c_fnwk_spec_stone = {
+				name = "Stone Mask",
+				text = {
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
+				}
+			},
 			c_fnwk_spec_impulse = {
 				name = "Impulse",
 				text = {
@@ -1641,7 +1649,10 @@ return {
                     "After defeating each",
                     "{C:attention}Boss Blind{}, gain a",
                     "{C:attention,T:tag_double}#1#{}"
-                }
+                },
+				unlock = {
+					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
+				}
 			},
 		},
 		Stand = {
@@ -1652,7 +1663,7 @@ return {
 				name = "Fanworks Deck",
 				text = {
 					"Start run with the",
-					"{C:attention,T:v_overstock_norm}#1#{} voucher,",
+					"{C:attention,T:v_overstock_norm}#1#{} voucher",
 					"{C:fanworks}Fanworks{} Jokers appear",
 					"{C:attention}#2#X{} more often",
 				},

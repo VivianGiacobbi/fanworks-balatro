@@ -10,7 +10,6 @@ SMODS.Atlas({
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableJokers',
-		'enableWipJokers',
 		'enableDecks',
 		'enableVouchers',
 		'enableConsumables',
@@ -55,17 +54,6 @@ SMODS.current_mod.config_tab = function()
 				right_settings.nodes[#right_settings.nodes + 1] = art_node
 				right_count = right_count + 1
 
-				local skeptic_node = create_toggle({
-					label = localize("vs_options_enableSkepticStaticSeed"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableSkepticStaticSeed',
-					callback = G.FUNCS.fnwk_set_skeptic
-				})
-				skeptic_node.config.align = 'tr'
-				right_settings.nodes[#right_settings.nodes + 1] = skeptic_node
-				right_count = right_count + 1
-
 				right_settings.nodes[#right_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
 			end
 		else
@@ -91,17 +79,6 @@ SMODS.current_mod.config_tab = function()
 				})
 				art_node.config.align = 'tr'
 				left_settings.nodes[#left_settings.nodes + 1] = art_node				
-				left_count = left_count + 1
-
-				local skeptic_node = create_toggle({
-					label = localize("vs_options_enableSkepticStaticSeed"),
-					w = 1, 
-					ref_table = fnwk_config,
-					ref_value = 'enableSkepticStaticSeed',
-					callback = G.FUNCS.fnwk_set_skeptic
-				})
-				skeptic_node.config.align = 'tr'
-				left_settings.nodes[#left_settings.nodes + 1] = skeptic_node
 				left_count = left_count + 1
 
 				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }

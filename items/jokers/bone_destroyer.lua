@@ -13,6 +13,7 @@ local jokerInfo = {
     
 	rarity = 3,
 	cost = 8,
+    discovered = false,
     unlocked = false,
     unlock_condition = {type = 'modify_deck'},
 	blueprint_compat = true,
@@ -49,12 +50,9 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-    -- foreground
-    if not card.config.center.discovered then
+    if not card.config.center.discovered and card.area ~= G.shop_jokers then
         return
     end
-
-    card.children.center:set_sprite_pos({x = 1, y = 0})
     
     local role = {
 		role_type = 'Minor',
@@ -104,6 +102,14 @@ function jokerInfo.set_sprites(self, card, front)
     G.SHADERS['fnwk_speed_lines']:send('noise', G.ASSET_ATLAS['fnwk_noise'].image)
 end
 
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    if not card.config.center.discovered and (card.area and card.area.config.collection) then
+        return
+    end
+
+    card.children.center:set_sprite_pos({x = 1, y = 0})   
+end
+
 function jokerInfo.calculate(self, card, context)
     if card.debuff then
         return
@@ -130,8 +136,11 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.draw(self, card, layer)
+    if not card.config.center.discovered and (card.area ~= G.shop_jokers or (card.area and card.area.config.collection)) then
+        return
+    end
 
-    if not card.config.center.discovered or not card.children.action_lines then
+    if not card.children.action_lines then
         return
     end
 
