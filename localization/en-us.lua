@@ -1602,6 +1602,14 @@ return {
 			},
 		},
 		Spectral = {
+			c_fnwk_spec_stone = {
+				name = "Stone Mask",
+				text = {
+					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
+					"to a random Joker, overwriting",
+					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
+				}
+			},
 			c_fnwk_spec_impulse = {
 				name = "Impulse",
 				text = {
