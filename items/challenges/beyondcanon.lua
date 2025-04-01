@@ -13,7 +13,7 @@ local function fnwkJokerCheck(k)
     end
 end
 
-function fnwk_tucker_addBanned()
+function fnwk_beyondcanon_addBanned()
     for k, v in pairs(G.P_CENTERS) do
         fnwkJokerCheck(k)
     end
