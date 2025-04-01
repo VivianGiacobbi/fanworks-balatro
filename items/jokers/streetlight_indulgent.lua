@@ -54,9 +54,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	}
 end
 
-
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered and card.area ~= G.shop_jokers then
+	if not card.config.center.discovered and G.OVERLAY_MENU then
         return
     end
 

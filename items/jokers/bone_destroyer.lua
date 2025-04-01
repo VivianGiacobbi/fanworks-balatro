@@ -50,9 +50,11 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
+    if not card.config.center.discovered and G.OVERLAY_MENU then
         return
     end
+
+    card.children.center:set_sprite_pos({x = 1, y = 0})  
     
     local role = {
 		role_type = 'Minor',
@@ -100,14 +102,6 @@ function jokerInfo.set_sprites(self, card, front)
     card.late_center_draw = true
 
     G.SHADERS['fnwk_speed_lines']:send('noise', G.ASSET_ATLAS['fnwk_noise'].image)
-end
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-    if not card.config.center.discovered and (card.area and card.area.config.collection) then
-        return
-    end
-
-    card.children.center:set_sprite_pos({x = 1, y = 0})   
 end
 
 function jokerInfo.calculate(self, card, context)

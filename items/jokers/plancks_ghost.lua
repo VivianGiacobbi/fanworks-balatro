@@ -38,18 +38,12 @@ function jokerInfo.check_for_unlock(self, args)
 	return args.amount >= self.unlock_condition.amount
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
-        return
-    end
-
-    card.children.center:set_sprite_pos({x = 1, y = 0})   
-end
-
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered and card.area ~= G.shop_jokers then
+	if not card.config.center.discovered and G.OVERLAY_MENU then
         return
     end
+
+    card.children.center:set_sprite_pos({x = 1, y = 0})  
   
 	card.children.center.custom_draw = true
     card.children.patsy_overlay = Sprite(
