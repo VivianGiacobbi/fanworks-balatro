@@ -1641,7 +1641,10 @@ return {
                     "After defeating each",
                     "{C:attention}Boss Blind{}, gain a",
                     "{C:attention,T:tag_double}#1#{}"
-                }
+                },
+				unlock = {
+					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
+				}
 			},
 		},
 		Stand = {
