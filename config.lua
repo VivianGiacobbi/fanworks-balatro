@@ -5,7 +5,7 @@ return {
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
 	['enableBlinds'] = false,
-	['enableChallenges'] = false,
+	['enableChallenges'] = true,
 	['enableAchievements'] = false,
 	['enableAltArt'] = false,
 	['enableSkepticStaticSeed'] = false,
