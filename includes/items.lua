@@ -3,7 +3,7 @@ local items_to_load = {
 		-- fanworks
 		'fanworks_tos',
 		'fanworks_jester',
-		'fanworks_mascot',
+		-- 'fanworks_mascot',
 
 		-- jojopolis
 		'jojopolis_jokestar',
