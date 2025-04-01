@@ -11,7 +11,7 @@ local jokerInfo = {
 			unlock_sell_count = 20
 		},
 	},
-	rarity = 3,
+	rarity = 2,
 	cost = 6,
 	unlocked = false,
 	unlock_condition = {type = 'patsy_jokers_sold', amount = 20},
