@@ -140,8 +140,11 @@ end
 
 function G.FUNCS.fnwk_apply_alts()
 	fnwk_enabled = copy_table(fnwk_config)
-    for k, v in pairs(alt_jokers) do
-		G.P_CENTERS['j_fnwk_'..k].atlas = 'fnwk_'..k..(fnwk_enabled['enableAltArt'] and '_alt' or '')
+    for k, v in pairs(G.P_CENTERS) do
+		if v.alt_art then
+			v.atlas = string.sub(k, 3, #k)..(fnwk_enabled['enableAltArt'] and '_alt' or '')
+			sendDebugMessage(v.atlas)
+		end
     end
 end
 
