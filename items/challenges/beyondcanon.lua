@@ -25,7 +25,7 @@ end
 local chalInfo = {
     rules = {
         custom = {
-            {id = "fnwk_tucker" }
+            {id = "fnwk_beyondcanon" }
         }
     },
     restrictions = {
