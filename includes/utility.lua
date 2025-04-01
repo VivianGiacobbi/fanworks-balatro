@@ -102,9 +102,10 @@ function CheckFanworksDiscoveries(exclude)
     local count = 0
     local discovered = 0
     for k, v in pairs(G.P_CENTERS) do
-        if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.config.key) then
+        if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.key) then
             count = count + 1
-            if v.discovered then
+            if v.discovered and v.unlocked then
+				sendDebugMessage(k)
                 discovered = discovered + 1
             end
         end
