@@ -42,10 +42,6 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.cardarea == G.play and context.individual then
-		sendDebugMessage('flipped:'..tostring(context.other_card.ability.played_while_flipped))
-	end
-
 	if not context.repetition or not context.cardarea == G.play or card.debuff then
 		return
 	end

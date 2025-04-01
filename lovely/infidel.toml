@@ -10,7 +10,7 @@ priority = 0
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = '''if next(find_joker('Smeared Joker')) and (self.base.suit == 'Hearts' or self.base.suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
+pattern = '''if next(find_joker('Smeared Joker')) and SMODS.smeared_check(self, suit) then
     return true
 end'''
 position = "at"
@@ -22,7 +22,7 @@ if infidel and smeared then
         return true
     end
 end
-if smeared and (self.base.suit == 'Hearts' or self.base.suit == 'Diamonds') == (suit == 'Hearts' or suit == 'Diamonds') then
+if smeared and SMODS.smeared_check(self, suit) then
     return true
 end 
 

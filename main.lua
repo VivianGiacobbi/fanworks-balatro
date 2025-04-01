@@ -33,7 +33,6 @@ local includes = {
 	--- might require functionality
 	-- 'options/achievements',
 	-- 'options/blinds',
-	'options/challenges',
 
 	-- cosmetic
 	'queer',

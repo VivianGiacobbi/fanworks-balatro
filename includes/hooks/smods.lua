@@ -15,7 +15,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     reset_loyal()
 
     for k, v in pairs(G.playing_cards) do
-        v.joker_force_facedown = nil
+        v.ability.joker_force_facedown = nil
         v.ability.played_while_flipped = nil
     end
 end

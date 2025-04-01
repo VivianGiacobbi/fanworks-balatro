@@ -17,9 +17,7 @@ function fnwk_beyondcanon_addBanned()
     for k, v in pairs(G.P_CENTERS) do
         fnwkJokerCheck(k)
     end
-    for k, v in pairs(SMODS.Centers) do
-        fnwkJokerCheck(k)
-    end
+    sendDebugMessage(#banned)
 end
 
 local chalInfo = {
