@@ -21,7 +21,6 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = G.P_CENTERS.m_wild
     info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
     return { vars = {card.ability.extra.mult_mod, card.ability.extra.mult }}
 end

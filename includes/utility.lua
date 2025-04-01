@@ -83,6 +83,10 @@ function LoadItem(file_key, item_type, no_badges)
 		end
 	end
 
+	if item_type == 'Challenge' then
+		return
+	end
+
 	SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
 	if info.alt_art then
 		SMODS.Atlas({ key = file_key..'_alt', path = "jokers/" .. file_key .. '_alt'.. ".png", px = 71, py = 95 })
@@ -100,7 +104,7 @@ function CheckFanworksDiscoveries(exclude)
     for k, v in pairs(G.P_CENTERS) do
         if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.config.key) then
             count = count + 1
-            if v.config.discovered then
+            if v.discovered then
                 discovered = discovered + 1
             end
         end
