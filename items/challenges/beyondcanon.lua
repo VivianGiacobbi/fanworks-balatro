@@ -30,14 +30,7 @@ local chalInfo = {
     },
     restrictions = {
         banned_cards = banned,
-    },
-    unlocked = function(self)
-        for k, v in pairs(SMODS.Achievements) do
-            if k == 'ach_fnwk_win_vine'  then
-                return v.earned
-            end
-        end
-    end
+    }
 }
 
 return chalInfo

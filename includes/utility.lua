@@ -83,6 +83,10 @@ function LoadItem(file_key, item_type, no_badges)
 		end
 	end
 
+	if item_type == 'Challenge' then
+		return
+	end
+
 	SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or 71, py = new_item.height or  95 })
 	if info.alt_art then
 		SMODS.Atlas({ key = file_key..'_alt', path = "jokers/" .. file_key .. '_alt'.. ".png", px = 71, py = 95 })

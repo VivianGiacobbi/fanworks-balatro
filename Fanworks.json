@@ -1,6 +1,6 @@
 {
 	"id": "fanworks_demo",
-	"name": "JJBA Fanworks - DEMO 0.1",
+	"name": "JJBA Fanworks - DEMO 0.2",
 	"author": ["TheWinterComet", "BarrierTrio", "Kekulism"],
 	"description": "A mod inspired by the JoJo's Bizarre Fanworks Discord server!",
 	"prefix": "fnwk",
@@ -9,7 +9,7 @@
 	"badge_colour": "DD85B4",
 	"badge_text_colour": "FFFFFF",
 	"display_name": "Fanworks",
-	"version": "0.1 DEMO",
+	"version": "0.2 DEMO",
 	"dependencies": [
 		"Steamodded (>=1.0.0~ALPHA-1317a)",
 		"Lovely (>=0.7)"
