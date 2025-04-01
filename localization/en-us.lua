@@ -1166,7 +1166,7 @@ return {
 			j_fnwk_jojopolis_jokestar = {
 				name = "Extendable Jokestar",
 				text = {
-					"{C:mult}+#1#{} Mult for each card above",
+					"{C:mult}+#1#{} Mult for each card",
 					"above {C:attention}#3#{} in your full deck",
 					"{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)"
 				}
