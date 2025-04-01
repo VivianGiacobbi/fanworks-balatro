@@ -127,7 +127,7 @@ end
 local ref_card_hover = Card.hover
 function Card:hover()
     ref_card_hover(self)
-    if self.ability.set == 'Booster' then
+    if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == 'Booster' then
         SMODS.calculate_context({hovering_booster = true, booster = self})
     end
 end
@@ -135,7 +135,7 @@ end
 local ref_card_stop_hover = Card.stop_hover
 function Card:stop_hover()
     ref_card_stop_hover(self)
-    if self.ability.set == "Booster" then
+    if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == "Booster" then
         SMODS.calculate_context({stopped_hovering = true, booster = self})
         return
     end
