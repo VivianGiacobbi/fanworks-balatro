@@ -8,28 +8,9 @@ SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
 SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
 
-SMODS.Shader({
-    key = 'holo',
-    path = 'mod_holo.fs',
-    prefix_config = false
-})
-
-SMODS.Shader({
-    key = 'polychrome',
-    path = 'mod_polychrome.fs',
-    prefix_config = false
-})
-
-SMODS.Shader({
-    key = 'negative',
-    path = 'mod_negative.fs',
-    prefix_config = false
-})
-
-
 SMODS.DrawStep {
     key = 'revived',
-    order = 11,
+    order = 23,
     func = function(self)
         if self.ability.make_vortex and (self.config.center.discovered or self.bypass_discovery_center) then
             self.children.center:draw_shader('booster', nil, self.ARGS.send_to_shader)
@@ -40,7 +21,7 @@ SMODS.DrawStep {
 
 SMODS.DrawStep {
     key = 'water_shader',
-    order = 11,
+    order = 23,
     func = function(self)
         if (self.config.center.discovered or self.bypass_discovery_center) and self.ability.water_time and self.ability.water_atlas then
             local cursor_pos = {}
@@ -77,6 +58,67 @@ SMODS.DrawStep {
             shader_args[3] = { name = 'screen_scale', val = screen_scale }
             shader_args[4] = { name = 'hovering', val = hovering }
             self.children.center:draw_shader('fnwk_glow', nil, shader_args, false, nil, nil, nil, nil, nil, true)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+-- prevent late drawing centers from drawing twice
+SMODS.DrawStep:take_ownership('center', {
+    func = function(self, layer)
+        --Draw the main part of the card
+        if (self.edition and self.edition.negative and not self.delay_edition) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+            self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
+        elseif not self:should_draw_base_shader() then
+            -- Don't render base dissolve shader.
+        elseif not self.greyed then
+            self.children.center:draw_shader('dissolve')
+        end
+
+         --If the card is not yet discovered
+         if not self.config.center.discovered and (self.ability.consumeable or self.config.center.unlocked) and not self.config.center.demo and not self.bypass_discovery_center then
+            local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot
+            local scale_mod = -0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL)
+            local rotate_mod = 0.03*math.sin(1.219*G.TIMERS.REAL)
+
+            shared_sprite.role.draw_major = self
+            if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then 
+                shared_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+            else
+                if SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].overlay_sprite then
+                    SMODS.UndiscoveredSprites[self.ability.set].overlay_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+                end
+            end
+        end
+
+        if self.ability.name == 'Invisible Joker' and (self.config.center.discovered or self.bypass_discovery_center) then
+            if self:should_draw_base_shader() then
+                self.children.center:draw_shader('voucher', nil, self.ARGS.send_to_shader)
+            end
+        end
+
+        if self.late_center_draw then
+            return
+        end
+
+        local center = self.config.center
+        if center.draw and type(center.draw) == 'function' then
+            center:draw(self, layer)
+        end
+    end,
+})
+
+SMODS.DrawStep {
+    key = 'late_center_draw',
+    order = 22,
+    func = function(self, layer)
+        if not self.late_center_draw then
+            return
+        end
+
+        local center = self.config.center
+        if center.draw and type(center.draw) == 'function' then
+            center:draw(self, layer)
         end
     end,
     conditions = { vortex = false, facing = 'front' },

@@ -44,7 +44,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult, joker_name_mod(card) } }
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+function jokerInfo.set_sprites(self, card, front)
     local t = {x = card.T.x, y = card.T.y, w = card.T.w, h = card.T.h}
     local major_role = {
 		role_type = 'Major',
@@ -53,6 +53,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 
     -- foreground
     local atlas = G.ASSET_ATLAS['fnwk_city_neet']
+    --[[
     card.children.city_bkg = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 3, y = 0})
 	card.children.city_bkg:set_role({
 		role_type = 'Minor',
@@ -65,6 +66,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		draw_major = card
 	})
 	card.children.city_bkg.custom_draw = true
+    --]]
 
     -- first layer
 	card.children.city_layer1 = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 4, y = 0})
@@ -94,7 +96,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		draw_major = card
 	})
 	card.children.city_fg.custom_draw = true
-    
+    card.late_center_draw = true
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -162,7 +164,7 @@ function jokerInfo.draw(self, card, layer)
     end
     
     -- foreground
-    card.children.city_bkg:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
+    -- card.children.city_bkg:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
 
     -- first layer
     card.children.city_layer1.T = copy_table(card.T)

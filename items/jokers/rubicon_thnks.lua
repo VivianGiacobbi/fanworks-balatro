@@ -1,21 +1,5 @@
-SMODS.DrawStep {
-    key = 'rubicon_thnks',
-    order = 9,
-    func = function(self)
-        if not self.config.center.discovered then
-            return
-        end
-        
-        if (not self.children.thnks_overlay or not self.children.thnks_underlay) then
-            return
-        end
-
-		self.children.thnks_underlay:draw_shader('dissolve')
-		self.children.thnks_overlay:draw_shader('dissolve')
-    end,
-}
-
 local jokerInfo = {
+	key = 'j_fnwk_rubicon_thnks',
 	name = 'Thnks fr th Jkrs',
 	config = {
 		extra = {
@@ -44,25 +28,24 @@ SMODS.Atlas({ key = 'thnks_overlay', path ='jokers/rubicon_thnks_overlay.png', p
 SMODS.Atlas({ key = 'thnks_underlay', path ='jokers/rubicon_thnks_underlay.png', px = 71, py = 95 })
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	card.ability.scroll.update_rate = 1 / card.ability.scroll.fps
+	card.ability.scroll.update_timer = 0
+	card.ability.scroll.mod = card.ability.scroll.scale / card.ability.scroll.frames
+end
+
+function jokerInfo.set_sprites(self, card, front)
 	if not card.config.center.discovered then
         return
     end
 
-	card.ability.scroll.update_rate = 1 / card.ability.scroll.fps
-	card.ability.scroll.update_timer = 0
-	card.ability.scroll.mod = card.ability.scroll.scale / card.ability.scroll.frames
-
-	local under_atlas = G.ASSET_ATLAS['fnwk_thnks_underlay']
 	card.children.thnks_underlay = Sprite(
 		card.T.x,
 		card.T.y,
 		card.T.w,
 		card.T.h,
-		under_atlas,
+		G.ASSET_ATLAS['fnwk_thnks_underlay'],
 		{ x = 0, y = 0 }
 	)
-	card.children.thnks_underlay.custom_draw = true
-
 	card.children.thnks_underlay:set_role({
 		role_type = 'Minor',
 		major = card,
@@ -73,7 +56,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		scale_bond = 'Strong',
 		draw_major = card
 	})
-
+	card.children.thnks_underlay.custom_draw = true
 
 	card.children.thnks_overlay = Sprite(
 		card.T.x,
@@ -83,7 +66,6 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		G.ASSET_ATLAS['fnwk_thnks_overlay'],
 		{ x = 0, y = 0 }
 	)
-
 	card.children.thnks_overlay:set_role({
 		role_type = 'Minor',
 		major = card,
@@ -95,6 +77,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 		draw_major = card
 	})
 	card.children.thnks_overlay.custom_draw = true
+	card.late_center_draw = true
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -152,6 +135,28 @@ function jokerInfo.update(self, card, dt)
 	scroll_val = scroll_val + 0.005 * (math.random() * 2 - 1)
 	local jitter = 0 + 0.002 * (math.random() * 2 - 1)
 	card.children.thnks_underlay:set_sprite_pos({ x = jitter, y = scroll_val })
+end
+
+function jokerInfo.draw(self, card, layer)
+	-- manually draw editions here
+	if card.edition and not card.delay_edition then
+		for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+			if card.edition[v.key:sub(3)] and v.shader then
+				if type(v.draw) == 'function' then
+					card.children.thnks_underlay:draw(card, layer)
+				else
+					-- because foil is transparent unlike the other edition shaders
+					if v.key:sub(3) == 'foil' then
+						card.children.thnks_underlay:draw_shader('dissolve')
+					end
+					card.children.thnks_underlay:draw_shader(v.shader, nil, card.ARGS.send_to_shader)
+				end
+			end
+		end
+	else 
+		card.children.thnks_underlay:draw_shader('dissolve')
+	end
+	card.children.thnks_overlay:draw_shader('dissolve')
 end
 
 return jokerInfo

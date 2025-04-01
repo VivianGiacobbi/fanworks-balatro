@@ -48,7 +48,7 @@ function jokerInfo.check_for_unlock(self, args)
     return true
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
+function jokerInfo.set_sprites(self, card, front)
     -- foreground
     if not card.config.center.discovered then
         return
@@ -99,6 +99,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
     )
 	card.children.yoko_fore:set_role(role)
 	card.children.yoko_fore.custom_draw = true
+    card.late_center_draw = true
 
     G.SHADERS['fnwk_speed_lines']:send('noise', G.ASSET_ATLAS['fnwk_noise'].image)
 end
