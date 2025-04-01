@@ -70,6 +70,7 @@ local items_to_load = {
 		'rubicon_fishy',
 		'rubicon_thnks',
 		'rubicon_crown',
+		'rubicon_moonglass',
 
 		-- streetlight pursuit
 		'streetlight_fledgling',
