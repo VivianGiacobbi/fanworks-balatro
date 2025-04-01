@@ -144,6 +144,10 @@ function jokerInfo.draw(self, card, layer)
         return
     end
 
+	if not (card.children.thnks_underlay and card.children.thnks_overlay) then
+		return
+	end
+
 	if card.edition and not card.delay_edition then
 		for k, v in pairs(G.P_CENTER_POOLS.Edition) do
 			if card.edition[v.key:sub(3)] and v.shader then
