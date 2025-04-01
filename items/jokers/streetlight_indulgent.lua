@@ -55,7 +55,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered and G.OVERLAY_MENU then
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -131,7 +131,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered and card.area ~= G.shop_jokers then
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 

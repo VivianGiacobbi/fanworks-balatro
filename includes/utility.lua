@@ -105,7 +105,6 @@ function CheckFanworksDiscoveries(exclude)
         if string.sub(k, 3, 6) == 'fnwk' and (not exclude or k ~= exclude.key) then
             count = count + 1
             if v.discovered and v.unlocked then
-				sendDebugMessage(k)
                 discovered = discovered + 1
             end
         end

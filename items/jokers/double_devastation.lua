@@ -42,6 +42,10 @@ function jokerInfo.load(self, card, card_table, other_card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
     if card.children.dev_glow then card.children.dev_glow:remove() end
 
     local dev_atlas = G.ASSET_ATLAS['fnwk_double_devastation_glow']
@@ -81,7 +85,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -107,7 +111,7 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered and (card.area ~= G.shop_jokers or (card.area and card.area.config.collection)) then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 

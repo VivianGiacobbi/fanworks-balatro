@@ -58,7 +58,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -98,7 +98,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.update(self, card, dt)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -172,7 +172,7 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered and card.area ~= G.shop_jokers then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
     

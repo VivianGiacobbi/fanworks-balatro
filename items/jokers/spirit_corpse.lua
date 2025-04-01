@@ -34,7 +34,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-    if not card.config.center.discovered and G.OVERLAY_MENU then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
