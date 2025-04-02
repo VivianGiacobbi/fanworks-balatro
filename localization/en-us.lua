@@ -894,7 +894,7 @@ return {
 				},
 				unlock = {
 					"Play a hand of {C:attention,E:1}5{}",
-					"{C:attention,E:1}face down{} cards"
+					"scoring {C:attention,E:1}face down{} cards"
 				}
 			},
 			j_fnwk_bluebolt_tuned = {
