@@ -1022,9 +1022,8 @@ return {
 			j_fnwk_rockhard_nameless = {
 				name = "Endless Nameless",
 				text = {
-					"This Joker gains {C:mult}+#1#{} Mult",
-					"every time you {C:planet}level up{}",
-					"a poker hand",
+					"{C:mult}+#1#{} Mult for each",
+					"{C:attention}poker hand{} {C:planet}level{} gained",
 					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
 				}
 			},
