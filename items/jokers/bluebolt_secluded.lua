@@ -50,10 +50,6 @@ function jokerInfo.calculate(self, card, context)
 	if context.other_card:is_suit('Diamonds') then
 		retriggers = card.ability.extra
 	end
-
-	if context.other_card:get_id() == 11 then
-		retriggers = retriggers + 1
-	end
 	
 	if retriggers > 0 then
 		return {

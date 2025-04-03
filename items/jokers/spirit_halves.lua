@@ -1,5 +1,4 @@
 local jokerInfo = {
-    key = 'j_fnwk_spirit_halves',
 	name = 'The Halves',
 	config = {
         extra = {
