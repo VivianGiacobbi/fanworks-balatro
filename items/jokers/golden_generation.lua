@@ -1,7 +1,8 @@
 local jokerInfo = {
 	name = 'Golden Generation',
 	config = {
-        extra = 2,
+        extra = 1,
+        initial_extra = 2
     },
 	rarity = 2,
 	cost = 7,
@@ -28,11 +29,11 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_reda", set = "Other"} 
-    return { vars = {card.ability.extra, fanworks_cards(card) * card.ability.extra}}
+    return { vars = {card.ability.extra, (fanworks_cards(card) * card.ability.extra) + 2}}
 end
 
 function jokerInfo.calc_dollar_bonus(self, card)
-    local bonus = fanworks_cards(card) * card.ability.extra
+    local bonus = (fanworks_cards(card) * card.ability.extra) + 2
     if bonus > 0 then
         return bonus
     end

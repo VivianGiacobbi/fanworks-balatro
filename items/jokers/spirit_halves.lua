@@ -1,8 +1,13 @@
 local jokerInfo = {
+    key = 'j_fnwk_spirit_halves',
 	name = 'The Halves',
-	config = {},
-	rarity = 2,
-	cost = 6,
+	config = {
+        extra = {
+            final_mult_mod = 0.5
+        }
+    },
+	rarity = 3,
+	cost = 10,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -11,6 +16,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
+    return { vars = {card.ability.extra.final_mult_mod}}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -22,7 +28,17 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    balance_score(context.blueprint_card or card)
+    local juice_card = context.blueprint_card or card
+    balance_score(juice_card)
+
+    mult = math.floor(mult * card.ability.extra.final_mult_mod)
+    update_hand_text({delay = 0}, {mult = mult, chips = hand_chips})
+
+    return {
+        message_card = juice_card,
+        colour = G.C.MULT,
+        message = localize{type='variable',key='a_xmult',vars={card.ability.extra.final_mult_mod}},
+    }
 end
 
 return jokerInfo

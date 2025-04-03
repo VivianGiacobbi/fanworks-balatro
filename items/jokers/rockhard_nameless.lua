@@ -20,9 +20,19 @@ local jokerInfo = {
 	fanwork = 'rockhard',
 }
 
+local function levels_over_one()
+    local levels = 0
+    for k, v in ipairs(SMODS.PokerHand.obj_buffer) do
+        if SMODS.PokerHands[v].visible then
+            levels = levels + G.GAME.hands[v].level - 1
+        end
+    end
+    return levels
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
-    return { vars = {card.ability.extra.mult_mod, card.ability.extra.mult }}
+    return { vars = {card.ability.extra.mult_mod, levels_over_one() * card.ability.extra.mult_mod }}
 end
 
 function jokerInfo.update(self, card, dt)
@@ -30,28 +40,16 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.joker_main and not card.debuff and card.ability.extra.mult > 0 then
+    if context.cardarea == G.jokers and context.joker_main and not card.debuff and (levels_over_one() * card.ability.extra.mult_mod) > 0 then
         return {
-            message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
-            mult_mod = card.ability.extra.mult,
+            message = localize{type='variable',key='a_mult',vars={levels_over_one() * card.ability.extra.mult_mod or 0}},
+            mult_mod = levels_over_one() * card.ability.extra.mult_mod,
             card = context.blueprint_card or card
         }
     end
 
     if context.blueprint then return end
     
-    if (context.cardarea == G.jokers and context.hand_upgraded) and not card.debuff then        
-        local count = 0
-        for k, v in pairs(context.upgraded) do
-            count = count + 1
-        end
-        local levels = card.ability.extra.mult_mod * context.amount * count
-        card.ability.extra.mult = card.ability.extra.mult + levels 
-        return {
-            card = card,
-            message = localize{type='variable',key='a_mult',vars={levels}}
-        }
-    end
 end
 
 return jokerInfo

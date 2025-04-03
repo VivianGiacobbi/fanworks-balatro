@@ -14,7 +14,7 @@ local jokerInfo = {
         glow_range = 0.6,
     },
 	rarity = 3,
-	cost = 7,
+	cost = 8,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,

@@ -1022,9 +1022,8 @@ return {
 			j_fnwk_rockhard_nameless = {
 				name = "Endless Nameless",
 				text = {
-					"This Joker gains {C:mult}+#1#{} Mult",
-					"every time you {C:planet}level up{}",
-					"a poker hand",
+					"{C:mult}+#1#{} Mult for each",
+					"{C:attention}poker hand{} {C:planet}level{} gained",
 					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
 				}
 			},
@@ -1214,7 +1213,8 @@ return {
 				name = "The Halves",
 				text = {
 					"If played hand is a {C:attention}Pair{},",
-					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
+					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{},",
+					"then {X:mult,C:white}X#1#{} Mult"
 				}
 			},
 			j_fnwk_spirit_gambler = {
