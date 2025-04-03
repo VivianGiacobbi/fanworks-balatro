@@ -1,8 +1,8 @@
 local jokerInfo = {
 	name = 'The Halves',
 	config = {},
-	rarity = 2,
-	cost = 6,
+	rarity = 3,
+	cost = 10,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
