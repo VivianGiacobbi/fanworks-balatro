@@ -876,7 +876,7 @@ return {
 			j_fnwk_bluebolt_sexy = {
 				name = "Sexy Joker",
 				text = {
-					"{C:chips}+#1#{} Chips if played hand, is a {C:attention}Pair{}",
+					"{C:chips}+#1#{} Chips if played hand is a {C:attention}Pair{}",
 					"{C:attention}Three of a Kind{}, or {C:attention}Four of a Kind{}",
 					"{s:0.1} {}",
 					"{C:chips}+#2#{} Chips for each Joker of a",
@@ -894,7 +894,7 @@ return {
 				},
 				unlock = {
 					"Play a hand of {C:attention,E:1}5{}",
-					"{C:attention,E:1}face down{} cards"
+					"scoring {C:attention,E:1}face down{} cards"
 				}
 			},
 			j_fnwk_bluebolt_tuned = {

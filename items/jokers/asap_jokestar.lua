@@ -17,6 +17,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "artist_coop", set = "Other"}
 	return { vars = {card.ability.extra.score_name, card.ability.extra.h_size }}
 end
 
