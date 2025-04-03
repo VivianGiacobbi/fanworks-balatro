@@ -6,7 +6,7 @@ local jokerInfo = {
 	config = {
         extra = {
             x_mult = 1,
-            x_mult_mod = 0.1,
+            x_mult_mod = 0.04,
         },
         action_time = 0,
     },
@@ -102,6 +102,12 @@ function jokerInfo.set_sprites(self, card, front)
     card.late_center_draw = true
 
     G.SHADERS['fnwk_speed_lines']:send('noise', G.ASSET_ATLAS['fnwk_noise'].image)
+end
+
+function jokerInfo.in_pool(self, args)
+    if G.GAME.round_scores.times_rerolled.amt >= 15 then
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)

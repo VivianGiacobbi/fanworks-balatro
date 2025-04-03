@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Funkadelic Joker',
 	config = {
         extra = {
-            x_mult = 2
+            x_mult = 2.5
         },
     },
 	rarity = 2,

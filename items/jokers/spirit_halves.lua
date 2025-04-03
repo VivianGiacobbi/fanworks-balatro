@@ -36,6 +36,7 @@ function jokerInfo.calculate(self, card, context)
 
     return {
         message_card = juice_card,
+        colour = G.C.MULT,
         message = localize{type='variable',key='a_xmult',vars={card.ability.extra.final_mult_mod}},
     }
 end
