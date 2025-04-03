@@ -21,7 +21,19 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	-- card.name = 'Gypsy Eyes'
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+   	card.T.h = card.T.h/1.2
+end
+
+function jokerInfo.set_sprites(self, card, front)
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+	card.children.center.scale.y = card.children.center.scale.y/1.2
 end
 
 function jokerInfo.calculate(self, card, context)

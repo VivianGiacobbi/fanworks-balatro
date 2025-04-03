@@ -341,3 +341,14 @@ function SecretHandsPlayed()
 
 	return secret
 end
+
+function PopulateBeyondCanonBans()
+	local banned = {}
+	for k, v in pairs(G.P_CENTERS) do
+		if StringStartsWith(k, "j_") and not StringStartsWith(k, "j_fnwk_") then
+			banned[#banned+1] = { id = k }
+		end
+	end
+	G.beyond_bans = banned
+end
+PopulateBeyondCanonBans()

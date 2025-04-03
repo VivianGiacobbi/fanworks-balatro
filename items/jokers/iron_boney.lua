@@ -144,6 +144,11 @@ function jokerInfo.update(self, card, dt)
                 card.ability.boned = true
                 -- bad to the bone
                 card.late_center_draw = false
+                card.children.center.scale = card.ability.old_scale
+                card.T.w = card.ability.oldT.w
+                card.T.h = card.ability.oldT.h
+                card.ability.old_scale = nil
+                card.ability.oldT = nil
 
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_boney'), colour = G.C.DARK_EDITION, sound = 'fnwk_bad_to_the_bone', delay = 1.3, no_juice = true})
                 card:juice_up(1.4)
@@ -172,19 +177,7 @@ function jokerInfo.calculate(self, card, context)
             trigger = 'after',
             delay = 0.3,
             func = function() 
-                local rand_set = {}
-                for i=1, #G.jokers.cards do
-                    if G.jokers.cards[i] ~= card and not G.jokers.cards[i].ability.eternal then
-                        rand_set[#rand_set+1] = i
-                    end
-                end
-                
-                if #rand_set == 0 then
-                    return true
-                end
-             
-                local rand_idx = pseudorandom_element(rand_set, pseudoseed('boney'))
-                local rand_joker = G.jokers.cards[rand_idx]
+                local rand_joker = pseudorandom_element(G.jokers.cards, pseudoseed('boney'))
 
                 -- immediately replace with boney, forgoing any animation
                 G.GAME.joker_buffer = G.GAME.joker_buffer + 1
@@ -221,7 +214,25 @@ function jokerInfo.calculate(self, card, context)
                 
                 new_joker.ability.initialized = false
                 new_joker.ability.boned = false
+                new_joker.ability.perishable_compat = true
+                new_joker.ability.eternal_compat = true
+                new_joker.ability.old_scale = card.children.center.scale
+                new_joker.ability.oldT = card.T
                 new_joker.late_center_draw = true
+
+                -- inherit editions and stickers
+                new_joker:set_edition(rand_joker.edition, true, true)
+                for k, v in pairs(SMODS.Stickers) do
+                    new_joker.ability[v.key] = nil
+                    if v and rand_joker.ability[v.key] then
+                        local old_compat = new_joker.config.center[v.key..'_compat']
+                        new_joker.config.center[v.key..'_compat'] = true
+                        if type(v.should_apply) ~= 'function' or v:should_apply(new_joker, new_joker.config.center, G.jokers, true) then
+                            v:apply(new_joker, true)
+                        end
+                        new_joker.config.center[v.key..'_compat'] = old_compat
+                    end
+                end
 
                 -- place boney
                 G.jokers:emplace(new_joker, nil, nil, nil, nil, rand_idx)
