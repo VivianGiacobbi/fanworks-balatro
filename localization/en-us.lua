@@ -1214,7 +1214,8 @@ return {
 				name = "The Halves",
 				text = {
 					"If played hand is a {C:attention}Pair{},",
-					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{}"
+					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{},",
+					"then {X:mult,C:white}X#1#{} Mult"
 				}
 			},
 			j_fnwk_spirit_gambler = {
