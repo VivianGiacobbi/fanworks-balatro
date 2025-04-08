@@ -26,7 +26,7 @@ function jokerInfo.calculate(self, card, context)
     if context.other_card:is_suit('Spades') and context.other_card:get_id() == 3 then
         return {
             chips = card.ability.extra.chips,
-            card = context.blueprint_card or card
+            card = context.other_card
         }
     end
 end

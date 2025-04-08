@@ -50,16 +50,10 @@ function jokerInfo.calculate(self, card, context)
 
     local enhancement = context.other_card:calculate_enhancement(context)
     if enhancement then
-        enhancement.message = localize('k_again_ex')
-        enhancement.message_card = card
-        enhancement.extra = {instant = true}
         SMODS.trigger_effects({{enhancement = enhancement}}, context.other_card)
     end
 
     if next(return_table) then
-        return_table.message_card = card
-        return_table.message = localize('k_again_ex')
-        return_table.extra = {instant = true}
         return return_table
     end
 end

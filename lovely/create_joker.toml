@@ -37,7 +37,6 @@ end'''
 match_indent = true
 times = 1
 
-
 # CardArea:emplace()
 [[patches]]
 [patches.pattern]

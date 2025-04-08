@@ -7,6 +7,11 @@ SMODS.Sound({
 	path = "carry_on.ogg",
 })
 
+SMODS.Sound({
+	key = "stereo",
+	path = "stereo.ogg",
+})
+
 local jokerInfo = {
 	name = 'Tuned Rust Joker',
 	config = {
@@ -29,30 +34,37 @@ local function update_tuned_mode(card)
 		return
 	end
 
-	local joker_idx = 1
-	for i=1, #card.area.cards do
-		if card.area.cards[i] == card then 
-			joker_idx = i 
-			break
-		end
-	end
-
-	if joker_idx == card.ability.last_idx and card.ability.last_count == #card.area.cards and card.ability.last_area == card.area then
+	if card.rank == card.ability.last_idx and card.ability.last_count == #card.area.cards and card.ability.last_area == card.area then
 		return
 	end
 
 	card.ability.last_count = #card.area.cards
-	card.ability.last_idx = joker_idx
+	card.ability.last_idx = card.rank
 	card.ability.last_area = card.area
 
-	if card.ability.last_idx == #card.area.cards then
+	if card.ability.last_idx == #card.area.cards and card.ability.last_idx == 1 then
+		if card.ability.tuned_mode == 'stereo' then
+			return
+		end
+
+		card.ability.tuned_mode = 'stereo'
+		card_eval_status_text(card, 'extra', nil, nil, nil, {
+			message = localize('k_tuned_stereo'),
+			colour = G.C.RED,
+			sound = 'fnwk_crocodile',
+			extra = {
+				instant = true
+			}
+		})
+	
+	elseif card.ability.last_idx == #card.area.cards then
 		if card.ability.tuned_mode == 'mult' then
 			return
 		end
 
 		card.ability.tuned_mode = 'mult'
 		card_eval_status_text(card, 'extra', nil, nil, nil, {
-			message = localize('k_tuned_m'),
+			message = localize('k_tuned_mult'),
 			colour = G.C.RED,
 			sound = 'fnwk_crocodile',
 			extra = {
@@ -66,7 +78,7 @@ local function update_tuned_mode(card)
 
 		card.ability.tuned_mode = 'xmult'
 		card_eval_status_text(card, 'extra', nil, nil, nil, {
-			message = localize('k_tuned_x'),
+			message = localize('k_tuned_xmult'),
 			colour = G.C.RED,
 			sound = 'fnwk_carry_on',
 		})
@@ -84,25 +96,12 @@ end
 function jokerInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = {key = "artist_winter", set = "Other"}
 	
-	local mult_display = ''
-	local x_mult_display = ''
-	local text_display = ' Mult'
-	if card.ability.tuned_mode == 'mult' then
-		mult_display = '+'..card.ability.extra.mult
-	elseif card.ability.tuned_mode == 'xmult' then
-		x_mult_display = 'X'..card.ability.extra.x_mult
-	else
-		text_display = 'None'
-	end
-
     return { 
 		vars = {
 			card.ability.extra.mult,
 			card.ability.extra.x_mult,
-			mult_display,
-			x_mult_display,
-			text_display
-		}
+		},
+		key = card.config.center.key..(card.ability.tuned_mode == 'none' and '' or '_'..card.ability.tuned_mode)
 	}
 end
 
@@ -119,7 +118,19 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if card.ability.tuned_mode == 'xmult' then
+	if card.ability.tuned_mode == 'stereo' then
+		return {
+			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
+			mult_mod = card.ability.extra.mult,
+			card = context.blueprint_card or card,
+
+			extra = { 
+				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+				card = context.blueprint_card or card,
+				Xmult_mod = card.ability.extra.x_mult,
+			}
+		}
+	elseif card.ability.tuned_mode == 'xmult' then
 		return {
 			message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
 			card = context.blueprint_card or card,

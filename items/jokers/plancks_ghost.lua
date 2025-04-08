@@ -1,3 +1,32 @@
+local valid_keys = {
+	['mult'] = true,
+	['h_mult'] = true,
+	['h_x_mult'] = true,
+	['h_dollars'] = true,
+	['p_dollars'] = true,
+	['t_mult'] = true,
+	['t_chips'] = true,
+	['x_mult'] = true,
+	['h_chips'] = true,
+	['x_chips'] = true,
+	['h_x_chips'] = true,
+	['h_size'] = true,
+	['d_size'] = true,
+	['extra_value'] = true,
+	['perma_bonus'] = true,
+	['perma_x_chips'] = true,
+	['perma_mult'] = true,
+	['perma_x_mult'] = true,
+	['perma_h_chips'] = true,
+	['perma_h_mult'] = true,
+	['perma_h_x_mult'] = true,
+	['perma_p_dollars'] = true,
+	['perma_h_dollars'] = true,
+	['caino_xmult'] = true,
+	['yorick_discards'] = true,
+	['invis_rounds'] = true
+}
+
 local jokerInfo = {
 	name = 'Ghost Girl',
 	config = {
@@ -68,57 +97,65 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.blueprint then return end
-    if context.cardarea == G.jokers and context.joker_destroyed and context.removed ~= card and context.removed.ability.name ~= 'Crazy Creaking Joker' then	
-		local chips_diff =  context.removed.ability.chips ~= 0 and context.removed.config.center.config.chips ~= context.removed.ability.chips
-		local mult_diff = context.removed.ability.mult ~= 0 and context.removed.config.center.config.mult ~= context.removed.ability.mult
-		local x_mult_diff = context.removed.ability.x_mult ~= 1 and context.removed.config.center.config.x_mult ~= context.removed.ability.x_mult
-		local extra_val_diff = context.removed.ability.extra_value ~= 0 and context.removed.config.center.config.extra_value ~= context.removed.ability.extra_value
-		local extra_diff = not DeepCompare(context.removed.config.center.config.extra, context.removed.ability.extra)
-		if chips_diff or mult_diff or x_mult_diff or extra_val_diff or extra_diff then
-			card.ability.extra.saved_abilities[context.removed.ability.name] = {}
-			if chips_diff then card.ability.extra.saved_abilities[context.removed.ability.name].chips = context.removed.ability.chips end
-			if mult_diff then card.ability.extra.saved_abilities[context.removed.ability.name].mult = context.removed.ability.mult end
-			if x_mult_diff then card.ability.extra.saved_abilities[context.removed.ability.name].x_mult = context.removed.ability.x_mult end
-			if extra_val_diff then card.ability.extra.saved_abilities[context.removed.ability.name].extra_val = context.removed.ability.extra_value end
-			if extra_diff then card.ability.extra.saved_abilities[context.removed.ability.name].extra = context.removed.ability.extra end
+	if not context.cardarea == G.jokers or context.blueprint then return end
+    if context.joker_destroyed and context.removed ~= card and context.removed.config.center.key ~= 'j_fnwk_plancks_ghost' then	
+		
+		-- single level compare for valid keys in the main ability table
+		local changed = false
+		for k,v in pairs(context.removed.ability) do
+			if valid_keys[k] and v ~= context.removed.config.center.config[k] then
+				changed = true
+				break
+			end
 		end
+
+		if not changed then
+			changed = DeepCompare(context.removed.ability.extra, context.removed.config.center.config.extra)
+		end	
+
+		sendDebugMessage(context.removed.config.center.key..'changed: '..tostring(changed))
+		
+		if not changed then return end
+		
+		-- store relevant ability and extra values
+		local saved_ability = {}
+		for k, v in pairs(context.removed.ability) do
+			if valid_keys[k] then saved_ability[k] = v end
+		end
+		saved_ability.extra = RecursiveTableMod(context.removed.ability.extra)
+
+		-- save this table
+		card.ability.extra.saved_abilities[context.removed.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and context.joker_created and context.card ~= card then			
-		if context.card.ability.name == 'Crazy Creaking Joker' then
-			context.card.ability.extra.saved_abilities = card.ability.extra.saved_abilities
-		elseif card.ability.extra.saved_abilities[context.card.ability.name] then
-			local saved_ability = card.ability.extra.saved_abilities[context.card.ability.name]
-			if saved_ability.chips then context.card.ability.chips = saved_ability.chips end
-			if saved_ability.mult then context.card.ability.mult = saved_ability.mult end
-			if saved_ability.x_mult then context.card.ability.x_mult = saved_ability.x_mult end
-			if saved_ability.extra_val then context.card.ability.extra_value = saved_ability.extra_val end
-			if saved_ability.extra then context.card.ability.extra = saved_ability.extra end
-			card.ability.extra.saved_abilities[context.card.ability.name] = nil
-			context.card:set_cost()
-
-			G.E_MANAGER:add_event(Event({
-				blockable = false,
-				trigger = 'after', 
-				func = function()
-					context.card.ability.make_vortex = true
-					context.card:explode(nil, 0.6, true)
-					G.E_MANAGER:add_event(Event({
-						blockable = false,
-						trigger = 'after', 
-						delay = 1.2, 
-						func = function()
-							context.card.ability.make_vortex = nil
-							return true 
-						end
-					}))
-					card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
-					return true 
-				end
-			}))
-			
+	if context.cardarea == G.jokers and context.joker_created and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
+		for k, v in pairs(card.ability.extra.saved_abilities[context.card.config.center.key]) do
+			context.card.ability[k] = v
 		end
+
+		card.ability.extra.saved_abilities[context.card.config.center.key] = nil
+		context.card:set_cost()
+
+		G.E_MANAGER:add_event(Event({
+			blockable = false,
+			trigger = 'after', 
+			func = function()
+				context.card.ability.make_vortex = true
+				context.card:explode(nil, 0.6, true)
+				G.E_MANAGER:add_event(Event({
+					blockable = false,
+					trigger = 'after', 
+					delay = 1.2, 
+					func = function()
+						context.card.ability.make_vortex = nil
+						return true 
+					end
+				}))
+				card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
+				return true 
+			end
+		}))
+			
 	end
 end
 

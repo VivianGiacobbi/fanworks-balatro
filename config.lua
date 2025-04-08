@@ -10,6 +10,6 @@ return {
 	['enableAltArt'] = false,
 	['enableSkepticStaticSeed'] = false,
 	['enableQueer'] = true,
-	['enableConsumableTweaks'] = true,
+	['enableVanillaTweaks'] = true,
 	['enableTarotSkins'] = true,
 }

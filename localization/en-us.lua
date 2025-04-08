@@ -254,32 +254,29 @@ return {
 			},
 		},
 		dictionary = {
-			vs_credits1 = "Concepting/Direction",
-			vs_credits2 = "Artists",
-			vs_credits2_2 = "Playing Cards",
-			vs_credits3 = "Coding",
-			vs_credits4 = "Voice Acting",
-			vs_credits5 = "Support",
-			vs_credits6 = "Special Thanks",
-			vs_credits7 = "Music",
-			vs_options_sub = "(Restart required to apply)",
-			vs_options_enableJokers = "Jokers",
-			vs_options_enableWipJokers = "WIP Jokers",
-			vs_options_enableAltArt = "Alt Joker Art",
-			vs_options_enableSkepticStaticSeed = "Skeptic Static Seed",
-			vs_options_enableQueer = "Enable Queer Edition",
-			vs_options_enableDecks = "Decks",
-			vs_options_enableVouchers = "Vouchers",
-			vs_options_enableConsumables = "New Consumables",
-			vs_options_enableConsumableTweaks = "ConsumableTweaks",
-			vs_options_enableBosses = "Boss Blinds",
-			vs_options_enableSkins = "Playing Card Skins",
-			vs_options_enableChallenges = "Challenges",
-			vs_options_enableTrophies = "Fanworks Achievements",
-			vs_options_enableLogo = "Main Menu Logo",
-			vs_options_enableTarotSkins = "Tarot Card Reskins",
-			vs_options_resetTrophies_r = "Reset Achievements",
-			vs_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
+			fnwk_credits1 = "Concept/Direction",
+			fnwk_credits2 = "Artists",
+			fnwk_credits3 = "Programming",
+			fnwk_credits4 = "Support",
+			fnwk_credits5 = "Special Thanks",
+			fnwk_options_sub = "(Restart required to apply)",
+			fnwk_options_enableJokers = "Jokers",
+			fnwk_options_enableWipJokers = "WIP Jokers",
+			fnwk_options_enableAltArt = "Alt Joker Art",
+			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
+			fnwk_options_enableQueer = "Enable Queer Edition",
+			fnwk_options_enableDecks = "Decks",
+			fnwk_options_enableVouchers = "Vouchers",
+			fnwk_options_enableConsumables = "New Consumables",
+			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
+			fnwk_options_enableBosses = "Boss Blinds",
+			fnwk_options_enableSkins = "Playing Card Skins",
+			fnwk_options_enableChallenges = "Challenges",
+			fnwk_options_enableTrophies = "Fanworks Achievements",
+			fnwk_options_enableLogo = "Main Menu Logo",
+			fnwk_options_enableTarotSkins = "Tarot Card Reskins",
+			fnwk_options_resetTrophies_r = "Reset Achievements",
+			fnwk_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
@@ -296,8 +293,9 @@ return {
 			k_method_3 = "Three Step!",
 			k_method_4 = "Let's Dance!",
 			k_brienne = "Rewritten!",
-			k_tuned_x = "XMult!",
-			k_tuned_m = "+Mult!",
+			k_tuned_xmult = "XMult!",
+			k_tuned_mult = "+Mult!",
+			k_tuned_stereo = "Stereo!",
 			k_cabinet_start = "Game Start!",
 			k_cabinet_lose = "Game Over!",
 			k_cabinet_win = "Lucky You!",
@@ -879,9 +877,8 @@ return {
 					"{C:chips}+#1#{} Chips if played hand is a {C:attention}Pair{}",
 					"{C:attention}Three of a Kind{}, or {C:attention}Four of a Kind{}",
 					"{s:0.1} {}",
-					"{C:chips}+#2#{} Chips for each Joker of a",
-					"{C:attention}certain type ;){}",
-					"{C:inactive}(Currently{} {C:chips}+#3#{} {C:inactive}Chips){}",
+					"Each Joker of a {C:attention}certain type{} {C:inactive}[#2#]{}",
+					"scores {C:chips}+#3#{} additional Chips"
 				}
 			},
 			j_fnwk_bluebolt_secluded = {
@@ -903,7 +900,34 @@ return {
 					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
 					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
 					"the {C:attention}leftmost{} Joker slot",
-					"{C:inactive}(Currently{} {C:mult}#3#{}{X:mult,C:white}#4#{}{C:inactive}#5#){}"
+					"{C:inactive}(Currently None){}"
+				}
+			},
+			j_fnwk_bluebolt_tuned_mult = {
+				name = "Tuned Joker",
+				text = {
+					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
+					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
+					"the {C:attention}leftmost{} Joker slot",
+					"{C:inactive}(Currently{} {C:mult}+#1#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_bluebolt_tuned_xmult = {
+				name = "Tuned Joker",
+				text = {
+					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
+					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
+					"the {C:attention}leftmost{} Joker slot",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
+				}
+			},
+			j_fnwk_bluebolt_tuned_stereo = {
+				name = "Tuned Joker",
+				text = {
+					"{C:mult}+#1#{} Mult in the {C:attention}rightmost{}",
+					"Joker slot, {X:mult,C:white}X#2#{} Mult in",
+					"the {C:attention}leftmost{} Joker slot",
+					"{C:inactive}(Currently{} {C:mult}+#1#{} {C:inactive}and{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				}
 			},
 			j_fnwk_bluebolt_impaired = {
@@ -975,10 +999,10 @@ return {
 			j_fnwk_sunshine_laconic = {
 				name = "Laconic Joker",
 				text = {
-					"This Joker gains {C:chips}+10{} chips",
+					"This Joker gains {C:chips}+#1#{} chips",
 					"per {C:attention}consecutive{} played",
 					"hand of {C:attention}3 or less{} cards",
-					"{C:inactive}(currently{} {C:chips}+#1#{} {C:inactive}chips){}",
+					"{C:inactive}(currently{} {C:chips}+#2#{} {C:inactive}chips){}",
 				},
 				unlock = {
 					"Play the {C:attention,E:1}same{} poker hand",
