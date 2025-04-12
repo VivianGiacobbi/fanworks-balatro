@@ -11,6 +11,7 @@ G.C.STAND = HEX('b85f8e')
 local includes = {
 	-- includes utility functions required for following files
 	'tables',
+	'colors',
 	'utility',
 	'shaders',
 
@@ -28,12 +29,11 @@ local includes = {
 	'ui',
 	'items',
 	'tarot_reskins',
-	'consumable_tweaks',
+	'vanilla_tweaks',
 
 	--- might require functionality
 	-- 'options/achievements',
 	-- 'options/blinds',
-	-- 'options/challenges',
 
 	-- cosmetic
 	'queer',

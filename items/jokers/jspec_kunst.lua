@@ -17,7 +17,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
-    return { vars = { CountGrammar(card.ability.extra.upgrade_mod) }}
+    return { vars = { FnwkCountGrammar(card.ability.extra.upgrade_mod) }}
 end
 
 function jokerInfo.calculate(self, card, context)

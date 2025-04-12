@@ -22,7 +22,7 @@ local function tally_fanworks_jokers()
 
 	local tally = 0
 	for k, _ in pairs(G.GAME.owned_jokers) do
-		if StringStartsWith(k, 'j_fnwk') then tally = tally + 1 end
+		if FnwkStringStartsWith(k, 'j_fnwk') then tally = tally + 1 end
 	end
 
 	return tally
@@ -38,7 +38,7 @@ function jokerInfo.calculate(self, card, context)
 	if not context.blueprint then
 		if (context.buying_card and context.card.ability.set == 'Joker') or (context.joker_created and context.card.area == G.jokers) then
 			local key = context.card.config.center.key
-			if StringStartsWith(key, 'j_fnwk') then
+			if FnwkStringStartsWith(key, 'j_fnwk') then
 				return {
 					message = localize('k_upgrade_ex'),
 					card = card,

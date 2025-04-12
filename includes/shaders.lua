@@ -44,7 +44,7 @@ SMODS.DrawStep {
 
 SMODS.DrawStep {
     key = 'glow_shader',
-    order = 11,
+    order = 24,
     func = function(self)
         if (self.config.center.discovered or self.bypass_discovery_center) and self.ability.glow then
             local cursor_pos = {}

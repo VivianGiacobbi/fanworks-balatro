@@ -1,0 +1,1 @@
+SMODS.Gradient({key = 'bluebolt', colours = {HEX('3BC2EF'), HEX('3BACD1')}, cycle = 2 })

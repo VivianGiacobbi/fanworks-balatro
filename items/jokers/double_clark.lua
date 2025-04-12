@@ -45,7 +45,8 @@ function jokerInfo.calculate(self, card, context)
                 _card:set_base(G.P_CARDS[suit_prefix..rank_suffix])
                 G.GAME.blind:debuff_card(_card)
                 G.hand:sort()
-                --if context.blueprint_card then context.blueprint_card:juice_up() else self:juice_up() end
+                local juice_card = context.blueprint_card or card
+                juice_card:juice_up()
                 return true
             end}))
 

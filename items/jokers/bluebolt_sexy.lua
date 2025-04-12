@@ -18,13 +18,13 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
     if not G.jokers then
-        return { vars = {card.ability.extra.base_chips, card.ability.extra.chips_mod, card.ability.extra.base_chips} }
+        return { vars = {card.ability.extra.base_chips, 0, card.ability.extra.chips_mod } }
     end
 
 	local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = FindWomen(G.jokers.cards[i].config.center.key)
+            local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
             if results.junkie or results.trans or results.cis then
                 count = count + 1
             end
@@ -33,22 +33,21 @@ function jokerInfo.loc_vars(self, info_queue, card)
 
 	return { 
         vars = {
-            card.ability.extra.base_chips,
+            card.ability.extra.base_chips + card.ability.extra.chips_mod * count,
+            count,
             card.ability.extra.chips_mod,
-            card.ability.extra.base_chips + card.ability.extra.chips_mod * count
         }
     }
 end
 
 function jokerInfo.calculate(self, card, context)
     
-    if (context.buying_card and context.card.ability.set == 'Joker') or (context.joker_created and context.card.area == G.jokers) and not context.blueprint then
-            
+    if context.card_added and context.card.area == G.jokers and not context.blueprint then 
         if context.card == card then
             return
         end
 
-        local results = FindWomen(context.card.config.center.key)
+        local results = FnwkFindWomen(context.card.config.center.key)
         if not (results.junkie or results.trans or results.cis) then
             return
         end
@@ -107,7 +106,7 @@ function jokerInfo.calculate(self, card, context)
     local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = FindWomen(G.jokers.cards[i].config.center.key)
+            local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
             if results.junkie or results.trans or results.cis then
                 count = count + 1
             end
@@ -116,10 +115,7 @@ function jokerInfo.calculate(self, card, context)
 
     local total_chips = card.ability.extra.base_chips + card.ability.extra.chips_mod * count
     return {
-        message = localize{ type='variable', key='a_chips', vars = {total_chips} },
-        chip_mod = total_chips, 
-        colour = G.C.CHIPS,
-        card = context.blueprint_card or card
+        chips = total_chips,
     }
 end
 

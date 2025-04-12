@@ -14,10 +14,9 @@ pattern = '''for k, v in ipairs(text) do
   row[#row+1] =  {n=G.UIT.R, config={align = "cl"}, nodes=v}
 end'''
 position = "at"
-payload = '''sendDebugMessage('num text entries: '..#text)
-for k, v in ipairs(text) do
+payload = '''for k, v in ipairs(text) do
     local node = v
-    if loc_vars.image and StringEndsWith(node[1].config.text, '[IMG]') then
+    if loc_vars and loc_vars.image and StringEndsWith(node[1].config.text, '[IMG]') then
         node[1].config.text = string.sub(node[1].config.text, 1, #node[1].config.text - 5)
         local img_atlas = G.ASSET_ATLAS[loc_vars.image]
         node[2] = {

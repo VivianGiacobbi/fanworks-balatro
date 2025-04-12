@@ -25,7 +25,7 @@ function jokerInfo.calculate(self, card, context)
     end
 
 	if context.joker_main then
-		balance_score(card)
+		fnwk_balance_score(card)
 		card.ability.extra.hands_count = card.ability.extra.hands_count - 1
 		return
 	end

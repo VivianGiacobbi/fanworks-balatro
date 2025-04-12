@@ -5,11 +5,11 @@ return {
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
 	['enableBlinds'] = false,
-	['enableChallenges'] = false,
+	['enableChallenges'] = true,
 	['enableAchievements'] = false,
 	['enableAltArt'] = false,
 	['enableSkepticStaticSeed'] = false,
 	['enableQueer'] = true,
-	['enableConsumableTweaks'] = true,
+	['enableVanillaTweaks'] = true,
 	['enableTarotSkins'] = true,
 }

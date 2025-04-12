@@ -19,14 +19,14 @@ end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
-        SetCenterDiscount(card, true, 'Booster')
+        FnwkSetCenterDiscount(card, true, 'Booster')
         return true 
     end}))
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
-        ClearCenterDiscountSource(card)
+        FnwkClearCenterDiscountSource(card)
         return true 
     end}))
 end

@@ -19,7 +19,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
-	return { vars = {CountGrammar(self.unlock_condition.count)}}
+	return { vars = {FnwkCountGrammar(self.unlock_condition.count)}}
 end
 
 function jokerInfo.check_for_unlock(self, args)

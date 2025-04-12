@@ -16,7 +16,7 @@ local jokerInfo = {
 		}
 	},
 	rarity = 1,
-	cost = 8,
+	cost = 4,
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -34,7 +34,7 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-	if not card.config.center.discovered then
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -117,9 +117,10 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
+
 	if not card.children.thnks_underlay or not card.children.thnks_underlay.sprite_pos then 
 		return 
 	end
@@ -139,6 +140,14 @@ end
 
 function jokerInfo.draw(self, card, layer)
 	-- manually draw editions here
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+	if not (card.children.thnks_underlay and card.children.thnks_overlay) then
+		return
+	end
+
 	if card.edition and not card.delay_edition then
 		for k, v in pairs(G.P_CENTER_POOLS.Edition) do
 			if card.edition[v.key:sub(3)] and v.shader then

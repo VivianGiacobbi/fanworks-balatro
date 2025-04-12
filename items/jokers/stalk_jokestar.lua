@@ -32,11 +32,11 @@ function jokerInfo.check_for_unlock(self, args)
 		return false
 	end
 
-	return SecretHandsPlayed() >= self.unlock_condition.secret_num
+	return FnwkSecretHandsPlayed() >= self.unlock_condition.secret_num
 end
 
 function jokerInfo.in_pool(self, args)
-	return SecretHandsPlayed() > 0
+	return FnwkSecretHandsPlayed() > 0
 end
 
 function jokerInfo.calculate(self, card, context)

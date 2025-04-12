@@ -34,9 +34,9 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = '=[SMODS _ "src/overrides.lua"]'
-pattern = '''function Card:set_edition(edition, immediate, silent)'''
+pattern = '''function Card:set_edition(edition, immediate, silent, delay)'''
 position = "at"
-payload = '''function Card:set_edition(edition, immediate, silent, force_ilsa)'''
+payload = '''function Card:set_edition(edition, immediate, silent, delay, force_ilsa)'''
 match_indent = true
 times = 1
 
@@ -83,7 +83,7 @@ for k, v in pairs(p_edition.config) do
                         G.hand.config.real_card_limit = G.hand.config.real_card_limit + v
                     end
                     G.hand.config.card_limit = G.hand.config.card_limit + v
-                    if not is_in_pack then
+                    if not is_in_pack and G.GAME.blind.in_blind then
                         G.FUNCS.draw_from_deck_to_hand(v)
                     end
                     return true
@@ -125,7 +125,7 @@ for k, v in pairs(all_types) do
                             G.hand.config.real_card_limit = G.hand.config.real_card_limit + v
                         end
                         G.hand.config.card_limit = G.hand.config.card_limit + v
-                        if not is_in_pack then
+                        if not is_in_pack and G.GAME.blind.in_blind then
                             G.FUNCS.draw_from_deck_to_hand(v)
                         end
                         return true
@@ -176,49 +176,9 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = '=[SMODS _ "src/utils.lua"]'
-pattern = '''SMODS.calculate_quantum_enhancements(G.play.cards[i], return_table, context)'''
+pattern = '''SMODS.calculate_quantum_enhancements(card, quantum_eval, context)'''
 position = "after"
-payload = '''SMODS.calculate_quantum_editions(G.play.cards[i], return_table, context)'''
-match_indent = true
-times = 1
-
-# SMODS.calculate_context()
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/utils.lua"]'
-pattern = '''SMODS.calculate_quantum_enhancements(G.play.cards[i], effects, context)'''
-position = "after"
-payload = '''SMODS.calculate_quantum_editions(G.play.cards[i], effects, context)'''
-match_indent = true
-times = 1
-
-# SMODS.calculate_context()
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/utils.lua"]'
-pattern = '''SMODS.calculate_quantum_enhancements(G.hand.cards[i], effects, context)'''
-position = "after"
-payload = '''SMODS.calculate_quantum_editions(G.hand.cards[i], effects, context)'''
-match_indent = true
-times = 1
-
-# SMODS.calculate_context()
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/utils.lua"]'
-pattern = '''SMODS.calculate_quantum_enhancements(G.deck.cards[i], effects, context)'''
-position = "after"
-payload = '''SMODS.calculate_quantum_editions(G.deck.cards[i], effects, context)'''
-match_indent = true
-times = 1
-
-# SMODS.calculate_context()
-[[patches]]
-[patches.pattern]
-target = '=[SMODS _ "src/utils.lua"]'
-pattern = '''SMODS.calculate_quantum_enhancements(G.discard.cards[i], effects, context)'''
-position = "after"
-payload = '''SMODS.calculate_quantum_editions(G.discard.cards[i], effects, context)'''
+payload = '''SMODS.calculate_quantum_editions(card, quantum_eval, context)'''
 match_indent = true
 times = 1
 
@@ -230,4 +190,4 @@ pattern = '''SMODS.calculate_quantum_enhancements(card, effects, context)'''
 position = "after"
 payload = '''SMODS.calculate_quantum_editions(card, effects, context)'''
 match_indent = true
-times = 1
+times = 3

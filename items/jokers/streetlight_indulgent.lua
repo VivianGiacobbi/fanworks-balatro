@@ -54,9 +54,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	}
 end
 
-
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-	if not card.config.center.discovered then
+function jokerInfo.set_sprites(self, card, front)
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -94,7 +93,6 @@ function jokerInfo.set_ability(self, card, initial, delay_sprites)
 end
 
 function jokerInfo.calculate(self, card, context)
-
 	if context.joker_destroyed and context.removed == card then
 		update_jokers_glow(card, true)
 	end
@@ -133,7 +131,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-	if not card.config.center.discovered then
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -157,9 +155,13 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function update_jokers_glow(card, removed)
-	
-	-- reset the area it was moved from
-	if (card.ability.glow_area and card.ability.glow_area ~= card.area) or (card.ability.glow_area and removed) then
+	-- manage reload manual replacement
+	if type(card.ability.glow_area) ~= 'table' then
+		card.ability.glow_area = card.area
+	end
+
+	-- reset an area it was moved from
+	if card.ability.glow_area and (card.ability.glow_area ~= card.area or removed) then
 		for i=1, #card.ability.glow_area.cards do
 			card.ability.glow_area.cards[i].ability.glow = nil
 			card.ability.glow_area.cards[i].no_shadow = false
@@ -171,7 +173,6 @@ function update_jokers_glow(card, removed)
 	end
 
 	if not card.area or (card.area ~= G.jokers and card.area ~= G.shop_jokers and card.area ~= G.pack_cards) then
-
 		card.ability.glow_area = nil
 		return
 	end
@@ -180,7 +181,7 @@ function update_jokers_glow(card, removed)
 	local area_changed = #card.area.cards ~= (card.ability.old_glow_cards and #card.ability.old_glow_cards or -1)
 	for i=1, #card.area.cards do
 		if card.area.cards[i] == card then joker_idx = i end
-		if not area_changed and card.area.cards[i].ID ~= card.ability.old_glow_cards[i] then
+		if not area_changed and card.area.cards[i] ~= card.ability.old_glow_cards[i] then
 			area_changed = true
 		end
 	end
@@ -193,10 +194,26 @@ function update_jokers_glow(card, removed)
 	card.ability.glow_area = card.area
 	card.ability.glow_idx = joker_idx
 
+	if card.ability.old_glow_cards then
+		-- manage reload manual replacement
+		if card.ability.old_glow_cards and #card.ability.old_glow_cards > 0 and type(card.ability.old_glow_cards[1]) ~= 'table' then
+			card.ability.old_glow_cards = {}
+		end
+
+		for i, v in ipairs(card.ability.old_glow_cards) do
+			if v.area ~= card.area and v.children.glow_sprite then
+				v.children.glow_sprite:remove()
+				v.children.glow_sprite = nil
+				v.ability.glow = nil
+				v.no_shadow = false
+			end
+		end
+	end
+
 	if card.ability.glow_area then
 		card.ability.old_glow_cards = {}
 		for i=1, #card.ability.glow_area.cards do
-			card.ability.old_glow_cards[#card.ability.old_glow_cards+1] = card.ability.glow_area.cards[i].ID
+			card.ability.old_glow_cards[#card.ability.old_glow_cards+1] = card.ability.glow_area.cards[i]
 		end
 	end
 	
@@ -208,7 +225,7 @@ function update_jokers_glow(card, removed)
 		if i ~= card.ability.glow_idx and dist <= card.ability.extra.max_dist then
 			if glow_card.children.glow_sprite then glow_card.children.glow_sprite:remove() end
 			
-			local glow = 1 + (card.ability.extra.glow_step * Fact(dist_mod))
+			local glow = math.max(0, math.min(1, dist_mod * 0.2))
 			glow_card.ability.glow = glow
 			glow_card.no_shadow = true
 

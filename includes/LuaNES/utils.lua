@@ -8,7 +8,7 @@ local rshift = bit.rshift
 UTILS = {}
 local UTILS = UTILS
 
-function table.clear(t)
+function table.fnwk_clear(t)
     for k in pairs(t) do
         t[k] = nil
     end

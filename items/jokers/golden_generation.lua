@@ -19,7 +19,7 @@ local function fanworks_cards(card)
 
     local count = 0
     for i=1, #G.jokers.cards do
-        if G.jokers.cards[i] ~= card and StringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_') then
+        if G.jokers.cards[i] ~= card and FnwkStringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_') then
             count = count + 1
         end
     end

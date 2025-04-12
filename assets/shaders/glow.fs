@@ -5,12 +5,12 @@
 #endif
 
 extern MY_HIGHP_OR_MEDIUMP float glow_intensity;
+extern MY_HIGHP_OR_MEDIUMP vec3 glow_color = vec3(1, 1, 1);
 
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 {
-    vec4 pixel = Texel(texture, texture_coords);
-    vec4 color = pixel * glow_intensity;
-	return color;
+    float alpha = Texel(texture, texture_coords).a;
+	return vec4(glow_color.rgb, min(alpha, glow_intensity));
 }
 
 extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;

@@ -73,7 +73,7 @@ local function get_pack_ui(card, pack)
 
 	local booster_obj = pack.config.center
 
-	psuedoseed_predict(true)
+	fnwk_psuedoseed_predict(true)
 	for i = 1, pack.ability.extra do
 		local new_card = nil
 		local _card_to_spawn = booster_obj:create_card(pack, i)
@@ -111,7 +111,7 @@ local function get_pack_ui(card, pack)
 		predict_area:emplace(new_card)
 	end
 	-- make sure to unset predict mode once finished
-	psuedoseed_predict(false)
+	fnwk_psuedoseed_predict(false)
 	return predict_area
 end
 

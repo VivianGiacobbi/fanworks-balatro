@@ -42,10 +42,6 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.cardarea == G.play and context.individual then
-		sendDebugMessage('flipped:'..tostring(context.other_card.ability.played_while_flipped))
-	end
-
 	if not context.repetition or not context.cardarea == G.play or card.debuff then
 		return
 	end
@@ -53,10 +49,6 @@ function jokerInfo.calculate(self, card, context)
 	local retriggers = 0
 	if context.other_card:is_suit('Diamonds') then
 		retriggers = card.ability.extra
-	end
-
-	if context.other_card:get_id() == 11 then
-		retriggers = retriggers + 1
 	end
 	
 	if retriggers > 0 then

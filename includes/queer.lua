@@ -16,7 +16,6 @@ SMODS.Edition:take_ownership('e_polychrome',
 true
 )
 
-
 SMODS.Voucher:take_ownership('v_hone',
 {
     config = {

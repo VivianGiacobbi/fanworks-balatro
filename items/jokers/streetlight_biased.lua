@@ -29,7 +29,7 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 					v:add_force_debuff(card)
 				end
 				if v.config.center then 
-					local result = FindWomen(v.config.center.key)
+					local result = FnwkFindWomen(v.config.center.key)
 					if result.cis or result.trans then
 						v:add_force_debuff(card)
 					end

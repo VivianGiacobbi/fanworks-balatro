@@ -36,7 +36,7 @@ local function try_transform_sludgemass(card, added_card)
 
 	local transform = false
 	for i=1, #G.jokers.cards do
-		if StringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
+		if FnwkStringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
 			transform = true
 			break
 		end
@@ -63,7 +63,7 @@ local function try_revert_sludgemass(card, removed_card)
 
 	local transform = true
 	for i=1, #G.jokers.cards do
-		if G.jokers.cards[i] ~= removed_card and StringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
+		if G.jokers.cards[i] ~= removed_card and FnwkStringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
 			transform = false
 			break
 		end

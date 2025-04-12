@@ -1,49 +1,91 @@
-SMODS.PokerHandPart {
-    key = 'fibonacci',
-    func = function(hand) 
-        return get_fibonacci(hand) 
-    end,
-}
+if not SMODS.PokerHandPart['csau_fibonacci'] then
+    SMODS.PokerHandPart {
+        key = 'csau_fibonacci',
+        prefix_config = false,
+        func = function(hand) 
+            return fnwk_get_fibonacci(hand) 
+        end,
+    }
+end
 
-SMODS.PokerHand {
-    key = 'fibonacci',
-    evaluate = function(parts, hand)
-        if not next(SMODS.find_card('j_fnwk_plancks_jokestar')) or not next(parts.fnwk_fibonacci) then return {} end
-        return { hand }
-    end,
-    example = {
-        {'S_A', true},
-        {'D_8', true},
-        {'D_5', true},
-        {'C_3', true},
-        {'S_2', true},
-    },
-    mult = 6,
-    l_mult = 3,
-    chips = 45,
-    l_chips = 25,
-    visible = false,
-}
+if not SMODS.PokerHand['csau_Fibonacci'] then
+    SMODS.PokerHand {
+        key = 'csau_Fibonacci',
+        prefix_config = false,
+        evaluate = function(parts, hand)
+            if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
+            or next(SMODS.find_card("c_csau_steel_tusk_4")))
+            or not next(parts.csau_fibonacci) then 
+                return {} 
+            end
+            return { hand }
+        end,
+        example = {
+            {'S_A', true},
+            {'D_8', true},
+            {'D_5', true},
+            {'C_3', true},
+            {'S_2', true},
+        },
+        mult = 6,
+        l_mult = 3,
+        chips = 45,
+        l_chips = 25,
+        visible = false,
+    }
+else
+    -- otherwise just update the evaluate condition to include the check for Bjorn
+    SMODS.PokerHand:take_ownership('csau_Fibonacci', {
+        evaluate = function(parts, hand)
+            if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
+            or next(SMODS.find_card("c_csau_steel_tusk_4")))
+            or not next(parts.csau_fibonacci) then 
+                return {} 
+            end
+            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+        end,
+    })
+end
 
-SMODS.PokerHand {
-    key = 'flush_fib',
-    evaluate = function(parts, hand)
-        if not next(SMODS.find_card('j_fnwk_plancks_jokestar')) or not next(parts.fnwk_fibonacci) or not next(parts._flush) then return {} end
-        return { SMODS.merge_lists(parts.fnwk_fibonacci, parts._flush) }
-    end,
-    example = {
-        {'H_A', true},
-        {'H_8', true},
-        {'H_5', true},
-        {'H_3', true},
-        {'H_2', true},
-    },
-    mult = 15,
-    l_mult = 4,
-    chips = 150,
-    l_chips = 45,
-    visible = false,
-}
+
+if not SMODS.PokerHand['csau_FlushFibonacci'] then
+    SMODS.PokerHand {
+        key = 'csau_FlushFibonacci',
+        prefix_config = false,
+        evaluate = function(parts, hand)
+            if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
+            or next(SMODS.find_card("c_csau_steel_tusk_4")))
+            or not next(parts.csau_fibonacci) or not next(parts._flush) then 
+                return {} 
+            end
+            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+        end,
+        example = {
+            {'H_A', true},
+            {'H_8', true},
+            {'H_5', true},
+            {'H_3', true},
+            {'H_2', true},
+        },
+        mult = 15,
+        l_mult = 4,
+        chips = 150,
+        l_chips = 45,
+        visible = false,
+    }
+else
+    -- otherwise just update the evaluate condition to include the check for Bjorn
+    SMODS.PokerHand:take_ownership('csau_FlushFibonacci', {
+        evaluate = function(parts, hand)
+            if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
+            or next(SMODS.find_card("c_csau_steel_tusk_4")))
+            or not next(parts.csau_fibonacci) or not next(parts._flush) then 
+                return {} 
+            end
+            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+        end,
+    })
+end
 
 local jokerInfo = {
     name = 'Creaking Bjokestar',
@@ -68,16 +110,16 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-    G.GAME.hands['fnwk_fibonacci'].visible = true
-    G.GAME.hands['fnwk_flush_fib'].visible = true
+    G.GAME.hands['csau_Fibonacci'].visible = true
+    G.GAME.hands['csau_FlushFibonacci'].visible = true
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
-    if next(SMODS.find_card('j_fnwk_plancks_jokestar')) then
+    if next(SMODS.find_card('j_fnwk_plancks_jokestar')) or next(SMODS.find_card("c_csau_steel_tusk_4")) then
         return
     end
-    G.GAME.hands['fnwk_fibonacci'].visible = false
-    G.GAME.hands['fnwk_flush_fib'].visible = false
+    G.GAME.hands['csau_Fibonacci'].visible = false
+    G.GAME.hands['csau_FlushFibonacci'].visible = false
 end
 
 function jokerInfo.calculate(self, card, context)

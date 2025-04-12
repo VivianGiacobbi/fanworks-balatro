@@ -42,7 +42,7 @@ function jokerInfo.load(self, card, card_table, other_card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-    if not card.config.center.discovered then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -85,7 +85,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
-    if not card.config.center.discovered then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
@@ -105,13 +105,13 @@ function jokerInfo.update(self, card, dt)
 		end
 	end
     
-    local ease = EaseInOutSin(card.ability.glow_lerp)
+    local ease = FnwkEaseInOutSin(card.ability.glow_lerp)
     card.ability.glow_intensity = 2.4 * (ease * card.ability.glow_range + card.ability.glow_min)
     card.ability.glow_size = 1.2 * (ease * card.ability.glow_range + card.ability.glow_min)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 

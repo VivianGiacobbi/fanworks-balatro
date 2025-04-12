@@ -170,7 +170,6 @@ local items_to_load = {
 	},
 
 	Consumable = {
-		'spec_stone',
 		'spec_impulse',
 		'spec_ichor',
 		'spec_mood'
@@ -201,7 +200,7 @@ local items_to_load = {
 for k, v in pairs(items_to_load) do
 	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
 		for i = 1, #v do
-			LoadItem(v[i], k, false)
+			FnwkLoadItem(v[i], k, false)
 		end
 	end
 end

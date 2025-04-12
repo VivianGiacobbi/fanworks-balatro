@@ -21,19 +21,19 @@ G.FUNCS.evaluate_play = function(e)
         trigger = 'immediate',
         func = function()     
             if math.floor(hand_chips*mult) >= G.GAME.blind.chips then
-                G.GAME.chip_novas = G.GAME.chip_novas + 1
-                check_for_unlock({type = 'chip_nova', total_novas = G.GAME.chip_novas})
+                G.GAME.fnwk_chip_novas = G.GAME.fnwk_chip_novas + 1
+                check_for_unlock({type = 'chip_nova', total_novas = G.GAME.fnwk_chip_novas})
             end
             return true 
         end
     }))
 
     if G.GAME.last_hand_played ~= last_hand then
-        G.GAME.consecutive_hands = 1
+        G.GAME.fnwk_consecutive_hands = 1
     else 
-        G.GAME.consecutive_hands = G.GAME.consecutive_hands + 1
+        G.GAME.fnwk_consecutive_hands = G.GAME.fnwk_consecutive_hands + 1
     end
-    check_for_unlock({type = 'consecutive_hands', num_consecutive = G.GAME.consecutive_hands})
+    check_for_unlock({type = 'consecutive_hands', num_consecutive = G.GAME.fnwk_consecutive_hands})
 
     return ret
 end

@@ -45,6 +45,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
     local t = {x = card.T.x, y = card.T.y, w = card.T.w, h = card.T.h}
     local major_role = {
 		role_type = 'Major',
@@ -115,8 +119,11 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.update(self, card, dt)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
 
-    if not card.config.center.discovered or not card.ability then
+    if not card.ability then
         return
     end
 
@@ -141,7 +148,11 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not card.config.center.discovered or not card.ability then
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+    if not card.ability then
         return
     end
 
@@ -155,7 +166,7 @@ function jokerInfo.draw(self, card, layer)
     shader_args[2] = {name = 'hovering', val = hovering}
     shader_args[3] = {name = 'screen_scale', val = screen_scale}
 
-    local lerp_val = EaseInOutQuart(card.ability.city_lerp)
+    local lerp_val = FnwkEaseInOutQuart(card.ability.city_lerp)
     local scroll_dist = card.ability.scroll_dist / 2
     if lerp_val > 0.5 then
         scroll_dist = scroll_dist * (lerp_val - 0.5) / 0.5
