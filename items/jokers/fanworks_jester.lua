@@ -27,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
         func = function() 
             local old_banned = copy_table(G.GAME.banned_keys)
             for k, v in pairs(G.P_CENTERS) do
-                if not StringStartsWith(k, "j_fnwk_") then
+                if not FnwkStringStartsWith(k, "j_fnwk_") then
                     G.GAME.banned_keys[k] = true
                 end
             end

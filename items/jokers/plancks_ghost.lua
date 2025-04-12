@@ -110,7 +110,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 
 		if not changed then
-			changed = DeepCompare(context.removed.ability.extra, context.removed.config.center.config.extra)
+			changed = FnwkDeepCompare(context.removed.ability.extra, context.removed.config.center.config.extra)
 		end	
 
 		sendDebugMessage(context.removed.config.center.key..'changed: '..tostring(changed))
@@ -122,7 +122,7 @@ function jokerInfo.calculate(self, card, context)
 		for k, v in pairs(context.removed.ability) do
 			if valid_keys[k] then saved_ability[k] = v end
 		end
-		saved_ability.extra = RecursiveTableMod(context.removed.ability.extra)
+		saved_ability.extra = FnwkRecursiveTableMod(context.removed.ability.extra)
 
 		-- save this table
 		card.ability.extra.saved_abilities[context.removed.config.center.key] = saved_ability
@@ -195,7 +195,7 @@ function jokerInfo.update(self, card, dt)
 		end
 	end
 
-	local ease = EaseInOutSin(card.ability.extra.lerp)
+	local ease = FnwkEaseInOutSin(card.ability.extra.lerp)
 	card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 end
 

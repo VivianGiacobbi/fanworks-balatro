@@ -166,7 +166,7 @@ function jokerInfo.draw(self, card, layer)
     shader_args[2] = {name = 'hovering', val = hovering}
     shader_args[3] = {name = 'screen_scale', val = screen_scale}
 
-    local lerp_val = EaseInOutQuart(card.ability.city_lerp)
+    local lerp_val = FnwkEaseInOutQuart(card.ability.city_lerp)
     local scroll_dist = card.ability.scroll_dist / 2
     if lerp_val > 0.5 then
         scroll_dist = scroll_dist * (lerp_val - 0.5) / 0.5

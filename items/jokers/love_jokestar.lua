@@ -166,7 +166,7 @@ function jokerInfo.update(self, card, dt)
 	end
 
     
-    local ease = EaseInOutSin(card.ability.glow_lerp)
+    local ease = FnwkEaseInOutSin(card.ability.glow_lerp)
     card.ability.glow_intensity = 4 * (ease * card.ability.glow_range + card.ability.glow_min)
     card.ability.glow_size = 0.95 * (ease * card.ability.glow_range + card.ability.glow_min)
 end

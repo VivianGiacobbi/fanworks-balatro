@@ -120,27 +120,16 @@ function jokerInfo.calculate(self, card, context)
 
 	if card.ability.tuned_mode == 'stereo' then
 		return {
-			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
-			mult_mod = card.ability.extra.mult,
-			card = context.blueprint_card or card,
-
-			extra = { 
-				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-				card = context.blueprint_card or card,
-				Xmult_mod = card.ability.extra.x_mult,
-			}
+			mult = card.ability.extra.mult,
+			xmult = card.ability.extra.x_mult,
 		}
 	elseif card.ability.tuned_mode == 'xmult' then
 		return {
-			message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
-			card = context.blueprint_card or card,
-			Xmult_mod = card.ability.extra.x_mult,
+			xmult = card.ability.extra.x_mult,
 		}
 	elseif card.ability.tuned_mode == 'mult' then
 		return {
-			message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
-			card = context.blueprint_card or card,
-			mult_mod = card.ability.extra.mult,
+			mult = card.ability.extra.mult,
 		}
 	end
 end

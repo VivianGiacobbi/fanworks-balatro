@@ -12,7 +12,7 @@ local deckInfo = {
 }
 
 function deckInfo.check_for_unlock(self, args)
-    local discovered = CheckFanworksDiscoveries(self)
+    local discovered = FnwkCheckFanworksDiscoveries(self)
     return discovered >= self.unlock_condition.num
 end
 
@@ -21,7 +21,7 @@ function deckInfo.loc_vars(self, info_queue, card)
 end
 
 function deckInfo.locked_loc_vars(self, info_queue, card)
-    local discovered = CheckFanworksDiscoveries(self)
+    local discovered = FnwkCheckFanworksDiscoveries(self)
     return {vars = {discovered, self.unlock_condition.num}}
 end
 

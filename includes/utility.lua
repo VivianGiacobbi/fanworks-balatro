@@ -1,4 +1,4 @@
-function table.clear(t)
+function table.fnwk_clear(t)
     for k in pairs(t) do
         t[k] = nil
     end
@@ -9,21 +9,21 @@ end
 --- @param b number Value to lerp to
 --- @param t number Lerp/time variable, between 0 and 1
 --- @return number # Interpolated value between a and b
-function math.lerp(a,b,t) 
+function math.fnwk_lerp(a,b,t) 
 	return (1-t)*a + t*b 
 end
 
 --- Recursively finds the full file tree at a specified path
 --- @param folder string The folder path to enumerate. Function fails if folder is not an OS directory
 --- @return string fileTree A string, separated by newlines, of all enumerated paths
-function RecursiveEnumerate(folder)
+function FnwkRecursiveEnumerate(folder)
 	local fileTree = ""
 	for _, file in ipairs(love.filesystem.getDirectoryItems(folder)) do
 		local path = folder .. "/" .. file
 		local info = love.filesystem.getInfo(path)
 		fileTree = fileTree .. "\n" .. path .. (info.type == "directory" and " (DIR)" or "")
 		if info.type == "directory" then
-			fileTree = fileTree .. RecursiveEnumerate(path)
+			fileTree = fileTree .. FnwkRecursiveEnumerate(path)
 		end
 	end
 	return fileTree
@@ -33,7 +33,7 @@ end
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
 --- @param no_badges boolean | nil Whether or not to display mod badges on this item
-function LoadItem(file_key, item_type, no_badges)
+function FnwkLoadItem(file_key, item_type, no_badges)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
@@ -98,7 +98,7 @@ end
 --- @param exclude table | nil An SMODS object to exclude from the count (usually the one calling the check)
 --- @return integer discovered Number of currently discovered cards
 --- @return integer total Total number of fanworks cards
-function CheckFanworksDiscoveries(exclude)
+function FnwkCheckFanworksDiscoveries(exclude)
     local count = 0
     local discovered = 0
     for k, v in pairs(G.P_CENTERS) do
@@ -117,7 +117,7 @@ end
 --- @param str string String to check
 --- @param start string Substring to search for within str
 --- @return boolean # If the string starts with the substring
-function StringStartsWith(str, start)
+function FnwkStringStartsWith(str, start)
 	return string.sub(str, 1, #start) == start
 end
 
@@ -125,7 +125,7 @@ end
 --- @param str string String to check
 --- @param ending string Substring to search for within str
 --- @return boolean # If the string end with the substring
-function StringEndsWith(str, ending)
+function FnwkStringEndsWith(str, ending)
 	return string.sub(str, -#ending) == ending
 end
 
@@ -133,7 +133,7 @@ end
 --- @param str string String to check
 --- @param substring string Substring to search for within str
 --- @return boolean # If the substring is found anywhere within str
-function ContainsString(str, substring)
+function FnwkContainsString(str, substring)
 	local lowerStr = string.lower(str)
 	local lowerSubstring = string.lower(substring)
 	return string.find(lowerStr, lowerSubstring, 1, true) ~= nil
@@ -143,7 +143,7 @@ end
 --- @param table table Table to search for a given value
 --- @param element any Value to search within the table
 --- @return boolean # If the table contains at least one instance of this value
-function table.contains(table, element)
+function table.fnwk_contains(table, element)
 	for _, value in pairs(table) do
 		if value == element then
 			return true
@@ -157,7 +157,7 @@ end
 --- @param tbl1 table First table
 --- @param tbl2 table Second table
 --- @return boolean # If every key and value on the table is identical
-function DeepCompare(tbl1, tbl2)
+function FnwkDeepCompare(tbl1, tbl2)
 	if type(tbl1) == "table" and type(tbl2) == "table" then
 		-- don't do a nested compare for objects, just compare the reference IDs
 		if (tbl1.is and tlb1:is(Object)) or (tbl2.is and tbl2:is(Object)) then
@@ -170,7 +170,7 @@ function DeepCompare(tbl1, tbl2)
 				return false
 			elseif v ~= tbl2[k] then
 				if type(v) == "table" and type(tbl2[k]) == "table" then
-					return DeepCompare(v, tbl2[k])
+					return FnwkDeepCompare(v, tbl2[k])
 				else
 					return v == tbl2[k]
 				end
@@ -199,7 +199,7 @@ end
 --- @param reset_table table | nil Table to reset directly comparable values from based on comparator
 --- @param compare string | nil A comparator to determine when to reset ('pos', 'neg', or 'dif', default is 'neg')
 --- @return table # A modified copy of the given table
-function RecursiveTableMod(table, mod, reset_table, compare)
+function FnwkRecursiveTableMod(table, mod, reset_table, compare)
     local val_type = type(table)
     local mod_copy = nil
     if val_type ~= 'table' then
@@ -235,12 +235,12 @@ function RecursiveTableMod(table, mod, reset_table, compare)
         else
             if mod and mod ~= 1 and type(v) == 'number' and (k == 'x_mult' or k == 'Xmult' or k == 'x_chips' or k == 'Xchips') then
                 if v == 1 then
-                    mod_copy[k] = math.max(0, RecursiveTableMod(0, mod, reset_table and reset_table[k] or nil, compare))
+                    mod_copy[k] = math.max(0, FnwkRecursiveTableMod(0, mod, reset_table and reset_table[k] or nil, compare))
                 else
-                    mod_copy[k] = math.max(0, RecursiveTableMod(v - 1, mod, reset_table and reset_table[k] or nil, compare))
+                    mod_copy[k] = math.max(0, FnwkRecursiveTableMod(v - 1, mod, reset_table and reset_table[k] or nil, compare))
                 end
             else 
-                mod_copy[k] = RecursiveTableMod(v, mod, reset_table and reset_table[k] or nil, compare)
+                mod_copy[k] = FnwkRecursiveTableMod(v, mod, reset_table and reset_table[k] or nil, compare)
             end
             
         end
@@ -252,14 +252,14 @@ end
 --- Sine Wave easing function both in and out
 --- @param x string Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function EaseInOutSin(x)
+function FnwkEaseInOutSin(x)
 	return -(math.cos(math.pi * x) - 1) / 2
 end
 
 --- x^4 easing function both in and out
 --- @param x string Value to ease (between 0 and 1)
 --- @return number # Eased value between 0 and 1
-function EaseInOutQuart(x) 
+function FnwkEaseInOutQuart(x) 
 	return x < 0.5 and 8 * x * x * x * x or 1 - (-2 * x + 2)^4 / 2;
 end
 
@@ -267,18 +267,18 @@ end
 --- Factorial of non-negative integer
 --- @param n integer
 --- @return number # Factorial of n
-function Fact (n)
+function FnwkFact (n)
 	if n <= 0 then
 	  return 1
 	else
-	  return n * Fact(n-1)
+	  return n * FnwkFact(n-1)
 	end
 end
 
 --- Find a card key in the G.WOMEN table
 --- @param key string card object key
 --- @return table # Table with three properties, 'junkie, 'trans', and 'cis'. Each will be true or nil if the key is found in each list
-function FindWomen(key) 
+function FnwkFindWomen(key) 
     local junkie = G.WOMEN.junkies[key]
     local trans = G.WOMEN.trans[key]
     local cis = G.WOMEN.cis[key]
@@ -289,7 +289,7 @@ end
 --- global discount and updates all instanced cards' costs
 --- @param source Card Balatro Card table indicating the source of the discount
 --- @param center_set string | nil Set to limit the discount to ('Booster', 'Tarot', 'Joker', etc)
-function SetCenterDiscount(source, juice, center_set)
+function FnwkSetCenterDiscount(source, juice, center_set)
     G.GAME.extra_discounts[source.ID] = {
 		center_set = center_set,
 		discount = source.ability.extra
@@ -308,7 +308,7 @@ end
 --- Clears any set discounts keyed with source's ID
 --- and updates all instanced cards' costs
 --- @param source Card Balatro Card table indicating the source of the discount
-function ClearCenterDiscountSource(source)
+function FnwkClearCenterDiscountSource(source)
 	G.GAME.extra_discounts[source.ID] = nil
 	for _, v in pairs(G.I.CARD) do
         if v.set_cost then 
@@ -320,7 +320,7 @@ end
 --- Formats a numeral for display. Numerals between 0 and 1 are written out fully
 --- @param n number Numeral to format
 --- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
-function FormatDisplayNumber(n, caps_style)
+function FnwkFormatDisplayNumber(n, caps_style)
 	local dict = {
 		[0] = 'zero',
 		[1] = 'one',
@@ -352,7 +352,7 @@ end
 --- Formats an integer count for grammatically correct display (once, twice, 3 times, etc)
 --- @param n number integer to format
 --- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
-function CountGrammar(value, caps_style, spell_numeral)
+function FnwkCountGrammar(value, caps_style, spell_numeral)
     caps_style = caps_style and string.lower(caps_style) or 'lower'
     local ret = ''
     if value == 1 then
@@ -372,7 +372,7 @@ function CountGrammar(value, caps_style, spell_numeral)
     if value > 2 then
 		local val = value
 		if spell_numeral then
-			val = FormatDisplayNumber(value)
+			val = FnwkFormatDisplayNumber(value)
 			if caps_style == 'first' then
 				ret = string.lower(ret)
 				val = val:gsub("^%l", string.upper)
@@ -386,7 +386,7 @@ end
 
 --- Finds the number of secret hands played this run
 --- @return integer # Number of secret hands played. 0 if no game is active
-function SecretHandsPlayed()
+function FnwkSecretHandsPlayed()
 	if not G.GAME then
 		return 0
 	end
@@ -401,13 +401,13 @@ function SecretHandsPlayed()
 	return secret
 end
 
-function PopulateBeyondCanonBans()
+function FnwkPopulateBeyondCanonBans()
 	local banned = {}
 	for k, v in pairs(G.P_CENTERS) do
-		if StringStartsWith(k, "j_") and not StringStartsWith(k, "j_fnwk_") then
+		if FnwkStringStartsWith(k, "j_") and not FnwkStringStartsWith(k, "j_fnwk_") then
 			banned[#banned+1] = { id = k }
 		end
 	end
 	G.beyond_bans = banned
 end
-PopulateBeyondCanonBans()
+FnwkPopulateBeyondCanonBans()

@@ -11,7 +11,7 @@ end
 
 
 G.loadTrophies = true
-for s in RecursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
+for s in FnwkRecursiveEnumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
 	trophiesToLoad[#trophiesToLoad + 1] = s:gsub(path_pattern_replace .. "/achievements/", "")
 end
 

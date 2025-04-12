@@ -118,8 +118,8 @@ function jokerInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and not context.other_card.debuff 
     and card.ability.extra.x_mult > 1 and context.other_card:get_id() == 12 then
         return {
-            Xmult = card.ability.extra.x_mult,
-            card = context.blueprint_card or card
+            xmult = card.ability.extra.x_mult,
+            card = context.other_card
         }
     end
 
