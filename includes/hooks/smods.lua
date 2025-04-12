@@ -1,18 +1,18 @@
 SMODS.current_mod.reset_game_globals = function(run_start)
     if run_start then
-        G.GAME.glass_shatters = 0
-        G.GAME.patsy_jokers_sold = 0
-        G.GAME.owned_jokers = {}
-        G.GAME.extra_discounts = {}
-        G.GAME.run_consumeables = {}
-        G.GAME.chip_novas = 0
-        G.GAME.consecutive_hands = 0
+        G.GAME.fnwk_glass_shatters = 0
+        G.GAME.fnwk_patsy_jokers_sold = 0
+        G.GAME.fnwk_owned_jokers = {}
+        G.GAME.fnwk_extra_discounts = {}
+        G.GAME.fnwk_run_consumeables = {}
+        G.GAME.fnwk_chip_novas = 0
+        G.GAME.fnwk_consecutive_hands = 0
     end
 
-    G.GAME.current_round.packs_rerolled = 0
-    reset_funkadelic()
-    reset_infidel()
-    reset_loyal()
+    G.GAME.current_round.fnwk_packs_rerolled = 0
+    fnwk_reset_funkadelic()
+    fnwk_reset_infidel()
+    fnwk_reset_loyal()
 
     for k, v in pairs(G.playing_cards) do
         v.ability.joker_force_facedown = nil

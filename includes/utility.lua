@@ -290,7 +290,7 @@ end
 --- @param source Card Balatro Card table indicating the source of the discount
 --- @param center_set string | nil Set to limit the discount to ('Booster', 'Tarot', 'Joker', etc)
 function FnwkSetCenterDiscount(source, juice, center_set)
-    G.GAME.extra_discounts[source.ID] = {
+    G.GAME.fnwk_extra_discounts[source.ID] = {
 		center_set = center_set,
 		discount = source.ability.extra
 	}
@@ -309,7 +309,7 @@ end
 --- and updates all instanced cards' costs
 --- @param source Card Balatro Card table indicating the source of the discount
 function FnwkClearCenterDiscountSource(source)
-	G.GAME.extra_discounts[source.ID] = nil
+	G.GAME.fnwk_extra_discounts[source.ID] = nil
 	for _, v in pairs(G.I.CARD) do
         if v.set_cost then 
             v:set_cost()

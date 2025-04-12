@@ -52,7 +52,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.cardarea == G.jokers and context.hand_upgraded) or context.blueprint then
+    if not (context.cardarea == G.jokers and context.fnwk_hand_upgraded) or context.blueprint then
         return
     end
 
@@ -62,7 +62,6 @@ function jokerInfo.calculate(self, card, context)
     end
 
     G.hand:change_size(hand_size - card.ability.last_size)
-    sendDebugMessage('current: '..hand_size..' | last: '.. card.ability.last_size)
     if hand_size > card.ability.last_size then
         card.ability.last_size = hand_size
         return {

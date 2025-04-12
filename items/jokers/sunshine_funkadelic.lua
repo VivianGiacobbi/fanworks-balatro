@@ -15,14 +15,14 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "artist_fizzy", set = "Other"}
-	if G.GAME and not G.GAME.current_funky_suits then
-		reset_funkadelic()
+	if G.GAME and not G.GAME.fnwk_current_funky_suits then
+		fnwk_reset_funkadelic()
 	end
 
-	local firstSuit = localize(G.GAME.current_funky_suits[1], 'suits_singular')
-	local firstColor = G.C.SUITS[G.GAME.current_funky_suits[1]]
-	local secondSuit = localize(G.GAME.current_funky_suits[2], 'suits_singular')
-	local secondColor = G.C.SUITS[G.GAME.current_funky_suits[2]]
+	local firstSuit = localize(G.GAME.fnwk_current_funky_suits[1], 'suits_singular')
+	local firstColor = G.C.SUITS[G.GAME.fnwk_current_funky_suits[1]]
+	local secondSuit = localize(G.GAME.fnwk_current_funky_suits[2], 'suits_singular')
+	local secondColor = G.C.SUITS[G.GAME.fnwk_current_funky_suits[2]]
 	return { vars = {card.ability.extra.x_mult, firstSuit, secondSuit, colours = {firstColor, secondColor}} }
 end
 
@@ -48,7 +48,7 @@ function jokerInfo.calculate(self, card, context)
 			end
 		end
 		
-		if suits[G.GAME.current_funky_suits[1]] > 0 and suits[G.GAME.current_funky_suits[2]] > 0 then
+		if suits[G.GAME.fnwk_current_funky_suits[1]] > 0 and suits[G.GAME.fnwk_current_funky_suits[2]] > 0 then
 			return {
 				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
 				Xmult_mod = card.ability.extra.x_mult,

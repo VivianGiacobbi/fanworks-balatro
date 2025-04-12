@@ -1,9 +1,9 @@
 local ref_use_consumable = Card.use_consumeable
 function Card:use_consumeable(area, copier)
-    if G.GAME.run_consumeables[self.config.center_key] then
-        G.GAME.run_consumeables[self.config.center_key] = G.GAME.run_consumeables[self.config.center_key] + 1
+    if G.GAME.fnwk_run_consumeables[self.config.center_key] then
+        G.GAME.fnwk_run_consumeables[self.config.center_key] = G.GAME.fnwk_run_consumeables[self.config.center_key] + 1
     else 
-        G.GAME.run_consumeables[self.config.center_key] = 1
+        G.GAME.fnwk_run_consumeables[self.config.center_key] = 1
     end
 
     return ref_use_consumable(self, area, copier)
@@ -207,8 +207,8 @@ function Card:sell_card()
     local ret = ref_sell_card(self)
 
     if self.ability.set == 'Joker' then 
-        G.GAME.patsy_jokers_sold = G.GAME.patsy_jokers_sold + 1
-        check_for_unlock({type = 'patsy_jokers_sold', amount = G.GAME.patsy_jokers_sold})
+        G.GAME.fnwk_patsy_jokers_sold = G.GAME.fnwk_patsy_jokers_sold + 1
+        check_for_unlock({type = 'patsy_jokers_sold', amount = G.GAME.fnwk_patsy_jokers_sold})
     end
 
     return ret
@@ -218,7 +218,7 @@ end
 local ref_shatter = Card.shatter
 function Card:shatter()
     local ret = ref_shatter(self)
-    G.GAME.glass_shatters = G.GAME.glass_shatters + 1
-    check_for_unlock({type = 'run_shattered', total_shattered = G.GAME.glass_shatters})
+    G.GAME.fnwk_glass_shatters = G.GAME.fnwk_glass_shatters + 1
+    check_for_unlock({type = 'run_shattered', total_shattered = G.GAME.fnwk_glass_shatters})
     return ret
 end
