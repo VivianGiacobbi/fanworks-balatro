@@ -64,7 +64,7 @@ function jokerInfo.calculate(self, card, context)
         return true end }))
     update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='+'..card.ability.extra.upgrade_mod})
     delay(1.3)
-    batch_level_up(card, SMODS.PokerHands, card.ability.extra.upgrade_mod)
+    fnwk_batch_level_up(card, SMODS.PokerHands, card.ability.extra.upgrade_mod)
     update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 end
 
