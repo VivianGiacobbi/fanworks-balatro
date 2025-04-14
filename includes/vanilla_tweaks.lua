@@ -44,7 +44,7 @@ SMODS.Consumable:take_ownership('c_black_hole',
                 return true end }))
             update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='+1'})
             delay(1.3)
-            batch_level_up(card, SMODS.PokerHands)
+            fnwk_batch_level_up(card, SMODS.PokerHands)
             update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
         end,
     },

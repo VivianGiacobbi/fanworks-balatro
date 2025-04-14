@@ -6,7 +6,6 @@ SMODS.optional_features.quantum_enhancements = true
 SMODS.optional_features.cardareas.unscored = true
 
 G.C.FANWORKS = SMODS.current_mod.badge_colour
-G.C.STAND = HEX('b85f8e')
 
 local includes = {
 	-- includes utility functions required for following files

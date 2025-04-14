@@ -12,7 +12,7 @@ position = "at"
 payload = '''local pre_joker_context = {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, edition = true, pre_joker = true}
 local eval = eval_card(_card, pre_joker_context)
 if eval.edition then effects[#effects+1] = eval end
-SMODS.calculate_quantum_editions(_card, effects, pre_joker_context)'''
+SMODS.fnwk_calculate_quantum_editions(_card, effects, pre_joker_context)'''
 match_indent = true
 times = 1
 
@@ -26,7 +26,7 @@ position = "at"
 payload = '''local post_joker_context = {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, edition = true, post_joker = true}
 local eval = eval_card(_card, post_joker_context)
 if eval.edition then effects[#effects+1] = eval end
-SMODS.calculate_quantum_editions(_card, effects, post_joker_context)'''
+SMODS.fnwk_calculate_quantum_editions(_card, effects, post_joker_context)'''
 match_indent = true
 times = 1
 
@@ -178,7 +178,7 @@ times = 1
 target = '=[SMODS _ "src/utils.lua"]'
 pattern = '''SMODS.calculate_quantum_enhancements(card, quantum_eval, context)'''
 position = "after"
-payload = '''SMODS.calculate_quantum_editions(card, quantum_eval, context)'''
+payload = '''SMODS.fnwk_calculate_quantum_editions(card, quantum_eval, context)'''
 match_indent = true
 times = 1
 
@@ -188,6 +188,6 @@ times = 1
 target = '=[SMODS _ "src/utils.lua"]'
 pattern = '''SMODS.calculate_quantum_enhancements(card, effects, context)'''
 position = "after"
-payload = '''SMODS.calculate_quantum_editions(card, effects, context)'''
+payload = '''SMODS.fnwk_calculate_quantum_editions(card, effects, context)'''
 match_indent = true
 times = 3

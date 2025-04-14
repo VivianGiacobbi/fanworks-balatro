@@ -31,7 +31,7 @@ function fnwk_reset_infidel()
     }
 end
 
-function batch_level_up(card, hands, amount)
+function fnwk_batch_level_up(card, hands, amount)
     amount = amount or 1
     for k, v in pairs(hands) do
         level_up_hand(card, k, true, amount)

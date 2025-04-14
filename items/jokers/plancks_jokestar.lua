@@ -1,4 +1,4 @@
-if not SMODS.PokerHandPart['csau_fibonacci'] then
+if not SMODS.PokerHandParts['csau_fibonacci'] then
     SMODS.PokerHandPart {
         key = 'csau_fibonacci',
         prefix_config = false,
@@ -8,7 +8,7 @@ if not SMODS.PokerHandPart['csau_fibonacci'] then
     }
 end
 
-if not SMODS.PokerHand['csau_Fibonacci'] then
+if not SMODS.PokerHands['csau_Fibonacci'] then
     SMODS.PokerHand {
         key = 'csau_Fibonacci',
         prefix_config = false,
@@ -48,7 +48,7 @@ else
 end
 
 
-if not SMODS.PokerHand['csau_FlushFibonacci'] then
+if not SMODS.PokerHands['csau_FlushFibonacci'] then
     SMODS.PokerHand {
         key = 'csau_FlushFibonacci',
         prefix_config = false,

@@ -32,10 +32,7 @@ SMODS.Consumable:take_ownership('c_fool', {
         return { vars = {last_tarot_planet}, main_end = main_end }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_jspec')
-        local color = HEX(localize('co_jspec'))
-        local text = G.localization.misc.dictionary.te_jspec and HEX(localize('te_jspec')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('jspec')
     end
 }, true)
 
@@ -47,10 +44,7 @@ SMODS.Consumable:take_ownership('c_magician', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_asap')
-        local color = HEX(localize('co_asap'))
-        local text = G.localization.misc.dictionary.te_asap and HEX(localize('te_asap')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('asap')
     end
 }, true)
 
@@ -61,10 +55,7 @@ SMODS.Consumable:take_ownership('c_high_priestess', {
         return { vars = {card.ability.planets} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_plancks')
-        local color = HEX(localize('co_plancks'))
-        local text = G.localization.misc.dictionary.te_plancks and HEX(localize('te_plancks')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('plancks')
     end
 }, true)
 
@@ -76,10 +67,7 @@ SMODS.Consumable:take_ownership('c_empress', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} } 
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_sunshine')
-        local color = HEX(localize('co_sunshine'))
-        local text = G.localization.misc.dictionary.te_sunshine and HEX(localize('te_sunshine')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('sunshine')
     end
 }, true)
 
@@ -90,10 +78,7 @@ SMODS.Consumable:take_ownership('c_emperor', {
         return { vars = {card.ability.tarots}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_last')
-        local color = HEX(localize('co_last'))
-        local text = G.localization.misc.dictionary.te_last and HEX(localize('te_last')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('last')
     end
 }, true)
 
@@ -105,10 +90,7 @@ SMODS.Consumable:take_ownership('c_heirophant', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} } 
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_moscow')
-        local color = HEX(localize('co_moscow'))
-        local text = G.localization.misc.dictionary.te_moscow and HEX(localize('te_moscow')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('moscow')
     end
 }, true)
 
@@ -120,10 +102,7 @@ SMODS.Consumable:take_ownership('c_lovers', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_gotequest')
-        local color = HEX(localize('co_gotequest'))
-        local text = G.localization.misc.dictionary.te_gotequest and HEX(localize('te_gotequest')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('gotequest')
     end
 }, true)
 
@@ -135,10 +114,7 @@ SMODS.Consumable:take_ownership('c_chariot', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_crimson')
-        local color = HEX(localize('co_crimson'))
-        local text = G.localization.misc.dictionary.te_crimson and HEX(localize('te_crimson')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('crimson')
     end
 }, true)
 
@@ -150,10 +126,7 @@ SMODS.Consumable:take_ownership('c_justice', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_rubicon')
-        local color = HEX(localize('co_rubicon'))
-        local text = G.localization.misc.dictionary.te_rubicon and HEX(localize('te_rubicon')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('rubicon')
     end
 }, true)
 
@@ -164,10 +137,7 @@ SMODS.Consumable:take_ownership('c_hermit', {
         return { vars = {card.ability.extra}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_city')
-        local color = HEX(localize('co_city'))
-        local text = G.localization.misc.dictionary.te_city and HEX(localize('te_city')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('city')
     end
 }, true)
 
@@ -181,10 +151,7 @@ SMODS.Consumable:take_ownership('c_wheel_of_fortune', {
         return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_jojopolis')
-        local color = HEX(localize('co_jojopolis'))
-        local text = G.localization.misc.dictionary.te_jojopolis and HEX(localize('te_jojopolis')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('jojopolis')
     end
 }, true)
 
@@ -195,10 +162,7 @@ SMODS.Consumable:take_ownership('c_strength', {
         return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_neon')
-        local color = HEX(localize('co_neon'))
-        local text = G.localization.misc.dictionary.te_neon and HEX(localize('te_neon')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('neon')
     end
 }, true)
 
@@ -209,10 +173,7 @@ SMODS.Consumable:take_ownership('c_hanged_man', {
         return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_lighted')
-        local color = HEX(localize('co_lighted'))
-        local text = G.localization.misc.dictionary.te_lighted and HEX(localize('te_lighted')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('lighted')
     end
 }, true)
 
@@ -223,10 +184,7 @@ SMODS.Consumable:take_ownership('c_death', {
         return { vars = {card.ability.max_highlighted}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_rockhard')
-        local color = HEX(localize('co_rockhard'))
-        local text = G.localization.misc.dictionary.te_rockhard and HEX(localize('te_rockhard')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('rockhard')
     end
 }, true)
 
@@ -246,10 +204,7 @@ SMODS.Consumable:take_ownership('c_temperance', {
         return { vars = {card.ability.extra, math.min(card.ability.extra, _money)} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_coi')
-        local color = HEX(localize('co_coi'))
-        local text = G.localization.misc.dictionary.te_coi and HEX(localize('te_coi')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('coi')
     end
 }, true)
 
@@ -261,10 +216,7 @@ SMODS.Consumable:take_ownership('c_devil', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_spirit')
-        local color = HEX(localize('co_spirit'))
-        local text = G.localization.misc.dictionary.te_spirit and HEX(localize('te_spirit')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('spirit')
     end
 }, true)
 
@@ -276,10 +228,7 @@ SMODS.Consumable:take_ownership('c_tower', {
         return { vars = {card.ability.max_highlighted, localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}} }
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_mania')
-        local color = HEX(localize('co_mania'))
-        local text = G.localization.misc.dictionary.te_mania and HEX(localize('te_mania')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('mania')
     end
 }, true)
 
@@ -290,10 +239,7 @@ SMODS.Consumable:take_ownership('c_star', {
         return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_culture')
-        local color = HEX(localize('co_culture'))
-        local text = G.localization.misc.dictionary.te_culture and HEX(localize('te_culture')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('culture')
     end
 }, true)
 
@@ -304,10 +250,7 @@ SMODS.Consumable:take_ownership('c_moon', {
         return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_iron')
-        local color = HEX(localize('co_iron'))
-        local text = G.localization.misc.dictionary.te_iron and HEX(localize('te_iron')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('iron')
     end
 }, true)
 
@@ -318,10 +261,7 @@ SMODS.Consumable:take_ownership('c_sun', {
         return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_streetlight')
-        local color = HEX(localize('co_streetlight'))
-        local text = G.localization.misc.dictionary.te_streetlight and HEX(localize('te_streetlight')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('streetlight')
     end
 }, true)
 
@@ -331,10 +271,7 @@ SMODS.Consumable:take_ownership('c_judgement', {
         info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_industry')
-        local color = HEX(localize('co_industry'))
-        local text = G.localization.misc.dictionary.te_industry and HEX(localize('te_industry')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('industry')
     end
 }, true)
 
@@ -345,9 +282,6 @@ SMODS.Consumable:take_ownership('c_world', {
         return { vars = {card.ability.max_highlighted,  localize(card.ability.suit_conv, 'suits_plural'), colours = {G.C.SUITS[card.ability.suit_conv]}}}
     end,
     set_badges = function(self, card, badges)
-        local title = localize('ba_thorny')
-        local color = HEX(localize('co_thorny'))
-        local text = G.localization.misc.dictionary.te_thorny and HEX(localize('te_thorny')) or G.C.WHITE
-        badges[#badges+1] = create_badge(title, color, text, 1)
+        badges[#badges+1] = FnwkDynamicBadge('thorny')
     end
 }, true)
