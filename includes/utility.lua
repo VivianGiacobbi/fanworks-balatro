@@ -90,12 +90,11 @@ function FnwkLoadItem(file_key, item_type, no_badges)
 	if item_type == 'Stand' then smods_item = 'Consumable' end
 	if item_type == 'Deck' then smods_item = 'Back' end
 
-	local stands_enabled = next(SMODS.find_mod('Cardsauce')) or next(SMODS.find_mod('stands_mod'))
-	if (info.requires_stands or item_type == 'Stand') and not stands_enabled then
+	if (item_type == 'Stand' or info.requires_stands) and not G.fnwk_stands_enabled then
 		return
 	end
 
-	if info.in_progress and not fnwk_enabled['enableWipJokers'] then
+	if info.in_progress and not fnwk_enabled['enableWipItems'] then
 		return
 	end
 
@@ -409,30 +408,47 @@ end
 
 --- Formats a numeral for display. Numerals between 0 and 1 are written out fully
 --- @param n number Numeral to format
+--- @param number_type string | nil Type of display number ('number', 'order')
 --- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
-function FnwkFormatDisplayNumber(n, caps_style)
+function FnwkFormatDisplayNumber(n, number_type, caps_style)
+	number_type = number_type or 'number'
 	local dict = {
-		[0] = 'zero',
-		[1] = 'one',
-		[2] = 'two',
-		[3] = 'three',
-		[4] = 'four',
-		[5] = 'five',
-		[6] = 'six',
-		[7] = 'seven',
-		[8] = 'eight',
-		[9] = 'nine',
-		[10] = 'ten',
+		[0] = {number = 'zero', order = 'zeroth'},
+		[1] = {number = 'one', order = 'first'},
+		[2] = {number = 'two', order = 'second'},
+		[3] = {number = 'three', order = 'third'},
+		[4] = {number = 'four', order = 'fourth'},
+		[5] = {number = 'five', order = 'fifth'},
+		[6] = {number = 'six', order = 'sixth'},
+		[7] = {number = 'seven', order = 'seventh'},
+		[8] = {number = 'eight', order = 'eighth'},
+		[9] = {number = 'nine', order = 'ninth'},
+		[10] = {number = 'ten', order = 'tenth'},
+		[11] = {number = '11', order = '11th'},
+		[12] = {number = '12', order = '12th'},
 	}
 	if n < 0 or n > #dict then
-		return n
+		if number_type == 'number' then return n end
+
+		local ret = ''
+		local mod = n % 10
+		if mod == 1 then 
+			ret = n..'st'
+		elseif mod == 2 then
+			ret = n..'nd'
+		elseif mod == 3 then
+			ret = n..'rd'
+		else
+			ret = n..'th'
+		end
+		return ret
 	end
 
-	local ret = dict[n]
+	local ret = dict[n][number_type]
 	local style = caps_style and string.lower(caps_style) or 'lower'
 	if style == 'upper' then
 		ret = string.upper(ret)
-	elseif style == 'first' then
+	elseif n < 11 and style == 'first' then
 		ret = ret:gsub("^%l", string.upper)
 	end
 
@@ -440,7 +456,7 @@ function FnwkFormatDisplayNumber(n, caps_style)
 end
 
 --- Formats an integer count for grammatically correct display (once, twice, 3 times, etc)
---- @param n number integer to format
+--- @param value number integer to format
 --- @param caps_style string | nil Style of capitalization ('lower', 'upper', 'first')
 function FnwkCountGrammar(value, caps_style, spell_numeral)
     caps_style = caps_style and string.lower(caps_style) or 'lower'

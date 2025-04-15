@@ -261,7 +261,8 @@ return {
 			fnwk_credits5 = "Special Thanks",
 			fnwk_options_sub = "(Restart required to apply)",
 			fnwk_options_enableJokers = "Jokers",
-			fnwk_options_enableWipJokers = "WIP Jokers",
+			fnwk_options_enableStands = "Stands",
+			fnwk_options_enableWipItems = "WIP Items",
 			fnwk_options_enableAltArt = "Alt Joker Art",
 			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
 			fnwk_options_enableQueer = "Enable Queer Edition",
@@ -381,6 +382,7 @@ return {
 			ba_lipstick = 'Lipstick Vogue',
 			ba_cis = 'Cold Iron Streets',
 			ba_yym = "Yo-Yo Ma's Bizarre RPG",
+			ba_rebels = 'JJ29: Stardust Rebels'
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -978,14 +980,6 @@ return {
 					"{C:green}#1# in #2#{} chance per scoring",
 					"{C:attention}Wild Card{} to level up",
 					"played {C:attention}poker hand{}",
-				}
-			},
-			j_fnwk_rockhard_peppers = {
-				name = "Sgt Pepper's",
-				text = {
-					"All {C:attention}Enhanced Cards{} also act",
-					"as {C:attention}Wild Cards{} as well as",
-					"their current {C:attention}Enhancement{}",
 				}
 			},
 			j_fnwk_rockhard_nameless = {
@@ -1604,6 +1598,273 @@ return {
 				}
 			}
 		},
+		csau_Stand = {
+			c_fnwk_bluebolt_chemical = {
+				name = "My Chemical Romance",
+				text = {
+					"If the {C:attention}first discard{} of round contains",
+					"only one card, remove its {C:attention}enhancement{},",
+					"{C:attention}seal{}, and {C:dark_edition}edition{}. If the {C:attention}next hand{} contains",
+					"only one card, apply {C:attention}#1#{}#2#{C:attention}#3#{}#4#{C:dark_edition}#5#{} to it"
+				}
+			},
+			c_fnwk_bluebolt_thunder = {
+				name = "Thunderstruck",
+				text = {
+					"If played hand is not a {C:attention}#1#{},",
+					"each successive card that is the",
+					"same suit as the {C:attention}first scoring card{}",
+					"gives {X:mult,C:white}X#2#{} Mult",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after {C:attention}#3#{} procs",
+				}
+			},
+			c_fnwk_bluebolt_thunder_dc = {
+				name = "Thunderstruck: D/C Mode",
+				text = {
+					"If played hand is a {C:attention}#1#{},",
+					"{C:attention}destroy{} all cards after scoring",
+					"{s:0.1} {}",
+					"{C:stand}Devolves{} after this effect activates",
+				}
+			},
+			c_fnwk_bone_king = {
+				name = "KING & COUNTRY",
+				text = {
+					"After a {C:attention}Steel{} Card is scored, {C:attention}destroy{} it",
+					"and make a random card in hand {C:attention}Steel{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} when your deck has",
+					"less than {C:attention}#1#{} cards",
+				}
+			},
+			c_fnwk_bone_king_farewell = {
+				name = "Farewell to Kings",
+				text = {
+					"After a {C:attention}Steel King{} is scored,",
+					"{C:attention}destroy{} it and {C:attention}halve{} the Blind requirement",
+				}
+			},
+			c_fnwk_city_dead = {
+				name = "Dead Weight",
+				text = {
+					"{C:tarot}The Fool{} and {C:tarot}The Emperor{}",
+					"always give {C:tarot}The Hermit{}",
+				},
+			},
+			c_fnwk_city_opera = {
+				name = "Opera No. 2",
+				text = {
+					"If you have {C:money}$#1#{} or less",
+					"when {C:attention}first hand{} of round",
+					"is scored, upgrade it",
+				},
+			},
+			c_fnwk_crimson_fortunate = {
+				name = "Fortunate Son",
+				text = {
+					"{C:mult}+#1#{} Mult if played hand",
+					"was the last hand {C:planet}upgraded{}",
+					"{C:inactive}(Currently {C:attention}#1#{}{C:inactive}#2#){}"
+				},
+			},
+			c_fnwk_glass_big = {
+				name = "Big Poppa",
+				text = {
+					"{C:attention}Stone Cards{} give {X:mult,C:white}X#1#{} Mult but",
+					"have a {C:green}#2# in #3#{} chance to break"
+				},
+			},
+			c_fnwk_gotequest_born = {
+				name = "BORN 2B WILD",
+				text = {
+					"A hand of {C:attention}#1#{}, {C:attention}#2#{}, {C:attention}#3#{}, {C:attention}#4#{}, and {C:attention}#5#{}",
+					"counts as a {C:attention}Straight{} and",
+					"{C:planet}levels up{} when played"
+				},
+			},
+			c_fnwk_gotequest_sweet = {
+				name = "Sweet Dreams",
+				text = {
+					"If {C:attention}first hand{} of round",
+					"is a single {C:attention}#1#{}, {C:attention}#2#{}, or {C:attention}#3#{}, split it",
+					"into three {C:attention}#4#s{}, {C:attention}#5#s{}, or {C:attention}#6#s{} with",
+					"the same {C:attention}modifiers{}"
+				},
+			},
+			c_fnwk_gotequest_takyon = {
+				name = "Takyon",
+				text = {
+					"{C:attention}#1#s{} give {X:mult,C:white}X#2#{} Mult when scored",
+					"{C:inactive}(Rank increases after scoring){}"
+				},
+			},
+			c_fnwk_mania_moving = {
+				name = "Moving Pictures",
+				text = {
+					"[NEEDS REVISION]"
+				},
+			},
+			c_fnwk_lighted_limelight = {
+				name = "Limelight",
+				text = {
+					"{C:attention}Unscored cards{} have a",
+					"{C:green}#1# in #2#{} chance to become",
+					"{C:dark_edition}#3#{} when played"
+				},
+			},
+			c_fnwk_lighted_money = {
+				name = "Money Talks",
+				text = {
+					"{C:attention}Destroy{} all scoring {C:attention}Gold Cards{}",
+					"and gain {C:money}$7{} for each"
+				},
+			},
+			c_fnwk_rebels_rebel = {
+				name = "Rebel Moon",
+				text = {
+					"{C:attention}Mult Cards{} give {C:chips}+50{} Chips",
+					"{C:attention}Bonus Cards{} give {C:mult}+6{} Mult",
+				},
+			},
+			c_fnwk_rockhard_peppers = {
+				name = "Sgt Pepper's",
+				text = {
+					"All {C:attention}Enhanced Cards{} also act",
+					"as {C:attention}Wild Cards{} as well as",
+					"their current {C:attention}Enhancement{}",
+				}
+			},
+			c_fnwk_rockhard_quadro = {
+				name = "Quadrophenia",
+				text = {
+					"Create {C:tarot}#1#{} or {C:tarot}#2#{}",
+					"if {C:attention}first hand{} of round is",
+					"a {C:attention}#3#{}",
+					"{C:inactive}(Must have room){}"
+				},
+			},
+			c_fnwk_rubicon_dance = {
+				name = "Dance Macabre",
+				text = {
+					"{C:attention}Glass Cards{} of {V:1}#1#{} suit will not break",
+					"{C:attention}Glass Cards{} of any other suit always break"
+				},
+			},
+			c_fnwk_scepter_lenfer = {
+				name = "L'Enfer",
+				text = {
+					"If discard is {C:attention}#1# Enhanced Card,",
+					"{C:attention}destroy{} it and draw {C:attention}#2#{} cards"
+				},
+			},
+			c_fnwk_spirit_achtung = {
+				name = "Achtung Baby",
+				text = {
+					"{C:attention}#1#{} card is drawn {C:attention}face down{}",
+					"with each draw, face down cards",
+					"give {X:mult,C:white}X#2#{} Mult",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} when a {C:attention}#3#{}",
+					"is played",
+				},
+			},
+			c_fnwk_spirit_achtung_stranger = {
+				name = "A Stranger I Remain",
+				text = {
+					"All cards are drawn {C:attention}face down,{}",
+					"face down cards give {X:mult,C:white}X#1#{} Mult",
+					"{s:0.1} {}",
+					"Whenever you play a hand that isn't",
+					"a {C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
+				},
+			},
+			c_fnwk_spirit_sweet = {
+				name = "Sweet Bod",
+				text = {
+					"When a {C:attention}Boss Blind{} is defeated,",
+					"create a {C:dark_edition}Negative{}",
+					"{C:attention}Corpse Part{} with that",
+					"Boss Blind's effect",
+				},
+			},
+			c_fnwk_spirit_ultimate = {
+				name = "Ultimate Showdown of Ultimate Destiny",
+				text = {
+					"{C:attention}Lucky Cards{} retrigger {C:attention}{} for",
+					"each {C:attention}Gold Card{} held in hand",
+					"{s:0.1} {}",
+					"Increase by #1# for each {C:attention}Jokestar{}",
+					"{C:attention}sold{} or {C:attention}destroyed{}",
+				},
+			},
+			c_fnwk_double_wine = {
+				name = "Wine Song",
+				text = {
+					"{V:1}#1#{} and {V:2}#2#{} in hand give",
+				},
+			},
+			c_fnwk_streetlight_notorious = {
+				name = "NOTORIOUS",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if deck has",
+					"no {C:attention}face cards{}",
+				},
+			},
+			c_fnwk_streetlight_paperback = {
+				name = "Paperback Writer",
+				text = {
+					"{C:attention}#1#{} free {C:green}Reroll{} of {C:attention}Booster Packs{}",
+					"and {C:attention}Vouchers{} per shop",
+					"{C:stand}Evolves{} upon reaching Ante {C:attention}#2#{}",
+				},
+			},
+			c_fnwk_streetlight_paperback_rewrite = {
+				name = "Paperback Writer: REWRITE",
+				text = {
+					"Infinite {C:attention}Booster Pack{} and {C:attention}Voucher{} {C:green}Rerolls{}",
+					"{C:green}#1# in #2#{} chance to destroy this card,",
+					"increases with each {C:green}Reroll{}",
+				},
+			},
+			c_fnwk_sunshine_damned = {
+				name = "The Damned",
+				text = {
+					"Create a {C:tarot}Tarot{} card for every {C:attention}#1#{}",
+					"{V:1}#2#{} or {V:2}#3#{} scored"
+				},
+			},
+			c_fnwk_sunshine_downward = {
+				name = "The Damned",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"Only your {C:attention}most played hand{}",
+					"is scored"
+				},
+			},
+			c_fnwk_sunshine_electric = {
+				name = "Electriclarryland",
+				text = {
+					"All {C:attention}Enhanced Cards{} in {C:attention}first hand{}",
+					"of round are returned to hand after scoring"
+				},
+			},
+			c_fnwk_sunshine_red = {
+				name = "They're Red Hot",
+				text = {
+					"This Stand gains {X:mult,C:white}X#1#{} Mult for",
+					"each {C:attention}consecutive hand{} played containing",
+					"only {V:1}#3#{} and {V:2}#4#{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
+				},
+			},
+			c_fnwk_whiplash_never = {
+				name = "Never Enough",
+				text = {
+					"{C:attention}+#1#{} Consumable Slots"
+				},
+			},
+		},
 		Voucher = {
 			v_fnwk_rubicon_kitty = {
 				name = "Demon Kitty",
@@ -1623,9 +1884,6 @@ return {
 					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
 				}
 			},
-		},
-		Stand = {
-
 		},
 		Back = {
 			b_fnwk_fanworks = {

@@ -1,7 +1,9 @@
 return {
 	['resetTrophies'] = nil,
 	['enableJokers'] = true,
-	['enableWipJokers'] = false,
+	['enableStands'] = true,
+	['enableWipItems'] = false,
+	['enableWipStands'] = false,
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
 	['enableBlinds'] = false,

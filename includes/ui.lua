@@ -10,7 +10,7 @@ SMODS.Atlas({
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableJokers',
-		'enableWipJokers',
+		'enableWipItems',
 		'enableDecks',
 		'enableVouchers',
 		'enableConsumables',
@@ -24,6 +24,7 @@ SMODS.current_mod.config_tab = function()
 		'enableSkins',
 		--]]
 	}
+	if G.fnwk_stands_enabled then table.insert(ordered_config, 2, 'enableStands') end
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local left_count = 0

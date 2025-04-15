@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
+        
         extra = {
             dollars = 7
         }
@@ -12,8 +12,9 @@ local consumInfo = {
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
-    part = 'lighted',
+    fanwork = 'lighted',
     in_progress = true,
+    requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

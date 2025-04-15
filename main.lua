@@ -1,6 +1,18 @@
-
 fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
+
+local csau = next(SMODS.find_mod('Cardsauce'))
+local stands = next(SMODS.find_mod('stands_mod'))
+
+if csau or stands then
+	G.fnwk_stands_enabled = true
+end
+
+-- force set these to false
+if not G.fnwk_stands_enabled then
+	fnwk_config['standsEnabled'] = false
+	fnwk_enabled['standsEnabled'] = false
+end
 
 SMODS.optional_features.quantum_enhancements = true
 SMODS.optional_features.cardareas.unscored = true
