@@ -1,20 +1,25 @@
 local consumInfo = {
-    name = 'Moving Pictures',
+    name = 'Limelight',
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
+        
+        extra = {
+            chance = 7
+        }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
-    part = 'jjm',
+    fanwork = 'lighted',
     in_progress = true,
+    requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'}}
 end
 
 function consumInfo.add_to_deck(self, card)

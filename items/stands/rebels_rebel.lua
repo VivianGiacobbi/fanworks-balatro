@@ -2,23 +2,25 @@ local consumInfo = {
     name = 'Rebel Moon',
     set = 'csau_Stand',
     config = {
-        -- stand_mask = true,
-        aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
+        stand_mask = true,
+        aura_colors = { 'FD5F55DC', 'FDA200DC' },
         extra = {
-            chips = 50
+            chips = 50,
+            mult = 6
         }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
-    part = 'rebels',
+    fanwork = 'rebels',
     in_progress = true,
+    requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = {card.ability.extra.chips}}
+    return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 
 function consumInfo.add_to_deck(self, card)

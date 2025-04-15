@@ -3,22 +3,23 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
+        aura_colors = { 'CC2CDDFDC', '9C403ADC' },
         extra = {
-            money = 7
+            evolve_size = 0.825
         }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
-    part = 'bone',
+    fanwork = 'bone',
     in_progress = true,
+    requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = {card.ability.extra.money}}
+    return { vars = {math.floor(G.GAME.starting_deck_size * card.ability.extra.evolve_size)}}
 end
 
 function consumInfo.add_to_deck(self, card)

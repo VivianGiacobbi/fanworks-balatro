@@ -3,31 +3,31 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        aura_colors = { 'DCFB8CDC', '5EEB2FDC' },
+        aura_colors = { '3EA8F3DC', '009CFDDC' },
         evolve_key = 'c_fnwk_bluebolt_thunder_dc',
         extra = {
+            avoid_hand = 'Flush',
             x_mult = 2,
             evolve_procs = 0,
-            evlolve_num = 15
+            evolve_num = 15
         }
     },
     cost = 4,
     rarity = 'csau_StandRarity',
     alerted = true,
     hasSoul = true,
-    part = 'bluebolt',
+    fanwork = 'bluebolt',
     in_progress = true,
+    requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    local num_display = (card.ability.extra.stored_enhance and 1 or 0) + (card.ability.extra.stored_seal and 1 or 0) + (card.ability.extra.stored_edition and 1 or 0)
-    return { vars = {
-            card.ability.extra.stored_enhance or '',
-            card.ability.extra.stored_enhance and (num_display > 2 and ', ' or ' and ') or '',
-            card.ability.extra.stored_seal or '',
-            card.ability.extra.stored_seal and (((num_display > 2 and not card.ability.extra.stored_enhance) and ' and ') or ((num_display > 2) and ', '))  or '',
-            card.ability.extra.stored_edition or '',
+    return { 
+        vars = {
+            card.ability.extra.avoid_hand,
+            card.ability.extra.x_mult,
+            card.ability.extra.evolve_procs - card.ability.extra.evolve_num
         }
     }
 end

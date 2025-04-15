@@ -79,6 +79,7 @@ local items_to_load = {
 		-- 'spirit_aquarium',
 		'spirit_gambler',
 		'spirit_corpse',
+		'spirit_part',
 
 		-- industry baby
 		'industry_loyal',
@@ -173,6 +174,76 @@ local items_to_load = {
 		'spec_impulse',
 		'spec_ichor',
 		'spec_mood'
+	},
+
+	Stand = {
+		-- bone to blades
+		'bone_king',
+		'bone_king_farewell',
+
+		-- city living
+		'city_dead',
+		'city_opera',
+
+		-- crimson jungle
+		'crimson_fortunate',
+
+		-- gotequest
+		'gotequest_born',
+		'gotequest_sweet',
+		'gotequest_takyon',
+
+		--glass lariats
+		'glass_big',
+
+		-- rockhard in a funky place
+		'rockhard_peppers',
+		'rockhard_quadro',
+
+		-- the lighted stage
+		'lighted_limelight',
+		'lighted_money',
+
+		-- jojomania
+		'mania_moving',
+
+		-- spirit lines
+		'spirit_achtung',
+		'spirit_achtung_stranger',
+		'spirit_sweet',
+		'spirit_ultimate',
+
+		-- double down
+		'double_wine',
+
+		-- rubicon crossroads
+		'rubicon_dance',
+
+		-- streetlight pursuit
+		'streetlight_paperback',
+		'streetlight_paperback_rewrite',
+		'streetlight_notorious',
+
+		-- whiplash riot
+		'whiplash_never',
+
+		-- bluebolt incarnation
+		'bluebolt_thunder',
+		'bluebolt_thunder_dc',
+		'bluebolt_chemical',
+		
+		-- sunshine deluxe
+		'sunshine_electric',
+		'sunshine_damned',
+		'sunshine_downward',
+		'sunshine_red',
+
+		-- scepter files
+		'scepter_lenfer',
+
+		-- JJ29: Stardust Rebels
+		'rebels_rebel'
+
 	},
 	
 	Deck = {
