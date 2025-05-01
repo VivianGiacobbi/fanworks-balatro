@@ -34,16 +34,50 @@ function consumInfo.loc_vars(self, info_queue, card)
     }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
+    if not (context.cardarea == G.play and context.individual) then return end
 
-end
+    local found_suit = false
+    for _, v in pairs(card.ability.extra.suits) do
+        if context.other_card:is_suit(v) then
+            found_suit = true
+            break
+        end
+    end
 
-function consumInfo.can_use(self, card)
-    return false
+    if not found_suit then return end
+    card.ability.extra.scored_count = card.ability.extra.scored_count + 1
+    if card.ability.extra.scored_count < card.ability.extra.num_scores then
+        return {
+            message_card = card,
+            message = localize{type='variable', key='a_remaining', vars={card.ability.extra.num_scores - card.ability.extra.scored_count}},
+            delay = 0.45
+        }
+    end
+
+    card.ability.extra.scored_count = 0
+    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+    return {
+        extra = {
+            focus = card,
+            message = localize('k_plus_tarot'),
+            func = function()
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.0,
+                    func = function()
+                        local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'fnwk_damned')
+                        new_tarot:add_to_deck()
+                        G.consumeables:emplace(new_tarot)
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+            end
+        },
+        colour = G.C.SECONDARY_SET.Tarot,
+        message_card = card
+    }
 end
 
 return consumInfo

@@ -1,5 +1,4 @@
 local consumInfo = {
-    key = 'c_fnwk_spec_mood',
     name = 'Mood Indigo',
     set = "Spectral",
     cost = 4,
@@ -8,7 +7,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_gar", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gar }}
 end
 
 function consumInfo.use(self, card, area, copier)

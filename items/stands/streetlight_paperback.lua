@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         evolve_key = 'c_fnwk_streetlight_paperback_rewrite',
         extra = {
             spec_rerolls = 1,
@@ -22,15 +22,6 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {card.ability.extra.spec_rerolls, card.ability.extra.evolve_ante} }
-end
-
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

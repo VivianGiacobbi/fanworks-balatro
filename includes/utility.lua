@@ -82,12 +82,47 @@ end
 --- Load an item definition using SMODS
 --- @param file_key string file name to load within the "Items" directory, excluding file extension
 --- @param item_type string SMODS item type (such as Joker, Consumable, Deck, etc)
-function FnwkLoadItem(file_key, item_type, no_badges)
+function FnwkLoadItem(file_key, item_type)
 	local key = string.lower(item_type)..'s'
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
+	info.key = file_key
 	local smods_item = item_type
-	if item_type == 'Stand' then smods_item = 'Consumable' end
+	if item_type == 'Stand' then
+		smods_item = 'Consumable'
+
+		-- add universal set_consumable_usage() for stands
+		local ref_add_to_deck = function(self, card, from_debuff) end
+		if info.add_to_deck then
+			ref_add_to_deck = info.add_to_deck
+		end
+		function info.add_to_deck(self, card, from_debuff)
+			ref_add_to_deck(self, card, from_debuff)
+
+			-- only set initially
+			if not from_debuff then
+				set_consumeable_usage(card)
+			end
+			
+		end
+
+		-- force no use for stands
+		function info.can_use(self, card)
+			return false
+		end
+
+		-- add universal update to evolved Stand badges
+		if info.rarity == 'csau_EvolvedRarity' then
+			local ref_type_badge = function(self, card, badges) end
+			if info.set_card_type_badge then
+				ref_type_badge = info.set_card_type_badge
+			end
+			function info.set_card_type_badge(self, card, badges)
+				badges[1] = create_badge(localize('k_csau_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
+				ref_type_badge(self, card)
+			end
+		end
+	end
 	if item_type == 'Deck' then smods_item = 'Back' end
 
 	if (item_type == 'Stand' or info.requires_stands) and not G.fnwk_stands_enabled then
@@ -97,8 +132,7 @@ function FnwkLoadItem(file_key, item_type, no_badges)
 	if info.in_progress and not fnwk_enabled['enableWipItems'] then
 		return
 	end
-
-	info.key = file_key
+	
 	if item_type ~= 'Challenge' and item_type ~= 'Edition' then
 		info.atlas = file_key
 		info.pos = { x = 0, y = 0 }
@@ -108,9 +142,7 @@ function FnwkLoadItem(file_key, item_type, no_badges)
 		end
 	end
 
-	if no_badges then
-		info.no_mod_badges = true
-	elseif info.fanwork then
+	if not info.no_mod_badges and info.fanwork then
 		info.no_mod_badges = true
 		local sb_ref = function(self, card, badges) end
 		if info.set_badges then
@@ -368,9 +400,9 @@ end
 --- @param key string card object key
 --- @return table # Table with three properties, 'junkie, 'trans', and 'cis'. Each will be true or nil if the key is found in each list
 function FnwkFindWomen(key) 
-    local junkie = G.WOMEN.junkies[key]
-    local trans = G.WOMEN.trans[key]
-    local cis = G.WOMEN.cis[key]
+    local junkie = G.fnwk_women.junkies[key]
+    local trans = G.fnwk_women.trans[key]
+    local cis = G.fnwk_women.cis[key]
     return {junkie = junkie, trans = trans, cis = cis}
 end
 

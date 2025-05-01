@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_gote", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = {card.ability.extra.final_mult_mod}}
 end
 
@@ -29,7 +29,7 @@ function jokerInfo.calculate(self, card, context)
     end
 
     local juice_card = context.blueprint_card or card
-    balance_score(juice_card)
+    fnwk_balance_score(juice_card)
 
     mult = math.floor(mult * card.ability.extra.final_mult_mod)
     update_hand_text({delay = 0}, {mult = mult, chips = hand_chips})

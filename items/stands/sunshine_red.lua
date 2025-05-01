@@ -5,9 +5,12 @@ local consumInfo = {
         -- stand_mask = true,
         aura_colors = { 'FD5F55DC', 'FDA200DC' },
         extra = {
-            suits = {'Hearts', 'Diamonds'},
+            suits = {
+                ['Hearts'] = true,
+                ['Diamonds'] = true
+            },
             x_mult = 1,
-            x_mult_mod = 0.1
+            x_mult_mod = 0.5
         }
     },
     cost = 4,
@@ -25,26 +28,44 @@ function consumInfo.loc_vars(self, info_queue, card)
         vars = {
             card.ability.extra.x_mult_mod,
             card.ability.extra.x_mult,
-            localize(card.ability.extra.suits[1], 'suits_plural'),
-            localize(card.ability.extra.suits[2], 'suits_plural'),
+            localize('Hearts', 'suits_plural'),
+            localize('Diamonds', 'suits_plural'),
             colours = {
-                G.C.SUITS[card.ability.extra.suits[1]],
-                G.C.SUITS[card.ability.extra.suits[2]],
+                G.C.SUITS['Hearts'],
+                G.C.SUITS['Diamonds'],
             }
         }
     }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
+    if context.joker_main and card.ability.extra.x_mult > 1 then
+        return {
+            message_card = card,
+            Xmult = card.ability.extra.x_mult
+        }
+    end
 
-end
+    if context.blueprint then return end
 
-function consumInfo.can_use(self, card)
-    return false
+    if context.before then
+        local all_suit = true
+        for _, v in ipairs(context.full_hand) do
+            if not card.ability.extra.suits[v.base.suit] then
+                all_suit = false
+                break
+            end
+        end
+
+        if not all_suit then return end
+
+        card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+        return {
+            message = localize('k_upgrade_ex'),
+            colour = G.C.MULT,
+            card = card
+        }
+    end
 end
 
 return consumInfo

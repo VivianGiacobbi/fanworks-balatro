@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             consum_mod = 4
         }
@@ -23,16 +23,11 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
     G.consumeables:change_size(card.ability.extra.consum_mod)
 end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
 	G.consumeables:change_size(-card.ability.extra.consum_mod)
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

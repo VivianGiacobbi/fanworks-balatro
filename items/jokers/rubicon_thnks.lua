@@ -81,7 +81,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_creamwinter", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_2", set = "Other", vars = { G.fnwk_credits.cream, G.fnwk_credits.winter }}
 	return { vars = {card.ability.extra.chips }}
 end
 

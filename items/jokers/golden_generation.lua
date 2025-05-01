@@ -28,7 +28,7 @@ local function fanworks_cards(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_reda", set = "Other"} 
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.reda }}
     return { vars = {card.ability.extra, (fanworks_cards(card) * card.ability.extra) + 2}}
 end
 

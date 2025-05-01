@@ -86,7 +86,7 @@ G.fnwk_badge_colours = {
 }
 
 --- A table of joker keys considered "women"
-G.WOMEN = {
+G.fnwk_women = {
     cis = {
         ['j_lusty_joker'] = true,
         ['j_hack'] = true,
@@ -122,4 +122,52 @@ G.WOMEN = {
         ['j_fnwk_bluebolt_sexy'] = 1,
         ['j_fnwk_bluebolt_impaired'] = 1,
     }
+}
+
+G.fnwk_credits = {
+    gote = 'BarrierTrio/Gote',
+    cejai = 'SagaciousCejai',
+    daed = 'NotDaedalus',
+    coop = 'Cauthen Currie',
+    fizzy = 'FizzyWizard',
+    mal = 'qrowscant',
+    winter = 'TheWinterComet',
+    cream = 'CreamSodaCrossroads',
+    cringe = 'Stupisms',
+    poul = 'Poul Shmidt',
+    leafy = 'Leafgilly',
+    piano = 'Pianolote',
+    shaft = 'AllShaftsFall',
+    tos = 'TOS',
+    jester = 'Jester',
+    gar = 'GarPlatinum',
+    reda = 'Redastrin',
+    durandal = 'Durandal',
+    pink = 'pinkthorne',
+    monky = 'Monky4Real'
+}
+
+G.fnwk_reskin_credits = {
+    c_fool = { "plusgal", "BarrierTrio/Gote" },
+    c_magician = { "Doopo", "BarrierTrio/Gote" },
+    c_high_priestess = { "Cauthen Currie", "BarrierTrio/Gote" },
+    c_empress = { "BarrierTrio/Gote" },
+    c_emperor = { "Monky4Real", "BarrierTrio/Gote" },
+    c_heirophant = { "BarrierTrio/Gote" },
+    c_lovers = { "BarrierTrio/Gote" },
+    c_chariot = { "GarPlatinum", "BarrierTrio/Gote" },
+    c_justice = { "CreamSodaCrossroads", "BarrierTrio/Gote" },
+    c_hermit = { "MildlyAnxious", "BarrierTrio/Gote" },
+    c_wheel_of_fortune = { "AlgebraFalcon", "BarrierTrio/Gote" },
+    c_strength = { "BarrierTrio/Gote" },
+    c_hanged_man = { "Cody Savoie", "BarrierTrio/Gote" },
+    c_death = { "Stupisms", "BarrierTrio/Gote" },
+    c_temperance = { "BarrierTrio/Gote" },
+    c_devil = { "Polygonate", "BarrierTrio/Gote" },
+    c_tower = { "BarrierTrio/Gote" },
+    c_sun = { "Pianolote", "Leafgilly", "BarrierTrio/Gote"},
+    c_star = { "AllShaftsFall", "BarrierTrio/Gote" },
+    c_moon = { "BarrierTrio/Gote" },
+    c_judgement = { "BarrierTrio/Gote" },
+    c_world = { "sadlyandroid", "BarrierTrio/Gote" },
 }

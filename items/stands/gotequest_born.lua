@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             ranks = {'2', '5', '8', 'Jack', 'Ace'}
         }
@@ -30,16 +30,8 @@ function consumInfo.loc_vars(self, info_queue, card)
     }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

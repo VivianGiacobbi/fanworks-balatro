@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Add built-in artist credits for reskinned tarot cards
+#
+
+# generate_card_ui()
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if main_end then 
+    desc_nodes[#desc_nodes+1] = main_end 
+end'''
+position = "before"
+payload = '''if fnwk_enabled['enableTarotSkins'] and G.fnwk_reskin_credits[_c.key] then
+    info_queue[#info_queue + 1] = {key = "fnwk_artist_"..#G.fnwk_reskin_credits[_c.key], set = "Other", vars = G.fnwk_reskin_credits[_c.key] }
+end'''
+match_indent = true
+times = 1
+

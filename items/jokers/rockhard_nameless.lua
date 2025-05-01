@@ -31,7 +31,7 @@ local function levels_over_one()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     return { vars = {card.ability.extra.mult_mod, levels_over_one() * card.ability.extra.mult_mod }}
 end
 

@@ -10,7 +10,7 @@ local function is_perfect_square(x)
 	return sqrt^2 == x
 end
 
-function get_fibonacci(hand)
+function csau_get_fibonacci(hand)
 	local ret = {}
 	if #hand < 5 then return ret end
 	local vals = {}
@@ -53,13 +53,13 @@ function get_fibonacci(hand)
 	return ret
 end
 
-function psuedoseed_predict(bool)
+function fnwk_psuedoseed_predict(bool)
 	G.GAME.pseudorandom.predict_mode = bool or false
 	G.GAME.pseudorandom.predicts = {}
 	return G.GAME.pseudorandom.predict_mode
 end
 
-function balance_score(card)
+function fnwk_balance_score(card)
 	local tot = hand_chips + mult
     hand_chips = math.floor(tot/2)
     mult = math.floor(tot/2)

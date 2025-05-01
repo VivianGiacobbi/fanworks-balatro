@@ -271,7 +271,7 @@ local items_to_load = {
 for k, v in pairs(items_to_load) do
 	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
 		for i = 1, #v do
-			FnwkLoadItem(v[i], k, false)
+			FnwkLoadItem(v[i], k)
 		end
 	end
 end

@@ -1,10 +1,12 @@
 local consumInfo = {
+    key = 'c_fnwk_lighted_limelight',
     name = 'Limelight',
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
+            edition = 'e_polychrome',
             chance = 7
         }
     },
@@ -22,16 +24,20 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
-
-end
-
-function consumInfo.can_use(self, card)
-    return false
+    if context.before then
+        for _, v in ipairs(context.full_hand) do
+            if not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+                    v:set_edition(card.ability.extra.edition, true)
+                    card:juice_up()
+                    return true end
+                }))
+                delay(0.5)
+            end
+        end
+    end
 end
 
 return consumInfo

@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             x_mult = 4,
         }
@@ -20,15 +20,6 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {card.ability.extra.x_mult} }
-end
-
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

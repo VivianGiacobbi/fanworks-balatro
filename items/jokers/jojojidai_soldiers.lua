@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_jester", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.jester }}
 
     if not G.hand then
         return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.hand_compare, 1 }}

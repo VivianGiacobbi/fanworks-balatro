@@ -22,16 +22,8 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {math.floor(G.GAME.starting_deck_size * card.ability.extra.evolve_size)}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

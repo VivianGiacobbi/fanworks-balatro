@@ -4,7 +4,6 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_patsy_jokers_sold = 0
         G.GAME.fnwk_owned_jokers = {}
         G.GAME.fnwk_extra_discounts = {}
-        G.GAME.fnwk_run_consumeables = {}
         G.GAME.fnwk_chip_novas = 0
         G.GAME.fnwk_consecutive_hands = 0
     end
