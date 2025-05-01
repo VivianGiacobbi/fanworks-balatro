@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             num_enhanced = 1,
             draw_size = 5,

@@ -341,6 +341,12 @@ return {
 			k_dzvalin = 'Dummy Text!',
 			k_joker_replaced = 'Energy Tranformed!',
 
+			-- stand related strings
+			k_mcr_bubbled = 'Bubbled!',
+			k_mcr_transmuted = 'Transmuted!',
+			k_mcr_popped = 'Popped!',
+
+
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
 			ba_streetlight = 'Streetlight Pursuit',
@@ -1360,10 +1366,20 @@ return {
 			c_fnwk_bluebolt_chemical = {
 				name = "My Chemical Romance",
 				text = {
-					"If the {C:attention}first discard{} of round contains",
+					"If the {C:attention}first{} {C:red}discard{} of round contains",
 					"only one card, remove its {C:attention}enhancement{},",
-					"{C:attention}seal{}, and {C:dark_edition}edition{}. If the {C:attention}next hand{} contains",
-					"only one card, apply {C:attention}#1#{}#2#{C:attention}#3#{}#4#{C:dark_edition}#5#{} to it"
+					"{C:dark_edition}edition{}, and {C:attention}seal{}. If the {C:attention}next{} {C:blue}hand{} contains",
+					"only one card, apply {C:attention}#1#{}#2#{C:dark_edition}#3#{}#4#{C:attention}#5#{} to it"
+				}
+			},
+			c_fnwk_bluebolt_chemical_longver = {
+				name = "My Chemical Romance",
+				text = {
+					"If the {C:attention}first{} {C:red}discard{} of round contains",
+					"only one card, remove its {C:attention}enhancement{},",
+					"{C:dark_edition}edition{}, and {C:attention}seal{}. If the {C:attention}next{} {C:blue}hand{} contains",
+					"only one card, apply {C:attention}#1#{}#2#{C:dark_edition}#3#{}#4#",
+					"#6#{C:attention}#5#{} to it"
 				}
 			},
 			c_fnwk_bluebolt_thunder = {

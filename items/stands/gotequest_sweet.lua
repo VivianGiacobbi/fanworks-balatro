@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             play_ranks = {'3', '6', '9'},
             convert_ranks = {'A', '2', '3'}

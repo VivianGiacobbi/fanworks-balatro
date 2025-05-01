@@ -1,5 +1,4 @@
 local consumInfo = {
-    key = 'c_fnwk_spec_ichor',
     name = 'Ichor',
     set = 'Spectral',
     cost = 4,

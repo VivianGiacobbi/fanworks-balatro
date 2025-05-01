@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'csau_Stand',
     config = {
         -- stand_mask = true,
-        
+        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         evolve_key = 'c_fnwk_streetlight_paperback_rewrite',
         extra = {
             spec_rerolls = 1,

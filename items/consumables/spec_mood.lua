@@ -1,5 +1,4 @@
 local consumInfo = {
-    key = 'c_fnwk_spec_mood',
     name = 'Mood Indigo',
     set = "Spectral",
     cost = 4,
