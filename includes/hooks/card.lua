@@ -1,13 +1,6 @@
-local ref_use_consumable = Card.use_consumeable
-function Card:use_consumeable(area, copier)
-    if G.GAME.fnwk_run_consumeables[self.config.center_key] then
-        G.GAME.fnwk_run_consumeables[self.config.center_key] = G.GAME.fnwk_run_consumeables[self.config.center_key] + 1
-    else 
-        G.GAME.fnwk_run_consumeables[self.config.center_key] = 1
-    end
-
-    return ref_use_consumable(self, area, copier)
-end
+---------------------------
+--------------------------- Crown of Thorns
+---------------------------
 
 local ref_get_id = Card.get_id
 function Card:get_id()
@@ -18,8 +11,14 @@ function Card:get_id()
     return id
 end
 
----------- #region quips
----------- Handles creating textboxes for Maggie's text quips
+
+
+
+
+
+---------------------------
+--------------------------- Maggie Quips
+---------------------------
 
 function Card:add_quip(text_key, align, loc_vars, extra)
     if self.children.quip then 
@@ -89,10 +88,14 @@ function Card:say_quip(iter, not_first, def_speed)
         return true  
     end}), 'tutorial')
 end
----------- #endregion
 
----------- #region predict_ui
----------- Functions to create the prediction UI for Creaking Skeptic Joker
+
+
+
+
+---------------------------
+--------------------------- Skeptic Joker predict UI
+---------------------------
 
 --- Creates a UI box appended as a child to the card, self.children.predict_ui
 --- @param cardarea CardArea A Balatro cardarea table containing cards to display
@@ -141,10 +144,14 @@ function Card:stop_hover()
     end
 end
 
----------- #endregion
 
----------- #region streetlight jokers
----------- Function hooks for Teenage Gangster and Biased Joker
+
+
+
+
+---------------------------
+--------------------------- Teenage Ganster and Biased Joker hooks
+---------------------------
 
 local ref_is_face = Card.is_face
 function Card:is_face(from_boss)
@@ -183,10 +190,15 @@ function Card:reset_force_debuffs()
     self.force_debuffs = nil
     self:set_debuff()
 end
----------- #endregion
 
----------- #region unlock conditions
----------- function hooks for joker unlock conditions
+
+
+
+
+---------------------------
+--------------------------- Joker Unlock condition hooks
+---------------------------
+
 local ref_set_base = Card.set_base
 function Card:set_base(card, initial)
     local old_id = nil
@@ -222,3 +234,80 @@ function Card:shatter()
     check_for_unlock({type = 'run_shattered', total_shattered = G.GAME.fnwk_glass_shatters})
     return ret
 end
+
+
+
+
+
+
+---------------------------
+--------------------------- Adds Rock Break sound for Stone Cards
+---------------------------
+
+--[[
+SMODS.Sound({
+	key = "rock_break",
+	path = "rock_break.ogg",
+})
+
+local ref_start_dissolve = Card.start_dissolve
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    if self.config.center.key == 'm_stone' then
+        self:rock_break()
+        return
+    end
+
+    return ref_start_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+end
+
+function Card:rock_break()
+    local dissolve_time = 0.7
+    self.shattered = true
+    self.dissolve = 0
+    self.dissolve_colours = {{1,1,1,0.8}}
+    self:juice_up()
+    local childParts = Particles(0, 0, 0,0, {
+        timer_type = 'TOTAL',
+        timer = 0.007*dissolve_time,
+        scale = 0.3,
+        speed = 4,
+        lifespan = 0.5*dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.5*dissolve_time,
+        func = (function() childParts:fade(0.15*dissolve_time) return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = (function()
+                play_sound('fnwk_rock_break', math.random()*0.1 + 0.9, 0.5)
+                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+            return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay =  0.5*dissolve_time,
+        func = (function(t) return t end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.55*dissolve_time,
+        func = (function() self:remove() return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.51*dissolve_time,
+    }))
+end
+--]]

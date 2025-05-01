@@ -22,16 +22,26 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult, G.GAME.probabilities.normal, card.ability.extra.chance }}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
+    if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, 'm_stone') then
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            end,
+            extra = {
+                x_mult = card.ability.extra.x_mult,
+                card = context.other_card
+            }
+        }
+    end
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
+    if context.destroy_card and context.cardarea == G.play and not context.repetition then
+        if SMODS.has_enhancement(context.destroy_card, 'm_stone') and pseudorandom('bigpoppa') < G.GAME.probabilities.normal / card.ability.extra.chance then
+            return {
+                remove = true
+            }
+        end
+    end
 end
 
 return consumInfo

@@ -40,7 +40,7 @@ local function joker_name_mod(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
+	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = { card.ability.extra.x_mult, joker_name_mod(card) } }
 end
 

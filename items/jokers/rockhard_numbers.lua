@@ -19,13 +19,13 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_cringe", set = "Other"}
-    if not G.GAME.fnwk_run_consumeables then
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
+    if not G.GAME.consumeable_usage then
         return { vars = { card.ability.extra.x_mult_mod, 1 } }
     end
-    local cryptids = G.GAME.fnwk_run_consumeables['c_cryptid'] or 0
-    local deaths = G.GAME.fnwk_run_consumeables['c_death'] or 0
-    local hung_men = G.GAME.fnwk_run_consumeables['c_hanged_man'] or 0
+    local cryptids = G.GAME.consumeable_usage['c_cryptid'] or 0
+    local deaths = G.GAME.consumeable_usage['c_death'] or 0
+    local hung_men = G.GAME.consumeable_usage['c_hanged_man'] or 0
     return { 
         vars = { 
             card.ability.extra.x_mult_mod, 
@@ -69,10 +69,6 @@ function jokerInfo.calculate(self, card, context)
         if context.consumeable.ability.name == 'Cryptid' 
         or context.consumeable.ability.name == 'Death'
         or context.consumeable.ability.name == 'The Hanged Man' then
-            local cryptids = G.GAME.fnwk_run_consumeables['c_cryptid'] or 0
-            local deaths = G.GAME.fnwk_run_consumeables['c_death'] or 0
-            local hung_men = G.GAME.fnwk_run_consumeables['c_hanged_man'] or 0
-            local total = cryptids + deaths + hung_men
             return {
                 message = localize('k_upgrade_ex'),
                 message_card = card,
@@ -81,9 +77,9 @@ function jokerInfo.calculate(self, card, context)
     end
 
     if context.cardarea == G.jokers and context.joker_main then
-        local cryptids = G.GAME.fnwk_run_consumeables['c_cryptid'] or 0
-        local deaths = G.GAME.fnwk_run_consumeables['c_death'] or 0
-        local hung_men = G.GAME.fnwk_run_consumeables['c_hanged_man'] or 0
+        local cryptids = G.GAME.consumeable_usage['c_cryptid'] or 0
+        local deaths = G.GAME.consumeable_usage['c_death'] or 0
+        local hung_men = G.GAME.consumeable_usage['c_hanged_man'] or 0
         local total = 1 + card.ability.extra.x_mult_mod * (cryptids + deaths + hung_men)
         if total > 1 then
             return {

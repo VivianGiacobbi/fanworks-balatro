@@ -140,7 +140,7 @@ local function advance_pack_seeds()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "artist_coop", set = "Other"}
+	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
 	return { vars = {fnwk_enabled['enableSkepticStaticSeed'] and '' or 'This Joker changes seed progression'}}
 end
 

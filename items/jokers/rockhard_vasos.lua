@@ -18,7 +18,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
 	return { vars = {card.ability.extra.base, card.ability.extra.base + card.ability.extra.stand_mod}}
 end
 

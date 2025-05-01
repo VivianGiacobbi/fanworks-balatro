@@ -22,16 +22,8 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'}}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

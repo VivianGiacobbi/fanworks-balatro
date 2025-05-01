@@ -25,16 +25,8 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.x_mult, card.ability.extra.non_hand, card.ability.extra.hand_gain }}
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo

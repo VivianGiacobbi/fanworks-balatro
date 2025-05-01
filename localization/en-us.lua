@@ -329,7 +329,6 @@ return {
                 	"can change this",
                 	"channel's name soon"
 				}
-                
             },
             k_toilet5 = {
 				text = {
@@ -409,47 +408,6 @@ return {
 		},
 	},
 	descriptions = {
-		Blind = {
-			bl_fnwk_hog = {
-				name="The Hog",
-				text={
-					"#1# in 4 face cards",
-					"become The Hog's prey"
-				},
-			},
-			bl_fnwk_tray = {
-				name="The Tray",
-				text={
-					"#1# in #2# chance to divide",
-					"base Chips and Mult by 3"
-				},
-			},
-			bl_fnwk_vod = {
-				name="The Vod",
-				text={
-					"Played cards are redrawn"
-				},
-			},
-			bl_fnwk_outlaw = {
-				name="The Outlaw",
-				text={
-					"Debuffs all cards of the",
-					"ranks played last hand"
-				},
-			},
-			bl_fnwk_finger = {
-				name="The Finger",
-				text={
-					"High Card will not score"
-				},
-			},
-			bl_fnwk_mochamike = {
-				name="Mocha Mike",
-				text={
-					"#1# will not score"
-				},
-			},
-		},
 		Other = {
 			incomplete = {
 				name = 'WORK IN PROGRESS',
@@ -459,225 +417,26 @@ return {
 					"when testing runs"
 				}
 			},
-			artist_notdaedalus = {
+			fnwk_artist_1 = {
 				name = "Artist",
 				text = {
-					"{E:1}NotDaedalus{}",
+					"{E:1}#1#{}",
 				},
 			},
-			artist_gote = {
-				name = "Artist",
-				text = {
-					"{E:1}BarrierTrio/Gote{}",
-				},
-			},
-			artist_cejai = {
-				name = "Artist",
-				text = {
-					"{E:1}SagaciousCejai{}",
-				},
-			},
-			artist_coop = {
-				name = "Artist",
-				text = {
-					"{E:1}Cauthen Currie{}",
-				},
-			},
-			artist_fizzy = {
-				name = "Artist",
-				text = {
-					"{E:1}FizzyWizard{}",
-				},
-			},
-			artist_mal = {
-				name = "Artist",
-				text = {
-					"{E:1}qrowscant{}",
-				},
-			},
-			artist_winter = {
-				name = "Artist",
-				text = {
-					"{E:1}TheWinterComet{}",
-				},
-			},
-			artist_cream = {
-				name = "Artist",
-				text = {
-					"{E:1}CreamSodaCrossroads{}",
-				},
-			},
-			artist_creamwinter = {
+			fnwk_artist_2 = {
 				name = "Artists",
 				text = {
-					"{E:1}CreamSodaCrossroads,{}",
-					"{E:1}TheWinterComet{}",
+					"{E:1}#1#{}",
+					"{E:1}#2#{}"
 				},
 			},
-			artist_cringe = {
-				name = "Artist",
+			fnwk_artist_3 = {
+				name = "Artists",
 				text = {
-					"{E:1}Stupisms{}",
+					"{E:1}#1#{}",
+					"{E:1}#2#{}",
+					"{E:1}#3#{}"
 				},
-			},
-			artist_poul = {
-				name = "Artist",
-				text = {
-					"{E:1}Poul Shmidt{}",
-				},
-			},
-			artist_leafy = {
-				name = "Artist",
-				text = {
-					"{E:1}Leafgilly{}",
-				},
-			},
-			artist_piano = {
-				name = "Artist",
-				text = {
-					"{E:1}Pianolote{}",
-				},
-			},
-			artist_shaft = {
-				name = "Artist",
-				text = {
-					"{E:1}AllShaftsFall{}",
-				},
-			},
-			artist_tos = {
-				name = "Artist",
-				text = {
-					"{E:1}TOS{}",
-				},
-			},
-			artist_jester = {
-				name = "Artist",
-				text = {
-					"{E:1}Jester{}",
-				},
-			},
-			artist_gar = {
-				name = "Artist",
-				text = {
-					"{E:1}GarPlatinum{}",
-				},
-			},
-			artist_reda = {
-				name = "Artist",
-				text = {
-					"{E:1}Redastrin{}",
-				},
-			},
-			artist_durandal = {
-				name = "Artist",
-				text = {
-					"{E:1}Durandal{}",
-				},
-			},
-			artist_pink = {
-				name = "Artist",
-				text = {
-					"{E:1}pinkthorne{}",
-				},
-			},
-			artist_fool = {
-				name = "Artists",
-				text = {
-					"{E:1}plusgal{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_magician = {
-				name = "Artists",
-				text = {
-					"{E:1}Doopo{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_priestess = {
-				name = "Artists",
-				text = {
-					"{E:1}Cauthen Currie{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_emperor = {
-				name = "Artists",
-				text = {
-					"{E:1}Monky4Real{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_chariot = {
-				name = "Artists",
-				text = {
-					"{E:1}GarPlatinum{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_justice = {
-				name = "Artists",
-				text = {
-					"{E:1}CreamSodaCrossroads{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_hermit = {
-				name = "Artists",
-				text = {
-					"{E:1}MildlyAnxious{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_wheel = {
-				name = "Artists",
-				text = {
-					"{E:1}AlgebraFalcon{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_hanged = {
-				name = "Artists",
-				text = {
-					"{E:1}Cody Savoie{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_death = {
-				name = "Artists",
-				text = {
-					"{E:1}Stupisms{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_devil = {
-				name = "Artists",
-				text = {
-					"{E:1}Polygonate{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_star = {
-				name = "Artists",
-				text = {
-					"{E:1}AllShaftsFall{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_sun = {
-				name = "Artists",
-				text = {
-					"{E:1}Pianolote{},",
-					"{E:1}Leafgilly{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
-			},
-			artist_world = {
-				name = "Artists",
-				text = {
-					"{E:1}sadlyandroid{},",
-					"{E:1}BarrierTrio/Gote{}"
-				}
 			},
 			artist_impulse = {
 				name = "Artists",
@@ -688,17 +447,6 @@ return {
 			}
 		},
 		Joker = {
-			j_fnwk_tetris = {
-				name = "YOU GOT THE TETRIS!",
-				text = {
-					"Tetris. Use {C:attention}Arrow Keys{},",
-					"{C:attention}Z{}, and {C:attention}X{} to play",
-					"{C:inactive}(Pausing is not allowed)",
-					"Gain {C:mult}Mult{} equal to",
-					"amount of lines cleared.",
-					"{C:inactive}(Currently {}{C:mult}+#1#{}{C:inactive} Mult{}{C:inactive}){}",
-				},
-			},
 			j_fnwk_streetlight_fledgling = {
 				name = "Fledgling Streetlit Joker",
 				text = {
@@ -1564,6 +1312,16 @@ return {
 				}
 			},
 		},
+		Tarot = {
+			c_emperor_dead = {
+				name = "The Emperor",
+				text = {
+					"Creates {C:tarot}The Hermit{} and",
+                    "{C:attention}#1#{} random {C:tarot}Tarot{} card",
+                    "{C:inactive}(Must have room)"
+				}
+			},
+		},
 		Spectral = {
 			c_fnwk_spec_stone = {
 				name = "Stone Mask",
@@ -1852,9 +1610,9 @@ return {
 			c_fnwk_sunshine_red = {
 				name = "They're Red Hot",
 				text = {
-					"This Stand gains {X:mult,C:white}X#1#{} Mult for",
-					"each {C:attention}consecutive hand{} played containing",
-					"only {V:1}#3#{} and {V:2}#4#{}",
+					"This Stand gains {X:mult,C:white}X#1#{} Mult for each",
+					"{C:attention}consecutive hand{} played containing",
+					"only {V:1}#3#{} or {V:2}#4#{}",
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 			},

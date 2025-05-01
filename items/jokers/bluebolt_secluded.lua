@@ -15,7 +15,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_winter", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.winter }}
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -42,7 +42,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if not context.repetition or not context.cardarea == G.play or card.debuff then
+	if not (context.repetition and context.cardarea == G.play) or card.debuff then
 		return
 	end
 

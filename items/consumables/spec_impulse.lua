@@ -10,7 +10,7 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.e_foil
     info_queue[#info_queue+1] = {key = 'perishable', set = 'Other', vars = {G.GAME.perishable_rounds, G.GAME.perishable_rounds}}
-    info_queue[#info_queue+1] = {key = "artist_impulse", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_2", set = "Other", vars = { G.fnwk_credits.monky, G.fnwk_credits.coop }}
     return { vars = { fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome' } }
 end
 

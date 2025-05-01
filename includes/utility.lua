@@ -87,7 +87,29 @@ function FnwkLoadItem(file_key, item_type, no_badges)
 	local info = assert(SMODS.load_file("items/" .. key .. "/" .. file_key .. ".lua"))()
 
 	local smods_item = item_type
-	if item_type == 'Stand' then smods_item = 'Consumable' end
+	if item_type == 'Stand' then
+		smods_item = 'Consumable'
+
+		-- add universal set_consumable_usage() for stands
+		local ref_add_to_deck = function(self, card, from_debuff) end
+		if info.add_to_deck then
+			ref_add_to_deck = info.add_to_deck
+		end
+		function info.add_to_deck(self, card, from_debuff)
+			ref_add_to_deck(self, card, from_debuff)
+
+			-- only set initially
+			if not from_debuff then
+				set_consumeable_usage(card)
+			end
+			
+		end
+
+		-- force no use for stands
+		function info.can_use(self, card)
+			return false
+		end
+	end
 	if item_type == 'Deck' then smods_item = 'Back' end
 
 	if (item_type == 'Stand' or info.requires_stands) and not G.fnwk_stands_enabled then
@@ -368,9 +390,9 @@ end
 --- @param key string card object key
 --- @return table # Table with three properties, 'junkie, 'trans', and 'cis'. Each will be true or nil if the key is found in each list
 function FnwkFindWomen(key) 
-    local junkie = G.WOMEN.junkies[key]
-    local trans = G.WOMEN.trans[key]
-    local cis = G.WOMEN.cis[key]
+    local junkie = G.fnwk_women.junkies[key]
+    local trans = G.fnwk_women.trans[key]
+    local cis = G.fnwk_women.cis[key]
     return {junkie = junkie, trans = trans, cis = cis}
 end
 

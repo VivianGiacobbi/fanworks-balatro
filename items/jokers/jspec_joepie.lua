@@ -39,7 +39,7 @@ end
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artist_mal", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = { card.ability.extra.h_mod, get_lowest_planet() * card.ability.extra.h_mod }}
 end
 

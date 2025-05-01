@@ -156,6 +156,10 @@ local jokerInfo = {
     fanwork = 'streetlight',
 }
 
+function jokerInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
+end
+
 function jokerInfo.locked_loc_vars(self, info_queue, card)
 	return { vars = { FnwkCountGrammar(self.unlock_condition.mod)} }
 end

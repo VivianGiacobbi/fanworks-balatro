@@ -23,12 +23,4 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {FnwkFormatDisplayNumber(card.ability.extra.num_enhanced), card.ability.extra.draw_size} }
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
-function consumInfo.can_use(self, card)
-    return false
-end
-
 return consumInfo

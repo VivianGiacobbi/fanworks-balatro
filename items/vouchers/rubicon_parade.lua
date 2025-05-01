@@ -11,7 +11,7 @@ local voucherInfo = {
 function voucherInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = 'tag_negative', set = 'Tag'}
     info_queue[#info_queue+1] = G.P_CENTERS['e_negative']
-    info_queue[#info_queue+1] = {key = "artist_cream", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
     return { vars = {localize{type = 'name_text', key = 'tag_negative', set = 'Tag'}}}
 end
 

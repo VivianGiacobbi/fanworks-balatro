@@ -55,16 +55,8 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
     desc_nodes[#desc_nodes+1] = main_end
 end
 
-function consumInfo.add_to_deck(self, card)
-    set_consumeable_usage(card)
-end
-
 function consumInfo.calculate(self, card, context)
 
-end
-
-function consumInfo.can_use(self, card)
-    return false
 end
 
 return consumInfo
