@@ -1,4 +1,5 @@
 local consumInfo = {
+    key = 'c_fnwk_bone_king_farewell',
     name = 'Farewell to Kings',
     set = 'csau_Stand',
     config = {
@@ -23,7 +24,43 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.destroy_card and context.cardarea == G.play then
+        local scoring  = SMODS.in_scoring(context.destroy_card, context.scoring_hand)
+        local steel = SMODS.has_enhancement(context.destroy_card, 'm_steel')
+        local king = context.destroy_card:get_id() == 13
 
+        if scoring and steel and king then
+            context.destroy_card.fnwk_removed_by_farewell = true
+            return {
+                remove = true
+            }
+        end
+    end
+
+    if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_farewell then
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                message = localize('k_farewell'),
+                sound = 'slice1',
+                delay = 0,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            G.GAME.blind.chips = math.floor(G.GAME.blind.chips * card.ability.extra.blind_mod)
+                            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                            G.hand_text_area.blind_chips:juice_up()
+                            return true 
+                        end 
+                    }))
+                    delay(0.6)
+                end
+            }
+        }
+    end
 end
 
 return consumInfo

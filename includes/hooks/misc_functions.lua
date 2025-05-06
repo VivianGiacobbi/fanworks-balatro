@@ -180,3 +180,18 @@ function G.FUNCS.draw_from_deck_to_hand(e)
 	SMODS.calculate_context({pre_draw = true})
 	return draw_from_deck_to_handref(hand_limit)
 end
+
+
+function fnwk_get_most_played_hand()
+	local hand = 'High Card'
+	local played = -1;
+	local order = 100;
+	for k, v in pairs(G.GAME.hands) do
+		if v.played > played or (v.played == played and order < v.order) then 
+			played = v.played
+			hand = k
+		end
+	end
+
+	return hand, played
+end

@@ -27,13 +27,45 @@ function consumInfo.loc_vars(self, info_queue, card)
         vars = {
             card.ability.extra.avoid_hand,
             card.ability.extra.x_mult,
-            card.ability.extra.evolve_procs - card.ability.extra.evolve_num
+            card.ability.extra.evolve_num - card.ability.extra.evolve_procs
         }
     }
 end
 
-function consumInfo.calculate(self, card, context)
+function consumInfo.calculate(self, card, context)    
+    if context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
+        sendDebugMessage('evolve')
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.FUNCS.csau_evolve_stand(card, localize('k_stand_devolved'))
+                return true 
+            end 
+        }))
+    end
 
+    if not (context.individual and context.cardarea == G.play) then
+        return
+    end
+
+    if next(context.poker_hands[card.ability.extra.avoid_hand]) or context.other_card == context.scoring_hand[1] then
+        return
+    end
+
+    if (not context.scoring_hand[1].debuff and SMODS.has_any_suit(context.scoring_hand[1]))
+    or (not context.other_card.debuff and SMODS.has_any_suit(context.scoring_hand[1]))
+    or context.other_card:is_suit(context.scoring_hand[1].base.suit) then
+        card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                Xmult = card.ability.extra.x_mult,
+                message_card = context.other_card
+            }    
+        }
+    end
 end
 
 return consumInfo

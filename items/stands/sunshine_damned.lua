@@ -1,4 +1,5 @@
 local consumInfo = {
+    key = 'c_fnwk_sunshine_damned',
     name = "The Damned",
     set = 'csau_Stand',
     config = {
@@ -49,34 +50,35 @@ function consumInfo.calculate(self, card, context)
     card.ability.extra.scored_count = card.ability.extra.scored_count + 1
     if card.ability.extra.scored_count < card.ability.extra.num_scores then
         return {
-            message_card = card,
-            message = localize{type='variable', key='a_remaining', vars={card.ability.extra.num_scores - card.ability.extra.scored_count}},
-            delay = 0.45
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                message_card = card,
+                message = localize{type='variable', key='a_remaining', vars={card.ability.extra.num_scores - card.ability.extra.scored_count}},
+                delay = 0.45
+            }
         }
     end
 
     card.ability.extra.scored_count = 0
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
     return {
+        func = function()
+            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+                local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'fnwk_damned')
+                new_tarot:add_to_deck()
+                G.consumeables:emplace(new_tarot)
+                G.GAME.consumeable_buffer = 0
+                return true end
+            }))
+        end,
         extra = {
-            focus = card,
+            colour = G.C.SECONDARY_SET.Tarot,
+            message_card = card,
             message = localize('k_plus_tarot'),
-            func = function()
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
-                    delay = 0.0,
-                    func = function()
-                        local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'fnwk_damned')
-                        new_tarot:add_to_deck()
-                        G.consumeables:emplace(new_tarot)
-                        G.GAME.consumeable_buffer = 0
-                        return true
-                    end
-                }))
-            end
         },
-        colour = G.C.SECONDARY_SET.Tarot,
-        message_card = card
     }
 end
 

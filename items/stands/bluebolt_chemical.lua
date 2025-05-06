@@ -58,7 +58,7 @@ function consumInfo.calculate(self, card, context)
 
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                    G.FUNCS.csau_flare_stand_aura(card, 0.5)
                     change_card:set_ability('c_base')
                     change_card:set_seal(nil, true, true)
                     change_card:set_edition(nil, true, true)
@@ -88,7 +88,7 @@ function consumInfo.calculate(self, card, context)
         local change_card = context.full_hand[1]
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
 
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     -- apply all saved modifications
