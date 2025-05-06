@@ -25,44 +25,23 @@ end
 
 function consumInfo.calculate(self, card, context)
     if context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_gold') then
+        context.destroy_card.fnwk_removed_by_moneytalks = true
         return {
             remove = true
         }
     end
 
-    if context.remove_playing_cards and context.scoring_hand then
-        local removed = 0
-        for _, v in ipairs(context.removed) do
-            if SMODS.has_enhancement(v, 'm_gold') and SMODS.in_scoring(v, context.scoring_hand) then
-               removed = removed + 1
-            end
-        end
-
-        if removed > 0 then
-            return {
-                func = function()
-                    G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                    ease_dollars(card.ability.extra.dollars * removed)
-                end,
-                extra = {
-                    func = function()
-                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
-                            card:juice_up()
-                            attention_text({
-                                text = localize('$')..card.ability.extra.dollars * removed,
-                                scale = 1, 
-                                hold = 0.5,
-                                backdrop_colour = G.C.MONEY,
-                                align = 'bm',
-                                major = card,
-                                offset = {x = 0, y = 0.05*card.T.h}
-                            })
-                            return true end
-                        }))
-                    end
-                }
+    if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_moneytalks then
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            delay = 0.5,
+            extra = {
+                dollars = card.ability.extra.dollars,
+                colour = G.C.MONEY,
             }
-        end
+        }
     end
 end
 

@@ -41,8 +41,13 @@ end
 function consumInfo.calculate(self, card, context)
     if context.joker_main and card.ability.extra.x_mult > 1 then
         return {
-            message_card = card,
-            Xmult = card.ability.extra.x_mult
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                message_card = card,
+                Xmult = card.ability.extra.x_mult
+            }
         }
     end
 
@@ -61,9 +66,14 @@ function consumInfo.calculate(self, card, context)
 
         card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
         return {
-            message = localize('k_upgrade_ex'),
-            colour = G.C.MULT,
-            card = card
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            end,
+            extra = {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.MULT,
+                card = card
+            }
         }
     end
 end

@@ -345,7 +345,7 @@ return {
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
 			k_mcr_popped = 'Popped!',
-
+			k_farewell = 'Farewell!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -388,6 +388,9 @@ return {
 			ba_cis = 'Cold Iron Streets',
 			ba_yym = "Yo-Yo Ma's Bizarre RPG",
 			ba_rebels = 'JJ29: Stardust Rebels'
+		},
+		v_dictionary = {
+			downward_warn_text = "Must play #1#"
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -444,13 +447,6 @@ return {
 					"{E:1}#3#{}"
 				},
 			},
-			artist_impulse = {
-				name = "Artists",
-				text = {
-					"{E:1}Monky4Real{},",
-					"{E:1}Cauthen Currie{}"
-				}
-			}
 		},
 		Joker = {
 			j_fnwk_streetlight_fledgling = {
@@ -1385,9 +1381,9 @@ return {
 			c_fnwk_bluebolt_thunder = {
 				name = "Thunderstruck",
 				text = {
-					"If played hand is not a {C:attention}#1#{},",
-					"each successive card that is the",
-					"same suit as the {C:attention}first scoring card{}",
+					"If played hand does not contain a",
+					"{C:attention}Flush{}, each following card with the",
+					"{C:attention}same suit{} as the {C:attention}first scoring card{}",
 					"gives {X:mult,C:white}X#2#{} Mult",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} after {C:attention}#3#{} procs",
@@ -1396,8 +1392,9 @@ return {
 			c_fnwk_bluebolt_thunder_dc = {
 				name = "Thunderstruck: D/C Mode",
 				text = {
-					"If played hand is a {C:attention}#1#{},",
-					"{C:attention}destroy{} all cards after scoring",
+					"If played hand contains a {C:attention}#1#{},",
+					"all scoring cards give {X:mult,C:white}X#2#{} Mult",
+					"and are {C:attention}destroyed{} after scoring",
 					"{s:0.1} {}",
 					"{C:stand}Devolves{} after this effect activates",
 				}
@@ -1405,18 +1402,20 @@ return {
 			c_fnwk_bone_king = {
 				name = "KING & COUNTRY",
 				text = {
-					"After a {C:attention}Steel{} Card is scored, {C:attention}destroy{} it",
-					"and make a random card in hand {C:attention}Steel{}",
+					"When a {C:attention}Steel Card{} is scored,",
+					"destroy it and enhance {C:attention}1{} random card",
+					"held in hand into a {C:attention}Steel Card{},",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} when your deck has",
-					"less than {C:attention}#1#{} cards",
+					"{C:attention}#1# or fewer{} cards",
 				}
 			},
 			c_fnwk_bone_king_farewell = {
 				name = "Farewell to Kings",
 				text = {
 					"After a {C:attention}Steel King{} is scored,",
-					"{C:attention}destroy{} it and {C:attention}halve{} the Blind requirement",
+					"destroy it and {C:attention}halve{} the",
+					"{C:attention}Blind requirement{}"
 				}
 			},
 			c_fnwk_city_dead = {
@@ -1439,7 +1438,6 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult if played hand",
 					"was the last hand {C:planet}upgraded{}",
-					"{C:inactive}(Currently {C:attention}#1#{}{C:inactive}#2#){}"
 				},
 			},
 			c_fnwk_glass_big = {
@@ -1620,7 +1618,8 @@ return {
 				name = "Electriclarryland",
 				text = {
 					"All {C:attention}Enhanced Cards{} in {C:attention}first hand{}",
-					"of round are returned to hand after scoring"
+					"of round are returned to hand",
+					"after scoring"
 				},
 			},
 			c_fnwk_sunshine_red = {

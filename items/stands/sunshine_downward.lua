@@ -4,9 +4,7 @@ local consumInfo = {
     config = {
         -- stand_mask = true,
         aura_colors = { 'D36DD4DC', 'A3E7F6DC' },
-        extra = {
-            x_mult = 3
-        }
+        x_mult = 3,
     },
     cost = 4,
     rarity = 'csau_StandRarity',
@@ -19,11 +17,7 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = {card.ability.extra.x_mult}}
-end
-
-function consumInfo.calculate(self, card, context)
-
+    return { vars = {card.ability.x_mult}}
 end
 
 return consumInfo

@@ -27,7 +27,7 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, 'm_stone') then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.FUNCS.csau_flare_stand_aura(card, 0.5)
             end,
             extra = {
                 x_mult = card.ability.extra.x_mult,
