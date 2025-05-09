@@ -2,9 +2,7 @@ local jokerInfo = {
 	name = 'Corpse Part',
 	config = {
         x_mult = 4,
-        extra = {
-            blind_type = nil
-        }
+        blind_type = nil
     },
 	rarity = 1,
 	cost = 1,
@@ -21,13 +19,12 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	local main_end = nil
-	if card.ability.extra.blind_type then
-		local blind = card.ability.extra.blind_type
-		sendDebugMessage(tostring(blind.key))
+	if card.ability.blind_type then
+		local blind = card.ability.blind_type
 		local blind_name = localize{type ='name_text', key = blind.key, set = 'Blind'}
 		main_end = {
-			{n=G.UIT.C, config={align = "bm", padding = 0.02}, nodes={
-				{n=G.UIT.C, config={align = "m", colour = get_blind_main_colour(blind.key), r = 0.05, padding = 0.05}, nodes={
+			{n=G.UIT.C, config={align = "bm", padding = 0.1}, nodes={
+				{n=G.UIT.C, config={align = "m", colour = get_blind_main_colour(blind.key), r = 0.05, padding = 0.1, shadow = true}, nodes={
 					{n=G.UIT.T, config={text = ' '..blind_name..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}},
 				}}
 			}}
@@ -41,7 +38,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 			local res = blind:loc_vars() or {}
             loc_vars = res.vars or loc_vars
 		end
-		info_queue[#info_queue+1] = {set = 'Blind', key = card.ability.extra.blind_type.key, vars = loc_vars }
+		info_queue[#info_queue+1] = {set = 'Blind', key = blind.key, vars = loc_vars }
 	end
 	
 	return { 
@@ -53,10 +50,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-	if from_debuff or not card.ability.extra.blind_type then return end
+	if from_debuff or not card.ability.blind_type then return end
 
-	local extra_blind = fnwk_create_extra_blind(card, card.ability.extra.blind_type)
-	if next(SMODS.find_card('j_chicot')) then
+	local extra_blind = fnwk_create_extra_blind(card, card.ability.blind_type)
+	if G.GAME.blind.in_blind and next(SMODS.find_card('j_chicot')) then
 		extra_blind:disable()
 	end
 end

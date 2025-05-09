@@ -456,8 +456,7 @@ function Blind:load(blindTable)
 		return ref_blind_load(self, blindTable)
 	end
 
-	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}
-    
+	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}  
     self.name = blindTable.name
     self.debuff = blindTable.debuff
     self.mult = blindTable.mult
@@ -468,4 +467,6 @@ function Blind:load(blindTable)
     self.hands = blindTable.hands
     self.only_hand = blindTable.only_hand
     self.triggered = blindTable.triggered
+
+	self:set_text()
 end

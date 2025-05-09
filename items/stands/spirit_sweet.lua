@@ -28,20 +28,18 @@ function consumInfo.calculate(self, card, context)
     return {
         func = function()
             G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+                local new_part = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_fnwk_spirit_part', 'fnwk_sweet_bod')
+                new_part:set_edition({negative = true}, true, true)
+                new_part.ability.blind_type = G.GAME.blind.config.blind
+                new_part:add_to_deck()
+                G.jokers:emplace(new_part)
+                new_part:juice_up()
+            return true end }))
         end,
         extra = {
             message = localize('k_grafted'),
             message_card = card,
-            func = function()
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
-                    local new_part = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_fnwk_spirit_part', 'fnwk_sweet_bod')
-                    new_part:set_edition({negative = true}, true, true)
-                    new_part.ability.extra.blind_type = G.GAME.blind.config.blind
-                    new_part:add_to_deck()
-                    G.jokers:emplace(new_part)
-                    new_part:juice_up()
-                return true end }))
-            end
         }    
     }
 end
