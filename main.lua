@@ -29,6 +29,7 @@ local includes = {
 	-- object hooks
 	'hooks/game',
 	'hooks/card',
+	'hooks/cardarea',
 	'hooks/blind',
 	'hooks/common_events',
 	'hooks/state_events',

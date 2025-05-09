@@ -6,6 +6,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_extra_discounts = {}
         G.GAME.fnwk_chip_novas = 0
         G.GAME.fnwk_consecutive_hands = 0
+        G.GAME.fnwk_extra_blinds = {}
     end
 
     G.GAME.current_round.fnwk_packs_rerolled = 0

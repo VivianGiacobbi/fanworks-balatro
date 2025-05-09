@@ -195,3 +195,41 @@ function fnwk_get_most_played_hand()
 
 	return hand, played
 end
+
+function fnwk_create_extra_blind(blind_source, blind_type)
+	if not G.GAME then return end	
+
+	local new_extra_blind = Blind(0, 0, 0, 0, blind_source)
+	if G.GAME.blind.in_blind then
+		new_extra_blind:extra_set_blind(blind_type)
+	else
+		new_extra_blind.config.blind = blind_type
+		new_extra_blind.name = blind_type.name
+		new_extra_blind.debuff = blind_type.debuff
+		new_extra_blind.mult = blind_type.mult / 2
+		new_extra_blind.disabled = false
+		new_extra_blind.discards_sub = nil
+		new_extra_blind.hands_sub = nil
+		new_extra_blind.boss = not not blind_type.boss
+		new_extra_blind.blind_set = false
+		new_extra_blind.triggered = nil
+		new_extra_blind.prepped = true
+		new_extra_blind:set_text()
+	end
+
+	G.GAME.fnwk_extra_blinds[#G.GAME.fnwk_extra_blinds+1] = new_extra_blind
+	return new_extra_blind
+end
+
+function fnwk_remove_extra_blind(blind_source)
+	if not G.GAME then return end
+
+	for i=1, #G.GAME.fnwk_extra_blinds do
+		if G.GAME.fnwk_extra_blinds[i].fnwk_extra_blind == blind_source then
+			table.remove(G.GAME.fnwk_extra_blinds, i)
+			return true
+		end
+	end
+
+	return false
+end

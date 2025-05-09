@@ -103,7 +103,6 @@ function jokerInfo.update(self, card, dt)
     end
 
     if card.ability.fizzled then
-        -- sendDebugMessage(card.ability.fizzle_timer..' < '..card.ability.fizzle_limit)
         if card.ability.fizzle_timer < card.ability.fizzle_limit then 
             card.ability.fizzle_timer = card.ability.fizzle_timer + G.real_dt
             if card.ability.fizzle_timer >= card.ability.fizzle_limit then
@@ -177,9 +176,6 @@ function jokerInfo.draw(self, card, layer)
     end
     
     if not (card.children.bloom1 and card.children.bloom2 and card.children.bloom3) then
-        --sendDebugMessage(tostring(card.children.bloom1))
-        --sendDebugMessage(tostring(card.children.bloom2))
-        --sendDebugMessage(tostring(card.children.bloom3))
         return
     end
 

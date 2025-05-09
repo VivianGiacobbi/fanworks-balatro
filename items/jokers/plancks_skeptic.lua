@@ -152,7 +152,6 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.ending_shop and not fnwk_enabled['enableSkepticStaticSeed'] then
 		card:remove_predict_ui()
-		sendDebugMessage('rerolling pack seeds')
 		advance_pack_seeds()
 	end
 
