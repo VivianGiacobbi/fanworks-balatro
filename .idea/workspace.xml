@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5802d6f7-ef8b-42c4-804d-d2713e12e865" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/tarot_reskins.lua" beforeDir="false" afterPath="$PROJECT_DIR$/includes/tarot_reskins.lua" afterDir="false" />
-    </list>
+    <list default="true" id="5802d6f7-ef8b-42c4-804d-d2713e12e865" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,7 +97,7 @@
       <workItem from="1736879081843" duration="8730000" />
       <workItem from="1737052642821" duration="15847000" />
       <workItem from="1746828635626" duration="1255000" />
-      <workItem from="1746830741944" duration="351000" />
+      <workItem from="1746830741944" duration="1135000" />
     </task>
     <servers />
   </component>
