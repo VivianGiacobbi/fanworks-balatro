@@ -1,5 +1,3 @@
-
-
 local function force_fool_card()
     if G.consumeables then
         local force_card = nil
@@ -317,3 +315,31 @@ SMODS.Consumable:take_ownership('c_world', {
         badges[#badges+1] = FnwkDynamicBadge('thorny')
     end
 }, true)
+
+if AltTexture and TexturePack then
+
+    AltTexture({
+        key = 'tarot',
+        set = 'Tarot',
+        path = 'tarotreskins.png',
+        loc_txt = {
+            name = 'Tarot'
+        },
+        original_sheet = true
+    })
+
+    TexturePack{
+        key = 'fnwk',
+        textures = {
+            'fnwk_tarot',
+        },
+        loc_txt = {
+            name = 'Fanworks Malverk Compatibility',
+            text = {
+                "Enables the Fanworks reskins of the",
+                "Tarot cards to work with Malverk!",
+            }
+        }
+    }
+
+end

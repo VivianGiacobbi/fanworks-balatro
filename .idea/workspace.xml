@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5802d6f7-ef8b-42c4-804d-d2713e12e865" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/consumables/arrow.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/consumables/moodyblues.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/consumables/tohth.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jokers/LuaNES" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jokers/tetris.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/consumables/doubledown.lua" beforeDir="false" afterPath="$PROJECT_DIR$/consumables/doubledown.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/consumables/tbone.lua" beforeDir="false" afterPath="$PROJECT_DIR$/consumables/tbone.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jokers/red.lua" beforeDir="false" afterPath="$PROJECT_DIR$/jokers/red.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jokers/werewolves.lua" beforeDir="false" afterPath="$PROJECT_DIR$/jokers/werewolves.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jokers/wingsoftime.lua" beforeDir="false" afterPath="$PROJECT_DIR$/jokers/wingsoftime.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/localization/en-us.lua" beforeDir="false" afterPath="$PROJECT_DIR$/localization/en-us.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lovely.toml" beforeDir="false" afterPath="$PROJECT_DIR$/lovely.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/main.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/tarot_reskins.lua" beforeDir="false" afterPath="$PROJECT_DIR$/includes/tarot_reskins.lua" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +26,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2qUzHYmKvVS6PamwVU4k5nR7LTt" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -47,8 +38,12 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kekul/AppData/Roaming/Balatro/Mods (Backup)/Cardsauce&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kekul/AppData/Roaming/Balatro/Mods/fanworks-balatro&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -66,6 +61,14 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kekul\AppData\Roaming\Balatro\Mods\Cardsauce\packs" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,6 +99,8 @@
       <workItem from="1736817586355" duration="12597000" />
       <workItem from="1736879081843" duration="8730000" />
       <workItem from="1737052642821" duration="15847000" />
+      <workItem from="1746828635626" duration="1255000" />
+      <workItem from="1746830741944" duration="351000" />
     </task>
     <servers />
   </component>
