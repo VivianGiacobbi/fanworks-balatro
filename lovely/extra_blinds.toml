@@ -59,6 +59,11 @@ if saveTable.EXTRA_BLINDS then
         if blind_source then
             local new_extra_blind = Blind(0, 0, 0, 0, blind_source)
             new_extra_blind:load(v)
+            if blind_source.ability and type(blind_source.ability) == 'table' then
+                blind_source.ability.blind_type = new_extra_blind.config.blind
+            else
+                blind_source.blind_type = new_extra_blind.config.blind
+            end
             self.GAME.fnwk_extra_blinds[#self.GAME.fnwk_extra_blinds+1] = new_extra_blind
         end
     end
@@ -72,15 +77,13 @@ times = 1
 target = "functions/state_events.lua"
 pattern = '''mult, hand_chips, modded = G.GAME.blind:modify_hand(G.play.cards, poker_hands, text, mult, hand_chips, scoring_hand)
 mult, hand_chips = mod_mult(mult), mod_chips(hand_chips)
-if modded then update_hand_text({sound = 'chips2', modded = modded}, {chips = hand_chips, mult = mult}) end
-delay(0.3)'''
+if modded then update_hand_text({sound = 'chips2', modded = modded}, {chips = hand_chips, mult = mult}) end'''
 position = "after"
 payload = '''for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
     if G.GAME.blind.config.blind ~= v.config.blind then
         mult, hand_chips, modded = v:modify_hand(G.play.cards, poker_hands, text, mult, hand_chips, scoring_hand)
         mult, hand_chips = mod_mult(mult), mod_chips(hand_chips)
         if modded then update_hand_text({sound = 'chips2', modded = modded}, {chips = hand_chips, mult = mult}) end
-        delay(0.3)
     end
 end'''
 match_indent = true
@@ -150,7 +153,6 @@ for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
                 return true
             end)
         }))
-        delay(0.4)
     end
 end'''
 match_indent = true

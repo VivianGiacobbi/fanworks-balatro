@@ -449,6 +449,207 @@ return {
 				},
 			},
 		},
+		Blind = {
+            bl_small = {
+                name = "Small Blind",
+                text = {}
+            },
+            bl_big = {
+                name = "Big Blind",
+                text = {}
+            },
+            bl_hook = {
+                name = "The Hook",
+                text = {
+                    "Discards {C:attention}2{} random",
+                    "cards per hand played"
+                }
+            },
+            bl_wall = {
+                name = "The Wall",
+                text = {
+                    "{C:attention}Extra large{} blind"
+                }
+            },
+            bl_wheel = {
+                name = "The Wheel",
+                text = {
+                    "{C:green}#1# in 7{} cards get",
+                    "drawn face down"
+                }
+            },
+            bl_arm = {
+                name = "The Arm",
+                text = {
+                    "Decrease {C:planet}level{} of",
+                    "played {C:attention}poker{} hand"
+                }
+            },
+            bl_psychic = {
+                name = "The Psychic",
+                text = {
+                    "Must play {C:attention}5{} cards"
+                }
+            },
+            bl_goad = {
+                name = "The Goad",
+                text = {
+                    "All {C:spades}Spade{} cards",
+                    "are debuffed"
+                }
+            },
+            bl_water = {
+                name = "The Water",
+                text = {
+                    "Start with",
+                    "{C:red}0{} discards"
+                }
+            },
+            bl_eye = {
+                name = "The Eye",
+                text = {
+                    "No {C:attention}repeat{} hand",
+                    "types this round"
+                }
+            },
+            bl_mouth = {
+                name = "The Mouth",
+                text = {
+                    "Play only {C:attention}1{} hand",
+                    "type this round"
+                }
+            },
+            bl_plant = {
+                name = "The Plant",
+                text = {
+                    "All {C:attention}face{} cards",
+                    "are debuffed"
+                }
+            },
+            bl_needle = {
+                name = "The Needle",
+                text = {
+                    "Play only {C:blue}1{} hand"
+                }
+            },
+            bl_head = {
+                name = "The Head",
+                text = {
+                    "All {C:hearts}Heart{} cards",
+                    "are debuffed"
+                }
+            },
+            bl_tooth = {
+                name = "The Tooth",
+                text = {
+                    "Lose {C:money}$1{} per",
+                    "card played"
+                }
+            },
+            bl_final_leaf = {
+                name = "Verdant Leaf",
+                text = {
+                    "All cards debuffed",
+                    "until {C:attention}1{} Joker sold"
+                }
+            },
+            bl_final_vessel = {
+                name = "Violet Vessel",
+                text = {
+                    "{C:attention}Very large{} blind"
+                }
+            },
+            bl_ox = {
+                name = "The Ox",
+                text = {
+                    "Playing a {C:attention}#1#{}",
+                    "sets money to {C:money}$0{}"
+                }
+            },
+            bl_house = {
+                name = "The House",
+                text = {
+                    "First hand is",
+                    "drawn {C:attention}face down{}"
+                }
+            },
+            bl_club = {
+                name = "The Club",
+                text = {
+                    "All {C:clubs}Club{} cards",
+                    "are debuffed"
+                }
+            },
+            bl_fish = {
+                name = "The Fish",
+                text = {
+                    "Cards drawn {C:attention}face down{}",
+                    "after each hand played"
+                }
+            },
+            bl_window = {
+                name = "The Window",
+                text = {
+                    "All {C:diamonds}Diamond{} cards",
+                    "are debuffed"
+                }
+            },
+            bl_manacle = {
+                name = "The Manacle",
+                text = {
+                    "{C:attention}-1{} Hand Size"
+                }
+            },
+            bl_serpent = {
+                name = "The Serpent",
+                text = {
+                    "After {C:blue}Play{} or {C:red}Discard{},",
+                    "always draw {C:attention}3{} cards"
+                }
+            },
+            bl_pillar = {
+                name = "The Pillar",
+                text = {
+                    "Cards played previously",
+                    "this {C:attention}Ante{} are debuffed"
+                }
+            },
+            bl_flint = {
+                name = "The Flint",
+                text = {
+                    "Base Chips and",
+                    "Mult are {C:attention}halved{}"
+                }
+            },
+            bl_mark = {
+                name = "The Mark",
+                text = {
+                    "All {C:attention}face{} cards are",
+                    "drawn {C:attention}face down{}"
+                }
+            },
+            bl_final_acorn = {
+                name = "Amber Acorn",
+                text = {
+                    "{C:attention}Flips and shuffles{}",
+                    "all Joker cards"
+                }
+            },
+            bl_final_heart = {
+                name = "Crimson Heart",
+                text = {
+                    "One random Joker",
+                    "{C:attention}disabled{} every hand"
+                }
+            },
+            bl_final_bell = {
+                name = "Cerulean Bell",
+                text = {
+                    "Forces {C:attention}1{} card to",
+                    "always be selected"
+                }
+            }
+        },
 		Joker = {
 			j_fnwk_streetlight_fledgling = {
 				name = "Fledgling Streetlit Joker",
