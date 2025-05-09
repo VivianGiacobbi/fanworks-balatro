@@ -24,8 +24,6 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    sendDebugMessage('past return')
-
     local dollars = card.ability.extra.dollars * #context.removed
     return {
         dollars = dollars,

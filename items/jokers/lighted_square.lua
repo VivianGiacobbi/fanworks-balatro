@@ -28,8 +28,6 @@ end
 function jokerInfo.check_for_unlock(self, args)
     if args.type ~= self.unlock_condition.type then return false end
 
-    sendDebugMessage(args.total_shattered)
-
     return args.total_shattered >= self.unlock_condition.total
 end
 

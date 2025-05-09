@@ -346,6 +346,7 @@ return {
 			k_mcr_transmuted = 'Transmuted!',
 			k_mcr_popped = 'Popped!',
 			k_farewell = 'Farewell!',
+			k_grafted = 'Grafted!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -948,6 +949,12 @@ return {
 				unlock = {
 					"Survive {C:attention,E:1}death{}"
 				}
+			},
+			j_fnwk_spirit_part = {
+				name = "Corpse Part",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+				},
 			},
 			j_fnwk_industry_loyal = {
 				name = "Loyal Gambler",
@@ -1555,9 +1562,8 @@ return {
 				name = "Sweet Bod",
 				text = {
 					"When a {C:attention}Boss Blind{} is defeated,",
-					"create a {C:dark_edition}Negative{}",
-					"{C:attention}Corpse Part{} with that",
-					"Boss Blind's effect",
+					"create a {C:dark_edition}Negative{} {C:attention}Corpse Part{}",
+					"with that Boss Blind's effect",
 				},
 			},
 			c_fnwk_spirit_ultimate = {

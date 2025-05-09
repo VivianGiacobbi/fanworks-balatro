@@ -46,8 +46,6 @@ local function try_transform_sludgemass(card, added_card)
 		return
 	end
 
-	sendDebugMessage('transformed')
-
 	card.config.center.atlas = 'fnwk_fanworks_jogarc_dark'
     card:set_sprites(card.config.center)
 	card.ability.water_time = 0
@@ -73,7 +71,6 @@ local function try_revert_sludgemass(card, removed_card)
 		return
 	end
 
-	sendDebugMessage('reverted')
 	card.config.center.atlas = 'fnwk_fanworks_jogarc'
     card:set_sprites(card.config.center)
 	card.ability.form = 'garc'

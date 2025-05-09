@@ -34,7 +34,6 @@ end
 
 function consumInfo.calculate(self, card, context)    
     if context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
-        sendDebugMessage('evolve')
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()

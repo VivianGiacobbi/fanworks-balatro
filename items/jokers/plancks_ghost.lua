@@ -112,8 +112,6 @@ function jokerInfo.calculate(self, card, context)
 		if not changed then
 			changed = FnwkDeepCompare(context.removed.ability.extra, context.removed.config.center.config.extra)
 		end	
-
-		sendDebugMessage(context.removed.config.center.key..'changed: '..tostring(changed))
 		
 		if not changed then return end
 		
