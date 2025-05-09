@@ -24,7 +24,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 		local blind_name = localize{type ='name_text', key = blind.key, set = 'Blind'}
 		main_end = {
 			{n=G.UIT.C, config={align = "bm", padding = 0.1}, nodes={
-				{n=G.UIT.C, config={align = "m", colour = get_blind_main_colour(blind.key), r = 0.05, padding = 0.1, shadow = true}, nodes={
+				{n=G.UIT.C, config={align = "m", colour = get_blind_main_colour(blind.key), r = 0.05, padding = 0.075, shadow = true}, nodes={
 					{n=G.UIT.T, config={text = ' '..blind_name..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}},
 				}}
 			}}
