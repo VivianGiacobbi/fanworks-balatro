@@ -22,8 +22,4 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {G.P_CENTERS[card.ability.extra.tarot].name}}
 end
 
-function consumInfo.calculate(self, card, context)
-
-end
-
 return consumInfo

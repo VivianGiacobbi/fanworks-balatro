@@ -341,6 +341,8 @@ return {
 			k_dzvalin = 'Dummy Text!',
 			k_joker_replaced = 'Energy Tranformed!',
 
+			k_blind_disabled_ex = 'Blind Disabled',
+
 			-- stand related strings
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
@@ -419,6 +421,13 @@ return {
 	},
 	descriptions = {
 		Other = {
+			fnwk_disabled_blind = {
+                name = "Blind Disabled",
+                text = {
+                    "Blind effects",
+                    "are disabled"
+                }
+            },
 			incomplete = {
 				name = 'WORK IN PROGRESS',
 				text = {

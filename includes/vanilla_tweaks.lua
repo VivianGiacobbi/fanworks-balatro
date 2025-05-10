@@ -164,5 +164,39 @@ SMODS.Joker:take_ownership('j_duo', { config = { x_mult = 2, type = 'Pair'}} , t
 SMODS.Joker:take_ownership('j_trio', { config = { x_mult = 3, type = 'Three of a Kind'} } , true)
 SMODS.Joker:take_ownership('j_family', { config = { x_mult = 4, type = 'Four of a Kind'} } , true)
 SMODS.Joker:take_ownership('j_tribe', { config = { x_mult = 2, type = 'Flush'} } , true)
-SMODS.Joker:take_ownership('j_order', { xconfig = { extra = 3, type = 'Straight'} } , true)
+SMODS.Joker:take_ownership('j_order', { config = { extra = 3, type = 'Straight'} } , true)
 SMODS.Joker:take_ownership('j_ramen', { config = { x_mult = 2, extra = 0.01} }, true)
+
+
+SMODS.Joker:take_ownership('j_luchador', {
+    loc_vars = function(self, info_queue, card)
+        local has_message = (G.GAME and card.area and (card.area == G.jokers))
+        local main_end = nil
+        if has_message then
+            
+            local disableable = G.GAME.blind and (G.GAME.blind.boss and not G.GAME.blind.disabled)
+            main_end = {
+                {n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={
+                    {n=G.UIT.C, config={ref_table = card, align = "m", colour = disableable and G.C.GREEN or G.C.RED, r = 0.05, padding = 0.06}, nodes={
+                        {n=G.UIT.T, config={text = ' '..localize(disableable and 'k_active' or 'ph_no_boss_active')..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.32*0.9}},
+                    }}
+                }}
+            }
+        end
+
+        return {
+            vars = {},
+            main_end = main_end
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.selling_self then 
+            if G.GAME.blind.boss and not G.GAME.blind.disabled then 
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('ph_boss_disabled')})
+                G.GAME.blind:disable()
+                return nil, true
+            end
+        end      
+    end
+})
