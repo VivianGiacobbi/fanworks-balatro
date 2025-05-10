@@ -8,10 +8,21 @@ target = "functions/common_events.lua"
 pattern = "_pool[#_pool + 1] = v.key"
 position = "before"
 payload = '''
-if G.GAME.selected_back and G.GAME.selected_back.effect.center.key == "b_fnwk_fanworks" then
-    local rate = G.GAME.selected_back.effect.config.extra - 1
-    if string.sub(v.key, 1, 6) == 'j_fnwk' then
-        for i=1, rate do
+if G.GAME.starting_params.fnwk_jokers_rate or G.GAME.starting_params.fnwk_all_rate then
+    local fnwk_rate, fnwk_all_rate
+    if G.GAME.starting_params.fnwk_jokers_rate then
+        fnwk_rate = math.ceil(G.GAME.starting_params.fnwk_jokers_rate-1)
+    end
+    if G.GAME.starting_params.fnwk_all_rate then
+        fnwk_all_rate = math.ceil(G.GAME.starting_params.fnwk_all_rate-1)
+    end
+    if G.GAME.starting_params.fnwk_jokers_rate and string.sub(v.key, 1, 6) == 'j_fnwk' then
+        for i=1, fnwk_rate do
+            _pool[#_pool + 1] = v.key
+            _pool_size = _pool_size + 1
+        end
+    elseif G.GAME.starting_params.fnwk_all_rate and containsString(v.key, '_fnwk_') then
+        for i=1, fnwk_all_rate do
             _pool[#_pool + 1] = v.key
             _pool_size = _pool_size + 1
         end

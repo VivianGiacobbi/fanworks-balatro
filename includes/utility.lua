@@ -161,12 +161,25 @@ function FnwkLoadItem(file_key, item_type)
 		info.color = nil
 	end
 
-	local new_item = SMODS[smods_item](info)
-	for k_, v_ in pairs(new_item) do
-		if type(v_) == 'function' then
-			new_item[k_] = info[k_]
+	local new_item
+	if SMODS[smods_item] then
+		new_item = SMODS[smods_item](info)
+		for k_, v_ in pairs(new_item) do
+			if type(v_) == 'function' then
+				new_item[k_] = info[k_]
+			end
+		end
+	else
+		if CardSleeves and item_type == 'Sleeve' then
+			new_item = CardSleeves.Sleeve(info)
+			for k_, v_ in pairs(new_item) do
+				if type(v_) == 'function' then
+					new_item[k_] = info[k_]
+				end
+			end
 		end
 	end
+
 
     if item_type == 'Challenge' or item_type == 'Edition' then
         -- these dont need visuals
@@ -180,6 +193,7 @@ function FnwkLoadItem(file_key, item_type)
 		local width = 71
 		local height = 95
 		if item_type == 'Tag' then width = 34; height = 34 end
+		if item_type == 'Sleeve' then width = 73 end
         SMODS.Atlas({ key = file_key, path = key .. "/" .. file_key .. ".png", px = new_item.width or width, py = new_item.height or height })
     end
 end
@@ -549,3 +563,13 @@ function FnwkPopulateBeyondCanonBans()
 	G.beyond_bans = banned
 end
 FnwkPopulateBeyondCanonBans()
+
+function fnwk_filter_loading(item_type)
+	if item_type == 'Sleeve' then
+		if CardSleeves then
+			return true
+		end
+	else
+		return fnwk_enabled['enable'..item_type..'s']
+	end
+end

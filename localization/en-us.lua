@@ -1880,6 +1880,26 @@ return {
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
+		},
+		Sleeve = {
+			sleeve_fnwk_sleeve_fanworks = {
+				name = "Fanworks Sleeve",
+				text = {
+					"Start run with the",
+					"{C:attention,T:v_overstock_norm}#1#{} voucher",
+					"{C:fanworks}Fanworks{} Jokers appear",
+					"{C:attention}#2#X{} more often",
+				},
+			},
+			sleeve_fnwk_sleeve_fanworks_alt = {
+				name = "Fanworks Sleeve",
+				text = {
+					"Start run with the",
+					"{C:attention,T:v_overstock_plus}#1#{} voucher",
+					"{C:fanworks}Fanworks{} Jokers appear",
+					"{C:attention}#2#X{} more often",
+				},
+			},
 		}
 	}
 }

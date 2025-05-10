@@ -250,6 +250,10 @@ local items_to_load = {
 		'fanworks',
 	},
 
+	Sleeve = {
+		'sleeve_fanworks'
+	},
+
 	Voucher = {
 		'rubicon_kitty',
     	'rubicon_parade'
@@ -269,7 +273,7 @@ local items_to_load = {
 }
 
 for k, v in pairs(items_to_load) do
-	if next(items_to_load[k]) and fnwk_enabled['enable'..k..'s'] then
+	if next(items_to_load[k]) and fnwk_filter_loading(k) then
 		for i = 1, #v do
 			FnwkLoadItem(v[i], k)
 		end

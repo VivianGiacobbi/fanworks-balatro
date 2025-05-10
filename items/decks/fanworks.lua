@@ -25,4 +25,14 @@ function deckInfo.locked_loc_vars(self, info_queue, card)
     return {vars = {discovered, self.unlock_condition.num}}
 end
 
+deckInfo.apply = function(self, back)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate or 1
+            G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate * self.config.extra
+            return true
+        end
+    }))
+end
+
 return deckInfo
