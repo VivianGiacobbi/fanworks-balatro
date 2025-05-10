@@ -1,7 +1,7 @@
 local jokerInfo = {
 	name = 'Corpse Part',
 	config = {
-        x_mult = 4,
+        x_mult = 3,
         blind_type = nil
     },
 	rarity = 1,
