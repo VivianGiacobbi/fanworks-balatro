@@ -1772,7 +1772,7 @@ return {
 				name = "Sweet Bod",
 				text = {
 					"When a {C:attention}Boss Blind{} is defeated,",
-					"create a {C:dark_edition}Negative{} {C:attention}Corpse Part{}",
+					"create a {C:dark_edition}Negative{} {C:attention}#1#{}",
 					"with its {C:attention}Blind{} effect",
 				},
 			},
