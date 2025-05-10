@@ -199,4 +199,56 @@ SMODS.Joker:take_ownership('j_luchador', {
             end
         end      
     end
-})
+}, true)
+
+
+SMODS.Joker:take_ownership('j_madness', {
+    calculate = function(self, card, context)
+        if context.blueprint then return end
+
+        if context.setting_blind and G.GAME.blind:get_type() ~= 'Boss' then
+            card.ability.x_mult = card.ability.x_mult + card.ability.extra
+            local destructable_jokers = {}
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] ~= card and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then
+                    destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i]
+                end
+            end
+            local joker_to_destroy = #destructable_jokers > 0 and pseudorandom_element(destructable_jokers, pseudoseed('madness')) or nil
+
+            if joker_to_destroy and not (context.blueprint_card or card).getting_sliced then 
+                joker_to_destroy.getting_sliced = true
+                G.E_MANAGER:add_event(Event({func = function()
+                    (context.blueprint_card or card):juice_up(0.8, 0.8)
+                    joker_to_destroy:start_dissolve({G.C.RED}, nil, 1.6)
+                return true end }))
+            end
+            if not (context.blueprint_card or card).getting_sliced then
+                card_eval_status_text((context.blueprint_card or card), 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.x_mult}}})
+            end
+            return nil, true
+        end
+    end
+}, true)
+
+SMODS.Joker:take_ownership('j_chicot', {
+    calculate = function(self, card, context)
+        if context.blueprint or card.getting_sliced then return end
+
+        if context.setting_blind and G.GAME.blind.boss then
+            
+            G.E_MANAGER:add_event(Event({func = function()
+                G.E_MANAGER:add_event(Event({func = function()
+                    sendDebugMessage('calling for disable')
+                    G.GAME.blind:disable()
+                    play_sound('timpani')
+                    delay(0.4)
+                    return true end }))
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('ph_boss_disabled')})
+            return true end }))
+            return nil, true
+        end
+    end
+}, true)
+
+

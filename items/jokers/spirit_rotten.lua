@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Corpse Part',
+	name = 'Rotten Graft',
 	config = {
         x_mult = 2,
         blind_type = nil,

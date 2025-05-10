@@ -59,7 +59,6 @@ function level_up_hand(card, hand, instant, amount, bypass_event)
     return ret
 end
 
-
 -- force not using main_start and main_end from default uibox_ability_table function if you've overwritten them
 local ref_card_ui = generate_card_ui
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)

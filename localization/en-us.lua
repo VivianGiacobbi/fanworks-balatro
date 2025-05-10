@@ -1160,8 +1160,8 @@ return {
 					"Survive {C:attention,E:1}death{}"
 				}
 			},
-			j_fnwk_spirit_part = {
-				name = "Corpse Part",
+			j_fnwk_spirit_rotten = {
+				name = "Rotten Graft",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
 				},

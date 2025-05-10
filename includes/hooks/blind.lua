@@ -196,10 +196,10 @@ function Blind:disable()
 	if not self.fnwk_extra_blind then
 		local ret = nil
 		if not self.main_blind_disabled then
+			self.main_blind_disabled = not self.disabled
 			ret = ref_blind_disable(self)
 		end
 		
-		self.main_blind_disabled = not self.disabled
 		if self.main_blind_disabled then self.boss = false end
 		self.disabled = false
 
@@ -211,7 +211,6 @@ function Blind:disable()
 				G.GAME.blind = v
 
 				ref_blind_disable(v)
-				sendDebugMessage('extra blind disabled: '..tostring(v.disabled))
 
 				self.chips = v.chips
 				self.chip_text = number_format(v.chips)
@@ -238,6 +237,15 @@ function Blind:disable()
 	return ret
 end
 
+local ref_blind_type = Blind.get_type
+function Blind:get_type()
+    if self.fnwk_extra_blind then
+		return 'Extra'
+	end
+
+	return ref_blind_type(self)
+end
+
 
 
 
@@ -251,6 +259,16 @@ function Blind:change_colour(blind_col)
 	if self.fnwk_extra_blind then return end
 
 	return ref_blind_colour(self, blind_col)
+end
+
+local ref_alert_debuff = Blind.alert_debuff
+function Blind:alert_debuff(first)
+	if not self.fnwk_extra_blind and self.main_blind_disabled then
+		self.block_play = nil
+		return
+	end
+
+	return ref_alert_debuff(self, first)
 end
 
 local ref_debuff_text = Blind.get_loc_debuff_text
@@ -575,7 +593,7 @@ function Blind:debuff_card(card, from_blind)
 	local ret = ref_blind_debuff(self, card, from_blind)
 
 	if not self.fnwk_extra_blind then
-		self.disabled = false	
+		self.disabled = false
 		if not card.debuffed_by_blind then
 			for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
 				if self.config.blind ~= v.config.blind then

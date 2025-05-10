@@ -226,12 +226,15 @@ function fnwk_remove_extra_blind(blind_source)
 
 	for i=1, #G.GAME.fnwk_extra_blinds do
 		if G.GAME.fnwk_extra_blinds[i].fnwk_extra_blind == blind_source then
+			local extra_blind = G.GAME.fnwk_extra_blinds[i]
 			table.remove(G.GAME.fnwk_extra_blinds, i)
 
 			if blind_source.ability and type(blind_source.ability) == 'table' then
                 blind_source.ability.blind_type = nil
             end
             blind_source.blind_type = nil
+
+			extra_blind:remove()
 
 			return true
 		end

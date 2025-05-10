@@ -6,6 +6,7 @@ priority = 0
 # Patches to enable extra blind support
 #
 
+# save_run()
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
@@ -26,8 +27,7 @@ end'''
 match_indent = true
 times = 1
 
-
-
+# save_run()
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
@@ -37,6 +37,7 @@ payload = '''EXTRA_BLINDS = extra_blinds,'''
 match_indent = true
 times = 1
 
+# Game:start_run()
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -89,6 +90,7 @@ end'''
 match_indent = true
 times = 1
 
+# Game:update(dt)
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -112,6 +114,7 @@ if #blind_strings > 0 then
 match_indent = true
 times = 1
 
+# Game:update(dt)
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -125,6 +128,7 @@ end'''
 match_indent = true
 times = 1
 
+# Game:update(dt)
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -134,6 +138,7 @@ payload = '''{n=G.UIT.O, config={object = DynaText({scale = 0.6, string = dyna_s
 match_indent = true
 times = 1
 
+# G.FUNCS.play_cards_from_highlighted
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
@@ -158,6 +163,7 @@ end'''
 match_indent = true
 times = 1
 
+# CardArea:parse_highlighted()
 [[patches]]
 [patches.pattern]
 target = "cardarea.lua"
@@ -171,12 +177,15 @@ payload = '''if G.GAME.blind then
 match_indent = true
 times = 1
 
+# end_round()
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = '''if G.GAME.blind:get_type() == 'Boss' then'''
+pattern = '''
+if G.GAME.blind:get_type() == 'Boss' then'''
 position = "at"
-payload = '''if true then'''
+payload = '''
+if true then'''
 match_indent = true
 times = 1
 
@@ -190,7 +199,7 @@ payload = '''(G.GAME.blind and G.GAME.blind:get_type() == 'Boss' and 'music5') o
 match_indent = true
 times = 1
 
-# modulate_sound()
+# Back:trigger_effect(args)
 [[patches]]
 [patches.pattern]
 target = "back.lua"
@@ -199,6 +208,21 @@ position = "at"
 payload = '''if self.name == 'Anaglyph Deck' and args.context == 'eval' and G.GAME.last_blind and G.GAME.last_blind:get_type() == 'Boss' then'''
 match_indent = true
 times = 1
+
+# Back:trigger_effect(args)
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''if self.disabled then self.block_play = nil; return true end'''
+position = "at"
+payload = '''if self.disabled or self.main_blind_disabled then self.block_play = nil; return true end'''
+match_indent = true
+times = 1
+
+
+
+
+
 
 
 

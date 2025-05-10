@@ -79,7 +79,7 @@ local items_to_load = {
 		-- 'spirit_aquarium',
 		'spirit_gambler',
 		'spirit_corpse',
-		'spirit_part',
+		'spirit_rotten',
 
 		-- industry baby
 		'industry_loyal',
