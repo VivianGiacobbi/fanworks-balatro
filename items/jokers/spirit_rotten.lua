@@ -1,9 +1,11 @@
 local jokerInfo = {
-	name = 'Corpse Part',
+	name = 'Rotten Graft',
 	config = {
-        x_mult = 3,
-        blind_type = nil
+        x_mult = 2,
+        blind_type = nil,
+		extra = {}
     },
+	no_doe = true,
 	rarity = 1,
 	cost = 1,
 	blueprint_compat = false,
@@ -21,10 +23,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	local main_end = nil
 	if card.ability.blind_type then
 		local blind = card.ability.blind_type
-		local blind_name = localize{type ='name_text', key = blind.key, set = 'Blind'}
+		local disabled = card.ability.extra.disabled
+		local blind_name = disabled and localize('k_blind_disabled_ex') or localize{type ='name_text', key = blind.key, set = 'Blind'}
 		main_end = {
 			{n=G.UIT.C, config={align = "bm", padding = 0.1}, nodes={
-				{n=G.UIT.C, config={align = "m", colour = get_blind_main_colour(blind.key), r = 0.05, padding = 0.075, shadow = true}, nodes={
+				{n=G.UIT.C, config={align = "m", colour = disabled and G.C.FILTER or get_blind_main_colour(blind.key), r = 0.05, padding = 0.075, shadow = true}, nodes={
 					{n=G.UIT.T, config={text = ' '..blind_name..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}},
 				}}
 			}}
@@ -38,7 +41,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 			local res = blind:loc_vars() or {}
             loc_vars = res.vars or loc_vars
 		end
-		info_queue[#info_queue+1] = {set = 'Blind', key = blind.key, vars = loc_vars }
+		info_queue[#info_queue+1] = disabled and {set = 'Other', key = 'fnwk_disabled_blind'} or {set = 'Blind', key = blind.key, vars = loc_vars }
 	end
 	
 	return { 
@@ -55,6 +58,18 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 	local extra_blind = fnwk_create_extra_blind(card, card.ability.blind_type)
 	if G.GAME.blind.in_blind and next(SMODS.find_card('j_chicot')) then
 		extra_blind:disable()
+	end
+end
+
+function jokerInfo.calculate(self, card, context)
+	if context.cardarea ~= G.jokers or context.blueprint then return end
+
+	if context.blind_disabled then
+		card.ability.extra.disabled = true
+	end
+
+	if context.end_of_round then
+		card.ability.extra.disabled = nil
 	end
 end
 

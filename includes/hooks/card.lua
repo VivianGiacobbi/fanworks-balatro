@@ -3,8 +3,8 @@
 ---------------------------
 
 local ref_get_id = Card.get_id
-function Card:get_id()
-    local id = ref_get_id(self)
+function Card:get_id(skip_pmk)
+    local id = ref_get_id(self, skip_pmk)
     if not self.debuff and next(SMODS.find_card('j_fnwk_rubicon_crown')) and (id == 11 or id == 13) then
         return 12
     end
@@ -155,7 +155,6 @@ end
 
 local ref_is_face = Card.is_face
 function Card:is_face(from_boss)
-    if not self:get_id() then return end
     if next(SMODS.find_card('j_fnwk_streetlight_teenage')) then
         return false
     end
@@ -200,12 +199,12 @@ end
 ---------------------------
 
 local ref_set_base = Card.set_base
-function Card:set_base(card, initial)
+function Card:set_base(card, initial, delay_sprites)
     local old_id = nil
     if self.base then old_id = self.base.id end
 
     -- base function call
-    local ret = ref_set_base(self, card, initial)
+    local ret = ref_set_base(self, card, initial, delay_sprites)
 
     if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
         check_for_unlock({type = 'queen_to_king'})
