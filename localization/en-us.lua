@@ -1764,7 +1764,7 @@ return {
 				text = {
 					"When a {C:attention}Boss Blind{} is defeated,",
 					"create a {C:dark_edition}Negative{} {C:attention}Corpse Part{}",
-					"with that Boss Blind's effect",
+					"with its {C:attention}Blind{} effect",
 				},
 			},
 			c_fnwk_spirit_ultimate = {

@@ -221,7 +221,15 @@ end
 local ref_blind_wiggle = Blind.wiggle
 function Blind:wiggle()
 	if self.fnwk_extra_blind then 
-		self.fnwk_extra_blind:juice_up()
+		sendDebugMessage('wiggle')
+		card_eval_status_text(
+		self.fnwk_extra_blind,
+		'extra',
+		nil, nil, nil,
+		{
+			message = self.loc_name,
+			colour = get_blind_main_colour(self.config.blind.key)
+		})
 		play_sound('generic1')
 		return
 	end
@@ -232,7 +240,14 @@ end
 local ref_blind_juice = Blind.juice_up
 function Blind:juice_up(_a, _b)
 	if self.fnwk_extra_blind then 
-		self.fnwk_extra_blind:juice_up()
+		card_eval_status_text(
+		self.fnwk_extra_blind,
+		'extra',
+		nil, nil, nil,
+		{
+			message = self.loc_name,
+			colour = get_blind_main_colour(self.config.blind.key)
+		})
 		play_sound('generic1')
 		return
 	end
@@ -292,13 +307,22 @@ function Blind:press_play()
 		G.E_MANAGER:add_event(Event({
 			trigger = 'immediate',
 			func = function()
+				attention_text({
+					text = self.loc_name,
+					scale = 1, 
+					hold = 0.45,
+					backdrop_colour = get_blind_main_colour(self.config.blind.key),
+					align = 'bm',
+					major = self.fnwk_extra_blind,
+					offset = {x = 0, y = 0.05*self.fnwk_extra_blind.T.h}
+				})
 				self.fnwk_extra_blind:juice_up()
-				play_sound('generic1')
+				play_sound('generic1', (0.9 + 0.2*math.random())*0.2 + 0.8, 1)
 				return true
 			end
 		}))
-		
 	end
+		
 
 	return ret
 end
@@ -320,8 +344,17 @@ function Blind:modify_hand(cards, poker_hands, text, mult, hand_chips, scoring_h
 		G.E_MANAGER:add_event(Event({
 			trigger = 'immediate',
 			func = function()
+				attention_text({
+					text = self.loc_name,
+					scale = 1, 
+					hold = 0.45,
+					backdrop_colour = get_blind_main_colour(self.config.blind.key),
+					align = 'bm',
+					major = self.fnwk_extra_blind,
+					offset = {x = 0, y = 0.05*self.fnwk_extra_blind.T.h}
+				})
 				self.fnwk_extra_blind:juice_up()
-				play_sound('generic1')
+				play_sound('generic1', (0.9 + 0.2*math.random())*0.2 + 0.8, 1)
 				return true
 			end
 		}))
