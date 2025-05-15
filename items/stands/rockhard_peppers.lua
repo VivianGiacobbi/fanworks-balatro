@@ -20,9 +20,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-	if context.blueprint then return end
-    if context.check_enhancement and context.cardarea == G.jokers then
-		if context.other_card.ability.effect ~= "Base" then
+    if context.check_enhancement and not (context.other_card.area == G.deck or context.other_card.area == G.discard) then
+		if context.other_card.config.center.key ~= 'c_base' then
             return {
                 ['m_wild'] = true,
             }

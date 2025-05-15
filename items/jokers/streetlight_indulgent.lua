@@ -93,7 +93,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.joker_destroyed and context.removed == card then
+	if context.fnwk_joker_destroyed and context.joker == card then
 		update_jokers_glow(card, true)
 	end
 

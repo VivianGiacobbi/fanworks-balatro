@@ -48,7 +48,7 @@ function jokerInfo.calculate(self, card, context)
 	if G.GAME.current_round.hands_left ~= card.ability.extra.hand_trigger or G.GAME.current_round.discards_left ~= card.ability.extra.discard_trigger or G.GAME.dzrawlin then
 		return
 	end
-	if context.change_discards or context.change_hands and not G.GAME.dzrawlin then
+	if context.fnwk_change_discards or context.fnwk_change_hands and not G.GAME.dzrawlin then
 		G.GAME.dzrawlin = true
 		local eval = function() return G.GAME.dzrawlin == true end
         juice_card_until(card, eval, true)

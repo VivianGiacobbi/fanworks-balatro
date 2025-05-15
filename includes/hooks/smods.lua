@@ -9,13 +9,14 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_extra_blinds = {}
     end
 
+    G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback')
     G.GAME.current_round.fnwk_packs_rerolled = 0
     fnwk_reset_funkadelic()
     fnwk_reset_infidel()
     fnwk_reset_loyal()
 
     for k, v in pairs(G.playing_cards) do
-        v.ability.joker_force_facedown = nil
+        v.joker_force_facedown = nil
         v.ability.played_while_flipped = nil
     end
 end

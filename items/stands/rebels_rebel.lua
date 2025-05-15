@@ -15,7 +15,6 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     fanwork = 'rebels',
-    in_progress = true,
     requires_stands = true,
 }
 

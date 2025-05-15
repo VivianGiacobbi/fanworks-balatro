@@ -1,4 +1,7 @@
---- Unlock condition used by Corpse Crimelord
+---------------------------
+--------------------------- Corpse crimelord unlock
+---------------------------
+
 local ref_end_round = end_round
 function end_round()
     local ret ref_end_round()
@@ -12,6 +15,14 @@ function end_round()
     }))
     return ret
 end
+
+
+
+
+
+---------------------------
+--------------------------- Ice-Cold Jokestar unlock
+---------------------------
 
 local ref_evaluate_play = G.FUNCS.evaluate_play
 G.FUNCS.evaluate_play = function(e)
@@ -38,6 +49,14 @@ G.FUNCS.evaluate_play = function(e)
     return ret
 end
 
+
+
+
+
+---------------------------
+--------------------------- Electriclarryland effect
+---------------------------
+
 local ref_play_to_discard = G.FUNCS.draw_from_play_to_discard
 G.FUNCS.draw_from_play_to_discard = function(e)
     local larrylands = SMODS.find_card('c_fnwk_sunshine_electric')
@@ -55,7 +74,7 @@ G.FUNCS.draw_from_play_to_discard = function(e)
             delay(0.2)
         end
         for k, v in ipairs(G.play.cards) do
-            if (not v.shattered) and (not v.destroyed) then 
+            if (not v.shattered) and (not v.destroyed) then
                 local enhanced = next(SMODS.get_enhancements(v))
                 local location = enhanced and G.hand or G.discard
                 local face = enhanced and 'up' or 'down'

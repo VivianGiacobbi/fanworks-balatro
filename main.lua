@@ -15,7 +15,6 @@ if not G.fnwk_stands_enabled then
 end
 
 SMODS.optional_features.quantum_enhancements = true
-SMODS.optional_features.cardareas.unscored = true
 
 G.C.FANWORKS = SMODS.current_mod.badge_colour
 
@@ -27,6 +26,7 @@ local includes = {
 	'shaders',
 
 	-- object hooks
+	'hooks/button_callbacks',
 	'hooks/game',
 	'hooks/card',
 	'hooks/cardarea',

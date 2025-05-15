@@ -15,7 +15,6 @@ end
 
 
 
-
 ---------------------------
 --------------------------- Maggie Quips
 ---------------------------
@@ -129,21 +128,82 @@ end
 
 local ref_card_hover = Card.hover
 function Card:hover()
-    ref_card_hover(self)
+    if G.fnwk_peppers_hovers then
+        for _, v in ipairs(G.fnwk_peppers_hovers) do
+            if v then
+                v.ability.aura_flare_queued = nil
+                v.ability.stand_activated = nil
+            end
+        end
+        
+        G.fnwk_peppers_hovers = nil
+    end
+
+    if self.ability.set == 'Enhanced' and self.config.center.key ~= 'm_wild' then
+        local peppers = SMODS.find_card('c_fnwk_rockhard_peppers')
+        if next(peppers) then
+            G.fnwk_peppers_hovers = {}
+            for i, v in ipairs(peppers) do
+                v.ability.aura_flare_queued = true
+                G.fnwk_peppers_hovers[i] = v
+            end
+        end
+        
+    end
+
+    local ret = ref_card_hover(self)
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == 'Booster' then
         SMODS.calculate_context({hovering_booster = true, booster = self})
     end
+
+    return ret
 end
 
 local ref_card_stop_hover = Card.stop_hover
 function Card:stop_hover()
-    ref_card_stop_hover(self)
+    if G.fnwk_peppers_hovers then
+        local remove = not G.CONTROLLER.hovering.target
+        if not remove then
+            local target = G.CONTROLLER.hovering.target
+            if not target.is or type(target.is) ~= 'function' or not target:is(Card) then
+                remove = true
+            end
+        end
+
+        if remove then
+            for _, v in ipairs(G.fnwk_peppers_hovers) do
+                if v then
+                    v.ability.aura_flare_queued = nil
+                    v.ability.stand_activated = nil
+                end
+            end
+        end
+    end
+    
+
+    local ret = ref_card_stop_hover(self)
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == "Booster" then
         SMODS.calculate_context({stopped_hovering = true, booster = self})
         return
     end
+
+    return ret
 end
 
+function love.focus(f)
+    if not f then return end
+
+    if G.fnwk_peppers_hovers then
+        for _, v in ipairs(G.fnwk_peppers_hovers) do
+            if v then
+                v.ability.aura_flare_queued = nil
+                v.ability.stand_activated = nil
+            end
+        end
+        
+        G.fnwk_peppers_hovers = nil
+    end
+end
 
 
 
@@ -240,73 +300,35 @@ end
 
 
 ---------------------------
---------------------------- Adds Rock Break sound for Stone Cards
+--------------------------- Tracking for Fanworks Joker
 ---------------------------
 
---[[
-SMODS.Sound({
-	key = "rock_break",
-	path = "rock_break.ogg",
-})
+local ref_card_add = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    local ret = ref_card_add(self, from_debuff)
 
-local ref_start_dissolve = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    if self.config.center.key == 'm_stone' then
-        self:rock_break()
-        return
+    if not from_debuff then
+        G.GAME.fnwk_owned_jokers[self.config.center.key] = true
     end
 
-    return ref_start_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+    return ret
 end
 
-function Card:rock_break()
-    local dissolve_time = 0.7
-    self.shattered = true
-    self.dissolve = 0
-    self.dissolve_colours = {{1,1,1,0.8}}
-    self:juice_up()
-    local childParts = Particles(0, 0, 0,0, {
-        timer_type = 'TOTAL',
-        timer = 0.007*dissolve_time,
-        scale = 0.3,
-        speed = 4,
-        lifespan = 0.5*dissolve_time,
-        attach = self,
-        colours = self.dissolve_colours,
-        fill = true
-    })
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.5*dissolve_time,
-        func = (function() childParts:fade(0.15*dissolve_time) return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        blockable = false,
-        func = (function()
-                play_sound('fnwk_rock_break', math.random()*0.1 + 0.9, 0.5)
-                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
-            return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        blockable = false,
-        ref_table = self,
-        ref_value = 'dissolve',
-        ease_to = 1,
-        delay =  0.5*dissolve_time,
-        func = (function(t) return t end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.55*dissolve_time,
-        func = (function() self:remove() return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.51*dissolve_time,
-    }))
+
+
+
+
+---------------------------
+--------------------------- Joker destruction calc context
+---------------------------
+
+local ref_card_dissolve = Card.start_dissolve
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    local ret = ref_card_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+
+    if G.jokers and self.ability.set == 'Joker' then
+        SMODS.calculate_context({fnwk_joker_destroyed = true, joker = self})
+    end
+
+    return ret
 end
---]]

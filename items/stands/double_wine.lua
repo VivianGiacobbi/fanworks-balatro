@@ -5,7 +5,10 @@ local consumInfo = {
         -- stand_mask = true,
         aura_colors = { 'FB5D53DC', 'A34B6EDC' },
         extra = {
-            suits = {'Hearts', 'Diamonds'},
+            suits = {
+                ['Hearts'] = true,
+                ['Diamonds'] = true
+            },
             mult_min = 1,
             mult_max = 5
         }
@@ -22,11 +25,11 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {
-            localize(card.ability.extra.suits[1], 'suits_plural'),
-            localize(card.ability.extra.suits[2], 'suits_plural'),
+            localize('Hearts', 'suits_plural'),
+            localize('Diamonds', 'suits_plural'),
             colours = {
-                G.C.SUITS[card.ability.extra.suits[1]],
-                G.C.SUITS[card.ability.extra.suits[2]]
+                G.C.SUITS['Hearts'],
+                G.C.SUITS['Diamonds']
             }
         }
     }
@@ -56,7 +59,24 @@ function consumInfo.generate_ui(self, info_queue, card, desc_nodes, specific_var
 end
 
 function consumInfo.calculate(self, card, context)
+    if not (context.individual and context.cardarea == G.hand) or context.end_of_round then
+        return
+    end
 
+    if context.other_card.debuf or not card.ability.extra.suits[context.other_card.base.suit] then
+        return
+    end
+
+    local rand_mult = pseudorandom(pseudoseed('fnwk_winesong'), card.ability.extra.mult_min, card.ability.extra.mult_max)
+    return {
+        func = function()
+            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+        end,
+        extra = {
+            mult = rand_mult,
+            card = context.other_card
+        }
+    }
 end
 
 return consumInfo

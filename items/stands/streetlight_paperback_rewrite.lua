@@ -6,7 +6,7 @@ local consumInfo = {
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         evolved = true,
         extra = {
-            base_chance = 1000,
+            normal_mod = 1,
             chance = 1000
         }
     },
@@ -21,7 +21,27 @@ local consumInfo = {
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance} }
+    return { vars = {G.GAME.probabilities.normal * card.ability.extra.normal_mod, card.ability.extra.chance} }
 end
+
+function consumInfo.calculate(self, card, context)
+    if not context.reroll_shop then return end
+
+    local chance = (G.GAME.probabilities.normal * card.ability.extra.normal_mod) / card.ability.extra.chance
+    if pseudorandom(pseudoseed('fnwk_rewrite_sd')) < chance then
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card.ability.fnwk_rewrite_destroyed = true
+                card:start_dissolve()
+                return true
+            end
+        }))
+    end
+
+    card.ability.extra.normal_mod = card.ability.extra.normal_mod + 1
+end
+
+
 
 return consumInfo

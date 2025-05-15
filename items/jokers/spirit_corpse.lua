@@ -47,7 +47,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.change_dollars and context.cardarea == G.jokers then
+    if context.fnwk_change_dollars and context.cardarea == G.jokers then
         local dollar_digits = get_dollar_digits()
         if card.ability.last_digits == dollar_digits then
             return

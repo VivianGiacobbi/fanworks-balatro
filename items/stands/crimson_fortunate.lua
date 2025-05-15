@@ -14,12 +14,10 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     fanwork = 'crimson',
-    in_progress = true,
     requires_stands = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     local main_end = nil
     if G.GAME.fnwk_last_upgraded_hand then
         local nodes = {}

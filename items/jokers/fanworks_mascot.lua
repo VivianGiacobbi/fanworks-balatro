@@ -21,7 +21,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.check_enhancement and context.cardarea == G.jokers then
+    if context.check_enhancement and not (context.other_card.area == G.deck or context.other_card.area == G.discard) then
 		if context.other_card.config.center.key == 'm_lucky' then
             return {
                 ['m_glass'] = true,

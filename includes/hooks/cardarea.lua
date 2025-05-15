@@ -1,3 +1,7 @@
+---------------------------
+--------------------------- Hook for extra blinds
+---------------------------
+
 local ref_cardarea_highlighted = CardArea.parse_highlighted
 function CardArea:parse_highlighted()
     for k, v in pairs(G.GAME.fnwk_extra_blinds) do
