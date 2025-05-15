@@ -393,7 +393,8 @@ return {
 			ba_rebels = 'JJ29: Stardust Rebels'
 		},
 		v_dictionary = {
-			downward_warn_text = "Must play #1#"
+			downward_warn_text = "Must play #1#",
+			a_hand = "+#1# Hand",
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -420,6 +421,22 @@ return {
 		},
 	},
 	descriptions = {
+		Enhanced = {
+			m_glass_fnwk_dance_spades = {
+                name = "Glass Card",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult",
+                }
+            },
+			m_glass_fnwk_dance_other = {
+                name = "Glass Card",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "This card is {C:attention}destroyed{}",
+					"after scoring",
+                }
+            },
+		},
 		Other = {
 			fnwk_disabled_blind = {
                 name = "Blind Disabled",
@@ -1377,16 +1394,35 @@ return {
 				name = "Fanworks™",
 				text = {
 					"{C:mult}+#1#{} Mult for each {C:fanworks}Fanworks{}",
-					"{C:attention}Joker{} and {C:stand}Stand{} owned this run",
+					"{C:attention}Joker{} or {C:stand}Stand{} owned this run",
 					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult){}"
 				}
 			},
-			j_fnwk_fanworks_standoff = {
+			j_fnwk_fanworks_standoff_none = {
 				name = "Stand-Off Spreadsheet",
 				text = {
 					"{C:chips}+#1#{} Chips if you do not have a {C:stand}Stand{}",
 					"{C:mult}+#2#{} Mult if you have a {C:stand}Stand{}",
 					"{X:mult,C:white}X#3#{} Mult if you have an {C:stand}Evolved Stand{}",
+					"{C:inactive}(Currently {}{C:chips}+#4#{}{C:inactive} Chips){}"
+				}
+			},
+			j_fnwk_fanworks_standoff_stand = {
+				name = "Stand-Off Spreadsheet",
+				text = {
+					"{C:chips}+#1#{} Chips if you do not have a {C:stand}Stand{}",
+					"{C:mult}+#2#{} Mult if you have a {C:stand}Stand{}",
+					"{X:mult,C:white}X#3#{} Mult if you have an {C:stand}Evolved Stand{}",
+					"{C:inactive}(Currently {}{C:mult}+#4#{}{C:inactive} Mult){}"
+				}
+			},
+			j_fnwk_fanworks_standoff_evolved = {
+				name = "Stand-Off Spreadsheet",
+				text = {
+					"{C:chips}+#1#{} Chips if you do not have a {C:stand}Stand{}",
+					"{C:mult}+#2#{} Mult if you have a {C:stand}Stand{}",
+					"{X:mult,C:white}X#3#{} Mult if you have an {C:stand}Evolved Stand{}",
+					"{C:inactive}(Currently {}{X:mult,C:white}X#4#{}{C:inactive} Mult){}"
 				}
 			},
 			j_fnwk_fanworks_bathroom = {
@@ -1540,6 +1576,22 @@ return {
                     "{C:inactive}(Must have room)"
 				}
 			},
+			c_emperor_civil = {
+				name = "The Emperor",
+				text = {
+					"Creates {C:tarot}The Hanged Man{} and",
+                    "{C:attention}#1#{} random {C:tarot}Tarot{} card",
+                    "{C:inactive}(Must have room)"
+				}
+			},
+			c_emperor_dead_civil = {
+				name = "The Emperor",
+				text = {
+					"Creates {C:tarot}The Hermit{}",
+                    "and {C:tarot}The Hanged Man{}",
+                    "{C:inactive}(Must have room)"
+				}
+			},
 		},
 		Spectral = {
 			c_fnwk_spec_stone = {
@@ -1645,9 +1697,9 @@ return {
 			c_fnwk_city_opera = {
 				name = "Opera No. 2",
 				text = {
-					"If you have {C:money}$#1#{} or less",
-					"when {C:attention}first hand{} of round",
-					"is scored, upgrade it",
+					"{C:planet}Upgrade{} {C:attention}first hand{}",
+					"of round by {C:attention}#1#{} level#2#",
+					"if you have {C:money}$#3#{} or less",
 				},
 			},
 			c_fnwk_crimson_fortunate = {
@@ -1722,22 +1774,26 @@ return {
 					"All {C:attention}Enhanced Cards{} also act",
 					"as {C:attention}Wild Cards{} as well as",
 					"their current {C:attention}Enhancement{}",
+					"{s:0.1} {}",
+					"{s:0.8,C:inactive}\"Try to realise it's all within yourself.{}",
+					"{s:0.8,C:inactive}No one else can make you change.\"{}"
 				}
 			},
 			c_fnwk_rockhard_quadro = {
 				name = "Quadrophenia",
 				text = {
-					"Create {C:tarot}#1#{} or {C:tarot}#2#{}",
-					"if {C:attention}first hand{} of round is",
-					"a {C:attention}#3#{}",
-					"{C:inactive}(Must have room){}"
+					"Create a {C:dark_edition}Negative{} {C:tarot}#1#{} or",
+					"{C:tarot}#2#{} if {C:attention}first hand{}",
+					"of round is a {C:attention}#3#{}",
+					"{s:0.1} {}",
+					"{s:0.8,C:inactive}\"Can you see the real me?\"{}",
 				},
 			},
 			c_fnwk_rubicon_dance = {
 				name = "Dance Macabre",
 				text = {
 					"{C:attention}Glass Cards{} of {V:1}#1#{} suit will not break",
-					"{C:attention}Glass Cards{} of any other suit always break"
+					"{C:attention}Glass Cards{} of any other {C:attention}suit{} always break"
 				},
 			},
 			c_fnwk_scepter_lenfer = {
@@ -1750,9 +1806,8 @@ return {
 			c_fnwk_spirit_achtung = {
 				name = "Achtung Baby",
 				text = {
-					"{C:attention}#1#{} card is drawn {C:attention}face down{}",
-					"with each draw, face down cards",
-					"give {X:mult,C:white}X#2#{} Mult",
+					"{C:attention}#1#{} card each draw is drawn {C:attention}face down{}",
+					"{C:attention}Face down{} cards give {X:mult,C:white}X#2#{} Mult",
 					"{s:0.1} {}",
 					"{C:stand}Evolves{} when a {C:attention}#3#{}",
 					"is played",
@@ -1761,35 +1816,36 @@ return {
 			c_fnwk_spirit_achtung_stranger = {
 				name = "A Stranger I Remain",
 				text = {
-					"All cards are drawn {C:attention}face down,{}",
-					"face down cards give {X:mult,C:white}X#1#{} Mult",
+					"{C:attention}All{} cards are drawn {C:attention}face down{}",
+					"{C:attention}Face down{} cards give {X:mult,C:white}X#1#{} Mult",
 					"{s:0.1} {}",
-					"Whenever you play a hand that isn't",
-					"a {C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
+					"When you play a hand that isn't a",
+					"{C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
 				},
 			},
 			c_fnwk_spirit_sweet = {
 				name = "Sweet Bod",
 				text = {
 					"When a {C:attention}Boss Blind{} is defeated,",
-					"create a {C:dark_edition}Negative{} {C:attention}Corpse Part{}",
+					"create a {C:dark_edition}Negative{} {C:attention}#1#{}",
 					"with its {C:attention}Blind{} effect",
 				},
 			},
 			c_fnwk_spirit_ultimate = {
 				name = "Ultimate Showdown of Ultimate Destiny",
 				text = {
-					"{C:attention}Lucky Cards{} retrigger {C:attention}{} for",
+					"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
 					"each {C:attention}Gold Card{} held in hand",
 					"{s:0.1} {}",
-					"Increase by #1# for each {C:attention}Jokestar{}",
+					"Increase by {C:attention}#3#{} for each {C:attention}Jokestar{}",
 					"{C:attention}sold{} or {C:attention}destroyed{}",
 				},
 			},
 			c_fnwk_double_wine = {
 				name = "Wine Song",
 				text = {
-					"{V:1}#1#{} and {V:2}#2#{} in hand give",
+					"{V:1}#1#{} and {V:2}#2#{}",
+					"in hand give",
 				},
 			},
 			c_fnwk_streetlight_notorious = {
@@ -1802,17 +1858,17 @@ return {
 			c_fnwk_streetlight_paperback = {
 				name = "Paperback Writer",
 				text = {
-					"{C:attention}#1#{} free {C:green}Reroll{} of {C:attention}Booster Packs{}",
+					"{C:attention}#1#{} {C:inactive}[#2#]{} {C:green}Reroll{} of {C:attention}Booster Packs{}",
 					"and {C:attention}Vouchers{} per shop",
-					"{C:stand}Evolves{} upon reaching Ante {C:attention}#2#{}",
+					"{C:stand}Evolves{} upon reaching Ante {C:attention}#3#{}",
 				},
 			},
 			c_fnwk_streetlight_paperback_rewrite = {
 				name = "Paperback Writer: REWRITE",
 				text = {
 					"Infinite {C:attention}Booster Pack{} and {C:attention}Voucher{} {C:green}Rerolls{}",
-					"{C:green}#1# in #2#{} chance to destroy this card,",
-					"increases with each {C:green}Reroll{}",
+					"{C:green}#1# in #2#{} chance to {C:red,E:2}self destruct{}",
+					"{C:green}Chance{} increases with each {C:green}Reroll{}",
 				},
 			},
 			c_fnwk_sunshine_damned = {

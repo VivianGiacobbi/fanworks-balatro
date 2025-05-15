@@ -23,4 +23,26 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {FnwkFormatDisplayNumber(card.ability.extra.num_enhanced), card.ability.extra.draw_size} }
 end
 
+function consumInfo.calculate(self, card, context)
+    if context.discard and #context.full_hand == 1 and next(SMODS.get_enhancements(context.other_card)) then
+        G.GAME.fnwk_lenfer_draw = true
+        return {
+            func = function()
+                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    func = function()
+                        play_sound('generic1')
+                        card:juice_up()
+                        return true
+                    end 
+                }))
+            end,
+            delay = 0.45,
+            remove = true,
+        }
+    end
+end
+
 return consumInfo

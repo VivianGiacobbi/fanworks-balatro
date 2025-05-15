@@ -2,9 +2,11 @@ local jokerInfo = {
 	name = 'Stand-Off Spreadsheet',
 	config = {
         extra = {
-            chips = 30,
-            mult = 15,
-            x_mult = 3,
+            states = {
+                ['none'] = {key = 'chips', value = 30},
+                ['stand'] = {key = 'mult', value = 15},
+                ['evolved'] = {key = 'x_mult', value = 3}
+            }
         }
     },
 	rarity = 1,
@@ -13,13 +15,49 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'fanworks',
-    in_progress = true,
     requires_stands = true,
 }
 
+local function get_stand_state()
+    local has_stand = G.FUNCS.csau_get_leftmost_stand()
+
+    if not has_stand then  
+        return 'none'
+    end
+
+    for _, v in ipairs(G.consumeables.cards) do
+        if v.ability.set == 'csau_Stand' and v.ability.evolved then
+            return 'evolved'
+        end
+    end
+
+    return 'stand'
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.x_mult }}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
+
+    local state = get_stand_state()
+    return { 
+        vars = {
+            card.ability.extra.states.none.value,
+            card.ability.extra.states.stand.value,
+            card.ability.extra.states.evolved.value,
+            card.ability.extra.states[state].value
+        },
+        key = card.config.center.key..'_'..state
+    }
+end
+
+function jokerInfo.calculate(self, card, context)
+    if not (context.joker_main and context.cardarea == G.jokers) then
+        return
+    end
+
+    local state = get_stand_state()
+    return {
+        [card.ability.extra.states[state].key] = card.ability.extra.states[state].value
+    }
 end
 
 return jokerInfo

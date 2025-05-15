@@ -26,20 +26,20 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.destroy_card and context.cardarea == G.play and context.poker_hands[card.ability.extra.destroy_hand] then
+    if context.destroy_card and context.cardarea == G.play and next(context.poker_hands[card.ability.extra.destroy_hand]) then
         card.ability.fnwk_thunder_dc_activated = true
         return {
             remove = true
         }
     end
 
-    if context.individual and context.cardarea == G.play then
+    if context.individual and context.cardarea == G.play and next(context.poker_hands[card.ability.extra.destroy_hand]) then
         return {
             func = function()
                 G.FUNCS.csau_flare_stand_aura(card, 0.5)
             end,
             extra = {
-                Xmult = card.ability.extra.x_mult,
+                x_mult = card.ability.extra.x_mult,
                 message_card = context.other_card
             }    
         }
@@ -58,6 +58,7 @@ function consumInfo.calculate(self, card, context)
             trigger = 'after',
             func = function()
                 G.FUNCS.csau_evolve_stand(card)
+                card.ability.evolved = false
                 return true 
             end 
         }))

@@ -1,3 +1,7 @@
+---------------------------
+--------------------------- Fanworks related global reset functions
+---------------------------
+
 function fnwk_reset_funkadelic()
     G.GAME.fnwk_current_funky_suits = {'Spades', 'Hearts'}
     local suits = {'Spades','Hearts','Clubs','Diamonds'}
@@ -31,6 +35,14 @@ function fnwk_reset_infidel()
     }
 end
 
+
+
+
+
+---------------------------
+--------------------------- Hand Level Up helper functions and contexts
+---------------------------
+
 function fnwk_batch_level_up(card, hands, amount)
     amount = amount or 1
     G.GAME.fnwk_last_upgraded_hand = {}
@@ -59,7 +71,15 @@ function level_up_hand(card, hand, instant, amount, bypass_event)
     return ret
 end
 
--- force not using main_start and main_end from default uibox_ability_table function if you've overwritten them
+
+
+
+
+
+---------------------------
+--------------------------- Force clear main_start and main_end
+---------------------------
+
 local ref_card_ui = generate_card_ui
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
     if not full_UI_table then
@@ -70,4 +90,84 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
     end
 
     return ref_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
+end
+
+
+
+
+
+---------------------------
+--------------------------- joker created context
+---------------------------
+
+local ref_create_card = create_card
+function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+    local ret = ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+
+    if ret.ability.set == 'Joker' then
+        SMODS.calculate_context({fnwk_joker_created = true, joker = ret, area = area})
+    end
+
+    return ret
+end
+
+
+
+
+
+---------------------------
+--------------------------- Value easing contexts
+---------------------------
+
+local ref_ease_hands = ease_hands_played
+function ease_hands_played(mod, instant)
+    local ret = ref_ease_hands(mod, instant)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            SMODS.calculate_context({fnwk_change_hands = true})
+            return true
+        end
+    }))
+
+    return ret
+end
+
+local ref_ease_discards = ease_discard
+function ease_discard(mod, instant, silent)
+    local ret = ref_ease_discards(mod, instant, silent)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            SMODS.calculate_context({fnwk_change_discards = true})
+            return true
+        end
+    }))
+    return ret
+end
+
+local ref_ease_dollars = ease_dollars
+function ease_dollars(mod, instant)
+    local ret = ref_ease_dollars(mod, instant)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            SMODS.calculate_context({fnwk_change_dollars = true})
+            return true
+        end
+    }))
+    return ret
+end
+
+local ref_ease_ante = ease_ante
+function ease_ante(mod)
+    local ret = ref_ease_ante(mod)
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            SMODS.calculate_context({fnwk_change_ante = true})
+            return true
+        end
+    }))
+    return ret
 end

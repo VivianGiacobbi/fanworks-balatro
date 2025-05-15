@@ -22,4 +22,13 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {G.P_CENTERS[card.ability.extra.tarot].name}}
 end
 
+function consumInfo.calculate(self, card, context)
+    if context.using_consumeable and not card.debuff then
+        local center_key = context.consumeable.config.center.key
+        if center_key == 'c_emperor' or center_key == 'c_fool' then
+            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+        end
+    end
+end
+
 return consumInfo

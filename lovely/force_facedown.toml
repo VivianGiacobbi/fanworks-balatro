@@ -34,10 +34,10 @@ times = 1
 target = "cardarea.lua"
 pattern = '''local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card, area)'''
 position = "at"
-payload = '''local stay_flipped = (G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card, area)) or card.joker_force_facedown'''
+payload = '''local stay_flipped = (G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card, area)) or card.joker_force_facedown
+card.joker_force_facedown = nil'''
 match_indent = true
 times = 1
-
 
 # draw_card()
 [[patches]]
@@ -45,6 +45,7 @@ times = 1
 target = "functions/common_events.lua"
 pattern = '''local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(to, card, from)'''
 position = "at"
-payload = '''local stay_flipped = (G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(to, card, from)) or card.joker_force_facedown'''
+payload = '''local stay_flipped = (G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(to, card, from)) or card.joker_force_facedown
+card.joker_force_facedown = nil'''
 match_indent = true
 times = 1

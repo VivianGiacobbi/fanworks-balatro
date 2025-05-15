@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 0
 
 #
-# Adds a run tracker for consumables
+# Adds custom discount calculation
 #
 
 # Card:set_cost()

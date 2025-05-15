@@ -31,10 +31,10 @@ function jokerInfo.calculate(self, card, context)
                     G.GAME.banned_keys[k] = true
                 end
             end
-            local card = create_card('Joker', G.jokers, nil, nil, nil, nil, nil, 'jes')
-            card:add_to_deck()
-            G.jokers:emplace(card)
-            card:start_materialize()
+            local new_fnwk_card = create_card('Joker', G.jokers, nil, nil, nil, nil, nil, 'jes')
+            new_fnwk_card:add_to_deck()
+            G.jokers:emplace(new_fnwk_card)
+            new_fnwk_card:start_materialize()
             G.GAME.joker_buffer = 0
             G.GAME.banned_keys = old_banned
             return true

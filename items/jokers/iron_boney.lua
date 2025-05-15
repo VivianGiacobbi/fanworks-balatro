@@ -142,7 +142,6 @@ function jokerInfo.update(self, card, dt)
                 card.ability.mask_mod = 0
                 card.ability.mask_target = 0
                 card.ability.boned = true
-                -- bad to the bone
                 card.late_center_draw = false
                 card.children.center.scale = card.ability.old_scale
                 card.T.w = card.ability.oldT.w
@@ -172,72 +171,52 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.cardarea == G.jokers and context.joker_destroyed and context.removed == card and not card.debuff then
+    if context.cardarea == G.jokers and context.fnwk_joker_destroyed and context.joker == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,
             func = function() 
                 local rand_joker = pseudorandom_element(G.jokers.cards, pseudoseed('boney'))
+                local rand_atlas = rand_joker.config.center.atlas
+                local rand_pos = rand_joker.config.center.pos
 
                 -- immediately replace with boney, forgoing any animation
-                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                local new_joker = copy_card(card)
+                fnwk_transform_card(rand_joker, card.config.center.key)                               
+                
+                rand_joker.ability.initialized = false
+                rand_joker.ability.boned = false
+                rand_joker.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+                rand_joker.ability.perishable_compat = true
+                rand_joker.ability.eternal_compat = true
+                rand_joker.ability.old_scale = card.children.center.scale
+                rand_joker.ability.oldT = card.T
+                rand_joker.late_center_draw = true
 
-                -- set boney's new abilities
-                new_joker:add_to_deck()
-                new_joker:hard_set_T(rand_joker.T.x, rand_joker.T.y, rand_joker.T.w, rand_joker.T.h)
-                new_joker.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-
-                local atlas = rand_joker.config.center.atlas and G.ASSET_ATLAS[rand_joker.config.center.atlas] or G.ASSET_ATLAS['Joker']
+                local atlas = rand_atlas and G.ASSET_ATLAS[rand_atlas] or G.ASSET_ATLAS['Joker']
                 local role = {
                     role_type = 'Minor',
-                    major = new_joker,
+                    major = rand_joker,
                     offset = { x = 0, y = 0 },
                     xy_bond = 'Strong',
                     wh_bond = 'Strong',
                     r_bond = 'Strong',
                     scale_bond = 'Strong',
-                    draw_major = new_joker,
+                    draw_major = rand_joker,
                 }
 
-                new_joker.children.boned_bottom = Sprite(new_joker.T.x, new_joker.T.y, new_joker.T.w, new_joker.T.h, atlas, rand_joker.config.center.pos)
-                new_joker.children.boned_bottom:set_role(role)
-                new_joker.children.boned_bottom.custom_draw = true
+                rand_joker.children.boned_bottom = Sprite(rand_joker.T.x, rand_joker.T.y, rand_joker.T.w, rand_joker.T.h, atlas, rand_pos)
+                rand_joker.children.boned_bottom:set_role(role)
+                rand_joker.children.boned_bottom.custom_draw = true
 
-                new_joker.children.boned_top = Sprite(new_joker.T.x, new_joker.T.y, new_joker.T.w, new_joker.T.h, atlas, rand_joker.config.center.pos)
-                new_joker.children.boned_top:set_role(role)
-                new_joker.children.boned_top.custom_draw = true
+                rand_joker.children.boned_top = Sprite(rand_joker.T.x, rand_joker.T.y, rand_joker.T.w, rand_joker.T.h, atlas, rand_pos)
+                rand_joker.children.boned_top:set_role(role)
+                rand_joker.children.boned_top.custom_draw = true
 
-                new_joker.children.backing = Sprite(new_joker.T.x, new_joker.T.y, new_joker.T.w, new_joker.T.h, G.ASSET_ATLAS['fnwk_iron_boney'], {x = 1, y = 0})
-                new_joker.children.backing:set_role(role)
-                new_joker.children.backing.custom_draw = true
-                
-                new_joker.ability.initialized = false
-                new_joker.ability.boned = false
-                new_joker.ability.perishable_compat = true
-                new_joker.ability.eternal_compat = true
-                new_joker.ability.old_scale = card.children.center.scale
-                new_joker.ability.oldT = card.T
-                new_joker.late_center_draw = true
-
-                -- inherit editions and stickers
-                new_joker:set_edition(rand_joker.edition, true, true)
-                for k, v in pairs(SMODS.Stickers) do
-                    new_joker.ability[v.key] = nil
-                    if v and rand_joker.ability[v.key] then
-                        local old_compat = new_joker.config.center[v.key..'_compat']
-                        new_joker.config.center[v.key..'_compat'] = true
-                        if type(v.should_apply) ~= 'function' or v:should_apply(new_joker, new_joker.config.center, G.jokers, true) then
-                            v:apply(new_joker, true)
-                        end
-                        new_joker.config.center[v.key..'_compat'] = old_compat
-                    end
-                end
+                rand_joker.children.backing = Sprite(rand_joker.T.x, rand_joker.T.y, rand_joker.T.w, rand_joker.T.h, G.ASSET_ATLAS['fnwk_iron_boney'], {x = 1, y = 0})
+                rand_joker.children.backing:set_role(role)
+                rand_joker.children.backing.custom_draw = true
 
                 -- place boney
-                G.jokers:emplace(new_joker, nil, nil, nil, nil, rand_idx)
-                rand_joker:remove()
-                G.GAME.joker_buffer = 0
                 return true 
             end 
         }))

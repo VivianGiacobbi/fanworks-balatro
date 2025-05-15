@@ -68,10 +68,10 @@ if skins or stands then
                     if not found_card then
                         found_card = G.GAME.last_tarot_planet
                     end
-                    local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, found_card, 'fool')
-                    card:add_to_deck()
-                    G.consumeables:emplace(card)
-                    card:juice_up(0.3, 0.5)
+                    local fool_c = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, found_card, 'fool')
+                    fool_c:add_to_deck()
+                    G.consumeables:emplace(fool_c)
+                    fool_c:juice_up(0.3, 0.5)
                 end
                 return true end }))
             delay(0.6)
@@ -81,7 +81,7 @@ if skins or stands then
             local force_card = force_fool_card()
             if force_card then return true end
 
-            local has_space = #G.consumeables.cards < G.consumeables.config.card_limit or self.area == G.consumeables
+            local has_space = #G.consumeables.cards < G.consumeables.config.card_limit or card.area == G.consumeables
             return (has_space and G.GAME.last_tarot_planet and G.GAME.last_tarot_planet ~= 'c_fool')
         end
     end
@@ -100,27 +100,30 @@ if skins or stands then
     if stands then
         build_table.loc_vars = function (self, info_queue, card)
             local force_options = {
-                c_hermit = next(SMODS.find_card('c_fnwk_city_dead'))
+                c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
+                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
             }
 
             local tarot_count = self.config.tarots
             for k, v in pairs(force_options) do
                 tarot_count = tarot_count - 1
+                info_queue[#info_queue+1] = G.P_CENTERS[k]
             end
             tarot_count = math.max(0, tarot_count)
             
             return { 
                 vars = { tarot_count },
-                key = self.key..(force_options.c_hermit and '_dead' or '')
+                key = self.key..(force_options.c_hermit and '_dead' or '')..(force_options.c_hanged_man and '_civil' or '')
             }
         end
 
         build_table.use = function(self, card, area, copier)
             local force_options = {
-                c_hermit = next(SMODS.find_card('c_fnwk_city_dead'))
+                c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
+                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
             }
 
-            local tarot_count = self.config.tarots
+            local tarot_count = card.ability.config.tarots
             for k, v in pairs(force_options) do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -140,7 +143,7 @@ if skins or stands then
             end
 
             tarot_count = math.max(0, tarot_count)
-            for i = 1, tarot_count, G.consumeables.config.card_limit - #G.consumeables.cards do
+            for i = 1, math.min(tarot_count, G.consumeables.config.card_limit - #G.consumeables.cards) do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.4,

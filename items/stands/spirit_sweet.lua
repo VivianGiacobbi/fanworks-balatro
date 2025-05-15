@@ -1,3 +1,8 @@
+SMODS.Sound({
+	key = "sweet_bod",
+	path = "sweet_bod.ogg",
+})
+
 local consumInfo = {
     name = 'Sweet Bod',
     set = 'csau_Stand',
@@ -39,6 +44,7 @@ function consumInfo.calculate(self, card, context)
         end,
         extra = {
             message = localize('k_grafted'),
+            sound = 'fnwk_sweet_bod',
             message_card = card,
         }    
     }

@@ -98,58 +98,58 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if not context.cardarea == G.jokers or context.blueprint then return end
-    if context.joker_destroyed and context.removed ~= card and context.removed.config.center.key ~= 'j_fnwk_plancks_ghost' then	
+    if context.fnwk_joker_destroyed and context.joker ~= card and context.joker.config.center.key ~= 'j_fnwk_plancks_ghost' then	
 		
 		-- single level compare for valid keys in the main ability table
 		local changed = false
-		for k,v in pairs(context.removed.ability) do
-			if valid_keys[k] and v ~= context.removed.config.center.config[k] then
+		for k,v in pairs(context.joker.ability) do
+			if valid_keys[k] and v ~= context.joker.config.center.config[k] then
 				changed = true
 				break
 			end
 		end
 
 		if not changed then
-			changed = FnwkDeepCompare(context.removed.ability.extra, context.removed.config.center.config.extra)
+			changed = FnwkDeepCompare(context.joker.ability.extra, context.joker.config.center.config.extra)
 		end	
 		
 		if not changed then return end
 		
 		-- store relevant ability and extra values
 		local saved_ability = {}
-		for k, v in pairs(context.removed.ability) do
+		for k, v in pairs(context.joker.ability) do
 			if valid_keys[k] then saved_ability[k] = v end
 		end
-		saved_ability.extra = FnwkRecursiveTableMod(context.removed.ability.extra)
+		saved_ability.extra = FnwkRecursiveTableMod(context.joker.ability.extra)
 
 		-- save this table
-		card.ability.extra.saved_abilities[context.removed.config.center.key] = saved_ability
+		card.ability.extra.saved_abilities[context.joker.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and context.joker_created and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
-		for k, v in pairs(card.ability.extra.saved_abilities[context.card.config.center.key]) do
-			context.card.ability[k] = v
+	if context.cardarea == G.jokers and context.fnwk_joker_created and context.joker ~= card and card.ability.extra.saved_abilities[context.joker.config.center.key] then			
+		for k, v in pairs(card.ability.extra.saved_abilities[context.joker.config.center.key]) do
+			context.joker.ability[k] = v
 		end
 
-		card.ability.extra.saved_abilities[context.card.config.center.key] = nil
-		context.card:set_cost()
+		card.ability.extra.saved_abilities[context.joker.config.center.key] = nil
+		context.joker:set_cost()
 
 		G.E_MANAGER:add_event(Event({
 			blockable = false,
 			trigger = 'after', 
 			func = function()
-				context.card.ability.make_vortex = true
-				context.card:explode(nil, 0.6, true)
+				context.joker.ability.make_vortex = true
+				context.joker:explode(nil, 0.6, true)
 				G.E_MANAGER:add_event(Event({
 					blockable = false,
 					trigger = 'after', 
 					delay = 1.2, 
 					func = function()
-						context.card.ability.make_vortex = nil
+						context.joker.ability.make_vortex = nil
 						return true 
 					end
 				}))
-				card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
+				card_eval_status_text(context.joker or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
 				return true 
 			end
 		}))

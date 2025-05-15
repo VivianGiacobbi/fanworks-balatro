@@ -1,9 +1,21 @@
+---------------------------
+--------------------------- Custom localization colors
+---------------------------
+
 local ref_loc_colour = loc_colour
 function loc_colour(_c, _default)
 	ref_loc_colour(_c, _default)
 	G.ARGS.LOC_COLOURS.fanworks = G.C.FANWORKS
 	return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
 end
+
+
+
+
+
+---------------------------
+--------------------------- Fibonacci calculation
+---------------------------
 
 local function is_perfect_square(x)
 	local sqrt = math.sqrt(x)
@@ -53,11 +65,27 @@ function csau_get_fibonacci(hand)
 	return ret
 end
 
+
+
+
+
+---------------------------
+--------------------------- Pseudoseed hooking for prediction
+---------------------------
+
 function fnwk_psuedoseed_predict(bool)
 	G.GAME.pseudorandom.predict_mode = bool or false
 	G.GAME.pseudorandom.predicts = {}
 	return G.GAME.pseudorandom.predict_mode
 end
+
+
+
+
+
+---------------------------
+--------------------------- Balance score helper function
+---------------------------
 
 function fnwk_balance_score(card)
 	local tot = hand_chips + mult
@@ -107,6 +135,14 @@ function fnwk_balance_score(card)
     delay(0.6)
 end
 
+
+
+
+
+---------------------------
+--------------------------- Main Menu UI callbacks
+---------------------------
+
 G.FUNCS.reset_trophies = function(e)
 	local warning_text = e.UIBox:get_UIE_by_ID('warn')
 	if warning_text.config.colour ~= G.C.WHITE then
@@ -143,7 +179,6 @@ function G.FUNCS.fnwk_apply_alts()
     for k, v in pairs(G.P_CENTERS) do
 		if v.alt_art then
 			v.atlas = string.sub(k, 3, #k)..(fnwk_enabled['enableAltArt'] and '_alt' or '')
-			sendDebugMessage(v.atlas)
 		end
     end
 end
@@ -170,17 +205,37 @@ function G.FUNCS.fnwk_restart()
 	end
 end
 
+
+
+
+
+---------------------------
+--------------------------- Hand draw contexts
+---------------------------
+
 local draw_from_deck_to_handref = G.FUNCS.draw_from_deck_to_hand
 function G.FUNCS.draw_from_deck_to_hand(e)
 	local hand_limit = e
 	if G.GAME.dzrawlin then
 		hand_limit = #G.deck.cards + #G.hand.cards
+	elseif G.GAME.fnwk_lenfer_draw then
+		hand_limit = 5
+		G.GAME.fnwk_lenfer_draw = nil
 	end
+
+	sendDebugMessage('drawing')
 	
-	SMODS.calculate_context({pre_draw = true})
+	SMODS.calculate_context({pre_draw = true, num_draws = hand_limit})
 	return draw_from_deck_to_handref(hand_limit)
 end
 
+
+
+
+
+---------------------------
+--------------------------- Extra blind helper functions
+---------------------------
 
 function fnwk_get_most_played_hand()
 	local hand = 'High Card'
@@ -241,4 +296,37 @@ function fnwk_remove_extra_blind(blind_source)
 	end
 
 	return false
+end
+
+
+
+
+
+---------------------------
+--------------------------- Cardsauce transform function
+---------------------------
+
+--- Based on code from Ortalab
+--- Replaces a card in-place with a card of the specified key
+--- @param card Card Balatro card table of the card to replace
+--- @param to_key string string key (including prefixes) to replace the given card
+function fnwk_transform_card(card, to_key)
+	local new_center = G.P_CENTERS[to_key]
+	card.children.center = Sprite(card.T.x, card.T.y, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[new_center.atlas], new_center.pos)
+	card.children.center.states.hover = card.states.hover
+	card.children.center.states.click = card.states.click
+	card.children.center.states.drag = card.states.drag
+	card.children.center.states.collide.can = false
+	card.children.center:set_role({major = card, role_type = 'Glued', draw_major = card})
+
+	if new_center.soul_pos then
+		card.children.floating_sprite = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_center.atlas], new_center.soul_pos)
+		card.children.floating_sprite.role.draw_major = card
+		card.children.floating_sprite.states.hover.can = false
+		card.children.floating_sprite.states.click.can = false
+	end
+
+	card:set_ability(new_center)
+	card:add_to_deck()
+	card:set_cost()
 end

@@ -31,7 +31,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_moneytalks then
+    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_moneytalks then
         return {
             func = function()
                 G.FUNCS.csau_flare_stand_aura(card, 0.5)

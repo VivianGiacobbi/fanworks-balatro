@@ -16,27 +16,30 @@ local jokerInfo = {
 }
 
 local function tally_fanworks_jokers()
-	if not G.GAME or not G.GAME.owned_jokers then
+	if not G.GAME or not G.GAME.fnwk_owned_jokers then
 		return 0
 	end
 
 	local tally = 0
-	for k, _ in pairs(G.GAME.owned_jokers) do
-		if FnwkStringStartsWith(k, 'j_fnwk') then tally = tally + 1 end
+	for k, _ in pairs(G.GAME.fnwk_owned_jokers) do
+		local center = G.P_CENTERS[k]
+		if center and FnwkContainsString(k, 'fnwk_') and (center.set == 'Joker' or center.set == 'csau_Stand') then 
+			tally = tally + 1
+		end
 	end
 
 	return tally
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult_mod * tally_fanworks_jokers() }}
 end
 
 function jokerInfo.calculate(self, card, context)
 
 	if not context.blueprint then
-		if (context.buying_card and context.card.ability.set == 'Joker') or (context.joker_created and context.card.area == G.jokers) then
+		if (context.buying_card and context.card.ability.set == 'Joker') or (context.fnwk_joker_created and context.area == G.jokers) then
 			local key = context.card.config.center.key
 			if FnwkStringStartsWith(key, 'j_fnwk') then
 				return {
