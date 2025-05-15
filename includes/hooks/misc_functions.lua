@@ -222,8 +222,6 @@ function G.FUNCS.draw_from_deck_to_hand(e)
 		hand_limit = 5
 		G.GAME.fnwk_lenfer_draw = nil
 	end
-
-	sendDebugMessage('drawing')
 	
 	SMODS.calculate_context({pre_draw = true, num_draws = hand_limit})
 	return draw_from_deck_to_handref(hand_limit)

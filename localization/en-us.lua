@@ -1929,9 +1929,27 @@ return {
 					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
 				}
 			},
+			v_fnwk_sunshine_rapture = {
+				name = "Rapture",
+				text = {
+					"{C:green}Uncommon{} and {C:red}Rare{} {C:attention}Jokers{}",
+					"appear {C:attention}#1#X{} more often"
+				}
+			},
+			v_fnwk_sunshine_totality = {
+				name = "Totality",
+				text = {
+                    "{C:green}Uncommon{} and {C:red}Rare{} {C:attention}Jokers{}",
+					"appear {C:attention}#1#X{} more often"
+                },
+				unlock = {
+					"Have {C:attention}#1#{} {C:red}Rare{} Jokers",
+					"in your Joker Slots"
+				}
+			},
 		},
 		Back = {
-			b_fnwk_fanworks = {
+			b_fnwk_fanworks_deck = {
 				name = "Fanworks Deck",
 				text = {
 					"Start run with the",
@@ -1945,9 +1963,17 @@ return {
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
+			b_fnwk_act = {
+				name = "ACT Deck",
+				text = {
+					"{C:attention}Small Blind{} shops have {C:blue}common{} Jokers",
+					"{C:attention}Big Blind{} shops have {C:green}uncommon{} Jokers",
+					"{C:attention}Boss Blind{} shops have {C:red}rare{} Jokers",
+				},
+			},
 		},
 		Sleeve = {
-			sleeve_fnwk_sleeve_fanworks = {
+			sleeve_fnwk_sleeve_fanworks_deck = {
 				name = "Fanworks Sleeve",
 				text = {
 					"Start run with the",
@@ -1956,7 +1982,7 @@ return {
 					"{C:attention}#2#X{} more often",
 				},
 			},
-			sleeve_fnwk_sleeve_fanworks_alt = {
+			sleeve_fnwk_sleeve_fanworks_deck_alt = {
 				name = "Fanworks Sleeve",
 				text = {
 					"Start run with the",

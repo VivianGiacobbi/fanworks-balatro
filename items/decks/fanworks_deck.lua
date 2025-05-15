@@ -9,6 +9,7 @@ local deckInfo = {
     unlocked = false,
     unlock_condition = {num = 25},
     discovered = true,
+    fanwork = 'fanworks',
 }
 
 function deckInfo.check_for_unlock(self, args)
