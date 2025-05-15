@@ -58,38 +58,14 @@ function consumInfo.calculate(self, card, context)
         end
 
         if gold_count > 0 then
-            local flare_func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.38)
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    func = function()
-                        card:juice_up()
-                        return true
-                    end 
-                }))
-            end
-
-            local return_table = {
-                func = flare_func,
+            return {
+                func = function()
+                    G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                end,
                 message = localize('k_again_ex'),
-                repetitions = 1,
-                card = context.other_card,
+                repetitions = (gold_count * reps),
+                card = card,
             }
-
-            local recurse_table = return_table
-            for i=1, (gold_count * reps) - 1 do
-                recurse_table.extra = {
-                    func = flare_func,
-                    message = localize('k_again_ex'),
-                    repetitions = 1,
-                    card = context.other_card,
-                }
-
-                recurse_table = recurse_table.extra
-            end
-
-            return return_table
         end     
     end
 end

@@ -247,16 +247,19 @@ local items_to_load = {
 	},
 	
 	Deck = {
-		'fanworks',
+		'fanworks_deck',
+		'act',
 	},
 
 	Sleeve = {
-		'sleeve_fanworks'
+		'sleeve_fanworks_deck'
 	},
 
 	Voucher = {
 		'rubicon_kitty',
-    	'rubicon_parade'
+    	'rubicon_parade',
+		'sunshine_rapture',
+		'sunshine_totality'
 	},
 
 	Challenge = {
