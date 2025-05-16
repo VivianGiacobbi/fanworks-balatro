@@ -57,7 +57,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.individual and not context.other_card.debuff and context.other_card.cubist_flagged then
+	if context.individual and context.cardarea == G.play and not context.other_card.debuff and context.other_card.cubist_flagged then
 		context.other_card.cubist_flagged = nil
 		return {
             chips = card.ability.extra.chips,
