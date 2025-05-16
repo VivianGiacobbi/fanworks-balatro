@@ -104,7 +104,7 @@ if skins or stands then
                 c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
             }
 
-            local tarot_count = self.config.tarots
+            local tarot_count = card.ability.extra.tarots
             for k, v in pairs(force_options) do
                 tarot_count = tarot_count - 1
                 info_queue[#info_queue+1] = G.P_CENTERS[k]
@@ -123,7 +123,7 @@ if skins or stands then
                 c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
             }
 
-            local tarot_count = card.ability.config.tarots
+            local tarot_count = card.ability.extra.tarots
             for k, v in pairs(force_options) do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
