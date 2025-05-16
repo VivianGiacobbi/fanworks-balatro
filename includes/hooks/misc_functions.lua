@@ -6,6 +6,7 @@ local ref_loc_colour = loc_colour
 function loc_colour(_c, _default)
 	ref_loc_colour(_c, _default)
 	G.ARGS.LOC_COLOURS.fanworks = G.C.FANWORKS
+	G.ARGS.LOC_COLOURS.crystal = G.C.CRYSTAL
 	return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
 end
 

@@ -258,6 +258,8 @@ local items_to_load = {
 	Voucher = {
 		'rubicon_kitty',
     	'rubicon_parade',
+		'streetlight_waystone',
+		'streetlight_binding',
 		'sunshine_rapture',
 		'sunshine_totality'
 	},

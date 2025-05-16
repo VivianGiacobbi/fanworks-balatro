@@ -17,6 +17,7 @@ end
 SMODS.optional_features.quantum_enhancements = true
 
 G.C.FANWORKS = SMODS.current_mod.badge_colour
+G.C.CRYSTAL = HEX('B5FFFF')
 
 local includes = {
 	-- includes utility functions required for following files
