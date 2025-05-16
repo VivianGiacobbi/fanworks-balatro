@@ -35,7 +35,7 @@ end
 function jokerInfo.check_for_unlock(self, args)
 	if args.type ~= self.unlock_condition.type then return end
 
-	return G.GAME.chip_novas <= self.unlock_condition.max_novas
+	return G.GAME.fnwk_chip_novas <= self.unlock_condition.max_novas
 end
 
 function jokerInfo.calculate(self, card, context)
