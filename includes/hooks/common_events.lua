@@ -102,7 +102,7 @@ end
 
 local ref_create_card = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    if G.GAME.starting_params.fnwk_act_rarity and area == G.shop_jokers then
+    if G.GAME.starting_params.fnwk_act_rarity and area == G.shop_jokers and _type == 'Joker' then
         if G.GAME.round_resets.blind_states.Small == 'Upcoming' then
             _rarity = 'Rare'
         elseif G.GAME.round_resets.blind_states.Small == 'Defeated' and G.GAME.round_resets.blind_states.Big == 'Upcoming' then

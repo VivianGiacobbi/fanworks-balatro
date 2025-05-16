@@ -47,8 +47,15 @@ SMODS.Enhancement:take_ownership('glass', {
             return
         end
         
+        if context.destroy_card and context.cardarea == G.play and context.destroy_card == card and pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra then
+            return { remove = true }
+        end
 
-        return ref_glass_calculate(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return {
+                x_mult = 2,
+            }
+        end
     end,
 }, true)
 
