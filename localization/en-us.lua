@@ -340,8 +340,8 @@ return {
 			k_expired_ex = 'Expired!',
 			k_dzvalin = 'Dummy Text!',
 			k_joker_replaced = 'Energy Tranformed!',
-
 			k_blind_disabled_ex = 'Blind Disabled',
+			k_crystal = 'Changed timelines...',
 
 			-- stand related strings
 			k_mcr_bubbled = 'Bubbled!',
@@ -1927,6 +1927,19 @@ return {
                 },
 				unlock = {
 					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
+				}
+			},
+			v_fnwk_streetlight_waystone = {
+				name = "Waystone",
+				text = {
+					"{E:1,C:inactive}Does Nothing...?{}"
+				}
+			},
+			v_fnwk_streetlight_binding = {
+				name = "Binding Band",
+				text = {
+					"{E:1}Once per run, upon {C:red}death,{}",
+					"{E:1}begin a new{} {E:1,C:dark_edition}experiment{}"
 				}
 			},
 			v_fnwk_sunshine_rapture = {

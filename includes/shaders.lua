@@ -7,6 +7,7 @@ SMODS.Shader({ key = 'bloom', path = 'bloom.fs' })
 SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
 SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
+SMODS.Shader({ key = 'mod_background', path = 'mod_background.fs'})
 
 SMODS.DrawStep {
     key = 'revived',
