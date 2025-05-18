@@ -15,6 +15,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'glass',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -27,7 +28,7 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, 'm_stone') then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 x_mult = card.ability.extra.x_mult,
@@ -36,7 +37,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.destroy_card and context.cardarea == G.play and not context.repetition then
+    if not context.blueprint and context.destroy_card and context.cardarea == G.play and not context.repetition then
         if SMODS.has_enhancement(context.destroy_card, 'm_stone') and pseudorandom('bigpoppa') < G.GAME.probabilities.normal / card.ability.extra.chance then
             return {
                 remove = true

@@ -16,6 +16,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'lighted',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -25,13 +26,16 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if card.debuff then return end
+
     if context.before then
         for _, v in ipairs(context.full_hand) do
-            if not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            if not v.edition and not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
+                local juice_card = (context.blueprint_card or card)
+                G.FUNCS.csau_flare_stand_aura(juice_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     v:set_edition(card.ability.extra.edition, true)
-                    card:juice_up()
+                    juice_card:juice_up()
                     return true end
                 }))
                 delay(0.5)

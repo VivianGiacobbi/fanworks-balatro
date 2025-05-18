@@ -14,6 +14,7 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     fanwork = 'crimson',
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -73,10 +74,12 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if not G.GAME.fnwk_last_upgraded_hand or card.debuff then return end
+
     if context.joker_main and G.GAME.fnwk_last_upgraded_hand[context.scoring_name] then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 mult = card.ability.extra.mult,

@@ -14,6 +14,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'whiplash',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 
@@ -22,11 +23,15 @@ function consumInfo.loc_vars(self, info_queue, card)
     return { vars = {card.ability.extra.consum_mod} }
 end
 
-function consumInfo.add_to_deck(self, card)
+function consumInfo.add_to_deck(self, card, from_debuff)
+    if from_debuff then return end
+
     G.consumeables:change_size(card.ability.extra.consum_mod)
 end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
+    if from_debuff then return end
+
 	G.consumeables:change_size(-card.ability.extra.consum_mod)
 end
 

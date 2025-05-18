@@ -1,5 +1,4 @@
 local ref_glass_locvars = SMODS.Centers.m_glass.loc_vars
-local ref_glass_calculate = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
     config = {extra = 4},
     loc_vars = function(self, info_queue, card)
@@ -19,7 +18,15 @@ SMODS.Enhancement:take_ownership('glass', {
     end,
     calculate = function(self, card, context)
         local dances = SMODS.find_card('c_fnwk_rubicon_dance')
-        if next(dances) then
+        local valid = true
+        for _, v in ipairs(dances) do
+            if v.debuff then
+                valid = false
+                break
+            end
+        end
+
+        if valid then
             if context.destroy_card and context.cardarea == G.play then
                 local is_spades = context.destroy_card:is_suit('Spades')
                 if not is_spades then
@@ -74,8 +81,8 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     fanwork = 'rubicon',
+    blueprint_compat = false,
     requires_stands = true,
-    
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -90,6 +97,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if card.debuff or context.blueprint then return end
+
     if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_dance then
         return {
             func = function()

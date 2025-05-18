@@ -15,12 +15,9 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
-
-local function recursive_flare_table(count)
-
-end
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
@@ -40,7 +37,9 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.fnwk_joker_destroyed and context.joker ~= card then
+    if card.debuff then return end
+
+    if context.fnwk_joker_destroyed and context.joker ~= card and not context.blueprint then
         local name = string.lower(context.joker.config.center.name)
         if FnwkContainsString(name, 'jokestar') then
             card.ability.extra.retrigger_mod = card.ability.extra.retrigger_mod + 1
@@ -60,11 +59,11 @@ function consumInfo.calculate(self, card, context)
         if gold_count > 0 then
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                    G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
                 end,
                 message = localize('k_again_ex'),
                 repetitions = (gold_count * reps),
-                card = card,
+                card = context.blueprint_card or card,
             }
         end     
     end

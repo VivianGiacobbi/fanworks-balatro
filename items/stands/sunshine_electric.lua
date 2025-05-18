@@ -11,6 +11,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'sunshine',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 

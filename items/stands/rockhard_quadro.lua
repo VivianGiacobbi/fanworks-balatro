@@ -15,6 +15,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'rockhard',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -36,12 +37,14 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.debuff then return end
+
     if context.after and context.scoring_name == card.ability.extra.hand and G.GAME.current_round.hands_played == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         local random_tarot = pseudorandom_element(card.ability.extra.tarots, pseudoseed('fnwk_quadro'))
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, random_tarot, 'fnwk_quadro')
                     new_tarot:set_edition({negative = true}, true)
@@ -53,7 +56,7 @@ function consumInfo.calculate(self, card, context)
             end,
             extra = {
                 colour = G.C.SECONDARY_SET.Tarot,
-                message_card = card,
+                message_card = context.blueprint_card or card,
                 message = localize('k_plus_tarot'),
             },
         }

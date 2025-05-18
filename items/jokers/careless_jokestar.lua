@@ -11,9 +11,6 @@ local jokerInfo = {
     perishable_compat = true,
     fanwork = 'careless',
     in_progress = true,
-    loc_vars = function(self, info_queue, card)
-
-    end,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

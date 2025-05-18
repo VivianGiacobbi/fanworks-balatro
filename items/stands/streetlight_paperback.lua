@@ -16,6 +16,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'streetlight',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 
@@ -54,6 +55,8 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.blueprint or card.debuff then return end
+
     if context.fnwk_change_ante and G.GAME.round_resets.ante >= card.ability.extra.evolve_ante then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',

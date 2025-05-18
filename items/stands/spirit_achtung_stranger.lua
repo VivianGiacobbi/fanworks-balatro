@@ -17,6 +17,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -28,7 +29,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if context.pre_draw and context.individual then
+    if not context.blueprint and context.pre_draw and context.individual then
         context.drawn.joker_force_facedown = true
 	end
 
@@ -37,9 +38,9 @@ function consumInfo.calculate(self, card, context)
         local key_var = card.ability.extra.hand_gain == 1 and 'a_hand' or 'a_hands'
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.38)
             end,
-            card = card,
+            card = context.blueprint_card or card,
             message = localize{type = 'variable', key = key_var, vars = {card.ability.extra.hand_gain}},
             colour = G.C.BLUE
         }
@@ -48,12 +49,12 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and context.other_card.ability.played_while_flipped then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,
                     func = function()
-                        card:juice_up()
+                        (context.blueprint_card or card):juice_up()
                         return true
                     end 
                 }))

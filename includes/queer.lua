@@ -99,23 +99,6 @@ SMODS.Joker:take_ownership('j_bootstraps',
 true
 )
 
-SMODS.Consumable:take_ownership('c_wheel_of_fortune',
-{
-    loc_txt = {
-        ['en-us'] = {
-            name = "The Wheel of Fortune",
-            text = {
-                "{C:green}#1# in #2#{} chance to add",
-                "{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
-                "{C:dark_edition}Queer{} edition to",
-                "a random {C:attention}Joker"
-            }
-        }
-    }
-},
-true
-)
-
 SMODS.Consumable:take_ownership('c_aura',
 {
     loc_txt = {

@@ -15,9 +15,21 @@ local voucherInfo = {
     cost = 10,
     requires = {'v_fnwk_streetlight_waystone'},
     unlocked = false,
-    unlock_condition = { type = 'modify_jokers', rare_count = 5 },
+    unlock_condition = { type = 'ante_up', ante_count = 4 },
     fanwork = 'streetlight'
 }
+
+function voucherInfo.locked_loc_vars(self, info_queue, card)
+    return { vars = {self.unlock_condition.ante_count}}
+end
+
+function voucherInfo.check_for_unlock(self, args)
+    if not G.jokers or args.type ~= self.unlock_condition.type or not G.GAME.fnwk_waystone_ante then
+        return false
+    end
+    
+    return args.ante >= G.GAME.fnwk_waystone_ante
+end
 
 function voucherInfo.calculate(self, card, context)
     if not (context.end_of_round and context.game_over) or card.ability.extra.used then

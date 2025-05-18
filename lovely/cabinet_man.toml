@@ -44,11 +44,11 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     if G.EMU.game.timers.startup_timer and G.EMU.game.timers.startup_timer.time > 0 then
         local max_lerp = (G.EMU.game.timers.startup_timer.sub_count + 1) / G.EMU.game.timers.startup_timer.subtimers
         local lerp_val = G.EMU.game.timers.startup_timer.sub_time /  G.EMU.game.timers.startup_timer.sub_limit * max_lerp
-        in_x_pos = math.lerp(G.EMU.game.start_pos.x, in_x_pos, lerp_val)
-        in_y_pos = math.lerp(G.EMU.game.start_pos.y, in_y_pos, lerp_val)
-        out_x_pos = math.lerp(G.EMU.game.start_pos.x, out_x_pos, lerp_val)
-        out_y_pos = math.lerp(G.EMU.game.start_pos.y, out_y_pos, lerp_val)
-        scale = math.lerp(0, scale, lerp_val)
+        in_x_pos = math.fnwk_lerp(G.EMU.game.start_pos.x, in_x_pos, lerp_val)
+        in_y_pos = math.fnwk_lerp(G.EMU.game.start_pos.y, in_y_pos, lerp_val)
+        out_x_pos = math.fnwk_lerp(G.EMU.game.start_pos.x, out_x_pos, lerp_val)
+        out_y_pos = math.fnwk_lerp(G.EMU.game.start_pos.y, out_y_pos, lerp_val)
+        scale = math.fnwk_lerp(0, scale, lerp_val)
     end
 
     G.SHADERS['CRT']:send('distortion_fac', {1.0 + 0.07, 1.0 + 0.1})

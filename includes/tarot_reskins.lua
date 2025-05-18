@@ -166,6 +166,38 @@ if skins or stands then
     SMODS.Consumable:take_ownership('c_emperor', build_table, true)
 end
 
+local queer = fnwk_enabled['enableQueer']
+if skins or queer then
+    local build_table = {
+        -- generate_ui = 0
+    }
+
+    if queer then
+        --[[
+        build_table.loc_txt = {
+            ['en-us'] = {
+                name = "The Wheel of Fortune",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add",
+                    "{C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+                    "{C:dark_edition}Queer{} edition to",
+                    "a random {C:attention}Joker"
+                }
+            }
+        }
+        --]]
+    end
+
+    if skins then
+        build_table.atlas = 'fnwk_tarotreskins'
+        build_table.set_badges = function(self, card, badges)
+            badges[#badges+1] = FnwkDynamicBadge('jojopolis')
+        end
+    end
+
+    SMODS.Consumable:take_ownership('c_wheel_of_fortune', build_table, true)
+end
+
 if not fnwk_enabled['enableTarotSkins'] then
     return
 end
@@ -232,13 +264,6 @@ SMODS.Consumable:take_ownership('c_hermit', {
     atlas = 'fnwk_tarotreskins',
     set_badges = function(self, card, badges)
         badges[#badges+1] = FnwkDynamicBadge('city')
-    end
-}, true)
-
-SMODS.Consumable:take_ownership('c_wheel_of_fortune', {
-    atlas = 'fnwk_tarotreskins',
-    set_badges = function(self, card, badges)
-        badges[#badges+1] = FnwkDynamicBadge('jojopolis')
     end
 }, true)
 

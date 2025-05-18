@@ -17,6 +17,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 

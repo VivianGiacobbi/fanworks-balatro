@@ -15,6 +15,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -24,7 +25,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.destroy_card and context.cardarea == G.play then
+    if not context.blueprint and context.destroy_card and context.cardarea == G.play then
         local scoring  = SMODS.in_scoring(context.destroy_card, context.scoring_hand)
         local steel = SMODS.has_enhancement(context.destroy_card, 'm_steel')
         local king = context.destroy_card:get_id() == 13
@@ -40,7 +41,7 @@ function consumInfo.calculate(self, card, context)
     if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_farewell then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 message = localize('k_farewell'),

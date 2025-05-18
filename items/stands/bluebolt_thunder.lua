@@ -18,6 +18,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -33,11 +34,11 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)    
-    if context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
+    if not context.blueprint and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.csau_evolve_stand(card, localize('k_stand_devolved'))
+                G.FUNCS.csau_evolve_stand(card)
                 return true 
             end 
         }))
@@ -54,10 +55,14 @@ function consumInfo.calculate(self, card, context)
     if (not context.scoring_hand[1].debuff and SMODS.has_any_suit(context.scoring_hand[1]))
     or (not context.other_card.debuff and SMODS.has_any_suit(context.scoring_hand[1]))
     or context.other_card:is_suit(context.scoring_hand[1].base.suit) then
-        card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
+
+        if not context.blueprint then
+            card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
+        end
+        
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 Xmult = card.ability.extra.x_mult,

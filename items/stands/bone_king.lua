@@ -16,6 +16,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -25,14 +26,16 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_steel') and SMODS.in_scoring(context.destroy_card, context.scoring_hand) then
+    if card.debuff then return end
+    
+    if not context.blueprint and context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_steel') and SMODS.in_scoring(context.destroy_card, context.scoring_hand) then
         context.destroy_card.fnwk_removed_by_kingandcountry = true
         return {
             remove = true
         }
     end
 
-    if context.remove_playing_cards and not context.scoring_hand then
+    if not context.blueprint and context.remove_playing_cards and not context.scoring_hand then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -47,7 +50,7 @@ function consumInfo.calculate(self, card, context)
 
     -- the after handler covers evolving the stand for cards destroyed during main scoring
     -- in order to let K&C's ability play out, otherwise it would evolve before the hand finishes
-    if context.after then
+    if not context.blueprint and context.after then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -62,12 +65,12 @@ function consumInfo.calculate(self, card, context)
     if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_kingandcountry then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.48)
-                
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.48)
             end,
             delay = 0.75,
             extra = {
                 func = function()
+                    local juice_card = context.blueprint_card or card
                     local available_indices = {}
                     for i, hand_card in ipairs(G.hand.cards) do 
                         if hand_card.config.center.key ~= 'm_steel' then
@@ -83,7 +86,7 @@ function consumInfo.calculate(self, card, context)
                         trigger = 'after',
                         delay = 0.15,
                         func = function()
-                            card:juice_up()
+                            juice_card:juice_up()
                             rand_card:flip()
                             rand_card:juice_up(0.3, 0.3)
                             play_sound('card1')

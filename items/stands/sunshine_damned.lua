@@ -17,6 +17,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'sunshine',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 
@@ -36,7 +37,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not (context.cardarea == G.play and context.individual) then return end
+    if not (context.cardarea == G.play and context.individual) or context.blueprint or card.debuff then return end
 
     local found_suit = false
     for _, v in pairs(card.ability.extra.suits) do

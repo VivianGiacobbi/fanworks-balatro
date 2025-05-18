@@ -17,6 +17,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -34,30 +35,31 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if context.pre_draw and not context.individual then
+    if not context.blueprint and context.pre_draw and not context.individual then
         G.deck.cards[#G.deck.cards].joker_force_facedown = true
 	end
 
     if context.individual and context.cardarea == G.play and context.other_card.ability.played_while_flipped then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,
                     func = function()
-                        card:juice_up()
+                        (context.blueprint_card or card):juice_up()
                         return true
                     end 
                 }))
             end,
             extra = {
+                x_mult = card.ability.extra.x_mult,
                 card = context.other_card
             }
         }
     end
 
-    if context.after and context.scoring_name == card.ability.extra.evolve_hand then
+    if not context.blueprint and context.after and context.scoring_name == card.ability.extra.evolve_hand then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()

@@ -17,6 +17,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -26,7 +27,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.destroy_card and context.cardarea == G.play and next(context.poker_hands[card.ability.extra.destroy_hand]) then
+    if not context.blueprint and context.destroy_card and context.cardarea == G.play and next(context.poker_hands[card.ability.extra.destroy_hand]) then
         card.ability.fnwk_thunder_dc_activated = true
         return {
             remove = true
@@ -36,7 +37,7 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and next(context.poker_hands[card.ability.extra.destroy_hand]) then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 x_mult = card.ability.extra.x_mult,
@@ -45,7 +46,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.remove_playing_cards and context.scoring_hand then
+    if not context.blueprint and context.remove_playing_cards and context.scoring_hand then
         return {
             func = function()
                 G.FUNCS.csau_flare_stand_aura(card, 0.5)
@@ -53,11 +54,11 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.after and card.ability.fnwk_thunder_dc_activated then
+    if not context.blueprint and context.after and card.ability.fnwk_thunder_dc_activated then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.csau_evolve_stand(card)
+                G.FUNCS.csau_evolve_stand(card, localize('k_stand_devolved'))
                 card.ability.evolved = false
                 return true 
             end 

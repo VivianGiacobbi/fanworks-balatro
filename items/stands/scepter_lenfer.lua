@@ -15,6 +15,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'scepter',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 
@@ -24,6 +25,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.blueprint or card.debuff then return end
+
     if context.discard and #context.full_hand == 1 and next(SMODS.get_enhancements(context.other_card)) then
         G.GAME.fnwk_lenfer_draw = true
         return {

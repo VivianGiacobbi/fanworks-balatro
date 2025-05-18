@@ -14,6 +14,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'streetlight',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -33,11 +34,11 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.joker_main or not no_face_cards() then return end
+    if not context.joker_main or not no_face_cards() or card.debuff then return end
 
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
         end,
         extra = {
             x_mult = card.ability.extra.x_mult

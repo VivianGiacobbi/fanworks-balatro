@@ -19,6 +19,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
+    blueprint_compat = false,
     requires_stands = true,
 }
 
@@ -28,6 +29,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.blueprint or card.debuff then return end
+    
     if not (context.cardarea == G.consumeables and context.end_of_round and G.GAME.blind:get_type() == 'Boss') then return end
 
     return {

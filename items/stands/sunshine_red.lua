@@ -19,6 +19,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'sunshine',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -39,13 +40,15 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if card.debuff then return end
+
     if context.joker_main and card.ability.extra.x_mult > 1 then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
-                message_card = card,
+                message_card = context.blueprint_card or card,
                 Xmult = card.ability.extra.x_mult
             }
         }

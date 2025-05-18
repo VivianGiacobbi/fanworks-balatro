@@ -1926,7 +1926,7 @@ return {
                     "{C:attention,T:tag_double}#1#{}"
                 },
 				unlock = {
-					"Have {C:attention}#1#{} {C:dark_edition}#2#{} Jokers"
+					"Have {C:attention,E:1}#1#{} {C:dark_edition,E:1}#2#{} Jokers"
 				}
 			},
 			v_fnwk_streetlight_waystone = {
@@ -1940,6 +1940,10 @@ return {
 				text = {
 					"{E:1}Once per run, upon {C:red}death,{}",
 					"{E:1}begin a new{} {E:1,C:dark_edition}experiment{}"
+				},
+				unlock = {
+					"Carry {E:1,C:dark_edition}Waystone{}",
+					"for {E:1,C:attention}#1#{} Antes"
 				}
 			},
 			v_fnwk_sunshine_rapture = {
@@ -1956,7 +1960,7 @@ return {
 					"appear {C:attention}#1#X{} more often"
                 },
 				unlock = {
-					"Have {C:attention}#1#{} {C:red}Rare{} Jokers",
+					"Have {E:1,C:attention}#1#{} {E:1,C:red}Rare{} Jokers",
 					"in your Joker Slots"
 				}
 			},
@@ -1972,7 +1976,7 @@ return {
 				},
 				unlock = {
 					"Discover {C:attention,E:1}#2#{}",
-					"{C:fanworks}Fanworks{} cards",
+					"{C:fanworks,E:1}Fanworks{} cards",
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
