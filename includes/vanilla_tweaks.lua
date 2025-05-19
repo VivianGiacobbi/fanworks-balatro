@@ -144,8 +144,8 @@ SMODS.Joker:take_ownership('j_swashbuckler', {
         if context.joker_main then
             local sell_cost = 0
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] ~= self and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
-                    sell_cost = sell_cost + G.jokers.cards[i].sell_cost * card.ability.extra.mult
+                if G.jokers.cards[i] ~= card and (G.jokers.cards[i].area and G.jokers.cards[i].area == G.jokers) then
+                    sell_cost = sell_cost + G.jokers.cards[i].sell_cost
                 end
             end
 
