@@ -19,6 +19,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'double',
     in_progress = true,
+    blueprint_compat = true,
     requires_stands = true,
 }
 
@@ -63,14 +64,14 @@ function consumInfo.calculate(self, card, context)
         return
     end
 
-    if context.other_card.debuf or not card.ability.extra.suits[context.other_card.base.suit] then
+    if card.debuff or context.other_card.debuff or not card.ability.extra.suits[context.other_card.base.suit] then
         return
     end
 
     local rand_mult = pseudorandom(pseudoseed('fnwk_winesong'), card.ability.extra.mult_min, card.ability.extra.mult_max)
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
         end,
         extra = {
             mult = rand_mult,

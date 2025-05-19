@@ -25,6 +25,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if card.debuff then return end
+
     if not context.blueprint and context.destroy_card and context.cardarea == G.play then
         local scoring  = SMODS.in_scoring(context.destroy_card, context.scoring_hand)
         local steel = SMODS.has_enhancement(context.destroy_card, 'm_steel')
