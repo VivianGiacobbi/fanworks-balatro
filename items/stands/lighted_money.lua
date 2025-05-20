@@ -3,8 +3,8 @@ local consumInfo = {
     name = 'Money Talks',
     set = 'csau_Stand',
     config = {
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
-        -- stand_mask = true,
+        aura_colors = { 'FFE6BCDC', 'FFD081DC' },
+        stand_mask = true,
         extra = {
             dollars = 7
         }
