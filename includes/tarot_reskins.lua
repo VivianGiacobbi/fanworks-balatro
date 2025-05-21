@@ -2,7 +2,7 @@ local function force_fool_card()
     if G.consumeables then
         local force_card = nil
         local force_options = {
-            c_hanged_man = SMODS.find_card('c_csau_steel_civil'),
+            c_hanged_man = SMODS.find_card('c_jojobal_steel_civil'),
             c_hermit = SMODS.find_card('c_fnwk_city_dead')
         }
         local low_rank = G.consumeables.config.card_limit
@@ -101,7 +101,7 @@ if skins or stands then
         build_table.loc_vars = function (self, info_queue, card)
             local force_options = {
                 c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
-                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
+                c_hanged_man = next(SMODS.find_card('c_jojobal_steel_civil'))
             }
 
             local tarot_count = card.ability.tarots
@@ -120,7 +120,7 @@ if skins or stands then
         build_table.use = function(self, card, area, copier)
             local force_options = {
                 c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
-                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
+                c_hanged_man = next(SMODS.find_card('c_jojobal_steel_civil'))
             }
 
             local tarot_count = card.ability.tarots

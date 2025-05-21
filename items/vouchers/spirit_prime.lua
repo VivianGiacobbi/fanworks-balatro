@@ -6,7 +6,7 @@ local voucherInfo = {
     cost = 10,
     requires = {'v_fnwk_spirit_binary'},
     unlocked = false,
-    unlock_condition = { type = 'win_deck', deck = 'b_csau_disc' },
+    unlock_condition = { type = 'win_deck', deck = 'b_jojobal_disc' },
     fanwork = 'sunshine'
 }
 

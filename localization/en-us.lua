@@ -349,6 +349,7 @@ return {
 			k_mcr_popped = 'Popped!',
 			k_farewell = 'Farewell!',
 			k_grafted = 'Grafted!',
+			k_stand_devolved = 'Devolved!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -407,14 +408,14 @@ return {
 		achievement_descriptions = {
 		},
 		poker_hands = {
-			csau_Fibonacci = 'Fibonacci',
-			csau_FlushFibonacci = 'Flush Fibonacci',
+			jojobal_Fibonacci = 'Fibonacci',
+			jojobal_FlushFibonacci = 'Flush Fibonacci',
 		},
 		poker_hand_descriptions = {
-			csau_Fibonacci = {
+			jojobal_Fibonacci = {
 				'5 cards that follow the Fibonacci sequence',
 			},
-			csau_FlushFibonacci = {
+			jojobal_FlushFibonacci = {
 				"5 cards that follow the Fibonacci sequence",
 				"with all cards sharing the same suit",
 			}

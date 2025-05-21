@@ -23,7 +23,7 @@ local function is_perfect_square(x)
 	return sqrt^2 == x
 end
 
-function csau_get_fibonacci(hand)
+function jojobal_get_fibonacci(hand)
 	local ret = {}
 	if #hand < 5 then return ret end
 	local vals = {}
