@@ -1,18 +1,18 @@
 local consumInfo = {
 	name = "Sgt Pepper's",
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         stand_mask = true,
         aura_colors = { '68BC9ADC', '5176B0DC' },
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'rockhard',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

@@ -3,7 +3,7 @@ if not SMODS.PokerHandParts['csau_fibonacci'] then
         key = 'csau_fibonacci',
         prefix_config = false,
         func = function(hand) 
-            return fnwk_get_fibonacci(hand) 
+            return csau_get_fibonacci(hand) 
         end,
     }
 end

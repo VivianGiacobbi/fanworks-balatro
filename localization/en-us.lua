@@ -1627,7 +1627,7 @@ return {
 				}
 			}
 		},
-		csau_Stand = {
+		Stand = {
 			c_fnwk_bluebolt_chemical = {
 				name = "My Chemical Romance",
 				text = {

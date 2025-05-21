@@ -1,7 +1,7 @@
 local consumInfo = {
     key = 'c_fnwk_rebels_rebel',
     name = 'Rebel Moon',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         stand_mask = true,
         aura_colors = { 'FD5F55DC', 'FDA200DC' },
@@ -11,12 +11,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'rebels',
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -31,7 +31,7 @@ function consumInfo.calculate(self, card, context)
         if SMODS.has_enhancement(context.other_card, 'm_mult') then
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                    G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
                 end,
                 extra = {
                     chips = card.ability.extra.chips
@@ -40,7 +40,7 @@ function consumInfo.calculate(self, card, context)
         elseif SMODS.has_enhancement(context.other_card, 'm_bonus') then
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                    G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
                 end,
                 extra = {
                     mult = card.ability.extra.mult

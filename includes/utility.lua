@@ -112,20 +112,20 @@ function FnwkLoadItem(file_key, item_type)
 		end
 
 		-- add universal update to evolved Stand badges
-		if info.rarity == 'csau_EvolvedRarity' then
+		if info.rarity == 'arrow_EvolvedRarity' then
 			local ref_type_badge = function(self, card, badges) end
 			if info.set_card_type_badge then
 				ref_type_badge = info.set_card_type_badge
 			end
 			function info.set_card_type_badge(self, card, badges)
-				badges[1] = create_badge(localize('k_csau_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
+				badges[1] = create_badge(localize('k_arrow_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
 				ref_type_badge(self, card)
 			end
 		end
 	end
 	if item_type == 'Deck' then smods_item = 'Back' end
 
-	if (item_type == 'Stand' or info.requires_stands) and not G.fnwk_stands_enabled then
+	if item_type == 'Stand' and not G.fnwk_stands_enabled then
 		return
 	end
 

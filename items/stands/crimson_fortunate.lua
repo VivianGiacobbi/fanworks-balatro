@@ -1,7 +1,7 @@
 local consumInfo = {
     key = 'c_fnwk_crimson_fortunate',
     name = 'Fortunate Son',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         stand_mask = true,
         aura_colors = { 'FF658BDC', 'FFE6AADC' },
@@ -10,12 +10,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'crimson',
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -79,7 +79,7 @@ function consumInfo.calculate(self, card, context)
     if context.joker_main and G.GAME.fnwk_last_upgraded_hand[context.scoring_name] then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 mult = card.ability.extra.mult,

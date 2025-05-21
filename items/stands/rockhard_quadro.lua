@@ -1,6 +1,6 @@
 local consumInfo = {
 	name = 'Quadrophenia',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         stand_mask = true,
         aura_colors = { '6A62D2DC', 'B64038DC' },
@@ -10,13 +10,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'rockhard',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -44,7 +44,7 @@ function consumInfo.calculate(self, card, context)
         local random_tarot = pseudorandom_element(card.ability.extra.tarots, pseudoseed('fnwk_quadro'))
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, random_tarot, 'fnwk_quadro')
                     new_tarot:set_edition({negative = true}, true)

@@ -1,6 +1,6 @@
 local consumInfo = {
     name = "L'enfer",
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -10,13 +10,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'scepter',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -31,7 +31,7 @@ function consumInfo.calculate(self, card, context)
         G.GAME.fnwk_lenfer_draw = true
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.38)
+                G.FUNCS.flare_stand_aura(card, 0.38)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,

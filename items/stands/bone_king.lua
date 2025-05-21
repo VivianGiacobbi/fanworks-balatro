@@ -1,7 +1,7 @@
 local consumInfo = {
     key = 'c_fnwk_bone_king',
     name = 'KING & COUNTRY',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'CC2CDDFDC', '9C403ADC' },
@@ -11,13 +11,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -40,7 +40,7 @@ function consumInfo.calculate(self, card, context)
             trigger = 'after',
             func = function()
                 if #G.playing_cards <= (G.GAME.starting_deck_size - card.ability.extra.evolve_sub) then
-                    G.FUNCS.csau_evolve_stand(card)
+                    G.FUNCS.evolve_stand(card)
                 end
 
                 return true 
@@ -55,7 +55,7 @@ function consumInfo.calculate(self, card, context)
             trigger = 'after',
             func = function()
                 if #G.playing_cards <= (G.GAME.starting_deck_size - card.ability.extra.evolve_sub) then
-                    G.FUNCS.csau_evolve_stand(card)
+                    G.FUNCS.evolve_stand(card)
                 end
                 return true 
             end 
@@ -65,7 +65,7 @@ function consumInfo.calculate(self, card, context)
     if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_kingandcountry then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.48)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.48)
             end,
             delay = 0.75,
             extra = {

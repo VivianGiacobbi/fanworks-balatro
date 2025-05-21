@@ -39,7 +39,7 @@ SMODS.Enhancement:take_ownership('glass', {
                 return {
                     func = function()
                         for _, v in ipairs(dances) do
-                            G.FUNCS.csau_flare_stand_aura(v, 0.5)
+                            G.FUNCS.flare_stand_aura(v, 0.5)
                             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                                 v:juice_up()
                             return true end }))
@@ -68,7 +68,7 @@ SMODS.Enhancement:take_ownership('glass', {
 
 local consumInfo = {
     name = 'Dance Macabre',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         stand_mask = true,
         aura_colors = { 'FF55FEDC', 'A600D0DC' },
@@ -77,12 +77,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'rubicon',
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -102,7 +102,7 @@ function consumInfo.calculate(self, card, context)
     if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_dance then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.flare_stand_aura(card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     card:juice_up()
                 return true end }))

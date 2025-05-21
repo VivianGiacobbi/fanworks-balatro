@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'A Stranger I Remain',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'CDE3F0DC', 'EC9BEEDC' },
@@ -12,13 +12,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -38,7 +38,7 @@ function consumInfo.calculate(self, card, context)
         local key_var = card.ability.extra.hand_gain == 1 and 'a_hand' or 'a_hands'
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.38)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.38)
             end,
             card = context.blueprint_card or card,
             message = localize{type = 'variable', key = key_var, vars = {card.ability.extra.hand_gain}},
@@ -49,7 +49,7 @@ function consumInfo.calculate(self, card, context)
     if context.individual and context.cardarea == G.play and context.other_card.ability.played_while_flipped then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,

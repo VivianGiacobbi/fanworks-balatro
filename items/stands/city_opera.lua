@@ -1,6 +1,6 @@
 local consumInfo = {
     name = "Opera No. 2",
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FF3BBADC', '62CCA2DC' },
@@ -10,13 +10,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'city',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -36,7 +36,7 @@ function consumInfo.calculate(self, card, context)
     if context.before and G.GAME.dollars <= card.ability.extra.min_dollars then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 1.5)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 1.5)
             end,
             extra = {
                 level_up = card.ability.extra.levels,

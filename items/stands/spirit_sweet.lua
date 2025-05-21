@@ -5,7 +5,7 @@ SMODS.Sound({
 
 local consumInfo = {
     name = 'Sweet Bod',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { '7DD75ADC', '588C52DC' },
@@ -14,13 +14,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -35,7 +35,7 @@ function consumInfo.calculate(self, card, context)
 
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.FUNCS.flare_stand_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 local new_part = create_card('Joker', G.jokers, nil, nil, nil, nil, card.ability.extra.create_key, 'fnwk_sweet_bod')
                 new_part:set_edition({negative = true}, true, true)

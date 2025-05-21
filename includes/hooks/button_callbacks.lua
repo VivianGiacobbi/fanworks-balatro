@@ -5,7 +5,7 @@ G.FUNCS.reroll_shop = function(e)
     if G.GAME.current_round.fnwk_paperback_rerolls > 0 or (next(rewrites) and not rewrites[1].ability.fnwk_rewrite_destroyed) then
         local juice_cards = next(rewrites) and rewrites or {paperbacks[G.GAME.current_round.fnwk_paperback_rerolls]}
         for _, v in ipairs(juice_cards) do
-            G.FUNCS.csau_flare_stand_aura(v, 0.5)
+            G.FUNCS.flare_stand_aura(v, 0.5)
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()

@@ -1,23 +1,23 @@
 local consumInfo = {
     key = 'c_fnwk_lighted_limelight',
     name = 'Limelight',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
+        aura_colors = { 'FFFFFFDC', 'fnwk_limelight', },
         extra = {
             edition = 'e_polychrome',
             chance = 7
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'lighted',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -32,7 +32,7 @@ function consumInfo.calculate(self, card, context)
         for _, v in ipairs(context.full_hand) do
             if not v.edition and not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
                 local juice_card = (context.blueprint_card or card)
-                G.FUNCS.csau_flare_stand_aura(juice_card, 0.5)
+                G.FUNCS.flare_stand_aura(juice_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     v:set_edition(card.ability.extra.edition, true)
                     juice_card:juice_up()

@@ -1,22 +1,23 @@
 local consumInfo = {
     key = 'c_fnwk_bone_king_farewell',
     name = 'Farewell to Kings',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'CBD4E7DC', 'FD5F55DC' },
+        evolved = true,
         extra = {
             blind_mod = 0.5
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -43,7 +44,7 @@ function consumInfo.calculate(self, card, context)
     if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_farewell then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
             end,
             extra = {
                 message = localize('k_farewell'),
