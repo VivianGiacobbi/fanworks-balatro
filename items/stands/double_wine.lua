@@ -15,7 +15,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'double',
     in_progress = true,
@@ -69,9 +68,10 @@ function consumInfo.calculate(self, card, context)
     end
 
     local rand_mult = pseudorandom(pseudoseed('fnwk_winesong'), card.ability.extra.mult_min, card.ability.extra.mult_max)
+    local flare_card = context.blueprint_card or card
     return {
         func = function()
-            G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+            G.FUNCS.flare_stand_aura(flare_card, 0.5)
         end,
         extra = {
             mult = rand_mult,

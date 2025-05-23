@@ -282,11 +282,6 @@ return {
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
-			k_level_up_ex1 = "Level Up x1!",
-			k_level_up_ex2 = "Level Up x2!",
-			k_level_up_ex3 = "Level Up x3!",
-			k_level_up_ex4 = "Level Up x4!",
-			k_level_up_ex5 = "Level Up x5!",
 			k_plus_fool = "Fool!",
 			k_revived = "Revived!",
 			k_glass_ex = "Glass!",
@@ -362,6 +357,7 @@ return {
 			ba_gotequest = 'Gotequest',
 			ba_jojopolis = 'JoJopolis',
 			ba_spirit = 'Spirit Lines',
+			ba_closer = 'CLOSER 2 GOD',
 			ba_industry = 'Industry Baby',
 			ba_double = 'Double Down',
 			ba_love = 'Love Once Buried',
@@ -1842,6 +1838,13 @@ return {
 					"{C:attention}sold{} or {C:attention}destroyed{}",
 				},
 			},
+			c_fnwk_closer_artificial = {
+				name = 'Artificial Stand',
+				text = {
+                    "Copies ability of",
+                    "{C:stand}Stand{} to the right"
+                },
+			},
 			c_fnwk_double_wine = {
 				name = "Wine Song",
 				text = {
@@ -1945,6 +1948,23 @@ return {
 				unlock = {
 					"Carry {E:1,C:dark_edition}Waystone{}",
 					"for {E:1,C:attention}#1#{} Antes"
+				}
+			},
+			v_fnwk_spirit_binary = {
+				name = "Type Binary",
+				text = {
+					"Increases {C:stand}Stand{} limit by {C:attention}1{}"
+				}
+			},
+			v_fnwk_spirit_prime = {
+				name = "Type Prime",
+				text = {
+					"{C:attention}+1{} consumable slot",
+					"Grants an {C:dark_edition}#1#{}"
+				},
+				unlock = {
+					"Win a run with {C:attention,E:1}#1#{}",
+					"on {V:1,E:1}#2#{} difficulty"
 				}
 			},
 			v_fnwk_sunshine_rapture = {

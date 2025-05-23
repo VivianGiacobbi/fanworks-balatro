@@ -36,12 +36,14 @@ end
 function consumInfo.calculate(self, card, context)
     if not context.joker_main or not no_face_cards() or card.debuff then return end
 
+    local flare_card = context.blueprint_card or card
     return {
         func = function()
-            G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+            G.FUNCS.flare_stand_aura(flare_card, 0.5)
         end,
         extra = {
-            x_mult = card.ability.extra.x_mult
+            x_mult = card.ability.extra.x_mult,
+            card = flare_card
         }
     }
 end

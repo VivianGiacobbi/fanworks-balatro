@@ -43,18 +43,19 @@ function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
     if context.joker_main and card.ability.extra.x_mult > 1 then
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
             end,
             extra = {
-                message_card = context.blueprint_card or card,
+                message_card = flare_card,
                 Xmult = card.ability.extra.x_mult
             }
         }
     end
 
-    if context.blueprint then return end
+    if context.blueprint or context.retrigger_joker then return end
 
     if context.before then
         local all_suit = true

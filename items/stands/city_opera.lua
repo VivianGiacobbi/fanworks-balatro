@@ -11,7 +11,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'city',
     in_progress = true,
@@ -34,13 +33,14 @@ function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
     if context.before and G.GAME.dollars <= card.ability.extra.min_dollars then
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 1.5)
+                G.FUNCS.flare_stand_aura(flare_card, 1.5)
             end,
             extra = {
                 level_up = card.ability.extra.levels,
-                message_card = card
+                message_card = flare_card
             }
         }
     end

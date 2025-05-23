@@ -12,7 +12,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
@@ -28,14 +27,14 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
     
-    if not context.blueprint and context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_steel') and SMODS.in_scoring(context.destroy_card, context.scoring_hand) then
+    if not context.blueprint and not context.retrigger_joker and context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_steel') and SMODS.in_scoring(context.destroy_card, context.scoring_hand) then
         context.destroy_card.fnwk_removed_by_kingandcountry = true
         return {
             remove = true
         }
     end
 
-    if not context.blueprint and context.remove_playing_cards and not context.scoring_hand then
+    if not context.blueprint and not context.retrigger_joker and context.remove_playing_cards and not context.scoring_hand then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -50,7 +49,7 @@ function consumInfo.calculate(self, card, context)
 
     -- the after handler covers evolving the stand for cards destroyed during main scoring
     -- in order to let K&C's ability play out, otherwise it would evolve before the hand finishes
-    if not context.blueprint and context.after then
+    if not context.blueprint and not context.retrigger_joker and context.after then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -62,10 +61,11 @@ function consumInfo.calculate(self, card, context)
         }))
     end
 
-    if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_kingandcountry then
+    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_kingandcountry then
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.48)
+                G.FUNCS.flare_stand_aura(flare_card, 0.48)
             end,
             delay = 0.75,
             extra = {

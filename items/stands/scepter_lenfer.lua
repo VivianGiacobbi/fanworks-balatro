@@ -25,7 +25,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or card.debuff then return end
+    if context.blueprint or card.debuff or context.retrigger_joker then return end
 
     if context.discard and #context.full_hand == 1 and next(SMODS.get_enhancements(context.other_card)) then
         G.GAME.fnwk_lenfer_draw = true

@@ -13,7 +13,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
@@ -48,6 +47,8 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
+    if context.blueprint or context.retrigger_joker then return end
+
     if context.pre_discard and G.GAME.current_round.discards_used == 0 and #context.full_hand == 1 then
         local change_card = context.full_hand[1]
         card.ability.extra.stored_enhance = change_card.config.center.key ~= 'c_base' and change_card.config.center.key or nil
@@ -116,7 +117,6 @@ function consumInfo.calculate(self, card, context)
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_mcr_transmuted'), colour = G.C.RED})
             end,
         }
-        
     end
 end
 

@@ -29,7 +29,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or card.debuff then return end
+    if context.blueprint or card.debuff or context.joker_retrigger then return end
     
     if not (context.cardarea == G.consumeables and context.end_of_round and G.GAME.blind:get_type() == 'Boss') then return end
 

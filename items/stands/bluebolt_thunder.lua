@@ -14,7 +14,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
@@ -34,7 +33,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)    
-    if not context.blueprint and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
+    if not context.blueprint and not context.joker_retrigger and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -60,9 +59,10 @@ function consumInfo.calculate(self, card, context)
             card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
         end
         
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
             end,
             extra = {
                 Xmult = card.ability.extra.x_mult,

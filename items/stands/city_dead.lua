@@ -10,7 +10,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'city',
     in_progress = true,
@@ -24,7 +23,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or card.debuff then
+    if context.blueprint or context.joker_retrigger or card.debuff then
         return
     end
 

@@ -11,7 +11,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'crimson',
     blueprint_compat = true,
@@ -77,12 +76,14 @@ function consumInfo.calculate(self, card, context)
     if not G.GAME.fnwk_last_upgraded_hand or card.debuff then return end
 
     if context.joker_main and G.GAME.fnwk_last_upgraded_hand[context.scoring_name] then
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
             end,
             extra = {
                 mult = card.ability.extra.mult,
+                card = flare_card
             }
         }
     end

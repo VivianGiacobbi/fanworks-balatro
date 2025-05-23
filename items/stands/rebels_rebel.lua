@@ -12,7 +12,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'rebels',
     blueprint_compat = true,
@@ -29,21 +28,25 @@ function consumInfo.calculate(self, card, context)
 
     if context.cardarea == G.play and context.individual then
         if SMODS.has_enhancement(context.other_card, 'm_mult') then
+            local flare_card = context.blueprint_card or card
             return {
                 func = function()
-                    G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                    G.FUNCS.flare_stand_aura(flare_card, 0.5)
                 end,
                 extra = {
-                    chips = card.ability.extra.chips
+                    chips = card.ability.extra.chips,
+                    card = flare_card
                 }
             }
         elseif SMODS.has_enhancement(context.other_card, 'm_bonus') then
+            local flare_card = context.blueprint_card or card
             return {
                 func = function()
-                    G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                    G.FUNCS.flare_stand_aura(flare_card, 0.5)
                 end,
                 extra = {
-                    mult = card.ability.extra.mult
+                    mult = card.ability.extra.mult,
+                    card = flare_card
                 }
             }
         end

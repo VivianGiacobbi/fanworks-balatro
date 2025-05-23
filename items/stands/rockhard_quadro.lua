@@ -11,7 +11,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'rockhard',
     in_progress = true,
@@ -42,9 +41,11 @@ function consumInfo.calculate(self, card, context)
     if context.after and context.scoring_name == card.ability.extra.hand and G.GAME.current_round.hands_played == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         local random_tarot = pseudorandom_element(card.ability.extra.tarots, pseudoseed('fnwk_quadro'))
+        
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, random_tarot, 'fnwk_quadro')
                     new_tarot:set_edition({negative = true}, true)
@@ -56,7 +57,7 @@ function consumInfo.calculate(self, card, context)
             end,
             extra = {
                 colour = G.C.SECONDARY_SET.Tarot,
-                message_card = context.blueprint_card or card,
+                message_card = flare_card,
                 message = localize('k_plus_tarot'),
             },
         }

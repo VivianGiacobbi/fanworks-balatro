@@ -12,7 +12,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'lighted',
     in_progress = true,
@@ -31,7 +30,7 @@ function consumInfo.calculate(self, card, context)
     if context.before then
         for _, v in ipairs(context.full_hand) do
             if not v.edition and not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
-                local juice_card = (context.blueprint_card or card)
+                local juice_card = context.blueprint_card or card
                 G.FUNCS.flare_stand_aura(juice_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     v:set_edition(card.ability.extra.edition, true)

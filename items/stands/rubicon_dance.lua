@@ -78,7 +78,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'rubicon',
     blueprint_compat = false,
@@ -97,7 +96,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if card.debuff or context.blueprint then return end
+    if card.debuff or context.blueprint or context.retrigger_joker then return end
 
     if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_dance then
         return {
