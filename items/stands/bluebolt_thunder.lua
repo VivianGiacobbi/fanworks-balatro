@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Thunderstruck A/C',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { '3EA8F3DC', '009CFDDC' },
@@ -13,13 +13,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
-    alerted = true,
+    rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -34,11 +33,11 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)    
-    if not context.blueprint and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
+    if not context.blueprint and not context.joker_retrigger and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.csau_evolve_stand(card)
+                G.FUNCS.evolve_stand(card)
                 return true 
             end 
         }))
@@ -60,9 +59,10 @@ function consumInfo.calculate(self, card, context)
             card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
         end
         
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
             end,
             extra = {
                 Xmult = card.ability.extra.x_mult,

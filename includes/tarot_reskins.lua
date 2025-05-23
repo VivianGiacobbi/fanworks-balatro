@@ -2,7 +2,7 @@ local function force_fool_card()
     if G.consumeables then
         local force_card = nil
         local force_options = {
-            c_hanged_man = SMODS.find_card('c_csau_steel_civil'),
+            c_hanged_man = SMODS.find_card('c_jojobal_steel_civil'),
             c_hermit = SMODS.find_card('c_fnwk_city_dead')
         }
         local low_rank = G.consumeables.config.card_limit
@@ -38,8 +38,8 @@ if skins or stands then
             
             -- imported cardsauce logic
             local last_tarot_planet = localize('k_none')
-            if fool_c and fool_c.key == 'c_csau_arrow' then
-                last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.csau_max_stands or 1, (card.area.config.collection and localize('k_csau_stand')) or (G.GAME.csau_max_stands > 1 and localize('b_csau_stand_cards') or localize('k_csau_stand')) }} or localize('k_none')
+            if fool_c and fool_c.key == 'c_arrow_arrow' then
+                last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.modifiers.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.modifiers.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
             else
                 last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
             end
@@ -101,7 +101,7 @@ if skins or stands then
         build_table.loc_vars = function (self, info_queue, card)
             local force_options = {
                 c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
-                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
+                c_hanged_man = next(SMODS.find_card('c_jojobal_steel_civil'))
             }
 
             local tarot_count = card.ability.tarots
@@ -120,7 +120,7 @@ if skins or stands then
         build_table.use = function(self, card, area, copier)
             local force_options = {
                 c_hermit = next(SMODS.find_card('c_fnwk_city_dead')),
-                c_hanged_man = next(SMODS.find_card('c_csau_steel_civil'))
+                c_hanged_man = next(SMODS.find_card('c_jojobal_steel_civil'))
             }
 
             local tarot_count = card.ability.tarots

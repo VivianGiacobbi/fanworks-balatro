@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'BORN 2B WILD',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -9,12 +9,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'gotequest',
     in_progress = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

@@ -2,7 +2,7 @@ fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
 
 local csau = next(SMODS.find_mod('Cardsauce'))
-local stands = next(SMODS.find_mod('stands_mod'))
+local stands = next(SMODS.find_mod('ArrowAPI'))
 
 if csau or stands then
 	G.fnwk_stands_enabled = true

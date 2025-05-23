@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Ultimate Showdown of Ultimate Destiny',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'F4C275DC' },
@@ -10,13 +10,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'spirit',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -39,7 +39,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if context.fnwk_joker_destroyed and context.joker ~= card and not context.blueprint then
+    if context.fnwk_joker_destroyed and not context.joker_retrigger and context.joker ~= card and not context.blueprint then
         local name = string.lower(context.joker.config.center.name)
         if FnwkContainsString(name, 'jokestar') then
             card.ability.extra.retrigger_mod = card.ability.extra.retrigger_mod + 1
@@ -57,13 +57,14 @@ function consumInfo.calculate(self, card, context)
         end
 
         if gold_count > 0 then
+            local flare_card = context.blueprint_card or card
             return {
                 func = function()
-                    G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                    G.FUNCS.flare_stand_aura(flare_card, 0.5)
                 end,
                 message = localize('k_again_ex'),
                 repetitions = (gold_count * reps),
-                card = context.blueprint_card or card,
+                card = flare_card,
             }
         end     
     end

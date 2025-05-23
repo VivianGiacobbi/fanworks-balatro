@@ -213,6 +213,9 @@ local items_to_load = {
 		'spirit_sweet',
 		'spirit_ultimate',
 
+		-- closer 2 god
+		'closer_artificial',
+
 		-- double down
 		'double_wine',
 
@@ -260,6 +263,8 @@ local items_to_load = {
     	'rubicon_parade',
 		'streetlight_waystone',
 		'streetlight_binding',
+		'spirit_binary',
+		'spirit_prime',
 		'sunshine_rapture',
 		'sunshine_totality'
 	},

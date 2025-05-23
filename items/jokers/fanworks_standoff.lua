@@ -15,18 +15,18 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'fanworks',
-    requires_stands = true,
+    dependencies = {'ArrowAPI'}
 }
 
 local function get_stand_state()
-    local has_stand = G.FUNCS.csau_get_leftmost_stand()
+    local has_stand = G.FUNCS.get_leftmost_stand()
 
     if not has_stand then  
         return 'none'
     end
 
     for _, v in ipairs(G.consumeables.cards) do
-        if v.ability.set == 'csau_Stand' and v.ability.evolved then
+        if v.ability.set == 'Stand' and v.ability.evolved then
             return 'evolved'
         end
     end

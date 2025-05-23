@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Paperback Writer: REWRITE',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -11,13 +11,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'streetlight',
     blueprint_compat = false,
     in_progress = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -26,7 +26,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.reroll_shop or context.blueprint or card.debuff then return end
+    if not context.reroll_shop or context.blueprint or card.debuff or context.joker_retrigger then return end
 
     local chance = (G.GAME.probabilities.normal * card.ability.extra.normal_mod) / card.ability.extra.chance
     if pseudorandom(pseudoseed('fnwk_rewrite_sd')) < chance then

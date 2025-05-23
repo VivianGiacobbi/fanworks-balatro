@@ -27,7 +27,7 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.before and context.cardarea == G.jokers then
+    if context.before and context.cardarea == G.jokers and not card.debuff then
         local tick_cards = {}
         for i = 1, #context.scoring_hand do
             local enhancements = SMODS.get_enhancements(context.scoring_hand[i])
@@ -50,7 +50,7 @@ function jokerInfo.calculate(self, card, context)
             return {
                 card = context.blueprint_card or card,
                 level_up = levels,
-                message = localize('k_level_up_ex'..levels)
+                message = localize{type = 'variable', key = 'a_multilevel', vars = {levels}},
             }
         end
     end

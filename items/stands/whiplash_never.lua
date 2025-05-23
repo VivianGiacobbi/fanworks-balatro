@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Never Enough',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -9,13 +9,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'whiplash',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

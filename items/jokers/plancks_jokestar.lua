@@ -1,21 +1,21 @@
-if not SMODS.PokerHandParts['csau_fibonacci'] then
+if not SMODS.PokerHandParts['jojobal_fibonacci'] then
     SMODS.PokerHandPart {
-        key = 'csau_fibonacci',
+        key = 'jojobal_fibonacci',
         prefix_config = false,
         func = function(hand) 
-            return fnwk_get_fibonacci(hand) 
+            return jojobal_get_fibonacci(hand) 
         end,
     }
 end
 
-if not SMODS.PokerHands['csau_Fibonacci'] then
+if not SMODS.PokerHands['jojobal_Fibonacci'] then
     SMODS.PokerHand {
-        key = 'csau_Fibonacci',
+        key = 'jojobal_Fibonacci',
         prefix_config = false,
         evaluate = function(parts, hand)
             if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
-            or next(SMODS.find_card("c_csau_steel_tusk_4")))
-            or not next(parts.csau_fibonacci) then 
+            or next(SMODS.find_card("c_jojobal_steel_tusk_4")))
+            or not next(parts.jojobal_fibonacci) then 
                 return {} 
             end
             return { hand }
@@ -35,30 +35,30 @@ if not SMODS.PokerHands['csau_Fibonacci'] then
     }
 else
     -- otherwise just update the evaluate condition to include the check for Bjorn
-    SMODS.PokerHand:take_ownership('csau_Fibonacci', {
+    SMODS.PokerHand:take_ownership('jojobal_Fibonacci', {
         evaluate = function(parts, hand)
             if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
-            or next(SMODS.find_card("c_csau_steel_tusk_4")))
-            or not next(parts.csau_fibonacci) then 
+            or next(SMODS.find_card("c_jojobal_steel_tusk_4")))
+            or not next(parts.jojobal_fibonacci) then 
                 return {} 
             end
-            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+            return { SMODS.merge_lists(parts.jojobal_fibonacci, parts._flush) }
         end,
     })
 end
 
 
-if not SMODS.PokerHands['csau_FlushFibonacci'] then
+if not SMODS.PokerHands['jojobal_FlushFibonacci'] then
     SMODS.PokerHand {
-        key = 'csau_FlushFibonacci',
+        key = 'jojobal_FlushFibonacci',
         prefix_config = false,
         evaluate = function(parts, hand)
             if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
-            or next(SMODS.find_card("c_csau_steel_tusk_4")))
-            or not next(parts.csau_fibonacci) or not next(parts._flush) then 
+            or next(SMODS.find_card("c_jojobal_steel_tusk_4")))
+            or not next(parts.jojobal_fibonacci) or not next(parts._flush) then 
                 return {} 
             end
-            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+            return { SMODS.merge_lists(parts.jojobal_fibonacci, parts._flush) }
         end,
         example = {
             {'H_A', true},
@@ -75,14 +75,14 @@ if not SMODS.PokerHands['csau_FlushFibonacci'] then
     }
 else
     -- otherwise just update the evaluate condition to include the check for Bjorn
-    SMODS.PokerHand:take_ownership('csau_FlushFibonacci', {
+    SMODS.PokerHand:take_ownership('jojobal_FlushFibonacci', {
         evaluate = function(parts, hand)
             if not (next(SMODS.find_card('j_fnwk_plancks_jokestar'))
-            or next(SMODS.find_card("c_csau_steel_tusk_4")))
-            or not next(parts.csau_fibonacci) or not next(parts._flush) then 
+            or next(SMODS.find_card("c_jojobal_steel_tusk_4")))
+            or not next(parts.jojobal_fibonacci) or not next(parts._flush) then 
                 return {} 
             end
-            return { SMODS.merge_lists(parts.csau_fibonacci, parts._flush) }
+            return { SMODS.merge_lists(parts.jojobal_fibonacci, parts._flush) }
         end,
     })
 end
@@ -110,16 +110,16 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-    G.GAME.hands['csau_Fibonacci'].visible = true
-    G.GAME.hands['csau_FlushFibonacci'].visible = true
+    G.GAME.hands['jojobal_Fibonacci'].visible = true
+    G.GAME.hands['jojobal_FlushFibonacci'].visible = true
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
-    if next(SMODS.find_card('j_fnwk_plancks_jokestar')) or next(SMODS.find_card("c_csau_steel_tusk_4")) then
+    if next(SMODS.find_card('j_fnwk_plancks_jokestar')) or next(SMODS.find_card("c_jojobal_steel_tusk_4")) then
         return
     end
-    G.GAME.hands['csau_Fibonacci'].visible = false
-    G.GAME.hands['csau_FlushFibonacci'].visible = false
+    G.GAME.hands['jojobal_Fibonacci'].visible = false
+    G.GAME.hands['jojobal_FlushFibonacci'].visible = false
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -1,19 +1,19 @@
 local consumInfo = {
     name = 'Downward Spiral',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'D36DD4DC', 'A3E7F6DC' },
         x_mult = 3,
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'sunshine',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

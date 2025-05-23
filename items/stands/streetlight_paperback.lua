@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Paperback Writer',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -11,13 +11,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'streetlight',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -55,13 +55,13 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or card.debuff then return end
+    if context.blueprint or context.joker_retrigger or card.debuff then return end
 
     if context.fnwk_change_ante and G.GAME.round_resets.ante >= card.ability.extra.evolve_ante then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.csau_evolve_stand(card)
+                G.FUNCS.evolve_stand(card)
                 return true 
             end
         }))

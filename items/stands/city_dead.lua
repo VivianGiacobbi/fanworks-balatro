@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Dead Weight',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'DCFB8CDC', '4CB3D9DC' },
@@ -9,13 +9,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
-    alerted = true,
+    rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'city',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -24,14 +23,14 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or card.debuff then
+    if context.blueprint or context.joker_retrigger or card.debuff then
         return
     end
 
     if context.using_consumeable then
         local center_key = context.consumeable.config.center.key
         if center_key == 'c_emperor' or center_key == 'c_fool' then
-            G.FUNCS.csau_flare_stand_aura(card, 0.38)
+            G.FUNCS.flare_stand_aura(card, 0.38)
         end
     end
 end

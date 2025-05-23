@@ -1,22 +1,22 @@
 local consumInfo = {
     key = 'c_fnwk_bone_king_farewell',
     name = 'Farewell to Kings',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'CBD4E7DC', 'FD5F55DC' },
+        evolved = true,
         extra = {
             blind_mod = 0.5
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
-    alerted = true,
+    rarity = 'arrow_EvolvedRarity',
     hasSoul = true,
     fanwork = 'bone',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -27,7 +27,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if not context.blueprint and context.destroy_card and context.cardarea == G.play then
+    if not context.blueprint and not context.joker_retrigger and context.destroy_card and context.cardarea == G.play then
         local scoring  = SMODS.in_scoring(context.destroy_card, context.scoring_hand)
         local steel = SMODS.has_enhancement(context.destroy_card, 'm_steel')
         local king = context.destroy_card:get_id() == 13
@@ -40,10 +40,11 @@ function consumInfo.calculate(self, card, context)
         end
     end
 
-    if context.fnwk_card_destroyed and G.play and context.removed.fnwk_removed_by_farewell then
+    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_farewell then
+        local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+                G.FUNCS.flare_stand_aura(flare_card, 0.5)
             end,
             extra = {
                 message = localize('k_farewell'),

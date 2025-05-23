@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'NOTORIOUS',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
@@ -9,13 +9,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'streetlight',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 local function no_face_cards()
@@ -36,12 +36,14 @@ end
 function consumInfo.calculate(self, card, context)
     if not context.joker_main or not no_face_cards() or card.debuff then return end
 
+    local flare_card = context.blueprint_card or card
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+            G.FUNCS.flare_stand_aura(flare_card, 0.5)
         end,
         extra = {
-            x_mult = card.ability.extra.x_mult
+            x_mult = card.ability.extra.x_mult,
+            card = flare_card
         }
     }
 end

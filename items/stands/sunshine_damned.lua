@@ -1,7 +1,7 @@
 local consumInfo = {
     key = 'c_fnwk_sunshine_damned',
     name = "The Damned",
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FFFFFFDC', '4F6367DC' },
@@ -12,13 +12,13 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
+    rarity = 'arrow_StandRarity',
     alerted = true,
     hasSoul = true,
     fanwork = 'sunshine',
     in_progress = true,
     blueprint_compat = false,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -37,7 +37,11 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not (context.cardarea == G.play and context.individual) or context.blueprint or card.debuff then return end
+    if not (context.cardarea == G.play and context.individual) then return end
+
+    if context.blueprint or context.joker_retrigger then
+        return
+    end
 
     local found_suit = false
     for _, v in pairs(card.ability.extra.suits) do
@@ -52,7 +56,7 @@ function consumInfo.calculate(self, card, context)
     if card.ability.extra.scored_count < card.ability.extra.num_scores then
         return {
             func = function()
-                G.FUNCS.csau_flare_stand_aura(card, 0.5)
+                G.FUNCS.flare_stand_aura(card, 0.5)
             end,
             extra = {
                 message_card = card,
@@ -66,7 +70,7 @@ function consumInfo.calculate(self, card, context)
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(card, 0.5)
+            G.FUNCS.flare_stand_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'fnwk_damned')
                 new_tarot:add_to_deck()

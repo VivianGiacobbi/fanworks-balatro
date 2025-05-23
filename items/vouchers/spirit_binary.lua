@@ -5,7 +5,7 @@ local voucherInfo = {
     },
     cost = 10,
     fanwork = 'spirit',
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

@@ -1,6 +1,6 @@
 local consumInfo = {
     name = 'Wine Song',
-    set = 'csau_Stand',
+    set = 'Stand',
     config = {
         -- stand_mask = true,
         aura_colors = { 'FB5D53DC', 'A34B6EDC' },
@@ -14,13 +14,12 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'csau_StandRarity',
-    alerted = true,
+    rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'double',
     in_progress = true,
     blueprint_compat = true,
-    requires_stands = true,
+    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -69,9 +68,10 @@ function consumInfo.calculate(self, card, context)
     end
 
     local rand_mult = pseudorandom(pseudoseed('fnwk_winesong'), card.ability.extra.mult_min, card.ability.extra.mult_max)
+    local flare_card = context.blueprint_card or card
     return {
         func = function()
-            G.FUNCS.csau_flare_stand_aura(context.blueprint_card or card, 0.5)
+            G.FUNCS.flare_stand_aura(flare_card, 0.5)
         end,
         extra = {
             mult = rand_mult,

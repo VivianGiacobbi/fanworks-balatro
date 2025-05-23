@@ -23,7 +23,7 @@ local function tally_fanworks_jokers()
 	local tally = 0
 	for k, _ in pairs(G.GAME.fnwk_owned_jokers) do
 		local center = G.P_CENTERS[k]
-		if center and FnwkContainsString(k, 'fnwk_') and (center.set == 'Joker' or center.set == 'csau_Stand') then 
+		if center and FnwkContainsString(k, 'fnwk_') and (center.set == 'Joker' or center.set == 'Stand') then 
 			tally = tally + 1
 		end
 	end
