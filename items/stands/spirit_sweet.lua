@@ -18,7 +18,6 @@ local consumInfo = {
     alerted = true,
     hasSoul = true,
     fanwork = 'spirit',
-    in_progress = true,
     blueprint_compat = false,
     dependencies = {'ArrowAPI'},
 }

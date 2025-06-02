@@ -245,8 +245,10 @@ local items_to_load = {
 		'scepter_lenfer',
 
 		-- JJ29: Stardust Rebels
-		'rebels_rebel'
+		'rebels_rebel',
 
+		-- red rising sun
+		'redrising_invisible'
 	},
 	
 	Deck = {

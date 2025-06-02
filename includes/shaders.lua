@@ -8,8 +8,6 @@ SMODS.Shader({ key = 'boney_bottom', path = 'boney_bottom.fs' })
 SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
 SMODS.Shader({ key = 'mod_background', path = 'mod_background.fs'})
-
-SMODS.Atlas({ key = "test_chip", path = "test_chip.png", px = 34, py = 34})
 SMODS.Shader({ key = 'rotten_graft', path = 'rotten_graft.fs'})
 
 SMODS.DrawStep {

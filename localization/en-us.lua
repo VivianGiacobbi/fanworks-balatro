@@ -387,11 +387,14 @@ return {
 			ba_lipstick = 'Lipstick Vogue',
 			ba_cis = 'Cold Iron Streets',
 			ba_yym = "Yo-Yo Ma's Bizarre RPG",
-			ba_rebels = 'JJ29: Stardust Rebels'
+			ba_rebels = 'JJ29: Stardust Rebels',
+			ba_redrising = 'Red Rising Sun'
 		},
 		v_dictionary = {
 			downward_warn_text = "Must play #1#",
 			a_hand = "+#1# Hand",
+			a_reps = "+#1# Reps",
+			a_reps_minus = "-#1# Reps",
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -1763,6 +1766,17 @@ return {
 				text = {
 					"{C:attention}Mult Cards{} give {C:chips}+50{} Chips",
 					"{C:attention}Bonus Cards{} give {C:mult}+6{} Mult",
+				},
+			},
+			c_fnwk_redrising_invisible = {
+				name = "Invisible Sun",
+				text = {
+					"Played {C:attention}Queens{} are retriggered",
+					"{C:attention}#1#{} {C:inactive}[max{} {C:attention}#3#{}{C:inactive}]{} time#2#",
+					"{s:0.1} {}",
+					"This Stand gains {C:attention}#4#{} retrigger when a",
+					"{C:attention}King{} or {C:attention}Jack{} is destroyed and loses",
+					"{C:attention}#4#{} retrigger at end of round"
 				},
 			},
 			c_fnwk_rockhard_peppers = {

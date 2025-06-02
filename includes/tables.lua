@@ -85,6 +85,8 @@ G.fnwk_badge_colours = {
     te_yym = 'FFFFFF',
     co_rebels = 'FF6DDC',
     te_rebels = 'FFFFFF',
+    co_redrising = '7F1010',
+    te_redrising = 'FFFFFF'
 }
 
 --- A table of joker keys considered "women"
