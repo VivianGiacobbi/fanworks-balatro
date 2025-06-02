@@ -61,7 +61,7 @@ function consumInfo.calculate(self, card, context)
 		if card.ability.extra.reps > 0 then
             local flare_card = context.blueprint_card or card
             return {
-                func = function()
+                pre_func = function()
                     G.FUNCS.flare_stand_aura(flare_card, 0.5)
                 end,
                 message = localize('k_again_ex'),
