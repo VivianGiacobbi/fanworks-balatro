@@ -36,11 +36,11 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.jokers and context.pre_draw and context.individual then
-		if context.drawn:is_suit('Diamonds') then
-			context.drawn.joker_force_facedown = true
-		end
-	end
+	if not context.blueprint and not context.retrigger_joker and context.stay_flipped and context.other_card:is_suit('Diamonds') then
+        return {
+            stay_flipped = true,
+        }
+    end
 
 	if not (context.repetition and context.cardarea == G.play) or card.debuff then
 		return

@@ -27,11 +27,11 @@ end
 function consumInfo.calculate(self, card, context)
     if context.blueprint or card.debuff or context.retrigger_joker then return end
 
-    if context.discard and #context.full_hand == 1 and next(SMODS.get_enhancements(context.other_card)) then
-        G.GAME.fnwk_lenfer_draw = true
-        return {
+    if card.ability.fnwk_lenfer_draw and context.drawing_cards and context.amount < card.ability.extra.draw_size then
+		card.ability.fnwk_lenfer_draw = nil
+		return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.38)
+                G.FUNCS.flare_stand_aura(card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,
@@ -42,7 +42,15 @@ function consumInfo.calculate(self, card, context)
                     end 
                 }))
             end,
-            delay = 0.45,
+            extra = {
+                cards_to_draw = card.ability.extra.draw_size
+            }
+		}
+	end
+
+    if context.discard and #context.full_hand == 1 and next(SMODS.get_enhancements(context.other_card)) then
+        card.ability.fnwk_lenfer_draw = true
+        return {
             remove = true,
         }
     end

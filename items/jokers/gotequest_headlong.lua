@@ -35,29 +35,33 @@ function jokerInfo.calculate(self, card, context)
 		}))
 	end
 
-	if context.pre_draw and G.GAME.dzrawlin and not card.ability.dzvalin_triggered then
+	if card.ability.dzvalin_ready and context.drawing_cards and context.amount < #G.deck.cards then
 		card.ability.dzvalin_triggered = true
-		G.GAME.dzrawlin = nil
+		card.ability.dzvalin_ready = nil
+		return {
+			cards_to_draw = #G.deck.cards
+		}
 	end
 
-	if context.end_of_round and G.GAME.dzrawlin then
-		card.ability.dzvalin_triggered = false
-		G.GAME.dzrawlin = nil
+	if context.end_of_round and card.ability.dzvalin_ready then
+		card.ability.dzvalin_triggered = nil
+		card.ability.dzvalin_ready = nil
 	end
 
 	if G.GAME.current_round.hands_left ~= card.ability.extra.hand_trigger or G.GAME.current_round.discards_left ~= card.ability.extra.discard_trigger or G.GAME.dzrawlin then
 		return
 	end
-	if context.fnwk_change_discards or context.fnwk_change_hands and not G.GAME.dzrawlin then
-		G.GAME.dzrawlin = true
-		local eval = function() return G.GAME.dzrawlin == true end
+
+	if context.fnwk_change_discards or context.fnwk_change_hands and not card.ability.dzvalin_ready then
+		card.ability.dzvalin_ready = true
+		local eval = function() return card.ability.dzvalin_ready == true end
         juice_card_until(card, eval, true)
 	end
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
-	if G.GAME.dzrawlin and not next(SMODS.find_card('j_fnwk_gotequest_headlong')) then
-		G.GAME.dzrawlin = nil
+	if card.ability.dzvalin_ready and not next(SMODS.find_card('j_fnwk_gotequest_headlong')) then
+		card.ability.dzvalin_ready = nil
 	end
 end
 

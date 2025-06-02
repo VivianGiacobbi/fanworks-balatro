@@ -28,16 +28,15 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    local juice_card = context.blueprint_card or card
-    fnwk_balance_score(juice_card)
-
-    mult = math.floor(mult * card.ability.extra.final_mult_mod)
-    update_hand_text({delay = 0}, {mult = mult, chips = hand_chips})
 
     return {
-        message_card = juice_card,
-        colour = G.C.MULT,
-        message = localize{type='variable',key='a_xmult',vars={card.ability.extra.final_mult_mod}},
+        balance = true,
+        card = context.blueprint_card or card,
+        delay = 0.7,
+        extra = {
+            x_mult = card.ability.extra.final_mult_mod,
+            message_card = context.blueprint_card or card,
+        }
     }
 end
 

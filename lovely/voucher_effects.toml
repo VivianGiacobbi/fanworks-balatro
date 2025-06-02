@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 0
 
 #
-# Adds a "pre_draw" context
+# Adds a voucher evaluation context
 #
 
 # G.FUNCS.evaluate_round()
