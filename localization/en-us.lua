@@ -1824,8 +1824,8 @@ return {
 				name = "Sweet Bod",
 				text = {
 					"When a {C:attention}Boss Blind{} is defeated,",
-					"create a {C:dark_edition}Negative{} {C:attention}#1#{}",
-					"with its {C:attention}Blind{} effect",
+					"create a {C:dark_edition}#1#{} with",
+					"its {C:attention}Blind{} effect",
 				},
 			},
 			c_fnwk_spirit_ultimate = {
