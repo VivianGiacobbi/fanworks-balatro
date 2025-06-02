@@ -35,9 +35,16 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if not context.blueprint and not context.retrigger_joker and context.pre_draw and not context.individual then
-        G.deck.cards[#G.deck.cards].joker_force_facedown = true
-	end
+    if not context.blueprint and not context.retrigger_joker and context.drawing_cards then
+        G.deck.cards[#G.deck.cards].ability.fnwk_achtung_effect = true
+    end
+
+    if not context.blueprint and not context.retrigger_joker and context.stay_flipped and context.other_card.ability.fnwk_achtung_effect then
+        context.other_card.ability.fnwk_achtung_effect = nil
+        return {
+            stay_flipped = true,
+        }
+    end
 
     if context.individual and context.cardarea == G.play and context.other_card.ability.played_while_flipped then
         local flare_card = context.blueprint_card or card

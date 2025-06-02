@@ -139,7 +139,75 @@ function jokerInfo.calculate(self, card, context)
 			trigger = 'after', 
 			func = function()
 				context.joker.ability.make_vortex = true
-				context.joker:explode(nil, 0.6, true)
+				
+				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
+				self.dissolve = 0
+				self.dissolve_colours = {G.C.WHITE}
+
+				local start_time = G.TIMERS.TOTAL
+				local percent = 0
+				play_sound('explosion_buildup1')
+				self.juice = {
+					scale = 0,
+					r = 0,
+					handled_elsewhere = true,
+					start_time = start_time, 
+					end_time = start_time + explode_time
+				}
+
+				local particles = Particles(0, 0, 0,0, {
+					timer_type = 'TOTAL',
+					timer = 0.01*explode_time,
+					scale = 0.2,
+					speed = 2,
+					lifespan = 0.2*explode_time,
+					attach = self,
+					colours = self.dissolve_colours,
+					fill = true
+				})
+
+				G.E_MANAGER:add_event(Event({
+					blockable = false,
+					func = (function()
+							if self.juice then 
+								percent = (G.TIMERS.TOTAL - start_time)/explode_time
+								self.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
+								self.juice.scale = percent*0.15
+							end
+							if G.TIMERS.TOTAL - start_time > 1.5*explode_time then return true end
+						end)
+				}))
+
+				G.E_MANAGER:add_event(Event({
+					trigger = 'ease',
+					blockable = false,
+					ref_table = self,
+					ref_value = 'dissolve',
+					ease_to = 0.3,
+					delay =  0.9*explode_time,
+					func = (function(t) return t end)
+				}))
+
+				G.E_MANAGER:add_event(Event({
+					blockable = false,
+					delay = 1.6*explode_time,
+					func = (function() 
+						if G.TIMERS.TOTAL - start_time > 1.55*explode_time then  
+							self.dissolve = 0
+							percent = 0
+							self.juice = {
+								scale = 0,
+								r = 0,
+								handled_elsewhere = true,
+								start_time = start_time, 
+								end_time = G.TIMERS.TOTAL
+							}
+							return true 
+						end
+					end)
+				}))
+				particles:fade()
+
 				G.E_MANAGER:add_event(Event({
 					blockable = false,
 					trigger = 'after', 

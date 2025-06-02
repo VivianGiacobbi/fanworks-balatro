@@ -29,9 +29,11 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if not context.blueprint and not context.retrigger_joker and context.pre_draw and context.individual then
-        context.drawn.joker_force_facedown = true
-	end
+    if not context.blueprint and not context.retrigger_joker and context.stay_flipped then
+        return {
+            stay_flipped = true,
+        }
+    end
 
     if context.before and context.scoring_name ~= card.ability.extra.non_hand then
         ease_hands_played(card.ability.extra.hand_gain)

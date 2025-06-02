@@ -14,11 +14,6 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     fnwk_reset_funkadelic()
     fnwk_reset_infidel()
     fnwk_reset_loyal()
-
-    for k, v in pairs(G.playing_cards) do
-        v.joker_force_facedown = nil
-        v.ability.played_while_flipped = nil
-    end
 end
 
 --- Add effects for non-main editions to an effects table, similar to SMODS.calculate_quantum_enhancements()
@@ -59,7 +54,7 @@ end
 --- @param card table Balatro card table to find extra editions on
 --- @return table extras An indexed table containing extra editions, formatted like card.edition in vanilla
 function SMODS.fnwk_get_quantum_editions(card)
-    if card.edition.others and nexts(card.edition.others) then
+    if card.edition.others and next(card.edition.others) then
         local extras = copy_table(card.edition.others)
         return extras
     end
