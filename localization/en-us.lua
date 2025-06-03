@@ -765,7 +765,7 @@ return {
 			j_fnwk_streetlight_biased = {
 				name = "Biased Joker",
 				text = {
-					"Gain {C:money}$#1#{} whenever a",
+					"Gain {C:money}$#1#{} when a",
 					"{C:tarot}Tarot{} card is used",
 					"{s:0.1} {}",
 					"All {C:attention}women{} are debuffed",
