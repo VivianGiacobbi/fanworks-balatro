@@ -97,7 +97,7 @@ end
 
 
 ---------------------------
---------------------------- joker created context
+--------------------------- card created context
 ---------------------------
 
 local ref_create_card = create_card
@@ -114,9 +114,7 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
     
     local ret = ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
 
-    if ret.ability.set == 'Joker' then
-        SMODS.calculate_context({fnwk_joker_created = true, joker = ret, area = area})
-    end
+    SMODS.calculate_context({fnwk_created_card = true, card = ret, area = area})
 
     return ret
 end

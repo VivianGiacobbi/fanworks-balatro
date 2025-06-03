@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'NOTORIOUS',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             x_mult = 5,
@@ -10,10 +10,7 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_StandRarity',
-    alerted = true,
-    hasSoul = true,
     fanwork = 'streetlight',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }
@@ -29,8 +26,27 @@ local function no_face_cards()
 end
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = {card.ability.extra.x_mult} }
+end
+
+function consumInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+	card.children.noto_layer = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[card.config.center.atlas], {x = 2, y = 0})
+	card.children.noto_layer:set_role({
+		role_type = 'Minor',
+		major = card,
+		offset = { x = 0, y = 0 },
+		xy_bond = 'Strong',
+		wh_bond = 'Strong',
+		r_bond = 'Strong',
+		scale_bond = 'Strong',
+		draw_major = card
+	})
+    card.children.noto_layer.custom_draw = true
 end
 
 function consumInfo.calculate(self, card, context)

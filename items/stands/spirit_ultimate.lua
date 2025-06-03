@@ -66,7 +66,7 @@ function consumInfo.calculate(self, card, context)
                 repetitions = (gold_count * reps),
                 card = flare_card,
             }
-        end     
+        end
     end
 end
 

@@ -106,55 +106,16 @@ SMODS.current_mod.config_tab = function()
 	}
 end
 
---[[
-fnwk_credit_1 = "BarrierTrio/Gote"
-fnwk_credit_2 = "DPS2004"
-fnwk_credit_3 = "SagaciousCejai"
-fnwk_credit_4 = "Nether"
-fnwk_credit_5 = "Mysthaps"
-fnwk_credit_6 = "Numbuh214"
-fnwk_credit_7 = "Aurelius7309"
-fnwk_credit_8 = "Austin L. Matthews"
-fnwk_credit_8_tag = "(AmtraxVA)"
-fnwk_credit_9 = "Lyman"
-fnwk_credit_9_from = "(JankJonklers)"
-fnwk_credit_10 = "Akai"
-fnwk_credit_10_from = "(Balatrostuck)"
-fnwk_credit_5_from = "(LobotomyCorp)"
-fnwk_credit_12 = "Victin"
-fnwk_credit_12_from = "(Victin's Collection)"
-fnwk_credit_13 = "Keku"
-fnwk_credit_14 = "Gappie"
-fnwk_credit_15 = "Arthur Effgus"
-fnwk_credit_16 = "FenixSeraph"
-fnwk_credit_17 = "WhimsyCherry"
-fnwk_credit_18 = "Global-Trance"
-fnwk_credit_19 = "Lyzerus"
-fnwk_credit_20 = "Bassclefff"
-fnwk_credit_20_tag = "(bassclefff.bandcamp.com)"
-fnwk_credit_21 = "fradavovan"
-fnwk_credit_22 = "Greeeg"
-fnwk_credit_23 = "CheesyDraws"
-fnwk_credit_24 = "Jazz_Jen"
-fnwk_credit_25 = "BardVergil"
-fnwk_credit_26 = "GuffNFluff"
-fnwk_credit_27 = "sinewuui"
-fnwk_credit_28 = "Swizik"
-fnwk_credit_29 = "Burdrehnar"
-fnwk_credit_30 = "Crisppyboat"
-fnwk_credit_31 = "Alli"
-fnwk_credit_32 = "Lyman"
-fnwk_credit_st1 = "tortoise"
-fnwk_credit_st2 = "Protokyuuu"
-fnwk_credit_st3 = "ShrineFox"
-fnwk_credit_st4 = "cyrobolic"
-fnwk_credit_st5 = "ReconBox"
-fnwk_credit_st6 = "SinCityAssassin"
-
 local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
-local artist_size = 0.43
+local artist_size = 0.38
+local special_thanks_mod = 1
+local special_thanks_padding = 0
+local artist_padding = 0.03
+local coding_scale = 0.90
+local shader_scale = 0.9
+local text_scale = 0.98
 
 SMODS.current_mod.credits_tab = function()
 	chosen = true
@@ -164,169 +125,139 @@ SMODS.current_mod.credits_tab = function()
 				{n=G.UIT.T, config={text = localize("b_credits"), scale = text_scale*1.2, colour = G.C.GREEN, shadow = true}},
 			}},
 			{n=G.UIT.R, config={align = "cm", padding = 0.05,outline_colour = G.C.GREEN, r = 0.1, outline = 1}, nodes= {
-				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes={
-					{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
-						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = localize('fnwk_credits1'), scale = header_scale * 0.5, colour = G.C.GOLD, shadow = true}},
+				{n=G.UIT.C, config={align = "cm", padding = 0.1, r = 0.1}, nodes={
+					{n=G.UIT.C, config={align = "cm", padding = 0}, nodes={
+						{n=G.UIT.R, config={align = "cm", padding = 0.1, minh = 6.2, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+								{n=G.UIT.T, config={text = localize('fnwk_credits_direct'), scale = header_scale * 0.6, colour = G.C.GOLD, shadow = true}},
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = fnwk_credit_1, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								{n=G.UIT.R, config={align = "tm", padding = 0.1}, nodes={
+									{n=G.UIT.T, config={text = G.fnwk_credits.gote, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = fnwk_credit_13, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-								}},
-							}},
-						}},
-						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.4, colour = G.C.CLEAR, shadow = true}},
-							}},
-						}},
-						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = localize('fnwk_credits7'), scale = header_scale * 0.6, colour = G.C.RED, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = fnwk_credit_20, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = fnwk_credit_20_tag, scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
-								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.05, colour = G.C.CLEAR, shadow = true}},
-								}},
-							}},
-						}},
-						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.4, colour = G.C.CLEAR, shadow = true}},
-							}},
-						}},
-						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = G.SETTINGS.roche and localize('fnwk_credits4') or "?????", scale = header_scale*0.6, colour = G.C.BLUE, shadow = true}},
-							}},
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = G.SETTINGS.roche and fnwk_credit_8 or "?????", scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-								}},
-								{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = G.SETTINGS.roche and fnwk_credit_8_tag or "?????", scale = text_scale*0.45, colour = G.C.JOKER_GREY, shadow = true}},
+								{n=G.UIT.R, config={align = "tm", padding = 0.1}, nodes={
+									{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
 					}},
 				}},
 				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
-					{ n = G.UIT.C, config = { align = "tm", padding = 0.1 * bonus_padding, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1 }, nodes = {
-						{ n = G.UIT.R, config = { align = "cm", padding = 0 }, nodes = {
-							{ n = G.UIT.T, config = { text = localize('fnwk_credits2'), scale = header_scale * 0.6, colour = HEX('f75294'), shadow = true } },
-						} },
+					{n = G.UIT.C, config = {align = "cm", padding = 0.1 * bonus_padding, minh = 6.140, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes = {
+						{n = G.UIT.R, config = {align = "cm", padding = 0}, nodes = {
+							{n = G.UIT.T, config = {text = localize('fnwk_credits_artists'), scale = header_scale * 0.6, colour = HEX('f75294'), shadow = true}},
+						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_1, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_3, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_13, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_14, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_15, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_16, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_17, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_18, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_19, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_25, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_26, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_24, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_27, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_21, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.algebra, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.shaft, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.gote, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.coop, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.cody, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.cream, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.daed, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.doopo, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.durandal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.fizzy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.gar, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.jester, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.jin, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.leafy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
 							}},
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_22, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_23, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_10, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_28, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_29, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_30, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_31, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-								{ n = G.UIT.R, config = { align = "tm", padding = 0 }, nodes = {
-									{ n = G.UIT.T, config = { text = fnwk_credit_32, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true } },
-								} },
-							}}
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.mae, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.monky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.piano, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.pink, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.plus, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.polyg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.poul, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.mal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.reda, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.android, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.cejai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.cringe, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.winter, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.tos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+							}},
 						}},
 					} },
 				}},
 				{n=G.UIT.C, config={align = "tm", padding = 0.1, r = 0.1}, nodes= {
 					{ n = G.UIT.C, config = { align = "tm", padding = 0, r = 0.1, }, nodes = {
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-							{n=G.UIT.C, config={align = "tl", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+							{n=G.UIT.C, config={align = "cm", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
 								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = localize('fnwk_credits3'), scale = header_scale*0.6, colour = G.C.ORANGE, shadow = true}},
+									{n=G.UIT.T, config={text = localize('fnwk_credits_coding'), scale = header_scale*0.6, colour = G.C.ORANGE, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_1, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.gote, scale = text_scale*0.44*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_2, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.daed, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_4, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.keku, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_6, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_7, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_13, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},
@@ -335,75 +266,37 @@ SMODS.current_mod.credits_tab = function()
 									{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.3, colour = G.C.CLEAR, vert = true, shadow = true}},
 								}},
 							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0.1*bonus_padding,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-									{n=G.UIT.T, config={text = localize('fnwk_credits5'), scale = header_scale*0.55, colour = G.C.PURPLE, shadow = true}},
-								}},
-								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_9, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
+								{n=G.UIT.R, config={align = "cm", padding = 0.1, minh = 3.9, outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
+									{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+										{n=G.UIT.T, config={text = localize('fnwk_credits_shaders'), scale = header_scale * 0.515, colour = G.C.DARK_EDITION, shadow = true}},
 									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_9_from, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_10, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_10_from, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_5, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_5_from, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_12, scale = text_scale*0.45, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = support_padding}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_12_from, scale = text_scale*0.375, colour = G.C.JOKER_GREY, shadow = true}},
+									{n=G.UIT.R, config={align = "cm", padding = support_padding}, nodes= {
+										{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
+											{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.55*shader_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										}},
 									}},
 								}},
 							}},
 						}},
 						{n=G.UIT.R, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
 							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.3, colour = G.C.CLEAR, shadow = true}},
+								{n=G.UIT.T, config={text = "separator", scale = text_scale*0.3, colour = G.C.CLEAR, shadow = true}},
 							}},
 						}},
-						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1}, nodes={
-							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
-								{n=G.UIT.T, config={text = localize('fnwk_credits6'), scale = header_scale*0.55, colour = G.C.GREEN, shadow = true}},
+						{n=G.UIT.R, config={align = "tm", padding = 0.1,outline_colour = G.C.JOKER_GREY, r = 0.1, outline = 1, minh=2}, nodes={
+							{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+								{n=G.UIT.T, config={text = localize('fnwk_credits_thanks'), scale = header_scale*0.55, colour = G.C.GREEN, shadow = true}},
 							}},
-							{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-								{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st1, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+								{n=G.UIT.C, config={align = "cm", padding = 0}, nodes={
+									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.araki, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st3, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st5, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.luckyland, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
-								{n=G.UIT.C, config={align = "tm", padding = 0,outline_colour = G.C.CLEAR, r = 0.1, outline = 1}, nodes={
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = "SEPARATOR LMAO", scale = text_scale*0.15, colour = G.C.CLEAR, shadow = true}},
-									}},
-								}},
-								{n=G.UIT.C, config={align = "tm", padding = 0}, nodes={
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st2, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st4, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
-										{n=G.UIT.T, config={text = fnwk_credit_st6, scale = text_scale*0.36, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-								}}
 							}},
 						}},
 					}},
@@ -412,4 +305,3 @@ SMODS.current_mod.credits_tab = function()
 		}}
 	}}
 end
---]]

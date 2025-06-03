@@ -28,6 +28,7 @@ local includes = {
 
 	-- object hooks
 	'hooks/button_callbacks',
+	'hooks/uielement',
 	'hooks/game',
 	'hooks/card',
 	'hooks/cardarea',

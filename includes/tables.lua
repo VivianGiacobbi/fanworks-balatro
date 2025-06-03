@@ -1,3 +1,15 @@
+--- Table containing all names of people who contributed to the mod, used in crediting
+G.fnwk_mod_team = {
+	['gote'] = "BarrierTrio/Gote",
+	['cejai'] = "SagaciousCejai",
+	['keku'] = "Keku",
+	['winter'] = "TheWinterComet",
+	['cauthen'] = "Cauthen Currie",
+	['stup'] = 'Stupisms',
+	['reda'] = 'Redastrin',
+
+}
+
 -- colors used for dynamic badges, used to be in localization file which is a bad place to put hex codes -keku
 G.fnwk_badge_colours = {
 	-- badge colors for jojo parts
@@ -106,6 +118,8 @@ G.fnwk_women = {
         ['j_fnwk_rubicon_thnks'] = true,
         ['j_fnwk_streetlight_resil'] = true,
         ['j_fnwk_bone_destroyer'] = true,
+        ['j_fnwk_industry_loyal'] = true,
+        ['j_fnwk_mania_jokestar'] = true,
         ['j_fnwk_gotequest_killing'] = true,
         ['j_fnwk_jspec_joepie'] = true,
         ['j_fnwk_jspec_ilsa'] = true,
@@ -129,26 +143,37 @@ G.fnwk_women = {
 }
 
 G.fnwk_credits = {
-    gote = 'BarrierTrio/Gote',
-    cejai = 'SagaciousCejai',
-    daed = 'NotDaedalus',
-    coop = 'Cauthen Currie',
-    fizzy = 'FizzyWizard',
-    mal = 'qrowscant',
-    winter = 'TheWinterComet',
-    cream = 'CreamSodaCrossroads',
-    cringe = 'Stupisms',
-    poul = 'Poul Shmidt',
-    leafy = 'Leafgilly',
-    piano = 'Pianolote',
+    algebra = 'AlgebraFalcon',
     shaft = 'AllShaftsFall',
-    tos = 'TOS',
-    jester = 'Jester',
-    gar = 'GarPlatinum',
-    reda = 'Redastrin',
+    gote = 'BarrierTrio/Gote',
+    coop = 'Cauthen Currie',
+    cody = 'Cody Savoie',
+    cream = 'CreamSodaCrossroads',
+    daed = 'NotDaedalus',
+    doopo = 'Doopo',
     durandal = 'Durandal',
+    fizzy = 'FizzyWizard',
+    gar = 'GarPlatinum',
+    jester = 'Jester',
+    jin = 'JorgeHernandez',
+    keku = 'Kekulism',
+    leafy = 'Leafgilly',
+    mae = 'MildlyAnxious',
+    monky = 'Monky4Real',
+    piano = 'Pianolote',
     pink = 'pinkthorne',
-    monky = 'Monky4Real'
+    plus = 'plusgal',
+    polyg = 'polygonate',
+    poul = 'Poul Shmidt',
+    mal = 'qrowscant',
+    reda = 'Redastrin',
+    android = 'sadlyandroid',
+    cejai = 'SagaciousCejai',
+    cringe = 'Stupisms',
+    winter = 'TheWinterComet',
+    tos = 'TOS',
+    araki = 'Hirohiko Araki',
+	luckyland = 'Lucky Land Communications',
 }
 
 G.fnwk_reskin_credits = {
