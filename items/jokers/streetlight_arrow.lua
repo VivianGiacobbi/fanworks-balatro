@@ -7,7 +7,6 @@ local jokerInfo = {
 	eternal_compat = false,
 	perishable = true,
 	fanwork = 'streetlight',
-	in_progress = true,
 	required_stands = true,
 }
 
