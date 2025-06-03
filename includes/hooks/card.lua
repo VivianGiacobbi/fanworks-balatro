@@ -5,9 +5,21 @@
 local ref_get_id = Card.get_id
 function Card:get_id(skip_pmk)
     local id = ref_get_id(self, skip_pmk)
-    if not self.debuff and next(SMODS.find_card('j_fnwk_rubicon_crown')) and (id == 11 or id == 13) then
-        return 12
+    local crowns = SMODS.find_card('j_fnwk_rubicon_crown')
+    local valid_crown = nil
+    if next(crowns) then
+        for _, v in pairs(crowns) do
+            if not v.debuff then valid_crown = true end
+        end
     end
+
+    if valid_crown and id then
+        local rank = SMODS.Ranks[self.base.value]
+        if (id > 0 and rank and rank.face) or next(find_joker("Pareidolia")) then
+            return 12
+        end
+    end
+    
     return id
 end
 
@@ -298,7 +310,7 @@ local ref_card_dissolve = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
     local ret = ref_card_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
 
-    if G.jokers and self.ability.set == 'Joker' then
+    if (G.jokers and self.ability.set == 'Joker') or (G.consumeables and self.ability.set == 'Stand') then
         SMODS.calculate_context({fnwk_joker_destroyed = true, joker = self})
     end
 

@@ -41,9 +41,20 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
+	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_joker_destroyed or context.remove_playing_cards) then
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			func = function()
+				for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
+				for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
+				return true 
+			end
+		}))
+	end
+
 	if not context.blueprint and not context.retrigger_joker and context.debuff_card and not card.ability.fnwk_biased_removed then
 		local women = FnwkFindWomen(context.debuff_card.config.center.key)
-		if women.trans or women.cis or context.debuff_card.base.value == 'Queen' then
+		if women.trans or women.cis or context.debuff_card:get_id() == 12 then
 			return {
 				debuff = true
 			}
@@ -60,8 +71,7 @@ end
 function jokerInfo.add_to_deck(self, card, from_debuff)
 	card.ability.fnwk_biased_removed = nil
 	G.E_MANAGER:add_event(Event({
-		trigger = 'after',
-		delay = 0.2, 
+		trigger = 'after', 
 		func = function()
 			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
     		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
@@ -74,7 +84,6 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 	card.ability.fnwk_biased_removed = true
 	G.E_MANAGER:add_event(Event({
 		trigger = 'after',
-		delay = 0.2, 
 		func = function()
 			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
     		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
