@@ -254,11 +254,12 @@ return {
 			},
 		},
 		dictionary = {
-			fnwk_credits1 = "Concept/Direction",
-			fnwk_credits2 = "Artists",
-			fnwk_credits3 = "Programming",
-			fnwk_credits4 = "Support",
-			fnwk_credits5 = "Special Thanks",
+			fnwk_credits_direct = "Direction",
+			fnwk_credits_artists = "Art",
+			fnwk_credits_coding = "Programming",
+			fnwk_credits_shaders = "Graphics",
+			fnwk_credits_thanks = "Special Thanks",
+
 			fnwk_options_sub = "(Restart required to apply)",
 			fnwk_options_enableJokers = "Jokers",
 			fnwk_options_enableStands = "Stands",
@@ -735,8 +736,8 @@ return {
 			j_fnwk_streetlight_arrow = {
 				name = "Arrow Shard",
 				text = {
-					"Sell this card to",
-					"{C:stand}Evolve{} your {C:stand}Stand{}",
+					"Sell this card to {C:stand}Evolve{}",
+					"your {C:attention}leftmost{} {C:stand}Stand{}",
 				},
 			},
 			j_fnwk_streetlight_pinstripe = {
@@ -766,8 +767,8 @@ return {
 				text = {
 					"Gain {C:money}$#1#{} whenever a",
 					"{C:tarot}Tarot{} card is used",
-					"All female {C:attention}Jokers{} and",
-					"{C:attention}Queens{} are debuffed",
+					"{s:0.1} {}",
+					"All {C:attention}women{} are debuffed",
 				},
 			},
 			j_fnwk_streetlight_teenage = {

@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Biased Joker',
 	config = {
 		extra = {
-			money = 2
+			dollars = 2
 		}
 	},
 	rarity = 1,
@@ -11,43 +11,73 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'streetlight',
-	in_progress = true,
 }
+
+local function debuff_helper(card) 
+	if G.GAME.blind then
+		G.GAME.blind:debuff_card(card)
+		return
+	end
+
+	SMODS.calculate_context({ debuff_card = card, ignore_debuff = true })
+	local flags = SMODS.calculate_context({ debuff_card = card, ignore_debuff = true })
+	if flags.prevent_debuff then 
+		if card.debuff then card:set_debuff(false) end
+		return
+	elseif flags.debuff then
+		if not card.debuff then card:set_debuff(true) end
+		return
+	end
+end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-	return { vars = {card.ability.extra.money}}
+	return { vars = {card.ability.extra.dollars}}
+end
+
+function jokerInfo.calculate(self, card, context)
+	if not context.blueprint and not context.retrigger_joker and context.fnwk_created_card then
+		debuff_helper(context.card)
+		return
+	end
+
+	if not context.blueprint and not context.retrigger_joker and context.debuff_card and not card.ability.fnwk_biased_removed then
+		local women = FnwkFindWomen(context.debuff_card.config.center.key)
+		if women.trans or women.cis or context.debuff_card.base.value == 'Queen' then
+			return {
+				debuff = true
+			}
+		end
+	end
+
+	if context.using_consumeable and context.consumeable.ability.set == 'Tarot' then
+        return {
+			dollars = card.ability.extra.dollars
+		}
+    end
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
+	card.ability.fnwk_biased_removed = nil
 	G.E_MANAGER:add_event(Event({
 		trigger = 'after',
 		delay = 0.2, 
 		func = function()
-			for k, v in pairs(G.I.CARD) do
-				if v.get_id and v:get_id() == 12 then
-					v:add_force_debuff(card)
-				end
-				if v.config.center then 
-					local result = FnwkFindWomen(v.config.center.key)
-					if result.cis or result.trans then
-						v:add_force_debuff(card)
-					end
-				end
-			end
+			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
+    		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
         	return true 
     	end
 	}))
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
+	card.ability.fnwk_biased_removed = true
 	G.E_MANAGER:add_event(Event({
 		trigger = 'after',
 		delay = 0.2, 
 		func = function()
-			for k, v in pairs(G.I.CARD) do
-				v:remove_force_debuff(card)
-			end
+			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
+    		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
         	return true 
     	end
 	}))

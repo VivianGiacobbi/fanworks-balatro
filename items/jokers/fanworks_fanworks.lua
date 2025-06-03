@@ -39,7 +39,7 @@ end
 function jokerInfo.calculate(self, card, context)
 
 	if not context.blueprint then
-		if (context.buying_card and context.card.ability.set == 'Joker') or (context.fnwk_joker_created and context.area == G.jokers) then
+		if (context.buying_card and context.card.ability.set == 'Joker') or (context.fnwk_created_card and context.area == G.jokers) then
 			local key = context.card.config.center.key
 			if FnwkStringStartsWith(key, 'j_fnwk') then
 				return {

@@ -126,7 +126,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.extra.saved_abilities[context.joker.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and context.fnwk_joker_created and context.joker ~= card and card.ability.extra.saved_abilities[context.joker.config.center.key] then			
+	if context.cardarea == G.jokers and (context.fnwk_created_card and context.area == G.jokers) and context.card ~= card and card.ability.extra.saved_abilities[context.joker.config.center.key] then			
 		for k, v in pairs(card.ability.extra.saved_abilities[context.joker.config.center.key]) do
 			context.joker.ability[k] = v
 		end

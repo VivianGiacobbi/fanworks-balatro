@@ -141,13 +141,13 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if (context.buying_card or (context.fnwk_joker_created and context.area == G.jokers)) and not context.blueprint then
+	if (context.buying_card or (context.fnwk_created_card and context.area == G.jokers)) and not context.blueprint then
             
-        if (context.joker or context.card) == card then
+        if context.card == card then
             return
         end
 
-		try_transform_sludgemass(card, context.joker or context.card)
+		try_transform_sludgemass(card, context.card)
     end
 
 	if context.selling_card or context.fnwk_joker_destroyed then

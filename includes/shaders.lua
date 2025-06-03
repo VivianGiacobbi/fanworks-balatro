@@ -9,6 +9,7 @@ SMODS.Shader({ key = 'boney_top', path = 'boney_top.fs' })
 SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
 SMODS.Shader({ key = 'mod_background', path = 'mod_background.fs'})
 SMODS.Shader({ key = 'rotten_graft', path = 'rotten_graft.fs'})
+SMODS.Shader({ key = 'stand_notorious', path = 'stand_notorious.fs'})
 
 SMODS.DrawStep {
     key = 'revived',
@@ -65,6 +66,41 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = 'front' },
 }
 
+local ref_shadow_ds = SMODS.DrawSteps.shadow.func
+SMODS.DrawStep:take_ownership('shadow', {
+    func = function(self)
+        if self.config.center.key ~= 'c_fnwk_streetlight_notorious' then
+            return ref_shadow_ds(self)
+        end
+
+        self.ARGS.send_to_shader = self.ARGS.send_to_shader or {}
+        self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + math.sin(G.TIMERS.REAL/28) + 1 + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
+        self.ARGS.send_to_shader[2] = G.TIMERS.REAL
+
+        for _, v in pairs(self.children) do
+            v.VT.scale = self.VT.scale
+        end
+
+        local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+        local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+
+        local stand_scale_mod = 0
+        G.SHADERS['fnwk_stand_notorious']:send("scale_mod",scale_mod)
+        G.SHADERS['fnwk_stand_notorious']:send("rotate_mod",rotate_mod)
+        G.SHADERS['fnwk_stand_notorious']:send("output_scale",1+stand_scale_mod)
+
+        if not self.no_shadow and G.SETTINGS.GRAPHICS.shadows == 'On' and self:should_draw_shadow() then
+            self.shadow_height = self.states.drag.is and 0.35 or 0.1
+            
+            if self.sprite_facing == 'front' then
+                self.children.noto_layer:draw_shader('fnwk_stand_notorious', self.shadow_height)
+            else 
+                self.children.back:draw_shader('dissolve', self.shadow_height)
+            end
+        end
+    end,
+}, true)
+
 -- prevent late drawing centers from drawing twice
 SMODS.DrawStep:take_ownership('center', {
     func = function(self, layer)
@@ -73,6 +109,8 @@ SMODS.DrawStep:take_ownership('center', {
             self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
         elseif not self:should_draw_base_shader() then
             -- Don't render base dissolve shader.
+        elseif self.config.center.key == 'c_fnwk_streetlight_notorious' then
+            self.children.noto_layer:draw_shader('fnwk_stand_notorious', nil, nil, nil, self.children.center)
         elseif not self.greyed then
             self.children.center:draw_shader('dissolve')
         end
