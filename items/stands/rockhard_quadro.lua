@@ -13,7 +13,6 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'rockhard',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }

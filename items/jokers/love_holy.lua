@@ -12,11 +12,9 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'love',
-	in_progress = true,
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.pink}}
     return { vars = {card.ability.extra.chip_mod, card.ability.extra.chips}}
 end
