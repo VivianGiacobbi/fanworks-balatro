@@ -346,6 +346,9 @@ return {
 			k_farewell = 'Farewell!',
 			k_grafted = 'Grafted!',
 			k_stand_devolved = 'Devolved!',
+			k_hgm_cosmic_draw = 'Draw!',
+			k_misirlou_final = 'Final Hand?',
+			k_tragic_rankdown = 'Rank Down!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -1710,6 +1713,12 @@ return {
 					"was the last hand {C:planet}upgraded{}",
 				},
 			},
+			c_fnwk_culture_star = {
+				name = "Shatter Me",
+				text = {
+					"Dummy Text",
+				},
+			},
 			c_fnwk_glass_big = {
 				name = "Big Poppa",
 				text = {
@@ -1741,10 +1750,42 @@ return {
 					"{C:inactive}(Rank increases after scoring){}"
 				},
 			},
-			c_fnwk_mania_moving = {
-				name = "Moving Pictures",
+			c_fnwk_iron_shatter = {
+				name = "Shatter Me",
 				text = {
-					"[NEEDS REVISION]"
+					"Retrigger each scored {C:attention}Glass Card{}",
+					"and retrigger its {C:green}chance{} to {C:attention}break{}",
+				},
+			},
+			c_fnwk_jojopolis_hgm = {
+				name = "Hurdy Gurdy Man",
+				text = {
+					"{C:attention}+#1#{} hand size on {C:attention}Big Blinds{}",
+					"{C:attention}+#2#{} hand size on {C:attention}Boss Blinds{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} when a hand reaches {C:planet}level{} {C:attention}#3#{}"
+				},
+			},
+			c_fnwk_jojopolis_hgm_cosmic = {
+				name = "Hurdy Gurdy Man: Cosmic Wheels",
+				text = {
+					"After {C:attention}playing{} a hand,",
+					"draw your {C:attention}hand size{}"
+				},
+			},
+			c_fnwk_last_saturn = {
+				name = "Saturn Barz",
+				text = {
+					"When a {C:planet}Planet{} card is used,",
+					"{C:planet}level up{} a {C:attention}random{} hand"
+				},
+			},
+			c_fnwk_last_tragic = {
+				name = "Tragic Kingdom",
+				text = {
+					"If played hand contains an {C:attention}#1#{},",
+					"reduce {C:attention}rank{} of all other cards",
+					"held in hand by {C:attention}#2#{}"
 				},
 			},
 			c_fnwk_lighted_limelight = {
@@ -1760,6 +1801,18 @@ return {
 				text = {
 					"{C:attention}Destroy{} all scoring {C:attention}Gold Cards{}",
 					"and gain {C:money}$7{} for each"
+				},
+			},
+			c_fnwk_mania_moving = {
+				name = "Moving Pictures",
+				text = {
+					"Dummy Text"
+				},
+			},
+			c_fnwk_plancks_moon = {
+				name = "Moon River",
+				text = {
+					"Dummy Text"
 				},
 			},
 			c_fnwk_rebels_rebel = {
@@ -1799,6 +1852,14 @@ return {
 					"of round is a {C:attention}#3#{}",
 					"{s:0.1} {}",
 					"{s:0.8,C:inactive}\"Can you see the real me?\"{}",
+				},
+			},
+			c_fnwk_rockhard_misirlou = {
+				name = "Misirlou",
+				text = {
+					"If you have at least {C:attention}#1# #2#s{}",
+					"in your full deck, {C:attention}first hands{} trigger",
+					"{C:attention}final hand{} and {C:attention}end of round{} effects",
 				},
 			},
 			c_fnwk_rubicon_dance = {

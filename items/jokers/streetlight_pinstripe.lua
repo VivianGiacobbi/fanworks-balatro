@@ -31,23 +31,6 @@ local jokerInfo = {
 	fanwork = 'streetlight',
 }
 
-local function get_lucky_tally()
-    local lucky_tally = 0
-
-    if not G.playing_cards then
-        return lucky_tally
-    end
-    if G.playing_cards then 
-        for k, v in pairs(G.playing_cards) do
-            if SMODS.has_enhancement(v, 'm_lucky') then 
-                lucky_tally =  lucky_tally + 1
-            end
-        end
-    end
-
-    return lucky_tally
-end
-
 function jokerInfo.add_to_deck(self, card)
     if G.GAME.lucky_cancels then
         G.GAME.lucky_cancels = G.GAME.lucky_cancels + 1
@@ -60,7 +43,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.leafy }}
         
-    return { vars = {get_lucky_tally()}}
+    return { vars = {fnwk_get_enhanced_tally('m_lucky')}}
 end
 
 function jokerInfo.in_pool(self, args)
@@ -72,7 +55,7 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calc_dollar_bonus(self, card)
-    local tally = get_lucky_tally()
+    local tally = fnwk_get_enhanced_tally('m_lucky')
     if tally > 0 then
         return tally
     end

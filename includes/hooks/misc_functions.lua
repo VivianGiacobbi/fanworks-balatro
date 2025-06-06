@@ -155,16 +155,9 @@ end
 
 
 ---------------------------
---------------------------- Hand draw contexts
+--------------------------- 
 ---------------------------
 
-
-
-
-
----------------------------
---------------------------- Extra blind helper functions
----------------------------
 
 function fnwk_get_most_played_hand()
 	local hand = 'High Card'
@@ -179,6 +172,32 @@ function fnwk_get_most_played_hand()
 
 	return hand, played
 end
+
+
+function fnwk_get_enhanced_tally(enhancement_key)
+    local enhance_tally = 0
+
+    if not G.playing_cards then
+        return enhance_tally
+    end
+    if G.playing_cards then 
+        for k, v in pairs(G.playing_cards) do
+            if (not enhancement_key and v.ability.set == 'Enhanced') or SMODS.has_enhancement(v, enhancement_key) then 
+                enhance_tally =  enhance_tally + 1
+            end
+        end
+    end
+
+    return enhance_tally
+end
+
+
+
+
+
+---------------------------
+--------------------------- Extra blind helper functions
+---------------------------
 
 function fnwk_create_extra_blind(blind_source, blind_type)
 	if not G.GAME then return end	

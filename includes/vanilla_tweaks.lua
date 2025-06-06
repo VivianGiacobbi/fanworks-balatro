@@ -1,3 +1,82 @@
+local ref_glass_locvars = SMODS.Centers.m_glass.loc_vars
+SMODS.Enhancement:take_ownership('glass', {
+    config = {extra = 4},
+    loc_vars = function(self, info_queue, card)
+        if next(SMODS.find_card('c_fnwk_rubicon_dance')) then
+            local loc_key = 'm_glass_fnwk_dance_'..(card:is_suit('Spades') and 'spades' or 'other')
+            return {
+                vars = {2},
+                key = loc_key
+            }
+        end
+
+        if ref_glass_locvars and type(ref_glass_locvars) == 'function' then
+            return ref_glass_locvars(self, info_queue, card)
+        end
+
+        return { vars = {2, G.GAME.probabilities.normal, self.config.extra}}
+    end,
+    calculate = function(self, card, context)
+        local dances = SMODS.find_card('c_fnwk_rubicon_dance')
+        local valid = true
+        for _, v in ipairs(dances) do
+            if v.debuff then
+                valid = false
+                break
+            end
+        end
+
+        if valid then
+            if context.destroy_card and context.cardarea == G.play then
+                local is_spades = context.destroy_card:is_suit('Spades')
+                if not is_spades then
+                    context.destroy_card.fnwk_removed_by_dance = true
+                    return { remove = true }
+                end
+            end
+
+            if context.main_scoring and context.cardarea == G.play then
+                return {
+                    func = function()
+                        for _, v in ipairs(dances) do
+                            G.FUNCS.flare_stand_aura(v, 0.5)
+                            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
+                                v:juice_up()
+                            return true end }))
+                        end
+                    end,
+                    extra = {
+                        x_mult = 2,
+                    }
+                }
+            end
+            return
+        end
+        
+        if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
+            if not check_break then
+                local shatter_mes = SMODS.find_card('c_fnwk_iron_shatter')
+                if next(shatter_mes) then
+                    for _, v in ipairs(shatter_mes) do
+                        check_break = pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra
+                        if check_break then break end
+                    end
+                end
+            end
+            
+            if check_break then
+                return { remove = true }
+            end
+        end
+
+        if context.main_scoring and context.cardarea == G.play then
+            return {
+                x_mult = 2,
+            }
+        end
+    end,
+}, true)
+
 if not fnwk_enabled['enableVanillaTweaks'] then
     return
 end

@@ -526,3 +526,14 @@ function Card:set_edition(edition, immediate, silent, delay)
 
 	self:set_cost()
 end
+
+local ref_card_align = Card.align
+function Card:align() 
+    if self.config.center.key ~= 'c_fnwk_bone_king_farewell' then
+        sendDebugMessage('aligning '..self.config.center.key)
+        return ref_card_align(self)
+    end
+
+    sendDebugMessage('aligning farewell')
+    if self.children.focused_ui then self.children.focused_ui:set_alignment() end
+end

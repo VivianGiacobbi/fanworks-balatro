@@ -156,16 +156,6 @@ function jokerInfo.draw(self, card, layer)
         return
     end
 
-    local shader_args = {}
-    local cursor_pos = {}
-    cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-    cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-    local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
-    local hovering = (card.hover_tilt or 0)
-    shader_args[1] = {name = 'mouse_screen_pos', val = cursor_pos}
-    shader_args[2] = {name = 'hovering', val = hovering}
-    shader_args[3] = {name = 'screen_scale', val = screen_scale}
-
     local lerp_val = FnwkEaseInOutQuart(card.ability.city_lerp)
     local scroll_dist = card.ability.scroll_dist / 2
     if lerp_val > 0.5 then
@@ -174,30 +164,26 @@ function jokerInfo.draw(self, card, layer)
         scroll_dist = -1 * scroll_dist * (0.5 - lerp_val) / 0.5
     end
     
-    -- foreground
-    -- card.children.city_bkg:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
-
     -- first layer
     card.children.city_layer1.T = copy_table(card.T)
     card.children.city_layer1.VT = copy_table(card.VT)
     card.children.city_layer1.VT.x = card.VT.x + scroll_dist * card.ability.layer1_mod
-	card.children.city_layer1:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
+	card.children.city_layer1:draw_shader('dissolve')
 
     -- second layer
     card.children.city_layer2.T = copy_table(card.T)
     card.children.city_layer2.VT = copy_table(card.VT)
     card.children.city_layer2.VT.x = card.VT.x + scroll_dist * card.ability.layer2_mod
-    card.children.city_layer2:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
-
+    card.children.city_layer2:draw_shader('dissolve')
     -- third layer
     card.children.city_layer3.T = copy_table(card.T)
     card.children.city_layer3.VT = copy_table(card.VT)
     card.children.city_layer3.VT.x = card.VT.x + scroll_dist * card.ability.layer3_mod
-    card.children.city_layer3:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
+    card.children.city_layer3:draw_shader('dissolve')
     
     -- foreground
     -- function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
-    card.children.city_fg:draw_shader('fnwk_basic', nil, shader_args, nil, nil, nil, nil, nil, nil, true, true)
+    card.children.city_fg:draw_shader('dissolve')
 end
 
 

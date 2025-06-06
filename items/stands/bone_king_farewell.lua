@@ -1,9 +1,12 @@
+SMODS.Atlas({ key = 'bone_king_farewell_overlay', path = 'stands/bone_king_farewell_overlay.png', px = 237, py = 95 })
+
+
 local consumInfo = {
     key = 'c_fnwk_bone_king_farewell',
     name = 'Farewell to Kings',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'CBD4E7DC', 'FD5F55DC' },
         evolved = true,
         extra = {
@@ -12,7 +15,8 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_EvolvedRarity',
-    hasSoul = true,
+    vertex_scale_mod = 71/474,
+    soul_pos = {x = 2, y = 0},
     fanwork = 'bone',
     in_progress = true,
     blueprint_compat = true,
@@ -22,6 +26,52 @@ local consumInfo = {
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {card.ability.extra.blind_mod * 100}}
+end
+
+function consumInfo.set_sprites(self, card, initial, delay_sprites)
+    card.ignore_base_shader = card.ignore_base_shader or {}
+    card.ignore_base_shader['fnwk_farewell'] = true
+    
+    local atlas = G.ASSET_ATLAS['fnwk_bone_king_farewell_overlay']
+    local w_scale = atlas.px / 71
+
+    local w = card.T.w * w_scale
+    local h = card.T.h
+    local x_off = (w - card.T.w) / 2
+	local y_off = (h - card.T.h) / 2
+    local role = {
+        role_type = 'Minor',
+        major = card,
+        offset = { x = -x_off, y = -y_off },
+        xy_bond = 'Strong',
+        wh_bond = 'Weak',
+        r_bond = 'Strong',
+        scale_bond = 'Weak',
+        draw_major = card
+    }
+
+    card.children.bone_king_base = Sprite(card.T.x - x_off, card.T.y - y_off, w, h, atlas, {x = 1, y = 0})
+    card.children.bone_king_base:set_role(role)
+    card.children.bone_king_base.custom_draw = true
+
+    if card.children.floating_sprite then 
+        card.children.floating_sprite:remove()
+        card.children.floating_sprite = nil
+    end
+
+    card.children.floating_sprite = Sprite(card.T.x - x_off, card.T.y - y_off, w, h, atlas, {x = 2, y = 0})
+    card.children.floating_sprite:set_role({
+        role_type = 'Minor',
+        major = card,
+        offset = { x = -x_off, y = -y_off },
+        xy_bond = 'Strong',
+        wh_bond = 'Weak',
+        r_bond = 'Strong',
+        scale_bond = 'Weak',
+        draw_major = card
+    })
+    card.children.floating_sprite.states.hover.can = false
+    card.children.floating_sprite.states.click.can = false
 end
 
 function consumInfo.calculate(self, card, context)
@@ -60,11 +110,20 @@ function consumInfo.calculate(self, card, context)
                             return true 
                         end 
                     }))
-                    delay(0.6)
+                    delay(1)
                 end
             }
         }
     end
+end
+
+function consumInfo.draw(self, card, layer)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+    G.SHADERS['fnwk_basic']:send("vertex_scale_mod", card.config.center.vertex_scale_mod)
+    card.children.bone_king_base:draw_shader('fnwk_basic')
 end
 
 return consumInfo

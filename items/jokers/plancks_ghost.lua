@@ -274,18 +274,7 @@ function jokerInfo.draw(self, card, layer)
 		return
 	end
 
-    local cursor_pos = {}
-    cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-    cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-    local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
-    local hovering = (card.hover_tilt or 0)
-
-    G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_basic']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
-    card.children.center:draw_self()
-
+    card.children.center:draw_shader('dissolve')
 	card.children.patsy_overlay:draw_shader('dissolve')
 end
 

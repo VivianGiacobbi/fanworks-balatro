@@ -55,7 +55,6 @@ local items_to_load = {
 
 		-- rockhard in a funky place
 		'rockhard_rebirth',
-		-- 'rockhard_peppers',
 		'rockhard_nameless',
 		'rockhard_alfie',
 		'rockhard_vasos',
@@ -177,6 +176,10 @@ local items_to_load = {
 	},
 
 	Stand = {
+		-- jojopolis
+		'jojopolis_hgm',
+		'jojopolis_hgm_cosmic',
+
 		-- bone to blades
 		'bone_king',
 		'bone_king_farewell',
@@ -193,12 +196,25 @@ local items_to_load = {
 		'gotequest_sweet',
 		'gotequest_takyon',
 
-		--glass lariats
+		'culture_starboy',
+
+		-- glass lariats
 		'glass_big',
+
+		-- plancks creek
+		'plancks_moon',
+		
+		-- last hope army
+		'last_tragic',
+		'last_saturn',
 
 		-- rockhard in a funky place
 		'rockhard_peppers',
 		'rockhard_quadro',
+		'rockhard_misirlou',
+
+		-- iron touch
+		'iron_shatter',
 
 		-- the lighted stage
 		'lighted_limelight',

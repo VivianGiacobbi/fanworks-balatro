@@ -11,21 +11,9 @@ local jokerInfo = {
 	fanwork = 'culture',
 }
 
-local function count_enhanced()
-    local tally = 0
-    if G.playing_cards then 
-        for k, v in pairs(G.playing_cards) do
-            if v.ability.set == 'Enhanced' then 
-                tally = tally + 1
-            end
-        end
-    end
-    return tally
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.shaft }}
-    return { vars = {card.ability.extra, count_enhanced() * card.ability.extra}}
+    return { vars = {card.ability.extra, fnwk_get_enhanced_tally() * card.ability.extra}}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -33,7 +21,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    local enhanced = count_enhanced()
+    local enhanced = fnwk_get_enhanced_tally()
     if enhanced > 0 then
         return {
             message = localize { type = 'variable', key = 'a_mult', vars = {enhanced * card.ability.extra} },

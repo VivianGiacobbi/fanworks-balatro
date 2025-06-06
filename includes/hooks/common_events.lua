@@ -46,7 +46,7 @@ end
 function fnwk_batch_level_up(card, hands, amount)
     amount = amount or 1
     G.GAME.fnwk_last_upgraded_hand = {}
-    for k, v in pairs(hands) do
+    for k, _ in pairs(hands) do
         level_up_hand(card, k, true, amount, true)
         G.GAME.fnwk_last_upgraded_hand[k] = true
     end
@@ -62,7 +62,7 @@ function level_up_hand(card, hand, instant, amount, bypass_event)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                SMODS.calculate_context({fnwk_hand_upgraded = true, upgraded = {hand}, amount = amount})
+                SMODS.calculate_context({fnwk_hand_upgraded = true, upgraded = {[hand] = true}, amount = amount})
                 return true
             end
         }))
