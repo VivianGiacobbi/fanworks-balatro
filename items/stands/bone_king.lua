@@ -3,7 +3,7 @@ local consumInfo = {
     name = 'KING & COUNTRY',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'CC2CDDFDC', '9C403ADC' },
         evolve_key = 'c_fnwk_bone_king_farewell',
         extra = {
@@ -14,7 +14,6 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'bone',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }
