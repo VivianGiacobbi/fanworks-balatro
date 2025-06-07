@@ -21,6 +21,7 @@ G.C.CRYSTAL = HEX('B5FFFF')
 
 local includes = {
 	-- includes utility functions required for following files
+	'emulator',
 	'tables',
 	'colors',
 	'utility',

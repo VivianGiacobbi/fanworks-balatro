@@ -1,3 +1,28 @@
+local enhance_text = {
+	singular = {
+		"Enhances {C:attention}#1#{} selected",
+		"card into a {C:attention}#2#{}"
+	},
+	multi = {
+		"Enhances up to {C:attention}#1#{}",
+		"selected cards into",
+		"{C:attention}#2#s{}"
+	}
+}
+
+local seal_text = {
+	singular = {
+		"Add a {C:attention}#1#{} to",
+		"{C:attention}#2#{} selected card",
+		"in your hand"
+	},
+	multi = {
+		"Add {C:attention}#1#s{} to up",
+		"to {C:attention}#2#{} selected cards",
+		"in your hand"
+	}
+}
+
 return {
 	misc = {
 		quips = {
@@ -1572,6 +1597,57 @@ return {
 			},
 		},
 		Tarot = {
+			c_strength = {
+				name = "Strength",
+				text = {
+					"Increases rank of",
+					"up to {C:attention}#1#{} selected",
+					"cards by {C:attention}#2#{}"
+				}
+			},
+			c_strength_multi = {
+				name = "Strength",
+				text = {
+					"Increases rank",
+					"of {C:attention}#1#{} selected",
+					"card by {C:attention}#2#{}"
+				}
+			},
+			c_death = {
+				name = "Death",
+				text = {
+					"Select {C:attention}#1#{} cards,",
+					"convert the {C:attention}left{} card",
+					"into the {C:attention}right{} card",
+					"{C:inactive}(Drag to rearrange)"
+				}
+			},
+			c_death_multi = {
+				name = "Death",
+				text = {
+					"Select {C:attention}#1#{} cards,",
+					"convert the {C:attention}left{} cards",
+					"into the {C:attention}rightmost{} card",
+					"{C:inactive}(Drag to rearrange)"
+				}
+			},
+			c_devil = { name = "The Devil", text = enhance_text.singular },
+			c_devil_multi = { name = "The Devil", text = enhance_text.multi },
+            c_tower = { name = "The Tower", text = enhance_text.singular },
+			c_tower_multi = { name = "The Tower", text = enhance_text.multi },
+			c_magician = { name = "The Magician", text = enhance_text.singular },
+			c_magician_multi = { name = "The Magician", text = enhance_text.multi },
+			c_empress = { name = "The Empress", text = enhance_text.singular },
+			c_empress_multi = { name = "The Empress", text = enhance_text.multi },
+			c_heirophant = { name = "The Hierophant", text = enhance_text.singular },
+			c_heirophant_multi = { name = "The Hierophant", text = enhance_text.multi },
+			c_lovers = { name = "The Lovers", text = enhance_text.singular },
+			c_lovers_multi = { name = "The Lovers", text = enhance_text.multi },
+			c_chariot = { name = "The Chariot", text = enhance_text.singular },
+			c_chariot_multi = { name = "The Chariot", text = enhance_text.multi },
+			c_justice = { name = "Justice", text = enhance_text.singular },
+			c_justice_multi = { name = "Justice", text = enhance_text.multi },
+
 			c_emperor_dead = {
 				name = "The Emperor",
 				text = {
@@ -1598,6 +1674,49 @@ return {
 			},
 		},
 		Spectral = {
+			c_talisman = { name = "Talisman", text = seal_text.singular },
+			c_talisman_multi = { name = "Talisman", text = seal_text.multi },
+			c_deja_vu = { name = "Deja Vu", text = seal_text.singular },
+			c_deja_vu_multi = { name = "Deja Vu", text = seal_text.multi },
+			c_medium = { name = "Medium", text = seal_text.singular },
+			c_medium_multi = { name = "Medium", text = seal_text.multi },
+			c_trance = { name = "Trance", text = seal_text.singular },
+			c_trance_multi = { name = "Trance", text = seal_text.multi },
+
+			c_cryptid = {
+				name = 'Cryptid',
+				text = {
+					"Create {C:attention}#1#{} copies of",
+					"{C:attention}#2#{} selected card",
+					"in your hand"
+				},
+			},
+			c_cryptid_multi = {
+				name = 'Cryptid',
+				text = {
+					"Create {C:attention}#1#{} copies of",
+					"up to {C:attention}#2#{} selected cards",
+					"in your hand"
+				},
+			},
+
+			c_aura = {
+				name = 'Aura',
+				text = {
+					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+					"{C:dark_edition}#2#{} edition to",
+					"{C:attention}#1#{} selected card in hand"
+				},
+			},
+			c_aura_multi = {
+				name = 'Aura',
+				text = {
+					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+					"{C:dark_edition}#2#{} edition to up to",
+					"{C:attention}#1#{} selected cards in hand"
+				},
+			},
+
 			c_fnwk_spec_stone = {
 				name = "Stone Mask",
 				text = {
@@ -1713,10 +1832,11 @@ return {
 					"was the last hand {C:planet}upgraded{}",
 				},
 			},
-			c_fnwk_culture_star = {
-				name = "Shatter Me",
+			c_fnwk_culture_starboy = {
+				name = "Starboy",
 				text = {
-					"Dummy Text",
+					"Increases {C:attention}selection limit{}",
+					"of consumables by {C:attention}#1#{}"
 				},
 			},
 			c_fnwk_glass_big = {
@@ -1862,11 +1982,26 @@ return {
 					"{C:attention}final hand{} and {C:attention}end of round{} effects",
 				},
 			},
+			c_fnwk_rubicon_infidelity = {
+				name = "Hi Infidelity",
+				text = {
+					"When a hand is {C:attention}played{}, each scoring card",
+					"that shares the {C:attention}leftmost card's suit{} has a",
+					"{C:green}1 in 3{} chance to {C:attention}transform{} into that card"
+				},
+			},
 			c_fnwk_rubicon_dance = {
 				name = "Dance Macabre",
 				text = {
 					"{C:attention}Glass Cards{} of {V:1}#1#{} suit will not break",
 					"{C:attention}Glass Cards{} of any other {C:attention}suit{} always break"
+				},
+			},
+			c_fnwk_rubicon_mother = {
+				name = "Mother Love Bone",
+				text = {
+					"{C:attention}Queens{} have a {C:green}1 in 2{} chance",
+					"to become {C:attention}Steel{} when scored"
 				},
 			},
 			c_fnwk_scepter_lenfer = {

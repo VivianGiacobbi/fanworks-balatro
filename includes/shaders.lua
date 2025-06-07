@@ -163,3 +163,12 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+local old_seal_ds = SMODS.DrawSteps.seal.func
+SMODS.DrawStep:take_ownership('seal', {
+    func = function(self, layer)
+        if self.delay_seal then return end
+
+        return old_seal_ds(self, layer)
+    end
+}, true)

@@ -99,22 +99,6 @@ SMODS.Joker:take_ownership('j_bootstraps',
 true
 )
 
-SMODS.Consumable:take_ownership('c_aura',
-{
-    loc_txt = {
-        ['en-us'] = {
-            name = "Aura",
-            text = {
-                "Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{},",
-                "or {C:dark_edition}Queer{} effect to",
-                "{C:attention}1{} selected card in hand"
-            }
-        }
-    }
-},
-true
-)
-
 SMODS.Consumable:take_ownership('c_hex',
 {
     loc_txt = {

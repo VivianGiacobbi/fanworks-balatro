@@ -236,6 +236,7 @@ local items_to_load = {
 		'double_wine',
 
 		-- rubicon crossroads
+		'rubicon_infidelity',
 		'rubicon_dance',
 
 		-- streetlight pursuit
