@@ -1,3 +1,6 @@
+local usable_path = SMODS.current_mod.path:match("Mods/[^/]+")
+local path_pattern_replace = usable_path:gsub("(%W)","%%%1")
+playable_roms = {}
 
 -- Mod Icon in Mods tab
 SMODS.Atlas({
@@ -304,4 +307,61 @@ SMODS.current_mod.credits_tab = function()
 			}}
 		}}
 	}}
+end
+
+SMODS.current_mod.extra_tabs = function()
+	return {
+		{
+			label = 'Cabinet Man',
+			tab_definition_function = function()
+				-- works in the same way as mod.config_tab
+				local button_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
+				
+				playable_roms = {}
+				local count = 0
+				for s in FnwkRecursiveEnumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
+					local name = string.gsub(s, path_pattern_replace .. "/includes/LuaNES/roms//", "")
+					name = string.gsub(name, '.nes', '')
+					playable_roms[name] = true
+					count = count + 1
+				end
+
+				if count > 0 then
+					for k, _ in pairs(playable_roms) do
+						local name = k
+						local main_node = UIBox_button({
+							label = {name},
+							button = 'fnwk_start_rom',
+							minw = 5,
+							maxw = 5,
+							choice = name
+						})
+
+						main_node.config.align = 'tr'
+						main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
+						button_settings.nodes[#button_settings.nodes + 1] = main_node
+						button_settings.nodes[#button_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
+					end
+				end
+
+				local cabinet_ui = { n = G.UIT.C, config = { align = "tm", padding = 0.25 }, nodes = { button_settings } }
+				return {
+					n = G.UIT.ROOT,
+					config = {
+						emboss = 0.05,
+						minh = 6,
+						r = 0.1,
+						minw = 10,
+						align = "cm",
+						padding = 0.05,
+						colour = G.C.BLACK,
+					},
+					nodes = {
+						cabinet_ui
+					}
+				}
+			end,
+		},
+		-- insert more tables with the same structure here
+	}
 end

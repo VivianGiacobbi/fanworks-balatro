@@ -126,19 +126,19 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.extra.saved_abilities[context.joker.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and (context.fnwk_created_card and context.area == G.jokers) and context.card ~= card and card.ability.extra.saved_abilities[context.joker.config.center.key] then			
-		for k, v in pairs(card.ability.extra.saved_abilities[context.joker.config.center.key]) do
-			context.joker.ability[k] = v
+	if context.cardarea == G.jokers and context.fnwk_created_card and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
+		for k, v in pairs(card.ability.extra.saved_abilities[context.card.config.center.key]) do
+			context.card.ability[k] = v
 		end
 
-		card.ability.extra.saved_abilities[context.joker.config.center.key] = nil
-		context.joker:set_cost()
+		card.ability.extra.saved_abilities[context.card.config.center.key] = nil
+		context.card:set_cost()
 
 		G.E_MANAGER:add_event(Event({
 			blockable = false,
 			trigger = 'after', 
 			func = function()
-				context.joker.ability.make_vortex = true
+				context.card.ability.make_vortex = true
 				
 				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
 				self.dissolve = 0
@@ -213,11 +213,11 @@ function jokerInfo.calculate(self, card, context)
 					trigger = 'after', 
 					delay = 1.2, 
 					func = function()
-						context.joker.ability.make_vortex = nil
+						context.card.ability.make_vortex = nil
 						return true 
 					end
 				}))
-				card_eval_status_text(context.joker or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
+				card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
 				return true 
 			end
 		}))

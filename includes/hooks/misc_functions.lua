@@ -85,77 +85,7 @@ end
 
 
 ---------------------------
---------------------------- Main Menu UI callbacks
----------------------------
-
-G.FUNCS.reset_trophies = function(e)
-	local warning_text = e.UIBox:get_UIE_by_ID('warn')
-	if warning_text.config.colour ~= G.C.WHITE then
-		warning_text:juice_up()
-		warning_text.config.colour = G.C.WHITE
-		warning_text.config.shadow = true
-		e.config.disable_button = true
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
-			play_sound('tarot2', 0.76, 0.4);return true end}))
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
-			e.config.disable_button = nil;return true end}))
-		play_sound('tarot2', 1, 0.4)
-	else
-		G.FUNCS.wipe_on()
-		for k, v in pairs(SMODS.Achievements) do
-			if FnwkStringStartsWith(k, 'ach_fnwk_') then
-				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
-				G.ACHIEVEMENTS[k].earned = nil
-			end
-		end
-		G:save_settings()
-		G.E_MANAGER:add_event(Event({
-			delay = 1,
-			func = function()
-				G.FUNCS.wipe_off()
-				return true
-			end
-		}))
-	end
-end
-
-function G.FUNCS.fnwk_apply_alts()
-	fnwk_enabled = copy_table(fnwk_config)
-    for k, v in pairs(G.P_CENTERS) do
-		if v.alt_art then
-			v.atlas = string.sub(k, 3, #k)..(fnwk_enabled['enableAltArt'] and '_alt' or '')
-		end
-    end
-end
-
-function G.FUNCS.fnwk_set_skeptic()
-	fnwk_enabled = copy_table(fnwk_config)
-end
-
-function G.FUNCS.fnwk_restart()
-
-	local settingsMatch = true
-	for k, v in pairs(fnwk_enabled) do
-		if v ~= fnwk_config[k] then
-			settingsMatch = false
-		end
-	end
-	
-	if settingsMatch then
-		sendDebugMessage('Settings match')
-		SMODS.full_restart = 0
-	else
-		sendDebugMessage('Settings mismatch, restart required')
-		SMODS.full_restart = 1
-	end
-end
-
-
-
-
-
----------------------------
---------------------------- 
+--------------------------- utility functions
 ---------------------------
 
 
@@ -277,4 +207,28 @@ function fnwk_transform_card(card, to_key)
 	card:set_ability(new_center)
 	card:add_to_deck()
 	card:set_cost()
+end
+
+
+
+
+
+---------------------------
+--------------------------- pool modification
+---------------------------
+local ref_current_pool = get_current_pool
+function get_current_pool(_type, _rarity, _legendary, _append)
+	local pool, pool_key = ref_current_pool(_type, _rarity, _legendary, _append)
+	if G.GAME.starting_params.fnwk_jokers_rate then
+		local fnwk_rate = math.ceil(G.GAME.starting_params.fnwk_jokers_rate-1)
+		for i, v in ipairs(pool) do
+			if FnwkContainsString(v, 'j_fnwk') then
+				for j=1, fnwk_rate do
+					table.insert(pool, v, i)
+				end
+			end
+		end
+	end
+
+	return pool, pool_key
 end
