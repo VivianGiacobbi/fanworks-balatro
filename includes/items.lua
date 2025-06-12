@@ -243,6 +243,10 @@ local items_to_load = {
 
 		-- streetlight pursuit
 		'streetlight_disturbia',
+		'streetlight_neon',
+		'streetlight_neon_favorite',
+		'streetlight_eurythmics',
+		'streetlight_rockin',
 		'streetlight_paperback',
 		'streetlight_paperback_rewrite',
 		'streetlight_notorious',

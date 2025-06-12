@@ -49,7 +49,7 @@ function consumInfo.calculate(self, card, context)
         end
     end
 
-    if context.repetition and context.cardarea == G.play and SMODS.has_enhancement(context.other_card, 'm_lucky') then
+    if context.repetition and context.cardarea == G.play and not context.other_card.debuff and SMODS.has_enhancement(context.other_card, 'm_lucky') then
         local reps = card.ability.extra.base_retriggers + card.ability.extra.base_retriggers * card.ability.extra.retrigger_mod
         local gold_count = 0
         for _, v in ipairs(G.hand.cards) do

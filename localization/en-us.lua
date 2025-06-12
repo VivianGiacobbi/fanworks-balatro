@@ -2132,6 +2132,41 @@ return {
 					"random {C:attention}Joker{} each hand",
 				},
 			},
+			c_fnwk_streetlight_eurythmics = {
+				name = "Neon Trees",
+				text = {
+					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} rounds,",
+					"gain {C:attention}#3# #4#s{}",
+				},
+			},
+			c_fnwk_streetlight_neon = {
+				name = "Neon Trees",
+				text = {
+					"When a {C:attention}#1#{} pays out",
+					"permanently increase its",
+					"payout by {C:money}$#2#{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after spending",
+					"{C:money}$#3#{} in one shop"
+				},
+			},
+			c_fnwk_streetlight_neon_favorite = {
+				name = {
+					"Neon Trees:",
+					"Favorite Daze"
+				},
+				text = {
+					"{C:attention}#1#s{} cannot be debuffed",
+					"and retrigger",
+				},
+			},
+			c_fnwk_streetlight_rockin = {
+				name = "Rockin' Robin",
+				text = {
+					"When a hand is played, increase",
+					"hand size by {C:attention}#1#{} this round",
+				},
+			},
 			c_fnwk_streetlight_notorious = {
 				name = "NOTORIOUS",
 				text = {
