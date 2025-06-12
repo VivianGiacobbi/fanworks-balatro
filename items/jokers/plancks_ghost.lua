@@ -72,7 +72,7 @@ function jokerInfo.set_sprites(self, card, front)
         return
     end
 
-    card.children.center:set_sprite_pos({x = 1, y = 0})  
+    card.children.center:set_sprite_pos({x = 1, y = 0})
   
 	card.children.center.custom_draw = true
     card.children.patsy_overlay = Sprite(
@@ -274,7 +274,11 @@ function jokerInfo.draw(self, card, layer)
 		return
 	end
 
+	local last_dissolve = card.dissolve
+	card.dissolve = 0
     card.children.center:draw_shader('dissolve')
+
+	card.dissolve = last_dissolve
 	card.children.patsy_overlay:draw_shader('dissolve')
 end
 

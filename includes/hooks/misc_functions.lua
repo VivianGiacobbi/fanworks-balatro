@@ -220,14 +220,14 @@ local ref_current_pool = get_current_pool
 function get_current_pool(_type, _rarity, _legendary, _append)
 	local pool, pool_key = ref_current_pool(_type, _rarity, _legendary, _append)
 	if G.GAME.starting_params.fnwk_jokers_rate then
-		local fnwk_rate = math.ceil(G.GAME.starting_params.fnwk_jokers_rate-1)
-		for i, v in ipairs(pool) do
-			if FnwkContainsString(v, 'j_fnwk') then
-				for j=1, fnwk_rate do
-					table.insert(pool, v, i)
-				end
+		local new_pool = {}
+		for _, v in ipairs(pool) do
+			local fnwk_rate = FnwkContainsString(v, 'j_fnwk') and G.GAME.starting_params.fnwk_jokers_rate or 1
+			for j=1, fnwk_rate do
+				new_pool[#new_pool+1] = v
 			end
 		end
+		pool = new_pool
 	end
 
 	return pool, pool_key
