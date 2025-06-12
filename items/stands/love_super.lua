@@ -76,7 +76,8 @@ function consumInfo.calculate(self, card, context)
         end
     end
 
-    if context.repetition and context.cardarea == G.play and not context.other_card.ability.fnwk_strut_this_hand
+    if context.repetition and context.cardarea == G.play and not context.other_card.debuff
+    and not context.other_card.ability.fnwk_strut_this_hand
     and card.ability.fnwk_strut_prev_played[context.other_card.base.value] then
 		local flare_card = context.blueprint_card or card
         return {
