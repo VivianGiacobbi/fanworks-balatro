@@ -67,6 +67,10 @@ vec2 mult_mat_inv_point(mat3 mat_inv, vec2 point) {
 	return vec2(result.x / result.z, result.y / result.z);
 }
 
+vec4 blend_normal(vec4 base_color, vec4 blend) {
+	return vec4(blend.rgb * blend.a + base_color.rgb * (1.0 - blend.a), min(1, base_color.a + blend.a));
+}
+
 // function defs for required functions later in the code
 vec4 dissolve_mask(vec4 tex, vec2 uv)
 {
@@ -187,7 +191,9 @@ vec4 effect(vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords)
         under_color = Texel(base_image, base_uv);
     }
 
-    soul = vec4(mix(under_color, soul, 0.38).rgb, soul.a);
+    if (soul.a > 0) {
+        soul = blend_normal(under_color, soul);
+    }
 
     float shadow_strength = 0.33; 
     vec4 shadow_layer = draw_shadow(

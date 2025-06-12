@@ -97,11 +97,11 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
 
         main_card = card
     else
-        if full_UI_table.name and main_card.config.center.key == 'c_fnwk_double_geometrical' then
+        if full_UI_table.name and main_card and main_card.config.center.key == 'c_fnwk_double_geometrical' then
             full_UI_table.name[1].nodes[2].config.ref_table = main_card
             main_card = nil
         elseif main_card.fnwk_disturbia_joker then
-            if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] then
+            if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] and _c.key ~= "fnwk_artist_1" then
                 return full_UI_table
             end
         end

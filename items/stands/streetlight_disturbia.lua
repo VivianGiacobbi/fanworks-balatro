@@ -14,12 +14,13 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'streetlight',
-    in_progress = true,
     blueprint_compat = false,
     dependencies = {'ArrowAPI'},
 }
 
 local function replace_return_messages(ret_table, replace_target, replace_card)
+    if type(ret_table) ~= 'table' then return end
+
     local recur_tbl = ret_table
     repeat
         recur_tbl.message_card = (recur_tbl.message_card == replace_target) and replace_card or recur_tbl.message_card
@@ -28,6 +29,10 @@ local function replace_return_messages(ret_table, replace_target, replace_card)
         recur_tbl.focus = (recur_tbl.focus == replace_target) and replace_card or recur_tbl.focus
         recur_tbl = recur_tbl.extra
     until recur_tbl == nil
+end
+
+function consumInfo.loc_vars(self, info_queue, card)
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.piano }}
 end
 
 function consumInfo.load(self, card, card_table, other_card)
@@ -50,19 +55,20 @@ function consumInfo.load(self, card, card_table, other_card)
         find_target.states.visible = false
         card_table.ability.fnwk_disturbia_fake = find_target
         card_table.ability.name = find_target.ability.name or find_target.center.key
+        card:set_cost()
     end
 end
 
 function consumInfo.add_to_deck(self, card, from_debuff)
     if card.ability.extra.target_card then
-       return card.ability.fnwk_disturbia_fake:add_to_deck(from_debuff)
+       return card.ability.fnwk_disturbia_fake:add_to_deck(from_debuff, true)
     end
 end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
     if card.ability.extra.target_card then
         if from_debuff then
-            return card.ability.fnwk_disturbia_fake:remove_from_deck(from_debuff)
+            return card.ability.fnwk_disturbia_fake:remove_from_deck(from_debuff, true)
         end
         
         card.ability.fnwk_disturbia_fake:remove()
@@ -72,14 +78,13 @@ end
 
 function consumInfo.calc_dollar_bonus(self, card)
     if card.ability.extra.target_card then
-       return card.ability.fnwk_disturbia_fake:calculate_dollar_bonus()
+       return card.ability.fnwk_disturbia_fake:calculate_dollar_bonus(true)
     end
 end
 
 function consumInfo.update(self, card, dt)
-    local ret = nil
     if card.ability.extra.target_card then
-        ret = card.ability.fnwk_disturbia_fake:update(dt)
+        local ret = card.ability.fnwk_disturbia_fake:update(dt)
         card.debuff = card.ability.fnwk_disturbia_fake.debuff
         return ret
     end
@@ -94,17 +99,39 @@ function consumInfo.calculate(self, card, context)
         if context.drawing_cards and card.ability.fnwk_disturbia_played_hand then
             card.ability.fnwk_disturbia_played_hand = nil
 
-            if card.ability.fnwk_disturbia_fake then
-                card.ability.fnwk_disturbia_fake:remove()
-                card.ability.fnwk_disturbia_fake = nil
-                card.ability.extra.target_card = nil
-            end
-
             if not G.jokers or G.jokers.config.visible_card_count < 1 then
+                if card.ability.fnwk_disturbia_fake then
+                    card.ability.fnwk_disturbia_fake:remove()
+                    card.ability.fnwk_disturbia_fake = nil
+                    card.ability.extra.target_card = nil
+                end
+                card:set_cost()
                 return
             end
             
-            local copy_target = pseudorandom_element(G.jokers.cards, pseudoseed('fnwk_disturbia'))
+            local jokers = {}
+            for _, v in ipairs(G.jokers.cards) do
+                if not v.fnwk_disturbia_joker then
+                    jokers[#jokers+1] = v
+                end
+            end
+
+            local copy_target = pseudorandom_element(jokers, pseudoseed('fnwk_disturbia'))
+            if card.ability.extra.target_card and copy_target.unique_val == card.ability.extra.target_card.unique_val then
+                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    message = card.ability.name,
+                    colour = G.C.STAND,
+                    card = card
+                })
+                return
+            else
+                if card.ability.fnwk_disturbia_fake then
+                    card.ability.fnwk_disturbia_fake:remove()
+                    card.ability.fnwk_disturbia_fake = nil
+                    card.ability.extra.target_card = nil
+                end
+            end
+
             local new_fake = copy_card(copy_target)
             new_fake.states.visible = false
             new_fake.fnwk_disturbia_joker = card
@@ -118,9 +145,8 @@ function consumInfo.calculate(self, card, context)
                 unique_val = copy_target.unique_val
             }
             card.ability.name = localize{type = 'name_text', key = copy_target.config.center.key, set = copy_target.ability.set}
+            card:set_cost()
 
-            card:juice_up()
-            play_sound('generic1')
             card_eval_status_text(card, 'extra', nil, nil, nil, {
                 message = card.ability.name,
                 colour = G.C.STAND,
@@ -138,6 +164,5 @@ function consumInfo.calculate(self, card, context)
         return ret, triggered
     end
 end
-
 
 return consumInfo

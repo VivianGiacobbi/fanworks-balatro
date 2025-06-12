@@ -110,7 +110,7 @@ SMODS.DrawStep:take_ownership('center', {
             self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
         elseif not self:should_draw_base_shader() then
             -- Don't render base dissolve shader.
-        elseif self.config.center.key == 'c_fnwk_streetlight_notorious' then
+        elseif self.config.center.key == 'c_fnwk_streetlight_notorious' and self.children.noto_layer then
             self.children.noto_layer:draw_shader('fnwk_stand_notorious', nil, nil, nil, self.children.center)
         elseif not self.greyed then
             self.children.center:draw_shader('dissolve')
@@ -176,10 +176,10 @@ SMODS.DrawStep:take_ownership('seal', {
 
 ---[[
 local disturb_corners = {
-    top_left = {0.0, 0.295},
-    top_right = {0.704, 0.295},
-    bottom_left = {0.0, 1.0},
-    bottom_right = {0.704, 1.0}
+    top_left = {0.0, 0.37},
+    top_right = {0.704, 0.37},
+    bottom_left = {0.0, 1.075},
+    bottom_right = {0.704, 1.075}
 }
 ---]]
 
