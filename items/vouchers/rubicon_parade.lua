@@ -33,7 +33,7 @@ function voucherInfo.check_for_unlock(self, args)
 end
 
 function voucherInfo.calculate(self, card, context)
-    if context.fnwk_cash_out and G.GAME.last_blind and G.GAME.last_blind.boss then
+    if context.round_eval and G.GAME.blind:get_type() == 'Boss' then
         G.E_MANAGER:add_event(Event({
             delay = 0.4,
             trigger = 'after',

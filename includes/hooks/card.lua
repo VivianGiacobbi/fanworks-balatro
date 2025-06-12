@@ -310,8 +310,8 @@ local ref_card_dissolve = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
     local ret = ref_card_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
 
-    if (G.jokers and self.ability.set == 'Joker') or (G.consumeables and self.ability.set == 'Stand') then
-        SMODS.calculate_context({fnwk_joker_destroyed = true, joker = self})
+    if self.area then
+        SMODS.calculate_context({fnwk_card_removed = true, card = self})
     end
 
     return ret
@@ -527,13 +527,57 @@ function Card:set_edition(edition, immediate, silent, delay)
 	self:set_cost()
 end
 
-local ref_card_align = Card.align
-function Card:align() 
-    if self.config.center.key ~= 'c_fnwk_bone_king_farewell' then
-        sendDebugMessage('aligning '..self.config.center.key)
-        return ref_card_align(self)
+local ref_card_open = Card.open
+function Card:open()
+    local insanes = nil
+    if self.ability.set == 'Booster' and self.ability.extra and type(self.ability.extra) ~= 'table' then
+        local card_mod = G.P_CENTERS['c_fnwk_bluebolt_insane'].config.extra.card_mod
+        insanes = SMODS.find_card('c_fnwk_bluebolt_insane')
+        self.ability.extra = self.ability.extra * card_mod^#insanes
     end
 
-    sendDebugMessage('aligning farewell')
-    if self.children.focused_ui then self.children.focused_ui:set_alignment() end
+    local ret = ref_card_open(self)
+
+    if insanes then
+        for _, v in ipairs(insanes) do
+            G.FUNCS.flare_stand_aura(v, 0.5)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    v:juice_up()
+                    play_sound('generic1')
+                    attention_text({
+                        text = localize('k_insane'),
+                        scale = 1,
+                        hold = 0.5,
+                        backdrop_colour = G.C.STAND,
+                        align = 'bm',
+                        major = v,
+                        offset = {x = 0, y = 0.05*v.T.h}
+                    })
+                    return true
+                end
+            }))
+        end
+    end
+
+    return ret
+end
+
+
+
+
+
+---------------------------
+--------------------------- Disturbia joker interjection
+---------------------------
+
+local ref_UAT = Card.generate_UIBox_ability_table
+function Card:generate_UIBox_ability_table(vars_only)
+    if self.ability.fnwk_disturbia_fake then
+        local ret = ref_UAT(self.ability.fnwk_disturbia_fake, vars_only)
+        return generate_card_ui(G.P_CENTERS['c_fnwk_streetlight_disturbia'], ret)
+    end
+
+    return ref_UAT(self, vars_only)
 end

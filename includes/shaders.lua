@@ -10,6 +10,7 @@ SMODS.Shader({ key = 'speed_lines', path = 'speed_lines.fs' })
 SMODS.Shader({ key = 'mod_background', path = 'mod_background.fs'})
 SMODS.Shader({ key = 'rotten_graft', path = 'rotten_graft.fs'})
 SMODS.Shader({ key = 'stand_notorious', path = 'stand_notorious.fs'})
+SMODS.Shader({ key = 'stand_disturbia', path = 'stand_disturbia.fs'})
 
 SMODS.DrawStep {
     key = 'revived',
@@ -171,4 +172,64 @@ SMODS.DrawStep:take_ownership('seal', {
 
         return old_seal_ds(self, layer)
     end
+}, true)
+
+---[[
+local disturb_corners = {
+    top_left = {0.0, 0.295},
+    top_right = {0.704, 0.295},
+    bottom_left = {0.0, 1.0},
+    bottom_right = {0.704, 1.0}
+}
+---]]
+
+local old_stand_ds = SMODS.DrawSteps.arrow_stand_mask.func
+SMODS.DrawStep:take_ownership('arrow_stand_mask', {
+    func = function(self, layer)
+        local key = self.config.center.key
+        if key == 'c_fnwk_streetlight_notorious' then return end
+
+        if key ~= 'c_fnwk_bone_king_farewell'
+        and (key ~= 'c_fnwk_streetlight_disturbia' or not self.ability.fnwk_disturbia_fake) then           
+            return old_stand_ds(self, layer)
+        end
+
+        if self.config.center.discovered or self.bypass_discovery_center then
+            local scale_mod = 0.07 + 0.02*math.sin(1.8*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+            local rotate_mod = 0.05*math.sin(1.219*G.TIMERS.REAL) + 0.00*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+
+            if key == 'c_fnwk_bone_king_farewell' then
+                G.SHADERS['arrow_stand_mask']:send("scale_mod",scale_mod)
+                G.SHADERS['arrow_stand_mask']:send("rotate_mod",rotate_mod)
+                G.SHADERS['arrow_stand_mask']:send("output_scale", 1)
+                G.SHADERS['arrow_stand_mask']:send("vertex_scale_mod", self.config.center.vertex_scale_mod or 1.0)
+                
+                self.children.floating_sprite:draw_shader('arrow_stand_mask')
+            elseif self.ability.fnwk_disturbia_fake then
+                local fake = self.ability.fnwk_disturbia_fake
+                G.SHADERS['fnwk_stand_disturbia']:send("scale_mod",scale_mod)
+                G.SHADERS['fnwk_stand_disturbia']:send("rotate_mod",rotate_mod)
+                G.SHADERS['fnwk_stand_disturbia']:send("output_scale", 1)
+                -- set perspective transform vals
+                for k, v in pairs(disturb_corners) do
+                    G.SHADERS['fnwk_stand_disturbia']:send(k, v)
+                end
+                G.SHADERS['fnwk_stand_disturbia']:send("base_image", G.ASSET_ATLAS[fake.config.center.atlas or 'Joker'].image)
+                G.SHADERS['fnwk_stand_disturbia']:send("base_texture_details", fake.children.center:get_pos_pixel())
+                G.SHADERS['fnwk_stand_disturbia']:send("base_image_details", fake.children.center:get_image_dims())
+
+                self.children.floating_sprite:draw_shader('fnwk_stand_disturbia', nil, nil, nil, self.children.center)
+            end
+
+            if self.edition then
+                for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+                    if v.apply_to_float then
+                        if self.edition[v.key:sub(3)] then
+                            self.children.floating_sprite:draw_shader(v.shader, nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+                        end
+                    end
+                end
+            end
+        end
+    end,
 }, true)

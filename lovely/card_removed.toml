@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 0
 
 #
-# Adds a central "fnwk_card_destroyed" context
+# Adds a central "fnwk_playing_card_removed" context
 #
 
 # G.FUNCS.evaluate_play()
@@ -21,6 +21,6 @@ pattern = '''G.E_MANAGER:add_event(Event({
     end
 }))'''
 position = "after"
-payload = '''SMODS.calculate_context({fnwk_card_destroyed = true, removed = cards_destroyed[i] })'''
+payload = '''SMODS.calculate_context({fnwk_playing_card_removed = true, removed = cards_destroyed[i] })'''
 match_indent = true
 times = 1

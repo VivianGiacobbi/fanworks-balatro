@@ -150,8 +150,12 @@ function jokerInfo.calculate(self, card, context)
 		try_transform_sludgemass(card, context.card)
     end
 
-	if context.selling_card or context.fnwk_joker_destroyed then
-		try_revert_sludgemass(card, context.joker or context.card)
+	if context.selling_card or context.fnwk_card_removed then
+		if context.card == card then
+            return
+        end
+
+		try_revert_sludgemass(card, context.card)
 	end
 end
 

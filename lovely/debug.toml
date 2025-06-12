@@ -23,7 +23,8 @@ pattern = '''if _card.ability.set == 'Joker' and G.jokers and #G.jokers.cards < 
 end'''
 position = "at"
 payload = '''if _card.ability.set == 'Joker' and G.jokers then
-    SMODS.add_card({set = _card.ability.set, area = G.jokers, no_edition = true, key = _card.config.center.key})
+    local card = SMODS.add_card({set = _card.ability.set, area = G.jokers, no_edition = true, key = _card.config.center.key})
+    card:start_materialize()
 end'''
 match_indent = true
 overwrite = false
