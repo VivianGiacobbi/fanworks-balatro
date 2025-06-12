@@ -2,7 +2,8 @@ local jokerInfo = {
 	name = 'Corpse Crimelord',
 	config = {
         extra = { 
-            money = 0
+            slot_mod = 1,
+            cost_mod = 1
         },
         last_digits = 0
     },
@@ -33,28 +34,63 @@ function jokerInfo.check_for_unlock(self, args)
     return true
 end
 
-function jokerInfo.set_ability(self, card, initial, delay_sprites)
-    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
-        return
-    end
-
-    card:set_rental(true)
-end
-
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.durandal }}
-    return { vars = { card.ability.extra.money, card.ability.extra.slots} }
+    return { vars = { card.ability.extra.slot_mod, card.ability.extra.cost_mod} }
 end
 
 function jokerInfo.calculate(self, card, context)
+    if context.blueprint or context.retrigger_joker then return end
+
     if context.fnwk_change_dollars and context.cardarea == G.jokers then
         local dollar_digits = get_dollar_digits()
         if card.ability.last_digits == dollar_digits then
             return
         end
         local diff = dollar_digits - card.ability.last_digits
-        G.jokers.config.card_limit = G.jokers.config.card_limit + diff
+        G.jokers.config.card_limit = G.jokers.config.card_limit + diff * card.ability.extra.slot_mod
         card.ability.last_digits = dollar_digits
+    end
+
+    if context.end_of_round and not context.individual and not context.repetition and not card.getting_sliced then
+        local count = 0
+        local other_crimelords = {}
+        for _, v in ipairs(G.jokers.cards) do
+            if v.config.center.key == 'j_fnwk_spirit_corpse' then
+                if v ~= card then
+                    if count == 0 then break end
+                    other_crimelords[#other_crimelords+1] = v
+                    v.getting_sliced = true
+                end
+
+                count = count + 1
+            end
+        end
+
+        if #other_crimelords > 0 then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card:juice_up(0.8, 0.8)
+                    for _, v in ipairs(other_crimelords) do
+                        v:start_dissolve({HEX("57ecab")}, i ~= 0)
+                    end
+                    play_sound('slice1', 0.96+math.random()*0.08)                
+                    return true
+                end
+            }))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_valentino'), colour = G.C.GREEN, no_juice = true})
+        end
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                local mod = #G.jokers.cards * card.ability.extra.cost_mod
+                ease_dollars(-mod)
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = '-$'..mod, colour = G.C.MONEY})
+                return true
+            end
+        }))
     end
 end
 

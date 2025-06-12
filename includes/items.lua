@@ -145,7 +145,7 @@ local items_to_load = {
 		-- cold iron streets,
 		'cis_jokestar',
 
-		--love once buried
+		-- love once buried
 		'love_jokestar',
 		'love_holy',
 
@@ -234,12 +234,15 @@ local items_to_load = {
 
 		-- double down
 		'double_wine',
+		'double_geometrical',
 
 		-- rubicon crossroads
 		'rubicon_infidelity',
 		'rubicon_dance',
+		'rubicon_mother',
 
 		-- streetlight pursuit
+		'streetlight_disturbia',
 		'streetlight_paperback',
 		'streetlight_paperback_rewrite',
 		'streetlight_notorious',
@@ -251,6 +254,7 @@ local items_to_load = {
 		'bluebolt_thunder',
 		'bluebolt_thunder_dc',
 		'bluebolt_chemical',
+		'bluebolt_insane',
 		
 		-- sunshine deluxe
 		'sunshine_electric',
@@ -263,6 +267,9 @@ local items_to_load = {
 
 		-- JJ29: Stardust Rebels
 		'rebels_rebel',
+
+		-- love once buried
+		'love_super',
 
 		-- red rising sun
 		'redrising_invisible'

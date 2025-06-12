@@ -45,3 +45,14 @@ function G.UIDEF.artist_card_ui(cardarea)
         }}
     }
 end
+
+local ref_card_popup = G.UIDEF.card_h_popup
+function G.UIDEF.card_h_popup(card)
+    if card.config.center.key == 'c_fnwk_streetlight_disturbia' then
+        card.ability_UIBox_table.card_type = 'Stand'
+        card.ability_UIBox_table.badges.force_rarity = nil
+        local ret = ref_card_popup(card)
+        return ret
+    end
+    return ref_card_popup(card)
+end

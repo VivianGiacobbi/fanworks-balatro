@@ -49,3 +49,13 @@ position = "after"
 payload = '''SMODS.fnwk_calculate_quantum_editions(card, effects, context)'''
 match_indent = true
 times = 3
+
+# SMODS.calculate_context()
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '''SMODS.calculate_quantum_enhancements(card, return_table, context)'''
+position = "after"
+payload = '''SMODS.fnwk_calculate_quantum_editions(card, return_table, context)'''
+match_indent = true
+times = 1

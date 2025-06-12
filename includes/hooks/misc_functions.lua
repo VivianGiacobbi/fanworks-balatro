@@ -232,3 +232,116 @@ function get_current_pool(_type, _rarity, _legendary, _append)
 
 	return pool, pool_key
 end
+
+local name_map = {
+    ['GEOMETRICAL DOMINATOR'] = 0,
+    ['FINGERBANG'] = 1,
+    ['STEREO MADNESS'] = 2,
+    ['CLUTTERFUNK'] = 3,
+    ['STAY INSIDE ME'] = 4,
+    ['ELECTRODYNAMIX'] = 5,
+    ['HEXAGON FORCE'] = 6,
+    ['ELECTROMAN ADVENTURES'] = 7,
+    ['TIME MACHINE'] = 8,
+}
+
+G.FUNCS.fnwk_geo_func = function(e)
+	local card = e.config.ref_table
+	if not card then return end
+
+    card.ability.fnwk_geo_name = e.config.object.string
+	if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+	
+	card.children.center:set_sprite_pos({x = name_map[card.ability.fnwk_geo_name], y = 0})  
+end
+
+local ref_localize = localize
+function localize(args, misc_cat)
+  	if args.type == 'name' and args.key == 'c_fnwk_double_geometrical' then
+		local name = G.localization.descriptions[args.set][args.key]
+		local loc_target = { name_parsed = name.name_parsed or {loc_parse_string(name.name)}}
+
+		args.AUT = {}
+		args.AUT.box_colours = {}
+		local dyn_nodes = {}
+		local final_size = 0
+		local part_s = nil
+		local part_f = nil
+		local part_b = nil
+		local part_x = nil
+
+		for _, lines in ipairs(loc_target.name_parsed) do
+			local final_name_assembled_string = ''
+			for _, part in ipairs(lines) do
+				local assembled_string_part = ''
+				for _, subpart in ipairs(part.strings) do
+					assembled_string_part = assembled_string_part..(type(subpart) == 'string' and subpart or format_ui_value(args.vars[tonumber(subpart[1])]) or 'ERROR')
+				end
+				final_name_assembled_string = final_name_assembled_string..assembled_string_part
+
+				if part.control.s then
+					local scale = tonumber(part.control.s) < part_s 
+					part_s = scale < part_s and scale or part_s
+				end
+
+				-- essentially, only get the values of the first tag part for this name
+				if not part_f and part.control.f then
+					part_f = SMODS.Fonts[part.control.f] or G.FONTS[tonumber(part.control.f)]
+				end
+				
+				if not part_v and part.control.V then part_v = args.vars.colours[tonumber(part.control.V)] end
+				if not part_c and part.control.C then part_c = loc_colour(part.control.C) end
+
+				if not part_b and part.control.B then part_b = args.vars.colours[tonumber(part.control.B)] end
+				if not part_x and part.control.X then part_x = loc_colour(part.control.X) end
+			end
+
+			if #final_name_assembled_string > final_size then
+				final_size = #final_name_assembled_string
+			end
+
+			dyn_nodes[#dyn_nodes+1] = { string = final_name_assembled_string, colour = part_v or part_c }
+		end
+
+		local desc_scale = G.LANG.font.DESCSCALE
+		if G.F_MOBILE_UI then desc_scale = desc_scale*1.5 end
+
+		local final_name = {{
+			n=G.UIT.R,
+			config={align = "m" },
+			nodes = {
+				{ n=G.UIT.C,
+				config={align = "m", colour = part_b or part_x or nil, r = 0.05, padding = 0.03, res = 0.15},
+				nodes={}},
+
+				{ n=G.UIT.O,
+				config={
+					func = "fnwk_geo_func",
+					object = DynaText({
+						string = dyn_nodes,
+						colours = {G.C.UI.TEXT_LIGHT},
+						bump = true,
+						silent = true,
+						pop_in_rate = 7,
+						random_element = true,
+						random_no_repeat = true,
+						min_cycle_time = 0.12,
+						pop_delay = 0.36,
+						maxw = 5,
+						shadow = true,
+						y_offset = -0.6,
+						spacing = math.max(0, 0.32*(17 - final_size)),
+						font = part_f,
+						scale =  (0.55 - 0.004*final_size)*(part_s or 1)
+					})}
+				}
+			}
+		}}
+	
+		return final_name
+  	end
+
+	return ref_localize(args, misc_cat)
+end

@@ -39,7 +39,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if context.fnwk_joker_destroyed and not context.joker_retrigger and context.joker ~= card and not context.blueprint then
+    if context.fnwk_card_removed and not context.joker_retrigger and context.card ~= card and not context.blueprint then
         local name = string.lower(context.joker.config.center.name)
         if FnwkContainsString(name, 'jokestar') then
             card.ability.extra.retrigger_mod = card.ability.extra.retrigger_mod + 1

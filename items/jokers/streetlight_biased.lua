@@ -41,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_joker_destroyed or context.remove_playing_cards) then
+	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_card_removed or context.remove_playing_cards) then
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			func = function()

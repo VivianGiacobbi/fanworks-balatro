@@ -169,11 +169,10 @@ end
 local queer = fnwk_enabled['enableQueer']
 if skins or queer then
     local build_table = {
-        -- generate_ui = 0
+        generate_ui = 0
     }
 
     if queer then
-        --[[
         build_table.loc_txt = {
             ['en-us'] = {
                 name = "The Wheel of Fortune",
@@ -185,7 +184,6 @@ if skins or queer then
                 }
             }
         }
-        --]]
     end
 
     if skins then

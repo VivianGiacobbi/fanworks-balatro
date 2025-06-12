@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        aura_colors = { '4DEE74DC', '3AA330DC' },
+        aura_colors = { '8EEDA4DC', '9FCE07DC' },
         extra = {
             chance = 3
         }
@@ -106,6 +106,8 @@ function consumInfo.calculate(self, card, context)
                     return true 
                 end 
             }))
+
+            delay(0.4)
         end
     end
 end

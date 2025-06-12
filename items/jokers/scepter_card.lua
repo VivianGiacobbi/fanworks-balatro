@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Speedwagon Foundation Card',
+	name = 'Foundation Card',
 	config = {
         extra =  {
             mult = 15,

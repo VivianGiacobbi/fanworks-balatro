@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Big Poppa',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             x_mult = 2,
@@ -13,13 +13,12 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'glass',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = { card.ability.extra.x_mult, G.GAME.probabilities.normal, card.ability.extra.chance }}
 end
 

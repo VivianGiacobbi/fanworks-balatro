@@ -363,6 +363,7 @@ return {
 			k_joker_replaced = 'Energy Tranformed!',
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
+			k_valentino = 'Autocannibalized!',
 
 			-- stand related strings
 			k_mcr_bubbled = 'Bubbled!',
@@ -374,6 +375,7 @@ return {
 			k_hgm_cosmic_draw = 'Draw!',
 			k_misirlou_final = 'Final Hand?',
 			k_tragic_rankdown = 'Rank Down!',
+			k_insane = 'Doubled!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -424,6 +426,7 @@ return {
 			a_hand = "+#1# Hand",
 			a_reps = "+#1# Reps",
 			a_reps_minus = "-#1# Reps",
+			fnwk_variable = "#1#"
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -707,7 +710,10 @@ return {
         },
 		Joker = {
 			j_fnwk_streetlight_fledgling = {
-				name = "Fledgling Streetlit Joker",
+				name = {
+					"Fledgling",
+					"Streetlit Joker",
+				},
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
 					"if {C:attention}first hand{} of round doesn't",
@@ -716,7 +722,10 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil = {
-				name = "Resilient Streetlit Joker",
+				name = {
+					"Resilient",
+					"Streetlit Joker",
+				},
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
 					"create an {C:attention}Enhancement{}-granting",
@@ -726,14 +735,20 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil_regen = {
-				name = "Resilient Streetlit Joker",
+				name = {
+					"Resilient",
+					"Streetlit Joker",
+				},
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
 				},
 			},
 			j_fnwk_streetlight_indulgent = {
-				name = "Indulgent Streetlit Joker",
+				name = {
+					"Indulgent",
+					"Streetlit Joker",
+				},
 				text = {
 					"This Joker gains {X:mult,C:white}X#1#{} Mult",
 					"if you spend at least {C:money}$#2#{} {C:inactive}[#3#]{}",
@@ -742,14 +757,20 @@ return {
 				},
 			},
 			j_fnwk_streetlight_methodical = {
-				name = "Methodical Streetlit Joker",
+				name = {
+					"Methodical",
+					"Streetlit Joker"
+				},
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
 					"level up played {C:attention}poker hand{}",
 				},
 			},
 			j_fnwk_streetlight_industrious = {
-				name = "Industrious Streetlit Joker",
+				name = {
+					"Industrious",
+					"Streetlit Joker"
+				},
 				text = {
 					"If played hand is a {C:attention}Full House{},",
 					"convert the {C:attention}Pair{} into the same rank",
@@ -1198,9 +1219,11 @@ return {
 			j_fnwk_spirit_corpse = {
 				name = "Corpse Crimelord",
 				text = {
-					'{C:dark_edition}+1{} Joker slot for every',
-					'digit of {C:money}money{} you have',
-					'{s:0.8}Always spawns {C:attention,s:0.8}Rental{}{}'
+					"{C:dark_edition}+#1#{} Joker slot for every",
+					"digit of {C:money}money{} you have",
+					"{s:0.1} {}",
+					"Lose {C:money}$#2#{} for each {C:attention}Joker{} you",
+					"own at end of round"
 				},
 				unlock = {
 					"Survive {C:attention,E:1}death{}"
@@ -1215,7 +1238,7 @@ return {
 			j_fnwk_industry_loyal = {
 				name = "Loyal Gambler",
 				text = {
-					"{V:1}#1#s{} count as {C:attention}Lucky Cards{}",
+					"{V:1}#1#{} count as {C:attention}Lucky Cards{}",
                     "in addition to current {C:attention}Enhancement{}",
                     "{s:0.8}suit changes at end of round",
 				},
@@ -1470,13 +1493,12 @@ return {
 			j_fnwk_noman_unknown = {
 				name = "Unknown Soldier",
 				text = {
-					"{C:mult}+#1#{} Mult for each {C:attention}High Card{}",
-					"played this run",
-					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult){}"
+					"Each {C:attention}#1#{} gives",
+					"Mult equal to its {C:attention}rank{}"
 				}
 			},
 			j_fnwk_scepter_card = {
-				name = "Speedwagon Foundation Card",
+				name = "Foundation Card",
 				text = {
 					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to give",
@@ -1583,7 +1605,10 @@ return {
 				}
 			},
 			j_fnwk_stalk_jokestar = {
-				name = "Investigative Jokestar",
+				name = {
+					"Investigative",
+					"Jokestar",
+				},
 				text = {
 					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
 					"if played hand is a",
@@ -1791,6 +1816,14 @@ return {
 					"{C:stand}Devolves{} after this effect activates",
 				}
 			},
+			c_fnwk_bluebolt_insane = {
+				name = "Insane in the Brain",
+				text = {
+					"{C:attention}Doubles{} the cards inside",
+					"{C:attention}Booster Packs{}, but also",
+					"doubles their {C:attention}base costs{}"
+				}
+			},
 			c_fnwk_bone_king = {
 				name = "KING & COUNTRY",
 				text = {
@@ -1929,6 +1962,13 @@ return {
 					"Dummy Text"
 				},
 			},
+			c_fnwk_love_super = {
+				name = "Super Strut",
+				text = {
+					"Retrigger each {C:attention}rank{} previously",
+					"scored this round"
+				},
+			},
 			c_fnwk_plancks_moon = {
 				name = "Moon River",
 				text = {
@@ -2040,7 +2080,10 @@ return {
 				},
 			},
 			c_fnwk_spirit_ultimate = {
-				name = "Ultimate Showdown of Ultimate Destiny",
+				name = {
+					"Ultimate Showdown",
+					"of Ultimate Destiny",
+				},
 				text = {
 					"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
 					"each {C:attention}Gold Card{} held in hand",
@@ -2063,6 +2106,32 @@ return {
 					"in hand give",
 				},
 			},
+			c_fnwk_double_geometrical = {
+				name = {
+					'GEOMETRICAL DOMINATOR',
+					'FINGERBANG',
+					'STEREO MADNESS',
+					'CLUTTERFUNK',
+					'STAY INSIDE ME',
+					'ELECTRODYNAMIX',
+					'HEXAGON FORCE',
+					'ELECTROMAN ADVENTURES',
+					'TIME MACHINE',
+				},
+				text = {
+					"This Stand gives {C:chips}#1#^{}{s:0.6,C:chips}x{} Chips for each",
+					"{C:attention}unique word{} in the names of your",
+					"other {C:attention}Jokers{} and {C:attention}Consumables{}",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips){}"
+				},
+			},
+			c_fnwk_streetlight_disturbia = {
+				name = "Disturbia",
+				text = {
+					"Copies the effect of a",
+					"random {C:attention}Joker{} each hand",
+				},
+			},
 			c_fnwk_streetlight_notorious = {
 				name = "NOTORIOUS",
 				text = {
@@ -2079,7 +2148,10 @@ return {
 				},
 			},
 			c_fnwk_streetlight_paperback_rewrite = {
-				name = "Paperback Writer: REWRITE",
+				name = {
+					"Paperback Writer:",
+					"REWRITE",
+				},
 				text = {
 					"Infinite {C:attention}Booster Pack{} and {C:attention}Voucher{} {C:green}Rerolls{}",
 					"{C:green}#1# in #2#{} chance to {C:red,E:2}self destruct{}",

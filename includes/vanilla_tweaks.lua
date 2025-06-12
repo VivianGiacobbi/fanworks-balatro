@@ -7,7 +7,7 @@ SMODS.Consumable:take_ownership('c_strength', {
                 card.ability.max_highlighted,
                 card.ability.extra
             },
-            key = card.config.center.key..(multi and '_multi' or '')
+            key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
         }
     end,
     
@@ -75,7 +75,7 @@ SMODS.Consumable:take_ownership('death', {
             vars = {
                 card.ability.max_highlighted,
             },
-            key = card.config.center.key..(multi and '_multi' or '')
+            key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
         }
     end,
 
@@ -100,7 +100,7 @@ SMODS.Consumable:take_ownership('death', {
                 rightmost = G.hand.highlighted[i]
             end
         end
-        
+
         for i=1, #G.hand.highlighted do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
@@ -173,7 +173,7 @@ for _, v in ipairs(enhance_convert_keys) do
                     card.ability.max_highlighted,
                     localize{type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv}
                 },
-                key = card.config.center.key..(multi and '_multi' or '')
+                key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
             }
         end,
 
@@ -257,7 +257,7 @@ for _, v in ipairs(seal_keys) do
                     localize{type = 'name_text', set = 'Other', key = string.lower(card.ability.extra) .. '_seal'},
                     card.ability.max_highlighted,                   
                 },
-                key = card.config.center.key..(multi and '_multi' or '')
+                key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
             }
         end,
 
@@ -316,7 +316,7 @@ SMODS.Consumable:take_ownership('c_cryptid', {
                 card.ability.extra,
                 card.ability.max_highlighted,          
             },
-            key = card.config.center.key..(multi and '_multi' or '')
+            key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
         }
     end,
     use = function(self, card, area, copier)
@@ -375,7 +375,7 @@ SMODS.Consumable:take_ownership('aura', {
                 card.ability.max_highlighted,
                 poly_name
             },
-            key = card.config.center.key..(multi and '_multi' or '')
+            key = card.config and card.config.center.key..(multi and '_multi' or '') or nil
         }
     end,
     
@@ -438,16 +438,16 @@ SMODS.Enhancement:take_ownership('glass', {
     end,
     calculate = function(self, card, context)
         local dances = SMODS.find_card('c_fnwk_rubicon_dance')
-        local valid = true
+        local valid = false
         for _, v in ipairs(dances) do
-            if v.debuff then
-                valid = false
+            if not v.debuff then
+                valid = true
                 break
             end
         end
 
         if valid then
-            if context.destroy_card and context.cardarea == G.play then
+            if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
                 local is_spades = context.destroy_card:is_suit('Spades')
                 if not is_spades then
                     context.destroy_card.fnwk_removed_by_dance = true
@@ -474,10 +474,11 @@ SMODS.Enhancement:take_ownership('glass', {
         end
         
         if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
+            local check_break = pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra
             if not check_break then
                 local shatter_mes = SMODS.find_card('c_fnwk_iron_shatter')
-                if next(shatter_mes) then
-                    for _, v in ipairs(shatter_mes) do
+                for _, v in ipairs(shatter_mes) do
+                    if not v.debuff then
                         check_break = pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra
                         if check_break then break end
                     end
@@ -485,6 +486,7 @@ SMODS.Enhancement:take_ownership('glass', {
             end
             
             if check_break then
+                card.glass_trigger = true
                 return { remove = true }
             end
         end
@@ -738,7 +740,6 @@ SMODS.Joker:take_ownership('j_chicot', {
             
             G.E_MANAGER:add_event(Event({func = function()
                 G.E_MANAGER:add_event(Event({func = function()
-                    sendDebugMessage('calling for disable')
                     G.GAME.blind:disable()
                     play_sound('timpani')
                     delay(0.4)

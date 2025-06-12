@@ -30,7 +30,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff or context.blueprint or context.retrigger_joker then return end
 
-    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_dance then
+    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_dance then
         return {
             func = function()
                 G.FUNCS.flare_stand_aura(card, 0.5)

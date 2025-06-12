@@ -62,3 +62,4 @@ for _, module in ipairs(includes) do
 		sendDebugMessage("[Fanworks] Loaded module: " .. module)
 	end
 end
+

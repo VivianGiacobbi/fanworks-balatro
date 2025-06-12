@@ -98,32 +98,32 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if not context.cardarea == G.jokers or context.blueprint then return end
-    if context.fnwk_joker_destroyed and context.joker ~= card and context.joker.config.center.key ~= 'j_fnwk_plancks_ghost' then	
+    if context.fnwk_card_removed and context.card ~= card and context.card.config.center.key ~= 'j_fnwk_plancks_ghost' then	
 		
 		-- single level compare for valid keys in the main ability table
 		local changed = false
-		for k,v in pairs(context.joker.ability) do
-			if valid_keys[k] and v ~= context.joker.config.center.config[k] then
+		for k,v in pairs(context.card.ability) do
+			if valid_keys[k] and v ~= context.card.config.center.config[k] then
 				changed = true
 				break
 			end
 		end
 
 		if not changed then
-			changed = FnwkDeepCompare(context.joker.ability.extra, context.joker.config.center.config.extra)
+			changed = FnwkDeepCompare(context.card.ability.extra, context.card.config.center.config.extra)
 		end	
 		
 		if not changed then return end
 		
 		-- store relevant ability and extra values
 		local saved_ability = {}
-		for k, v in pairs(context.joker.ability) do
+		for k, v in pairs(context.card.ability) do
 			if valid_keys[k] then saved_ability[k] = v end
 		end
-		saved_ability.extra = FnwkRecursiveTableMod(context.joker.ability.extra)
+		saved_ability.extra = FnwkRecursiveTableMod(context.card.ability.extra)
 
 		-- save this table
-		card.ability.extra.saved_abilities[context.joker.config.center.key] = saved_ability
+		card.ability.extra.saved_abilities[context.card.config.center.key] = saved_ability
 	end
 
 	if context.cardarea == G.jokers and context.fnwk_created_card and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			

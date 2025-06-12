@@ -20,7 +20,7 @@ end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
-        FnwkSetCenterDiscount(card, true, 'Booster')
+        FnwkSetCenterDiscount(card, card.ability.extra, true, 'Booster')
         return true 
     end}))
 end

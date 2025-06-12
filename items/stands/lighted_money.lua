@@ -32,7 +32,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_moneytalks then
+    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_moneytalks then
         local flare_card = context.blueprint_card or card
         return {
             func = function()

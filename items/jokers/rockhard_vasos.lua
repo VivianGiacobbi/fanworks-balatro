@@ -36,7 +36,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.fnwk_vasos_mod = card.ability.fnwk_vasos_mod + card.ability.extra.stand_mod
 	end
 
-	if context.fnwk_joker_destroyed and context.joker.ability.set == 'Stand' and card.ability.fnwk_vasos_mod > card.ability.extra.base then
+	if context.fnwk_card_removed and context.card.ability.set == 'Stand' and card.ability.fnwk_vasos_mod > card.ability.extra.base then
 		if G.FUNCS.get_leftmost_stand() then
 			return
 		end

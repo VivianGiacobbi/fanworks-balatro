@@ -12,8 +12,8 @@ priority = 0
 target = "card.lua"
 pattern = '''self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))'''
 position = "after"
-payload = '''if G.GAME and G.GAME.extra_discounts then
-    for k,v in pairs(G.GAME.extra_discounts) do
+payload = '''if G.GAME and G.GAME.fnwk_extra_discounts then
+    for k,v in pairs(G.GAME.fnwk_extra_discounts) do
         if not v.center_set or (v.center_set == self.ability.set) then
             self.cost = math.max(1, math.floor(self.cost * v.discount))
         end

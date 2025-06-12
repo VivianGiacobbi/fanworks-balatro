@@ -1,0 +1,15 @@
+{
+    "workspace.library": [
+      "C:\\Users\\benja\\AppData\\Roaming\\Balatro\\Mods\\smods\\lsp_def",
+      "C:\\Users\\benja\\AppData\\Roaming\\Balatro\\Mods\\balatro" // Suggested, vast majority of vanilla function and classes are not fully annotated for the purpose of this PR
+    ],
+    "diagnostics.disable": [
+        "undefined-global",
+        "lowercase-global",
+        "need-check-nil",
+        "duplicate-set-field",
+        "inject-field",
+        "undefined-field"
+    ],
+    "runtime.version": "LuaJIT"
+}

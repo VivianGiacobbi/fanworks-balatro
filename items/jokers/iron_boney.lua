@@ -160,7 +160,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.cardarea == G.jokers and context.fnwk_joker_destroyed and context.joker == card and not card.debuff then
+    if context.cardarea == G.jokers and context.fnwk_card_removed and context.card == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,

@@ -147,7 +147,6 @@ end
 
 function G.FUNCS.fnwk_start_rom(e)
 	local rom = e.config.choice
-	sendDebugMessage(tostring(e.config.choice))
 
 	G.FUNCS:exit_overlay_menu()
     G.SETTINGS.SOUND.music_volume = 0
