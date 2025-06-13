@@ -21,6 +21,7 @@ SMODS.current_mod.config_tab = function()
 		'enableTarotSkins',
 		'enableVanillaTweaks',
 		'enableChallenges',
+		'enableBlindReskins',
 		--[[
 		'enableTrophies',
 		'enableBosses',

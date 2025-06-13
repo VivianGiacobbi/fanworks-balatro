@@ -291,11 +291,12 @@ return {
 			fnwk_options_enableWipItems = "WIP Items",
 			fnwk_options_enableAltArt = "Alt Joker Art",
 			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
-			fnwk_options_enableQueer = "Enable Queer Edition",
+			fnwk_options_enableQueer = "Queer Edition",
 			fnwk_options_enableDecks = "Decks",
 			fnwk_options_enableVouchers = "Vouchers",
-			fnwk_options_enableConsumables = "New Consumables",
+			fnwk_options_enableConsumables = "Consumables",
 			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
+			fnwk_options_enableBlindReskins = "Boss Blind Reskins",
 			fnwk_options_enableBosses = "Boss Blinds",
 			fnwk_options_enableSkins = "Playing Card Skins",
 			fnwk_options_enableChallenges = "Challenges",
@@ -518,191 +519,191 @@ return {
                 text = {}
             },
             bl_hook = {
-                name = "The Hook",
+                name = "The Shock",
                 text = {
                     "Discards {C:attention}2{} random",
                     "cards per hand played"
                 }
             },
             bl_wall = {
-                name = "The Wall",
+                name = "The Neon",
                 text = {
                     "{C:attention}Extra large{} blind"
                 }
             },
             bl_wheel = {
-                name = "The Wheel",
+                name = "The Cargo",
                 text = {
                     "{C:green}#1# in 7{} cards get",
                     "drawn face down"
                 }
             },
             bl_arm = {
-                name = "The Arm",
+                name = "The Blade",
                 text = {
                     "Decrease {C:planet}level{} of",
                     "played {C:attention}poker{} hand"
                 }
             },
             bl_psychic = {
-                name = "The Psychic",
+                name = "The Army",
                 text = {
                     "Must play {C:attention}5{} cards"
                 }
             },
             bl_goad = {
-                name = "The Goad",
+                name = "The Falcon",
                 text = {
                     "All {C:spades}Spade{} cards",
                     "are debuffed"
                 }
             },
             bl_water = {
-                name = "The Water",
+                name = "The Call",
                 text = {
                     "Start with",
                     "{C:red}0{} discards"
                 }
             },
             bl_eye = {
-                name = "The Eye",
+                name = "The Forest",
                 text = {
                     "No {C:attention}repeat{} hand",
                     "types this round"
                 }
             },
             bl_mouth = {
-                name = "The Mouth",
+                name = "The Touch",
                 text = {
                     "Play only {C:attention}1{} hand",
                     "type this round"
                 }
             },
             bl_plant = {
-                name = "The Plant",
+                name = "The Lariat",
                 text = {
                     "All {C:attention}face{} cards",
                     "are debuffed"
                 }
             },
             bl_needle = {
-                name = "The Needle",
+                name = "The Thorn",
                 text = {
                     "Play only {C:blue}1{} hand"
                 }
             },
             bl_head = {
-                name = "The Head",
+                name = "The Jungle",
                 text = {
                     "All {C:hearts}Heart{} cards",
                     "are debuffed"
                 }
             },
             bl_tooth = {
-                name = "The Tooth",
+                name = "The Shine",
                 text = {
                     "Lose {C:money}$1{} per",
                     "card played"
                 }
             },
             bl_final_leaf = {
-                name = "Verdant Leaf",
+                name = "Verdant Leafgilly",
                 text = {
                     "All cards debuffed",
                     "until {C:attention}1{} Joker sold"
                 }
             },
             bl_final_vessel = {
-                name = "Violet Vessel",
+                name = "Navy NotDaedalus",
                 text = {
                     "{C:attention}Very large{} blind"
                 }
             },
             bl_ox = {
-                name = "The Ox",
+                name = "The Mania",
                 text = {
                     "Playing a {C:attention}#1#{}",
                     "sets money to {C:money}$0{}"
                 }
             },
             bl_house = {
-                name = "The House",
+                name = "The Info",
                 text = {
                     "First hand is",
                     "drawn {C:attention}face down{}"
                 }
             },
             bl_club = {
-                name = "The Club",
+                name = "The Mob",
                 text = {
                     "All {C:clubs}Club{} cards",
                     "are debuffed"
                 }
             },
             bl_fish = {
-                name = "The Fish",
+                name = "The Riot",
                 text = {
                     "Cards drawn {C:attention}face down{}",
                     "after each hand played"
                 }
             },
             bl_window = {
-                name = "The Window",
+                name = "The Stage",
                 text = {
                     "All {C:diamonds}Diamond{} cards",
                     "are debuffed"
                 }
             },
             bl_manacle = {
-                name = "The Manacle",
+                name = "The Scepter",
                 text = {
                     "{C:attention}-1{} Hand Size"
                 }
             },
             bl_serpent = {
-                name = "The Serpent",
+                name = "The Hope",
                 text = {
                     "After {C:blue}Play{} or {C:red}Discard{},",
                     "always draw {C:attention}3{} cards"
                 }
             },
             bl_pillar = {
-                name = "The Pillar",
+                name = "The Roads",
                 text = {
                     "Cards played previously",
                     "this {C:attention}Ante{} are debuffed"
                 }
             },
             bl_flint = {
-                name = "The Flint",
+                name = "The City",
                 text = {
                     "Base Chips and",
                     "Mult are {C:attention}halved{}"
                 }
             },
             bl_mark = {
-                name = "The Mark",
+                name = "The Indstry",
                 text = {
                     "All {C:attention}face{} cards are",
                     "drawn {C:attention}face down{}"
                 }
             },
             bl_final_acorn = {
-                name = "Amber Acorn",
+                name = "Pink Plusgal",
                 text = {
                     "{C:attention}Flips and shuffles{}",
                     "all Joker cards"
                 }
             },
             bl_final_heart = {
-                name = "Crimson Heart",
+                name = "Tenebral TOS",
                 text = {
                     "One random Joker",
                     "{C:attention}disabled{} every hand"
                 }
             },
             bl_final_bell = {
-                name = "Cerulean Bell",
+                name = "Sky Stupisms",
                 text = {
                     "Forces {C:attention}1{} card to",
                     "always be selected"
@@ -1797,7 +1798,10 @@ return {
 				}
 			},
 			c_fnwk_bluebolt_thunder = {
-				name = "Thunderstruck",
+				name = {
+					"Thunderstruck:",
+					"A/C Mode",
+				},
 				text = {
 					"If played hand does not contain a",
 					"{C:attention}Flush{}, each following card with the",
@@ -1808,7 +1812,10 @@ return {
 				}
 			},
 			c_fnwk_bluebolt_thunder_dc = {
-				name = "Thunderstruck: D/C Mode",
+				name = {
+					"Thunderstruck:",
+					"D/C Mode",
+				},
 				text = {
 					"If played hand contains a {C:attention}#1#{},",
 					"all scoring cards give {X:mult,C:white}X#2#{} Mult",
@@ -1930,7 +1937,10 @@ return {
 				},
 			},
 			c_fnwk_jojopolis_hgm_cosmic = {
-				name = "Hurdy Gurdy Man: Cosmic Wheels",
+				name = {
+					"Hurdy Gurdy Man:",
+					"Cosmic Wheels",
+				},
 				text = {
 					"After {C:attention}playing{} a hand,",
 					"draw your {C:attention}hand size{}"

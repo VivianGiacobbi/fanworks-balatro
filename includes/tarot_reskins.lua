@@ -203,7 +203,7 @@ end
 -- Tarot Atlas
 SMODS.Atlas{
     key = "tarotreskins",
-    path = "tarotreskins.png",
+    path = "consumables/tarotreskins.png",
     px = 71,
     py = 95,
     atlas_table = "ASSET_ATLAS"

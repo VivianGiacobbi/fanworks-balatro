@@ -45,6 +45,7 @@ local includes = {
 	'ui',
 	'items',
 	'tarot_reskins',
+	'blind_reskins',
 	'vanilla_tweaks',
 
 	--- might require functionality
