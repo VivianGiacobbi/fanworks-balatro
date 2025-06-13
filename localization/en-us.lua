@@ -98,7 +98,7 @@ return {
 				"watch telenovelas?",
 			},
 			mq_15 = {
-				"Hey there, kitten",
+				"Hey there, darling.",
 				"Who's a good girl?~",
 			},
 			mq_16 = {
@@ -106,7 +106,7 @@ return {
 				"mommy, hon~",
 			},
 			mq_17 = {
-				"Wait you want",
+				"Wait, you want",
 				"me to put this",
 				"out on you?",
 			},
@@ -376,6 +376,7 @@ return {
 			k_misirlou_final = 'Final Hand?',
 			k_tragic_rankdown = 'Rank Down!',
 			k_insane = 'Doubled!',
+			k_shout = 'Chomp!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -1858,6 +1859,15 @@ return {
 					"if you have {C:money}$#3#{} or less",
 				},
 			},
+			c_fnwk_crimson_cough = {
+				name = "Cough Syrup",
+				text = {
+					"If a played hand contains multiple",
+					"{C:attention}scoring Wild Cards{}, one gains the",
+					"others' {C:attention}permanent{} Chips and the",
+					"others are {C:attention}destroyed{}"
+				},
+			},
 			c_fnwk_crimson_fortunate = {
 				name = "Fortunate Son",
 				text = {
@@ -1924,6 +1934,21 @@ return {
 				text = {
 					"After {C:attention}playing{} a hand,",
 					"draw your {C:attention}hand size{}"
+				},
+			},
+			c_fnwk_jspec_miracle_together = {
+				name = "Togetherland",
+				text = {
+					"{C:attention}Blue Seals{} create",
+					"{C:dark_edition}Negative{} {C:planet}Planet{} cards"
+				},
+			},
+			c_fnwk_jspec_shout = {
+				name = "Shout!",
+				text = {
+					"Non-{C:attention}Eternal{} Jokers can be gained",
+					"beyond your Joker limit, but are",
+					"{C:attention}destroyed{} at end of round"
 				},
 			},
 			c_fnwk_last_saturn = {

@@ -80,6 +80,31 @@ end
 
 
 ---------------------------
+--------------------------- Shout Behavior
+---------------------------
+
+local ref_check_buy_space = G.FUNCS.check_for_buy_space
+G.FUNCS.check_for_buy_space = function(card)
+    local shouts = SMODS.find_card('c_fnwk_jspec_shout')
+    if not next(shouts) or card.ability.set ~= 'Joker' or card.ability.eternal then
+        
+        return ref_check_buy_space(card)
+    end
+
+    for _, v in ipairs(shouts) do
+        if not v.debuff then
+            return true
+        end
+    end
+
+    return ref_check_buy_space(card)
+end
+
+
+
+
+
+---------------------------
 --------------------------- Main Menu UI callbacks
 ---------------------------
 

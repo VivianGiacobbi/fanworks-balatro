@@ -1,5 +1,4 @@
 local consumInfo = {
-    key = 'c_fnwk_crimson_fortunate',
     name = 'Fortunate Son',
     set = 'Stand',
     config = {

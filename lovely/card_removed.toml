@@ -21,6 +21,6 @@ pattern = '''G.E_MANAGER:add_event(Event({
     end
 }))'''
 position = "after"
-payload = '''SMODS.calculate_context({fnwk_playing_card_removed = true, removed = cards_destroyed[i] })'''
+payload = '''SMODS.calculate_context({scoring_hand = scoring_hand, fnwk_playing_card_removed = true, removed = cards_destroyed[i] })'''
 match_indent = true
 times = 1

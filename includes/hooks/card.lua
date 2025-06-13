@@ -316,7 +316,7 @@ end
 
 
 ---------------------------
---------------------------- Joker destruction calc context
+--------------------------- Card destruction calc context
 ---------------------------
 
 local ref_card_dissolve = Card.start_dissolve
@@ -339,7 +339,7 @@ end
 
 
 ---------------------------
---------------------------- Joker destruction calc context
+--------------------------- Ilsa edition effect
 ---------------------------
 
 local ref_set_edition = Card.set_edition
@@ -544,6 +544,14 @@ function Card:set_edition(edition, immediate, silent, delay)
 	self:set_cost()
 end
 
+
+
+
+
+---------------------------
+--------------------------- Insane in the Brain pack modification
+---------------------------
+
 local ref_card_open = Card.open
 function Card:open()
     local insanes = nil
@@ -625,6 +633,70 @@ function Card:set_cost()
         self.fnwk_disturbia_joker.sell_cost = self.sell_cost
         self.fnwk_disturbia_joker.sell_cost_label = self.sell_cost_label
     end
+
+    return ret
+end
+
+
+local ref_card_eor = Card.get_end_of_round_effect
+function Card:get_end_of_round_effect(context)
+    local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
+    if self.seal ~= 'Blue' or not next(togethers) then
+        return ref_card_eor(self, context)
+    end
+
+    local valid = false
+    for _, v in ipairs(togethers) do
+        if not v.debuff then
+            valid = true
+            break
+        end
+    end
+
+    if not valid then
+        return ref_card_eor(self, context)
+    end
+
+    local old_extra = self.extra_enhancement
+    self.extra_enhancement = self.extra_enhancement or true
+    local ret = ref_card_eor(self, context)
+    self.extra_enhancement = old_extra
+
+    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+
+    for _, v in ipairs(togethers) do
+        G.FUNCS.flare_stand_aura(v, 0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                v:juice_up()
+                return true
+            end
+        }))
+    end
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        delay = 0.0,
+        func = (function()
+            if G.GAME.last_hand_played then
+                local _planet = 0
+                for _, v in pairs(G.P_CENTER_POOLS.Planet) do
+                    if v.config.hand_type == G.GAME.last_hand_played then
+                        _planet = v.key
+                    end
+                end
+                if _planet == 0 then _planet = nil end
+                local new_planet = create_card('Planet' ,G.consumeables, nil, nil, nil, nil, _planet, 'blusl')
+                new_planet:set_edition({negative = true}, true)
+                new_planet:add_to_deck()
+                G.consumeables:emplace(new_planet)
+                G.GAME.consumeable_buffer = 0
+            end
+            return true
+        end)}))
+    card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+    ret.effect = true
 
     return ret
 end
