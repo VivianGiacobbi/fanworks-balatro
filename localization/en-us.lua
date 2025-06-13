@@ -682,7 +682,7 @@ return {
                 }
             },
             bl_mark = {
-                name = "The Indstry",
+                name = "The Industry",
                 text = {
                     "All {C:attention}face{} cards are",
                     "drawn {C:attention}face down{}"
