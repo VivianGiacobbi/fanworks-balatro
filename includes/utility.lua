@@ -416,8 +416,9 @@ end
 function FnwkFindWomen(key) 
     local junkie = G.fnwk_women.junkies[key]
     local trans = G.fnwk_women.trans[key]
-    local cis = G.fnwk_women.cis[key]
-    return {junkie = junkie, trans = trans, cis = cis}
+    local woman = G.fnwk_women.women[key]
+	local girl = G.fnwk_women.girls[key]
+    return {junkie = junkie, trans = trans, woman = woman, girl = girl}
 end
 
 --- Sets a discount for specific cards rather than a

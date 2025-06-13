@@ -25,7 +25,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
             local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
-            if results.junkie or results.trans or results.cis then
+            if results.junkie or results.trans or results.woman then
                 count = count + 1
             end
         end
@@ -41,14 +41,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    
-    if context.card_added and context.card.area == G.jokers and not context.blueprint then 
+    if context.card_added and not context.blueprint then 
         if context.card == card then
             return
         end
 
         local results = FnwkFindWomen(context.card.config.center.key)
-        if not (results.junkie or results.trans or results.cis) then
+        if not (results.junkie or results.trans or results.woman) then
             return
         end
 
@@ -63,12 +62,12 @@ function jokerInfo.calculate(self, card, context)
         end
 
         -- find trans women quotes
-        if results.trans then
+        if results.trans and not results.junkie then
             speech_key = speech_key..'t_'..math.random(1, 3)
         end
 
         -- find women quotes
-        if results.cis then
+        if results.woman and not results.junkie then
             speech_key = speech_key..'_'..math.random(1,19)
         end
 
@@ -83,7 +82,7 @@ function jokerInfo.calculate(self, card, context)
                 card:add_quip(speech_key, 'bm', nil, {text_alignment = "cm"})
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
-                    delay = 4.5,
+                    delay = 7,
                     blocking = false,
                     func = function()
                         card:remove_quip()
@@ -95,6 +94,7 @@ function jokerInfo.calculate(self, card, context)
         }))
         return
     end
+
     if not context.cardarea == G.jokers or not context.joker_main or card.debuff then
         return
     end
@@ -107,7 +107,7 @@ function jokerInfo.calculate(self, card, context)
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
             local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
-            if results.junkie or results.trans or results.cis then
+            if results.junkie or results.trans or results.woman then
                 count = count + 1
             end
         end

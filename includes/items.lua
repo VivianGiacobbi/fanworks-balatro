@@ -190,6 +190,7 @@ local items_to_load = {
 
 		-- crimson jungle
 		'crimson_fortunate',
+		'crimson_cough',
 
 		-- gotequest
 		'gotequest_born',
@@ -276,7 +277,11 @@ local items_to_load = {
 		'love_super',
 
 		-- red rising sun
-		'redrising_invisible'
+		'redrising_invisible',
+
+		-- jspec
+		'jspec_miracle_together',
+		'jspec_shout',
 	},
 	
 	Deck = {

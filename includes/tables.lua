@@ -103,9 +103,8 @@ G.fnwk_badge_colours = {
 
 --- A table of joker keys considered "women"
 G.fnwk_women = {
-    cis = {
+    women = {
         ['j_lusty_joker'] = true,
-        ['j_hack'] = true,
         ['j_blueprint'] = true,
         ['j_brainstorm'] = true,
         ['j_shoot_the_moon'] = true,
@@ -124,12 +123,18 @@ G.fnwk_women = {
         ['j_fnwk_jspec_joepie'] = true,
         ['j_fnwk_jspec_ilsa'] = true,
         ['j_fnwk_bluebolt_tuned'] = true,
+        ['j_fnwk_love_holy'] = true,
     },
     trans = {
         ['j_drivers_license'] = true,
         ['j_fnwk_rockhard_rebirth'] = true,
         ['j_fnwk_bluebolt_sexy'] = true,
         ['j_fnwk_bluebolt_secluded'] = true
+    },
+    girls = {
+        ['j_fnwk_plancks_ghost'] = true,
+        ['j_fnwk_glass_jokestar'] = true,
+        ['j_fnwk_love_jokestar'] = true,
     },
     junkies = {
         ['j_fnwk_gotequest_lambiekins'] = 2,
