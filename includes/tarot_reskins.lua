@@ -169,11 +169,10 @@ end
 local queer = fnwk_enabled['enableQueer']
 if skins or queer then
     local build_table = {
-        -- generate_ui = 0
+        generate_ui = 0
     }
 
     if queer then
-        --[[
         build_table.loc_txt = {
             ['en-us'] = {
                 name = "The Wheel of Fortune",
@@ -185,7 +184,6 @@ if skins or queer then
                 }
             }
         }
-        --]]
     end
 
     if skins then
@@ -205,7 +203,7 @@ end
 -- Tarot Atlas
 SMODS.Atlas{
     key = "tarotreskins",
-    path = "tarotreskins.png",
+    path = "consumables/tarotreskins.png",
     px = 71,
     py = 95,
     atlas_table = "ASSET_ATLAS"

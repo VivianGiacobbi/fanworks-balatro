@@ -18,7 +18,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = {card.ability.extra.dollars}}
 end
 
@@ -32,7 +32,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_moneytalks then
+    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_moneytalks then
         local flare_card = context.blueprint_card or card
         return {
             func = function()

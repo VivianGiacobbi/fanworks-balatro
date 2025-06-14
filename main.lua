@@ -21,6 +21,7 @@ G.C.CRYSTAL = HEX('B5FFFF')
 
 local includes = {
 	-- includes utility functions required for following files
+	'emulator',
 	'tables',
 	'colors',
 	'utility',
@@ -44,6 +45,7 @@ local includes = {
 	'ui',
 	'items',
 	'tarot_reskins',
+	'blind_reskins',
 	'vanilla_tweaks',
 
 	--- might require functionality
@@ -61,3 +63,4 @@ for _, module in ipairs(includes) do
 		sendDebugMessage("[Fanworks] Loaded module: " .. module)
 	end
 end
+

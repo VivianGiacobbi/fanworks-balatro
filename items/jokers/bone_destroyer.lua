@@ -185,14 +185,8 @@ function jokerInfo.draw(self, card, layer)
     G.SHADERS['fnwk_speed_lines']:send('speed', 8)
 
     card.children.action_lines_2:draw_self()
-
-    G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_basic']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
-    card.children.yoko_fore:draw_self()
-
-    love.graphics.setShader()
+    
+    card.children.yoko_fore:draw_shader('dissolve')
 end
 
 return jokerInfo

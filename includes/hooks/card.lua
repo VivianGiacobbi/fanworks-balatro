@@ -288,7 +288,11 @@ end
 ---------------------------
 
 local ref_card_add = Card.add_to_deck
-function Card:add_to_deck(from_debuff)
+function Card:add_to_deck(from_debuff, disturbia)
+    if self.fnwk_disturbia_joker and from_debuff and not disturbia then
+        return
+    end
+
     local ret = ref_card_add(self, from_debuff)
 
     if not from_debuff then
@@ -298,20 +302,33 @@ function Card:add_to_deck(from_debuff)
     return ret
 end
 
+local ref_card_remove = Card.remove_from_deck
+function Card:remove_from_deck(from_debuff, disturbia)
+    if self.fnwk_disturbia_joker and from_debuff and not disturbia then
+        return
+    end
+
+    return ref_card_remove(self, from_debuff)
+end
+
 
 
 
 
 ---------------------------
---------------------------- Joker destruction calc context
+--------------------------- Card destruction calc context
 ---------------------------
 
 local ref_card_dissolve = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    if self.fnwk_disturbia_joker then
+        return ref_card_dissolve(self.fnwk_disturbia_joker, dissolve_colours, silent, dissolve_time_fac, no_juice)
+    end
+
     local ret = ref_card_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
 
-    if (G.jokers and self.ability.set == 'Joker') or (G.consumeables and self.ability.set == 'Stand') then
-        SMODS.calculate_context({fnwk_joker_destroyed = true, joker = self})
+    if self.area then
+        SMODS.calculate_context({fnwk_card_removed = true, card = self})
     end
 
     return ret
@@ -322,7 +339,7 @@ end
 
 
 ---------------------------
---------------------------- Joker destruction calc context
+--------------------------- Ilsa edition effect
 ---------------------------
 
 local ref_set_edition = Card.set_edition
@@ -525,4 +542,161 @@ function Card:set_edition(edition, immediate, silent, delay)
 	end
 
 	self:set_cost()
+end
+
+
+
+
+
+---------------------------
+--------------------------- Insane in the Brain pack modification
+---------------------------
+
+local ref_card_open = Card.open
+function Card:open()
+    local insanes = nil
+    if self.ability.set == 'Booster' and self.ability.extra and type(self.ability.extra) ~= 'table' then
+        insanes = SMODS.find_card('c_fnwk_bluebolt_insane')
+        local card_mod = G.P_CENTERS['c_fnwk_bluebolt_insane'].config.extra.card_mod
+        self.ability.extra = self.ability.extra * card_mod^#insanes
+    end
+
+    local ret = ref_card_open(self)
+
+    if insanes then
+        for _, v in ipairs(insanes) do
+            G.FUNCS.flare_stand_aura(v, 0.5)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    v:juice_up()
+                    play_sound('generic1')
+                    attention_text({
+                        text = localize('k_insane'),
+                        scale = 1,
+                        hold = 0.5,
+                        backdrop_colour = G.C.STAND,
+                        align = 'bm',
+                        major = v,
+                        offset = {x = 0, y = 0.05*v.T.h}
+                    })
+                    return true
+                end
+            }))
+        end
+    end
+
+    return ret
+end
+
+
+
+
+
+---------------------------
+--------------------------- Disturbia joker interjection
+---------------------------
+
+local ref_UAT = Card.generate_UIBox_ability_table
+function Card:generate_UIBox_ability_table(vars_only)
+    if self.ability.fnwk_disturbia_fake then
+        local ret = ref_UAT(self.ability.fnwk_disturbia_fake, vars_only)
+        ret = generate_card_ui(G.P_CENTERS['c_fnwk_streetlight_disturbia'], ret)
+        return ret
+    end
+
+    return ref_UAT(self, vars_only)
+end
+
+local ref_dollar_bonus = Card.calculate_dollar_bonus
+function Card:calculate_dollar_bonus(disturbia)
+    if self.fnwk_disturbia_joker and not disturbia then
+        return
+    end
+
+    return ref_dollar_bonus(self)
+end
+
+local ref_card_cost = Card.set_cost
+function Card:set_cost()
+    if self.config.center.key == 'c_fnwk_streetlight_disturbia' and self.ability.extra.target_card then
+        self.extra_cost = self.ability.fnwk_disturbia_fake.extra_cost
+        self.cost = self.ability.fnwk_disturbia_fake.cost
+        self.sell_cost = self.ability.fnwk_disturbia_fake.sell_cost
+        self.sell_cost_label = self.ability.fnwk_disturbia_fake.sell_cost_label
+    end
+
+    local ret = ref_card_cost(self)
+    if self.fnwk_disturbia_joker then
+        self.fnwk_disturbia_joker.extra_cost = self.extra_cost
+        self.fnwk_disturbia_joker.cost = self.cost
+        self.fnwk_disturbia_joker.sell_cost = self.sell_cost
+        self.fnwk_disturbia_joker.sell_cost_label = self.sell_cost_label
+    end
+
+    return ret
+end
+
+
+local ref_card_eor = Card.get_end_of_round_effect
+function Card:get_end_of_round_effect(context)
+    local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
+    if self.seal ~= 'Blue' or not next(togethers) then
+        return ref_card_eor(self, context)
+    end
+
+    local valid = false
+    for _, v in ipairs(togethers) do
+        if not v.debuff then
+            valid = true
+            break
+        end
+    end
+
+    if not valid then
+        return ref_card_eor(self, context)
+    end
+
+    local old_extra = self.extra_enhancement
+    self.extra_enhancement = self.extra_enhancement or true
+    local ret = ref_card_eor(self, context)
+    self.extra_enhancement = old_extra
+
+    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+
+    for _, v in ipairs(togethers) do
+        G.FUNCS.flare_stand_aura(v, 0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                v:juice_up()
+                return true
+            end
+        }))
+    end
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        delay = 0.0,
+        func = (function()
+            if G.GAME.last_hand_played then
+                local _planet = 0
+                for _, v in pairs(G.P_CENTER_POOLS.Planet) do
+                    if v.config.hand_type == G.GAME.last_hand_played then
+                        _planet = v.key
+                    end
+                end
+                if _planet == 0 then _planet = nil end
+                local new_planet = create_card('Planet' ,G.consumeables, nil, nil, nil, nil, _planet, 'blusl')
+                new_planet:set_edition({negative = true}, true)
+                new_planet:add_to_deck()
+                G.consumeables:emplace(new_planet)
+                G.GAME.consumeable_buffer = 0
+            end
+            return true
+        end)}))
+    card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
+    ret.effect = true
+
+    return ret
 end

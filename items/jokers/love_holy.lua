@@ -3,10 +3,10 @@ local jokerInfo = {
 	config = {
         extra = {
             chips = 0,
-            chip_mod = 8,
+            chip_mod = 6,
         }
     },
-	rarity = 2,
+	rarity = 1,
 	cost = 6,
 	blueprint_compat = true,
 	eternal_compat = true,
@@ -20,7 +20,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-
     if not context.cardarea == G.jokers or card.debuff then
         return
     end

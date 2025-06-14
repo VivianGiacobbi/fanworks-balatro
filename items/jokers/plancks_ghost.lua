@@ -72,7 +72,7 @@ function jokerInfo.set_sprites(self, card, front)
         return
     end
 
-    card.children.center:set_sprite_pos({x = 1, y = 0})  
+    card.children.center:set_sprite_pos({x = 1, y = 0})
   
 	card.children.center.custom_draw = true
     card.children.patsy_overlay = Sprite(
@@ -98,47 +98,47 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if not context.cardarea == G.jokers or context.blueprint then return end
-    if context.fnwk_joker_destroyed and context.joker ~= card and context.joker.config.center.key ~= 'j_fnwk_plancks_ghost' then	
+    if context.fnwk_card_removed and context.card ~= card and context.card.config.center.key ~= 'j_fnwk_plancks_ghost' then	
 		
 		-- single level compare for valid keys in the main ability table
 		local changed = false
-		for k,v in pairs(context.joker.ability) do
-			if valid_keys[k] and v ~= context.joker.config.center.config[k] then
+		for k,v in pairs(context.card.ability) do
+			if valid_keys[k] and v ~= context.card.config.center.config[k] then
 				changed = true
 				break
 			end
 		end
 
 		if not changed then
-			changed = FnwkDeepCompare(context.joker.ability.extra, context.joker.config.center.config.extra)
+			changed = FnwkDeepCompare(context.card.ability.extra, context.card.config.center.config.extra)
 		end	
 		
 		if not changed then return end
 		
 		-- store relevant ability and extra values
 		local saved_ability = {}
-		for k, v in pairs(context.joker.ability) do
+		for k, v in pairs(context.card.ability) do
 			if valid_keys[k] then saved_ability[k] = v end
 		end
-		saved_ability.extra = FnwkRecursiveTableMod(context.joker.ability.extra)
+		saved_ability.extra = FnwkRecursiveTableMod(context.card.ability.extra)
 
 		-- save this table
-		card.ability.extra.saved_abilities[context.joker.config.center.key] = saved_ability
+		card.ability.extra.saved_abilities[context.card.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and (context.fnwk_created_card and context.area == G.jokers) and context.card ~= card and card.ability.extra.saved_abilities[context.joker.config.center.key] then			
-		for k, v in pairs(card.ability.extra.saved_abilities[context.joker.config.center.key]) do
-			context.joker.ability[k] = v
+	if context.cardarea == G.jokers and context.fnwk_created_card and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
+		for k, v in pairs(card.ability.extra.saved_abilities[context.card.config.center.key]) do
+			context.card.ability[k] = v
 		end
 
-		card.ability.extra.saved_abilities[context.joker.config.center.key] = nil
-		context.joker:set_cost()
+		card.ability.extra.saved_abilities[context.card.config.center.key] = nil
+		context.card:set_cost()
 
 		G.E_MANAGER:add_event(Event({
 			blockable = false,
 			trigger = 'after', 
 			func = function()
-				context.joker.ability.make_vortex = true
+				context.card.ability.make_vortex = true
 				
 				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
 				self.dissolve = 0
@@ -213,11 +213,11 @@ function jokerInfo.calculate(self, card, context)
 					trigger = 'after', 
 					delay = 1.2, 
 					func = function()
-						context.joker.ability.make_vortex = nil
+						context.card.ability.make_vortex = nil
 						return true 
 					end
 				}))
-				card_eval_status_text(context.joker or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
+				card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
 				return true 
 			end
 		}))
@@ -274,18 +274,11 @@ function jokerInfo.draw(self, card, layer)
 		return
 	end
 
-    local cursor_pos = {}
-    cursor_pos[1] = card.tilt_var and card.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-    cursor_pos[2] = card.tilt_var and card.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-    local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
-    local hovering = (card.hover_tilt or 0)
+	local last_dissolve = card.dissolve
+	card.dissolve = 0
+    card.children.center:draw_shader('dissolve')
 
-    G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_basic']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
-    card.children.center:draw_self()
-
+	card.dissolve = last_dissolve
 	card.children.patsy_overlay:draw_shader('dissolve')
 end
 

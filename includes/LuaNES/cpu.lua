@@ -32,7 +32,7 @@ CPU.IRQ_FRAME = 0x40
 CPU.IRQ_DMC = 0x80
 
 CPU.ClockRates = {
-    Ntsc = 1789773,
+    Ntsc = 2000000,
     Pal = 1662607,
     Dendy = 1773448
 }

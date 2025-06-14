@@ -9,18 +9,7 @@ SMODS.DrawStep {
         if (not self.children.backing or not self.children.boned_bottom or not self.children.boned_top) or self.ability.boned then
             return
         end
-    
-        local cursor_pos = {}
-        cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
-        cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
-        local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
-        local hovering = (self.hover_tilt or 0)
-        
-        G.SHADERS['fnwk_basic']:send('mouse_screen_pos', cursor_pos)
-        G.SHADERS['fnwk_basic']:send('screen_scale', screen_scale)
-        G.SHADERS['fnwk_basic']:send('hovering', hovering)
-        love.graphics.setShader(G.SHADERS['fnwk_basic'], G.SHADERS['fnwk_basic'])
-        self.children.backing:draw_self()
+        self.children.backing:draw_sshader('dissolve')
     
         -- bottom effect values
         
@@ -171,7 +160,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.cardarea == G.jokers and context.fnwk_joker_destroyed and context.joker == card and not card.debuff then
+    if context.cardarea == G.jokers and context.fnwk_card_removed and context.card == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,

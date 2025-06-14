@@ -416,25 +416,24 @@ end
 function FnwkFindWomen(key) 
     local junkie = G.fnwk_women.junkies[key]
     local trans = G.fnwk_women.trans[key]
-    local cis = G.fnwk_women.cis[key]
-    return {junkie = junkie, trans = trans, cis = cis}
+    local woman = G.fnwk_women.women[key]
+	local girl = G.fnwk_women.girls[key]
+    return {junkie = junkie, trans = trans, woman = woman, girl = girl}
 end
 
 --- Sets a discount for specific cards rather than a
 --- global discount and updates all instanced cards' costs
 --- @param source Card Balatro Card table indicating the source of the discount
 --- @param center_set string | nil Set to limit the discount to ('Booster', 'Tarot', 'Joker', etc)
-function FnwkSetCenterDiscount(source, juice, center_set)
-    G.GAME.fnwk_extra_discounts[source.ID] = {
+function FnwkSetCenterDiscount(source, discount, juice, center_set)
+    G.GAME.fnwk_extra_discounts[source.unique_val] = {
 		center_set = center_set,
-		discount = source.ability.extra
+		discount = discount
 	}
     for _, v in pairs(G.I.CARD) do
-        if v.set_cost then 
+        if v.set_cost and (not center_set or (v.ability and v.ability.set == center_set)) then 
             v:set_cost()
-			if juice and (not center_set or (v.ability and v.ability.set == center_set)) then 
-				v:juice_up()
-			end
+			v:juice_up()
         end
     end
 	if juice then play_sound('generic1') end
@@ -444,7 +443,7 @@ end
 --- and updates all instanced cards' costs
 --- @param source Card Balatro Card table indicating the source of the discount
 function FnwkClearCenterDiscountSource(source)
-	G.GAME.fnwk_extra_discounts[source.ID] = nil
+	G.GAME.fnwk_extra_discounts[source.unique_val] = nil
 	for _, v in pairs(G.I.CARD) do
         if v.set_cost then 
             v:set_cost()

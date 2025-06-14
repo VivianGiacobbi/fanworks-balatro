@@ -48,7 +48,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if context.cardarea == G.jokers and context.fnwk_joker_destroyed and context.joker == card then
+	if context.cardarea == G.jokers and context.fnwk_card_removed and context.card == card then
 		if card.ability.state == 'default' then
 			card.ability.state = 'sacrifice'
 

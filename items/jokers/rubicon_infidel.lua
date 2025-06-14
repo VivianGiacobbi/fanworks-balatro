@@ -16,12 +16,12 @@ local jokerInfo = {
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
 
-    if not G.GAME or not G.GAME.infidel_suits then
+    if not G.GAME or not G.GAME.fnwk_infidel_suits then
         return {  vars = { 'Clubs', 'Spades', colours = {G.C.SUITS['Clubs'], G.C.SUITS['Spades']}} }
     end
 
     local suits = {}
-    for k, v in pairs(G.GAME.infidel_suits) do
+    for k, v in pairs(G.GAME.fnwk_infidel_suits) do
         suits[#suits+1] = k
     end
 

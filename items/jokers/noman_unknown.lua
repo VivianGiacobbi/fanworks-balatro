@@ -2,7 +2,7 @@ local jokerInfo = {
 	name = 'Unknown Soldier',
 	config = {
 		extra = {
-			mult_mod = 1,
+			hand_type = 'High Card',
 		}
 	},
 	rarity = 1,
@@ -14,24 +14,30 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-	return { vars = {card.ability.extra.mult_mod, G.GAME.hands and card.ability.extra.mult_mod * G.GAME.hands["High Card"].played or 0}}
+	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
+	return { vars = {localize(card.ability.extra.hand_type, 'poker_hands')}}
 end
 
 function jokerInfo.calculate(self, card, context)
-
 	if card.debuff then
-		return
-	end
+        return
+    end
 
-	if context.cardarea == G.jokers and context.joker_main then
-		return {
-			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult_mod * G.GAME.hands["High Card"].played}},
-			card = context.blueprint_card or card,
-			mult_mod = card.ability.extra.mult_mod * G.GAME.hands["High Card"].played,
-		}
+    if context.individual and context.cardarea == G.play and context.scoring_name == card.ability.extra.hand_type then
+		if context.other_card.debuff then
+			return {
+				message = localize('k_debuffed'),
+				colour = G.C.RED,
+				card = context.blueprint_card or card,
+			}
+		else
+			local mult = not SMODS.has_no_rank(context.other_card) and context.other_card.base.nominal
+			return {
+				mult = mult,
+				card = context.blueprint_card or card,
+			}
+		end
 	end
-
 end
 
 return jokerInfo

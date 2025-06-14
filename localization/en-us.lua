@@ -1,3 +1,28 @@
+local enhance_text = {
+	singular = {
+		"Enhances {C:attention}#1#{} selected",
+		"card into a {C:attention}#2#{}"
+	},
+	multi = {
+		"Enhances up to {C:attention}#1#{}",
+		"selected cards into",
+		"{C:attention}#2#s{}"
+	}
+}
+
+local seal_text = {
+	singular = {
+		"Add a {C:attention}#1#{} to",
+		"{C:attention}#2#{} selected card",
+		"in your hand"
+	},
+	multi = {
+		"Add {C:attention}#1#s{} to up",
+		"to {C:attention}#2#{} selected cards",
+		"in your hand"
+	}
+}
+
 return {
 	misc = {
 		quips = {
@@ -73,7 +98,7 @@ return {
 				"watch telenovelas?",
 			},
 			mq_15 = {
-				"Hey there, kitten",
+				"Hey there, darling.",
 				"Who's a good girl?~",
 			},
 			mq_16 = {
@@ -81,7 +106,7 @@ return {
 				"mommy, hon~",
 			},
 			mq_17 = {
-				"Wait you want",
+				"Wait, you want",
 				"me to put this",
 				"out on you?",
 			},
@@ -266,11 +291,12 @@ return {
 			fnwk_options_enableWipItems = "WIP Items",
 			fnwk_options_enableAltArt = "Alt Joker Art",
 			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
-			fnwk_options_enableQueer = "Enable Queer Edition",
+			fnwk_options_enableQueer = "Queer Edition",
 			fnwk_options_enableDecks = "Decks",
 			fnwk_options_enableVouchers = "Vouchers",
-			fnwk_options_enableConsumables = "New Consumables",
+			fnwk_options_enableConsumables = "Consumables",
 			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
+			fnwk_options_enableBlindReskins = "Boss Blind Reskins",
 			fnwk_options_enableBosses = "Boss Blinds",
 			fnwk_options_enableSkins = "Playing Card Skins",
 			fnwk_options_enableChallenges = "Challenges",
@@ -338,6 +364,7 @@ return {
 			k_joker_replaced = 'Energy Tranformed!',
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
+			k_valentino = 'Autocannibalized!',
 
 			-- stand related strings
 			k_mcr_bubbled = 'Bubbled!',
@@ -346,6 +373,11 @@ return {
 			k_farewell = 'Farewell!',
 			k_grafted = 'Grafted!',
 			k_stand_devolved = 'Devolved!',
+			k_hgm_cosmic_draw = 'Draw!',
+			k_misirlou_final = 'Final Hand?',
+			k_tragic_rankdown = 'Rank Down!',
+			k_insane = 'Doubled!',
+			k_shout = 'Chomp!',
 
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
@@ -396,6 +428,7 @@ return {
 			a_hand = "+#1# Hand",
 			a_reps = "+#1# Reps",
 			a_reps_minus = "-#1# Reps",
+			fnwk_variable = "#1#"
 		},
 		challenge_names = {
 			c_fnwk_beyondcanon = "Beyond Canon",
@@ -486,191 +519,191 @@ return {
                 text = {}
             },
             bl_hook = {
-                name = "The Hook",
+                name = "The Shock",
                 text = {
                     "Discards {C:attention}2{} random",
                     "cards per hand played"
                 }
             },
             bl_wall = {
-                name = "The Wall",
+                name = "The Neon",
                 text = {
                     "{C:attention}Extra large{} blind"
                 }
             },
             bl_wheel = {
-                name = "The Wheel",
+                name = "The Cargo",
                 text = {
                     "{C:green}#1# in 7{} cards get",
                     "drawn face down"
                 }
             },
             bl_arm = {
-                name = "The Arm",
+                name = "The Blade",
                 text = {
                     "Decrease {C:planet}level{} of",
                     "played {C:attention}poker{} hand"
                 }
             },
             bl_psychic = {
-                name = "The Psychic",
+                name = "The Army",
                 text = {
                     "Must play {C:attention}5{} cards"
                 }
             },
             bl_goad = {
-                name = "The Goad",
+                name = "The Falcon",
                 text = {
                     "All {C:spades}Spade{} cards",
                     "are debuffed"
                 }
             },
             bl_water = {
-                name = "The Water",
+                name = "The Call",
                 text = {
                     "Start with",
                     "{C:red}0{} discards"
                 }
             },
             bl_eye = {
-                name = "The Eye",
+                name = "The Forest",
                 text = {
                     "No {C:attention}repeat{} hand",
                     "types this round"
                 }
             },
             bl_mouth = {
-                name = "The Mouth",
+                name = "The Touch",
                 text = {
                     "Play only {C:attention}1{} hand",
                     "type this round"
                 }
             },
             bl_plant = {
-                name = "The Plant",
+                name = "The Lariat",
                 text = {
                     "All {C:attention}face{} cards",
                     "are debuffed"
                 }
             },
             bl_needle = {
-                name = "The Needle",
+                name = "The Thorn",
                 text = {
                     "Play only {C:blue}1{} hand"
                 }
             },
             bl_head = {
-                name = "The Head",
+                name = "The Jungle",
                 text = {
                     "All {C:hearts}Heart{} cards",
                     "are debuffed"
                 }
             },
             bl_tooth = {
-                name = "The Tooth",
+                name = "The Shine",
                 text = {
                     "Lose {C:money}$1{} per",
                     "card played"
                 }
             },
             bl_final_leaf = {
-                name = "Verdant Leaf",
+                name = "Verdant Leafgilly",
                 text = {
                     "All cards debuffed",
                     "until {C:attention}1{} Joker sold"
                 }
             },
             bl_final_vessel = {
-                name = "Violet Vessel",
+                name = "Navy NotDaedalus",
                 text = {
                     "{C:attention}Very large{} blind"
                 }
             },
             bl_ox = {
-                name = "The Ox",
+                name = "The Mania",
                 text = {
                     "Playing a {C:attention}#1#{}",
                     "sets money to {C:money}$0{}"
                 }
             },
             bl_house = {
-                name = "The House",
+                name = "The Info",
                 text = {
                     "First hand is",
                     "drawn {C:attention}face down{}"
                 }
             },
             bl_club = {
-                name = "The Club",
+                name = "The Mob",
                 text = {
                     "All {C:clubs}Club{} cards",
                     "are debuffed"
                 }
             },
             bl_fish = {
-                name = "The Fish",
+                name = "The Riot",
                 text = {
                     "Cards drawn {C:attention}face down{}",
                     "after each hand played"
                 }
             },
             bl_window = {
-                name = "The Window",
+                name = "The Stage",
                 text = {
                     "All {C:diamonds}Diamond{} cards",
                     "are debuffed"
                 }
             },
             bl_manacle = {
-                name = "The Manacle",
+                name = "The Scepter",
                 text = {
                     "{C:attention}-1{} Hand Size"
                 }
             },
             bl_serpent = {
-                name = "The Serpent",
+                name = "The Hope",
                 text = {
                     "After {C:blue}Play{} or {C:red}Discard{},",
                     "always draw {C:attention}3{} cards"
                 }
             },
             bl_pillar = {
-                name = "The Pillar",
+                name = "The Roads",
                 text = {
                     "Cards played previously",
                     "this {C:attention}Ante{} are debuffed"
                 }
             },
             bl_flint = {
-                name = "The Flint",
+                name = "The City",
                 text = {
                     "Base Chips and",
                     "Mult are {C:attention}halved{}"
                 }
             },
             bl_mark = {
-                name = "The Mark",
+                name = "The Industry",
                 text = {
                     "All {C:attention}face{} cards are",
                     "drawn {C:attention}face down{}"
                 }
             },
             bl_final_acorn = {
-                name = "Amber Acorn",
+                name = "Pink Plusgal",
                 text = {
                     "{C:attention}Flips and shuffles{}",
                     "all Joker cards"
                 }
             },
             bl_final_heart = {
-                name = "Crimson Heart",
+                name = "Tenebral TOS",
                 text = {
                     "One random Joker",
                     "{C:attention}disabled{} every hand"
                 }
             },
             bl_final_bell = {
-                name = "Cerulean Bell",
+                name = "Sky Stupisms",
                 text = {
                     "Forces {C:attention}1{} card to",
                     "always be selected"
@@ -679,7 +712,10 @@ return {
         },
 		Joker = {
 			j_fnwk_streetlight_fledgling = {
-				name = "Fledgling Streetlit Joker",
+				name = {
+					"Fledgling",
+					"Streetlit Joker",
+				},
 				text = {
 					"This Joker gains {C:chips}+#1#{} Chips",
 					"if {C:attention}first hand{} of round doesn't",
@@ -688,7 +724,10 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil = {
-				name = "Resilient Streetlit Joker",
+				name = {
+					"Resilient",
+					"Streetlit Joker",
+				},
 				text = {
 					"When this Joker is {C:attention}sacrificed{},",
 					"create an {C:attention}Enhancement{}-granting",
@@ -698,14 +737,20 @@ return {
 				},
 			},
 			j_fnwk_streetlight_resil_regen = {
-				name = "Resilient Streetlit Joker",
+				name = {
+					"Resilient",
+					"Streetlit Joker",
+				},
 				text = {
 					"{C:inactive}She's survived everything so far.{}",
 					"{C:inactive}Once more can't hurt.{}"
 				},
 			},
 			j_fnwk_streetlight_indulgent = {
-				name = "Indulgent Streetlit Joker",
+				name = {
+					"Indulgent",
+					"Streetlit Joker",
+				},
 				text = {
 					"This Joker gains {X:mult,C:white}X#1#{} Mult",
 					"if you spend at least {C:money}$#2#{} {C:inactive}[#3#]{}",
@@ -714,14 +759,20 @@ return {
 				},
 			},
 			j_fnwk_streetlight_methodical = {
-				name = "Methodical Streetlit Joker",
+				name = {
+					"Methodical",
+					"Streetlit Joker"
+				},
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} hands,",
 					"level up played {C:attention}poker hand{}",
 				},
 			},
 			j_fnwk_streetlight_industrious = {
-				name = "Industrious Streetlit Joker",
+				name = {
+					"Industrious",
+					"Streetlit Joker"
+				},
 				text = {
 					"If played hand is a {C:attention}Full House{},",
 					"convert the {C:attention}Pair{} into the same rank",
@@ -1170,9 +1221,11 @@ return {
 			j_fnwk_spirit_corpse = {
 				name = "Corpse Crimelord",
 				text = {
-					'{C:dark_edition}+1{} Joker slot for every',
-					'digit of {C:money}money{} you have',
-					'{s:0.8}Always spawns {C:attention,s:0.8}Rental{}{}'
+					"{C:dark_edition}+#1#{} Joker slot for every",
+					"digit of {C:money}money{} you have",
+					"{s:0.1} {}",
+					"Lose {C:money}$#2#{} for each {C:attention}Joker{} you",
+					"own at end of round"
 				},
 				unlock = {
 					"Survive {C:attention,E:1}death{}"
@@ -1187,7 +1240,7 @@ return {
 			j_fnwk_industry_loyal = {
 				name = "Loyal Gambler",
 				text = {
-					"{V:1}#1#s{} count as {C:attention}Lucky Cards{}",
+					"{V:1}#1#{} count as {C:attention}Lucky Cards{}",
                     "in addition to current {C:attention}Enhancement{}",
                     "{s:0.8}suit changes at end of round",
 				},
@@ -1442,13 +1495,12 @@ return {
 			j_fnwk_noman_unknown = {
 				name = "Unknown Soldier",
 				text = {
-					"{C:mult}+#1#{} Mult for each {C:attention}High Card{}",
-					"played this run",
-					"{C:inactive}(Currently {}{C:mult}+#2#{}{C:inactive} Mult){}"
+					"Each {C:attention}#1#{} gives",
+					"Mult equal to its {C:attention}rank{}"
 				}
 			},
 			j_fnwk_scepter_card = {
-				name = "Speedwagon Foundation Card",
+				name = "Foundation Card",
 				text = {
 					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to give",
@@ -1555,7 +1607,10 @@ return {
 				}
 			},
 			j_fnwk_stalk_jokestar = {
-				name = "Investigative Jokestar",
+				name = {
+					"Investigative",
+					"Jokestar",
+				},
 				text = {
 					"{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips",
 					"if played hand is a",
@@ -1569,6 +1624,57 @@ return {
 			},
 		},
 		Tarot = {
+			c_strength = {
+				name = "Strength",
+				text = {
+					"Increases rank of",
+					"up to {C:attention}#1#{} selected",
+					"cards by {C:attention}#2#{}"
+				}
+			},
+			c_strength_multi = {
+				name = "Strength",
+				text = {
+					"Increases rank",
+					"of {C:attention}#1#{} selected",
+					"card by {C:attention}#2#{}"
+				}
+			},
+			c_death = {
+				name = "Death",
+				text = {
+					"Select {C:attention}#1#{} cards,",
+					"convert the {C:attention}left{} card",
+					"into the {C:attention}right{} card",
+					"{C:inactive}(Drag to rearrange)"
+				}
+			},
+			c_death_multi = {
+				name = "Death",
+				text = {
+					"Select {C:attention}#1#{} cards,",
+					"convert the {C:attention}left{} cards",
+					"into the {C:attention}rightmost{} card",
+					"{C:inactive}(Drag to rearrange)"
+				}
+			},
+			c_devil = { name = "The Devil", text = enhance_text.singular },
+			c_devil_multi = { name = "The Devil", text = enhance_text.multi },
+            c_tower = { name = "The Tower", text = enhance_text.singular },
+			c_tower_multi = { name = "The Tower", text = enhance_text.multi },
+			c_magician = { name = "The Magician", text = enhance_text.singular },
+			c_magician_multi = { name = "The Magician", text = enhance_text.multi },
+			c_empress = { name = "The Empress", text = enhance_text.singular },
+			c_empress_multi = { name = "The Empress", text = enhance_text.multi },
+			c_heirophant = { name = "The Hierophant", text = enhance_text.singular },
+			c_heirophant_multi = { name = "The Hierophant", text = enhance_text.multi },
+			c_lovers = { name = "The Lovers", text = enhance_text.singular },
+			c_lovers_multi = { name = "The Lovers", text = enhance_text.multi },
+			c_chariot = { name = "The Chariot", text = enhance_text.singular },
+			c_chariot_multi = { name = "The Chariot", text = enhance_text.multi },
+			c_justice = { name = "Justice", text = enhance_text.singular },
+			c_justice_multi = { name = "Justice", text = enhance_text.multi },
+
 			c_emperor_dead = {
 				name = "The Emperor",
 				text = {
@@ -1595,6 +1701,49 @@ return {
 			},
 		},
 		Spectral = {
+			c_talisman = { name = "Talisman", text = seal_text.singular },
+			c_talisman_multi = { name = "Talisman", text = seal_text.multi },
+			c_deja_vu = { name = "Deja Vu", text = seal_text.singular },
+			c_deja_vu_multi = { name = "Deja Vu", text = seal_text.multi },
+			c_medium = { name = "Medium", text = seal_text.singular },
+			c_medium_multi = { name = "Medium", text = seal_text.multi },
+			c_trance = { name = "Trance", text = seal_text.singular },
+			c_trance_multi = { name = "Trance", text = seal_text.multi },
+
+			c_cryptid = {
+				name = 'Cryptid',
+				text = {
+					"Create {C:attention}#1#{} copies of",
+					"{C:attention}#2#{} selected card",
+					"in your hand"
+				},
+			},
+			c_cryptid_multi = {
+				name = 'Cryptid',
+				text = {
+					"Create {C:attention}#1#{} copies of",
+					"up to {C:attention}#2#{} selected cards",
+					"in your hand"
+				},
+			},
+
+			c_aura = {
+				name = 'Aura',
+				text = {
+					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+					"{C:dark_edition}#2#{} edition to",
+					"{C:attention}#1#{} selected card in hand"
+				},
+			},
+			c_aura_multi = {
+				name = 'Aura',
+				text = {
+					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
+					"{C:dark_edition}#2#{} edition to up to",
+					"{C:attention}#1#{} selected cards in hand"
+				},
+			},
+
 			c_fnwk_spec_stone = {
 				name = "Stone Mask",
 				text = {
@@ -1649,7 +1798,10 @@ return {
 				}
 			},
 			c_fnwk_bluebolt_thunder = {
-				name = "Thunderstruck",
+				name = {
+					"Thunderstruck:",
+					"A/C Mode",
+				},
 				text = {
 					"If played hand does not contain a",
 					"{C:attention}Flush{}, each following card with the",
@@ -1660,13 +1812,24 @@ return {
 				}
 			},
 			c_fnwk_bluebolt_thunder_dc = {
-				name = "Thunderstruck: D/C Mode",
+				name = {
+					"Thunderstruck:",
+					"D/C Mode",
+				},
 				text = {
 					"If played hand contains a {C:attention}#1#{},",
 					"all scoring cards give {X:mult,C:white}X#2#{} Mult",
 					"and are {C:attention}destroyed{} after scoring",
 					"{s:0.1} {}",
 					"{C:stand}Devolves{} after this effect activates",
+				}
+			},
+			c_fnwk_bluebolt_insane = {
+				name = "Insane in the Brain",
+				text = {
+					"{C:attention}Doubles{} the cards inside",
+					"{C:attention}Booster Packs{}, but also",
+					"doubles their {C:attention}base costs{}"
 				}
 			},
 			c_fnwk_bone_king = {
@@ -1703,11 +1866,27 @@ return {
 					"if you have {C:money}$#3#{} or less",
 				},
 			},
+			c_fnwk_crimson_cough = {
+				name = "Cough Syrup",
+				text = {
+					"If a played hand contains multiple",
+					"{C:attention}scoring Wild Cards{}, one gains the",
+					"others' {C:attention}permanent{} Chips and the",
+					"others are {C:attention}destroyed{}"
+				},
+			},
 			c_fnwk_crimson_fortunate = {
 				name = "Fortunate Son",
 				text = {
 					"{C:mult}+#1#{} Mult if played hand",
 					"was the last hand {C:planet}upgraded{}",
+				},
+			},
+			c_fnwk_culture_starboy = {
+				name = "Starboy",
+				text = {
+					"Increases {C:attention}selection limit{}",
+					"of consumables by {C:attention}#1#{}"
 				},
 			},
 			c_fnwk_glass_big = {
@@ -1741,10 +1920,60 @@ return {
 					"{C:inactive}(Rank increases after scoring){}"
 				},
 			},
-			c_fnwk_mania_moving = {
-				name = "Moving Pictures",
+			c_fnwk_iron_shatter = {
+				name = "Shatter Me",
 				text = {
-					"[NEEDS REVISION]"
+					"Retrigger each scored {C:attention}Glass Card{}",
+					"and retrigger its {C:green}chance{} to {C:attention}break{}",
+				},
+			},
+			c_fnwk_jojopolis_hgm = {
+				name = "Hurdy Gurdy Man",
+				text = {
+					"{C:attention}+#1#{} hand size on {C:attention}Big Blinds{}",
+					"{C:attention}+#2#{} hand size on {C:attention}Boss Blinds{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} when a hand reaches {C:planet}level{} {C:attention}#3#{}"
+				},
+			},
+			c_fnwk_jojopolis_hgm_cosmic = {
+				name = {
+					"Hurdy Gurdy Man:",
+					"Cosmic Wheels",
+				},
+				text = {
+					"After {C:attention}playing{} a hand,",
+					"draw your {C:attention}hand size{}"
+				},
+			},
+			c_fnwk_jspec_miracle_together = {
+				name = "Togetherland",
+				text = {
+					"{C:attention}Blue Seals{} create",
+					"{C:dark_edition}Negative{} {C:planet}Planet{} cards"
+				},
+			},
+			c_fnwk_jspec_shout = {
+				name = "Shout!",
+				text = {
+					"Non-{C:attention}Eternal{} Jokers can be gained",
+					"beyond your Joker limit, but are",
+					"{C:attention}destroyed{} at end of round"
+				},
+			},
+			c_fnwk_last_saturn = {
+				name = "Saturn Barz",
+				text = {
+					"When a {C:planet}Planet{} card is used,",
+					"{C:planet}level up{} a {C:attention}random{} hand"
+				},
+			},
+			c_fnwk_last_tragic = {
+				name = "Tragic Kingdom",
+				text = {
+					"If played hand contains an {C:attention}#1#{},",
+					"reduce {C:attention}rank{} of all other cards",
+					"held in hand by {C:attention}#2#{}"
 				},
 			},
 			c_fnwk_lighted_limelight = {
@@ -1760,6 +1989,25 @@ return {
 				text = {
 					"{C:attention}Destroy{} all scoring {C:attention}Gold Cards{}",
 					"and gain {C:money}$7{} for each"
+				},
+			},
+			c_fnwk_mania_moving = {
+				name = "Moving Pictures",
+				text = {
+					"Dummy Text"
+				},
+			},
+			c_fnwk_love_super = {
+				name = "Super Strut",
+				text = {
+					"Retrigger each {C:attention}rank{} previously",
+					"scored this round"
+				},
+			},
+			c_fnwk_plancks_moon = {
+				name = "Moon River",
+				text = {
+					"Dummy Text"
 				},
 			},
 			c_fnwk_rebels_rebel = {
@@ -1801,11 +2049,34 @@ return {
 					"{s:0.8,C:inactive}\"Can you see the real me?\"{}",
 				},
 			},
+			c_fnwk_rockhard_misirlou = {
+				name = "Misirlou",
+				text = {
+					"If you have at least {C:attention}#1# #2#s{}",
+					"in your full deck, {C:attention}first hands{} trigger",
+					"{C:attention}final hand{} and {C:attention}end of round{} effects",
+				},
+			},
+			c_fnwk_rubicon_infidelity = {
+				name = "Hi Infidelity",
+				text = {
+					"When a hand is {C:attention}played{}, each scoring card",
+					"that shares the {C:attention}leftmost card's suit{} has a",
+					"{C:green}1 in 3{} chance to {C:attention}transform{} into that card"
+				},
+			},
 			c_fnwk_rubicon_dance = {
 				name = "Dance Macabre",
 				text = {
 					"{C:attention}Glass Cards{} of {V:1}#1#{} suit will not break",
 					"{C:attention}Glass Cards{} of any other {C:attention}suit{} always break"
+				},
+			},
+			c_fnwk_rubicon_mother = {
+				name = "Mother Love Bone",
+				text = {
+					"{C:attention}Queens{} have a {C:green}1 in 2{} chance",
+					"to become {C:attention}Steel{} when scored"
 				},
 			},
 			c_fnwk_scepter_lenfer = {
@@ -1844,7 +2115,10 @@ return {
 				},
 			},
 			c_fnwk_spirit_ultimate = {
-				name = "Ultimate Showdown of Ultimate Destiny",
+				name = {
+					"Ultimate Showdown",
+					"of Ultimate Destiny",
+				},
 				text = {
 					"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
 					"each {C:attention}Gold Card{} held in hand",
@@ -1867,6 +2141,67 @@ return {
 					"in hand give",
 				},
 			},
+			c_fnwk_double_geometrical = {
+				name = {
+					'GEOMETRICAL DOMINATOR',
+					'FINGERBANG',
+					'STEREO MADNESS',
+					'CLUTTERFUNK',
+					'STAY INSIDE ME',
+					'ELECTRODYNAMIX',
+					'HEXAGON FORCE',
+					'ELECTROMAN ADVENTURES',
+					'TIME MACHINE',
+				},
+				text = {
+					"This Stand gives {C:chips}#1#^{}{s:0.6,C:chips}x{} Chips for each",
+					"{C:attention}unique word{} in the names of your",
+					"other {C:attention}Jokers{} and {C:attention}Consumables{}",
+					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips){}"
+				},
+			},
+			c_fnwk_streetlight_disturbia = {
+				name = "Disturbia",
+				text = {
+					"Copies the effect of a",
+					"random {C:attention}Joker{} each hand",
+				},
+			},
+			c_fnwk_streetlight_eurythmics = {
+				name = "Neon Trees",
+				text = {
+					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} rounds,",
+					"gain {C:attention}#3# #4#s{}",
+				},
+			},
+			c_fnwk_streetlight_neon = {
+				name = "Neon Trees",
+				text = {
+					"When a {C:attention}#1#{} pays out",
+					"permanently increase its",
+					"payout by {C:money}$#2#{}",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} after spending",
+					"{C:money}$#3#{} in one shop"
+				},
+			},
+			c_fnwk_streetlight_neon_favorite = {
+				name = {
+					"Neon Trees:",
+					"Favorite Daze"
+				},
+				text = {
+					"{C:attention}#1#s{} cannot be debuffed",
+					"and retrigger",
+				},
+			},
+			c_fnwk_streetlight_rockin = {
+				name = "Rockin' Robin",
+				text = {
+					"When a hand is played, increase",
+					"hand size by {C:attention}#1#{} this round",
+				},
+			},
 			c_fnwk_streetlight_notorious = {
 				name = "NOTORIOUS",
 				text = {
@@ -1883,7 +2218,10 @@ return {
 				},
 			},
 			c_fnwk_streetlight_paperback_rewrite = {
-				name = "Paperback Writer: REWRITE",
+				name = {
+					"Paperback Writer:",
+					"REWRITE",
+				},
 				text = {
 					"Infinite {C:attention}Booster Pack{} and {C:attention}Voucher{} {C:green}Rerolls{}",
 					"{C:green}#1# in #2#{} chance to {C:red,E:2}self destruct{}",

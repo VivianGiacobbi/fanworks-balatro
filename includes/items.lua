@@ -55,7 +55,6 @@ local items_to_load = {
 
 		-- rockhard in a funky place
 		'rockhard_rebirth',
-		-- 'rockhard_peppers',
 		'rockhard_nameless',
 		'rockhard_alfie',
 		'rockhard_vasos',
@@ -146,7 +145,7 @@ local items_to_load = {
 		-- cold iron streets,
 		'cis_jokestar',
 
-		--love once buried
+		-- love once buried
 		'love_jokestar',
 		'love_holy',
 
@@ -177,6 +176,10 @@ local items_to_load = {
 	},
 
 	Stand = {
+		-- jojopolis
+		'jojopolis_hgm',
+		'jojopolis_hgm_cosmic',
+
 		-- bone to blades
 		'bone_king',
 		'bone_king_farewell',
@@ -187,18 +190,32 @@ local items_to_load = {
 
 		-- crimson jungle
 		'crimson_fortunate',
+		'crimson_cough',
 
 		-- gotequest
 		'gotequest_born',
 		'gotequest_sweet',
 		'gotequest_takyon',
 
-		--glass lariats
+		'culture_starboy',
+
+		-- glass lariats
 		'glass_big',
+
+		-- plancks creek
+		'plancks_moon',
+		
+		-- last hope army
+		'last_tragic',
+		'last_saturn',
 
 		-- rockhard in a funky place
 		'rockhard_peppers',
 		'rockhard_quadro',
+		'rockhard_misirlou',
+
+		-- iron touch
+		'iron_shatter',
 
 		-- the lighted stage
 		'lighted_limelight',
@@ -218,11 +235,19 @@ local items_to_load = {
 
 		-- double down
 		'double_wine',
+		'double_geometrical',
 
 		-- rubicon crossroads
+		'rubicon_infidelity',
 		'rubicon_dance',
+		'rubicon_mother',
 
 		-- streetlight pursuit
+		'streetlight_disturbia',
+		'streetlight_neon',
+		'streetlight_neon_favorite',
+		'streetlight_eurythmics',
+		'streetlight_rockin',
 		'streetlight_paperback',
 		'streetlight_paperback_rewrite',
 		'streetlight_notorious',
@@ -234,6 +259,7 @@ local items_to_load = {
 		'bluebolt_thunder',
 		'bluebolt_thunder_dc',
 		'bluebolt_chemical',
+		'bluebolt_insane',
 		
 		-- sunshine deluxe
 		'sunshine_electric',
@@ -247,8 +273,15 @@ local items_to_load = {
 		-- JJ29: Stardust Rebels
 		'rebels_rebel',
 
+		-- love once buried
+		'love_super',
+
 		-- red rising sun
-		'redrising_invisible'
+		'redrising_invisible',
+
+		-- jspec
+		'jspec_miracle_together',
+		'jspec_shout',
 	},
 	
 	Deck = {

@@ -3,7 +3,7 @@ local consumInfo = {
     name = 'KING & COUNTRY',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'CC2CDDFDC', '9C403ADC' },
         evolve_key = 'c_fnwk_bone_king_farewell',
         extra = {
@@ -14,7 +14,6 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'bone',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }
@@ -61,7 +60,7 @@ function consumInfo.calculate(self, card, context)
         }))
     end
 
-    if context.fnwk_card_destroyed and context.removed.fnwk_removed_by_kingandcountry then
+    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_kingandcountry then
         local flare_card = context.blueprint_card or card
         return {
             func = function()

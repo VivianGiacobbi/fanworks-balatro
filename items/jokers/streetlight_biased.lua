@@ -41,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_joker_destroyed or context.remove_playing_cards) then
+	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_card_removed or context.remove_playing_cards) then
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			func = function()
@@ -54,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
 
 	if not context.blueprint and not context.retrigger_joker and context.debuff_card and not card.ability.fnwk_biased_removed then
 		local women = FnwkFindWomen(context.debuff_card.config.center.key)
-		if women.trans or women.cis or context.debuff_card:get_id() == 12 then
+		if women.trans or women.woman or women.girl or context.debuff_card:get_id() == 12 then
 			return {
 				debuff = true
 			}

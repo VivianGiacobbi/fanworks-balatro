@@ -14,6 +14,10 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     fnwk_reset_funkadelic()
     fnwk_reset_infidel()
     fnwk_reset_loyal()
+
+    for _, v in ipairs(G.playing_cards) do
+        v.ability.fnwk_strut_this_hand = nil
+    end
 end
 
 --- Add effects for non-main editions to an effects table, similar to SMODS.calculate_quantum_enhancements()
@@ -59,4 +63,31 @@ function SMODS.fnwk_get_quantum_editions(card)
         return extras
     end
     return {}
+end
+
+
+local ref_smeared_check = SMODS.smeared_check
+function SMODS.smeared_check(card, suit)
+    local smeared = next(SMODS.find_card('k_smeared'))
+    local infidel = next(SMODS.find_card('j_fnwk_rubicon_infidel'))
+    if infidel and smeared then
+        if not ((G.GAME.fnwk_infidel_suits['Hearts'] and G.GAME.fnwk_infidel_suits['Diamonds'])
+        or (G.GAME.fnwk_infidel_suits['Spades'] and G.GAME.fnwk_infidel_suits['Clubs'])) then
+            return true
+        end
+    end
+
+    local ret = ref_smeared_check(card, suit)
+
+    if not ret and infidel then
+        local infidelSuits = {}
+        for k, _ in pairs(G.GAME.fnwk_infidel_suits) do
+            infidelSuits[#infidelSuits+1] = k
+        end
+        if (card.base.suit == infidelSuits[1] or card.base.suit == infidelSuits[2]) and (suit == infidelSuits[1] or suit == infidelSuits[2]) then
+            ret = true
+        end
+    end
+
+    return ret
 end
