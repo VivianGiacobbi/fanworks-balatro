@@ -12,7 +12,7 @@ local consumInfo = {
     },
     cost = 4,
     hasSoul = true,
-    rarity = 'arrow_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     fanwork = 'streetlight',
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},

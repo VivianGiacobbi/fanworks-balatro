@@ -7,7 +7,7 @@ local consumInfo = {
         aura_colors = { '6DD5FFDC', '89F7FFDC' },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     hasSoul = true,
     fanwork = 'jspec',
     blueprint_compat = false,

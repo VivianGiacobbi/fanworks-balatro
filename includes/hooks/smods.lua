@@ -91,3 +91,53 @@ function SMODS.smeared_check(card, suit)
 
     return ret
 end
+
+local valid_keys = {
+    ['p_dollars'] = true,
+    ['dollars'] = true,
+    ['h_dollars'] = true,
+    ['mult'] = true,
+    ['h_mult'] = true,
+    ['mult_mod'] = true,
+    ['chips'] = true,
+    ['h_chips'] = true,
+    ['chip_mod'] = true,
+    ['x_chips'] = true,
+    ['xchips'] = true,
+    ['Xchip_mod'] = true,
+    ['x_mult'] = true,
+    ['xmult'] = true,
+    ['Xmult'] = true,
+    ['x_mult_mod'] = true,
+    ['Xmult_mod'] = true,
+    ['swap'] = true,
+    ['balance'] = true,
+    ['level_up'] = true
+}
+
+local ref_indv_effect = SMODS.calculate_individual_effect
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
+    if not (G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt') then
+        return ref_indv_effect(effect, scored_card, key, amount, from_edition)
+    end
+
+    local old_card = effect.card
+    G.fnwk_message_cancel = nil
+    local cancel = true
+    for k, v in pairs(effect) do
+        if valid_keys[k] then
+            cancel = false
+            break
+        end
+    end
+    
+    if cancel and (not effect.card or (effect.card and not effect.card.playing_card)) then
+        G.fnwk_message_cancel = true
+        effect.card = nil
+    end
+
+    local ret = ref_indv_effect(effect, scored_card, key, amount, from_edition)
+    G.fnwk_message_cancel = nil
+    effect.card = old_card
+    return ret
+end

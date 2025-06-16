@@ -21,11 +21,10 @@ SMODS.current_mod.config_tab = function()
 		'enableTarotSkins',
 		'enableVanillaTweaks',
 		'enableChallenges',
+		'enableBlinds',
 		'enableBlindReskins',
 		--[[
 		'enableTrophies',
-		'enableBosses',
-		'enableSkins',
 		--]]
 	}
 	if G.fnwk_stands_enabled then table.insert(ordered_config, 2, 'enableStands') end
@@ -172,9 +171,6 @@ SMODS.current_mod.credits_tab = function()
 									{n = G.UIT.T, config = {text = G.fnwk_credits.cream, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.daed, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-								}},
-								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.doopo, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
@@ -195,11 +191,11 @@ SMODS.current_mod.credits_tab = function()
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.leafy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
-							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.mae, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
+							}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.monky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
@@ -232,6 +228,9 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.cringe, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.wario, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.winter, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},

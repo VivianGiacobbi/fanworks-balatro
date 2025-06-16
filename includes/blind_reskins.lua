@@ -1,9 +1,6 @@
 if not fnwk_enabled['enableBlindReskins'] then
-    sendDebugMessage('NO BLIND RESKINS')
     return
 end
-
-sendDebugMessage('ENABLING BLIND RESKINS')
 
 -- Tarot Atlas
 SMODS.Atlas{

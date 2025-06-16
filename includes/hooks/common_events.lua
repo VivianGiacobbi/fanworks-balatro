@@ -100,7 +100,7 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
         if full_UI_table.name and main_card and main_card.config and main_card.config.center and main_card.config.center.key == 'c_fnwk_double_geometrical' then
             full_UI_table.name[1].nodes[2].config.ref_table = main_card
             main_card = nil
-        elseif main_card.fnwk_disturbia_joker then
+        elseif main_card and main_card.fnwk_disturbia_joker then
             if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] and _c.key ~= "fnwk_artist_1" then
                 return full_UI_table
             end
@@ -205,5 +205,18 @@ local ref_eval_card = eval_card
 function eval_card(card, context)
     if card.fnwk_disturbia_joker then return {}, {} end
 
-    return ref_eval_card(card, context)
+    G.fnwk_message_cancel = G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt'
+    local ret, post = ref_eval_card(card, context)
+    G.fnwk_message_cancel = nil
+    return ret, post
+end
+
+
+local ref_card_text = card_eval_status_text
+function card_eval_status_text(card, eval_type, amt, percent, dir, extra)
+    if G.fnwk_message_cancel then
+        return
+    end
+
+    return ref_card_text(card, eval_type, amt, percent, dir, extra)
 end

@@ -56,3 +56,61 @@ function G.UIDEF.card_h_popup(card)
     end
     return ref_card_popup(card)
 end
+
+
+
+
+
+---------------------------
+--------------------------- The Creek score modifiers
+---------------------------
+
+local ref_uibox_blind = create_UIBox_blind_popup
+function create_UIBox_blind_popup(blind, discovered, vars)
+    local ret = ref_uibox_blind(blind, discovered, vars)
+    if blind.key == 'bl_fnwk_creek' then
+        local dyn_nodes = {}
+        for i=0, 6 do
+            dyn_nodes[#dyn_nodes+1] = {string = (i*0.25 + 1.75)..localize('k_x_base'), colour = G.C.RED}          
+        end
+        ret.nodes[2].nodes[1].nodes[2].nodes[2] = { 
+            n=G.UIT.O,
+            config={
+                object = DynaText({
+                    string = dyn_nodes,
+                    colours = {G.C.RED},
+                    pop_in_rate = 9999999,
+                    silent = true,
+                    random_element = true,
+                    random_no_repeat = true,
+                    pop_delay = 0.3,
+                    scale = 0.4,
+                    min_cycle_time = 0,
+                })
+            }
+        }
+    end
+    return ret
+end
+
+local ref_blind_choice = create_UIBox_blind_choice
+function create_UIBox_blind_choice(type, run_info)
+    local ret = ref_blind_choice(type, run_info)
+
+    if type == 'Boss' then
+        local blind = G.P_BLINDS[G.GAME.round_resets.blind_choices['Boss']]
+        if blind.key ~= 'bl_fnwk_creek' then return ret end
+        local score_node = ret.nodes[1].nodes[3].nodes[1].nodes[2].nodes[2].nodes[3]
+        score_node.config.object = DynaText({
+            string = '?????',
+            colours = {disabled and G.C.UI.TEXT_INACTIVE or G.C.DARK_EDITION},
+            bump = true,
+            pop_in_rate = 1.5*G.SPEEDFACTOR,
+            silent = true,
+            scale = 0.65,
+        })
+        score_node.n = G.UIT.O
+    end
+
+    return ret
+end

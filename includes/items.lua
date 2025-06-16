@@ -309,11 +309,9 @@ local items_to_load = {
 	},
 
 	Blind = {
-		--'hog',
-		--'tray',
-		--'vod',
-		--'finger',
-		--'mochamike',
+		'bolt',
+		'rot',
+		'creek'
 	},
 }
 

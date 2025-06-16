@@ -299,6 +299,8 @@ function Card:add_to_deck(from_debuff, disturbia)
         G.GAME.fnwk_owned_jokers[self.config.center.key] = true
     end
 
+    if not from_debuff and G.GAME.blind then G.GAME.blind:fnwk_card_added(self) end
+
     return ret
 end
 
@@ -699,4 +701,13 @@ function Card:get_end_of_round_effect(context)
     ret.effect = true
 
     return ret
+end
+
+local ref_card_canuse = Card.can_use_consumeable
+function Card:can_use_consumeable(any_state, skip_check)
+    if not skip_check and G.GAME.modifiers.fnwk_no_consumeables then
+        return false
+    end
+
+    return ref_card_canuse(self, any_state, skip_check)
 end

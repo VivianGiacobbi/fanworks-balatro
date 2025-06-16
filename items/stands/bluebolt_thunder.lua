@@ -2,8 +2,9 @@ local consumInfo = {
     name = 'Thunderstruck A/C',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
-        aura_colors = { '3EA8F3DC', '009CFDDC' },
+        stand_mask = true,
+        stand_shadow = 0,
+        aura_colors = { 'BBDFEDDC', '71BEF2DC' },
         evolve_key = 'c_fnwk_bluebolt_thunder_dc',
         extra = {
             avoid_hand = 'Flush',
@@ -22,7 +23,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { 
         vars = {
             card.ability.extra.avoid_hand,
@@ -37,7 +38,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card)
+                G.FUNCS.evolve_stand(card, localize('k_stand_converted'))
                 return true 
             end 
         }))

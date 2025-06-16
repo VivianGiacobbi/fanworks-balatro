@@ -7,6 +7,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
+        vertex_scale_mod = 71/474,
         aura_colors = { 'CBD4E7DC', 'FD5F55DC' },
         evolved = true,
         extra = {
@@ -15,7 +16,6 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_EvolvedRarity',
-    vertex_scale_mod = 71/474,
     soul_pos = {x = 2, y = 0},
     fanwork = 'bone',
     in_progress = true,
@@ -122,7 +122,7 @@ function consumInfo.draw(self, card, layer)
         return
     end
 
-    G.SHADERS['fnwk_basic']:send("vertex_scale_mod", card.config.center.vertex_scale_mod)
+    G.SHADERS['fnwk_basic']:send("vertex_scale_mod", card.config.center.config.vertex_scale_mod)
     card.children.bone_king_base:draw_shader('fnwk_basic')
 end
 

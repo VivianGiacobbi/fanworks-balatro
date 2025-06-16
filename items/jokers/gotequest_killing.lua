@@ -38,15 +38,11 @@ function jokerInfo.calculate(self, card, context)
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
         end
         card.ability.extra.x_mult = math.min(card.ability.extra.x_mult_max, card.ability.extra.x_mult)
-        G.E_MANAGER:add_event(Event({
+        return {
             func = function()
                 card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
                 card:set_sprites(card.config.center)
-                card:juice_up()
-                return true
-             end
-        }))
-        return {
+            end,
             message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
             card = card,
         }
@@ -55,15 +51,11 @@ function jokerInfo.calculate(self, card, context)
     if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
         if card.ability.extra.x_mult > 1 then
             card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
-            G.E_MANAGER:add_event(Event({
+            return {
                 func = function()
                     card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
                     card:set_sprites(card.config.center)
-                    card:juice_up()
-                    return true
-                end
-            }))
-            return {
+                end,
                 card = card,
                 message = localize{type='variable',key='a_xmult_minus',vars={card.ability.extra.x_mult_mod}},
             }

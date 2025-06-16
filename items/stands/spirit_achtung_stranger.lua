@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'A Stranger I Remain',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'CDE3F0DC', 'EC9BEEDC' },
         evolved = true,
         extra = {
@@ -13,16 +13,14 @@ local consumInfo = {
     },
     cost = 4,
     rarity = 'arrow_EvolvedRarity',
-    alerted = true,
     hasSoul = true,
     fanwork = 'spirit',
-    in_progress = true,
     blueprint_compat = true,
     dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.wario }}
     return { vars = { card.ability.extra.x_mult, card.ability.extra.non_hand, card.ability.extra.hand_gain }}
 end
 
