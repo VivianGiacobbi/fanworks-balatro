@@ -38,7 +38,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card, localize('k_stand_converted'))
+                G.FUNCS.evolve_stand(card, localize('k_stand_advance'))
                 return true 
             end 
         }))

@@ -372,8 +372,8 @@ return {
 			k_mcr_popped = 'Popped!',
 			k_farewell = 'Farewell!',
 			k_grafted = 'Grafted!',
-			k_stand_converted = 'Converted!',
-			k_stand_reverted = 'Reverted!',
+			k_stand_advance = 'Advanced!',
+			k_stand_revert = 'Reverted!',
 			k_hgm_cosmic_draw = 'Draw!',
 			k_misirlou_final = 'Final Hand?',
 			k_tragic_rankdown = 'Rank Down!',
@@ -1831,7 +1831,7 @@ return {
 					"{C:attention}same suit{} as the {C:attention}first scoring card{}",
 					"gives {X:mult,C:white}X#2#{} Mult",
 					"{s:0.1} {}",
-					"{C:stand}Converts{} after {C:attention}#3#{} procs",
+					"{C:stand}Advances{} after {C:attention}#3#{} procs",
 				}
 			},
 			c_fnwk_bluebolt_thunder_dc = {

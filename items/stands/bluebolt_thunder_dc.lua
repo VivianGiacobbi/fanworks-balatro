@@ -62,7 +62,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card, localize('k_stand_reverted'))
+                G.FUNCS.evolve_stand(card, localize('k_stand_revert'))
                 card.ability.evolved = false
                 return true 
             end 
