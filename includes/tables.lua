@@ -1,15 +1,3 @@
---- Table containing all names of people who contributed to the mod, used in crediting
-G.fnwk_mod_team = {
-	['gote'] = "BarrierTrio/Gote",
-	['cejai'] = "SagaciousCejai",
-	['keku'] = "Keku",
-	['winter'] = "TheWinterComet",
-	['cauthen'] = "Cauthen Currie",
-	['stup'] = 'Stupisms',
-	['reda'] = 'Redastrin',
-
-}
-
 -- colors used for dynamic badges, used to be in localization file which is a bad place to put hex codes -keku
 G.fnwk_badge_colours = {
 	-- badge colors for jojo parts
@@ -175,6 +163,7 @@ G.fnwk_credits = {
     android = 'sadlyandroid',
     cejai = 'SagaciousCejai',
     cringe = 'Stupisms',
+    wario = 'MightyKingWario',
     winter = 'TheWinterComet',
     tos = 'TOS',
     araki = 'Hirohiko Araki',
@@ -204,4 +193,33 @@ G.fnwk_reskin_credits = {
     c_moon = { "BarrierTrio/Gote" },
     c_judgement = { "BarrierTrio/Gote" },
     c_world = { "sadlyandroid", "BarrierTrio/Gote" },
+}
+
+G.fnwk_valid_scaling_keys = {
+	['mult'] = true,
+	['h_mult'] = true,
+	['h_x_mult'] = true,
+	['h_dollars'] = true,
+	['p_dollars'] = true,
+	['t_mult'] = true,
+	['t_chips'] = true,
+	['x_mult'] = true,
+	['h_chips'] = true,
+	['x_chips'] = true,
+	['h_x_chips'] = true,
+	['h_size'] = true,
+	['d_size'] = true,
+	['extra_value'] = true,
+	['perma_bonus'] = true,
+	['perma_x_chips'] = true,
+	['perma_mult'] = true,
+	['perma_x_mult'] = true,
+	['perma_h_chips'] = true,
+	['perma_h_mult'] = true,
+	['perma_h_x_mult'] = true,
+	['perma_p_dollars'] = true,
+	['perma_h_dollars'] = true,
+	['caino_xmult'] = true,
+	['yorick_discards'] = true,
+	['invis_rounds'] = true
 }

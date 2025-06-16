@@ -11,6 +11,7 @@ SMODS.Shader({ key = 'mod_background', path = 'mod_background.fs'})
 SMODS.Shader({ key = 'rotten_graft', path = 'rotten_graft.fs'})
 SMODS.Shader({ key = 'stand_notorious', path = 'stand_notorious.fs'})
 SMODS.Shader({ key = 'stand_disturbia', path = 'stand_disturbia.fs'})
+SMODS.Shader({ key = 'stand_insane', path = 'stand_insane.fs'})
 
 SMODS.DrawStep {
     key = 'revived',
@@ -112,6 +113,10 @@ SMODS.DrawStep:take_ownership('center', {
             -- Don't render base dissolve shader.
         elseif self.config.center.key == 'c_fnwk_streetlight_notorious' and self.children.noto_layer then
             self.children.noto_layer:draw_shader('fnwk_stand_notorious', nil, nil, nil, self.children.center)
+        elseif self.config.center.key == 'c_fnwk_bluebolt_insane' then
+            local hue_mod = math.rad(G.TIMERS.REAL % 1 * 360)
+            G.SHADERS['fnwk_stand_insane']:send('hue_mod', hue_mod)
+            self.children.center:draw_shader('fnwk_stand_insane')
         elseif not self.greyed then
             self.children.center:draw_shader('dissolve')
         end
@@ -202,7 +207,7 @@ SMODS.DrawStep:take_ownership('arrow_stand_mask', {
                 G.SHADERS['arrow_stand_mask']:send("scale_mod",scale_mod)
                 G.SHADERS['arrow_stand_mask']:send("rotate_mod",rotate_mod)
                 G.SHADERS['arrow_stand_mask']:send("output_scale", 1)
-                G.SHADERS['arrow_stand_mask']:send("vertex_scale_mod", self.config.center.vertex_scale_mod or 1.0)
+                G.SHADERS['arrow_stand_mask']:send("vertex_scale_mod", self.config.center.config.vertex_scale_mod or 1.0)
                 
                 self.children.floating_sprite:draw_shader('arrow_stand_mask')
             elseif self.ability.fnwk_disturbia_fake then

@@ -24,14 +24,20 @@ function Blind:init(X, Y, W, H, extra_source)
 	return ref_blind_init(self, X, Y, W, H)
 end
 
-
 function Blind:extra_set_blind(blind, reset, silent)
 	if not reset then
 		self.config.blind = blind
 		self.name = blind.name
 		self.debuff = blind.debuff
 		self.dollars = G.GAME.blind.dollars
-		self.mult = blind.mult / 2
+		if self.config.blind.key == 'bl_fnwk_creek' then
+			local mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
+			self.mult = mult / 2
+			G.GAME.modifiers.fnwk_hide_blind_score = true
+		else
+			self.mult = blind.mult / 2
+		end
+		
 		self.disabled = false
 		self.discards_sub = nil
 		self.hands_sub = nil
@@ -134,8 +140,16 @@ function Blind:set_blind(blind, reset, silent)
 		return
 	end
 
+	G.GAME.modifiers.fnwk_hide_blind_score = nil
 	local ret = ref_blind_set(self, blind, reset, silent)
 	self.main_blind_disabled = nil
+
+	if blind and blind.key == 'bl_fnwk_creek' then
+		self.mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
+		self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling
+        self.chip_text = number_format(self.chips)
+		G.GAME.modifiers.fnwk_hide_blind_score = true
+	end
 	
 	if not (blind or reset) then return ret end
 
@@ -645,7 +659,14 @@ end
 local ref_blind_load = Blind.load
 function Blind:load(blindTable)
 	if not self.fnwk_extra_blind then
-		return ref_blind_load(self, blindTable)
+		local ret = ref_blind_load(self, blindTable)
+			
+		local obj = self.config.blind
+		if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
+			obj:fnwk_blind_load()
+		end
+
+		return ret
 	end
 
 	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}  
@@ -662,4 +683,19 @@ function Blind:load(blindTable)
     self.triggered = blindTable.triggered
 
 	self:set_text()
+end
+
+
+
+
+
+---------------------------
+--------------------------- Check for card added behavior
+---------------------------
+
+function Blind:fnwk_card_added(card)
+	local obj = self.config.blind
+	if obj.fnwk_card_added and type(obj.fnwk_card_added) == 'function' then
+        obj:fnwk_card_added(card)
+	end
 end

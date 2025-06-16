@@ -216,6 +216,7 @@ end
 ---------------------------
 --------------------------- pool modification
 ---------------------------
+
 local ref_current_pool = get_current_pool
 function get_current_pool(_type, _rarity, _legendary, _append)
 	local pool, pool_key = ref_current_pool(_type, _rarity, _legendary, _append)
@@ -344,4 +345,86 @@ function localize(args, misc_cat)
   	end
 
 	return ref_localize(args, misc_cat)
+end
+
+---------------------------
+--------------------------- pool modification
+---------------------------
+
+local ref_save_run = save_run
+function save_run()
+	if G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt' then
+		fnwk_reset_blind_proxies()
+		local ret = ref_save_run()
+		fnwk_set_blind_proxies()
+		return ret
+	end
+
+	return ref_save_run()
+end
+
+
+function fnwk_single_blind_proxy(joker)
+    local ability_orig = joker.ability
+    local extra_orig = type(joker.ability.extra) == 'table' and joker.ability.extra or nil
+
+    G.GAME.blind.fnwk_table_refs[joker.unique_val] = {
+        ability = ability_orig,
+        extra = extra_orig
+    }
+
+    joker.ability = {}
+    if extra_orig then
+        joker.ability.extra = {}
+        setmetatable(joker.ability.extra, {
+            __newindex = function (t,k,v) end,
+
+            __index = function (t,k)
+                return extra_orig[k] 
+            end
+        })
+    end
+
+    setmetatable(joker.ability, {
+        __newindex = function (t,k,v) 
+            if (k == 'extra' and type(ability_orig[k]) == 'table') or not G.fnwk_valid_scaling_keys[k] then 
+				ability_orig[k] = v
+			end
+        end,
+
+        __index = function (t,k)
+            return ability_orig[k]
+        end
+    })
+end
+
+function fnwk_set_blind_proxies()
+    G.GAME.blind.fnwk_table_refs = {}
+    for _, v in ipairs(G.jokers.cards) do
+        fnwk_single_blind_proxy(v)
+    end
+end
+
+function fnwk_reset_blind_proxies()
+    if not G.GAME.blind.fnwk_table_refs then return end
+
+    for k, v in pairs(G.GAME.blind.fnwk_table_refs) do
+        local find_joker = nil
+        for _, joker in ipairs(G.jokers.cards) do
+            if joker.unique_val == k then
+                find_joker = joker
+            end
+        end
+
+        if find_joker then
+            find_joker.ability = v.ability
+            setmetatable(find_joker.ability, nil)
+            if type(v.extra) == 'table' then
+                find_joker.ability.extra = v.extra
+                setmetatable(find_joker.ability.extra, nil)
+            end
+        end
+    end
+
+    G.GAME.blind.fnwk_table_ref = nil
 end

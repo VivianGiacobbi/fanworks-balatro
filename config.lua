@@ -6,7 +6,7 @@ return {
 	['enableWipStands'] = false,
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
-	['enableBlinds'] = false,
+	['enableBlinds'] = true,
 	['enableBlindReskins'] = true,
 	['enableChallenges'] = true,
 	['enableAchievements'] = false,

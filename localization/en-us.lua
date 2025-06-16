@@ -296,8 +296,8 @@ return {
 			fnwk_options_enableVouchers = "Vouchers",
 			fnwk_options_enableConsumables = "Consumables",
 			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
+			fnwk_options_enableBlinds = "Boss Blinds",
 			fnwk_options_enableBlindReskins = "Boss Blind Reskins",
-			fnwk_options_enableBosses = "Boss Blinds",
 			fnwk_options_enableSkins = "Playing Card Skins",
 			fnwk_options_enableChallenges = "Challenges",
 			fnwk_options_enableTrophies = "Fanworks Achievements",
@@ -366,13 +366,14 @@ return {
 			k_crystal = 'Changed timelines...',
 			k_valentino = 'Autocannibalized!',
 
-			-- stand related strings
+			k_stand_advanced = 'Advanced Stand',
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
 			k_mcr_popped = 'Popped!',
 			k_farewell = 'Farewell!',
 			k_grafted = 'Grafted!',
-			k_stand_devolved = 'Devolved!',
+			k_stand_converted = 'Converted!',
+			k_stand_reverted = 'Reverted!',
 			k_hgm_cosmic_draw = 'Draw!',
 			k_misirlou_final = 'Final Hand?',
 			k_tragic_rankdown = 'Rank Down!',
@@ -707,6 +708,28 @@ return {
                 text = {
                     "Forces {C:attention}1{} card to",
                     "always be selected"
+                }
+            },
+
+			bl_fnwk_bolt = {
+                name = "The Bolt",
+                text = {
+                    "Scaling Jokers",
+					"{C:attention}don't scale{}"
+                }
+            },
+			bl_fnwk_rot = {
+                name = "The Rot",
+                text = {
+                    "Consumables can't",
+					"be {C:attention}used{}"
+                }
+            },
+			bl_fnwk_creek = {
+                name = "The Creek",
+                text = {
+                    "Required score",
+					"is {C:attention}hidden{}"
                 }
             }
         },

@@ -8,7 +8,7 @@ local consumInfo = {
         evolved = true,
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'arrow_EvolvedRarity',
     hasSoul = true,
     fanwork = 'jojopolis',
     blueprint_compat = true,

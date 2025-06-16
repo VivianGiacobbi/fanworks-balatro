@@ -3,8 +3,8 @@ local consumInfo = {
     name = 'My Chemical Romance',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
+        stand_mask = true,
+        aura_colors = { 'EAB9E0DC', 'EF5375DC' },
         extra = {
             stored_enhance = nil,
             stored_seal = nil,
@@ -21,7 +21,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     local num_display = (card.ability.extra.stored_enhance and 1 or 0) + (card.ability.extra.stored_seal and 1 or 0) + (card.ability.extra.stored_edition and 1 or 0)
     
     local stored_enhance = card.ability.extra.stored_enhance and localize({type = 'name_text', key = card.ability.extra.stored_enhance, set = 'Enhanced'}) or nil

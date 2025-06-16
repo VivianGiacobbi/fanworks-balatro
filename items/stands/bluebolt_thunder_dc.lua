@@ -2,17 +2,17 @@ local consumInfo = {
     name = 'Thunderstruck D/C',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
-        aura_colors = { '3EA8F3DC', '009CFDDC' },
+        stand_mask = true,
+        stand_shadow = 0,
+        aura_colors = { 'BBDFEDDC', '71BEF2DC' },
         evolve_key = 'c_fnwk_bluebolt_thunder',
-        evolved = true,
         extra = {
             destroy_hand = 'Flush',
             x_mult = 5,
         }
     },
     cost = 8,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'bluebolt',
     in_progress = true,
@@ -20,8 +20,12 @@ local consumInfo = {
     dependencies = {'ArrowAPI'},
 }
 
+function consumInfo.set_card_type_badge(self, card, badges)
+    badges[1] = create_badge(localize('k_stand_advanced'), get_type_colour(self or card.config, card), nil, 1.2)
+end
+
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = {card.ability.extra.destroy_hand, card.ability.extra.x_mult}}
 end
 
@@ -58,7 +62,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card, localize('k_stand_devolved'))
+                G.FUNCS.evolve_stand(card, localize('k_stand_reverted'))
                 card.ability.evolved = false
                 return true 
             end 

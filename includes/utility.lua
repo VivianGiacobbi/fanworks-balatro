@@ -118,7 +118,7 @@ function FnwkLoadItem(file_key, item_type)
 				ref_type_badge = info.set_card_type_badge
 			end
 			function info.set_card_type_badge(self, card, badges)
-				badges[1] = create_badge(localize('k_arrow_evolved'), get_type_colour(self or card.config, card), nil, 1.2)
+				badges[1] = create_badge(localize('k_evolved_stand'), get_type_colour(self or card.config, card), nil, 1.2)
 				ref_type_badge(self, card)
 			end
 		end

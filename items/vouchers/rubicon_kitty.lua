@@ -1,6 +1,6 @@
 SMODS.Edition:take_ownership('e_negative', {
         get_weight = function(self)
-            return G.GAME.negative_rate * self.weight
+            return (G.GAME.negative_rate or 1) * self.weight
         end,
     }, true
 )

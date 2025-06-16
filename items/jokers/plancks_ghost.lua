@@ -1,32 +1,3 @@
-local valid_keys = {
-	['mult'] = true,
-	['h_mult'] = true,
-	['h_x_mult'] = true,
-	['h_dollars'] = true,
-	['p_dollars'] = true,
-	['t_mult'] = true,
-	['t_chips'] = true,
-	['x_mult'] = true,
-	['h_chips'] = true,
-	['x_chips'] = true,
-	['h_x_chips'] = true,
-	['h_size'] = true,
-	['d_size'] = true,
-	['extra_value'] = true,
-	['perma_bonus'] = true,
-	['perma_x_chips'] = true,
-	['perma_mult'] = true,
-	['perma_x_mult'] = true,
-	['perma_h_chips'] = true,
-	['perma_h_mult'] = true,
-	['perma_h_x_mult'] = true,
-	['perma_p_dollars'] = true,
-	['perma_h_dollars'] = true,
-	['caino_xmult'] = true,
-	['yorick_discards'] = true,
-	['invis_rounds'] = true
-}
-
 local jokerInfo = {
 	name = 'Ghost Girl',
 	config = {
@@ -103,7 +74,7 @@ function jokerInfo.calculate(self, card, context)
 		-- single level compare for valid keys in the main ability table
 		local changed = false
 		for k,v in pairs(context.card.ability) do
-			if valid_keys[k] and v ~= context.card.config.center.config[k] then
+			if G.fnwk_valid_scaling_keys[k] and v ~= context.card.config.center.config[k] then
 				changed = true
 				break
 			end
@@ -118,7 +89,7 @@ function jokerInfo.calculate(self, card, context)
 		-- store relevant ability and extra values
 		local saved_ability = {}
 		for k, v in pairs(context.card.ability) do
-			if valid_keys[k] then saved_ability[k] = v end
+			if G.fnwk_valid_scaling_keys[k] then saved_ability[k] = v end
 		end
 		saved_ability.extra = FnwkRecursiveTableMod(context.card.ability.extra)
 
