@@ -112,13 +112,13 @@ function jokerInfo.calculate(self, card, context)
 				context.card.ability.make_vortex = true
 				
 				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
-				self.dissolve = 0
-				self.dissolve_colours = {G.C.WHITE}
+				card.dissolve = 0
+				context.card.dissolve_colours = {G.C.WHITE}
 
 				local start_time = G.TIMERS.TOTAL
 				local percent = 0
 				play_sound('explosion_buildup1')
-				self.juice = {
+				card.juice = {
 					scale = 0,
 					r = 0,
 					handled_elsewhere = true,
@@ -132,18 +132,18 @@ function jokerInfo.calculate(self, card, context)
 					scale = 0.2,
 					speed = 2,
 					lifespan = 0.2*explode_time,
-					attach = self,
-					colours = self.dissolve_colours,
+					attach = context.card,
+					colours = context.card.dissolve_colours,
 					fill = true
 				})
 
 				G.E_MANAGER:add_event(Event({
 					blockable = false,
 					func = (function()
-							if self.juice then 
+							if context.card.juice then 
 								percent = (G.TIMERS.TOTAL - start_time)/explode_time
-								self.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
-								self.juice.scale = percent*0.15
+								context.card.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
+								context.card.juice.scale = percent*0.15
 							end
 							if G.TIMERS.TOTAL - start_time > 1.5*explode_time then return true end
 						end)
@@ -152,7 +152,7 @@ function jokerInfo.calculate(self, card, context)
 				G.E_MANAGER:add_event(Event({
 					trigger = 'ease',
 					blockable = false,
-					ref_table = self,
+					ref_table = context.card,
 					ref_value = 'dissolve',
 					ease_to = 0.3,
 					delay =  0.9*explode_time,
@@ -164,9 +164,9 @@ function jokerInfo.calculate(self, card, context)
 					delay = 1.6*explode_time,
 					func = (function() 
 						if G.TIMERS.TOTAL - start_time > 1.55*explode_time then  
-							self.dissolve = 0
+							context.card.dissolve = 0
 							percent = 0
-							self.juice = {
+							context.card.juice = {
 								scale = 0,
 								r = 0,
 								handled_elsewhere = true,
