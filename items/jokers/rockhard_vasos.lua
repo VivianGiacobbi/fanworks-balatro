@@ -48,7 +48,7 @@ end
 function jokerInfo.remove_from_deck(self, card, from_debuff)
 	local stand = G.FUNCS.get_leftmost_stand()
 	local mod = card.ability.extra.base + (stand and card.ability.extra.stand_mod or 0)
-	G.consumeables:change_size(-card.ability.extra.base)
+	G.consumeables:change_size(-mod)
 	card.ability.fnwk_vasos_mod = card.ability.fnwk_vasos_mod - mod
 end
 
