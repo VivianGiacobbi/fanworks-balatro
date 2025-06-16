@@ -1831,7 +1831,7 @@ return {
 					"{C:attention}same suit{} as the {C:attention}first scoring card{}",
 					"gives {X:mult,C:white}X#2#{} Mult",
 					"{s:0.1} {}",
-					"{C:stand}Evolves{} after {C:attention}#3#{} procs",
+					"{C:stand}Converts{} after {C:attention}#3#{} procs",
 				}
 			},
 			c_fnwk_bluebolt_thunder_dc = {
@@ -1844,7 +1844,7 @@ return {
 					"all scoring cards give {X:mult,C:white}X#2#{} Mult",
 					"and are {C:attention}destroyed{} after scoring",
 					"{s:0.1} {}",
-					"{C:stand}Devolves{} after this effect activates",
+					"{C:stand}Reverts{} after this effect activates",
 				}
 			},
 			c_fnwk_bluebolt_insane = {
