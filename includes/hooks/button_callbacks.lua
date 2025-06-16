@@ -102,6 +102,21 @@ end
 
 
 
+local ref_transform_card = G.FUNCS.transform_card
+G.FUNCS.transform_card = function(card, to_key, evolve)
+    if to_key == 'c_fnwk_bone_king_farewell' then
+        local center = G.P_CENTERS[to_key]
+        local old_soul_pos = center.soul_pos
+        center.soul_pos = nil
+        local ret = ref_transform_card(card, to_key, evolve)
+        center.soul_pos = old_soul_pos
+        return ret
+    end
+
+    return ref_transform_card(card, to_key, evolve)
+end
+
+
 
 
 ---------------------------

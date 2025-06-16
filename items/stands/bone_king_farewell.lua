@@ -2,7 +2,6 @@ SMODS.Atlas({ key = 'bone_king_farewell_overlay', path = 'stands/bone_king_farew
 
 
 local consumInfo = {
-    key = 'c_fnwk_bone_king_farewell',
     name = 'Farewell to Kings',
     set = 'Stand',
     config = {
