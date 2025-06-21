@@ -102,6 +102,12 @@ end
 
 
 
+
+
+---------------------------
+--------------------------- Farewell to Kings evolution sprites
+---------------------------
+
 local ref_transform_card = G.FUNCS.transform_card
 G.FUNCS.transform_card = function(card, to_key, evolve)
     if to_key == 'c_fnwk_bone_king_farewell' then
@@ -116,6 +122,24 @@ G.FUNCS.transform_card = function(card, to_key, evolve)
     return ref_transform_card(card, to_key, evolve)
 end
 
+
+
+
+
+---------------------------
+--------------------------- Update debuff text for bosses
+---------------------------
+
+G.FUNCS.update_blind_debuff_text = function(e)
+    if not e.config.object then return end
+    local new_str = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text()
+    if new_str ~= e.config.object.config.string[1].string then
+        e.config.object.config.string[1].string = new_str
+        e.config.object.start_pop_in = true
+        e.config.object:update_text(true)
+        e.UIBox:recalculate()
+    end
+end
 
 
 
@@ -201,5 +225,5 @@ function G.FUNCS.fnwk_start_rom(e)
 		y = 0,
 	}
 	
-	G.EMU:start_nes(rom, nil, start_pos)
+	G.EMU:start_nes(rom, nil, nil, start_pos)
 end

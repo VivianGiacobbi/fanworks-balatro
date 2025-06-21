@@ -134,7 +134,7 @@ times = 1
 target = "game.lua"
 pattern = '''{n=G.UIT.O, config={object = DynaText({scale = 0.6, string = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text(), maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6})}},'''
 position = "at"
-payload = '''{n=G.UIT.O, config={object = DynaText({scale = 0.6, string = dyna_strings, maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6, pop_delay = 1, min_cycle_time = 3})}},'''
+payload = '''{n=G.UIT.O, config={func = "update_blind_debuff_text", object = DynaText({scale = 0.6, string = dyna_strings, maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6, pop_delay = 1, min_cycle_time = 3})}},'''
 match_indent = true
 times = 1
 

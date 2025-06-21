@@ -36,11 +36,12 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     local cabinet_atlas = G.ASSET_ATLAS['fnwk_cabinet_overlay']
     local screen_res = { x = love.graphics.getWidth(), y = love.graphics.getHeight() }
     local scale = screen_res.y * 0.75 / width
-    local in_x_pos = screen_res.x / 2 - width * scale / 2
-    local in_y_pos = screen_res.y / 2 - height * scale / 2
+    local in_x_pos = screen_res.x / 2 - width * scale * 0.995 / 2
+    local in_y_pos = screen_res.y / 2 - height * scale * 1.165 / 2
     local out_x_pos = screen_res.x / 2 - cabinet_atlas.px * scale / 2
     local out_y_pos = screen_res.y / 2 - cabinet_atlas.py * scale / 2
 
+    --[[
     if G.EMU.game.timers.startup_timer and G.EMU.game.timers.startup_timer.time > 0 then
         local max_lerp = (G.EMU.game.timers.startup_timer.sub_count + 1) / G.EMU.game.timers.startup_timer.subtimers
         local lerp_val = G.EMU.game.timers.startup_timer.sub_time /  G.EMU.game.timers.startup_timer.sub_limit * max_lerp
@@ -50,6 +51,7 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
         out_y_pos = math.fnwk_lerp(G.EMU.game.start_pos.y, out_y_pos, lerp_val)
         scale = math.fnwk_lerp(0, scale, lerp_val)
     end
+    --]]
 
     G.SHADERS['CRT']:send('distortion_fac', {1.0 + 0.1, 1.0 + 0.1})
     G.SHADERS['CRT']:send('scale_fac', {0.92, 0.92})
@@ -68,7 +70,7 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     love.graphics.draw(
         G.EMU.video.image,
         in_x_pos,
-        in_y_pos + 1,
+        in_y_pos,
         0,
         scale,
         scale
@@ -77,7 +79,7 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     love.graphics.setShader()
     love.graphics.draw(
         cabinet_atlas.image,
-        out_x_pos + 10,
+        out_x_pos,
         out_y_pos,
         0,
         scale,

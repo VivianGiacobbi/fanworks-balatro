@@ -287,19 +287,6 @@ end
 
 local ref_debuff_text = Blind.get_loc_debuff_text
 function Blind:get_loc_debuff_text()
-	local enabled = false
-	for _, v in ipairs(SMODS.find_card('c_fnwk_sunshine_downward')) do
-		if not v.debuff then
-			enabled = true
-			break
-		end
-	end
-	if enabled then
-        local most_played = fnwk_get_most_played_hand()
-        local loc_text = localize(most_played, 'poker_hands')
-        return localize{type='variable',key='downward_warn_text',vars={loc_text}}
-	end
-
 	local old_main_blind = G.GAME.blind
 	if self.fnwk_extra_blind then 
 		G.GAME.blind = self
@@ -480,20 +467,6 @@ end
 
 local ref_blind_hand = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)
-	local enabled = false
-	for _, v in ipairs(SMODS.find_card('c_fnwk_sunshine_downward')) do
-		if not v.debuff then
-			enabled = true
-			break
-		end
-	end
-	if enabled then
-        local most_played = fnwk_get_most_played_hand()
-		if handname ~= most_played then
-			return true
-		end		
-	end 
-
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
 	local ret = ref_blind_hand(self, cards, hand, handname, check)
 	local extra_ret = nil

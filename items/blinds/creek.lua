@@ -53,19 +53,22 @@ local function set_blind_score_visible(bool)
 end
 
 function blindInfo.set_blind(self)
+    G.GAME.blind.triggered = true
     set_blind_score_visible(false)
 end
 
 function blindInfo.disable(self)
+    G.GAME.blind.triggered = false
     set_blind_score_visible(true)
 end
 
 function blindInfo.defeat(self)
+    G.GAME.blind.triggered = false
     set_blind_score_visible(true)
 end
 
 function blindInfo.fnwk_blind_load(self)
-    sendDebugMessage('setting visibility')
+    G.GAME.blind.triggered = true
     set_blind_score_visible(false)
 end
 

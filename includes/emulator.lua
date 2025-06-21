@@ -32,7 +32,7 @@ G.EMU = {
         }
     },
     
-    -- frame data to render, expects NTSC framerate
+    -- frame data to renders, expects NTSC framerate
     frames = {
         waiting = 0,
         fps = 59.94,
@@ -56,19 +56,19 @@ G.EMU = {
 
     -- sets up audio roughly equal to the NES's mono sound samples
     audio = {},
-    init_audio = function(self, samplerate, bits, channels)
+    init_audio = function(self, samplerate, bits, channels, framerate)
         
         if not samplerate then samplerate = 44100 end
         if not bits then bits = 16 end
         if not channels then channels = 1 end
 
         self.audio = {
-            sound = love.sound.newSoundData(samplerate / 60 + 1, samplerate, bits, 1),
+            sound = love.sound.newSoundData(samplerate / (framerate or 60) + 1, samplerate, bits, 1),
             QS = love.audio.newQueueableSource(samplerate, bits, 1),
         }
     end,
 
-    start_nes = function(self, game_str, control_card, start_pos)
+    start_nes = function(self, game_str, control_card, framerate, start_pos)
         if self.running then
             self:stop_nes()
         end
@@ -95,6 +95,7 @@ G.EMU = {
             delay = 0.1,
         }
         self.control_card = control_card
+        self.frames.fps = framerate or 59.94
         self.game.start_pos = start_pos
         self.game.run_state = 'startup'
         G.EMULATOR_RUNNING = true
@@ -108,12 +109,13 @@ G.EMU = {
         self.control_card = nil
         self.game.id = 'none'
         self.running = false
+        self.nes:reset()
         self.nes = nil
         G.EMULATOR_RUNNING = false
     end
 }
 
--- bindings for love to embed inpit
+-- bindings for love to embed input
 local ref_key_pressed = love.keypressed
 function love.keypressed(key)
 
@@ -195,16 +197,22 @@ function love.update(dt)
         end
 
         if G.EMU.game.run_state == 'startup' then
-            G.EMU.rawn = nil
+            G.EMU.drawn = nil
             return
         end
         
         G.EMU.frames.waiting = G.EMU.frames.waiting + (mod_dt * G.EMU.frames.fps) / G.SETTINGS.GAMESPEED
         while G.EMU.frames.waiting > 1 do
-            for i, v in ipairs(G.EMU.input.events) do
-                -- v[1] is the function key, I.E. keyup/keydown
-                -- v[2] is the Pad button key, whose value is an integer from 1-7 (excluding select)
-                G.EMU.nes.pads[v[1]](G.EMU.nes.pads, 1, v[2])
+            if G.EMU.game.run_state == 'shutdown' then
+                for _, v in ipairs(G.EMU.input.events) do
+                    G.EMU.nes.pads.pads[1]:reset()
+                end
+            else
+                for _, v in ipairs(G.EMU.input.events) do
+                    -- v[1] is the function key, I.E. keyup/keydown
+                    -- v[2] is the Pad button key, whose value is an integer from 1-7 (excluding select)
+                    G.EMU.nes.pads[v[1]](G.EMU.nes.pads, 1, v[2])
+                end
             end
             G.EMU.input.events = {}
             G.EMU.nes:run_once()

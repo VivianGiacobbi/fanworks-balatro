@@ -18,6 +18,23 @@ end
 --------------------------- Fibonacci calculation
 ---------------------------
 
+local valid_fib_cards = {
+	'j_fnwk_plancks_jokestar',
+	'c_fnwk_plancks_moon',
+	'c_jojobal_steel_tusk_4',
+}
+
+function fnwk_has_valid_fib_card()
+	for _, v in ipairs(valid_fib_cards) do
+		if next(SMODS.find_card(v)) then
+			return true
+		end
+	end
+
+	return false
+end
+
+
 local function is_perfect_square(x)
 	local sqrt = math.sqrt(x)
 	return sqrt^2 == x
@@ -99,6 +116,8 @@ function fnwk_get_most_played_hand()
 			hand = k
 		end
 	end
+
+	if played == 0 then hand = nil end
 
 	return hand, played
 end
