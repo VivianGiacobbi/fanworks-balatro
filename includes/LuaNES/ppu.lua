@@ -1,8 +1,7 @@
-local band, bor, bxor, bnot, lshift, rshift = bit.band, bit.bor, bit.bxor, bit.bnot, bit.lshift, bit.rshift
-local map, rotatePositiveIdx, nthBitIsSet, nthBitIsSetInt, range =
+local band, bor, bxor, lshift, rshift = bit.band, bit.bor, bit.bxor, bit.lshift, bit.rshift
+local map, rotatePositiveIdx, nthBitIsSetInt, range =
     UTILS.map,
     UTILS.rotatePositiveIdx,
-    UTILS.nthBitIsSet,
     UTILS.nthBitIsSetInt,
     UTILS.range
 

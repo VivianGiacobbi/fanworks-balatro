@@ -531,14 +531,14 @@ return {
                 name = "The Cargo",
                 text = {
                     "{C:green}#1# in 7{} cards get",
-                    "drawn face down"
+                    "drawn {C:attention}face down{}"
                 }
             },
             bl_arm = {
                 name = "The Blade",
                 text = {
                     "Decrease {C:planet}level{} of",
-                    "played {C:attention}poker{} hand"
+                    "played {C:attention}poker hand{}"
                 }
             },
             bl_psychic = {
@@ -705,6 +705,13 @@ return {
                     "always be selected"
                 }
             },
+			bl_fnwk_venus = {
+                name = "The Venus",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+					"{C:attention}debuff{} each card"
+                }
+            },
 			bl_fnwk_goat = {
                 name = "The Goat",
                 text = {
@@ -738,6 +745,20 @@ return {
                 text = {
                     "Held in hand effects",
 					"are {C:attention}disabled{}"
+                }
+            },
+			bl_fnwk_final_moe = {
+                name = "Multicolor MOE",
+                text = {
+                    "{C:attention}#1#{} random {C:attention}Boss Blind{} effects",
+                }
+            },
+			bl_fnwk_final_moe_alt = {
+                name = "Multicolor MOE",
+                text = {
+                    "{C:attention}#1#{}",
+					"{C:attention}#2#{}",
+					"{C:attention}#3#{}",
                 }
             }
         },
@@ -836,8 +857,11 @@ return {
 			j_fnwk_streetlight_cabinet = {
 				name = "Cabinet Man",
 				text = {
-					"Play a {C:attention}game{},",
-					"win a {C:attention}prize{}",
+					"{C:inactive,s:0.9}Play a{} {C:attention,s:0.9}game{}{C:inactive,s:0.9}, win a{} {C:dark_edition,s:0.9}prize{}",
+					"{s:0.1} {}",
+					"Earn {C:money}$#1#{} if played hand",
+					"beats your {C:attention}high score{}",
+					"{C:inactive}(Currently{} {C:attention}#2#{} {C:inactive}Chips){}"
 				},
 				unlock = {
 					"Score {C:attention,E:1}#1#{}",

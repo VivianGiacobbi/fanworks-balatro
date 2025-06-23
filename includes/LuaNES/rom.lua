@@ -425,7 +425,7 @@ function MMC3:new(...)
 end
 
 function MMC3:init(rev) -- rev = :A or :B or :C
-    rev = rev or "B"
+    rev = rev or "A"
     self.persistant = rev ~= "A"
 
     local new_banks = { {} }

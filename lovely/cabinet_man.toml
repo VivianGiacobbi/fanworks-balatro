@@ -36,22 +36,39 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
     local cabinet_atlas = G.ASSET_ATLAS['fnwk_cabinet_overlay']
     local screen_res = { x = love.graphics.getWidth(), y = love.graphics.getHeight() }
     local scale = screen_res.y * 0.75 / width
-    local in_x_pos = screen_res.x / 2 - width * scale * 0.995 / 2
-    local in_y_pos = screen_res.y / 2 - height * scale * 1.165 / 2
-    local out_x_pos = screen_res.x / 2 - cabinet_atlas.px * scale / 2
-    local out_y_pos = screen_res.y / 2 - cabinet_atlas.py * scale / 2
+    local half_res = {
+        x = screen_res.x / 2,
+        y = screen_res.y / 2
+    }
 
-    --[[
+    local scaled_atlas = {
+        x = cabinet_atlas.px * scale,
+        y = cabinet_atlas.py * scale
+    }
+    local in_x_pos = half_res.x - width * scale * 0.995 / 2
+    local in_y_pos = half_res.y - height * scale * 1.075 / 2
+    local out_x_pos = half_res.x - scaled_atlas.x / 2
+    local out_y_pos = half_res.y - scaled_atlas.y / 2
+
+    local joy_x_pos = out_x_pos + (scaled_atlas.x * 0.1875)
+    local joy_y_pos = out_y_pos + (scaled_atlas.y * 0.8)
+
+    local button_x_left = out_x_pos + (scaled_atlas.x * 0.6625)
+    local button_x_middle = out_x_pos + (scaled_atlas.x * 0.7375)
+    local button_x_right = out_x_pos + (scaled_atlas.x * 0.8125)
+
+    local button_y_up = out_y_pos + (scaled_atlas.y * 0.8333)
+    local button_y_middle = out_y_pos + (scaled_atlas.y * 0.8571)
+    local button_y_down = out_y_pos + (scaled_atlas.y * 0.8889)
+    
     if G.EMU.game.timers.startup_timer and G.EMU.game.timers.startup_timer.time > 0 then
-        local max_lerp = (G.EMU.game.timers.startup_timer.sub_count + 1) / G.EMU.game.timers.startup_timer.subtimers
-        local lerp_val = G.EMU.game.timers.startup_timer.sub_time /  G.EMU.game.timers.startup_timer.sub_limit * max_lerp
+        local lerp_val = G.EMU.game.timers.startup_timer.time / G.EMU.game.timers.startup_timer.timer_limit
         in_x_pos = math.fnwk_lerp(G.EMU.game.start_pos.x, in_x_pos, lerp_val)
         in_y_pos = math.fnwk_lerp(G.EMU.game.start_pos.y, in_y_pos, lerp_val)
         out_x_pos = math.fnwk_lerp(G.EMU.game.start_pos.x, out_x_pos, lerp_val)
         out_y_pos = math.fnwk_lerp(G.EMU.game.start_pos.y, out_y_pos, lerp_val)
         scale = math.fnwk_lerp(0, scale, lerp_val)
     end
-    --]]
 
     G.SHADERS['CRT']:send('distortion_fac', {1.0 + 0.1, 1.0 + 0.1})
     G.SHADERS['CRT']:send('scale_fac', {0.92, 0.92})
@@ -85,6 +102,64 @@ payload = '''if G.EMULATOR_RUNNING and not G.EMU.drawn then
         scale,
         scale
     )
+
+    love.graphics.setShader()
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_shadow'].image,
+        out_x_pos,
+        out_y_pos,
+        0,
+        scale,
+        scale
+    )
+
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_joystick'].image,
+        G.EMU.joy_quad,
+        joy_x_pos,
+        joy_y_pos,
+        0,
+        scale,
+        scale
+    )
+
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_button_down'].image,
+        G.EMU.button_down_quad,
+        button_x_middle,
+        button_y_down,
+        0,
+        scale,
+        scale
+    )
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_button_up'].image,
+        G.EMU.button_up_quad,
+        button_x_middle,
+        button_y_up,
+        0,
+        scale,
+        scale
+    )
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_button_left'].image,
+        G.EMU.button_left_quad,
+        button_x_left,
+        button_y_middle,
+        0,
+        scale,
+        scale
+    )
+    love.graphics.draw(
+        G.ASSET_ATLAS['fnwk_cabinet_button_right'].image,
+        G.EMU.button_right_quad,
+        button_x_right,
+        button_y_middle,
+        0,
+        scale,
+        scale
+    )
+
     G.EMU.drawn = true
 end'''
 match_indent = true

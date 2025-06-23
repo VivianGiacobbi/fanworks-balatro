@@ -49,10 +49,14 @@ if saveTable.EXTRA_BLINDS then
     for i, v in ipairs(saveTable.EXTRA_BLINDS) do
         local blind_source = nil
         if v.fnwk_extra_blind then
-            for _, card in ipairs(G.I.CARD) do
-                if card.unique_val == v.fnwk_extra_blind then
-                    blind_source = card
-                    break
+            if G.GAME.blind.in_blind and G.P_BLINDS[v.fnwk_extra_blind] then
+                blind_source = G.GAME.blind
+            else
+                for _, card in ipairs(G.I.CARD) do
+                    if card.unique_val == v.fnwk_extra_blind then
+                        blind_source = card
+                        break
+                    end
                 end
             end
         end
@@ -132,7 +136,7 @@ times = 1
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = '''{n=G.UIT.O, config={object = DynaText({scale = 0.6, string = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text(), maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6})}},'''
+pattern = '''{n=G.UIT.O, config={func = "update_blind_debuff_text", object = DynaText({scale = 0.6, string = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text(), maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6})}},'''
 position = "at"
 payload = '''{n=G.UIT.O, config={func = "update_blind_debuff_text", object = DynaText({scale = 0.6, string = dyna_strings, maxw = 9, colours = {G.C.WHITE},float = true, shadow = true, silent = true, pop_in = 0, pop_in_rate = 6, pop_delay = 1, min_cycle_time = 3})}},'''
 match_indent = true
@@ -218,11 +222,3 @@ position = "at"
 payload = '''if self.disabled or self.main_blind_disabled then self.block_play = nil; return true end'''
 match_indent = true
 times = 1
-
-
-
-
-
-
-
-

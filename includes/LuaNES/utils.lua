@@ -1,9 +1,5 @@
 local band = bit.band
-local bor = bit.bor
-local bxor = bit.bxor
-local bnot = bit.bnot
 local lshift = bit.lshift
-local rshift = bit.rshift
 
 UTILS = {}
 local UTILS = UTILS
@@ -140,7 +136,6 @@ end
 function UTILS.rotate(array, shift) -- Works for array with consecutive entries
     shift = shift or 1              -- make second arg optional, defaults to 1
 
-    local start = array[0] and 0 or 1
     local size = #array
 
     if shift > 0 then
@@ -354,8 +349,6 @@ function UTILS.print(x)
     end
     local str = UTILS.dump(x)
     f:write(str .. "\n")
-    --f:flush()
-    --p(str)
 end
 
 function UTILS.import(t)

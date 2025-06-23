@@ -129,10 +129,13 @@ end
 ---------------------------
 --------------------------- Update debuff text for bosses
 ---------------------------
-
+local ref_update_blind_debuff = G.FUNCS.update_blind_debuff_text
 G.FUNCS.update_blind_debuff_text = function(e)
     if not e.config.object then return end
+
     local new_str = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text()
+    if not new_str then return end
+    
     if new_str ~= e.config.object.config.string[1].string then
         e.config.object.config.string[1].string = new_str
         e.config.object.start_pop_in = true

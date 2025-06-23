@@ -190,7 +190,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 		return 
 	end	
 
-	fnwk_remove_extra_blind(card)
+	fnwk_remove_extra_blinds(card)
 end
 
 return jokerInfo

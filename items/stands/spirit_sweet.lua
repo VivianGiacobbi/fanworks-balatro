@@ -32,6 +32,9 @@ function consumInfo.calculate(self, card, context)
     
     if not (context.cardarea == G.consumeables and context.end_of_round and G.GAME.blind:get_type() == 'Boss') then return end
 
+    -- not gonna bother messing with multicolor moe
+    if G.GAME.blind.config.blind.key == 'bl_fnwk_final_moe' then return end
+
     return {
         func = function()
             G.FUNCS.flare_stand_aura(card, 0.5)

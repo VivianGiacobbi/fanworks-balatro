@@ -277,6 +277,8 @@ end
 
 local ref_alert_debuff = Blind.alert_debuff
 function Blind:alert_debuff(first)
+	if self.config.blind.key == 'bl_fnwk_final_moe' then return end
+
 	if not self.fnwk_extra_blind and self.main_blind_disabled then
 		self.block_play = nil
 		return
@@ -287,29 +289,30 @@ end
 
 local ref_debuff_text = Blind.get_loc_debuff_text
 function Blind:get_loc_debuff_text()
-	local old_main_blind = G.GAME.blind
-	if self.fnwk_extra_blind then 
+	if self.fnwk_extra_blind then
+		local old_main_blind = G.GAME.blind
 		G.GAME.blind = self
+		local ret = ref_debuff_text(self)
+		G.GAME.blind = old_main_blind
+		return ret
 	end
 
-	local ret = ref_debuff_text(self)
-	G.GAME.blind = old_main_blind
-    
-	return ret
+	return ref_debuff_text(self)
 end
 
 local ref_blind_wiggle = Blind.wiggle
 function Blind:wiggle()
 	if self.fnwk_extra_blind then 
 		card_eval_status_text(
-		self.fnwk_extra_blind,
-		'extra',
-		nil, nil, nil,
-		{
-			message = self.disabled and localize('k_disabled_ex') or self.loc_name,
-			colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key)
-		})
-		play_sound('generic1')
+			self.fnwk_extra_blind,
+			'extra',
+			nil, nil, nil,
+			{
+				message = self.disabled and localize('k_disabled_ex') or self.loc_name,
+				colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
+				delay = 0.8
+			})
+			play_sound('generic1')
 		return
 	end
 
@@ -325,7 +328,8 @@ function Blind:juice_up(_a, _b)
 		nil, nil, nil,
 		{
 			message = self.disabled and localize('k_disabled_ex') or self.loc_name,
-			colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key)
+			colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
+			delay = 0.8
 		})
 		play_sound('generic1')
 		return
@@ -622,7 +626,7 @@ function Blind:save()
 
 	ret.main_blind_disabled = self.main_blind_disabled
 	if self.fnwk_extra_blind then
-		ret.fnwk_extra_blind = self.fnwk_extra_blind.unique_val
+		ret.fnwk_extra_blind = self.fnwk_extra_blind:is(Blind) and self.fnwk_extra_blind.config.blind.key or self.fnwk_extra_blind.unique_val
 		ret.dollars = nil
 	end
 

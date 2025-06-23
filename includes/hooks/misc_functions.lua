@@ -148,11 +148,11 @@ end
 --------------------------- Extra blind helper functions
 ---------------------------
 
-function fnwk_create_extra_blind(blind_source, blind_type)
+function fnwk_create_extra_blind(blind_source, blind_type, skip_set_blind)
 	if not G.GAME then return end	
 
 	local new_extra_blind = Blind(0, 0, 0, 0, blind_source)
-	if G.GAME.blind.in_blind then
+	if not skip_set_blind and G.GAME.blind.in_blind then
 		new_extra_blind:extra_set_blind(blind_type)
 	else
 		new_extra_blind.config.blind = blind_type
@@ -173,11 +173,13 @@ function fnwk_create_extra_blind(blind_source, blind_type)
 	return new_extra_blind
 end
 
-function fnwk_remove_extra_blind(blind_source)
+function fnwk_remove_extra_blinds(blind_source)
 	if not G.GAME then return end
 
-	for i=1, #G.GAME.fnwk_extra_blinds do
+	local removed = false
+	for i=#G.GAME.fnwk_extra_blinds, 1, -1 do
 		if G.GAME.fnwk_extra_blinds[i].fnwk_extra_blind == blind_source then
+			sendDebugMessage('removing extra blind')
 			local extra_blind = G.GAME.fnwk_extra_blinds[i]
 			table.remove(G.GAME.fnwk_extra_blinds, i)
 
@@ -187,12 +189,11 @@ function fnwk_remove_extra_blind(blind_source)
             blind_source.blind_type = nil
 
 			extra_blind:remove()
-
-			return true
+			removed = true
 		end
 	end
 
-	return false
+	return removed
 end
 
 
