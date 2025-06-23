@@ -280,6 +280,7 @@ local items_to_load = {
 		'redrising_invisible',
 
 		-- jspec
+		'jspec_miracle',
 		'jspec_miracle_together',
 		'jspec_shout',
 	},
@@ -309,9 +310,11 @@ local items_to_load = {
 	},
 
 	Blind = {
+		'goat',
 		'bolt',
 		'rot',
-		'creek'
+		'creek',
+		'box',
 	},
 }
 

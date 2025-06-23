@@ -1,7 +1,17 @@
 
 local jokerInfo = {
     name = "Cabinet Man",
-    config = {},
+    config = {
+        extra = {
+            game_opts = {
+                {key = 'Donkey Kong (1986)', fps = 59.94},
+                {key = 'Teenage Mutant Ninja Turtles II (1989)', fps = 59.94},
+                {key = "Dragon's Lair (E) [no-dim]", fps = 50},
+            }
+        },
+        last_music_vol = 0,
+        last_sounds_vol = 0,
+    },
     rarity = 3,
     cost = 10,
     unlocked = false,
@@ -34,15 +44,15 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
     end
 
     G.FUNCS:exit_overlay_menu()
+    card.ability.last_music_vol = G.SETTINGS.SOUND.music_volume
     G.SETTINGS.SOUND.music_volume = 0
-    G.SETTINGS.SOUND.game_sounds_volume = 100
     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_cabinet_start'), colour = G.C.MONEY, delay = 0.8})
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         func = function()
             G.CONTROLLER.locks.frame = true
             G.EMU:init_video()
-            G.EMU:init_audio()
+            G.EMU:init_audio(44100, 16, 1, 50)
         
             local center = card.children.center
             local scale = G.TILESCALE * G.TILESIZE
@@ -53,8 +63,9 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
                 y = y_pos,
             }
             
-            G.EMU:start_nes('dk', card, start_pos)
-            return true 
+            local game = pseudorandom_element(card.ability.extra.game_opts)
+            G.EMU:start_nes(game.key, card, game.fps, start_pos)
+            return true
         end 
     }))
 end
@@ -75,7 +86,7 @@ function jokerInfo.update(self, card, dt)
     end
     
     -- individual win states for games
-    if G.EMU.game.id == 'dk' then
+    if G.EMU.game.id == 'Donkey Kong (1986)' then
         -- forces demo to never start
         G.EMU.nes.cpu.ram[0X0044] = 0
         G.EMU.nes.cpu.ram[0x0058] = 0
@@ -83,33 +94,70 @@ function jokerInfo.update(self, card, dt)
         -- level state (1 is stage 1, is stage 3, 0 is title)
         if G.EMU.nes.cpu.ram[0x0053] == 3 then
             G.EMU.game.game_state = 'win'
-        end
-        if G.EMU.nes.cpu.ram[0x0400] == 1 and G.EMU.nes.cpu.ram[0x0096] == 255 then
+            card.ability.win_key = 'j_fnwk_streetlight_indulgent'
+        elseif G.EMU.nes.cpu.ram[0x0400] == 1 and G.EMU.nes.cpu.ram[0x0096] == 255 then
             G.EMU.game.game_state = 'lose'
         end
         
     end
        
-    if G.EMU.game.id == 'dl' then
+    if G.EMU.game.id == "Dragon's Lair (E) [no-dim]" then
+        if G.EMU.nes.cpu.ram[0x05A6] > 249 and G.EMU.nes.cpu.ram[0x05A6] < 255 then
+            G.EMU.nes.cpu.ram[0x05A6] = 249
+        end
 
+        if G.EMU.nes.cpu.ram[0x05A6] > 249 or G.EMU.nes.cpu.ram[0x05A6] < 246 then
+            G.EMU.nes.cpu.ram[0x0027] = 0
+            G.EMU.nes.cpu.ram[0x0028] = 1
+            G.EMU.nes.cpu.ram[0x032F] = 16
+        end
+
+        -- G.EMU.nes.cpu.ram[0x05A9] -- level loading?
+        -- G.EMU.nes.cpu.ram[0x05AA] -- level loading?
+
+        if G.EMU.nes.cpu.ram[0x0058] == 32 then
+            G.EMU.game.game_state = 'win'
+            card.ability.win_key = 'j_fnwk_streetlight_resil'
+        end
+
+        if G.EMU.nes.cpu.ram[0x05A6] == 246 and G.EMU.nes.cpu.ram[0x000E] == 12 then
+            G.EMU.game.game_state = 'lose'
+            card.ability.game_over_delay = 5
+        end
     end
 
-    if G.EMU.game.id == 'tmnt' then
+    if G.EMU.game.id == 'Teenage Mutant Ninja Turtles II (1989)' then
+        -- skip title/character select
+        if G.EMU.nes.cpu.ram[0x0018] < 5 then
+            G.EMU.nes.cpu.ram[0x0018] = 5
+        end
 
+        -- 0 lives
+        -- forces selection of Raphael
+        G.EMU.nes.cpu.ram[0x004D] = 0
+        G.EMU.nes.cpu.ram[0x0033] = 3
+
+        if G.EMU.nes.cpu.ram[0x007E] == 6 and G.EMU.nes.cpu.ram[0x03EA] > 15 then
+            G.EMU.game.game_state = 'win'
+            card.ability.win_key = 'j_fnwk_streetlight_fledgling'
+        elseif G.EMU.nes.cpu.ram[0x003C] == 7 then
+            G.EMU.game.game_state = 'lose'
+        end
     end
 
     if G.EMU.game.game_state == 'win' or G.EMU.game.game_state == 'lose' then
         G.EMU.game.run_state = 'shutdown'
-    end
 
-    if G.EMU.game.game_state == 'win' or G.EMU.game.game_state == 'lose' then
         local finish_state = 'k_cabinet_'..G.EMU.game.game_state
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
-            delay = G.EMU.game.game_state == 'win' and 5 or 8,
+            delay = G.EMU.game.game_state == 'win' and 5 or card.ability.game_over_delay or 8,
             func = function()
                 G.CONTROLLER.locks.frame = nil
                 G.CONTROLLER.locks.frame_set = nil
+                G.SETTINGS.SOUND.music_volume = card.ability.last_music_vol or 50
+                card.ability.last_music_vol = nil
+                card.ability.game_over_delay = nil
                 G.EMU:stop_nes()
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize(finish_state), colour = G.C.MONEY, delay = 0.8})
                 return true 
@@ -121,7 +169,8 @@ function jokerInfo.update(self, card, dt)
                 delay = 0.4,
                 func = function()
                     G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                    local newJoker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_indulgent', 'resilient')
+                    local newJoker = create_card('Joker', G.jokers, nil, nil, true, nil, card.ability.win_key or 'j_fnwk_streetlight_indulgent', 'fnwk_cabinet')
+                    card.ability.win_key = nil
                     newJoker:add_to_deck()
                     G.jokers:emplace(newJoker)
                     newJoker:start_materialize()

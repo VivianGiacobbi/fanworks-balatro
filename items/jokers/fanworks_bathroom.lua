@@ -45,10 +45,12 @@ function jokerInfo.calculate(self, card, context)
             
         }
         local rand_idx = math.random(1, 5)
+        sendDebugMessage(tostring(localize('k_toilet'..rand_idx)))
         card_eval_status_text(card, 'extra', nil, nil, nil, {
-            message = localize({'k_toilet'..rand_idx,}),
+            message = localize('k_toilet'..rand_idx),
             message_card = card,
 			sound = 'fnwk_terlet',
+            delay = 1.2,
 		})
         G.E_MANAGER:add_event(Event({
             trigger = 'after',

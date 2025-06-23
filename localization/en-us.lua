@@ -340,23 +340,17 @@ return {
 			k_toilet1 = 'poop',
             k_toilet2 = 'peeing ahhhh',
             k_toilet3 = {
-				text = {
-					'pee pee poo poo',
-					'hahahaha'
-				}
+				"pee pee poo poo",
+				"hahahaha"
             },
             k_toilet4 = {
-				text = {
-					"Kinda hoping we",
-                	"can change this",
-                	"channel's name soon"
-				}
+				"Kinda hoping we can",
+				"change this channel's",
+				"name soon"
             },
             k_toilet5 = {
-				text = {
-					"can everyone leave",
-					"I need to use the sink",
-				}
+				"can everyone leave I",
+				"need to use the sink",
             },
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
@@ -426,6 +420,7 @@ return {
 		},
 		v_dictionary = {
 			downward_warn_text = "Must play #1#",
+			miracle_warn_text = "#1# will Level Up",
 			a_hand = "+#1# Hand",
 			a_reps = "+#1# Reps",
 			a_reps_minus = "-#1# Reps",
@@ -443,7 +438,7 @@ return {
 		},
 		poker_hands = {
 			jojobal_Fibonacci = 'Fibonacci',
-			jojobal_FlushFibonacci = 'Flush Fibonacci',
+			jojobal_FlushFibonacci = 'Flush Fib',
 		},
 		poker_hand_descriptions = {
 			jojobal_Fibonacci = {
@@ -710,7 +705,13 @@ return {
                     "always be selected"
                 }
             },
-
+			bl_fnwk_goat = {
+                name = "The Goat",
+                text = {
+                    "Cards with {C:attention}matching ranks{}",
+					"are {C:attention}debuffed{} when played"
+                }
+            },
 			bl_fnwk_bolt = {
                 name = "The Bolt",
                 text = {
@@ -730,6 +731,13 @@ return {
                 text = {
                     "Required score",
 					"is {C:attention}hidden{}"
+                }
+            },
+			bl_fnwk_box = {
+                name = "The Box",
+                text = {
+                    "Held in hand effects",
+					"are {C:attention}disabled{}"
                 }
             }
         },
@@ -941,9 +949,10 @@ return {
 				name = "Creaking Bjokestar",
 				text = {
 					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
-					"This Joker gains {X:mult,C:white}X#2#{} Mult if",
-					"played hand contains a {C:attention}Fibonacci{}",
-					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
+					"This Joker gains Mult along",
+					"the {C:mult}Fibonacci sequence{} when",
+					"a {C:attention}Flush Fib{} is played",
+					"{C:inactive}(Currently {C:mult}+#1#{} {C:inactive}Mult){}"
 				}
 			},
 			j_fnwk_plancks_unsure = {
@@ -1969,6 +1978,17 @@ return {
 					"draw your {C:attention}hand size{}"
 				},
 			},
+			c_fnwk_jspec_miracle = {
+				name = "Miracle Row",
+				text = {
+					"Played hands that aren't your",
+					"{C:attention}highest level hand{} are {C:planet}leveled up{}",
+					"instead of scored",
+					"{s:0.1} {}",
+					"{C:stand}Evolves{} when played hand",
+					"contains {C:attention}four different seals{}"
+				},
+			},
 			c_fnwk_jspec_miracle_together = {
 				name = "Togetherland",
 				text = {
@@ -2030,7 +2050,10 @@ return {
 			c_fnwk_plancks_moon = {
 				name = "Moon River",
 				text = {
-					"Dummy Text"
+					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
+					"This Stand gains {X:mult,C:white}X#2#{} Mult if",
+					"played hand contains a {C:attention}Fibonacci{}",
+					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				},
 			},
 			c_fnwk_rebels_rebel = {

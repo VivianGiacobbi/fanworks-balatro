@@ -28,7 +28,7 @@ SMODS.Blind:take_ownership('bl_manacle', {atlas = 'fnwk_blind_reskins', boss_col
 SMODS.Blind:take_ownership('bl_eye', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('86C09B')}, true)
 SMODS.Blind:take_ownership('bl_mouth', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('FF0000')}, true)
 SMODS.Blind:take_ownership('bl_plant', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('B0FFE6')}, true)
-SMODS.Blind:take_ownership('bl_serpent', {atlas = 'fnwk_blind_reskins'}, true)
+SMODS.Blind:take_ownership('bl_serpent', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('E8A686')}, true)
 SMODS.Blind:take_ownership('bl_pillar', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('F0D418')}, true)
 SMODS.Blind:take_ownership('bl_needle', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('A4A4A4')}, true)
 SMODS.Blind:take_ownership('bl_head', {atlas = 'fnwk_blind_reskins', boss_colour = HEX('FFB74B')}, true)

@@ -114,3 +114,153 @@ function create_UIBox_blind_choice(type, run_info)
 
     return ret
 end
+
+
+local ref_attention_text = attention_text
+function attention_text(args)
+    if not args or not args.text or (args.text and type(args.text) ~= 'table') then
+        return ref_attention_text(args)
+    end
+
+    args.scale = args.scale or 1
+    args.colour = SMODS.shallow_copy(args.colour or G.C.WHITE)
+    args.hold = (args.hold or 0) + 0.1*(G.SPEEDFACTOR)
+    args.pos = args.pos or {x = 0, y = 0}
+    args.align = args.align or 'cm'
+    args.emboss = args.emboss or nil
+    args.fade = 1
+
+    if args.cover then
+        args.cover_colour = SMODS.shallow_copy(args.cover_colour or G.C.RED)
+        args.cover_colour_l = SMODS.shallow_copy(lighten(args.cover_colour, 0.2))
+        args.cover_colour_d = SMODS.shallow_copy(darken(args.cover_colour, 0.2))
+    else
+        args.cover_colour = copy_table(G.C.CLEAR)
+    end
+
+    args.uibox_config = {
+        align = args.align or 'cm',
+        offset = args.offset or {x=0,y=0}, 
+        major = args.cover or args.major or nil,
+    }
+
+    local nodes = {}
+    for _, line in ipairs(args.text) do
+        nodes[#nodes+1] = {{
+            n=G.UIT.C, 
+            config={align = "m"},
+            nodes={{
+                n=G.UIT.O, 
+                config={
+                    object = DynaText({
+                        string = line,
+                        colours = {args.colour},
+                        silent = not args.noisy,
+                        pop_in = 0,
+                        pop_in_rate = 6,
+                        rotate = args.rotate or nil,
+                        maxw = args.maxw,
+                        float = true,
+                        shadow = true,
+                        scale = args.scale
+                    })
+                }
+            }}
+        }}
+    end
+
+    local final_text = {
+        n=G.UIT.ROOT, 
+        config = {
+            align = args.cover_align or 'cm',
+            minw = (args.cover and args.cover.T.w or 0.001) + (args.cover_padding or 0),
+            minh = (args.cover and args.cover.T.h or 0.001) + (args.cover_padding or 0),
+            padding = 0.03,
+            r = 0.1,
+            emboss = args.emboss,
+            colour = args.cover_colour
+        },
+        nodes={}
+    }
+    
+    for _, line in ipairs(nodes) do
+        final_text.nodes[#final_text.nodes+1] = {n=G.UIT.R, config={align = "m"}, nodes=line}
+    end
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0,
+        blockable = false,
+        blocking = false,
+        func = function()
+            args.AT = UIBox{
+                T = {args.pos.x,args.pos.y, 0, 0},
+                definition = final_text, 
+                config = args.uibox_config
+            }
+            args.AT.attention_text = true
+
+            args.text = args.AT.UIRoot.children
+            for _, v in ipairs(args.text) do
+                v.children[1].children[1].config.object:pulse(0.5)
+            end
+            
+            if args.cover then
+            Particles(args.pos.x,args.pos.y, 0,0, {
+                timer_type = 'TOTAL',
+                timer = 0.01,
+                pulse_max = 15,
+                max = 0,
+                scale = 0.3,
+                vel_variation = 0.2,
+                padding = 0.1,
+                fill=true,
+                lifespan = 0.5,
+                speed = 2.5,
+                attach = args.AT.UIRoot,
+                colours = {args.cover_colour, args.cover_colour_l, args.cover_colour_d},
+            })
+            end
+            if args.backdrop_colour then
+            args.backdrop_colour = SMODS.shallow_copy(args.backdrop_colour)
+            Particles(args.pos.x,args.pos.y,0,0,{
+                timer_type = 'TOTAL',
+                timer = 5,
+                scale = 2.4*(0.75 + 0.25 * #args.text),
+                lifespan = 5,
+                speed = 0,
+                attach = args.AT,
+                colours = {args.backdrop_colour}
+            })
+            end
+            return true
+        end
+    }))
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = args.hold,
+        blockable = false,
+        blocking = false,
+        func = function()
+            if not args.start_time then
+                args.start_time = G.TIMERS.TOTAL
+                for _, v in ipairs(args.text) do
+                    v.children[1].children[1].config.object:pop_out(3)
+                end
+            else
+                --args.AT:align_to_attach()
+                args.fade = math.max(0, 1 - 3*(G.TIMERS.TOTAL - args.start_time))
+                if args.cover_colour then args.cover_colour[4] = math.min(args.cover_colour[4], 2*args.fade) end
+                if args.cover_colour_l then args.cover_colour_l[4] = math.min(args.cover_colour_l[4], args.fade) end
+                if args.cover_colour_d then args.cover_colour_d[4] = math.min(args.cover_colour_d[4], args.fade) end
+                if args.backdrop_colour then args.backdrop_colour[4] = math.min(args.backdrop_colour[4], args.fade) end
+                args.colour[4] = math.min(args.colour[4], args.fade)
+                if args.fade <= 0 then
+                    args.AT:remove()
+                    return true
+                end
+            end
+        end
+    }))
+end

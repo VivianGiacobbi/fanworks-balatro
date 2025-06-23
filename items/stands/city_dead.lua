@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Dead Weight',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'DCFB8CDC', '4CB3D9DC' },
         extra = {
             tarot = 'c_hermit'
@@ -12,13 +12,12 @@ local consumInfo = {
     rarity = 'arrow_StandRarity',
     hasSoul = true,
     fanwork = 'city',
-    in_progress = true,
     blueprint_compat = false,
     dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.jester }}
     return { vars = {G.P_CENTERS[card.ability.extra.tarot].name}}
 end
 

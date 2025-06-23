@@ -205,6 +205,10 @@ local ref_eval_card = eval_card
 function eval_card(card, context)
     if card.fnwk_disturbia_joker then return {}, {} end
 
+    if G.GAME.modifiers.fnwk_no_hand_effects and context.cardarea == G.hand then
+        return {}, {}
+    end
+
     G.fnwk_message_cancel = G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt'
     local ret, post = ref_eval_card(card, context)
     G.fnwk_message_cancel = nil
