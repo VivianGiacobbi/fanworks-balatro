@@ -705,7 +705,7 @@ end
 
 local ref_card_canuse = Card.can_use_consumeable
 function Card:can_use_consumeable(any_state, skip_check)
-    if not skip_check and G.GAME.starting_params.fnwk_no_consumeables then
+    if not skip_check and G.GAME.modifiers.fnwk_no_consumeables then
         return false
     end
 

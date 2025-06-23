@@ -33,7 +33,7 @@ function Blind:extra_set_blind(blind, reset, silent)
 		if self.config.blind.key == 'bl_fnwk_creek' then
 			local mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
 			self.mult = mult / 2
-			G.GAME.starting_params.fnwk_hide_blind_score = true
+			G.GAME.modifiers.fnwk_hide_blind_score = true
 		else
 			self.mult = blind.mult / 2
 		end
@@ -140,7 +140,7 @@ function Blind:set_blind(blind, reset, silent)
 		return
 	end
 
-	G.GAME.starting_params.fnwk_hide_blind_score = nil
+	G.GAME.modifiers.fnwk_hide_blind_score = nil
 	local ret = ref_blind_set(self, blind, reset, silent)
 	self.main_blind_disabled = nil
 
@@ -148,7 +148,7 @@ function Blind:set_blind(blind, reset, silent)
 		self.mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
 		self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling
         self.chip_text = number_format(self.chips)
-		G.GAME.starting_params.fnwk_hide_blind_score = true
+		G.GAME.modifiers.fnwk_hide_blind_score = true
 	end
 	
 	if not (blind or reset) then return ret end

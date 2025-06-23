@@ -212,7 +212,7 @@ local ref_eval_card = eval_card
 function eval_card(card, context)
     if card.fnwk_disturbia_joker then return {}, {} end
 
-    if G.GAME.starting_params.fnwk_no_hand_effects and context.cardarea == G.hand then
+    if G.GAME.modifiers.fnwk_no_hand_effects and context.cardarea == G.hand then
         return {}, {}
     end
 

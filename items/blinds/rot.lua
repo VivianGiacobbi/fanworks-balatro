@@ -10,22 +10,22 @@ local blindInfo = {
 
 function blindInfo.set_blind(self)
     G.GAME.blind.triggered = true
-    G.GAME.starting_params.fnwk_no_consumeables = true
+    G.GAME.modifiers.fnwk_no_consumeables = true
 end
 
 function blindInfo.disable(self)
     G.GAME.blind.triggered = false
-    G.GAME.starting_params.fnwk_no_consumeables = nil
+    G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
 function blindInfo.defeat(self)
     G.GAME.blind.triggered = false
-    G.GAME.starting_params.fnwk_no_consumeables = nil
+    G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
 function blindInfo.fnwk_blind_load(self)
     G.GAME.blind.triggered = true
-    G.GAME.starting_params.fnwk_no_consumeables = true
+    G.GAME.modifiers.fnwk_no_consumeables = true
 end
 
 return blindInfo

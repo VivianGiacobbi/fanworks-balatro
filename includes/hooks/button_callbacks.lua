@@ -47,7 +47,7 @@ G.FUNCS.reroll_shop = function(e)
                 end
                 
                 G.GAME.current_round.used_packs = {}
-                for i=1, G.GAME.starting_params.boosters_in_shop + (G.GAME.starting_params.extra_boosters or 0) do
+                for i=1, G.GAME.starting_params.boosters_in_shop + (G.GAME.modifiers.extra_boosters or 0) do
                     G.GAME.current_round.used_packs[i] = get_pack('shop_pack').key
 
                     local new_booster = Card(G.shop_booster.T.x + G.shop_booster.T.w/2,
