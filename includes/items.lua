@@ -287,6 +287,7 @@ local items_to_load = {
 	
 	Deck = {
 		'fanworks_deck',
+		'shimmering',
 		'act',
 	},
 
@@ -318,6 +319,45 @@ local items_to_load = {
 		'box',
 		'final_moe',
 	},
+
+	Tag = {
+		'biased',
+	}
+}
+
+SMODS.ObjectType {
+    default = 'j_fnwk_bluebolt_sexy',
+    key = 'fnwk_women',
+	prefix_config = false,
+	cards = {
+		['j_lusty_joker'] = true,
+        ['j_blueprint'] = true,
+        ['j_brainstorm'] = true,
+        ['j_shoot_the_moon'] = true,
+        ['j_fnwk_plancks_unsure'] = true,
+        ['j_fnwk_rubicon_moonglass'] = true,
+        ['j_fnwk_streetlight_fledgling'] = true,
+        ['j_fnwk_streetlight_indulgent'] = true,
+        ['j_fnwk_streetlight_industrious'] = true,
+        ['j_fnwk_streetlight_methodical'] = true,
+        ['j_fnwk_rubicon_thnks'] = true,
+        ['j_fnwk_streetlight_resil'] = true,
+        ['j_fnwk_bone_destroyer'] = true,
+        ['j_fnwk_industry_loyal'] = true,
+        ['j_fnwk_mania_jokestar'] = true,
+        ['j_fnwk_gotequest_killing'] = true,
+        ['j_fnwk_jspec_joepie'] = true,
+        ['j_fnwk_jspec_ilsa'] = true,
+        ['j_fnwk_bluebolt_tuned'] = true,
+        ['j_fnwk_love_holy'] = true,
+        ['j_drivers_license'] = true,
+        ['j_fnwk_rockhard_rebirth'] = true,
+        ['j_fnwk_bluebolt_sexy'] = true,
+        ['j_fnwk_bluebolt_secluded'] = true,
+        ['j_fnwk_plancks_ghost'] = true,
+        ['j_fnwk_glass_jokestar'] = true,
+        ['j_fnwk_love_jokestar'] = true,
+	}
 }
 
 for k, v in pairs(items_to_load) do
@@ -327,3 +367,4 @@ for k, v in pairs(items_to_load) do
 		end
 	end
 end
+

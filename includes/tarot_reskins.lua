@@ -39,7 +39,7 @@ if skins or stands then
             -- imported cardsauce logic
             local last_tarot_planet = localize('k_none')
             if fool_c and fool_c.key == 'c_arrow_arrow' then
-                last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.modifiers.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.modifiers.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
+                last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set, vars = { G.GAME.starting_params.max_stands or 1, (card.area.config.collection and localize('k_stand')) or (G.GAME.starting_params.max_stands > 1 and localize('b_stand_cards') or localize('k_stand')) }} or localize('k_none')
             else
                 last_tarot_planet = fool_c and localize{type = 'name_text', key = fool_c.key, set = fool_c.set} or localize('k_none')
             end

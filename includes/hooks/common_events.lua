@@ -201,11 +201,18 @@ function ease_ante(mod)
 end
 
 
+
+
+
+---------------------------
+--------------------------- Skip scale messaging for Bolt blind
+---------------------------
+
 local ref_eval_card = eval_card
 function eval_card(card, context)
     if card.fnwk_disturbia_joker then return {}, {} end
 
-    if G.GAME.modifiers.fnwk_no_hand_effects and context.cardarea == G.hand then
+    if G.GAME.starting_params.fnwk_no_hand_effects and context.cardarea == G.hand then
         return {}, {}
     end
 
@@ -223,4 +230,20 @@ function card_eval_status_text(card, eval_type, amt, percent, dir, extra)
     end
 
     return ref_card_text(card, eval_type, amt, percent, dir, extra)
+end
+
+
+---------------------------
+--------------------------- Shimmering Deck Behavior
+---------------------------
+
+local ref_reroll_cost = calculate_reroll_cost
+function calculate_reroll_cost(skip_increment)
+    if G.GAME.starting_params.fnwk_only_free_rerolls then
+        G.GAME.current_round.reroll_cost_increase = 0
+        G.GAME.current_round.reroll_cost = 0
+        return
+    end
+
+    return ref_reroll_cost(skip_increment)
 end

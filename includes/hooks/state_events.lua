@@ -54,6 +54,23 @@ end
 
 
 ---------------------------
+--------------------------- Type Prime/ACT Deck Unlocks
+---------------------------
+
+local ref_win_game = win_game
+function win_game()
+    if (not G.GAME.seeded and not G.GAME.challenge) or SMODS.config.seeded_unlocks then
+        check_for_unlock({type = 'fnwk_win_deck'})
+    end
+
+    return ref_win_game()
+end
+
+
+
+
+
+---------------------------
 --------------------------- Electriclarryland effect
 ---------------------------
 

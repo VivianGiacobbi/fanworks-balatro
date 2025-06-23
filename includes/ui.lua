@@ -14,14 +14,15 @@ SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableJokers',
 		'enableWipItems',
-		'enableDecks',
-		'enableVouchers',
 		'enableConsumables',
+		'enableDecks',
+		'enableTags',
+		'enableVouchers',
+		'enableBlinds',
+		'enableChallenges',	
 		'enableQueer',
 		'enableTarotSkins',
 		'enableVanillaTweaks',
-		'enableChallenges',
-		'enableBlinds',
 		'enableBlindReskins',
 		--[[
 		'enableTrophies',
@@ -113,7 +114,7 @@ local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
 local artist_size = 0.38
-local special_thanks_mod = 1
+local special_thanks_mod = 0.75
 local special_thanks_padding = 0
 local artist_padding = 0.03
 local coding_scale = 0.90
@@ -194,11 +195,11 @@ SMODS.current_mod.credits_tab = function()
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.mae, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
-							}},
-							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.monky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
+							}},
+							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.piano, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
@@ -234,6 +235,9 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.winter, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+								}},
+								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
+									{n = G.UIT.T, config = {text = G.fnwk_credits.torch, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
 									{n = G.UIT.T, config = {text = G.fnwk_credits.tos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
@@ -298,6 +302,9 @@ SMODS.current_mod.credits_tab = function()
 									}},
 									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
 										{n=G.UIT.T, config={text = G.fnwk_credits.luckyland, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									}},
+									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
+										{n=G.UIT.T, config={text = G.fnwk_credits.abrams, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},

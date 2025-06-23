@@ -9,19 +9,19 @@ local blindInfo = {
 }
 
 function blindInfo.set_blind(self)
-    G.GAME.modifiers.fnwk_no_hand_effects = true
+    G.GAME.starting_params.fnwk_no_hand_effects = true
 end
 
 function blindInfo.disable(self)
-    G.GAME.modifiers.fnwk_no_hand_effects = nil
+    G.GAME.starting_params.fnwk_no_hand_effects = nil
 end
 
 function blindInfo.defeat(self)
-    G.GAME.modifiers.fnwk_no_hand_effects = nil
+    G.GAME.starting_params.fnwk_no_hand_effects = nil
 end
 
 function blindInfo.fnwk_blind_load(self)
-    G.GAME.modifiers.fnwk_no_hand_effects = true
+    G.GAME.starting_params.fnwk_no_hand_effects = true
 end
 
 return blindInfo

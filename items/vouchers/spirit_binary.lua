@@ -15,7 +15,7 @@ end
 function voucherInfo.redeem(self, card, area, copier)
     G.E_MANAGER:add_event(Event({
         func = (function()
-            G.GAME.modifiers.max_stands = (G.GAME.modifiers.max_stands or 1) + card.ability.extra
+            G.GAME.starting_params.max_stands = (G.GAME.starting_params.max_stands or 1) + card.ability.extra
             return true
         end)
     }))

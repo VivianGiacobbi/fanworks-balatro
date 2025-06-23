@@ -293,6 +293,7 @@ return {
 			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
 			fnwk_options_enableQueer = "Queer Edition",
 			fnwk_options_enableDecks = "Decks",
+			fnwk_options_enableTags = "Tags",
 			fnwk_options_enableVouchers = "Vouchers",
 			fnwk_options_enableConsumables = "Consumables",
 			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
@@ -842,6 +843,9 @@ return {
 					"Sell this card to {C:stand}Evolve{}",
 					"your {C:attention}leftmost{} {C:stand}Stand{}",
 				},
+				unlock = {
+					"{C:attention,E:1}Evolve{} a {C:stand,E:1}Stand{}"
+				}
 			},
 			j_fnwk_streetlight_pinstripe = {
 				name = "Pinstripe Joker",
@@ -2337,6 +2341,15 @@ return {
 				},
 			},
 		},
+		Tag = {
+            tag_fnwk_biased = {
+                name = "Biased tag",
+                text = {
+                    "Next shop Joker is",
+                    "{C:attention}free{} and is {C:attention}a woman{}"
+                },
+            },
+        },
 		Voucher = {
 			v_fnwk_rubicon_kitty = {
 				name = "Demon Kitty",
@@ -2404,8 +2417,8 @@ return {
 					"appear {C:attention}#1#X{} more often"
                 },
 				unlock = {
-					"Have {E:1,C:attention}#1#{} {E:1,C:red}Rare{} Jokers",
-					"in your Joker Slots"
+					"Have at least",
+					"{C:attention,E:1}#1#{} {C:red,E:1}Rare{} Jokers",
 				}
 			},
 		},
@@ -2424,6 +2437,17 @@ return {
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
+			b_fnwk_shimmering = {
+				name = "Shimmering Deck",
+				text = {
+					"{C:attention}#1#{} free {C:green}Rerolls{} per shop",
+					"but no additional {C:green}Rerolls{}",
+				},
+				unlock = {
+					"{C:green,E:1}Reroll{} {C:attention,E:1}#1#{} times",
+					"in one run"
+				}
+			},
 			b_fnwk_act = {
 				name = "ACT Deck",
 				text = {
@@ -2431,6 +2455,10 @@ return {
 					"{C:attention}Big Blind{} shops have {C:green}uncommon{} Jokers",
 					"{C:attention}Boss Blind{} shops have {C:red}rare{} Jokers",
 				},
+				unlock = {
+					"Win a run with {C:attention,E:1}#1#{}",
+					"on {V:1,E:1}#2#{} difficulty"
+				}
 			},
 		},
 		Sleeve = {

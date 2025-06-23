@@ -8,7 +8,7 @@ local voucherInfo = {
     cost = 10,
     requires = {'v_fnwk_spirit_binary'},
     unlocked = false,
-    unlock_condition = { type = 'win_deck', deck = 'b_jojobal_disc', stake = 8 },
+    unlock_condition = { type = 'fnwk_win_deck', deck = 'b_jojobal_disc', stake = 8 },
     fanwork = 'spirit',
     dependencies = {'ArrowAPI'},
 }
@@ -28,7 +28,7 @@ function voucherInfo.locked_loc_vars(self, info_queue, card)
 end
 
 function voucherInfo.check_for_unlock(self, args)
-	return (args.type == "win_deck" and get_deck_win_stake(self.unlock_condition.deck) >= self.unlock_condition.stake)
+	return (args.type == self.unlock_condition.type and get_deck_win_stake(self.unlock_condition.deck) >= self.unlock_condition.stake)
 end
 
 function voucherInfo.redeem(self, card, area, copier)
