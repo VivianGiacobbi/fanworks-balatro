@@ -1,14 +1,12 @@
 -- Refer to https://wiki.nesdev.com/w/index.php/APU
 -- for documentation on how the APU works
-local band, bor, bxor, bnot, lshift, rshift = bit.band, bit.bor, bit.bxor, bit.bnot, bit.lshift, bit.rshift
-local map, rotatePositiveIdx, nthBitIsSet, nthBitIsSetInt, range, concat0, concat =
+local band, bor, lshift, rshift = bit.band, bit.bor, bit.lshift, bit.rshift
+local map, nthBitIsSet, nthBitIsSetInt, range, concat0 =
     UTILS.map,
-    UTILS.rotatePositiveIdx,
     UTILS.nthBitIsSet,
     UTILS.nthBitIsSetInt,
     UTILS.range,
-    UTILS.concat0,
-    UTILS.concat
+    UTILS.concat0
 
 APU = {}
 local APU = APU

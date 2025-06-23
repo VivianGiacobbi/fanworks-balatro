@@ -1,4 +1,3 @@
-
 local jokerInfo = {
     name = "Cabinet Man",
     config = {
@@ -7,7 +6,8 @@ local jokerInfo = {
                 {key = 'Donkey Kong (1986)', fps = 59.94},
                 {key = 'Teenage Mutant Ninja Turtles II (1989)', fps = 59.94},
                 {key = "Dragon's Lair (E) [no-dim]", fps = 50},
-            }
+            },
+            dollars = 8
         },
         last_music_vol = 0,
         last_sounds_vol = 0,
@@ -24,6 +24,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
+    return { vars = {card.ability.extra.dollars, number_format(G.GAME.round_scores.hand.amt or 0)}}
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -39,7 +40,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-    if G.EMULATOR_RUNNING then
+    if G.EMULATOR_RUNNING or from_debuff then
         return
     end
 
@@ -51,9 +52,10 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
         trigger = 'after',
         func = function()
             G.CONTROLLER.locks.frame = true
+            local game = pseudorandom_element(card.ability.extra.game_opts)
             G.EMU:init_video()
-            G.EMU:init_audio(44100, 16, 1, 50)
-        
+            G.EMU:init_audio(44100, 16, 1, game.fps)
+
             local center = card.children.center
             local scale = G.TILESCALE * G.TILESIZE
             local x_pos = (center.VT.x + center.VT.w / 2) * scale + (center.VT.w * center.VT.scale / 2) * scale
@@ -62,15 +64,33 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
                 x = x_pos,
                 y = y_pos,
             }
-            
-            local game = pseudorandom_element(card.ability.extra.game_opts)
+
             G.EMU:start_nes(game.key, card, game.fps, start_pos)
             return true
         end 
     }))
 end
 
+function jokerInfo.calculate(self, card, context)
+
+    if context.before then
+        card.ability.extra.last_high_score = G.GAME.round_scores.hand.amt
+    end
+
+    if context.after and hand_chips*mult > card.ability.extra.last_high_score then
+        local last_score = card.ability.extra.last_high_score
+        card.ability.extra.last_high_score = nil
+        if hand_chips*mult > last_score then
+            return {
+                dollars = card.ability.extra.dollars
+            }
+        end
+    end
+end
+
 function jokerInfo.remove_from_deck(self, card, from_debuff)
+    if from_debuff then return end
+
     if G.EMU.running then
         G.EMU:stop_nes()
     end
@@ -79,6 +99,27 @@ end
 function jokerInfo.update(self, card, dt)
     if not G.EMU.running or G.EMU.control_card ~= card then
         return 
+    end
+
+    -- early close
+    if G.EMU.esc_pressed and G.EMU.game.run_state ~= 'shutdown' then
+        G.EMU.game.run_state = 'shutdown'
+        G.EMU.esc_pressed = nil
+        G.EMU:stop_nes()
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.5,
+            func = function()
+                G.CONTROLLER.locks.frame = nil
+                G.CONTROLLER.locks.frame_set = nil
+                G.SETTINGS.SOUND.music_volume = card.ability.last_music_vol or 50
+                card.ability.last_music_vol = nil
+                card.ability.game_over_delay = nil
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_cabinet_lose'), colour = G.C.MONEY, delay = 0.8})
+                return true 
+            end 
+        }))
     end
 
     if G.EMU.game.run_state == 'shutdown' then
@@ -102,10 +143,13 @@ function jokerInfo.update(self, card, dt)
     end
        
     if G.EMU.game.id == "Dragon's Lair (E) [no-dim]" then
+        -- setting lives to 3
         if G.EMU.nes.cpu.ram[0x05A6] > 249 and G.EMU.nes.cpu.ram[0x05A6] < 255 then
             G.EMU.nes.cpu.ram[0x05A6] = 249
         end
 
+        -- fast forward through main menu timers
+        -- and auto start level
         if G.EMU.nes.cpu.ram[0x05A6] > 249 or G.EMU.nes.cpu.ram[0x05A6] < 246 then
             G.EMU.nes.cpu.ram[0x0027] = 0
             G.EMU.nes.cpu.ram[0x0028] = 1

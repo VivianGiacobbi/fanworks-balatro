@@ -310,11 +310,13 @@ local items_to_load = {
 	},
 
 	Blind = {
+		'venus',
 		'goat',
 		'bolt',
 		'rot',
 		'creek',
 		'box',
+		'final_moe',
 	},
 }
 

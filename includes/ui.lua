@@ -320,10 +320,12 @@ SMODS.current_mod.extra_tabs = function()
 				playable_roms = {}
 				local count = 0
 				for s in FnwkRecursiveEnumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
-					local name = string.gsub(s, path_pattern_replace .. "/includes/LuaNES/roms//", "")
-					name = string.gsub(name, '.nes', '')
-					playable_roms[name] = true
-					count = count + 1
+					if FnwkContainsString(s, '.nes') then
+						local name = string.gsub(s, path_pattern_replace .. "/includes/LuaNES/roms//", "")
+						name = string.gsub(name, '.nes', '')
+						playable_roms[name] = true
+						count = count + 1
+					end
 				end
 
 				if count > 0 then

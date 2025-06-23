@@ -43,6 +43,7 @@ local includes = {
 	-- option files
 	--- jokers are required for some following files so include them first
 	'ui',
+	'poker_hands',
 	'items',
 	'tarot_reskins',
 	'blind_reskins',

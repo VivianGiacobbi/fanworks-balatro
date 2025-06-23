@@ -1,5 +1,25 @@
 SMODS.Atlas({ key = 'cabinet_overlay', path = 'cabinet_man.png', px = 320, py = 378 })
+SMODS.Atlas({ key = 'cabinet_shadow', path = 'cabinet_man_shadow.png', px = 320, py = 378 })
+SMODS.Atlas({ key = 'cabinet_joystick', path = 'cabinet_man_joystick.png', px = 41, py = 41 })
+SMODS.Atlas({ key = 'cabinet_button_left', path = 'cabinet_button_left.png', px = 25, py = 14 })
+SMODS.Atlas({ key = 'cabinet_button_right', path = 'cabinet_button_right.png', px = 25, py = 14 })
+SMODS.Atlas({ key = 'cabinet_button_up', path = 'cabinet_button_up.png', px = 25, py = 14 })
+SMODS.Atlas({ key = 'cabinet_button_down', path = 'cabinet_button_down.png', px = 25, py = 14 })
 local mod = SMODS.current_mod
+
+local joy_poses = {
+    ['up'] = 1,
+    ['right'] = 3,
+    ['down'] = 5,
+    ['left'] = 7,
+}
+
+local button_maps = {
+    ['x'] = 'right',
+    ['z'] = 'down',
+    ['rshift'] = 'left',
+    ['return'] = 'up',
+}
 
 -- this is functionally a recreation of the old "main.lua" function in LuaNES
 assert(SMODS.load_file('includes/LuaNES/nes.lua'))()
@@ -9,6 +29,15 @@ G.EMU = {
     startup = false,
     startup_time = 0,
     control_card = nil,
+
+    anim_states = {},
+
+    last_joy_pos = 0,
+    joy_quad = nil,
+    button_up_quad = nil,
+    button_down_quad = nil,
+    button_right_quad = nil,
+    button_left_quad = nil,
 
     game = {
         id = 'none',
@@ -22,13 +51,14 @@ G.EMU = {
     input = {
         events = {},
         inputs = {
-            [Pad.A] = 'x',
-            [Pad.B] = 'z',
-            [Pad.START] = 'return',
-            [Pad.UP] = 'up',
-            [Pad.DOWN] = 'down',
-            [Pad.LEFT] = 'left',
-            [Pad.RIGHT] = 'right',
+            ['x'] = Pad.A,
+            ['z'] = Pad.B,
+            ['return'] = Pad.START,
+            ['rshift'] = Pad.SELECT,
+            ['up'] = Pad.UP,
+            ['down'] = Pad.DOWN,
+            ['left'] = Pad.LEFT,
+            ['right'] = Pad.RIGHT,
         }
     },
     
@@ -90,7 +120,7 @@ G.EMU = {
         self.game.id = game_str
         self.game.timers.startup_timer = {
             time = 0,
-            timer_limit = 1,
+            timer_limit = 0.12,
             subtimers = 4,
             delay = 0.1,
         }
@@ -98,6 +128,22 @@ G.EMU = {
         self.frames.fps = framerate or 59.94
         self.game.start_pos = start_pos
         self.game.run_state = 'startup'
+
+        local joy_atlas = G.ASSET_ATLAS['fnwk_cabinet_joystick']
+        G.EMU.joy_quad = love.graphics.newQuad(0, 0, joy_atlas.px, joy_atlas.py, joy_atlas.image:getDimensions())
+
+        local up_atlas = G.ASSET_ATLAS['fnwk_cabinet_button_up']
+        G.EMU.button_up_quad = love.graphics.newQuad(0, 0, up_atlas.px, up_atlas.py, up_atlas.image:getDimensions())
+
+        local down_atlas = G.ASSET_ATLAS['fnwk_cabinet_button_down']
+        G.EMU.button_down_quad = love.graphics.newQuad(0, 0, down_atlas.px, down_atlas.py, down_atlas.image:getDimensions())
+
+        local left_atlas = G.ASSET_ATLAS['fnwk_cabinet_button_left']
+        G.EMU.button_left_quad = love.graphics.newQuad(0, 0, left_atlas.px, left_atlas.py, left_atlas.image:getDimensions())
+
+        local right_atlas = G.ASSET_ATLAS['fnwk_cabinet_button_right']
+        G.EMU.button_right_quad = love.graphics.newQuad(0, 0, right_atlas.px, right_atlas.py, right_atlas.image:getDimensions())
+
         G.EMULATOR_RUNNING = true
         self.running = true
     end,
@@ -109,7 +155,6 @@ G.EMU = {
         self.control_card = nil
         self.game.id = 'none'
         self.running = false
-        self.nes:reset()
         self.nes = nil
         G.EMULATOR_RUNNING = false
     end
@@ -118,14 +163,61 @@ G.EMU = {
 -- bindings for love to embed input
 local ref_key_pressed = love.keypressed
 function love.keypressed(key)
-
-    if G.EMU.running or G.EMU.pressed then
-        for k, v in pairs(G.EMU.input.inputs) do
-            if v == key then
-                G.EMU.input.events[#G.EMU.input.events + 1] = {"keydown", k}
-            end
+    if G.EMU.running then
+        if key == 'escape' then
+            G.EMU.esc_pressed = true
         end
-        G.EMU.pressed = true
+
+        if G.EMU.input.inputs[key] then
+            G.EMU.input.events[#G.EMU.input.events + 1] = {"keydown", G.EMU.input.inputs[key]}
+            local last_state = G.EMU.anim_states[key]
+            if not last_state then
+                G.EMU.anim_states[key] = true
+                if button_maps[key] then
+                    local atlas = G.ASSET_ATLAS['fnwk_cabinet_button_'..button_maps[key]]
+                    G.EMU['button_'..button_maps[key]..'_quad'] = love.graphics.newQuad(
+                        atlas.px,
+                        0,
+                        atlas.px,
+                        atlas.py,
+                        atlas.image:getDimensions()
+                    )
+                end
+            end
+
+            local joy_pos = 0
+            local count = 0
+            for k, v in pairs(joy_poses) do
+                if G.EMU.anim_states[k]
+                and not (k == 'up' and G.EMU.anim_states['down'])
+                and not (k == 'down' and G.EMU.anim_states['up'])
+                and not (k == 'left' and G.EMU.anim_states['right'])
+                and not (k == 'right' and G.EMU.anim_states['left']) then
+                    count = count + 1
+                    joy_pos = joy_pos + v
+                end
+            end
+            if count == 2 then
+                if G.EMU.anim_states['up'] and G.EMU.anim_states['left'] then
+                    joy_pos = 8
+                else
+                    joy_pos = joy_pos/2
+                end
+            end
+
+            if joy_pos ~= G.EMU.last_joy_pos then
+                local atlas = G.ASSET_ATLAS['fnwk_cabinet_joystick']
+                G.EMU.joy_quad = love.graphics.newQuad(
+                    joy_pos*atlas.px,
+                    0,
+                    atlas.px,
+                    atlas.py,
+                    atlas.image:getDimensions()
+                )
+            end
+
+            G.EMU.last_joy_pos = joy_pos
+        end
     end
 
     ref_key_pressed(key)
@@ -133,13 +225,60 @@ end
 
 local ref_key_released = love.keyreleased
 function love.keyreleased(key)
-    if G.EMU.running or G.EMU.released then
-        for k, v in pairs(G.EMU.input.inputs) do
-            if v == key then
-                G.EMU.input.events[#G.EMU.input.events + 1] = {"keyup", k}
+    if G.EMU.running then
+        if key == 'escape' then
+            G.EMU.esc_pressed = nil
+        end
+
+        if G.EMU.input.inputs[key] then
+            G.EMU.input.events[#G.EMU.input.events + 1] = {"keyup", G.EMU.input.inputs[key]}
+            local last_state = G.EMU.anim_states[key]
+            if last_state then
+                G.EMU.anim_states[key] = nil
+                if button_maps[key] then
+                    local atlas = G.ASSET_ATLAS['fnwk_cabinet_button_'..button_maps[key]]
+                    G.EMU['button_'..button_maps[key]..'_quad'] = love.graphics.newQuad(
+                        0,
+                        0,
+                        atlas.px,
+                        atlas.py,
+                        atlas.image:getDimensions()
+                    )
+                end
+            end
+
+            local joy_pos = 0
+            local count = 0
+            for k, v in pairs(joy_poses) do
+                if G.EMU.anim_states[k]
+                and not (k == 'up' and G.EMU.anim_states['down'])
+                and not (k == 'down' and G.EMU.anim_states['up'])
+                and not (k == 'left' and G.EMU.anim_states['right'])
+                and not (k == 'right' and G.EMU.anim_states['left']) then
+                    count = count + 1
+                    joy_pos = joy_pos + v
+                end
+            end
+            if count == 2 then
+                if G.EMU.anim_states['up'] and G.EMU.anim_states['left'] then
+                    joy_pos = 8
+                else
+                    joy_pos = joy_pos/2
+                end
+            end
+
+            if joy_pos ~= G.EMU.last_joy_pos then
+                local atlas = G.ASSET_ATLAS['fnwk_cabinet_joystick']
+                G.EMU.joy_quad = love.graphics.newQuad(
+                    joy_pos*atlas.px,
+                    0,
+                    atlas.px,
+                    atlas.py,
+                    atlas.image:getDimensions()
+                )
+                G.EMU.last_joy_pos = joy_pos
             end
         end
-        G.EMU.released = true
     end
 
     ref_key_released(key)
@@ -147,7 +286,7 @@ end
 
 local ref_update = love.update
 function love.update(dt)
-    local mod_dt = G.real_dt and G.real_dt * 2 or dt * 2
+    local mod_dt = G.real_dt and G.real_dt or dt
 
     if G.EMU.running then
         -- track state timers
@@ -201,7 +340,7 @@ function love.update(dt)
             return
         end
         
-        G.EMU.frames.waiting = G.EMU.frames.waiting + (mod_dt * G.EMU.frames.fps) / G.SETTINGS.GAMESPEED
+        G.EMU.frames.waiting = G.EMU.frames.waiting + (mod_dt * G.EMU.frames.fps)
         while G.EMU.frames.waiting > 1 do
             if G.EMU.game.run_state == 'shutdown' then
                 for _, v in ipairs(G.EMU.input.events) do
@@ -225,8 +364,6 @@ function love.update(dt)
             G.EMU.frames.waiting = G.EMU.frames.waiting - 1
         end
 
-        G.EMU.pressed = nil
-        G.EMU.released = nil
         G.EMU.drawn = nil
     end
     
