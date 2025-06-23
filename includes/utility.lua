@@ -180,7 +180,6 @@ function FnwkLoadItem(file_key, item_type)
 		end
 	end
 
-
     if item_type == 'Challenge' or item_type == 'Edition' then
         -- these dont need visuals
         return

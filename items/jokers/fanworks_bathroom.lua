@@ -8,6 +8,7 @@ local jokerInfo = {
 	rarity = 2,
 	cost = 6,
     unlocked = false,
+    unlock_condition = {type = 'fnwk_discovered_card'},
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -24,6 +25,10 @@ function jokerInfo.locked_loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then
+        return false
+    end
+
     local discovered, total = FnwkCheckFanworksDiscoveries(self)
     return discovered == total
 end

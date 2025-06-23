@@ -368,7 +368,7 @@ function localize(args, misc_cat)
 end
 
 ---------------------------
---------------------------- pool modification
+--------------------------- Joker proxies for Bolt blind
 ---------------------------
 
 local ref_save_run = save_run
@@ -447,4 +447,21 @@ function fnwk_reset_blind_proxies()
     end
 
     G.GAME.blind.fnwk_table_ref = nil
+end
+
+
+
+
+
+
+---------------------------
+--------------------------- Custom discover unlock type to prevent automatic deck description
+---------------------------
+
+local ref_discover_tallies = set_discover_tallies
+function set_discover_tallies()
+	local ret = ref_discover_tallies()
+
+	if check_for_unlock then check_for_unlock({type = 'fnwk_discovered_card'}) end
+  	return ret
 end

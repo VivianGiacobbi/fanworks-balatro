@@ -72,7 +72,9 @@ G.FUNCS.reroll_shop = function(e)
         }))
     end
 
-    return ref_reroll_shop(e)
+    local ret = ref_reroll_shop(e)
+    check_for_unlock({type = 'fnwk_shop_rerolled', amt = G.GAME.round_scores.times_rerolled.amt})
+    return ret
 end
 
 
@@ -129,7 +131,6 @@ end
 ---------------------------
 --------------------------- Update debuff text for bosses
 ---------------------------
-local ref_update_blind_debuff = G.FUNCS.update_blind_debuff_text
 G.FUNCS.update_blind_debuff_text = function(e)
     if not e.config.object then return end
 
@@ -141,6 +142,28 @@ G.FUNCS.update_blind_debuff_text = function(e)
         e.config.object.start_pop_in = true
         e.config.object:update_text(true)
         e.UIBox:recalculate()
+    end
+end
+
+
+
+
+
+---------------------------
+--------------------------- Update debuff text for bosses
+---------------------------
+local ref_can_reroll = G.FUNCS.can_reroll
+G.FUNCS.can_reroll = function(e)
+    if not G.GAME.starting_params.fnwk_only_free_rerolls then
+        return ref_can_reroll(e)
+    end
+
+    if G.GAME.current_round.free_rerolls <= 0 then 
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    else
+        e.config.colour = G.C.GREEN
+        e.config.button = 'reroll_shop'
     end
 end
 

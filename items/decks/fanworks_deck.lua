@@ -7,12 +7,15 @@ local deckInfo = {
         },
     },
     unlocked = false,
-    unlock_condition = {num = 25},
-    discovered = true,
+    unlock_condition = {type = 'fnwk_discovered_card', num = 25},
     fanwork = 'fanworks',
 }
 
 function deckInfo.check_for_unlock(self, args)
+    if args.type ~= self.unlock_condition.type then
+        return false
+    end
+
     local discovered = FnwkCheckFanworksDiscoveries(self)
     return discovered >= self.unlock_condition.num
 end
@@ -26,7 +29,7 @@ function deckInfo.locked_loc_vars(self, info_queue, card)
     return {vars = {discovered, self.unlock_condition.num}}
 end
 
-deckInfo.apply = function(self, back)
+function deckInfo.apply(self, back)
     G.E_MANAGER:add_event(Event({
         func = function()
             G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate or 1

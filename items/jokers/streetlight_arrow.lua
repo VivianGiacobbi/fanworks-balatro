@@ -3,6 +3,8 @@ local jokerInfo = {
 	config = {},
 	rarity = 3,
 	cost = 10,
+	unlocked = false,
+	unlock_condition = {type = 'evolve_stand'},
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable = true,
@@ -32,6 +34,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
         vars = {},
         main_end = main_end
     }
+end
+
+function jokerInfo.check_for_unlock(self, args)
+    return args.type == self.unlock_condition.type
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -6,6 +6,7 @@ return {
 	['enableWipStands'] = false,
 	['enableConsumables'] = true,
 	['enableDecks'] = true,
+	['enableTags'] = true,
 	['enableBlinds'] = true,
 	['enableBlindReskins'] = true,
 	['enableChallenges'] = true,

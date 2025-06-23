@@ -166,6 +166,8 @@ G.fnwk_credits = {
     wario = 'MightyKingWario',
     winter = 'TheWinterComet',
     tos = 'TOS',
+    torch = 'torch_dreemurr',
+    abrams = 'Nico Abrams (LuaNES)',
     araki = 'Hirohiko Araki',
 	luckyland = 'Lucky Land Communications',
 }
