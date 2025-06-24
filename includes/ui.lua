@@ -113,8 +113,8 @@ end
 local header_scale = 1.1
 local bonus_padding = 1.15
 local support_padding = 0.015
-local artist_size = 0.38
-local special_thanks_mod = 0.75
+local artist_size = 0.35
+local special_thanks_mod = 0.85
 local special_thanks_padding = 0
 local artist_padding = 0.03
 local coding_scale = 0.90
