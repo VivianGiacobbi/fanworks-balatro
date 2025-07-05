@@ -173,6 +173,7 @@ end
 --------------------------- Main Menu UI callbacks
 ---------------------------
 
+--[[
 G.FUNCS.reset_trophies = function(e)
 	local warning_text = e.UIBox:get_UIE_by_ID('warn')
 	if warning_text.config.colour ~= G.C.WHITE then
@@ -203,6 +204,7 @@ G.FUNCS.reset_trophies = function(e)
 		}))
 	end
 end
+--]]
 
 function G.FUNCS.fnwk_apply_alts()
 	fnwk_enabled = copy_table(fnwk_config)
@@ -252,4 +254,36 @@ function G.FUNCS.fnwk_start_rom(e)
 	}
 	
 	G.EMU:start_nes(rom, nil, nil, start_pos)
+end
+
+
+
+
+
+---------------------------
+--------------------------- Challenge functions
+---------------------------
+
+local ref_challenge_desc = G.UIDEF.challenge_description_tab
+function G.UIDEF.challenge_description_tab(args)
+	args = args or {}
+
+	if args._tab == 'Restrictions' then
+		local challenge = G.CHALLENGES[args._id]
+		if challenge.restrictions then
+            if challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
+                challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+            end
+
+            if challenge.restrictions.banned_tags and type(challenge.restrictions.banned_tags) == 'function' then
+                challenge.restrictions.banned_tags = challenge.restrictions.banned_tags()
+            end
+
+            if challenge.restrictions.banned_other and type(challenge.restrictions.banned_other) == 'function' then
+                challenge.restrictions.banned_other = challenge.restrictions.banned_other()
+            end
+        end
+	end
+
+	return ref_challenge_desc(args)
 end

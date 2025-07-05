@@ -13,6 +13,7 @@ fnwk_config['standsEnabled'] = G.fnwk_stands_enabled or false
 fnwk_enabled['standsEnabled'] = G.fnwk_stands_enabled or false
 
 SMODS.optional_features.quantum_enhancements = true
+-- SMODS.optional_features.scale_context = true
 
 G.C.FANWORKS = SMODS.current_mod.badge_colour
 G.C.CRYSTAL = HEX('B5FFFF')
@@ -46,11 +47,10 @@ local includes = {
 	'tarot_reskins',
 	'blind_reskins',
 	'vanilla_tweaks',
-
 	-- cosmetic
 	--'queer',
 
-	'hooks/scaling_test',
+	--'hooks/scaling_test',
 }
 
 for _, module in ipairs(includes) do

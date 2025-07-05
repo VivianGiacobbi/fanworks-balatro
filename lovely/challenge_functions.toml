@@ -1,0 +1,42 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+#
+# Adds support for banned cards in challenges being returned from function results
+#
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if _ch.restrictions.banned_cards then'''
+position = "after"
+payload = '''   if type(_ch.restrictions.banned_cards) == 'function' then
+        _ch.restrictions.banned_cards = _ch.restrictions.banned_cards()
+	end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if _ch.restrictions.banned_tags then'''
+position = "after"
+payload = '''
+    if type(_ch.restrictions.banned_tags) == 'function' then
+        _ch.restrictions.banned_tags = _ch.restrictions.banned_tags()
+    end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if _ch.restrictions.banned_other then'''
+position = "after"
+payload = '''   
+    if type(_ch.restrictions.banned_other) == 'function' then
+        _ch.restrictions.banned_other = _ch.restrictions.banned_other()
+    end'''
+match_indent = true
+times = 1

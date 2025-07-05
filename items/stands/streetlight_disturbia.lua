@@ -91,7 +91,7 @@ function consumInfo.update(self, card, dt)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.blueprint or context.retrigger_joker then
+    if context.setting_blind and not card.getting_sliced and not card.debuff and not context.blueprint or context.retrigger_joker then
         if context.before or context.setting_blind then
             card.ability.fnwk_disturbia_played_hand = true
         end

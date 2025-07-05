@@ -167,6 +167,9 @@ local items_to_load = {
 		
 		-- shit realm
 		'fanworks_bathroom',
+		
+		-- dummy
+		'banned_jokers'
 	},
 
 	Consumable = {
@@ -307,7 +310,7 @@ local items_to_load = {
 	},
 
 	Challenge = {
-		'beyondcanon',
+		'beyond_canon',
 	},
 
 	Blind = {

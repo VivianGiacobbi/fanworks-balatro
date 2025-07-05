@@ -12,7 +12,16 @@ priority = 0
 target = "cardarea.lua"
 pattern = '''update_hand_text({immediate = true, nopulse = nil, delay = 0}, {handname=disp_text, level=G.GAME.hands[text].level, mult = G.GAME.hands[text].mult, chips = G.GAME.hands[text].chips})'''
 position = "after"
-payload = '''if next(SMODS.find_card('j_fnwk_jojopolis_high')) then
+payload = '''local highs = SMODS.find_card('j_fnwk_jojopolis_high')
+local valid = nil
+for _, v in ipairs(highs) do
+    if not v.debuff then
+        valid = true
+        break
+    end
+end
+
+if valid then
     local highest = 0
     for k, v in pairs(G.GAME.hands) do
         if v.level > highest then highest = v.level end
@@ -39,8 +48,16 @@ payload = '''local effective_hand = {
     mult = G.GAME.hands[text].mult,
     chips = G.GAME.hands[text].chips
 }
-local find_onhigh = SMODS.find_card('j_fnwk_jojopolis_high')
-if next(find_onhigh) then
+local highs = SMODS.find_card('j_fnwk_jojopolis_high')
+local valid = nil
+for _, v in ipairs(highs) do
+    if not v.debuff then
+        valid = true
+        break
+    end
+end
+
+if valid then
     local highest = 0
     for k, v in pairs(G.GAME.hands) do
         if v.level > highest then highest = v.level end
@@ -82,12 +99,72 @@ times = 1
 [patches.pattern]
 target = "functions/state_events.lua"
 pattern = '''mult = mod_mult(G.GAME.hands[text].mult)
-hand_chips = mod_chips(G.GAME.hands[text].chips)'''
+hand_chips = mod_chips(G.GAME.hands[text].chips)
+
+check_for_unlock({type = 'hand', handname = text, disp_text = non_loc_disp_text, scoring_hand = scoring_hand, full_hand = G.play.cards})'''
 position = "at"
 payload = '''mult = mod_mult(effective_hand.mult)
+hand_chips = mod_chips(effective_hand.chips)
+
+check_for_unlock({type = 'hand', handname = text, disp_text = non_loc_disp_text, scoring_hand = scoring_hand, full_hand = G.play.cards})'''
+match_indent = true
+times = 1
+
+# G.FUNCS.evaluate_play()
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''SMODS.displayed_hand = nil
+
+mult = mod_mult(G.GAME.hands[text].mult)
+hand_chips = mod_chips(G.GAME.hands[text].chips)'''
+position = "at"
+payload = '''SMODS.displayed_hand = nil
+
+local highs = SMODS.find_card('j_fnwk_jojopolis_high')
+local valid = nil
+for _, v in ipairs(highs) do
+    if not v.debuff then
+        valid = true
+        break
+    end
+end
+
+if valid then
+    local highest = 0
+    for k, v in pairs(G.GAME.hands) do
+        if v.level > highest then highest = v.level end
+    end
+    effective_hand.level = highest
+end
+
+local ares = SMODS.find_card('j_fnwk_gotequest_ajorekesr')
+if next(ares) then
+    local eights = 0
+    for _, v in ipairs(context.scoring_hand) do
+        if v:get_id() == 8 then
+            eights = eights + 1
+        end
+    end
+
+    if eights > 0 then
+        for _, v in ipairs(ares) do
+            if not v.debuff then
+                effective_hand.level = effective_hand.level + eights
+            end
+        end
+    end
+end
+
+effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1)
+effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+
+mult = mod_mult(effective_hand.mult)
 hand_chips = mod_chips(effective_hand.chips)'''
 match_indent = true
-times = 2
+times = 1
+
+
 
 
 

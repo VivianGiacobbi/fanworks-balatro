@@ -4,6 +4,10 @@ local jokerInfo = {
 		extra = {
 			chips = 0,
 			chip_mod = 1,
+			chips_extra = {
+				chips = 0,
+				chip_mod = 1,
+			}
 		}
 	},
 	rarity = 1,
@@ -35,6 +39,14 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.discard and not context.other_card.debuff then
 		card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+		return {
+			extra = {focus = card, message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
+			card = card
+		}
+	end
+
+	if context.individual and context.cardarea == G.play and not context.other_card.debuff then
+		card.ability.extra.chips_extra.chips = card.ability.extra.chips_extra.chips + card.ability.extra.chips_extra.chip_mod
 		return {
 			extra = {focus = card, message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
 			card = card

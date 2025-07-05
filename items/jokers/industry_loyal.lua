@@ -12,12 +12,12 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-	if not G.GAME or not G.GAME.current_loyal_suit then
+	if not G.GAME or not G.GAME.fnwk_current_loyal_suit then
 		return { vars = {'Spades', colours = {G.C.SUITS['Spades']}} }
 	end
 
-	local suit = localize(G.GAME.current_loyal_suit, 'suits_singular')
-	local color = G.C.SUITS[G.GAME.current_loyal_suit]
+	local suit = localize(G.GAME.fnwk_current_loyal_suit, 'suits_singular')
+	local color = G.C.SUITS[G.GAME.fnwk_current_loyal_suit]
 	return { vars = {suit, colours = {color}} }
 end
 
@@ -25,13 +25,13 @@ function jokerInfo.calculate(self, card, context)
 	if context.blueprint or card.debuff then return end
 
     if context.check_enhancement and context.cardarea == G.jokers then
-		if context.other_card.ability.effect ~= "Lucky Card" and context.other_card.ability.effect ~= "Stone Card" and
-		(context.other_card.ability.effect == 'Wild Card' or context.other_card.base.suit == G.GAME.current_loyal_suit) then			
+		if context.other_card.config.center.key ~= 'm_lucky' and context.other_card.config.center.key ~= 'm_stone' and
+		(context.other_card.config.center.key == 'm_wild' or context.other_card.base.suit == G.GAME.fnwk_current_loyal_suit) then
             return {
                 ['m_lucky'] = true,
             }
         end
-	end 
+	end
 end
 
 return jokerInfo
