@@ -551,17 +551,6 @@ function FnwkSecretHandsPlayed()
 	return secret
 end
 
-function FnwkPopulateBeyondCanonBans()
-	local banned = {}
-	for k, v in pairs(G.P_CENTERS) do
-		if FnwkStringStartsWith(k, "j_") and not FnwkStringStartsWith(k, "j_fnwk_") then
-			banned[#banned+1] = { id = k }
-		end
-	end
-	G.beyond_bans = banned
-end
-FnwkPopulateBeyondCanonBans()
-
 function fnwk_filter_loading(item_type)
 	if item_type == 'Sleeve' then
 		if CardSleeves then

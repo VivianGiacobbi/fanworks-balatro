@@ -428,14 +428,16 @@ return {
 			fnwk_variable = "#1#"
 		},
 		challenge_names = {
-			c_fnwk_beyondcanon = "Beyond Canon",
+			c_fnwk_beyond_canon = "Beyond Canon",
 		},
 		v_text = {
-			ch_c_fnwk_beyondcanon = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"}
+			ch_c_fnwk_beyond_canon = {"All non-{C:fanworks}Fanworks{} {C:attention}Jokers{} are banned"}
 		},
 		achievement_names = {
+
 		},
 		achievement_descriptions = {
+			
 		},
 		poker_hands = {
 			jojobal_Fibonacci = 'Fibonacci',
@@ -1680,6 +1682,16 @@ return {
 					"Play {C:attention,E:1}#1#{} unique",
 					"{C:attention,E:1}secret poker hands{}",
 					"in one run"
+				}
+			},
+			j_csau_banned_jokers = {
+				name = {
+					"Non-Fanworks,",
+					"Jokers",
+				},
+				text = {
+					"This challenge bans all",
+					"non-{C:fanworks}Fanworks{} {C:attention}Jokers{}",
 				}
 			},
 		},

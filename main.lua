@@ -8,13 +8,12 @@ if csau or stands then
 	G.fnwk_stands_enabled = true
 end
 
--- force set these to false
-if not G.fnwk_stands_enabled then
-	fnwk_config['standsEnabled'] = false
-	fnwk_enabled['standsEnabled'] = false
-end
+-- force set these to false if not enabled
+fnwk_config['standsEnabled'] = G.fnwk_stands_enabled or false
+fnwk_enabled['standsEnabled'] = G.fnwk_stands_enabled or false
 
 SMODS.optional_features.quantum_enhancements = true
+-- SMODS.optional_features.scale_context = true
 
 G.C.FANWORKS = SMODS.current_mod.badge_colour
 G.C.CRYSTAL = HEX('B5FFFF')
@@ -48,13 +47,10 @@ local includes = {
 	'tarot_reskins',
 	'blind_reskins',
 	'vanilla_tweaks',
-
-	--- might require functionality
-	-- 'options/achievements',
-	-- 'options/blinds',
-
 	-- cosmetic
-	'queer',
+	--'queer',
+
+	--'hooks/scaling_test',
 }
 
 for _, module in ipairs(includes) do

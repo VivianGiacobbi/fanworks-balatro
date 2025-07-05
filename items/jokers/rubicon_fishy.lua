@@ -25,11 +25,9 @@ function jokerInfo.calculate(self, card, context)
     if context.other_card.ability.bonus > 0 then return_table.chips = context.other_card.ability.bonus end
     if context.other_card.ability.x_chips and context.other_card.ability.x_chips > 1 then return_table.x_chips = context.other_card.ability.x_chips end
     if context.other_card.ability.mult > 0 then 
-        if context.other_card.ability.effect == "Lucky Card" then
-            if not G.GAME.lucky_cancels and pseudorandom('lucky_mult') < G.GAME.probabilities.normal/5 then
-                context.other_card.lucky_trigger = true
-                return_table.mult = context.other_card.ability.mult
-            end
+        if context.other_card.ability.effect == "Lucky Card" and SMODS.pseudorandom_probability(self, 1, 5, 'lucky_mult') then
+            context.other_card.lucky_trigger = true
+            return_table.mult = context.other_card.ability.mult
         else
             return_table.mult = context.other_card.ability.mult 
         end
@@ -38,15 +36,13 @@ function jokerInfo.calculate(self, card, context)
     if context.other_card.ability.x_mult and context.other_card.ability.x_mult > 1 then return_table.x_mult =  context.other_card.ability.x_mult end
 
     if context.other_card.ability.p_dollars > 0 then 
-        if context.other_card.ability.effect == "Lucky Card" then 
-            if not G.GAME.lucky_cancels and pseudorandom('lucky_money') < G.GAME.probabilities.normal/15 then
-                context.other_card.lucky_trigger = true
-                return_table.p_dollars = context.other_card.ability.p_dollars 
-            end
+        if context.other_card.ability.effect == "Lucky Card" and SMODS.pseudorandom_probability(self, 1, 15, 'lucky_money') then
+            context.other_card.lucky_trigger = true
+            return_table.p_dollars = context.other_card.ability.p_dollars
         else 
-            return_table.p_dollars = context.other_card.ability.p_dollars 
+            return_table.p_dollars = context.other_card.ability.p_dollars
         end
-    end  
+    end
 
     local enhancement = context.other_card:calculate_enhancement(context)
     if enhancement then

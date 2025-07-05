@@ -1,3 +1,8 @@
+
+---------------------------
+--------------------------- Maggie Speech Bubble Support
+---------------------------
+
 function G.UIDEF.jok_speech_bubble(text_key, loc_vars, extra)
     local text = {}
     local extra = extra or {}
@@ -16,6 +21,14 @@ function G.UIDEF.jok_speech_bubble(text_key, loc_vars, extra)
     return t
 end
 
+
+
+
+
+---------------------------
+--------------------------- The Creek score modifiers
+---------------------------
+
 function G.UIDEF.predict_card_ui(cardarea)
     return {
         n = G.UIT.ROOT,
@@ -31,20 +44,13 @@ function G.UIDEF.predict_card_ui(cardarea)
     }
 end
 
-function G.UIDEF.artist_card_ui(cardarea)
-    return {
-        n = G.UIT.ROOT,
-        config = {align = "cm", minh = 1, r = 0.3, padding = 0.07, minw = 1, colour = G.C.JOKER_GREY, shadow = true},
-        nodes = {{
-            n = G .UIT.C,
-            config = {align = "cm", minh = 1, r = 0.2, padding = 0.1, minw = 1, colour = G.C.L_BLACK},
-            nodes = {{
-                n = G.UIT.O,
-                config = {object = cardarea}
-            }}
-        }}
-    }
-end
+
+
+
+
+---------------------------
+--------------------------- Fix Disturbia badge
+---------------------------
 
 local ref_card_popup = G.UIDEF.card_h_popup
 function G.UIDEF.card_h_popup(card)
@@ -115,6 +121,13 @@ function create_UIBox_blind_choice(type, run_info)
     return ret
 end
 
+
+
+
+
+---------------------------
+--------------------------- Multi line attention text support
+---------------------------
 
 local ref_attention_text = attention_text
 function attention_text(args)
@@ -263,4 +276,40 @@ function attention_text(args)
             end
         end
     }))
+end
+
+
+
+
+
+---------------------------
+--------------------------- Automatic challenge ban functions
+---------------------------
+
+function G.FUNCS.fnwk_run_challenge_functions(challenge)
+    if not challenge.restrictions then return end
+
+    if challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
+        challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+    end
+
+    if challenge.restrictions.banned_tags and type(challenge.restrictions.banned_tags) == 'function' then
+        challenge.restrictions.banned_tags = challenge.restrictions.banned_tags()
+    end
+
+    if challenge.restrictions.banned_other and type(challenge.restrictions.banned_other) == 'function' then
+        challenge.restrictions.banned_other = challenge.restrictions.banned_other()
+    end
+end
+
+local ref_challenge_desc = G.UIDEF.challenge_description_tab
+function G.UIDEF.challenge_description_tab(args)
+	args = args or {}
+
+	if args._tab == 'Restrictions' then
+		local challenge = G.CHALLENGES[args._id]
+		G.FUNCS.fnwk_run_challenge_functions(challenge)
+	end
+    
+	return ref_challenge_desc(args)
 end

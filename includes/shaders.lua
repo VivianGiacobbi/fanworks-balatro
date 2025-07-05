@@ -188,6 +188,7 @@ local disturb_corners = {
 }
 ---]]
 
+if not SMODS.DrawSteps.arrow_stand_mask then return end
 local old_stand_ds = SMODS.DrawSteps.arrow_stand_mask.func
 SMODS.DrawStep:take_ownership('arrow_stand_mask', {
     func = function(self, layer)

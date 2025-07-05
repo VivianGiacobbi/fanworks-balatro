@@ -26,8 +26,8 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-	if context.other_card.ability.set == 'Enhanced' then
-		return
+	if context.other_card.config.center.key ~= 'c_base' then
+		return { no_retrigger = true }
 	end
 	
 	local seed_result = pseudorandom(pseudoseed('mule_roll'))

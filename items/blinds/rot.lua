@@ -9,22 +9,29 @@ local blindInfo = {
 }
 
 function blindInfo.set_blind(self)
-    G.GAME.blind.triggered = true
     G.GAME.modifiers.fnwk_no_consumeables = true
 end
 
-function blindInfo.disable(self)
+function blindInfo.press_play(self)
+    for _, v in ipairs(G.consumeables) do
+        if v.ability.consumeable then
+            G.GAME.blind.triggered = true
+            return
+        end
+    end
+
     G.GAME.blind.triggered = false
+end
+
+function blindInfo.disable(self)
     G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
 function blindInfo.defeat(self)
-    G.GAME.blind.triggered = false
     G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
 function blindInfo.fnwk_blind_load(self)
-    G.GAME.blind.triggered = true
     G.GAME.modifiers.fnwk_no_consumeables = true
 end
 
