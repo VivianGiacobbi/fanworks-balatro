@@ -355,11 +355,12 @@ return {
             },
 			k_flush = 'Flushed!',
 			k_expired_ex = 'Expired!',
-			k_dzvalin = 'Dummy Text!',
+			k_dzvalin = 'Warped!',
 			k_joker_replaced = 'Energy Tranformed!',
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
 			k_valentino = 'Autocannibalized!',
+			k_nowkiss = "Now Kiss!",
 
 			k_stand_advanced = 'Advanced Stand',
 			k_mcr_bubbled = 'Bubbled!',
@@ -428,16 +429,14 @@ return {
 			fnwk_variable = "#1#"
 		},
 		challenge_names = {
-			c_fnwk_beyond_canon = "Beyond Canon",
+			c_fnwk_beyondcanon = "Beyond Canon",
 		},
 		v_text = {
-			ch_c_fnwk_beyond_canon = {"All non-{C:fanworks}Fanworks{} {C:attention}Jokers{} are banned"}
+			ch_c_fnwk_beyondcanon = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"}
 		},
 		achievement_names = {
-
 		},
 		achievement_descriptions = {
-			
 		},
 		poker_hands = {
 			jojobal_Fibonacci = 'Fibonacci',
@@ -1159,8 +1158,9 @@ return {
 			j_fnwk_gotequest_pair = {
 				name = "One True Pair",
 				text = {
-					"Played {C:attention}Pairs{} gain",
-					"{C:chips}each other's{} Chips"
+					"Each scored {C:attention}Pair{} has a",
+					"{C:green}#1# in #2#{} chance to",
+					"become {C:dark_edition}Polychrome{}"
 				}
 			},
 			j_fnwk_gotequest_killing = {
@@ -1682,16 +1682,6 @@ return {
 					"Play {C:attention,E:1}#1#{} unique",
 					"{C:attention,E:1}secret poker hands{}",
 					"in one run"
-				}
-			},
-			j_csau_banned_jokers = {
-				name = {
-					"Non-Fanworks,",
-					"Jokers",
-				},
-				text = {
-					"This challenge bans all",
-					"non-{C:fanworks}Fanworks{} {C:attention}Jokers{}",
 				}
 			},
 		},
