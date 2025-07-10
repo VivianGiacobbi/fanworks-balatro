@@ -179,7 +179,6 @@ function fnwk_remove_extra_blinds(blind_source)
 	local removed = false
 	for i=#G.GAME.fnwk_extra_blinds, 1, -1 do
 		if G.GAME.fnwk_extra_blinds[i].fnwk_extra_blind == blind_source then
-			sendDebugMessage('removing extra blind')
 			local extra_blind = G.GAME.fnwk_extra_blinds[i]
 			table.remove(G.GAME.fnwk_extra_blinds, i)
 
@@ -280,6 +279,10 @@ end
 
 local ref_localize = localize
 function localize(args, misc_cat)
+	if args and not (type(args) == 'table') then
+		return ref_localize(args, misc_cat)
+	end
+
   	if args.type == 'name' and args.key == 'c_fnwk_double_geometrical' then
 		local name = G.localization.descriptions[args.set][args.key]
 		local loc_target = { name_parsed = name.name_parsed or {loc_parse_string(name.name)}}
@@ -363,6 +366,12 @@ function localize(args, misc_cat)
 	
 		return final_name
   	end
+
+	if G.GAME.modifiers.fnwk_no_suits and args.type == 'other' and args.key == 'playing_card' and args.set == 'Other' then
+		args.key = 'fnwk_playing_card_nosuit'
+	elseif G.GAME.modifiers.fnwk_no_rank_chips and args.type == 'other' and args.key == 'card_chips' then
+		args.key = 'fnwk_card_chips_none'
+	end
 
 	return ref_localize(args, misc_cat)
 end
@@ -464,4 +473,24 @@ function set_discover_tallies()
 
 	if check_for_unlock then check_for_unlock({type = 'fnwk_discovered_card'}) end
   	return ret
+end
+
+
+
+---------------------------
+--------------------------- The Written Blind behavior
+---------------------------
+
+SMODS.Atlas({ key = 'nosuit', path = 'deck_nosuit.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'norank_lc', path = 'deck_norank_lc.png', px = 71, py = 95 })
+
+local ref_front_info = get_front_spriteinfo
+function get_front_spriteinfo(_front)
+	if G.GAME.modifiers.fnwk_no_suits then
+		return G.ASSET_ATLAS['fnwk_nosuit'], _front.pos
+	elseif G.GAME.modifiers.fnwk_no_rank_chips then
+		return G.ASSET_ATLAS['fnwk_norank_lc'], _front.pos
+	end
+
+	return ref_front_info(_front)
 end

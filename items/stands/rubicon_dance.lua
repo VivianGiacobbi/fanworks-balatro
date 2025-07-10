@@ -30,7 +30,21 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff or context.blueprint or context.retrigger_joker then return end
 
-    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_dance then
+    if context.fix_probability and context.identifier == 'glass' then
+        if context.trigger_obj:is_suit(card.ability.extra.suit) then
+            return {
+                numerator = 0
+            }
+        else
+            return {
+                numerator = 1,
+                denominator = 0
+            }
+        end
+    end
+
+    if context.fnwk_playing_card_removed and context.removed.glass_trigger
+    and SMODS.has_enhancement(context.removed, 'm_glass') then
         return {
             func = function()
                 G.FUNCS.flare_stand_aura(card, 0.5)

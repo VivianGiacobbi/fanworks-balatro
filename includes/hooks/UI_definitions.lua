@@ -1,4 +1,3 @@
-
 ---------------------------
 --------------------------- Maggie Speech Bubble Support
 ---------------------------
@@ -96,6 +95,14 @@ function create_UIBox_blind_popup(blind, discovered, vars)
             }
         }
     end
+
+    if discovered and blind.special_colour then
+        local ability_text = ret.nodes[2].nodes[1].nodes[4]
+        if ability_text then
+            ability_text.config.colour = blind.special_colour
+        end
+    end
+
     return ret
 end
 
@@ -312,4 +319,36 @@ function G.UIDEF.challenge_description_tab(args)
 	end
     
 	return ref_challenge_desc(args)
+end
+
+
+
+
+
+---------------------------
+--------------------------- Add "submit button" for The Work Blind
+---------------------------
+
+local ref_use_and_sell = G.UIDEF.use_and_sell_buttons
+function G.UIDEF.use_and_sell_buttons(card)
+    local ret = ref_use_and_sell(card)
+
+    if card.area and card.area == G.jokers and card.ability.set == 'Joker' and G.GAME.blind
+    and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+        local inner_nodes = ret.nodes[1].nodes[2].nodes
+        inner_nodes[#inner_nodes+1] = {
+            n = G.UIT.C,
+            config = { align = 'cr' },
+            nodes = {{
+                n = G.UIT.C,
+                config = { ref_table = card, align = "cr", maxw = 1.25, padding = 0.1, r = 0.08, minw = 1.25, minh = 1, hover = true, shadow = true, colour = G.C.FANWORKS, one_press = true, button = 'fnwk_submit_to_blind'},
+                nodes={
+                    {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                    {n=G.UIT.T, config = {text = localize('b_fnwk_submit'), colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+                }}
+            }
+        }
+    end
+
+    return ret
 end

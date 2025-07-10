@@ -307,6 +307,10 @@ return {
 			fnwk_options_resetTrophies_r = "Reset Achievements",
 			fnwk_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
 			
+			-- buttons
+			b_fnwk_submit = 'Submit',
+
+			-- joker loc strings
 			k_discount = "Discount!",
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
@@ -360,8 +364,13 @@ return {
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
 			k_valentino = 'Autocannibalized!',
+			k_fnwk_submitted = {
+				'Submitted for',
+				'Parnership!'
+			},
 			k_nowkiss = "Now Kiss!",
 
+			-- stand loc strings
 			k_stand_advanced = 'Advanced Stand',
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
@@ -376,6 +385,7 @@ return {
 			k_insane = 'Doubled!',
 			k_shout = 'Chomp!',
 
+			-- badges
 			ba_fanworks = 'Fanworks',
 			ba_plancks = "Planck's Creek",
 			ba_streetlight = 'Streetlight Pursuit',
@@ -475,6 +485,16 @@ return {
                 text = {
                     "Blind effects",
                     "are disabled"
+                }
+            },
+			fnwk_playing_card_nosuit = {
+                text = {
+					" {C:light_black}#1#{} of {C:inactive}None{} "
+                }
+            },
+			fnwk_card_chips_none = {
+                text = {
+					"{C:dark_edition}+0{} chips"
                 }
             },
 			incomplete = {
@@ -747,6 +767,25 @@ return {
                 text = {
                     "Held in hand effects",
 					"are {C:attention}disabled{}"
+                }
+            },
+			bl_fnwk_work = {
+                name = "The Work",
+                text = {
+                    "Submit {C:attention}#1# Joker{} to play"
+                }
+            },
+			bl_fnwk_written = {
+                name = "The Written",
+                text = {
+                    "Cards have {C:attention}no suits{}"
+                }
+            },
+			bl_fnwk_manga = {
+                name = "The Manga",
+                text = {
+                    "Cards do not score",
+					"{C:attention}base{} Chips"
                 }
             },
 			bl_fnwk_final_moe = {

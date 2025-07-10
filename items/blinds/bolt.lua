@@ -1,6 +1,6 @@
 local blindInfo = {
     name = "The Bolt",
-    color = HEX('6FD0F2'),
+    boss_colour = HEX('6FD0F2'),
     pos = {x = 0, y = 0},
     dollars = 5,
     mult = 2,

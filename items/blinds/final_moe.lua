@@ -1,6 +1,8 @@
 local blindInfo = {
     name = "Multicolor MOE",
-    color = SMODS.Gradients['fnwk_moe'],
+    boss_colour = SMODS.Gradients['fnwk_moe_light'],
+    special_colour = SMODS.Gradients['fnwk_moe_dark'],
+    tertiary_colour = SMODS.Gradients['fnwk_moe_dim'],
     pos = {x = 0, y = 0},
     dollars = 8,
     mult = 1,

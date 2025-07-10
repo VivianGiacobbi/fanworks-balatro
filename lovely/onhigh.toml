@@ -23,7 +23,7 @@ end
 
 if valid then
     local highest = 0
-    for k, v in pairs(G.GAME.hands) do
+    for _, v in pairs(G.GAME.hands) do
         if v.level > highest then highest = v.level end
     end
     local fake_hand = {
@@ -49,7 +49,7 @@ payload = '''local effective_hand = {
     chips = G.GAME.hands[text].chips
 }
 local highs = SMODS.find_card('j_fnwk_jojopolis_high')
-local valid = nil
+local high_valid = nil
 for _, v in ipairs(highs) do
     if not v.debuff then
         valid = true
@@ -57,7 +57,7 @@ for _, v in ipairs(highs) do
     end
 end
 
-if valid then
+if high_valid then
     local highest = 0
     for k, v in pairs(G.GAME.hands) do
         if v.level > highest then highest = v.level end
@@ -121,21 +121,15 @@ hand_chips = mod_chips(G.GAME.hands[text].chips)'''
 position = "at"
 payload = '''SMODS.displayed_hand = nil
 
-local highs = SMODS.find_card('j_fnwk_jojopolis_high')
-local valid = nil
-for _, v in ipairs(highs) do
-    if not v.debuff then
-        valid = true
-        break
-    end
-end
-
-if valid then
+local prev_level = effective_hand.level
+if high_valid then
     local highest = 0
     for k, v in pairs(G.GAME.hands) do
         if v.level > highest then highest = v.level end
     end
     effective_hand.level = highest
+else
+    effective_hand.level = G.GAME.hands[text].level
 end
 
 local ares = SMODS.find_card('j_fnwk_gotequest_ajorekesr')
@@ -156,8 +150,10 @@ if next(ares) then
     end
 end
 
-effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1)
-effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+if effective_hand.level ~= prev_level then
+    effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1)
+    effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+end
 
 mult = mod_mult(effective_hand.mult)
 hand_chips = mod_chips(effective_hand.chips)'''

@@ -131,6 +131,7 @@ end
 ---------------------------
 --------------------------- Update debuff text for bosses
 ---------------------------
+
 G.FUNCS.update_blind_debuff_text = function(e)
     if not e.config.object then return end
 
@@ -150,8 +151,83 @@ end
 
 
 ---------------------------
---------------------------- Update debuff text for bosses
+--------------------------- The Work Blind behavior
 ---------------------------
+
+local ref_can_play = G.FUNCS.can_play
+G.FUNCS.can_play = function(e)
+    local ret = ref_can_play(e)
+
+    -- hopefully preventing a disturbia softlock
+    if G.GAME.blind and G.jokers.config.visible_card_count > 0
+    and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+        local submitted = 0
+        local num_jokers = 0
+        for _, v in ipairs(G.jokers.cards) do
+            if v.ability.set == 'Joker' then num_jokers = num_jokers + 1 end
+            if v.fnwk_work_submitted then submitted = submitted + 1 end
+        end
+
+        if G.GAME.blind.fnwk_works_submitted ~= submitted then
+            for _, v in ipairs(G.jokers.cards) do
+                if v.ability.set == 'Joker' then G.GAME.blind:debuff_card(v, true) end
+            end
+            G.GAME.blind.fnwk_works_submitted = submitted
+        end
+        
+        
+        if num_jokers > 1 and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+            e.states.click.can = false
+            e.states.visible = false
+            local discard = e.parent.children[G.SETTINGS.play_button_pos == 1 and 1 or 3]
+            if discard.states then
+                discard.states.click.can = false
+                discard.states.visible = false
+            end
+        else
+            e.states.click.can = true
+            e.states.visible = true
+            local discard = e.parent.children[G.SETTINGS.play_button_pos == 1 and 1 or 3]
+            if discard.states then
+                discard.states.click.can = true
+                discard.states.visible = true
+            end
+        end
+    end
+
+    return ret
+end
+
+G.FUNCS.fnwk_submit_to_blind = function(e)
+    local card = e.config.ref_table
+    card.fnwk_work_submitted = true
+    G.jokers:unhighlight_all()
+
+    if G.GAME.blind.fnwk_works_submitted >= G.GAME.blind.fnwk_required_works - 1 then
+        -- juice the button if it should otherwise be active when this is submitted and
+        -- crosses the threshold
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                G.buttons.UIRoot.children[1]:juice_up()
+                G.buttons.UIRoot.children[3]:juice_up()
+                return true
+            end
+        }))
+    end
+    card_eval_status_text(card, 'extra', nil, nil, nil, {
+        message = localize('k_fnwk_submitted'),
+        colour = G.C.FANWORKS
+    })
+end
+
+
+
+
+
+---------------------------
+--------------------------- Shimmering Deck behavior
+---------------------------
+
 local ref_can_reroll = G.FUNCS.can_reroll
 G.FUNCS.can_reroll = function(e)
     if not G.GAME.starting_params.fnwk_only_free_rerolls then
@@ -286,4 +362,60 @@ function G.UIDEF.challenge_description_tab(args)
 	end
 
 	return ref_challenge_desc(args)
+end
+
+
+
+
+
+---------------------------
+--------------------------- Reset bkg for manga blind
+---------------------------
+
+local ref_start_run = G.FUNCS.start_run
+G.FUNCS.start_run = function(e, args)
+    if G.GAME.blind then
+        G.GAME.blind.in_blind = false
+        G.GAME.blind.fnwk_newrun_flag = true
+    end
+    
+    if G.GAME.fnwk_gradient_background then
+        G.C.BACKGROUND.L = { G.C.BACKGROUND.L[1], G.C.BACKGROUND.L[2], G.C.BACKGROUND.L[3], G.C.BACKGROUND.L[4] }
+        G.C.BACKGROUND.D = { G.C.BACKGROUND.D[1], G.C.BACKGROUND.D[2], G.C.BACKGROUND.D[3], G.C.BACKGROUND.D[4] }
+        G.C.BACKGROUND.C = { G.C.BACKGROUND.C[1], G.C.BACKGROUND.C[2], G.C.BACKGROUND.C[3], G.C.BACKGROUND.C[4] }
+        G.C.BACKGROUND.contrast = G.C.BACKGROUND.contrast
+        G.GAME.fnwk_gradient_background = nil
+    end
+
+    if G.GAME.fnwk_gradient_ui then
+        G.C.DYN_UI.MAIN = { G.C.DYN_UI.MAIN[1], G.C.DYN_UI.MAIN[2], G.C.DYN_UI.MAIN[3], G.C.DYN_UI.MAIN[4] }
+        G.C.DYN_UI.DARK = { G.C.DYN_UI.DARK[1], G.C.DYN_UI.DARK[2], G.C.DYN_UI.DARK[3], G.C.DYN_UI.DARK[4] }
+        G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
+        G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
+        G.GAME.fnwk_gradient_ui = nil
+    end
+
+    return ref_start_run(e, args)
+end
+
+local ref_go_menu = G.FUNCS.go_to_menu
+G.FUNCS.go_to_menu = function(e)
+    if G.GAME.fnwk_gradient_background then
+        G.C.BACKGROUND.L = { G.C.BACKGROUND.L[1], G.C.BACKGROUND.L[2], G.C.BACKGROUND.L[3], G.C.BACKGROUND.L[4] }
+        G.C.BACKGROUND.D = { G.C.BACKGROUND.D[1], G.C.BACKGROUND.D[2], G.C.BACKGROUND.D[3], G.C.BACKGROUND.D[4] }
+        G.C.BACKGROUND.C = { G.C.BACKGROUND.C[1], G.C.BACKGROUND.C[2], G.C.BACKGROUND.C[3], G.C.BACKGROUND.C[4] }
+        G.C.BACKGROUND.contrast = G.C.BACKGROUND.contrast
+        G.GAME.fnwk_gradient_background = nil
+    end
+
+    if G.GAME.fnwk_gradient_ui then
+        G.C.DYN_UI.MAIN = { G.C.DYN_UI.MAIN[1], G.C.DYN_UI.MAIN[2], G.C.DYN_UI.MAIN[3], G.C.DYN_UI.MAIN[4] }
+        G.C.DYN_UI.DARK = { G.C.DYN_UI.DARK[1], G.C.DYN_UI.DARK[2], G.C.DYN_UI.DARK[3], G.C.DYN_UI.DARK[4] }
+        G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
+        G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
+        G.GAME.fnwk_gradient_ui = nil
+        sendDebugMessage('resetting gradient UI')
+    end
+
+    return ref_go_menu(e)
 end

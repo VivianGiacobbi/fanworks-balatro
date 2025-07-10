@@ -156,11 +156,6 @@ function FnwkLoadItem(file_key, item_type)
 		end
 	end
 
-	if item_type == 'Blind' and info.color then
-		info.boss_colour = info.color
-		info.color = nil
-	end
-
 	local new_item
 	if SMODS[smods_item] then
 		new_item = SMODS[smods_item](info)
@@ -559,4 +554,35 @@ function fnwk_filter_loading(item_type)
 	else
 		return fnwk_enabled['enable'..item_type..'s']
 	end
+end
+
+function FnwkManualUIReload(hud_offset)
+	if G.HUD then G.HUD:remove(); G.HUD = nil end
+	if G.HUD_blind then
+		-- manually nil out the blind object so this remove call doesn't destroy it unnecessarily
+		G.HUD_blind.UIRoot.children[2].children[2].children[1].config.object = nil
+		G.HUD_blind:remove();
+		G.HUD_blind = nil
+	end
+	G.HUD = UIBox{
+		definition = create_UIBox_HUD(),
+		config = {align=('cli'), offset = {x=-0.7,y=0}, major = G.ROOM_ATTACH}
+	}
+	G.HUD_blind = UIBox{
+		definition = create_UIBox_HUD_blind(),
+		config = {major = G.HUD:get_UIE_by_ID('row_blind_bottom'), align = 'bmi', offset = {x=0,y=hud_offset or -10}, bond = 'Weak'}
+	}
+
+	G.hand_text_area = {
+		chips = G.HUD:get_UIE_by_ID('hand_chips'),
+		mult = G.HUD:get_UIE_by_ID('hand_mult'),
+		ante = G.HUD:get_UIE_by_ID('ante_UI_count'),
+		round = G.HUD:get_UIE_by_ID('round_UI_count'),
+		chip_total = G.HUD:get_UIE_by_ID('hand_chip_total'),
+		handname = G.HUD:get_UIE_by_ID('hand_name'),
+		hand_level = G.HUD:get_UIE_by_ID('hand_level'),
+		game_chips = G.HUD:get_UIE_by_ID('chip_UI_count'),
+		blind_chips = G.HUD_blind:get_UIE_by_ID('HUD_blind_count'),
+		blind_spacer = G.HUD:get_UIE_by_ID('blind_spacer')
+	}
 end

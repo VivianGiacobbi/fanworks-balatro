@@ -24,7 +24,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.repetition and context.cardarea == G.play and not context.end_of_round
+    if context.repetition and context.cardarea == G.play
     and SMODS.has_enhancement(context.other_card, card.ability.extra.enhancement) then
 		local flare_card = context.blueprint_card or card
         return {
