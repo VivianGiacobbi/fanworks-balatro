@@ -46,8 +46,8 @@ SMODS.Consumable:take_ownership('c_strength', {
                     G.hand.highlighted[i]:flip();
                     play_sound('tarot2', percent, 0.6);
                     G.hand.highlighted[i]:juice_up(0.3, 0.3);
-                    return true 
-                end 
+                    return true
+                end
             }))
         end
 
@@ -418,84 +418,30 @@ SMODS.Consumable:take_ownership('aura', {
     end
 }, true)
 
-local ref_glass_locvars = SMODS.Centers.m_glass.loc_vars
+local ref_glass_calc = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
-    config = {extra = 4},
-    loc_vars = function(self, info_queue, card)
-        if next(SMODS.find_card('c_fnwk_rubicon_dance')) then
-            local loc_key = 'm_glass_fnwk_dance_'..(card:is_suit('Spades') and 'spades' or 'other')
-            return {
-                vars = {2},
-                key = loc_key
-            }
-        end
-
-        if ref_glass_locvars and type(ref_glass_locvars) == 'function' then
-            return ref_glass_locvars(self, info_queue, card)
-        end
-
-        return { vars = {2, G.GAME.probabilities.normal, self.config.extra}}
-    end,
     calculate = function(self, card, context)
-        local dances = SMODS.find_card('c_fnwk_rubicon_dance')
-        local valid = false
-        for _, v in ipairs(dances) do
-            if not v.debuff then
-                valid = true
-                break
-            end
-        end
-
-        if valid then
-            if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
-                local is_spades = context.destroy_card:is_suit('Spades')
-                if not is_spades then
-                    context.destroy_card.fnwk_removed_by_dance = true
-                    return { remove = true }
-                end
-            end
-
-            if context.main_scoring and context.cardarea == G.play then
-                return {
-                    func = function()
-                        for _, v in ipairs(dances) do
-                            G.FUNCS.flare_stand_aura(v, 0.5)
-                            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
-                                v:juice_up()
-                            return true end }))
-                        end
-                    end,
-                    extra = {
-                        x_mult = 2,
-                    }
-                }
-            end
-            return
-        end
+        local ret, post = ref_glass_calc(self, card, context)
         
-        if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
-            local check_break = pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra
-            if not check_break then
-                local shatter_mes = SMODS.find_card('c_fnwk_iron_shatter')
-                for _, v in ipairs(shatter_mes) do
-                    if not v.debuff then
-                        check_break = pseudorandom('glass') < G.GAME.probabilities.normal/card.ability.extra
-                        if check_break then break end
-                    end
+        if context.destroy_card and context.cardarea == G.play and context.destroy_card == card
+        and not context.destroy_card.glass_trigger then
+            local shatter_mes = SMODS.find_card('c_fnwk_iron_shatter')
+            local valid = false
+            for _, v in ipairs(shatter_mes) do
+                if not v.debuff then
+                    valid = true
+                    break
                 end
             end
             
-            if check_break then
+            if valid and SMODS.pseudorandom_probability(card, 'glass', 1, card.ability.extra) then
                 card.glass_trigger = true
-                return { remove = true }
+                ret = ret or {}
+                ret.remove = true
             end
         end
 
-        if context.main_scoring and context.cardarea == G.play then
-            return {
-                x_mult = 2,
-            }
-        end
+        return ret, post
     end,
 }, true)
 

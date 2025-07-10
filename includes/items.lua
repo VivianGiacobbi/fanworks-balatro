@@ -320,6 +320,9 @@ local items_to_load = {
 		'rot',
 		'creek',
 		'box',
+		'work',
+		'written',
+		'manga',
 		'final_moe',
 	},
 

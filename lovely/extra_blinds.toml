@@ -222,3 +222,38 @@ position = "at"
 payload = '''if self.disabled or self.main_blind_disabled then self.block_play = nil; return true end'''
 match_indent = true
 times = 1
+
+# create_UIBox_blind_choice()
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''{n=G.UIT.R, config={align = "cm", r = 0.1, outline = 1, outline_colour = blind_col, colour = darken(blind_col, 0.3), minw = 2.9, emboss = 0.1, padding = 0.07, line_emboss = 1}, nodes={'''
+position = "at"
+payload = '''{n=G.UIT.R, config={align = "cm", r = 0.1, outline = 1, outline_colour = blind_col, colour = blind_choice.config.special_colour or darken(blind_col, 0.3), minw = 2.9, emboss = 0.1, padding = 0.07, line_emboss = 1}, nodes={'''
+match_indent = true
+times = 1
+
+# create_UIBox_blind_choice()
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''G.blind_select_opts.boss = G.GAME.round_resets.blind_states['Boss'] ~= 'Hide' and UIBox{definition = {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={UIBox_dyn_container({create_UIBox_blind_choice('Boss')},false,get_blind_main_colour('Boss'), mix_colours(G.C.BLACK, get_blind_main_colour('Boss'), 0.8))}}, config = {align="bmi", offset = {x=0,y=0}}} or nil'''
+position = "at"
+payload = '''G.blind_select_opts.boss = G.GAME.round_resets.blind_states['Boss'] ~= 'Hide' and UIBox{
+    definition = {
+      n=G.UIT.ROOT, 
+      config={align = "cm", colour = G.C.CLEAR},
+      nodes={
+        UIBox_dyn_container(
+          {create_UIBox_blind_choice('Boss')},
+          false,
+          get_blind_main_colour('Boss'),
+          G.P_BLINDS[G.GAME.round_resets.blind_choices['Boss']].special_colour or mix_colours(G.C.BLACK, get_blind_main_colour('Boss'),0.8)
+        )
+      }
+    },
+    config = {align="bmi", offset = {x=0,y=0}}} or nil'''
+match_indent = true
+times = 1
+
+

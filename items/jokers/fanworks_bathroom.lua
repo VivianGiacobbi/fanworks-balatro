@@ -46,11 +46,7 @@ function jokerInfo.calculate(self, card, context)
 
     if context.destroy_card and not card.debuff and context.destroy_card.bathroom_flag then
         context.destroy_card.bathroom_flag = nil
-        local messages = {
-            
-        }
         local rand_idx = math.random(1, 5)
-        sendDebugMessage(tostring(localize('k_toilet'..rand_idx)))
         card_eval_status_text(card, 'extra', nil, nil, nil, {
             message = localize('k_toilet'..rand_idx),
             message_card = card,

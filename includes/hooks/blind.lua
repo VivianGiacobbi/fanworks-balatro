@@ -38,6 +38,8 @@ function Blind:extra_set_blind(blind, reset, silent)
 			self.mult = blind.mult / 2
 		end
 		
+		self.fnwk_works_submitted = 0
+		self.fnwk_required_works = 0
 		self.disabled = false
 		self.discards_sub = nil
 		self.hands_sub = nil
@@ -56,12 +58,6 @@ function Blind:extra_set_blind(blind, reset, silent)
 
 		self.chips = G.GAME.blind.chips
 		self.chip_text = G.GAME.blind.chip_text
-
-		if blind.name then
-			self:change_colour()
-		else
-			self:change_colour(G.C.BLACK)
-		end
 	end
 
 	local old_main_blind = G.GAME.blind
@@ -141,6 +137,14 @@ function Blind:set_blind(blind, reset, silent)
 	end
 
 	G.GAME.modifiers.fnwk_hide_blind_score = nil
+
+	if not reset then
+		self.fnwk_works_submitted = 0
+		self.fnwk_required_works = 0
+	end
+
+	self.fnwk_newrun_flag = nil
+
 	local ret = ref_blind_set(self, blind, reset, silent)
 	self.main_blind_disabled = nil
 
@@ -271,6 +275,85 @@ end
 local ref_blind_colour = Blind.change_colour
 function Blind:change_colour(blind_col)
 	if self.fnwk_extra_blind then return end
+
+	-- redeclare these to reset table references
+	if not self.fnwk_newrun_flag and next(self.config.blind) and not blind_col and G.STATE ~= G.STATES.ROUND_EVAL then
+		local blind = self.config.blind
+		local col_primary = blind.boss_colour and blind.boss_colour.colours and blind.boss_colour or nil
+        local col_special = blind.special_colour and blind.special_colour.colours and blind.special_colour or nil
+        local col_tertiary = blind.tertiary_colour and blind.tertiary_colour.colours and blind.tertiary_colour or nil
+		
+		if col_primary or col_special or col_tertiary then
+			G.GAME.fnwk_gradient_ui = true
+
+			if col_primary then
+				local predict_primary = SMODS.predict_gradient(col_primary, 0.3)
+				ease_colour(G.C.DYN_UI.MAIN, predict_primary)
+				ease_colour(G.C.DYN_UI.BOSS_MAIN, predict_primary)
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.35,
+					func = function()
+						G.C.DYN_UI.MAIN = col_primary
+						G.C.DYN_UI.BOSS_MAIN = col_primary
+						return true
+					end
+				}))
+			else
+				ease_colour(G.C.DYN_UI.MAIN, blind.boss_colour)
+				ease_colour(G.C.DYN_UI.BOSS_MAIN, blind.boss_colour)
+			end
+
+			if col_special then
+				local predict_special = SMODS.predict_gradient(col_special, 0.3)
+				ease_colour(G.C.DYN_UI.DARK, predict_special)
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.35,
+					func = function()
+						G.C.DYN_UI.DARK = col_special
+						return true
+					end
+				}))
+			else
+				ease_colour(G.C.DYN_UI.DARK, blind.special_colour or mix_colours(col_primary, G.C.BLACK, 0.4))
+			end
+
+			if col_tertiary then
+				local predict_tertiary = SMODS.predict_gradient(col_tertiary, 0.3)
+				ease_colour(G.C.DYN_UI.DARK, predict_tertiary)
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.35,
+					func = function()
+						G.C.DYN_UI.BOSS_DARK = col_tertiary
+						return true
+					end
+				}))
+			else
+				ease_colour(G.C.DYN_UI.BOSS_DARK, blind.tertiary_colour or mix_colours(col_primary, G.C.BLACK, 0.2))
+			end
+
+			-- manual recreation of UI because for some reason I have to
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				blockable = false,
+				blocking = false,
+				delay =  0.8,
+				func = function()
+					FnwkManualUIReload(0)
+					return true
+				end
+			}))
+			return
+		end
+	end
 
 	return ref_blind_colour(self, blind_col)
 end
@@ -625,6 +708,9 @@ function Blind:save()
 	local ret = ref_blind_save(self)
 
 	ret.main_blind_disabled = self.main_blind_disabled
+	ret.fnwk_works_submitted = self.fnwk_works_submitted
+	ret.fnwk_required_works = self.fnwk_required_works
+
 	if self.fnwk_extra_blind then
 		ret.fnwk_extra_blind = self.fnwk_extra_blind:is(Blind) and self.fnwk_extra_blind.config.blind.key or self.fnwk_extra_blind.unique_val
 		ret.dollars = nil
@@ -637,6 +723,10 @@ local ref_blind_load = Blind.load
 function Blind:load(blindTable)
 	if not self.fnwk_extra_blind then
 		local ret = ref_blind_load(self, blindTable)
+
+		-- the work behavior
+		self.fnwk_works_submitted = blindTable.fnwk_works_submitted
+		self.fnwk_required_works = blindTable.fnwk_required_works
 			
 		local obj = self.config.blind
 		if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
@@ -658,6 +748,9 @@ function Blind:load(blindTable)
     self.hands = blindTable.hands
     self.only_hand = blindTable.only_hand
     self.triggered = blindTable.triggered
+
+	self.fnwk_works_submitted = blindTable.fnwk_works_submitted
+	self.fnwk_required_works = blindTable.fnwk_required_works
 
 	self:set_text()
 end

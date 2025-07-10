@@ -1,6 +1,6 @@
 local blindInfo = {
     name = "The Venus",
-    color = HEX('E86EB5'),
+    boss_colour = HEX('E86EB5'),
     pos = {x = 0, y = 0},
     dollars = 5,
     mult = 2,
@@ -24,7 +24,7 @@ function blindInfo.set_blind(self)
 end
 
 function blindInfo.recalc_debuff(self, card, from_blind)
-    if card.area == G.jokers or G.GAME.blind.disabled then
+    if card.area == G.jokers then
         return false
     end
 

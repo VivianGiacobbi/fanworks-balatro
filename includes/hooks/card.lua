@@ -703,6 +703,14 @@ function Card:get_end_of_round_effect(context)
     return ret
 end
 
+
+
+
+
+---------------------------
+--------------------------- Rot boss effect
+---------------------------
+
 local ref_card_canuse = Card.can_use_consumeable
 function Card:can_use_consumeable(any_state, skip_check)
     if not skip_check and G.GAME.modifiers.fnwk_no_consumeables then
@@ -710,4 +718,25 @@ function Card:can_use_consumeable(any_state, skip_check)
     end
 
     return ref_card_canuse(self, any_state, skip_check)
+end
+
+
+
+
+
+---------------------------
+--------------------------- Manga boss effect
+---------------------------
+
+local ref_card_bonus = Card.get_chip_bonus
+function Card:get_chip_bonus()
+    if G.GAME.modifiers.fnwk_no_rank_chips then
+        local old_nom = self.base.nominal
+        self.base.nominal = 0
+        local ret = ref_card_bonus(self)
+        self.base.nominal = old_nom
+        return ret
+    end
+
+    return ref_card_bonus(self)
 end

@@ -141,3 +141,34 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
     effect.card = old_card
     return ret
 end
+
+
+---------------------------
+--------------------------- The Written Blind behavior
+---------------------------
+
+local ref_no_suit = SMODS.has_no_suit
+function SMODS.has_no_suit(card)
+    return (G.GAME and G.GAME.modifiers.fnwk_no_suits) or ref_no_suit(card)
+end
+
+-- bad, evil overwrite
+function SMODS.predict_gradient(grad, delay)
+    if #grad.colours < 2 then return end
+    local timer = (G.TIMERS.REAL + (delay or 0))%grad.cycle
+    local start_index = math.ceil(timer*#grad.colours/grad.cycle)
+    local end_index = start_index == #grad.colours and 1 or start_index+1
+    local start_colour, end_colour = grad.colours[start_index], grad.colours[end_index]
+    local partial_timer = (timer%(grad.cycle/#grad.colours))*#grad.colours/grad.cycle
+
+    local ret = {0, 0, 0, 1}
+    for i = 1, 4 do
+        if grad.interpolation == 'linear' then
+            ret[i] = start_colour[i] + partial_timer*(end_colour[i]-start_colour[i])
+        elseif grad.interpolation == 'trig' then
+            ret[i] = start_colour[i] + 0.5*(1-math.cos(partial_timer*math.pi))*(end_colour[i]-start_colour[i])
+        end
+    end
+    
+    return ret
+end

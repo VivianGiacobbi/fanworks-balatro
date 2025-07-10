@@ -233,6 +233,9 @@ function card_eval_status_text(card, eval_type, amt, percent, dir, extra)
 end
 
 
+
+
+
 ---------------------------
 --------------------------- Shimmering Deck Behavior
 ---------------------------
@@ -246,4 +249,115 @@ function calculate_reroll_cost(skip_increment)
     end
 
     return ref_reroll_cost(skip_increment)
+end
+
+
+
+
+
+---------------------------
+--------------------------- The Manga background effect
+---------------------------
+
+local ref_background_blind = ease_background_colour_blind
+function ease_background_colour_blind(state, blind_override)
+    if state == G.STATES.ROUND_EVAL then
+        -- reset the table references so the gradients aren't active anymore
+        if G.GAME.fnwk_gradient_background then
+            G.C.BACKGROUND.L = { G.C.BACKGROUND.L[1], G.C.BACKGROUND.L[2], G.C.BACKGROUND.L[3], G.C.BACKGROUND.L[4] }
+            G.C.BACKGROUND.D = { G.C.BACKGROUND.D[1], G.C.BACKGROUND.D[2], G.C.BACKGROUND.D[3], G.C.BACKGROUND.D[4] }
+            G.C.BACKGROUND.C = { G.C.BACKGROUND.C[1], G.C.BACKGROUND.C[2], G.C.BACKGROUND.C[3], G.C.BACKGROUND.C[4] }
+            G.C.BACKGROUND.contrast = G.C.BACKGROUND.contrast
+            G.GAME.fnwk_gradient_background = nil
+        end
+
+        if G.GAME.fnwk_gradient_ui then
+            G.C.DYN_UI.MAIN = { G.C.DYN_UI.MAIN[1], G.C.DYN_UI.MAIN[2], G.C.DYN_UI.MAIN[3], G.C.DYN_UI.MAIN[4] }
+            G.C.DYN_UI.DARK = { G.C.DYN_UI.DARK[1], G.C.DYN_UI.DARK[2], G.C.DYN_UI.DARK[3], G.C.DYN_UI.DARK[4] }
+            G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
+            G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
+            G.GAME.fnwk_gradient_ui = nil
+            FnwkManualUIReload(0)
+        end
+    elseif G.GAME.blind and G.GAME.blind.in_blind then
+        local blind = G.P_BLINDS[G.GAME.blind.config.blind.key]
+        local col_primary = blind.boss_colour and blind.boss_colour.colours and blind.boss_colour or nil
+        local col_special = blind.special_colour and blind.special_colour.colours and blind.special_colour or nil
+        local col_tertiary = blind.tertiary_colour and blind.tertiary_colour.colours and blind.tertiary_colour or nil
+        
+        if col_primary or col_special or col_tertiary then
+            sendDebugMessage('setting gradient background')
+            G.GAME.fnwk_gradient_background = true
+
+            if col_primary and col_primary ~= G.C.BACKGROUND.L then
+                local predict_primary = SMODS.predict_gradient(col_primary, 0.8)
+                ease_value(G.C.BACKGROUND.L, 1, predict_primary[1]*1.3 - G.C.BACKGROUND.L[1], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.L, 2, predict_primary[2]*1.3 - G.C.BACKGROUND.L[2], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.L, 3, predict_primary[3]*1.3 - G.C.BACKGROUND.L[3], false, nil, true, 0.8)
+                G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.85,
+					func = function()
+						G.C.BACKGROUND.L = col_primary
+						return true
+					end
+				}))
+            elseif blind.boss_colour ~= G.C.BACKGROUND.L then
+                ease_value(G.C.BACKGROUND.L, 1, blind.boss_colour[1]*1.3 - G.C.BACKGROUND.L[1], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.L, 2, blind.boss_colour[2]*1.3 - G.C.BACKGROUND.L[2], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.L, 3, blind.boss_colour[3]*1.3 - G.C.BACKGROUND.L[3], false, nil, true, 0.8)
+            end
+
+            if col_special and col_special ~= G.C.BACKGROUND.C then
+                local predict_special = SMODS.predict_gradient(col_special, 0.8)
+                ease_value(G.C.BACKGROUND.C, 1, predict_special[1]*1.3 - G.C.BACKGROUND.C[1], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.C, 2, predict_special[2]*1.3 - G.C.BACKGROUND.C[2], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.C, 3, predict_special[3]*1.3 - G.C.BACKGROUND.C[3], false, nil, true, 0.8)
+                G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.85,
+					func = function()
+						G.C.BACKGROUND.C = col_special
+						return true
+					end
+				}))
+            elseif (blind.special_colour or blind.boss_colour) ~= G.C.BACKGROUND.C then
+                col_special = blind.special_colour or blind.boss_colour
+                ease_value(G.C.BACKGROUND.C, 1, col_special[1]*0.9 - G.C.BACKGROUND.C[1], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.C, 2, col_special[2]*0.9 - G.C.BACKGROUND.C[2], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.C, 3, col_special[3]*0.9 - G.C.BACKGROUND.C[3], false, nil, true, 0.8)
+            end
+
+            if col_tertiary and col_tertiary ~= G.C.BACKGROUND.D then
+                local predict_tertiary = SMODS.predict_gradient(col_tertiary, 0.8)
+                ease_value(G.C.BACKGROUND.D, 1, predict_tertiary[1]*0.4 - G.C.BACKGROUND.D[1], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.D, 2, predict_tertiary[2]*0.4 - G.C.BACKGROUND.D[2], false, nil, true, 0.8)
+                ease_value(G.C.BACKGROUND.D, 3, predict_tertiary[3]*0.4 - G.C.BACKGROUND.D[3], false, nil, true, 0.8)
+                G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					blockable = false,
+					blocking = false,
+					delay =  0.85,
+					func = function()
+						G.C.BACKGROUND.D = col_tertiary
+						return true
+					end
+				}))
+            elseif (blind.tertiary_colour or blind.boss_colour) ~= G.C.BACKGROUND.D then
+                col_tertiary = blind.tertiary_colour or blind.boss_colour
+                ease_value(G.C.BACKGROUND.D, 1, col_tertiary[1]*0.4 - G.C.BACKGROUND.D[1], false, nil, true, 0.6)
+                ease_value(G.C.BACKGROUND.D, 2, col_tertiary[2]*0.4 - G.C.BACKGROUND.D[2], false, nil, true, 0.6)
+                ease_value(G.C.BACKGROUND.D, 3, col_tertiary[3]*0.4 - G.C.BACKGROUND.D[3], false, nil, true, 0.6)
+            end
+
+            G.C.BACKGROUND.contrast = blind.contrast or G.C.BACKGROUND.contrast
+            return
+        end
+    end
+
+    return ref_background_blind(state, blind_override)
 end
