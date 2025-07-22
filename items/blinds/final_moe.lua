@@ -152,11 +152,15 @@ function blindInfo.set_blind(self)
     }))
 end
 
+function blindInfo.disable(self)
+    fnwk_remove_extra_blinds(G.GAME.blind)
+end
+
 function blindInfo.defeat(self)
     fnwk_remove_extra_blinds(G.GAME.blind)
 end
 
-function blindInfo.fnwk_post_blind_load(self)
+function blindInfo.fnwk_blind_load(self, blindTable)
     local extra_bosses = {}
     for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
 		if v.fnwk_extra_blind == G.GAME.blind then

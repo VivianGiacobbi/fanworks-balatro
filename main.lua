@@ -18,6 +18,10 @@ SMODS.optional_features.quantum_enhancements = true
 G.C.FANWORKS = SMODS.current_mod.badge_colour
 G.C.CRYSTAL = HEX('B5FFFF')
 
+loc_colour()
+G.ARGS.LOC_COLOURS['fanworks'] = G.C.FANWORKS
+G.ARGS.LOC_COLOURS['crystal'] = G.C.CRYSTAL
+
 local includes = {
 	-- includes utility functions required for following files
 	'emulator',
@@ -48,9 +52,10 @@ local includes = {
 	'blind_reskins',
 	'vanilla_tweaks',
 	-- cosmetic
-	--'queer',
+	'queer',
 
 	--'hooks/scaling_test',
+	--'gpu_joker'
 }
 
 for _, module in ipairs(includes) do

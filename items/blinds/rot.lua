@@ -31,7 +31,7 @@ function blindInfo.defeat(self)
     G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
-function blindInfo.fnwk_blind_load(self)
+function blindInfo.fnwk_blind_load(self, blindTable)
     G.GAME.modifiers.fnwk_no_consumeables = true
 end
 

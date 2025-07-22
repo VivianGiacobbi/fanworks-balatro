@@ -77,3 +77,34 @@ SMODS.Gradient({
     },
     cycle = 12
 })
+
+local function grad_update_func(self, dt)
+    self[1] = 0.6 + 0.2 * math.sin(self.config.offset + G.TIMERS.REAL * 1.3)
+    self[3] = 0.6 + 0.2 * (1 - math.sin(self.config.offset + G.TIMERS.REAL * 1.3))
+    self[2] = math.min(self[3], self[1])
+    self[4] = 1
+end
+
+SMODS.Gradient({
+    key = 'dark_edition_1',
+    colours = {HEX('99CC99'), HEX('CC9999'), HEX('66FF66')},
+    config = { offset = 0 },
+    cycle = 3,
+    update = grad_update_func
+})
+
+SMODS.Gradient({
+    key = 'dark_edition_2',
+    colours = { HEX('CC9999'), HEX('66FF66'), HEX('99CC99')},
+    config = { offset = math.pi },
+    cycle = 3,
+    update = grad_update_func
+})
+
+SMODS.Gradient({
+    key = 'dark_edition_3',
+    colours = { HEX('66FF66'), HEX('99CC99'), HEX('CC9999')},
+    config = { offset = (2 * math.pi) },
+    cycle = 3,
+    update = grad_update_func
+})

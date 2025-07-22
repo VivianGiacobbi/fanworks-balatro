@@ -708,12 +708,15 @@ function Blind:save()
 	local ret = ref_blind_save(self)
 
 	ret.main_blind_disabled = self.main_blind_disabled
-	ret.fnwk_works_submitted = self.fnwk_works_submitted
-	ret.fnwk_required_works = self.fnwk_required_works
 
 	if self.fnwk_extra_blind then
 		ret.fnwk_extra_blind = self.fnwk_extra_blind:is(Blind) and self.fnwk_extra_blind.config.blind.key or self.fnwk_extra_blind.unique_val
 		ret.dollars = nil
+	end
+
+	local obj = self.config.blind
+	if obj.fnwk_blind_save and type(obj.fnwk_blind_save) == 'function' then
+		obj:fnwk_blind_save(ret)
 	end
 
 	return ret
@@ -724,19 +727,18 @@ function Blind:load(blindTable)
 	if not self.fnwk_extra_blind then
 		local ret = ref_blind_load(self, blindTable)
 
-		-- the work behavior
-		self.fnwk_works_submitted = blindTable.fnwk_works_submitted
-		self.fnwk_required_works = blindTable.fnwk_required_works
+		self.fnwk_works_submitted = 0
+		self.fnwk_required_works = 0
 			
 		local obj = self.config.blind
 		if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
-			obj:fnwk_blind_load()
+			obj:fnwk_blind_load(blindTable)
 		end
 
 		return ret
 	end
 
-	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}  
+	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}
     self.name = blindTable.name
     self.debuff = blindTable.debuff
     self.mult = blindTable.mult
@@ -748,11 +750,14 @@ function Blind:load(blindTable)
     self.hands = blindTable.hands
     self.only_hand = blindTable.only_hand
     self.triggered = blindTable.triggered
-
-	self.fnwk_works_submitted = blindTable.fnwk_works_submitted
-	self.fnwk_required_works = blindTable.fnwk_required_works
-
+	self.fnwk_works_submitted = 0
+	self.fnwk_required_works = 0
 	self:set_text()
+	
+	local obj = self.config.blind
+	if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
+		obj:fnwk_blind_load(blindTable)
+	end
 end
 
 

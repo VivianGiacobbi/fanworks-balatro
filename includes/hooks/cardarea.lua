@@ -16,6 +16,24 @@ end
 
 
 ---------------------------
+--------------------------- Hook for extra blinds
+---------------------------
+
+local ref_cardarea_sort = CardArea.sort
+function CardArea:sort(method)
+    local sort = method or self.config.sort
+    if not G.GAME.modifiers.fnwk_obscure_suits or (sort ~= 'suit desc' and sort ~= 'suit asc' ) then
+        return ref_cardarea_sort(self, method)
+    end
+
+    return FnwkRandomSuitOrderCall(ref_cardarea_sort, self, method)
+end
+
+
+
+
+
+---------------------------
 --------------------------- Exclusions for Disturbia Jokers
 ---------------------------
 
