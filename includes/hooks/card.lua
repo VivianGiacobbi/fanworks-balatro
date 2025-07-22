@@ -740,3 +740,25 @@ function Card:get_chip_bonus()
 
     return ref_card_bonus(self)
 end
+
+
+
+
+
+---------------------------
+--------------------------- Work/Application blind tracking
+---------------------------
+
+local ref_card_save = Card.save
+function Card:save()
+    local ret = ref_card_save(self)
+    ret.fnwk_work_submitted = self.fnwk_work_submitted
+    return ret
+end
+
+local ref_card_load = Card.load
+function Card:load(cardTable, other_card)
+    local ret = ref_card_load(self, cardTable, other_card)
+    self.fnwk_work_submitted = cardTable.fnwk_work_submitted
+    return ret
+end

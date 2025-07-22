@@ -12,6 +12,15 @@ SMODS.Shader({ key = 'rotten_graft', path = 'rotten_graft.fs'})
 SMODS.Shader({ key = 'stand_notorious', path = 'stand_notorious.fs'})
 SMODS.Shader({ key = 'stand_disturbia', path = 'stand_disturbia.fs'})
 SMODS.Shader({ key = 'stand_insane', path = 'stand_insane.fs'})
+SMODS.Shader({ key = 'blind_multimedia', path = 'multimedia.fs'})
+
+
+
+
+
+---------------------------
+--------------------------- Ghost Girl revival effect
+---------------------------
 
 SMODS.DrawStep {
     key = 'revived',
@@ -23,6 +32,14 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+
+
+
+
+---------------------------
+--------------------------- Endless Nameless water visual
+---------------------------
 
 SMODS.DrawStep {
     key = 'water_shader',
@@ -47,6 +64,14 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = 'front' },
 }
 
+
+
+
+
+---------------------------
+--------------------------- Indulgent Streetlit Joker neighbor glow
+---------------------------
+
 SMODS.DrawStep {
     key = 'glow_shader',
     order = 24,
@@ -67,6 +92,15 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+
+
+
+
+
+---------------------------
+--------------------------- NOTORIOUS shader effects
+---------------------------
 
 local ref_shadow_ds = SMODS.DrawSteps.shadow.func
 SMODS.DrawStep:take_ownership('shadow', {
@@ -102,6 +136,14 @@ SMODS.DrawStep:take_ownership('shadow', {
         end
     end,
 }, true)
+
+
+
+
+
+---------------------------
+--------------------------- General center draw mod behavior
+---------------------------
 
 -- prevent late drawing centers from drawing twice
 SMODS.DrawStep:take_ownership('center', {
@@ -152,7 +194,7 @@ SMODS.DrawStep:take_ownership('center', {
             center:draw(self, layer)
         end
     end,
-})
+}, true)
 
 SMODS.DrawStep {
     key = 'late_center_draw',
@@ -170,6 +212,14 @@ SMODS.DrawStep {
     conditions = { vortex = false, facing = 'front' },
 }
 
+
+
+
+
+---------------------------
+--------------------------- Equivalent delay_seal (like delay_edition)
+---------------------------
+
 local old_seal_ds = SMODS.DrawSteps.seal.func
 SMODS.DrawStep:take_ownership('seal', {
     func = function(self, layer)
@@ -179,14 +229,20 @@ SMODS.DrawStep:take_ownership('seal', {
     end
 }, true)
 
----[[
+
+
+
+
+---------------------------
+--------------------------- Disturbia shader effect
+---------------------------
+
 local disturb_corners = {
     top_left = {0.0, 0.37},
     top_right = {0.704, 0.37},
     bottom_left = {0.0, 1.075},
     bottom_right = {0.704, 1.075}
 }
----]]
 
 if not SMODS.DrawSteps.arrow_stand_mask then return end
 local old_stand_ds = SMODS.DrawSteps.arrow_stand_mask.func
@@ -238,4 +294,152 @@ SMODS.DrawStep:take_ownership('arrow_stand_mask', {
             end
         end
     end,
+}, true)
+
+
+
+
+
+---------------------------
+--------------------------- Multimedia blind_shading
+---------------------------
+
+local old_front_ds = SMODS.DrawSteps.front.func
+SMODS.DrawStep:take_ownership('front', {
+    func = function(self, layer)
+        if not (G.GAME and G.GAME.modifiers.fnwk_obscure_suits) then return old_front_ds(self, layer) end
+
+        if (self.edition and self.edition.negative and not self.delay_edition) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+            if self.children.front and (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
+                -- draw the center instead to not show the weird base suit colors
+                self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
+            end
+        end
+    end
+}, true)
+
+local old_edition_ds = SMODS.DrawSteps.edition.func
+SMODS.DrawStep:take_ownership('edition', {
+    func = function(self, layer)
+        if not (G.GAME and G.GAME.modifiers.fnwk_obscure_suits) then return old_edition_ds(self, layer) end
+
+        if self.edition and not self.delay_edition then
+            for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+                if self.edition[v.key:sub(3)] and v.shader then
+                    if type(v.draw) == 'function' then
+                        v:draw(self, layer)
+                    else
+                        -- this excludes drawing the front so it can be drawn later
+                        self.children.center:draw_shader(v.shader, nil, self.ARGS.send_to_shader)
+                    end
+                end
+            end
+        end
+
+        if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then
+            self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+})
+
+SMODS.DrawStep {
+    key = 'multimedia_front',
+    order = 21,
+    func = function(self, layer)
+        if not (G.GAME and G.GAME.modifiers.fnwk_obscure_suits) or self.greyed or not self.children.front then return end
+
+        if (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
+            local multi_suit = G.GAME.modifiers.fnwk_obscure_suits[self.base.suit]
+            if multi_suit.r_replace then G.SHADERS['fnwk_blind_multimedia']:send("r_replace", multi_suit.r_replace) end
+            if multi_suit.g_replace then G.SHADERS['fnwk_blind_multimedia']:send("g_replace", multi_suit.g_replace) end
+            if multi_suit.b_replace then G.SHADERS['fnwk_blind_multimedia']:send("b_replace", multi_suit.b_replace) end
+
+            self.children.front:draw_shader('fnwk_blind_multimedia')
+        end
+    end,
+    conditions = { vortex = false, facing = 'front', front_hidden = false },
+}
+
+local function get_hue(s, t, h)
+	local hs = h % 1 * 6
+	if hs < 1 then return (t - s) * hs + s end
+	if hs < 3 then return t end
+	if hs < 4 then return (t - s) * (4 - hs) + s end
+	return s
+end
+
+local function hsl_to_rgb(c)
+	if c[2] == 0 then return { c[3], c[3], c[3], c[4]} end
+
+	local t = (c[3] < .5) and (c[2] * c[3] + c[3]) or (-c[2] * c[3] + (c[2] + c[3]))
+	local s = 2.0 * c[3] - t;
+	return { get_hue(s, t, c[1] + 1/3), get_hue(s, t, c[1]), get_hue(s, t, c[1] - 1/3), c[4]}
+end
+
+local function rgb_to_hsl(c)
+	local low = math.min(c[1], math.min(c[2], c[3]));
+	local high = math.max(c[1], math.max(c[2], c[3]));
+	local delta = high - low;
+	local sum = high + low;
+
+	local hsl = { 0, 0, 0.5 * sum, c[4] }
+	if delta == 0 then return hsl end
+
+	hsl[2] = (hsl[3] < 0.5) and (delta / sum) or (delta / (2.0 - sum))
+
+	if high == c[1] then
+		hsl[1] = c[2] - c[3] / delta;
+	elseif (high == c[2]) then
+		hsl[1] = c[3] - c[1] / delta + 2.0;
+	else
+		hsl[1] = c[1] - c[2] / delta + 4.0;
+    end
+
+	hsl[1] = (hsl[1] / 6) % 1
+	return hsl;
+end
+
+
+local old_greyed_ds = SMODS.DrawSteps.greyed.func
+SMODS.DrawStep:take_ownership('greyed', {
+    func = function(self)
+        if not (G.GAME and G.GAME.modifiers.fnwk_obscure_suits) then return old_greyed_ds(self) end
+        if not self.greyed then return end
+
+        self.children.center:draw_shader('played', nil, self.ARGS.send_to_shader)
+        if self.children.front and (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
+            local multi_suit = G.GAME.modifiers.fnwk_obscure_suits[self.base.suit]
+
+            -- copying the shader logic for the 'played' shader
+            if multi_suit.r_replace then
+                local r = rgb_to_hsl(multi_suit.r_replace)
+                r[2] = r[2] * 0.6
+                r[3] = r[3] * 0.8
+                r = hsl_to_rgb(r)
+                r[4] = r[4] * 0.5
+                G.SHADERS['fnwk_blind_multimedia']:send("r_replace", r)
+            end
+
+            if multi_suit.g_replace then
+                local g = rgb_to_hsl(multi_suit.g_replace)
+                g[2] = g[2] * 0.6
+                g[3] = g[3] * 0.8
+                g = hsl_to_rgb(g)
+                g[4] = g[4] * 0.5
+                G.SHADERS['fnwk_blind_multimedia']:send("g_replace", g)
+            end
+
+            if multi_suit.b_replace then
+                local b = rgb_to_hsl(multi_suit.b_replace)
+                b[2] = b[2] * 0.6
+                b[3] = b[3] * 0.8
+                b = hsl_to_rgb(b)
+                b[4] = b[4] * 0.5
+                G.SHADERS['fnwk_blind_multimedia']:send("b_replace", b)
+            end
+            
+            self.children.front:draw_shader('fnwk_blind_multimedia')
+        end
+    end
 }, true)

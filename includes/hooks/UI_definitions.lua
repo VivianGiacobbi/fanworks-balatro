@@ -352,3 +352,90 @@ function G.UIDEF.use_and_sell_buttons(card)
 
     return ret
 end
+
+
+
+
+
+---------------------------
+--------------------------- Multimedia deck preview fuckery
+---------------------------
+
+local ref_deck_preview = G.UIDEF.deck_preview
+function G.UIDEF.deck_preview(args)
+    local ret = ref_deck_preview(args)
+    
+    if G.GAME.modifiers.fnwk_obscure_suits then
+        local suit_labels = ret.nodes[1].nodes[1].nodes[1].nodes
+        for i, v in ipairs(suit_labels) do
+            if i > 1 then
+                local color = SMODS.Gradients['fnwk_dark_edition_'..math.random(1, 3)]
+                local main_node = v.nodes[2].nodes[1]
+                main_node.config.text = '?'
+                main_node.config.colour = color
+
+                local mod_node = v.nodes[2].nodes[2]
+                if mod_node then
+                    mod_node.config.text = ' (?) '
+                    mod_node.config.colour = color
+                end
+            end
+        end
+
+        local deck_rows = ret.nodes[1].nodes[1].nodes[2].nodes
+        for i, row in ipairs(deck_rows) do
+            for _, col in ipairs(row.nodes) do
+                if i ~= 1 then
+                    local node = col.nodes[1]
+                    node.config.text = '?'
+                    node.config.colour = SMODS.Gradients['fnwk_dark_edition_'..math.random(1, 3)]
+                    node.config.scale = 0.3
+                end
+            end
+        end
+    end
+
+    return ret
+end
+
+
+local ref_view_deck = G.UIDEF.view_deck
+function G.UIDEF.view_deck(unplayed_only)
+    if not G.GAME.modifiers.fnwk_obscure_suits then
+        return ref_view_deck(unplayed_only)
+    end
+
+    local ret = {FnwkRandomSuitOrderCall(ref_view_deck, unplayed_only)}
+
+    return unpack(ret)
+end
+
+local ref_suits_page = G.FUNCS.your_suits_page
+G.FUNCS.your_suits_page = function(args)
+    if not G.GAME.modifiers.fnwk_obscure_suits then
+        return ref_suits_page(args)
+    end
+
+    local ret = {FnwkRandomSuitOrderCall(ref_suits_page, args)}
+
+    return unpack(ret)
+end
+
+SMODS.Atlas({ key = 'obscured_ui', path = "obscured_ui.png", px = 18, py = 18})
+
+local ref_tally_sprite = tally_sprite
+function tally_sprite(pos, value, tooltip, suit)
+    if not suit or not G.GAME.modifiers.fnwk_obscure_suits then
+        return ref_tally_sprite(pos, value, tooltip, suit)
+    end
+
+    value = {{ string = '?', colour = G.C.DARK_EDITION }, { string = '?', colour = G.C.DARK_EDITION }}
+    tooltip = { '?' }
+    local ret = ref_tally_sprite(pos, value, tooltip, suit)
+    local icon_sprite = ret.nodes[1].nodes[1].config.object
+    icon_sprite.atlas = G.ASSET_ATLAS['fnwk_obscured_ui']
+    icon_sprite.sprite_pos = { x = 0, y = 0 }
+    icon_sprite:reset()
+
+    return ret
+end

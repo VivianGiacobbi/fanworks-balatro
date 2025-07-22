@@ -1,20 +1,4 @@
 ---------------------------
---------------------------- Custom localization colors
----------------------------
-
-local ref_loc_colour = loc_colour
-function loc_colour(_c, _default)
-	ref_loc_colour(_c, _default)
-	G.ARGS.LOC_COLOURS.fanworks = G.C.FANWORKS
-	G.ARGS.LOC_COLOURS.crystal = G.C.CRYSTAL
-	return G.ARGS.LOC_COLOURS[_c] or _default or G.C.UI.TEXT_DARK
-end
-
-
-
-
-
----------------------------
 --------------------------- Fibonacci calculation
 ---------------------------
 
@@ -367,8 +351,15 @@ function localize(args, misc_cat)
 		return final_name
   	end
 
-	if G.GAME.modifiers.fnwk_no_suits and args.type == 'other' and args.key == 'playing_card' and args.set == 'Other' then
-		args.key = 'fnwk_playing_card_nosuit'
+	if args.type == 'other' and args.key == 'playing_card' and args.set == 'Other' then
+		if G.GAME.modifiers.fnwk_no_suits then
+			args.key = 'fnwk_playing_card_nosuit'
+		elseif G.GAME.modifiers.fnwk_obscure_suits then
+			local obscure_suit = G.GAME.modifiers.fnwk_obscure_suits[args.vars.suit_key]
+			args.key = 'fnwk_playing_card_bkg'
+			args.vars[2] = localize(obscure_suit.key, 'fnwk_suits_plural')
+			args.vars.colours[1] = obscure_suit.r_replace
+		end
 	elseif G.GAME.modifiers.fnwk_no_rank_chips and args.type == 'other' and args.key == 'card_chips' then
 		args.key = 'fnwk_card_chips_none'
 	end
@@ -481,16 +472,50 @@ end
 --------------------------- The Written Blind behavior
 ---------------------------
 
-SMODS.Atlas({ key = 'nosuit', path = 'deck_nosuit.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'norank_lc', path = 'deck_norank_lc.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_nosuit', path = 'deck_nosuit.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_norank_lc', path = 'deck_norank_lc.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_norank_hc', path = 'deck_norank_hc.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_nosuit_norank', path = 'deck_nosuit_norank.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_obscured', path = 'deck_obscured.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_obscured_nosuit', path = 'deck_obscured_nosuit.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_obscured_norank', path = 'deck_obscured_norank.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'deck_obscured_nosuit_norank', path = 'deck_obscured_nosuit_norank.png', px = 71, py = 95 })
 
 local ref_front_info = get_front_spriteinfo
 function get_front_spriteinfo(_front)
-	if G.GAME.modifiers.fnwk_no_suits then
-		return G.ASSET_ATLAS['fnwk_nosuit'], _front.pos
-	elseif G.GAME.modifiers.fnwk_no_rank_chips then
-		return G.ASSET_ATLAS['fnwk_norank_lc'], _front.pos
+	local no_suit = G.GAME.modifiers.fnwk_no_suits
+	local no_rank = G.GAME.modifiers.fnwk_no_rank_chips
+	local obscure = G.GAME.modifiers.fnwk_obscure_suits
+
+	if G.fnwk_force_default_fronts
+	or (G.OVERLAY_MENU and G.OVERLAY_MENU.config.id == 'customize_deck')
+	or (not _front.suit or not _front.value)
+	or (not no_suit and not no_rank and not obscure) then
+		return ref_front_info(_front)
 	end
 
-	return ref_front_info(_front)
+	local key = 'fnwk_deck'
+	local pos = { x = _front.pos.x, y = _front.pos.y }
+
+	if obscure then
+		local obscure_suit = G.GAME.modifiers.fnwk_obscure_suits[_front.suit]
+		pos.y = obscure_suit.row_pos
+		key = key..'_obscured'
+	end
+
+	if no_suit then 
+		key = key..'_nosuit'
+	end
+
+	if no_rank then
+		key = key..'_norank'
+
+		if not no_suit and not obscure then
+			local collab = G.SETTINGS.CUSTOM_DECK.Collabs[_front.suit]
+			local hc = (SMODS.DeckSkins[collab] and G.SETTINGS.colour_palettes[_front.suit] == 'hc') or G.SETTINGS.colourblind_option
+			key = key..(hc and '_hc' or '_lc')
+		end
+	end
+
+	return G.ASSET_ATLAS[key], pos
 end

@@ -286,7 +286,6 @@ function ease_background_colour_blind(state, blind_override)
         local col_tertiary = blind.tertiary_colour and blind.tertiary_colour.colours and blind.tertiary_colour or nil
         
         if col_primary or col_special or col_tertiary then
-            sendDebugMessage('setting gradient background')
             G.GAME.fnwk_gradient_background = true
 
             if col_primary and col_primary ~= G.C.BACKGROUND.L then

@@ -67,7 +67,7 @@ function blindInfo.defeat(self)
     set_blind_score_visible(true)
 end
 
-function blindInfo.fnwk_blind_load(self)
+function blindInfo.fnwk_blind_load(self, blindTable)
     G.GAME.blind.triggered = true
     set_blind_score_visible(false)
 end

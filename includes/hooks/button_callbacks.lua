@@ -159,24 +159,24 @@ G.FUNCS.can_play = function(e)
     local ret = ref_can_play(e)
 
     -- hopefully preventing a disturbia softlock
-    if G.GAME.blind and G.jokers.config.visible_card_count > 0
+    if G.GAME.blind and #G.jokers.cards > 0
     and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
         local submitted = 0
-        local num_jokers = 0
+        local num_cards = 0
         for _, v in ipairs(G.jokers.cards) do
-            if v.ability.set == 'Joker' then num_jokers = num_jokers + 1 end
+            if v.ability.set == 'Joker' or v.ability.set == 'Stand' then num_cards = num_cards + 1 end
             if v.fnwk_work_submitted then submitted = submitted + 1 end
         end
 
         if G.GAME.blind.fnwk_works_submitted ~= submitted then
             for _, v in ipairs(G.jokers.cards) do
-                if v.ability.set == 'Joker' then G.GAME.blind:debuff_card(v, true) end
+                if v.ability.set == 'Joker' or v.ability.set == 'Stand' then G.GAME.blind:debuff_card(v, true) end
             end
             G.GAME.blind.fnwk_works_submitted = submitted
         end
         
         
-        if num_jokers > 1 and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+        if num_cards > 1 and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
             e.states.click.can = false
             e.states.visible = false
             local discard = e.parent.children[G.SETTINGS.play_button_pos == 1 and 1 or 3]
@@ -414,8 +414,30 @@ G.FUNCS.go_to_menu = function(e)
         G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
         G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
         G.GAME.fnwk_gradient_ui = nil
-        sendDebugMessage('resetting gradient UI')
     end
 
     return ref_go_menu(e)
+end
+
+
+local ref_collab_cards = G.FUNCS.update_collab_cards
+G.FUNCS.update_collab_cards = function(key, suit, silent)
+    local ret = ref_collab_cards(key, suit, silent)
+
+    G.fnwk_force_default_fronts = true
+    if G.cdds_cards and G.GAME.modifiers.fnwk_obscure_suits then
+        for _, v in ipairs(G.cdds_cards.cards) do
+            v:set_sprites(nil, v.config.card)
+        end
+    end
+    G.fnwk_force_default_fronts = nil
+
+    return ret
+end
+
+local ref_customize_deck = G.FUNCS.customize_deck
+G.FUNCS.customize_deck = function(e)
+    local ret = ref_customize_deck(e)
+    G.OVERLAY_MENU.config.id = 'customize_deck'
+    return ret
 end

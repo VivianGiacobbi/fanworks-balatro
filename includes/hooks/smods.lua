@@ -1,5 +1,9 @@
 SMODS.current_mod.reset_game_globals = function(run_start)
     if run_start then
+        G.GAME.gpu_usage_real = 0.25
+        G.GAME.gpu_usage = 0.25
+        G.GAME.gpu_update_timer = 0
+        G.GAME.gpu_update_time = 1.5
         G.GAME.fnwk_glass_shatters = 0
         G.GAME.fnwk_patsy_jokers_sold = 0
         G.GAME.fnwk_owned_jokers = {}

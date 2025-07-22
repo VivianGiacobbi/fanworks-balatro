@@ -324,6 +324,8 @@ local items_to_load = {
 		'written',
 		'manga',
 		'final_moe',
+		'final_application',
+		'final_multimedia',
 	},
 
 	Tag = {

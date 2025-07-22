@@ -25,20 +25,31 @@ function blindInfo.recalc_debuff(self, card, from_blind)
         return false
     end
 
-    return (card.ability.set == 'Joker' and card.fnwk_work_submitted)
+    return card.fnwk_work_submitted
 end
 
 function blindInfo.disable(self)
     G.GAME.blind.fnwk_required_works = 0
-    for _, v in ipairs(G.jokers) do
+    for _, v in ipairs(G.jokers.cards) do
         v.fnwk_work_submitted = nil
     end
 end
 
 function blindInfo.defeat(self)
-    for _, v in ipairs(G.jokers) do
+    for _, v in ipairs(G.jokers.cards) do
         v.fnwk_work_submitted = nil
     end
+end
+
+function blindInfo.fnwk_blind_save(self, saveTable)
+    saveTable.fnwk_works_submitted = G.GAME.blind.fnwk_works_submitted
+	saveTable.fnwk_required_works = G.GAME.blind.fnwk_required_works
+    return saveTable
+end
+
+function blindInfo.fnwk_blind_load(self, blindTable)
+    G.GAME.blind.fnwk_works_submitted = blindTable.fnwk_works_submitted
+	G.GAME.blind.fnwk_required_works = blindTable.fnwk_required_works
 end
 
 return blindInfo

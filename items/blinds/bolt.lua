@@ -24,7 +24,7 @@ function blindInfo.defeat(self)
     fnwk_reset_blind_proxies()
 end
 
-function blindInfo.fnwk_blind_load(self)
+function blindInfo.fnwk_blind_load(self, blindTable)
     fnwk_set_blind_proxies()
 end
 

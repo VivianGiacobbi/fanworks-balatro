@@ -461,6 +461,12 @@ return {
 				"with all cards sharing the same suit",
 			}
 		},
+		fnwk_suits_plural = {
+            Arrows = '\'Arrows\'',
+            Masks = '\'Masks\'',
+            Stars = '\'Stars\'',
+            Crosses = '\'Crosses\''
+        },
 	},
 	descriptions = {
 		Enhanced = {
@@ -485,6 +491,11 @@ return {
                 text = {
                     "Blind effects",
                     "are disabled"
+                }
+            },
+			fnwk_playing_card_bkg = {
+                text = {
+					" {C:light_black}#1#{} of {B:1,C:white}#2#{} "
                 }
             },
 			fnwk_playing_card_nosuit = {
@@ -801,7 +812,20 @@ return {
 					"{C:attention}#2#{}",
 					"{C:attention}#3#{}",
                 }
-            }
+            },
+			bl_fnwk_final_application = {
+                name = "Auric Application",
+                text = {
+                    "{C:attention}Rightmost Joker{} is {C:attention}submitted{}",
+					"after every hand",
+                }
+            },
+			bl_fnwk_final_multimedia = {
+                name = "Mauve Multimedia",
+                text = {
+                    "{C:attention}Suits{} are {C:attention}obscured{}"
+                }
+            },
         },
 		Joker = {
 			j_fnwk_streetlight_fledgling = {
@@ -890,22 +914,28 @@ return {
 			j_fnwk_streetlight_pinstripe = {
 				name = "Pinstripe Joker",
 				text = {
-					"Earn {C:money}$1{} for each",
-					"{C:attention}Lucky Card{} your {C:attention}full deck{}",
-					"at end of round",
-					"{s:0.1} {}",
-					"{C:attention}Lucky Cards{} never pay out",
-					"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
+					{
+						"Earn {C:money}$1{} for each",
+						"{C:attention}Lucky Card{} your {C:attention}full deck{}",
+						"at end of round",
+					},
+					{
+						"{C:attention}Lucky Cards{} never pay out",
+						"{C:inactive}(Currently {}{C:money}$#1#{}{C:inactive}){}",
+					}
 				},
 			},
 			j_fnwk_streetlight_cabinet = {
 				name = "Cabinet Man",
 				text = {
-					"{C:inactive,s:0.9}Play a{} {C:attention,s:0.9}game{}{C:inactive,s:0.9}, win a{} {C:dark_edition,s:0.9}prize{}",
-					"{s:0.1} {}",
-					"Earn {C:money}$#1#{} if played hand",
-					"beats your {C:attention}high score{}",
-					"{C:inactive}(Currently{} {C:attention}#2#{} {C:inactive}Chips){}"
+					{
+						"{C:inactive,s:0.9}Play a{} {C:attention,s:0.9}game{}{C:inactive,s:0.9}, win a{} {C:dark_edition,s:0.9}prize{}",
+					},
+					{
+						"Earn {C:money}$#1#{} if played hand",
+						"beats your {C:attention}high score{}",
+						"{C:inactive}(Currently{} {C:attention}#2#{} {C:inactive}Chips){}"
+					}
 				},
 				unlock = {
 					"Score {C:attention,E:1}#1#{}",
@@ -915,10 +945,13 @@ return {
 			j_fnwk_streetlight_biased = {
 				name = "Biased Joker",
 				text = {
-					"Gain {C:money}$#1#{} when a",
-					"{C:tarot}Tarot{} card is used",
-					"{s:0.1} {}",
-					"All {C:attention}women{} are debuffed",
+					{
+						"Gain {C:money}$#1#{} when a",
+						"{C:tarot}Tarot{} card is used",
+					},
+					{
+						"All {C:attention}women{} are debuffed",
+					}
 				},
 			},
 			j_fnwk_streetlight_teenage = {
@@ -950,11 +983,14 @@ return {
 			j_fnwk_bluebolt_sexy = {
 				name = "Sexy Joker",
 				text = {
-					"{C:chips}+#1#{} Chips if played hand is a {C:attention}Pair{}",
-					"{C:attention}Three of a Kind{}, or {C:attention}Four of a Kind{}",
-					"{s:0.1} {}",
-					"Each Joker of a {C:attention}certain type{} {C:inactive}[#2#]{}",
-					"scores {C:chips}+#3#{} additional Chips"
+					{
+						"{C:chips}+#1#{} Chips if played hand is a {C:attention}Pair{}",
+						"{C:attention}Three of a Kind{}, or {C:attention}Four of a Kind{}",
+					},
+					{
+						"Each Joker of a {C:attention}certain type{} {C:inactive}[#2#]{}",
+						"scores {C:chips}+#3#{} additional Chips"
+					}
 				}
 			},
 			j_fnwk_bluebolt_secluded = {
@@ -1322,11 +1358,14 @@ return {
 			j_fnwk_spirit_corpse = {
 				name = "Corpse Crimelord",
 				text = {
-					"{C:dark_edition}+#1#{} Joker slot for every",
-					"digit of {C:money}money{} you have",
-					"{s:0.1} {}",
-					"Lose {C:money}$#2#{} for each {C:attention}Joker{} you",
-					"own at end of round"
+					{
+						"{C:dark_edition}+#1#{} Joker slot for every",
+						"digit of {C:money}money{} you have",
+					},
+					{
+						"Lose {C:money}$#2#{} for each {C:attention}Joker{} you",
+						"own at end of round"
+					}
 				},
 				unlock = {
 					"Survive {C:attention,E:1}death{}"
@@ -1904,12 +1943,15 @@ return {
 					"A/C Mode",
 				},
 				text = {
-					"If played hand does not contain a",
-					"{C:attention}Flush{}, each following card with the",
-					"{C:attention}same suit{} as the {C:attention}first scoring card{}",
-					"gives {X:mult,C:white}X#2#{} Mult",
-					"{s:0.1} {}",
-					"{C:stand}Advances{} after {C:attention}#3#{} procs",
+					{
+						"If played hand does not contain a",
+						"{C:attention}Flush{}, each following card with the",
+						"{C:attention}same suit{} as the {C:attention}first scoring card{}",
+						"gives {X:mult,C:white}X#2#{} Mult",
+					},
+					{
+						"{C:stand}Advances{} after {C:attention}#3#{} procs",
+					}
 				}
 			},
 			c_fnwk_bluebolt_thunder_dc = {
@@ -1918,11 +1960,14 @@ return {
 					"D/C Mode",
 				},
 				text = {
-					"If played hand contains a {C:attention}#1#{},",
-					"all scoring cards give {X:mult,C:white}X#2#{} Mult",
-					"and are {C:attention}destroyed{} after scoring",
-					"{s:0.1} {}",
-					"{C:stand}Reverts{} after this effect activates",
+					{
+						"If played hand contains a {C:attention}#1#{},",
+						"all scoring cards give {X:mult,C:white}X#2#{} Mult",
+						"and are {C:attention}destroyed{} after scoring",
+					},
+					{
+						"{C:stand}Reverts{} after this effect activates",
+					}
 				}
 			},
 			c_fnwk_bluebolt_insane = {
@@ -1936,12 +1981,16 @@ return {
 			c_fnwk_bone_king = {
 				name = "KING & COUNTRY",
 				text = {
-					"When a {C:attention}Steel Card{} is scored,",
-					"destroy it and enhance {C:attention}1{} random card",
-					"held in hand into a {C:attention}Steel Card{},",
-					"{s:0.1} {}",
-					"{C:stand}Evolves{} when your deck has",
-					"{C:attention}#1# or fewer{} cards",
+					{
+						"When a {C:attention}Steel Card{} is scored,",
+						"destroy it and enhance {C:attention}1{} random card",
+						"held in hand into a {C:attention}Steel Card{},",
+					},
+					{
+						"{C:stand}Evolves{} when your deck has",
+						"{C:attention}#1# or fewer{} cards",
+					}
+					
 				}
 			},
 			c_fnwk_bone_king_farewell = {
@@ -2031,10 +2080,13 @@ return {
 			c_fnwk_jojopolis_hgm = {
 				name = "Hurdy Gurdy Man",
 				text = {
-					"{C:attention}+#1#{} hand size on {C:attention}Big Blinds{}",
-					"{C:attention}+#2#{} hand size on {C:attention}Boss Blinds{}",
-					"{s:0.1} {}",
-					"{C:stand}Evolves{} when a hand reaches {C:planet}level{} {C:attention}#3#{}"
+					{
+						"{C:attention}+#1#{} hand size on {C:attention}Big Blinds{}",
+						"{C:attention}+#2#{} hand size on {C:attention}Boss Blinds{}",
+					},
+					{
+						"{C:stand}Evolves{} when a hand reaches {C:planet}level{} {C:attention}#3#{}"
+					}
 				},
 			},
 			c_fnwk_jojopolis_hgm_cosmic = {
@@ -2050,13 +2102,17 @@ return {
 			c_fnwk_jspec_miracle = {
 				name = "Miracle Row",
 				text = {
-					"Played hands that aren't your",
-					"{C:attention}highest level hand{} are {C:planet}leveled up{}",
-					"instead of scored",
-					"{s:0.1} {}",
-					"{C:stand}Evolves{} when played hand",
-					"contains {C:attention}four different seals{}"
+					{
+						"Played hands that aren't your",
+						"{C:attention}highest level hand{} are {C:planet}leveled up{}",
+						"instead of scored",
+					},
+					{
+						"{C:stand}Evolves{} when played hand",
+						"contains {C:attention}four different seals{}"
+					}
 				},
+				
 			},
 			c_fnwk_jspec_miracle_together = {
 				name = "Togetherland",
@@ -2135,12 +2191,15 @@ return {
 			c_fnwk_redrising_invisible = {
 				name = "Invisible Sun",
 				text = {
-					"Played {C:attention}Queens{} are retriggered",
-					"{C:attention}#1#{} {C:inactive}[max{} {C:attention}#3#{}{C:inactive}]{} time#2#",
-					"{s:0.1} {}",
-					"This Stand gains {C:attention}#4#{} retrigger when a",
-					"{C:attention}King{} or {C:attention}Jack{} is destroyed and loses",
-					"{C:attention}#4#{} retrigger at end of round"
+					{
+						"Played {C:attention}Queens{} are retriggered",
+						"{C:attention}#1#{} {C:inactive}[max{} {C:attention}#3#{}{C:inactive}]{} time#2#",
+					},
+					{
+						"This Stand gains {C:attention}#4#{} retrigger when a",
+						"{C:attention}King{} or {C:attention}Jack{} is destroyed and loses",
+						"{C:attention}#4#{} retrigger at end of round"
+					}
 				},
 			},
 			c_fnwk_rockhard_peppers = {
@@ -2204,21 +2263,27 @@ return {
 			c_fnwk_spirit_achtung = {
 				name = "Achtung Baby",
 				text = {
-					"{C:attention}#1#{} card each draw is drawn {C:attention}face down{}",
-					"{C:attention}Face down{} cards give {X:mult,C:white}X#2#{} Mult",
-					"{s:0.1} {}",
-					"{C:stand}Evolves{} when a {C:attention}#3#{}",
-					"is played",
+					{
+						"{C:attention}#1#{} card each draw is drawn {C:attention}face down{}",
+						"{C:attention}Face down{} cards give {X:mult,C:white}X#2#{} Mult",
+					},
+					{
+						"{C:stand}Evolves{} when a {C:attention}#3#{}",
+						"is played",
+					}
 				},
 			},
 			c_fnwk_spirit_achtung_stranger = {
 				name = "A Stranger I Remain",
 				text = {
-					"{C:attention}All{} cards are drawn {C:attention}face down{}",
-					"{C:attention}Face down{} cards give {X:mult,C:white}X#1#{} Mult",
-					"{s:0.1} {}",
-					"When you play a hand that isn't a",
-					"{C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
+					{
+						"{C:attention}All{} cards are drawn {C:attention}face down{}",
+						"{C:attention}Face down{} cards give {X:mult,C:white}X#1#{} Mult",
+					},
+					{
+						"When you play a hand that isn't a",
+						"{C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
+					}
 				},
 			},
 			c_fnwk_spirit_sweet = {
@@ -2235,11 +2300,14 @@ return {
 					"of Ultimate Destiny",
 				},
 				text = {
-					"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
-					"each {C:attention}Gold Card{} held in hand",
-					"{s:0.1} {}",
-					"Increase by {C:attention}#3#{} for each {C:attention}Jokestar{}",
-					"{C:attention}sold{} or {C:attention}destroyed{}",
+					{
+						"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
+						"each {C:attention}Gold Card{} held in hand",
+					},
+					{
+						"Increase by {C:attention}#3#{} for each {C:attention}Jokestar{}",
+						"{C:attention}sold{} or {C:attention}destroyed{}",
+					}
 				},
 			},
 			c_fnwk_closer_artificial = {
@@ -2292,12 +2360,15 @@ return {
 			c_fnwk_streetlight_neon = {
 				name = "Neon Trees",
 				text = {
-					"When a {C:attention}#1#{} pays out",
-					"permanently increase its",
-					"payout by {C:money}$#2#{}",
-					"{s:0.1} {}",
-					"{C:stand}Evolves{} after spending",
-					"{C:money}$#3#{} in one shop"
+					{
+						"When a {C:attention}#1#{} pays out",
+						"permanently increase its",
+						"payout by {C:money}$#2#{}",
+					},
+					{
+						"{C:stand}Evolves{} after spending",
+						"{C:money}$#3#{} in one shop"
+					}
 				},
 			},
 			c_fnwk_streetlight_neon_favorite = {
@@ -2327,9 +2398,13 @@ return {
 			c_fnwk_streetlight_paperback = {
 				name = "Paperback Writer",
 				text = {
-					"{C:attention}#1#{} {C:inactive}[#2#]{} {C:green}Reroll{} of {C:attention}Booster Packs{}",
-					"and {C:attention}Vouchers{} per shop",
-					"{C:stand}Evolves{} upon reaching Ante {C:attention}#3#{}",
+					{
+						"{C:attention}#1#{} {C:inactive}[#2#]{} {C:green}Reroll{} of {C:attention}Booster Packs{}",
+						"and {C:attention}Vouchers{} per shop",
+					},
+					{
+						"{C:stand}Evolves{} upon reaching Ante {C:attention}#3#{}",
+					}
 				},
 			},
 			c_fnwk_streetlight_paperback_rewrite = {
