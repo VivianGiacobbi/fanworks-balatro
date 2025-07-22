@@ -37,7 +37,7 @@ function blindInfo.set_blind(self)
         local suit = G.fnwk_obscure_suits[suit_index]
         local color_index = table.remove(color_options[suit.key], pseudorandom('fnwk_multimedia_color', 1, #color_options[suit.key]))
         obscure_suit_info[i] = copy_table(suit)
-        obscure_suit_info[i].color = mix_colours(G.fnwk_obscure_suit_colors[color_index], pseudorandom_element(G.C.SO_2, 'fnwk_multimedia_mix'), 0.75)
+        obscure_suit_info[i].color = mix_colours(G.fnwk_obscure_suit_colors[color_index], G.C.BLACK, 0.8)
     end
 
     -- simple table shuffle

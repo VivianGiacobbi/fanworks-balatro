@@ -385,11 +385,12 @@ function G.UIDEF.deck_preview(args)
         local deck_rows = ret.nodes[1].nodes[1].nodes[2].nodes
         for i, row in ipairs(deck_rows) do
             for _, col in ipairs(row.nodes) do
-                local node = col.nodes[1]
-                if i == 1 then node = node.nodes[2].nodes[1] end
-                node.config.text = '?'
-                node.config.colour = SMODS.Gradients['fnwk_dark_edition_'..math.random(1, 3)]
-                node.config.scale = 0.3
+                if i ~= 1 then
+                    local node = col.nodes[1]
+                    node.config.text = '?'
+                    node.config.colour = SMODS.Gradients['fnwk_dark_edition_'..math.random(1, 3)]
+                    node.config.scale = 0.3
+                end
             end
         end
     end
