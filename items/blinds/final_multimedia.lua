@@ -8,14 +8,6 @@ local blindInfo = {
     boss = {min = 1, max = 10, showdown = true},
 }
 
-local function set_fronts()
-    for _, v in pairs(G.I.CARD) do
-        if v.config and v.config.card and v.children.front and v.config.center.key ~= 'm_stone' then
-            v:set_sprites(nil, v.config.card)
-        end
-    end
-end
-
 function blindInfo.set_blind(self)
     local color_options = {}
     for _, v in ipairs(G.fnwk_obscure_suits) do
@@ -53,22 +45,22 @@ function blindInfo.set_blind(self)
     end
 
     G.GAME.modifiers.fnwk_obscure_suits = chosen_suits
-    set_fronts()
+    FnwkSetFronts()
 end
 
 function blindInfo.disable(self)
     G.GAME.modifiers.fnwk_obscure_suits = nil
-    set_fronts()
+    FnwkSetFronts(true)
 end
 
 function blindInfo.defeat(self)
     G.GAME.modifiers.fnwk_obscure_suits = nil
-    set_fronts()
+    FnwkSetFronts()
 end
 
 function blindInfo.fnwk_blind_load(self, blindTable)
     if G.GAME.modifiers.fnwk_obscure_suits then
-         set_fronts()
+        FnwkSetFronts()
     end
 end
 

@@ -587,6 +587,16 @@ function FnwkManualUIReload(hud_offset)
 	}
 end
 
+
+function FnwkSetFronts(juice)
+    for _, v in pairs(G.I.CARD) do
+        if v.config and v.config.card and v.children.front and v.config.center.key ~= 'm_stone' then
+            v:set_sprites(nil, v.config.card)
+            if juice then v:juice_up() end
+        end
+    end
+end
+
 function FnwkRandomSuitOrderCall(f, ...)
 	local suit_buffer_copy = copy_table(SMODS.Suit.obj_buffer)
     local nominals_list = {}

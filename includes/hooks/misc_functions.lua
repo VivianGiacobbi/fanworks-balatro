@@ -163,7 +163,23 @@ function fnwk_remove_extra_blinds(blind_source)
 	local removed = false
 	for i=#G.GAME.fnwk_extra_blinds, 1, -1 do
 		if G.GAME.fnwk_extra_blinds[i].fnwk_extra_blind == blind_source then
+			-- disable effect more removal
 			local extra_blind = G.GAME.fnwk_extra_blinds[i]
+			if extra_blind.in_blind then
+				local old_main_blind = G.GAME.blind
+				extra_blind.chips = old_main_blind.chips
+				extra_blind.chip_text = number_format(old_main_blind.chips)
+				extra_blind.dollars = old_main_blind.dollars
+				G.GAME.blind = extra_blind
+
+				extra_blind:disable()
+
+				old_main_blind.chips = extra_blind.chips
+				old_main_blind.chip_text = number_format(extra_blind.chips)
+				old_main_blind.dollars = extra_blind.dollars
+				G.GAME.blind = old_main_blind
+			end
+			
 			table.remove(G.GAME.fnwk_extra_blinds, i)
 
 			if blind_source.ability and type(blind_source.ability) == 'table' then
@@ -171,7 +187,13 @@ function fnwk_remove_extra_blinds(blind_source)
             end
             blind_source.blind_type = nil
 
-			extra_blind:remove()
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				func = function()
+					extra_blind:remove()
+					return true
+				end
+			}))
 			removed = true
 		end
 	end

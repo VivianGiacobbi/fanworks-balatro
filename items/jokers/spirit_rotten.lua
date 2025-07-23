@@ -169,7 +169,12 @@ function jokerInfo.calculate(self, card, context)
 	if context.cardarea ~= G.jokers or context.blueprint then return end
 
 	if context.blind_disabled then
-		card.ability.extra.disabled = true
+		for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
+			if v.fnwk_extra_blind == card and v == G.GAME.blind then
+				card.ability.extra.disabled = true
+				break
+			end
+		end
 	end
 
 	if context.end_of_round then
@@ -178,17 +183,28 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
-	if from_debuff then
+	if from_debuff and G.GAME.blind.in_blind then
 		-- disables the blind when debuffed ala Luchador
 		for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
 			if v.fnwk_extra_blind == card then
+				local old_main_blind = G.GAME.blind
+				v.chips = old_main_blind.chips
+				v.chip_text = number_format(old_main_blind.chips)
+				v.dollars = old_main_blind.dollars
+				G.GAME.blind = v
+
 				v:disable()
+
+				old_main_blind.chips = v.chips
+				old_main_blind.chip_text = number_format(v.chips)
+				old_main_blind.dollars = v.dollars
+				G.GAME.blind = old_main_blind
 				break
 			end
 		end
 
-		return 
-	end	
+		return
+	end
 
 	fnwk_remove_extra_blinds(card)
 end

@@ -60,6 +60,10 @@ function Blind:extra_set_blind(blind, reset, silent)
 		self.chip_text = G.GAME.blind.chip_text
 	end
 
+	if blind then
+        self.in_blind = true
+    end
+
 	local old_main_blind = G.GAME.blind
 	G.GAME.blind = self
 	local obj = self.config.blind
@@ -738,7 +742,9 @@ function Blind:load(blindTable)
 		return ret
 	end
 
+	self.in_blind = blindTable.in_blind
 	self.config.blind = G.P_BLINDS[blindTable.config_blind] or {}
+	
     self.name = blindTable.name
     self.debuff = blindTable.debuff
     self.mult = blindTable.mult
