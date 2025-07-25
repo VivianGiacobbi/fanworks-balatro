@@ -1,7 +1,7 @@
 local chalInfo = {
     rules = {
         custom = {
-            {id = "fnwk_beyond_canon" }
+            {id = "fnwk_fanworks_beyond" }
         }
     },
     restrictions = {
@@ -14,7 +14,8 @@ local chalInfo = {
             end
             return {{id = 'j_fnwk_banned_jokers', ids = banned}}
         end,
-    }
+    },
+    fanwork = 'fanworks'
 }
 
 return chalInfo

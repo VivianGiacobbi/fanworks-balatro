@@ -290,7 +290,7 @@ end
 
 
 ---------------------------
---------------------------- Automatic challenge ban functions
+--------------------------- Custom Challenge display behavior
 ---------------------------
 
 function G.FUNCS.fnwk_run_challenge_functions(challenge)
@@ -317,8 +317,128 @@ function G.UIDEF.challenge_description_tab(args)
 		local challenge = G.CHALLENGES[args._id]
 		G.FUNCS.fnwk_run_challenge_functions(challenge)
 	end
-    
-	return ref_challenge_desc(args)
+
+    local ret = ref_challenge_desc(args)
+
+    if args._tab == 'Rules' and G.localization.descriptions.Challenge[G.CHALLENGES[args._id].key] then
+        local ch = G.CHALLENGES[args._id]
+
+        ret.nodes[1].nodes[1].config.minw = 2.5
+        local custom_rules = (ch.rules and ch.rules.custom and next(ch.rules.custom)) or false
+        local rule_node = ret.nodes[1].nodes[1].nodes[2]
+        rule_node.config.minw = custom_rules and 3.65 or 3.8
+        rule_node.config.maxw = custom_rules and 3.65 or 3.8
+        rule_node.config.minh = custom_rules and 4 or 4.1
+        ret.nodes[1].nodes[1].nodes[2] = {
+            n = G.UIT.R,
+            config = {align = "cm", padding = custom_rules and 0.05 or 0, colour = G.C.WHITE, r = 0.1 },
+            nodes = { rule_node }
+        }
+
+        ret.nodes[1].nodes[2].config.minw = 1.75
+        local modifier_node = ret.nodes[1].nodes[2].nodes[2]
+        modifier_node.config.minw = 2.3
+        modifier_node.config.maxw = 2.3
+        modifier_node.config.minh = 4.1
+        ret.nodes[1].nodes[2].nodes[2] = {
+            n = G.UIT.R,
+            config = {align = "cm", colour = G.C.WHITE, r = 0.1 },
+            nodes = { modifier_node }
+        }
+
+        local story_text = {{}}
+        localize{type = 'descriptions', set = 'Challenge', key = ch.key, nodes = story_text[#story_text], text_colour = G.C.BLACK }
+        story_text[#story_text] = desc_from_rows(story_text[#story_text], nil, 4.2)
+        story_text[#story_text].config.colour = G.C.CLEAR
+        if not next(story_text[#story_text].nodes) then
+            story_text[#story_text].nodes[1] = {n = G.UIT.T, config = { align = "cm", text = ''}}
+        end
+
+        local story_node = {n=G.UIT.C, config={align = "cm", minw = 3, r = 0.1, colour = G.C.BLUE}, nodes={
+            {n=G.UIT.R, config={align = "cm", padding = 0.08, minh = 0.6}, nodes={
+                {n=G.UIT.T, config={text = localize('k_challenge_story'), scale = 0.4, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+            }},
+            {n=G.UIT.R, config={align = "cm", padding = 0.075, colour = G.C.WHITE, r = 0.1 }, nodes={
+                (ch.fanwork and ch.fanwork ~= 'fanworks') and {
+                    n = G.UIT.R,
+                    config = {
+                        align = "cm",
+                        minw = 2,
+                        padding = 0.05,
+                        shadow = true,
+                    },
+                    nodes = {{
+                    n = G.UIT.C,
+                        config = {
+                            align = "cm",
+                            padding = 0.05,
+                            maxw = 3,
+                            minh = 0.5,
+                            colour = G.fnwk_badge_colours['co_'..ch.fanwork] and HEX(G.fnwk_badge_colours['co_'..ch.fanwork]) or G.C.STAND,
+                            r = 0.1,
+                        },
+                        nodes = {{
+                            n = G.UIT.T,
+                            config = {
+                                text = ' '..localize('ba_'..ch.fanwork)..' ',
+                                scale = 1,
+                                colour = G.C.WHITE,
+                                minh = 0.4,
+                                shadow = true,
+                            }
+                        }}
+                    }}
+                } or nil,
+                {n = G.UIT.R, config = {align = "cm", minh = (ch.fanwork and ch.fanwork ~= 'fanworks') and 3.275 or 3.95, minw = 4.4, maxw = 4.4, padding = 0.05, r = 0.1, colour = G.C.WHITE}, nodes = story_text}
+            }},
+        }}
+
+        table.insert(ret.nodes[1].nodes, 1, story_node)
+    end
+
+    return ret
+end
+
+local ref_ui_button = UIBox_button
+function UIBox_button(args)
+    local ret = ref_ui_button(args)
+    if not args.count and args.button == 'change_challenge_description' and G.CHALLENGES[args.id].mod then
+        local ch = G.CHALLENGES[args.id]
+        local mod = ch.mod or {}
+
+        -- copy new animated modicon style
+        local atlas_key = mod.prefix and mod.prefix .. '_modicon' or 'modicon'
+        local modicon
+        if G.ANIMATION_ATLAS[atlas_key] then
+            modicon = AnimatedSprite(0, 0, 0.5, 0.5, G.ANIMATION_ATLAS[atlas_key] or G.ASSET_ATLAS[atlas_key] or G.ASSET_ATLAS['tags'], tag_pos)
+        else
+            modicon = Sprite(0, 0, 0.5, 0.5, G.ASSET_ATLAS[atlas_key] or G.ASSET_ATLAS['tags'], tag_pos)
+        end
+
+        local text_colour = ch.fanwork and G.fnwk_badge_colours['te_'..ch.fanwork] and HEX(G.fnwk_badge_colours['te_'..ch.fanwork]) or args.text_colour or G.C.WHITE
+        local text_nodes = ret.nodes[1].nodes
+        for _, v in ipairs(text_nodes) do
+            v.config.minw = math.max(0, v.config.minw - 1.2)
+            v.nodes[1].config.colour = text_colour
+        end
+
+        local badge_colour = ch.fanwork and ch.fanwork ~= 'fanworks' and (G.fnwk_badge_colours['co_'..ch.fanwork] and HEX(G.fnwk_badge_colours['co_'..ch.fanwork])) or nil
+        local new_nodes = {
+            {n= G.UIT.C, config={ minw = 0.8, align = 'cm', padding = args.padding or 0 }, nodes = {
+                { n=G.UIT.O, config = {align = 'rm', can_collide = true, object = modicon, tooltip = {text = {mod.display_name}}}}
+            }},
+            {n= G.UIT.C, config={ minw = 0.8, colour = badge_colour, r = 0.1, minh = args.minh, align = 'cm' }, nodes = {
+                badge_colour and {n = G.UIT.C, config={minw = 0.2, align = 'cm'}} or nil,
+                {n = G.UIT.C, config={align = 'cm'}, nodes = text_nodes},
+                {n = G.UIT.C, config={minw = badge_colour and 0.2 or 0.4, align = 'cm'}}
+            }},
+        }
+
+        ret.config.padding = 0
+        ret.nodes[1].nodes = new_nodes
+    end
+
+    return ret
 end
 
 
