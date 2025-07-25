@@ -361,6 +361,7 @@ return {
 			k_expired_ex = 'Expired!',
 			k_dzvalin = 'Warped!',
 			k_joker_replaced = 'Energy Tranformed!',
+			k_stand_replaced = 'New Challenger!',
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
 			k_valentino = 'Autocannibalized!',
@@ -428,7 +429,9 @@ return {
 			ba_cis = 'Cold Iron Streets',
 			ba_yym = "Yo-Yo Ma's Bizarre RPG",
 			ba_rebels = 'JJ29: Stardust Rebels',
-			ba_redrising = 'Red Rising Sun'
+			ba_redrising = 'Red Rising Sun',
+
+			k_challenge_story = 'Story'
 		},
 		v_dictionary = {
 			downward_warn_text = "Must play #1#",
@@ -439,10 +442,17 @@ return {
 			fnwk_variable = "#1#"
 		},
 		challenge_names = {
-			c_fnwk_beyondcanon = "Beyond Canon",
+			c_fnwk_fanworks_beyond = "Beyond Canon",
+			c_fnwk_fanworks_bluesky = "Mr. Blue Sky",
+			c_fnwk_fanworks_standoff = "Stand-off",
+			c_fnwk_lighted_kriskross = "Kris Kross",
 		},
 		v_text = {
-			ch_c_fnwk_beyondcanon = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"}
+			ch_c_fnwk_fanworks_beyond = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"},
+			ch_c_fnwk_fanworks_bluesky = {"Non-{C:blue}Common{} {C:attention}Jokers{} are banned"},
+			ch_c_max_stands = {"You may have up to {C:attention}#1#{} {C:stand}Stands{}"},
+			ch_c_fnwk_fanworks_standoff = {"One {C:stand}Stand{} is {C:attention}randomized{} every round"},
+			ch_c_fnwk_fanworks_standoff_2 = {"(retaining {C:dark_edition}Editions{} and {C:attention}Stickers{})"},
 		},
 		achievement_names = {
 		},
@@ -1762,6 +1772,20 @@ return {
 					"in one run"
 				}
 			},
+			j_fnwk_banned_jokers = {
+				name = "Non-Fanworks Jokers",
+				text = {
+					"This challenge bans all",
+					"non-{C:fanworks}Fanworks{} {C:attention}Jokers{}",
+				}
+			},
+			j_fnwk_banned_commons = {
+				name = "Non-Common Jokrs",
+				text = {
+					"This challenge bans all",
+					"non-{C:blue}Common{} {C:attention}Jokers{}",
+				}
+			},
 		},
 		Tarot = {
 			c_strength = {
@@ -2456,6 +2480,12 @@ return {
 					"{C:attention}+#1#{} Consumable Slots"
 				},
 			},
+			c_fnwk_random_stand = {
+				name = "Random Stand",
+				text = {
+					"Start with a {C:attention}random{} {C:stand}Stand{}"
+				},
+			},
 		},
 		Tag = {
             tag_fnwk_biased = {
@@ -2595,6 +2625,48 @@ return {
 					"{C:fanworks}Fanworks{} Jokers appear",
 					"{C:attention}#2#X{} more often",
 				},
+			},
+		},
+		Challenge = {
+			c_fnwk_fanworks_beyond = {
+				name = "Beyond Canon",
+				text = {
+					"You watched that last {C:attention}episode{}.",
+					"Then you picked up the {C:attention}manga{}.",
+					"And when you finally finished",
+					"the newest {C:attention}weekly scan{}, your",
+					"first thought: {C:attention,E:1}'I need more.'{}",
+					"Fortunately, the {C:red}internet{} has",
+					"all the tear-jerking, indulgent",
+					"smutty, self-inserty, shockingly",
+					"professional {C:attention}fanworks{} you'd",
+					"ever want. {s:0.5}Or{} {s:0.5,C:attention}need{}{s:0.5}, for that matter.{}"
+
+				}
+			},
+			c_fnwk_fanworks_bluesky = {
+				name = "test",
+				text = {
+					"Time for your {C:attention,E:1}very first{} fanpart!",
+					"You've got all the {C:attention}creative energy{}",
+					"in the world, and a dream of going",
+					"big on {C:red,E:1}AO3{}! Now all you need is a",
+					"protagonist, some companions, {s:0.9}a plot,{}",
+					"{s:0.8}a setting,{} {s:0.7}Stands,{} {s:0.65}a main villain,{} {s:0.6}a writer,{} {s:0.55}an artist...{}",
+					"It can't be {C:attention,E:1}that{} hard, right?"
+				}
+			},
+			c_fnwk_fanworks_standoff = {
+				name = "Stand-Off",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_lighted_kriskross = {
+				name = "Kris Kross",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
 			},
 		}
 	}

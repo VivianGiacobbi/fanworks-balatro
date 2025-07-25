@@ -22,6 +22,53 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     for _, v in ipairs(G.playing_cards) do
         v.ability.fnwk_strut_this_hand = nil
     end
+
+    if G.GAME.modifiers.fnwk_fanworks_standoff then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            after = 1,
+            func = function()
+                local rand_stands = {}
+                for _, v in ipairs(G.consumeables.cards) do
+                    if v.ability.set == 'Stand' then rand_stands[#rand_stands+1] = v end
+                end
+
+                if #rand_stands < 1 then return true
+                elseif #rand_stands > 1 and not run_start then
+                    local stand = pseudorandom_element(rand_stands, 'fnwk_standoff_select')
+                    rand_stands = { stand }
+                end
+
+                for i, v in ipairs(rand_stands) do
+                    local _pool, _pool_key = get_current_pool('Stand', nil, nil, 'fnwk_standoff')
+                    local center = pseudorandom_element(_pool, pseudoseed(_pool_key))
+                    local it = 1
+                    while center == 'UNAVAILABLE' or center == v.config.center.key do
+                        it = it + 1
+                        center = pseudorandom_element(_pool, pseudoseed(_pool_key..'_resample'..it))
+                    end
+
+                    v.ability.evolved = nil
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.FUNCS.transform_card(v, center, false, true)
+                            return true
+                        end
+                    }))
+                    card_eval_status_text(v, 'extra', nil, nil, nil, {
+                        message = localize('k_stand_replaced'),
+                        colour = G.C.DARK_EDITION,
+                        sound = 'polychrome1'
+                    })
+
+                    if i ~= #rand_stands then
+                        delay(0.3)
+                    end
+                end
+                return true
+            end
+        }))
+    end
 end
 
 --- Add effects for non-main editions to an effects table, similar to SMODS.calculate_quantum_enhancements()

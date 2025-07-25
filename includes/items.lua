@@ -169,7 +169,8 @@ local items_to_load = {
 		'fanworks_bathroom',
 		
 		-- dummy
-		'banned_jokers'
+		'banned_jokers',
+		'banned_commons'
 	},
 
 	Consumable = {
@@ -286,6 +287,9 @@ local items_to_load = {
 		'jspec_miracle',
 		'jspec_miracle_together',
 		'jspec_shout',
+
+		-- dummy
+		'random_stand'
 	},
 	
 	Deck = {
@@ -310,7 +314,10 @@ local items_to_load = {
 	},
 
 	Challenge = {
-		'beyond_canon',
+		'fanworks_beyond',
+		'fanworks_bluesky',
+		'fanworks_standoff',
+		'lighted_kriskross',
 	},
 
 	Blind = {

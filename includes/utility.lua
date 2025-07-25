@@ -133,7 +133,9 @@ function FnwkLoadItem(file_key, item_type)
 		return
 	end
 	
-	if item_type ~= 'Challenge' and item_type ~= 'Edition' then
+	if item_type == 'Challenge' then
+        info.button_colour = G.C.STAND
+	elseif item_type ~= 'Edition' then
 		info.atlas = file_key
 		info.pos = { x = 0, y = 0 }
 		if info.hasSoul then
