@@ -51,6 +51,8 @@ if saveTable.EXTRA_BLINDS then
         if v.fnwk_extra_blind then
             if G.GAME.blind.in_blind and G.P_BLINDS[v.fnwk_extra_blind] then
                 blind_source = G.GAME.blind
+            elseif v.fnwk_extra_blind == true then
+                blind_source = {}
             else
                 for _, card in ipairs(G.I.CARD) do
                     if card.unique_val == v.fnwk_extra_blind then
@@ -62,12 +64,12 @@ if saveTable.EXTRA_BLINDS then
         end
 
         if blind_source then
-            local new_extra_blind = Blind(0, 0, 0, 0, blind_source)
+            local new_extra_blind = fnwk_init_extra_blind(0, 0, 0, 0, blind_source)
             new_extra_blind:load(v)
-            if blind_source.ability and type(blind_source.ability) == 'table' then
-                blind_source.ability.blind_type = new_extra_blind.config.blind
-            else
+            if blind_source == G.GAME.blind then
                 blind_source.blind_type = new_extra_blind.config.blind
+            elseif blind_source.ability and type(blind_source.ability) == 'table' then
+                blind_source.ability.blind_type = new_extra_blind.config.blind
             end
             self.GAME.fnwk_extra_blinds[#self.GAME.fnwk_extra_blinds+1] = new_extra_blind
         end
@@ -266,7 +268,6 @@ payload = '''localize{type = 'other', key = 'playing_card', set = 'Other', nodes
 match_indent = true
 times = 1
 
-
 # localize
 [[patches]]
 [patches.pattern]
@@ -276,3 +277,5 @@ position = "at"
 payload = '''if v.config and v.config.card and v.children.front and v.ability.effect ~= 'Stone Card' and (not (G.GAME and G.GAME.modifiers.fnwk_obscure_suits) or (G.cdds_cards and v.area == G.cdds_cards)) then'''
 match_indent = true
 times = 2
+
+

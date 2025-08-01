@@ -139,7 +139,7 @@ function Card:remove_predict_ui()
 end
 
 local ref_card_hover = Card.hover
-function Card:hover()
+function Card:hover(...)
     if G.fnwk_peppers_hovers then
         for _, v in ipairs(G.fnwk_peppers_hovers) do
             if v then
@@ -163,7 +163,7 @@ function Card:hover()
         
     end
 
-    local ret = ref_card_hover(self)
+    local ret = ref_card_hover(self, ...)
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == 'Booster' then
         SMODS.calculate_context({hovering_booster = true, booster = self})
     end
@@ -172,7 +172,7 @@ function Card:hover()
 end
 
 local ref_card_stop_hover = Card.stop_hover
-function Card:stop_hover()
+function Card:stop_hover(...)
     if G.fnwk_peppers_hovers then
         local remove = not G.CONTROLLER.hovering.target
         if not remove then
@@ -193,7 +193,7 @@ function Card:stop_hover()
     end
     
 
-    local ret = ref_card_stop_hover(self)
+    local ret = ref_card_stop_hover(self, ...)
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == "Booster" then
         SMODS.calculate_context({stopped_hovering = true, booster = self})
         return
@@ -226,12 +226,12 @@ end
 ---------------------------
 
 local ref_is_face = Card.is_face
-function Card:is_face(from_boss)
+function Card:is_face(...)
     if next(SMODS.find_card('j_fnwk_streetlight_teenage')) then
         return false
     end
 
-    return ref_is_face(self, from_boss)
+    return ref_is_face(self, ...)
 end
 
 
@@ -243,13 +243,15 @@ end
 ---------------------------
 
 local ref_set_base = Card.set_base
-function Card:set_base(card, initial, delay_sprites)
+function Card:set_base(...)
     local old_id = nil
     if self.base then old_id = self.base.id end
 
     -- base function call
-    local ret = ref_set_base(self, card, initial, delay_sprites)
+    local ret = ref_set_base(self, ...)
 
+    local args = {...}
+    local initial = args[2]
     if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
         check_for_unlock({type = 'queen_to_king'})
     end
@@ -258,8 +260,8 @@ function Card:set_base(card, initial, delay_sprites)
 end
 
 local ref_sell_card = Card.sell_card
-function Card:sell_card()
-    local ret = ref_sell_card(self)
+function Card:sell_card(...)
+    local ret = ref_sell_card(self, ...)
 
     if self.ability.set == 'Joker' then 
         G.GAME.fnwk_patsy_jokers_sold = G.GAME.fnwk_patsy_jokers_sold + 1
@@ -271,8 +273,8 @@ end
 
 --- Tallies glass shatters per run for the sake of Square Biz Killer unlock
 local ref_shatter = Card.shatter
-function Card:shatter()
-    local ret = ref_shatter(self)
+function Card:shatter(...)
+    local ret = ref_shatter(self, ...)
     G.GAME.fnwk_glass_shatters = G.GAME.fnwk_glass_shatters + 1
     check_for_unlock({type = 'run_shattered', total_shattered = G.GAME.fnwk_glass_shatters})
     return ret
@@ -288,12 +290,11 @@ end
 ---------------------------
 
 local ref_card_add = Card.add_to_deck
-function Card:add_to_deck(from_debuff, disturbia)
-    if self.fnwk_disturbia_joker and from_debuff and not disturbia then
-        return
-    end
+function Card:add_to_deck(...)
+    local ret = ref_card_add(self, ...)
 
-    local ret = ref_card_add(self, from_debuff)
+    local args = {...}
+    local from_debuff = args[1]
 
     if not from_debuff then
         G.GAME.fnwk_owned_jokers[self.config.center.key] = true
@@ -304,13 +305,20 @@ function Card:add_to_deck(from_debuff, disturbia)
     return ret
 end
 
-local ref_card_remove = Card.remove_from_deck
-function Card:remove_from_deck(from_debuff, disturbia)
+function Card:add_to_deck_disturbia(from_debuff, disturbia)
     if self.fnwk_disturbia_joker and from_debuff and not disturbia then
         return
     end
 
-    return ref_card_remove(self, from_debuff)
+    return Card.add_to_deck(self, from_debuff)
+end
+
+function Card:remove_from_deck_disturbia(from_debuff, disturbia)
+    if self.fnwk_disturbia_joker and from_debuff and not disturbia then
+        return
+    end
+
+    return Card.remove_from_deck(self, from_debuff)
 end
 
 
@@ -322,12 +330,12 @@ end
 ---------------------------
 
 local ref_card_dissolve = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+function Card:start_dissolve(...)
     if self.fnwk_disturbia_joker then
-        return ref_card_dissolve(self.fnwk_disturbia_joker, dissolve_colours, silent, dissolve_time_fac, no_juice)
+        return ref_card_dissolve(self.fnwk_disturbia_joker, ...)
     end
 
-    local ret = ref_card_dissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+    local ret = ref_card_dissolve(self, ...)
 
     if self.area then
         SMODS.calculate_context({fnwk_card_removed = true, card = self})
@@ -345,9 +353,9 @@ end
 ---------------------------
 
 local ref_set_edition = Card.set_edition
-function Card:set_edition(edition, immediate, silent, delay)
+function Card:set_edition(edition, immediate, silent, delay, ...)
     if not next(SMODS.find_card('j_fnwk_jspec_ilsa')) then
-        return ref_set_edition(self, edition, immediate, silent, delay)
+        return ref_set_edition(self, edition, immediate, silent, delay, ...)
     end
 
     SMODS.enh_cache:write(self, nil)
@@ -555,7 +563,7 @@ end
 ---------------------------
 
 local ref_card_open = Card.open
-function Card:open()
+function Card:open(...)
     local insanes = nil
     if self.ability.set == 'Booster' and self.ability.extra and type(self.ability.extra) ~= 'table' then
         insanes = SMODS.find_card('c_fnwk_bluebolt_insane')
@@ -563,7 +571,7 @@ function Card:open()
         self.ability.extra = self.ability.extra * card_mod^#insanes
     end
 
-    local ret = ref_card_open(self)
+    local ret = ref_card_open(self, ...)
 
     if insanes then
         for _, v in ipairs(insanes) do
@@ -600,27 +608,26 @@ end
 ---------------------------
 
 local ref_UAT = Card.generate_UIBox_ability_table
-function Card:generate_UIBox_ability_table(vars_only)
+function Card:generate_UIBox_ability_table(...)
     if self.ability.fnwk_disturbia_fake then
-        local ret = ref_UAT(self.ability.fnwk_disturbia_fake, vars_only)
+        local ret = ref_UAT(self.ability.fnwk_disturbia_fake, ...)
         ret = generate_card_ui(G.P_CENTERS['c_fnwk_streetlight_disturbia'], ret)
         return ret
     end
 
-    return ref_UAT(self, vars_only)
+    return ref_UAT(self, ...)
 end
 
-local ref_dollar_bonus = Card.calculate_dollar_bonus
-function Card:calculate_dollar_bonus(disturbia)
+function Card:calculate_dollar_bonus_disturbia(disturbia)
     if self.fnwk_disturbia_joker and not disturbia then
         return
     end
 
-    return ref_dollar_bonus(self)
+    return Card.calculate_dollar_bonus(self)
 end
 
 local ref_card_cost = Card.set_cost
-function Card:set_cost()
+function Card:set_cost(...)
     if self.config.center.key == 'c_fnwk_streetlight_disturbia' and self.ability.extra.target_card then
         self.extra_cost = self.ability.fnwk_disturbia_fake.extra_cost
         self.cost = self.ability.fnwk_disturbia_fake.cost
@@ -628,7 +635,7 @@ function Card:set_cost()
         self.sell_cost_label = self.ability.fnwk_disturbia_fake.sell_cost_label
     end
 
-    local ret = ref_card_cost(self)
+    local ret = ref_card_cost(self, ...)
     if self.fnwk_disturbia_joker then
         self.fnwk_disturbia_joker.extra_cost = self.extra_cost
         self.fnwk_disturbia_joker.cost = self.cost
@@ -641,10 +648,10 @@ end
 
 
 local ref_card_eor = Card.get_end_of_round_effect
-function Card:get_end_of_round_effect(context)
+function Card:get_end_of_round_effect(...)
     local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
     if self.seal ~= 'Blue' or not next(togethers) then
-        return ref_card_eor(self, context)
+        return ref_card_eor(self, ...)
     end
 
     local valid = false
@@ -656,12 +663,12 @@ function Card:get_end_of_round_effect(context)
     end
 
     if not valid then
-        return ref_card_eor(self, context)
+        return ref_card_eor(self, ...)
     end
 
     local old_extra = self.extra_enhancement
     self.extra_enhancement = self.extra_enhancement or true
-    local ret = ref_card_eor(self, context)
+    local ret = ref_card_eor(self, ...)
     self.extra_enhancement = old_extra
 
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -698,7 +705,7 @@ function Card:get_end_of_round_effect(context)
             return true
         end)}))
     card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-    ret.effect = true
+    ret[1].effect = true
 
     return ret
 end
@@ -711,13 +718,16 @@ end
 --------------------------- Rot boss effect
 ---------------------------
 
+
 local ref_card_canuse = Card.can_use_consumeable
-function Card:can_use_consumeable(any_state, skip_check)
-    if not skip_check and G.GAME.modifiers.fnwk_no_consumeables then
+function Card:can_use_consumeable(...)
+    local args = {...}
+
+    if not args[1] --[[ skip check --]] and G.GAME.modifiers.fnwk_no_consumeables then
         return false
     end
 
-    return ref_card_canuse(self, any_state, skip_check)
+    return ref_card_canuse(self, ...)
 end
 
 
@@ -729,16 +739,16 @@ end
 ---------------------------
 
 local ref_card_bonus = Card.get_chip_bonus
-function Card:get_chip_bonus()
+function Card:get_chip_bonus(...)
     if G.GAME.modifiers.fnwk_no_rank_chips then
         local old_nom = self.base.nominal
         self.base.nominal = 0
-        local ret = ref_card_bonus(self)
+        local ret = ref_card_bonus(self, ...)
         self.base.nominal = old_nom
         return ret
     end
 
-    return ref_card_bonus(self)
+    return ref_card_bonus(self, ...)
 end
 
 
@@ -750,15 +760,33 @@ end
 ---------------------------
 
 local ref_card_save = Card.save
-function Card:save()
-    local ret = ref_card_save(self)
+function Card:save(...)
+    local ret = ref_card_save(self, ...)
     ret.fnwk_work_submitted = self.fnwk_work_submitted
     return ret
 end
 
 local ref_card_load = Card.load
-function Card:load(cardTable, other_card)
-    local ret = ref_card_load(self, cardTable, other_card)
+function Card:load(...)
+    local ret = ref_card_load(self, ...)
+
+    local args = {...}
+    local cardTable = args[1]
     self.fnwk_work_submitted = cardTable.fnwk_work_submitted
+    return ret
+end
+
+
+
+
+
+---------------------------
+--------------------------- Arcane Deck unlock
+---------------------------
+
+local ref_card_use = Card.use_consumeable
+function Card:use_consumeable(...)
+    local ret = ref_card_use(self, ...)
+    check_for_unlock({type = 'use_consumable', consumable = self})
     return ret
 end

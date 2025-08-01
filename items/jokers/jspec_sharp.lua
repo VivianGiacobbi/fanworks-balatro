@@ -1,5 +1,5 @@
 local jokerInfo = {
-	name = 'Energetic Joker',
+	name = 'Sharp Joker',
 	config = {
 		extra = {
 			mult_mod = 1,

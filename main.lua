@@ -31,16 +31,17 @@ local includes = {
 	'shaders',
 
 	-- object hooks
-	'hooks/button_callbacks',
-	'hooks/uielement',
-	'hooks/game',
-	'hooks/card',
-	'hooks/cardarea',
-	'hooks/blind',
 	'hooks/common_events',
 	'hooks/state_events',
 	'hooks/misc_functions',
 	'hooks/UI_definitions',
+	'hooks/button_callbacks',
+	'hooks/uielement',
+	'hooks/game',
+	'hooks/card',
+	'hooks/back',
+	'hooks/cardarea',
+	'hooks/blind',
 	'hooks/smods',
 
 	-- option files

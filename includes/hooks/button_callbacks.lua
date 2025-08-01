@@ -86,11 +86,13 @@ end
 ---------------------------
 
 local ref_check_buy_space = G.FUNCS.check_for_buy_space
-G.FUNCS.check_for_buy_space = function(card)
+G.FUNCS.check_for_buy_space = function(...)
+    local args = {...}
+    local card = args[1]
     local shouts = SMODS.find_card('c_fnwk_jspec_shout')
     if not next(shouts) or card.ability.set ~= 'Joker' or card.ability.eternal then
         
-        return ref_check_buy_space(card)
+        return ref_check_buy_space(...)
     end
 
     for _, v in ipairs(shouts) do
@@ -99,7 +101,7 @@ G.FUNCS.check_for_buy_space = function(card)
         end
     end
 
-    return ref_check_buy_space(card)
+    return ref_check_buy_space(...)
 end
 
 
@@ -111,17 +113,19 @@ end
 ---------------------------
 
 local ref_transform_card = G.FUNCS.transform_card
-G.FUNCS.transform_card = function(card, to_key, evolve)
+G.FUNCS.transform_card = function(...)
+    local args = {...}
+    local to_key = args[2]
     if to_key == 'c_fnwk_bone_king_farewell' then
         local center = G.P_CENTERS[to_key]
         local old_soul_pos = center.soul_pos
         center.soul_pos = nil
-        local ret = ref_transform_card(card, to_key, evolve)
+        local ret = ref_transform_card(...)
         center.soul_pos = old_soul_pos
         return ret
     end
 
-    return ref_transform_card(card, to_key, evolve)
+    return ref_transform_card(...)
 end
 
 
@@ -337,43 +341,11 @@ end
 
 
 ---------------------------
---------------------------- Challenge functions
----------------------------
-
-local ref_challenge_desc = G.UIDEF.challenge_description_tab
-function G.UIDEF.challenge_description_tab(args)
-	args = args or {}
-
-	if args._tab == 'Restrictions' then
-		local challenge = G.CHALLENGES[args._id]
-		if challenge.restrictions then
-            if challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
-                challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
-            end
-
-            if challenge.restrictions.banned_tags and type(challenge.restrictions.banned_tags) == 'function' then
-                challenge.restrictions.banned_tags = challenge.restrictions.banned_tags()
-            end
-
-            if challenge.restrictions.banned_other and type(challenge.restrictions.banned_other) == 'function' then
-                challenge.restrictions.banned_other = challenge.restrictions.banned_other()
-            end
-        end
-	end
-
-	return ref_challenge_desc(args)
-end
-
-
-
-
-
----------------------------
 --------------------------- Reset bkg for manga blind
 ---------------------------
 
 local ref_start_run = G.FUNCS.start_run
-G.FUNCS.start_run = function(e, args)
+G.FUNCS.start_run = function(...)
     if G.GAME.blind then
         G.GAME.blind.in_blind = false
         G.GAME.blind.fnwk_newrun_flag = true
@@ -395,7 +367,7 @@ G.FUNCS.start_run = function(e, args)
         G.GAME.fnwk_gradient_ui = nil
     end
 
-    return ref_start_run(e, args)
+    return ref_start_run(...)
 end
 
 local ref_go_menu = G.FUNCS.go_to_menu
@@ -421,16 +393,16 @@ end
 
 
 local ref_collab_cards = G.FUNCS.update_collab_cards
-G.FUNCS.update_collab_cards = function(key, suit, silent)
-    local ret = ref_collab_cards(key, suit, silent)
+G.FUNCS.update_collab_cards = function(...)
+    local ret = ref_collab_cards(...)
 
-    G.fnwk_force_default_fronts = true
-    if G.cdds_cards and G.GAME.modifiers.fnwk_obscure_suits then
+    if G.GAME.modifiers.fnwk_obscure_suits and G.cdds_cards then
+        G.fnwk_force_default_fronts = true
         for _, v in ipairs(G.cdds_cards.cards) do
             v:set_sprites(nil, v.config.card)
         end
+        G.fnwk_force_default_fronts = nil
     end
-    G.fnwk_force_default_fronts = nil
 
     return ret
 end
@@ -440,4 +412,85 @@ G.FUNCS.customize_deck = function(e)
     local ret = ref_customize_deck(e)
     G.OVERLAY_MENU.config.id = 'customize_deck'
     return ret
+end
+
+
+
+
+
+local ref_use_card = G.FUNCS.use_card
+G.FUNCS.use_card = function(...)
+    local args = {...}
+    local card = args[1].config.ref_table
+
+    -- do this early just in case anybody hooks this
+    if card:check_use() then 
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                e.disable_button = nil
+                e.config.button = 'use_card'
+                return true
+            end
+        }))
+        return
+    end
+
+    if G.GAME.modifiers.fnwk_consumable_save and card.ability.set ~= 'Booster' and card.ability.consumeable and not SMODS.action_nosave then
+        save_with_action({
+            type = 'use_card',
+            card = card.sort_id,
+            args = {mute},
+            highlights = SMODS.save_action_highights()
+        })
+    end
+
+    return ref_use_card(...)
+end
+
+local ref_play_highlighted = G.FUNCS.play_cards_from_highlighted
+G.FUNCS.play_cards_from_highlighted = function(e)
+    if G.play and G.play.cards[1] then return end
+
+    if G.GAME.modifiers.fnwk_plays_save and not SMODS.action_nosave then
+        save_with_action({
+            type = 'play_cards_from_highlighted',
+            highlights = SMODS.save_action_highights({['hand'] = true})
+        })
+    end
+
+    return ref_play_highlighted(e)
+end
+
+G.FUNCS.RUN_SETUP_fnwk_check_artist = function(e)
+    if G.GAME.viewed_back.name ~= e.config.id then
+        --removes the UI from the previously selected back and adds the new one
+        if G.GAME.viewed_back.effect.center.artist then
+            if e.UIT == G.UIT.O then
+                e.config.object:remove()
+            end
+           
+            e.UIT = G.UIT.O
+            e.config.object = UIBox{
+                definition = G.UIDEF.fnwk_deck_credit(G.GAME.viewed_back),
+                config = {offset = {x=0,y=0}, align = 'cm', parent = e}
+            }
+            e.config.minh = nil
+            e.config.maxh = nil
+            e.parent.parent.children[1].config.minh = 0.45
+            e.parent.parent.children[2].config.minh = 0.9
+        else
+            if e.UIT == G.UIT.O then
+                e.config.object:remove()
+                e.config.object = nil
+            end
+           
+            e.UIT = G.UIT.R
+            e.config.minh = 0
+            e.config.maxh = 0
+            e.parent.parent.children[1].config.minh = 0.6
+            e.parent.parent.children[2].config.minh = 1.7
+        end
+        e.config.id = G.GAME.viewed_back.name
+        e.UIBox:recalculate()
+    end
 end

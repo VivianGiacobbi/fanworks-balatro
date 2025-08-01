@@ -1,39 +1,80 @@
+local function set_blind_score_visible(bool)
+    local blind_score = G.hand_text_area.blind_chips
+    local chip_total = G.hand_text_area.game_chips
+    if not bool then
+        blind_score.UIT = G.UIT.O
+        blind_score.config.object = DynaText({
+            string = '?????',
+            colours = {G.C.DARK_EDITION},
+            bump = true,
+            pop_in_rate = 99999999,
+            scale = 0.65,
+        })
+        blind_score.config.ref_table = nil
+        blind_score.config.ref_value = nil
+
+        chip_total.UIT = G.UIT.O
+        chip_total.config.object = DynaText({
+            string = '?????',
+            colours = {G.C.DARK_EDITION},
+            bump = true,
+            pop_in_rate = 99999999,
+            scale = 0.65,
+        })
+        chip_total.config.ref_table = nil
+        chip_total.config.ref_value = nil
+        chip_total.UIBox:recalculate()
+
+        return
+    end
+
+    blind_score.UIT = G.UIT.T
+    blind_score.config.ref_table = G.GAME.blind
+    blind_score.config.ref_value = 'chip_text'
+    if blind_score.config.object then blind_score.config.object:remove() end
+
+    chip_total.UIT = G.UIT.T
+    chip_total.config.ref_table = G.GAME
+    chip_total.config.ref_value = 'chips_text'
+    if chip_total.config.object then chip_total.config.object:remove() end
+
+    blind_score:juice_up()
+    chip_total:juice_up()
+end
+
+
 ---------------------------
 --------------------------- Initialization blind functions
 ---------------------------
 
-local ref_blind_init = Blind.init
-function Blind:init(X, Y, W, H, extra_source)
-	if extra_source then
-		Moveable.init(self, X, Y, W, H)
-		self.fnwk_extra_blind = extra_source
+function fnwk_init_extra_blind(X, Y, W, H, extra_source)
+	Moveable.init(self, X, Y, W, H)
+	self.fnwk_extra_blind = extra_source
 
-		self.children = {}
-		self.config = {}
-		self.states.visible = false
-		self.states.collide.can = false
-		self.states.drag.can = false
-		self.loc_debuff_lines = {'',''}
+	self.children = {}
+	self.config = {}
+	self.states.visible = false
+	self.states.collide.can = false
+	self.states.drag.can = false
+	self.loc_debuff_lines = {'',''}
 
-		if getmetatable(self) == Blind then 
-			table.insert(G.I.CARD, self)
-		end
-		return
+	if getmetatable(self) == Blind then 
+		table.insert(G.I.CARD, self)
 	end
-
-	return ref_blind_init(self, X, Y, W, H)
 end
 
-function Blind:extra_set_blind(blind, reset, silent)
+function Blind:extra_set_blind(blind, reset)
 	if not reset then
 		self.config.blind = blind
 		self.name = blind.name
 		self.debuff = blind.debuff
 		self.dollars = G.GAME.blind.dollars
-		if self.config.blind.key == 'bl_fnwk_creek' then
-			local mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
-			self.mult = mult / 2
-			G.GAME.modifiers.fnwk_hide_blind_score = true
+		if self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden then
+			if not G.GAME.modifiers.fnwk_hide_blind_score then
+				G.GAME.modifiers.fnwk_hide_blind_score = true
+				set_blind_score_visible(false)
+			end
+			if self.config.blind.score_invisible then self.triggered = true end
 		else
 			self.mult = blind.mult / 2
 		end
@@ -131,10 +172,12 @@ function Blind:extra_set_blind(blind, reset, silent)
 end
 
 local ref_blind_set = Blind.set_blind
-function Blind:set_blind(blind, reset, silent)
+function Blind:set_blind(...)
+	local args = {...}
+	local blind, reset = args[1], args[2]
 	if self.fnwk_extra_blind then
 		if blind or reset then
-			return self:extra_set_blind(self.config.blind, reset, silent)
+			return self:extra_set_blind(self.config.blind, reset)
 		end
 
 		return
@@ -149,21 +192,21 @@ function Blind:set_blind(blind, reset, silent)
 
 	self.fnwk_newrun_flag = nil
 
-	local ret = ref_blind_set(self, blind, reset, silent)
+	local ret = ref_blind_set(self, ...)
 	self.main_blind_disabled = nil
 
-	if blind and blind.key == 'bl_fnwk_creek' then
-		self.mult = pseudorandom(pseudoseed('fnwk_creek'), 0, 6) * 0.25 + 1.75
-		self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling
-        self.chip_text = number_format(self.chips)
+	if blind and (blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) then
 		G.GAME.modifiers.fnwk_hide_blind_score = true
+		set_blind_score_visible(false)
+
+		if blind.score_invisible then self.triggered = true end
 	end
 	
 	if not (blind or reset) then return ret end
 
 	for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
 		if self.config.blind ~= v.config.blind then
-			v:extra_set_blind(v.config.blind, reset, silent)
+			v:extra_set_blind(v.config.blind, reset)
 		end
 	end
 
@@ -173,9 +216,14 @@ end
 --- reimplementation because the original has a lot of visuals for "defeat"
 --- You can't "defeat" extra blinds except by selling the joker
 local ref_blind_defeat = Blind.defeat
-function Blind:defeat(silent)
+function Blind:defeat(...)
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
-	local ret = ref_blind_defeat(self, silent)
+	local ret = ref_blind_defeat(self, ...)
+
+	if (self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) and G.GAME.modifiers.fnwk_hide_blind_score then
+		G.GAME.modifiers.fnwk_hide_blind_score = nil
+		set_blind_score_visible(true)
+	end
 
 	-- although this is not recursive, this check still exists for if
 	-- defeat gets called by, say, the joker controlling the extra blind when sold
@@ -214,12 +262,16 @@ function Blind:defeat(silent)
 end
 
 local ref_blind_disable = Blind.disable
-function Blind:disable()
+function Blind:disable(...)
 	if not self.fnwk_extra_blind then
 		local ret = nil
 		if not self.main_blind_disabled then
 			self.main_blind_disabled = not self.disabled
-			ret = ref_blind_disable(self)
+			ret = {ref_blind_disable(self, ...)}
+			if (self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) and G.GAME.modifiers.fnwk_hide_blind_score then
+				G.GAME.modifiers.fnwk_hide_blind_score = nil
+				set_blind_score_visible(true)
+			end
 		end
 		
 		if self.main_blind_disabled then self.boss = false end
@@ -232,7 +284,7 @@ function Blind:disable()
 				v.dollars = self.dollars
 				G.GAME.blind = v
 
-				ref_blind_disable(v)
+				ref_blind_disable(v, ...)
 
 				self.chips = v.chips
 				self.chip_text = number_format(v.chips)
@@ -249,7 +301,12 @@ function Blind:disable()
 	self.dollars = G.GAME.blind.dollars
 	G.GAME.blind = self
 
-	local ret = ref_blind_disable(self)
+	local ret = ref_blind_disable(self, ...)
+
+	if (self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) and G.GAME.modifiers.fnwk_hide_blind_score then
+		G.GAME.modifiers.fnwk_hide_blind_score = nil
+		set_blind_score_visible(true)
+	end
 
 	G.GAME.blind.chips = self.chips
 	G.GAME.blind.chip_text = number_format(self.chips)
@@ -260,12 +317,12 @@ function Blind:disable()
 end
 
 local ref_blind_type = Blind.get_type
-function Blind:get_type()
+function Blind:get_type(...)
     if self.fnwk_extra_blind then
 		return 'Extra'
 	end
 
-	return ref_blind_type(self)
+	return ref_blind_type(self, ...)
 end
 
 
@@ -277,8 +334,11 @@ end
 ---------------------------
 
 local ref_blind_colour = Blind.change_colour
-function Blind:change_colour(blind_col)
+function Blind:change_colour(...)
 	if self.fnwk_extra_blind then return end
+
+	local args = {...}
+	local blind_col = args[1]
 
 	-- redeclare these to reset table references
 	if not self.fnwk_newrun_flag and next(self.config.blind) and not blind_col and G.STATE ~= G.STATES.ROUND_EVAL then
@@ -359,11 +419,11 @@ function Blind:change_colour(blind_col)
 		end
 	end
 
-	return ref_blind_colour(self, blind_col)
+	return ref_blind_colour(self, ...)
 end
 
 local ref_alert_debuff = Blind.alert_debuff
-function Blind:alert_debuff(first)
+function Blind:alert_debuff(...)
 	if self.config.blind.key == 'bl_fnwk_final_moe' then return end
 
 	if not self.fnwk_extra_blind and self.main_blind_disabled then
@@ -371,25 +431,59 @@ function Blind:alert_debuff(first)
 		return
 	end
 
-	return ref_alert_debuff(self, first)
+	return ref_alert_debuff(self, ...)
 end
 
 local ref_debuff_text = Blind.get_loc_debuff_text
-function Blind:get_loc_debuff_text()
+function Blind:get_loc_debuff_text(...)
 	if self.fnwk_extra_blind then
 		local old_main_blind = G.GAME.blind
 		G.GAME.blind = self
-		local ret = ref_debuff_text(self)
+		local ret = ref_debuff_text(self, ...)
 		G.GAME.blind = old_main_blind
 		return ret
 	end
 
-	return ref_debuff_text(self)
+	return ref_debuff_text(self, ...)
 end
 
 local ref_blind_wiggle = Blind.wiggle
-function Blind:wiggle()
-	if self.fnwk_extra_blind then 
+function Blind:wiggle(...)
+	if self.fnwk_extra_blind then
+		if next(self.fnwk_extra_blind) then
+			card_eval_status_text(
+				self.fnwk_extra_blind,
+				'extra',
+				nil, nil, nil,
+				{
+					message = self.disabled and localize('k_disabled_ex') or self.loc_name,
+					colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
+					delay = 0.8,
+					volume = 0,
+				}
+			)
+		end
+		
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.06*G.SETTINGS.GAMESPEED,
+			blockable = false,
+			blocking = false,
+			func = function()
+				play_sound('tarot2', 0.76, 0.4);
+				return true
+				end
+			}))
+		play_sound('tarot2', 1, 0.4)
+		return
+	end
+
+	return ref_blind_wiggle(self, ...)
+end
+
+local ref_blind_juice = Blind.juice_up
+function Blind:juice_up(...)
+	if self.fnwk_extra_blind and next(self.fnwk_extra_blind) then 
 		card_eval_status_text(
 			self.fnwk_extra_blind,
 			'extra',
@@ -397,62 +491,44 @@ function Blind:wiggle()
 			{
 				message = self.disabled and localize('k_disabled_ex') or self.loc_name,
 				colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
-				delay = 0.8
-			})
-			play_sound('generic1')
+				delay = 0.8,
+				volume = 0,
+			}
+		)
 		return
 	end
 
-	return ref_blind_wiggle(self)
-end
-
-local ref_blind_juice = Blind.juice_up
-function Blind:juice_up(_a, _b)
-	if self.fnwk_extra_blind then 
-		card_eval_status_text(
-		self.fnwk_extra_blind,
-		'extra',
-		nil, nil, nil,
-		{
-			message = self.disabled and localize('k_disabled_ex') or self.loc_name,
-			colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
-			delay = 0.8
-		})
-		play_sound('generic1')
-		return
-	end
-
-	return ref_blind_juice(self, _a, _b)
+	return ref_blind_juice(self, ...)
 end
 
 local ref_blind_hover = Blind.hover
-function Blind:hover()
+function Blind:hover(...)
 	if self.fnwk_extra_blind then return end
-	return ref_blind_hover(self)
+	return ref_blind_hover(self, ...)
 end
 
 local ref_blind_stop_hover = Blind.stop_hover
-function Blind:stop_hover()
+function Blind:stop_hover(...)
     if self.fnwk_extra_blind then return end
-	return ref_blind_stop_hover(self)
+	return ref_blind_stop_hover(self, ...)
 end
 
 local ref_blind_draw = Blind.draw
-function Blind:draw()
+function Blind:draw(...)
 	if self.fnwk_extra_blind then return end
-	return ref_blind_draw(self)
+	return ref_blind_draw(self, ...)
 end
 
 local ref_blind_move = Blind.move
-function Blind:move(dt)
+function Blind:move(...)
 	if self.fnwk_extra_blind then return end
-	return ref_blind_move(self, dt)
+	return ref_blind_move(self, ...)
 end
 
 local ref_blind_dims = Blind.change_dim
-function Blind:change_dim(w, h)
+function Blind:change_dim(...)
 	if self.fnwk_extra_blind then return end
-	return ref_blind_dims(self, w, h)
+	return ref_blind_dims(self, ...)
 end
 
 
@@ -464,11 +540,11 @@ end
 
 --- press_play() main functionality is handled with a lovely patch
 local ref_blind_play = Blind.press_play
-function Blind:press_play()
+function Blind:press_play(...)
 	if not self.fnwk_extra_blind then
 		self.disabled = self.main_blind_disabled
 		self.main_play_loop = true
-		return ref_blind_play(self)
+		return ref_blind_play(self, ...)
 	end
 	
 	local old_main_blind = G.GAME.blind
@@ -477,27 +553,28 @@ function Blind:press_play()
 	self.dollars = old_main_blind.dollars
 	G.GAME.blind = self
 
-	local ret = ref_blind_play(self)
+	local ret = ref_blind_play(self, ...)
 
 	old_main_blind.chips = self.chips
 	old_main_blind.chip_text = number_format(self.chips)
 	old_main_blind.dollars = self.dollars
 	G.GAME.blind = old_main_blind
 
-	if ret then 
+	if ret and next(self.fnwk_extra_blind) then
+		local juice_obj = self.fnwk_extra_blind
 		G.E_MANAGER:add_event(Event({
 			trigger = 'immediate',
 			func = function()
 				attention_text({
 					text = self.disabled and localize('k_disabled_ex') or self.loc_name,
-					scale = 1, 
+					scale = 1,
 					hold = 0.45,
 					backdrop_colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
 					align = 'bm',
-					major = self.fnwk_extra_blind,
-					offset = {x = 0, y = 0.05*self.fnwk_extra_blind.T.h}
+					major = juice_obj,
+					offset = { x = 0, y = 0.05*juice_obj.T.h}
 				})
-				self.fnwk_extra_blind:juice_up()
+				if juice_obj.juice_up then juice_obj:juice_up() end
 				play_sound('generic1', (0.9 + 0.2*math.random())*0.2 + 0.8, 1)
 				return true
 			end
@@ -509,14 +586,14 @@ end
 
 --- modify_hand() main functionality is taken care of within a lovely patch
 local ref_blind_modify = Blind.modify_hand
-function Blind:modify_hand(cards, poker_hands, text, mult, hand_chips, scoring_hand)
+function Blind:modify_hand(...)
 	if not self.fnwk_extra_blind then 
 		self.disabled = self.main_blind_disabled
-		local main_ret, main_chips, main_modded = ref_blind_modify(self, cards, poker_hands, text, mult, hand_chips, scoring_hand)
+		local ret = ref_blind_modify(self, ...)
 		if not self.main_play_loop then
 			self.disabled = false
 		end
-		return main_ret, main_chips, main_modded
+		return ret
 	end
 
 	local old_main_blind = G.GAME.blind
@@ -525,7 +602,7 @@ function Blind:modify_hand(cards, poker_hands, text, mult, hand_chips, scoring_h
 	self.dollars = old_main_blind.dollars
 	G.GAME.blind = self
 	
-	local mult_ret, chips_ret, modded_ret = ref_blind_modify(self, cards, poker_hands, text, mult, hand_chips, scoring_hand)
+	local ret = ref_blind_modify(self, ...)
 	
 	old_main_blind.chips = self.chips
 	old_main_blind.chip_text = number_format(self.chips)
@@ -533,7 +610,8 @@ function Blind:modify_hand(cards, poker_hands, text, mult, hand_chips, scoring_h
 	G.GAME.blind = old_main_blind
 
 	if ((self.config.blind.modify_hand and type(self.config.blind.modify_hand) == 'function')
-	or self.config.blind.name == 'The Flint') then
+	or self.config.blind.name == 'The Flint') and next(self.fnwk_extra_blind) then
+		local juice_obj = self.fnwk_extra_blind
 		G.E_MANAGER:add_event(Event({
 			trigger = 'immediate',
 			func = function()
@@ -543,23 +621,23 @@ function Blind:modify_hand(cards, poker_hands, text, mult, hand_chips, scoring_h
 					hold = 0.45,
 					backdrop_colour = self.disabled and G.C.FILTER or get_blind_main_colour(self.config.blind.key),
 					align = 'bm',
-					major = self.fnwk_extra_blind,
-					offset = {x = 0, y = 0.05*self.fnwk_extra_blind.T.h}
+					major = juice_obj,
+					offset = { x = 0, y = 0.05*juice_obj.T.h}
 				})
-				self.fnwk_extra_blind:juice_up()
+				if juice_obj.juice_up then juice_obj:juice_up() end
 				play_sound('generic1', (0.9 + 0.2*math.random())*0.2 + 0.8, 1)
 				return true
 			end
 		}))
 	end
 
-	return mult_ret, chips_ret, modded_ret
+	return ret
 end
 
 local ref_blind_hand = Blind.debuff_hand
-function Blind:debuff_hand(cards, hand, handname, check)
+function Blind:debuff_hand(...)
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
-	local ret = ref_blind_hand(self, cards, hand, handname, check)
+	local ret = ref_blind_hand(self, ...)
 	local extra_ret = nil
 
 	if not self.fnwk_extra_blind then
@@ -574,16 +652,16 @@ function Blind:debuff_hand(cards, hand, handname, check)
 				v.chips = self.chips
 				v.chip_text = number_format(self.chips)
 				v.dollars = self.dollars
-				G.GAME.blind = v				
+				G.GAME.blind = v
 
-				local v_ret = ref_blind_hand(v, cards, hand, handname, check)
+				local v_ret = ref_blind_hand(v, ...)
 
 				if v_ret then
 					v.fnwk_extra_boss_throw_hand = true
 				end
 
 				if not extra_ret and v_ret then
-					extra_ret = v_ret 
+					extra_ret = v_ret
 				end
 
 				self.chips = v.chips
@@ -603,9 +681,10 @@ end
 
 
 local ref_blind_drawn = Blind.drawn_to_hand
-function Blind:drawn_to_hand()
+function Blind:drawn_to_hand(...)
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
-	local ret = ref_blind_drawn(self)
+	local ret = ref_blind_drawn(self, ...)
+	
 
 	if not self.fnwk_extra_blind then
 		self.disabled = false
@@ -617,7 +696,7 @@ function Blind:drawn_to_hand()
 				v.dollars = self.dollars
 				G.GAME.blind = v
 
-				ref_blind_drawn(v)
+				ref_blind_drawn(v, ...)
 
 				self.chips = v.chips
 				self.chip_text = number_format(v.chips)
@@ -632,9 +711,9 @@ function Blind:drawn_to_hand()
 end
 
 local ref_blind_flipped = Blind.stay_flipped
-function Blind:stay_flipped(area, card, from_area)
+function Blind:stay_flipped(...)
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
-	local ret = ref_blind_flipped(self, area, card, from_area)
+	local ret = ref_blind_flipped(self, ...)
 
 	if not self.fnwk_extra_blind then
 		if not self.main_play_loop then
@@ -648,10 +727,10 @@ function Blind:stay_flipped(area, card, from_area)
 				v.dollars = self.dollars
 				G.GAME.blind = v
 
-				local extra_ret = ref_blind_flipped(v, area, card, from_area)
+				local extra_ret = ref_blind_flipped(v, ...)
 
 				if not ret and extra_ret and extra_ret == true then
-					ret = extra_ret 
+					ret = extra_ret
 				end
 
 				self.chips = v.chips
@@ -666,12 +745,14 @@ function Blind:stay_flipped(area, card, from_area)
 end
 
 local ref_blind_debuff = Blind.debuff_card
-function Blind:debuff_card(card, from_blind)
+function Blind:debuff_card(...)
 	if not self.fnwk_extra_blind then self.disabled = self.main_blind_disabled end
-	local ret = ref_blind_debuff(self, card, from_blind)
+	local ret = ref_blind_debuff(self, ...)
 
 	if not self.fnwk_extra_blind then
 		self.disabled = false
+		local args = {...}
+		local card = args[1]
 		if not card.debuffed_by_blind then
 			for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
 				if self.config.blind ~= v.config.blind then
@@ -680,7 +761,7 @@ function Blind:debuff_card(card, from_blind)
 					v.dollars = self.dollars
 					G.GAME.blind = v
 
-					ref_blind_debuff(v, card, from_blind)
+					ref_blind_debuff(v, ...)
 
 					self.chips = v.chips
 					self.chip_text = number_format(v.chips)
@@ -708,13 +789,13 @@ end
 
 --- this feels like it's going to get me killed
 local ref_blind_save = Blind.save
-function Blind:save()
-	local ret = ref_blind_save(self)
+function Blind:save(...)
+	local ret = ref_blind_save(self, ...)
 
 	ret.main_blind_disabled = self.main_blind_disabled
 
 	if self.fnwk_extra_blind then
-		ret.fnwk_extra_blind = self.fnwk_extra_blind:is(Blind) and self.fnwk_extra_blind.config.blind.key or self.fnwk_extra_blind.unique_val
+		ret.fnwk_extra_blind = (self.fnwk_extra_blind.is and self.fnwk_extra_blind:is(Blind) and self.fnwk_extra_blind.config.blind.key) or self.fnwk_extra_blind.unique_val or true
 		ret.dollars = nil
 	end
 
@@ -733,6 +814,11 @@ function Blind:load(blindTable)
 
 		self.fnwk_works_submitted = 0
 		self.fnwk_required_works = 0
+
+		if (self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) and G.GAME.modifiers.fnwk_hide_blind_score then
+			set_blind_score_visible(false)
+			if self.config.blind.score_invisible then self.triggered = true end
+		end
 			
 		local obj = self.config.blind
 		if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
@@ -759,6 +845,11 @@ function Blind:load(blindTable)
 	self.fnwk_works_submitted = 0
 	self.fnwk_required_works = 0
 	self:set_text()
+
+	if (self.config.blind.score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden) and G.GAME.modifiers.fnwk_hide_blind_score then
+		set_blind_score_visible(false)
+		if self.config.blind.score_invisible then self.triggered = true end
+	end
 	
 	local obj = self.config.blind
 	if self.in_blind and obj.fnwk_blind_load and type(obj.fnwk_blind_load) == 'function' then
@@ -779,4 +870,19 @@ function Blind:fnwk_card_added(card)
 	if obj.fnwk_card_added and type(obj.fnwk_card_added) == 'function' then
         obj:fnwk_card_added(card)
 	end
+end
+
+
+---------------------------
+--------------------------- Ensure blinds are removed from G.I.CARD to prevent memor leak/weirdness
+--------------------------- Vanilla only ever creates one blind object
+---------------------------
+
+function Blind:remove()
+	for k, v in pairs(G.I.CARD) do
+        if v == self then
+            table.remove(G.I.CARD, k)
+        end
+    end
+    Moveable.remove(self)
 end

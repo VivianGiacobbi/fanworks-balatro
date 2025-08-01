@@ -44,7 +44,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.individual and context.cardarea == G.play and context.other_card.ability.played_while_flipped then
+    if context.individual and context.cardarea == G.play and context.other_card.ability.wheel_flipped then
         local flare_card = context.blueprint_card or card
         return {
             func = function()

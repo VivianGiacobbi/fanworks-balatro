@@ -6,7 +6,8 @@ local deckInfo = {
     discovered = true,
     unlocked = false,
     unlock_condition = {type = 'fnwk_shop_rerolled', num = 25},
-    fanwork = 'bone'
+    fanwork = 'bone',
+    artist = 'torch'
 }
 
 function deckInfo.check_for_unlock(self, args)

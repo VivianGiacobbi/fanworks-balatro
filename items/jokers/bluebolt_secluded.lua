@@ -27,7 +27,7 @@ function jokerInfo.check_for_unlock(self, args)
 
 	local tally = 0
 	for _, card in ipairs(args.full_hand) do
-		if card.ability.played_while_flipped then
+		if card.ability.wheel_flipped then
 			tally = tally + 1
 		end
 	end
