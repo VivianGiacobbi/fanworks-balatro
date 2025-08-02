@@ -445,14 +445,34 @@ return {
 			c_fnwk_fanworks_beyond = "Beyond Canon",
 			c_fnwk_fanworks_bluesky = "Mr. Blue Sky",
 			c_fnwk_fanworks_standoff = "Stand-off",
+			c_fnwk_fanworks_reread = "Annual Re-Read",
+			c_fnwk_fanworks_moderated = "Closely Moderated",
+			c_fnwk_fanworks_corpse = "Fanquisite Corpse",
+			c_fnwk_fanworks_invisible = "Invisible Woman",
+			c_fnwk_fanworks_breakdown = "Third-Act Breakdown",
 			c_fnwk_lighted_kriskross = "Kris Kross",
 		},
 		v_text = {
-			ch_c_fnwk_fanworks_beyond = {"All Non-{C:fanworks}Fanworks{} Jokers are banned"},
-			ch_c_fnwk_fanworks_bluesky = {"Non-{C:blue}Common{} {C:attention}Jokers{} are banned"},
+			-- general behavior
+			fnwk_banned_except = {"{C:attention}All Jokers{} and {C:stand}all Stands{} {C:attention}banned{} except:"},
+			fnwk_blinds_except = {"{C:attention}All Blinds banned{} except:"},
 			ch_c_max_stands = {"You may have up to {C:attention}#1#{} {C:stand}Stands{}"},
-			ch_c_fnwk_fanworks_standoff = {"One {C:stand}Stand{} is {C:attention}randomized{} every round"},
+			ch_c_fnwk_duplicates_allowed = {"{C:attention}Dupliate Jokers{} can spawn"},
+			ch_c_fnwk_pinned_jokers = {"All {C:attention}Jokers{} are {C:gold}Pinned{}"},
+            ch_c_fnwk_right_eternal = {"Non-{C:attention}leftmost{} Jokers are {C:attention}Eternal{}"},
+			ch_c_fnwk_consumable_save = {"{C:attention}Using{} consumeables {C:attention}saves the run{}"},
+			ch_c_fnwk_play_save = {"{C:attention}Playing{} a hand {C:attention}saves the run{}"},
+			ch_c_fnwk_all_scores_hidden = {"{C:attention}Blind requirements{} are {C:dark_edition}hidden{}"},
+			ch_c_fnwk_all_bosses = {"{C:attention}Small{} and {C:attention}Big Blinds{} are {C:attention}Boss Blinds{}"},
+			ch_c_fnwk_all_showdown = {"{C:attention}Boss Blinds{} are {C:attention}Final Boss Blinds{}"},
+
+			-- challenge specific strings
+			ch_c_fnwk_fanworks_beyond = {"Non-{C:fanworks}Fanworks{} Jokers are banned"},
+			ch_c_fnwk_fanworks_bluesky = {"Non-{C:blue}Common{} {C:attention}Jokers{} are banned"},
+			ch_c_fnwk_fanworks_standoff = {"One {C:stand}Stand{} {C:attention}randomized{} each round"},
 			ch_c_fnwk_fanworks_standoff_2 = {"(retaining {C:dark_edition}Editions{} and {C:attention}Stickers{})"},
+			ch_c_fnwk_fanworks_reread = {"Only retrigger {C:attention}Jokers{} and {C:stand}Stands{} are allowed"},
+			ch_c_fnwk_fanworks_moderated = {"{X:1,C:white}#1#{} is {C:attention}always active{}"},
 		},
 		achievement_names = {
 		},
@@ -1505,8 +1525,8 @@ return {
 					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}"
 				}
 			},
-			j_fnwk_jspec_energetic = {
-				name = "Energetic Joker",
+			j_fnwk_jspec_sharp = {
+				name = "Sharp Joker",
 				text = {
 					"{C:mult}+#1#{} Mult for each unused",
 					"{C:red}discard{} this run",
@@ -1514,7 +1534,7 @@ return {
 				},
 			},
 			j_fnwk_jspec_seal = {
-				name = "Seal the Seal",
+				name = "Seal Joker",
 				text = {
 					"{C:planet}Blue{} and {C:tarot}Purple{} {C:attention}seals{}",
 					"trigger when {C:attention}scored{}"
@@ -1907,8 +1927,7 @@ return {
 					"{C:attention}#1#{} selected cards in hand"
 				},
 			},
-
-			c_fnwk_spec_stone = {
+			c_fnwk_spec_mask = {
 				name = "Stone Mask",
 				text = {
 					"Add {C:dark_edition}Holographic{} and {C:attention}Eternal{},",
@@ -2572,8 +2591,7 @@ return {
 			b_fnwk_fanworks_deck = {
 				name = "Fanworks Deck",
 				text = {
-					"Start run with the",
-					"{C:attention,T:v_overstock_norm}#1#{} voucher",
+					"Start with {C:attention,T:v_overstock_norm}#1#{} voucher",
 					"{C:fanworks}Fanworks{} Jokers appear",
 					"{C:attention}#2#X{} more often",
 				},
@@ -2583,7 +2601,7 @@ return {
 					"{C:inactive}[#1#/#2#]{}"
 				}
 			},
-			b_fnwk_shimmering = {
+			b_fnwk_bone_shimmering = {
 				name = "Shimmering Deck",
 				text = {
 					"{C:attention}#1#{} free {C:green}Rerolls{} per shop",
@@ -2594,7 +2612,7 @@ return {
 					"in one run"
 				}
 			},
-			b_fnwk_act = {
+			b_fnwk_fanworks_act = {
 				name = "ACT Deck",
 				text = {
 					"{C:attention}Small Blind{} shops have {C:blue}common{} Jokers",
@@ -2604,6 +2622,18 @@ return {
 				unlock = {
 					"Win a run with {C:attention,E:1}#1#{}",
 					"on {V:1,E:1}#2#{} difficulty"
+				}
+			},
+			b_fnwk_gotequest_arcane = {
+				name = "Arcane Deck",
+				text = {
+					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
+					"{C:red}#2#{} {C:stand}Stand{} limit",
+					"{C:red}#3#{} consumable slot",
+				},
+				unlock = {
+					"Use {C:attention,E:1}#1#{} unique {V:1,E:1}#2#{}",
+					"in one run"
 				}
 			},
 		},
@@ -2645,7 +2675,7 @@ return {
 				}
 			},
 			c_fnwk_fanworks_bluesky = {
-				name = "test",
+				name = "Mr. Blue Sky",
 				text = {
 					"Time for your {C:attention,E:1}very first{} fanpart!",
 					"You've got all the {C:attention}creative energy{}",
@@ -2658,6 +2688,42 @@ return {
 			},
 			c_fnwk_fanworks_standoff = {
 				name = "Stand-Off",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_fanworks_reread = {
+				name = "Annual Re-Read",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_fanworks_moderated = {
+				name = "Closely Moderated",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_fanworks_corpse = {
+				name = "Fanquisite Corpse",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_fanworks_invisible = {
+				name = "Invisible Woman",
+				text = {
+					"Time to write a {C:dark_edition}Shizuka{} part!",
+					"She was barely a character in",
+					"{C:stand}Part 4{}, so it only seems like",
+					"the {C:attention}right thing to do{}. Now we",
+					"just have to... hmmm... hold on...",
+					" ",
+					"{s:0.7,C:inactive}Invisibility is a tricky power, isn't it?{}"
+				}
+			},
+			c_fnwk_fanworks_breakdown = {
+				name = "Third-Act Breakdown",
 				text = {
 					"{C:attention,E:1}Dummy Text{}"
 				}

@@ -12,7 +12,6 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'fanworks',
-	in_progress = true,
 }
 
 local function tally_fanworks_jokers()

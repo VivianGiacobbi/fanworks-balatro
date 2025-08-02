@@ -16,42 +16,29 @@ local function get_moe_bosses(num_bosses)
 
     for i=1, num_bosses do
         local eligible_bosses = {}
-
+        local valid_num = 0
+        local min_use = 1000
         for k, v in pairs(G.P_BLINDS) do
-            if v.boss and not v.boss.showdown then
-                if v.in_pool and type(v.in_pool) == 'function' then
-                    local res = v:in_pool()
-                    eligible_bosses[k] = res and true or nil
-                else
+            if v.boss and not G.GAME.banned_keys[k] and G.GAME.bosses_used[k] <= min_use then
+                local valid = (v.in_pool and type(v.in_pool) == 'function' and v:in_pool()) or true
+                if valid and not v.boss.showdown and v.boss.min <= math.max(1, G.GAME.round_resets.ante) then
+                    if G.GAME.bosses_used[k] < min_use then
+                        min_use = G.GAME.bosses_used[k]
+                        eligible_bosses = {}
+                    end
                     eligible_bosses[k] = true
+                    valid_num = valid_num + 1
                 end
             end
         end
 
-        for k, v in pairs(G.GAME.banned_keys) do
-            if eligible_bosses[k] then eligible_bosses[k] = nil end
+        if valid_num > 0 then
+            local _, boss = pseudorandom_element(eligible_bosses, pseudoseed('boss'))
+            bosses_used[boss] = bosses_used[boss] + 1
+            chosen_bosses[#chosen_bosses+1] = boss
+        else
+            return chosen_bosses
         end
-
-        local min_use = 100
-        for k, v in pairs(bosses_used) do
-            if eligible_bosses[k] then
-                eligible_bosses[k] = v
-                if eligible_bosses[k] <= min_use then 
-                    min_use = eligible_bosses[k]
-                end
-            end
-        end
-
-        for k, _ in pairs(eligible_bosses) do
-            if eligible_bosses[k] then
-                if eligible_bosses[k] > min_use then 
-                    eligible_bosses[k] = nil
-                end
-            end
-        end
-        local _, boss = pseudorandom_element(eligible_bosses, pseudoseed('boss'))
-        bosses_used[boss] = bosses_used[boss] + 1
-        chosen_bosses[#chosen_bosses+1] = boss
     end
     
     return chosen_bosses

@@ -1,6 +1,5 @@
 local jokerInfo = {
-	key = 'j_fnwk_jspec_seal',
-	name = 'Seal the Seal',
+	name = 'Seal Joker',
 	config = {},
 	rarity = 2,
 	cost = 5,

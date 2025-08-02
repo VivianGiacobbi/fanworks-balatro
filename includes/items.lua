@@ -1,342 +1,368 @@
 local items_to_load = {
 	Joker = {
-		-- fanworks
-		'fanworks_jogarc',
-		'fanworks_tos',
-		'fanworks_jester',
-		'fanworks_mascot',
-		'fanworks_fanworks',
-		'fanworks_standoff',
+		items = {
+			-- fanworks
+			'fanworks_jogarc',
+			'fanworks_tos',
+			'fanworks_jester',
+			'fanworks_mascot',
+			'fanworks_fanworks',
+			'fanworks_standoff',
 
-		-- jojopolis
-		'jojopolis_jokestar',
-		'jojopolis_high',
+			-- jojopolis
+			'jojopolis_jokestar',
+			'jojopolis_high',
 
-		-- a$ap mob feedback
-		'asap_jokestar',
+			-- a$ap mob feedback
+			'asap_jokestar',
 
-		-- bone to blades
-		'bone_samurai',
-		'bone_destroyer',
+			-- bone to blades
+			'bone_samurai',
+			'bone_destroyer',
 
-		-- city living
-		'city_neet',
+			-- city living
+			'city_neet',
 
-		-- moscow calling
-		'moscow_mule',
+			-- moscow calling
+			'moscow_mule',
 
-		-- crimson jungle
-		'crimson_golden',
-		'crimson_bloodletting',
+			-- crimson jungle
+			'crimson_golden',
+			'crimson_bloodletting',
+				
+			-- gotequest
+			'gotequest_pair',
+			'gotequest_killing',
+			'gotequest_headlong',
+			'gotequest_2hot',
+			'gotequest_ajorekesr',
+			'gotequest_will',
+			'gotequest_lambiekins',
+
+			-- culture shock
+			'culture_adaptable',
+
+			-- glass lariats
+			'glass_jokestar',
+
+			-- planck's creek
+			'plancks_jokestar',
+			'plancks_unsure',
+			'plancks_skeptic',
+			'plancks_ghost',
+
+			-- last hope army
+			'last_morse',
+
+			-- rockhard in a funky place
+			'rockhard_rebirth',
+			'rockhard_nameless',
+			'rockhard_alfie',
+			'rockhard_vasos',
+			'rockhard_trans',
+			'rockhard_numbers',
+
+			-- iron touch
+			'iron_sanctuary',
+			'iron_boney',
+
+			-- lighted stage
+			'lighted_ge',
+			'lighted_square',
+
+			-- jojomania
+			'mania_jokestar',
+			'mania_fragile',
+
+			-- spirit lines
+			'spirit_halves',
+			-- 'spirit_aquarium',
+			'spirit_gambler',
+			'spirit_corpse',
+			'spirit_rotten',
+
+			-- industry baby
+			'industry_loyal',
+
+			-- double down
+			'double_clark',
+			'double_firewalker',
+			'double_devastation',
+
+			-- careless cargo
+			'careless_jokestar',
+
+			-- stalk forest club
+			'stalk_jokestar',
+
+			-- rubicon crossroads
+			'rubicon_fishy',
+			'rubicon_infidel',
+			'rubicon_thnks',
+			'rubicon_moonglass',
+			'rubicon_crown',
+
+			-- streetlight pursuit
+			'streetlight_fledgling',
+			'streetlight_resil',
+			'streetlight_indulgent',
+			'streetlight_methodical',
+			'streetlight_industrious',
+			'streetlight_arrow',
+			'streetlight_pinstripe',
+			'streetlight_biased',
+			'streetlight_teenage',
+			'streetlight_cabinet',
+
+			-- whiplash riot
+			'whiplash_quiet',
+
+			-- bluebolt incarnation
+			'bluebolt_jokestar',
+			'bluebolt_secluded',
+			'bluebolt_impaired',
+			'bluebolt_sexy',
+			'bluebolt_tuned',
 			
-		-- gotequest
-		'gotequest_pair',
-		'gotequest_killing',
-		'gotequest_headlong',
-		'gotequest_2hot',
-		'gotequest_ajorekesr',
-		'gotequest_will',
-		'gotequest_lambiekins',
 
-		-- culture shock
-		'culture_adaptable',
+			-- sunshine deluxe
+			'sunshine_duo',
+			'sunshine_laconic',
+			'sunshine_funkadelic',
+			'sunshine_reliable',
 
-		-- glass lariats
-		'glass_jokestar',
+			-- no man's army
+			'noman_unknown',
 
-		-- planck's creek
-		'plancks_jokestar',
-		'plancks_unsure',
-		'plancks_skeptic',
-		'plancks_ghost',
+			-- scepter files
+			'scepter_card',
 
-		-- last hope army
-		'last_morse',
+			-- yo yo ma
+			'yym_sheet',
 
-		-- rockhard in a funky place
-		'rockhard_rebirth',
-		'rockhard_nameless',
-		'rockhard_alfie',
-		'rockhard_vasos',
-		'rockhard_trans',
-		'rockhard_numbers',
+			-- golden generation
+			'golden_generation',
 
-		-- iron touch
-		'iron_sanctuary',
-		'iron_boney',
+			-- cold iron streets,
+			'cis_jokestar',
 
-		-- lighted stage
-		'lighted_ge',
-		'lighted_square',
+			-- love once buried
+			'love_jokestar',
+			'love_holy',
 
-		-- jojomania
-		'mania_jokestar',
-		'mania_fragile',
+			-- my digital venus
+			'mdv_shock',
 
-		-- spirit lines
-		'spirit_halves',
-		-- 'spirit_aquarium',
-		'spirit_gambler',
-		'spirit_corpse',
-		'spirit_rotten',
+			-- jojojidai
+			'jojojidai_soldiers',
 
-		-- industry baby
-		'industry_loyal',
+			-- lipstick_vogue
+			'lipstick_ego',
 
-		-- double down
-		'double_clark',
-		'double_firewalker',
-		'double_devastation',
-
-		-- careless cargo
-		'careless_jokestar',
-
-		-- stalk forest club
-		'stalk_jokestar',
-
-		-- rubicon crossroads
-		'rubicon_fishy',
-		'rubicon_infidel',
-		'rubicon_thnks',
-		'rubicon_moonglass',
-		'rubicon_crown',
-
-		-- streetlight pursuit
-		'streetlight_fledgling',
-		'streetlight_resil',
-		'streetlight_indulgent',
-		'streetlight_methodical',
-		'streetlight_industrious',
-		'streetlight_arrow',
-		'streetlight_pinstripe',
-		'streetlight_biased',
-		'streetlight_teenage',
-		'streetlight_cabinet',
-
-		-- whiplash riot
-		'whiplash_quiet',
-
-		-- bluebolt incarnation
-		'bluebolt_jokestar',
-		'bluebolt_secluded',
-		'bluebolt_impaired',
-		'bluebolt_sexy',
-		'bluebolt_tuned',
-		
-
-		-- sunshine deluxe
-		'sunshine_duo',
-		'sunshine_laconic',
-		'sunshine_funkadelic',
-		'sunshine_reliable',
-
-		-- no man's army
-		'noman_unknown',
-
-		-- scepter files
-		'scepter_card',
-
-		-- yo yo ma
-		'yym_sheet',
-
-		-- golden generation
-		'golden_generation',
-
-		-- cold iron streets,
-		'cis_jokestar',
-
-		-- love once buried
-		'love_jokestar',
-		'love_holy',
-
-		-- my digital venus
-		'mdv_shock',
-
-		-- jojojidai
-		'jojojidai_soldiers',
-
-		-- lipstick_vogue
-		'lipstick_ego',
-
-		-- jojospectacle,
-		'jspec_energetic',
-		'jspec_seal',
-		'jspec_joepie',
-		'jspec_kunst',
-		'jspec_ilsa',
-		
-		-- shit realm
-		'fanworks_bathroom',
-		
-		-- dummy
-		'banned_jokers',
-		'banned_commons'
+			-- jojospectacle,
+			'jspec_sharp',
+			'jspec_seal',
+			'jspec_joepie',
+			'jspec_kunst',
+			'jspec_ilsa',
+			
+			-- shit realm
+			'fanworks_bathroom',
+			
+			-- dummy
+			'banned_jokers',
+			'banned_commons'
+		}
 	},
 
 	Consumable = {
-		'spec_impulse',
-		'spec_ichor',
-		'spec_mood'
+		items = {
+			'spec_impulse',
+			'spec_ichor',
+			'spec_mood'
+		}
 	},
 
 	Stand = {
-		-- jojopolis
-		'jojopolis_hgm',
-		'jojopolis_hgm_cosmic',
+		items = {
+			-- jojopolis
+			'jojopolis_hgm',
+			'jojopolis_hgm_cosmic',
 
-		-- bone to blades
-		'bone_king',
-		'bone_king_farewell',
+			-- bone to blades
+			'bone_king',
+			'bone_king_farewell',
 
-		-- city living
-		'city_dead',
-		'city_opera',
+			-- city living
+			'city_dead',
+			'city_opera',
 
-		-- crimson jungle
-		'crimson_fortunate',
-		'crimson_cough',
+			-- crimson jungle
+			'crimson_fortunate',
+			'crimson_cough',
 
-		-- gotequest
-		'gotequest_born',
-		'gotequest_sweet',
-		'gotequest_takyon',
+			-- gotequest
+			'gotequest_born',
+			'gotequest_sweet',
+			'gotequest_takyon',
 
-		'culture_starboy',
+			'culture_starboy',
 
-		-- glass lariats
-		'glass_big',
+			-- glass lariats
+			'glass_big',
 
-		-- plancks creek
-		'plancks_moon',
-		
-		-- last hope army
-		'last_tragic',
-		'last_saturn',
+			-- plancks creek
+			'plancks_moon',
+			
+			-- last hope army
+			'last_tragic',
+			'last_saturn',
 
-		-- rockhard in a funky place
-		'rockhard_peppers',
-		'rockhard_quadro',
-		'rockhard_misirlou',
+			-- rockhard in a funky place
+			'rockhard_peppers',
+			'rockhard_quadro',
+			'rockhard_misirlou',
 
-		-- iron touch
-		'iron_shatter',
+			-- iron touch
+			'iron_shatter',
 
-		-- the lighted stage
-		'lighted_limelight',
-		'lighted_money',
+			-- the lighted stage
+			'lighted_limelight',
+			'lighted_money',
 
-		-- jojomania
-		'mania_moving',
+			-- jojomania
+			'mania_moving',
 
-		-- spirit lines
-		'spirit_achtung',
-		'spirit_achtung_stranger',
-		'spirit_sweet',
-		'spirit_ultimate',
+			-- spirit lines
+			'spirit_achtung',
+			'spirit_achtung_stranger',
+			'spirit_sweet',
+			'spirit_ultimate',
 
-		-- closer 2 god
-		'closer_artificial',
+			-- closer 2 god
+			'closer_artificial',
 
-		-- double down
-		'double_wine',
-		'double_geometrical',
+			-- double down
+			'double_wine',
+			'double_geometrical',
 
-		-- rubicon crossroads
-		'rubicon_infidelity',
-		'rubicon_dance',
-		'rubicon_mother',
+			-- rubicon crossroads
+			'rubicon_infidelity',
+			'rubicon_dance',
+			'rubicon_mother',
 
-		-- streetlight pursuit
-		'streetlight_disturbia',
-		'streetlight_neon',
-		'streetlight_neon_favorite',
-		'streetlight_eurythmics',
-		'streetlight_rockin',
-		'streetlight_paperback',
-		'streetlight_paperback_rewrite',
-		'streetlight_notorious',
+			-- streetlight pursuit
+			'streetlight_disturbia',
+			'streetlight_neon',
+			'streetlight_neon_favorite',
+			'streetlight_eurythmics',
+			'streetlight_rockin',
+			'streetlight_paperback',
+			'streetlight_paperback_rewrite',
+			'streetlight_notorious',
 
-		-- whiplash riot
-		'whiplash_never',
+			-- whiplash riot
+			'whiplash_never',
 
-		-- bluebolt incarnation
-		'bluebolt_thunder',
-		'bluebolt_thunder_dc',
-		'bluebolt_chemical',
-		'bluebolt_insane',
-		
-		-- sunshine deluxe
-		'sunshine_electric',
-		'sunshine_damned',
-		'sunshine_downward',
-		'sunshine_red',
+			-- bluebolt incarnation
+			'bluebolt_thunder',
+			'bluebolt_thunder_dc',
+			'bluebolt_chemical',
+			'bluebolt_insane',
+			
+			-- sunshine deluxe
+			'sunshine_electric',
+			'sunshine_damned',
+			'sunshine_downward',
+			'sunshine_red',
 
-		-- scepter files
-		'scepter_lenfer',
+			-- scepter files
+			'scepter_lenfer',
 
-		-- JJ29: Stardust Rebels
-		'rebels_rebel',
+			-- JJ29: Stardust Rebels
+			'rebels_rebel',
 
-		-- love once buried
-		'love_super',
+			-- love once buried
+			'love_super',
 
-		-- red rising sun
-		'redrising_invisible',
+			-- red rising sun
+			'redrising_invisible',
 
-		-- jspec
-		'jspec_miracle',
-		'jspec_miracle_together',
-		'jspec_shout',
+			-- jspec
+			'jspec_miracle',
+			'jspec_miracle_together',
+			'jspec_shout',
 
-		-- dummy
-		'random_stand'
+			-- dummy
+			'random_stand'
+		}
 	},
 	
 	Deck = {
-		'fanworks_deck',
-		'shimmering',
-		'act',
+		items = {
+			'fanworks_deck',
+			'bone_shimmering',
+			'gotequest_arcane',
+			'fanworks_act',
+		}
 	},
 
 	Sleeve = {
-		'sleeve_fanworks_deck'
+		items = {
+			'sleeve_fanworks_deck'
+		}
 	},
 
 	Voucher = {
-		'rubicon_kitty',
-    	'rubicon_parade',
-		'streetlight_waystone',
-		'streetlight_binding',
-		'spirit_binary',
-		'spirit_prime',
-		'sunshine_rapture',
-		'sunshine_totality'
+		items = {
+			'rubicon_kitty',
+			'rubicon_parade',
+			'streetlight_waystone',
+			'streetlight_binding',
+			'spirit_binary',
+			'spirit_prime',
+			'sunshine_rapture',
+			'sunshine_totality'
+		}
+	},
+
+	
+	Blind = {
+		items = {
+			'venus',
+			'goat',
+			'bolt',
+			'rot',
+			'creek',
+			'box',
+			'work',
+			'written',
+			'manga',
+			'final_moe',
+			'final_application',
+			'final_multimedia',
+		}
 	},
 
 	Challenge = {
-		'fanworks_beyond',
-		'fanworks_bluesky',
-		'fanworks_standoff',
-		'lighted_kriskross',
-	},
-
-	Blind = {
-		'venus',
-		'goat',
-		'bolt',
-		'rot',
-		'creek',
-		'box',
-		'work',
-		'written',
-		'manga',
-		'final_moe',
-		'final_application',
-		'final_multimedia',
+		load_priority = -1,
+		items = {
+			'fanworks_beyond',
+			'fanworks_bluesky',
+			'fanworks_standoff',
+			'fanworks_reread',
+			'fanworks_moderated',
+			'fanworks_corpse',
+			'fanworks_invisible',
+			'fanworks_breakdown',
+			'lighted_kriskross',
+		}
 	},
 
 	Tag = {
-		'biased',
+		items = {
+			'biased',
+		}
 	}
 }
 
@@ -375,10 +401,20 @@ SMODS.ObjectType {
 	}
 }
 
+local priority_list = {}
 for k, v in pairs(items_to_load) do
-	if next(items_to_load[k]) and fnwk_filter_loading(k) then
-		for i = 1, #v do
-			FnwkLoadItem(v[i], k)
+	priority_list[#priority_list+1] = {
+		key = k,
+		load_priority = v.load_priority or 0,
+		items = v.items
+	}
+end
+table.sort(priority_list, function(a, b) return a.load_priority > b.load_priority end)
+
+for _, v in ipairs(priority_list) do
+	if next(v.items) and fnwk_filter_loading(v.key) then
+		for _, item in ipairs(v.items) do
+			FnwkLoadItem(item, v.key)
 		end
 	end
 end

@@ -3,8 +3,8 @@
 ---------------------------
 
 local ref_end_round = end_round
-function end_round()
-    local ret ref_end_round()
+function end_round(...)
+    local ret = ref_end_round(...)
     G.E_MANAGER:add_event(Event({
         func = function()
             if SMODS.saved then 
@@ -30,18 +30,18 @@ G.FUNCS.evaluate_play = function(e)
     local ret = ref_evaluate_play(e)
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
-        func = function()     
+        func = function()
             if math.floor(hand_chips*mult) >= G.GAME.blind.chips then
                 G.GAME.fnwk_chip_novas = G.GAME.fnwk_chip_novas + 1
                 check_for_unlock({type = 'chip_nova', total_novas = G.GAME.fnwk_chip_novas})
             end
-            return true 
+            return true
         end
     }))
 
     if G.GAME.last_hand_played ~= last_hand then
         G.GAME.fnwk_consecutive_hands = 1
-    else 
+    else
         G.GAME.fnwk_consecutive_hands = G.GAME.fnwk_consecutive_hands + 1
     end
     check_for_unlock({type = 'consecutive_hands', num_consecutive = G.GAME.fnwk_consecutive_hands})
@@ -58,12 +58,12 @@ end
 ---------------------------
 
 local ref_win_game = win_game
-function win_game()
+function win_game(...)
     if (not G.GAME.seeded and not G.GAME.challenge) or SMODS.config.seeded_unlocks then
         check_for_unlock({type = 'fnwk_win_deck'})
     end
 
-    return ref_win_game()
+    return ref_win_game(...)
 end
 
 

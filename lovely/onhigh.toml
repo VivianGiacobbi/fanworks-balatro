@@ -135,7 +135,7 @@ end
 local ares = SMODS.find_card('j_fnwk_gotequest_ajorekesr')
 if next(ares) then
     local eights = 0
-    for _, v in ipairs(context.scoring_hand) do
+    for _, v in ipairs(scoring_hand) do
         if v:get_id() == 8 then
             eights = eights + 1
         end
@@ -151,8 +151,23 @@ if next(ares) then
 end
 
 if effective_hand.level ~= prev_level then
-    effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (highest - 1), 1)
-    effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (highest - 1), 0)
+    effective_hand.mult = math.max(G.GAME.hands[text].s_mult + G.GAME.hands[text].l_mult * (effective_hand.level - 1), 1)
+    effective_hand.chips = math.max(G.GAME.hands[text].s_chips + G.GAME.hands[text].l_chips * (effective_hand.level - 1), 0)
+    update_hand_text(
+        {
+            sound = G.GAME.current_round.current_hand.handname ~= disp_text and 'button' or nil,
+            volume = 0.4,
+            immediate = true,
+            nopulse = nil,
+            delay = G.GAME.current_round.current_hand.handname ~= disp_text and 0.4 or 0
+        },
+        {
+            handname = disp_text,
+            level = effective_hand.level,
+            mult = effective_hand.mult,
+            chips = effective_hand.chips
+        }
+    )
 end
 
 mult = mod_mult(effective_hand.mult)

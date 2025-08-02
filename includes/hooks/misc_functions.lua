@@ -81,6 +81,30 @@ function fnwk_psuedoseed_predict(bool)
 	return G.GAME.pseudorandom.predict_mode
 end
 
+local ref_pseudoseed = pseudoseed
+function pseudoseed(...)
+	if not G.GAME.pseudorandom.predict_mode then return ref_pseudoseed(...) end
+
+	-- maintain these two cases ig
+	if key == 'seed' then return math.random() end
+	if G.SETTINGS.paused and key ~= 'to_do' then return math.random() end
+
+	local _pseed = 0
+	if not G.GAME.pseudorandom.predicts[key] then
+		_pseed = pseudohash(key..(predict_seed or G.GAME.pseudorandom.seed or ''))
+		G.GAME.pseudorandom.predicts[key] = {
+			value = G.GAME.pseudorandom[key] or _pseed,
+			pos = 0
+		}
+	end
+
+	_pseed = math.abs(tonumber(string.format("%.13f", (2.134453429141+G.GAME.pseudorandom.predicts[key].value*1.72431234)%1)))
+	G.GAME.pseudorandom.predicts[key].value = _pseed
+	G.GAME.pseudorandom.predicts[key].pos = G.GAME.pseudorandom.predicts[key].pos + 1
+
+	return (_pseed + (G.GAME.pseudorandom.hashed_seed or 0))/2
+end
+
 
 
 
@@ -88,7 +112,6 @@ end
 ---------------------------
 --------------------------- utility functions
 ---------------------------
-
 
 function fnwk_get_most_played_hand()
 	local hand = 'High Card'
@@ -133,9 +156,9 @@ end
 ---------------------------
 
 function fnwk_create_extra_blind(blind_source, blind_type, skip_set_blind)
-	if not G.GAME then return end	
+	if not G.GAME then return end
 
-	local new_extra_blind = Blind(0, 0, 0, 0, blind_source)
+	local new_extra_blind = fnwk_init_extra_blind(0, 0, 0, 0, blind_source)
 	if not skip_set_blind and G.GAME.blind.in_blind then
 		new_extra_blind:extra_set_blind(blind_type)
 	else
@@ -243,20 +266,20 @@ end
 ---------------------------
 
 local ref_current_pool = get_current_pool
-function get_current_pool(_type, _rarity, _legendary, _append)
-	local pool, pool_key = ref_current_pool(_type, _rarity, _legendary, _append)
+function get_current_pool(...)
+	local ret = {ref_current_pool(...)}
 	if G.GAME.starting_params.fnwk_jokers_rate then
 		local new_pool = {}
-		for _, v in ipairs(pool) do
+		for _, v in ipairs(ret[1]) do
 			local fnwk_rate = FnwkContainsString(v, 'j_fnwk') and G.GAME.starting_params.fnwk_jokers_rate or 1
 			for j=1, fnwk_rate do
 				new_pool[#new_pool+1] = v
 			end
 		end
-		pool = new_pool
+		ret[1] = new_pool -- setting the pool arg
 	end
 
-	return pool, pool_key
+	return unpack(ret)
 end
 
 local name_map = {
@@ -284,9 +307,12 @@ G.FUNCS.fnwk_geo_func = function(e)
 end
 
 local ref_localize = localize
-function localize(args, misc_cat)
+function localize(...)
+	local unpack_args = {...}
+	local args = unpack_args[1]
+
 	if args and not (type(args) == 'table') then
-		return ref_localize(args, misc_cat)
+		return ref_localize(...)
 	end
 
   	if args.type == 'name' and args.key == 'c_fnwk_double_geometrical' then
@@ -386,7 +412,7 @@ function localize(args, misc_cat)
 		args.key = 'fnwk_card_chips_none'
 	end
 
-	return ref_localize(args, misc_cat)
+	return ref_localize(...)
 end
 
 ---------------------------
@@ -394,15 +420,15 @@ end
 ---------------------------
 
 local ref_save_run = save_run
-function save_run()
+function save_run(...)
 	if G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt' then
 		fnwk_reset_blind_proxies()
-		local ret = ref_save_run()
+		local ret = ref_save_run(...)
 		fnwk_set_blind_proxies()
 		return ret
 	end
 
-	return ref_save_run()
+	return ref_save_run(...)
 end
 
 
@@ -481,8 +507,8 @@ end
 ---------------------------
 
 local ref_discover_tallies = set_discover_tallies
-function set_discover_tallies()
-	local ret = ref_discover_tallies()
+function set_discover_tallies(...)
+	local ret = ref_discover_tallies(...)
 
 	if check_for_unlock then check_for_unlock({type = 'fnwk_discovered_card'}) end
   	return ret
@@ -504,28 +530,30 @@ SMODS.Atlas({ key = 'deck_obscured_norank', path = 'deck_obscured_norank.png', p
 SMODS.Atlas({ key = 'deck_obscured_nosuit_norank', path = 'deck_obscured_nosuit_norank.png', px = 71, py = 95 })
 
 local ref_front_info = get_front_spriteinfo
-function get_front_spriteinfo(_front)
+function get_front_spriteinfo(...)
 	local no_suit = G.GAME.modifiers.fnwk_no_suits
 	local no_rank = G.GAME.modifiers.fnwk_no_rank_chips
 	local obscure = G.GAME.modifiers.fnwk_obscure_suits
 
+	local args = {...}
+	local front = args[1]
 	if G.fnwk_force_default_fronts
 	or (G.OVERLAY_MENU and G.OVERLAY_MENU.config.id == 'customize_deck')
-	or (not _front.suit or not _front.value)
+	or (not front.suit or not front.value)
 	or (not no_suit and not no_rank and not obscure) then
-		return ref_front_info(_front)
+		return ref_front_info(...)
 	end
 
 	local key = 'fnwk_deck'
-	local pos = { x = _front.pos.x, y = _front.pos.y }
+	local pos = { x = front.pos.x, y = front.pos.y }
 
 	if obscure then
-		local obscure_suit = G.GAME.modifiers.fnwk_obscure_suits[_front.suit]
+		local obscure_suit = G.GAME.modifiers.fnwk_obscure_suits[front.suit]
 		pos.y = obscure_suit.row_pos
 		key = key..'_obscured'
 	end
 
-	if no_suit then 
+	if no_suit then
 		key = key..'_nosuit'
 	end
 
@@ -533,8 +561,8 @@ function get_front_spriteinfo(_front)
 		key = key..'_norank'
 
 		if not no_suit and not obscure then
-			local collab = G.SETTINGS.CUSTOM_DECK.Collabs[_front.suit]
-			local hc = (SMODS.DeckSkins[collab] and G.SETTINGS.colour_palettes[_front.suit] == 'hc') or G.SETTINGS.colourblind_option
+			local collab = G.SETTINGS.CUSTOM_DECK.Collabs[front.suit]
+			local hc = (SMODS.DeckSkins[collab] and G.SETTINGS.colour_palettes[front.suit] == 'hc') or G.SETTINGS.colourblind_option
 			key = key..(hc and '_hc' or '_lc')
 		end
 	end

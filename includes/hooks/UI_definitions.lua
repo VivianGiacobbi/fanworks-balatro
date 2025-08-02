@@ -52,14 +52,17 @@ end
 ---------------------------
 
 local ref_card_popup = G.UIDEF.card_h_popup
-function G.UIDEF.card_h_popup(card)
+function G.UIDEF.card_h_popup(...)
+    local args = { ... }
+    local card = args[1]
+
     if card.config and card.config.center and card.config.center.key == 'c_fnwk_streetlight_disturbia' then
         card.ability_UIBox_table.card_type = 'Stand'
         card.ability_UIBox_table.badges.force_rarity = nil
-        local ret = ref_card_popup(card)
-        return ret
+        return ref_card_popup(card)
     end
-    return ref_card_popup(card)
+
+    return ref_card_popup(...)
 end
 
 
@@ -71,12 +74,17 @@ end
 ---------------------------
 
 local ref_uibox_blind = create_UIBox_blind_popup
-function create_UIBox_blind_popup(blind, discovered, vars)
-    local ret = ref_uibox_blind(blind, discovered, vars)
+function create_UIBox_blind_popup(...)
+    local ret = ref_uibox_blind(...)
+
+    local args = { ... }
+    local blind = args[1]
+    local discovered = args[2]
+
     if blind.key == 'bl_fnwk_creek' then
         local dyn_nodes = {}
         for i=0, 6 do
-            dyn_nodes[#dyn_nodes+1] = {string = (i*0.25 + 1.75)..localize('k_x_base'), colour = G.C.RED}          
+            dyn_nodes[#dyn_nodes+1] = {string = (i*0.25 + 1.75)..localize('k_x_base'), colour = G.C.RED}
         end
         ret.nodes[2].nodes[1].nodes[2].nodes[2] = { 
             n=G.UIT.O,
@@ -107,12 +115,12 @@ function create_UIBox_blind_popup(blind, discovered, vars)
 end
 
 local ref_blind_choice = create_UIBox_blind_choice
-function create_UIBox_blind_choice(type, run_info)
-    local ret = ref_blind_choice(type, run_info)
+function create_UIBox_blind_choice(...)
+    local ret = ref_blind_choice(...)
 
-    if type == 'Boss' then
-        local blind = G.P_BLINDS[G.GAME.round_resets.blind_choices['Boss']]
-        if blind.key ~= 'bl_fnwk_creek' then return ret end
+    local args = { ... }
+    local type = args[1]
+    if G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].score_invisible or G.GAME.modifiers.fnwk_all_scores_hidden then
         local score_node = ret.nodes[1].nodes[3].nodes[1].nodes[2].nodes[2].nodes[3]
         score_node.config.object = DynaText({
             string = '?????',
@@ -293,36 +301,77 @@ end
 --------------------------- Custom Challenge display behavior
 ---------------------------
 
-function G.FUNCS.fnwk_run_challenge_functions(challenge)
-    if not challenge.restrictions then return end
+function G.FUNCS.fnwk_run_challenge_functions(ch)
+    if not ch.restrictions then return end
 
-    if challenge.restrictions.banned_cards and type(challenge.restrictions.banned_cards) == 'function' then
-        challenge.restrictions.banned_cards = challenge.restrictions.banned_cards()
+    if ch.restrictions.banned_cards then
+        if type(ch.restrictions.banned_cards) == 'function' then
+            ch.restrictions.banned_cards = ch.restrictions.banned_cards()
+        end
+
+        if ch.restrictions.banned_cards.allowed then
+            local bans = {}
+            local allow_map = {}
+            local allow_list = {}
+            for _, sets in pairs(ch.restrictions.banned_cards.allowed) do
+                for _, info in ipairs(sets) do
+                    allow_list[#allow_list+1] = { id = info.id, ids = info.ids }
+                    allow_map[info.id] = true
+                    for _, id in ipairs(info.ids or {}) do allow_map[id] = true end
+                end
+            end
+
+            for k, center in pairs(G.P_CENTERS) do
+                if not allow_map[k] and ch.restrictions.banned_cards.allowed[center.set] then
+                    bans[#bans+1] = k
+                end
+            end
+
+            ch.restrictions.banned_cards = {{id = 'j_joker', ids = bans}}
+            ch.restrictions.allowed_cards = allow_list
+        end
     end
 
-    if challenge.restrictions.banned_tags and type(challenge.restrictions.banned_tags) == 'function' then
-        challenge.restrictions.banned_tags = challenge.restrictions.banned_tags()
+    if ch.restrictions.banned_tags and type(ch.restrictions.banned_tags) == 'function' then
+        ch.restrictions.banned_tags = ch.restrictions.banned_tags()
     end
 
-    if challenge.restrictions.banned_other and type(challenge.restrictions.banned_other) == 'function' then
-        challenge.restrictions.banned_other = challenge.restrictions.banned_other()
+    if ch.restrictions.banned_other then
+        if type(ch.restrictions.banned_other) == 'function' then
+            ch.restrictions.banned_other = ch.restrictions.banned_other()
+        end
+
+        if ch.restrictions.banned_other.allowed then
+            local bans = {}
+            local allow_map = {}
+            local allow_list = {}
+            for _, blind in pairs(ch.restrictions.banned_other.allowed) do
+                allow_list[#allow_list+1] = { id = blind.id, type = 'blind' }
+                allow_map[blind.id] = true
+            end
+
+            for k, _ in pairs(G.P_BLINDS) do
+                if not allow_map[k] then
+                    bans[#bans+1] = { id = k, type = 'blind' }
+                end
+            end
+
+            ch.restrictions.banned_other = bans
+            ch.restrictions.allowed_other = allow_list
+        end
     end
 end
 
 local ref_challenge_desc = G.UIDEF.challenge_description_tab
 function G.UIDEF.challenge_description_tab(args)
-	args = args or {}
-
-	if args._tab == 'Restrictions' then
-		local challenge = G.CHALLENGES[args._id]
-		G.FUNCS.fnwk_run_challenge_functions(challenge)
+	if args and args._tab == 'Restrictions' then
+		G.FUNCS.fnwk_run_challenge_functions(G.CHALLENGES[args._id])
 	end
 
     local ret = ref_challenge_desc(args)
 
-    if args._tab == 'Rules' and G.localization.descriptions.Challenge[G.CHALLENGES[args._id].key] then
-        local ch = G.CHALLENGES[args._id]
-
+    local ch = G.CHALLENGES[args._id]
+    if args._tab == 'Rules' and G.localization.descriptions.Challenge[ch.key] then
         ret.nodes[1].nodes[1].config.minw = 2.5
         local custom_rules = (ch.rules and ch.rules.custom and next(ch.rules.custom)) or false
         local rule_node = ret.nodes[1].nodes[1].nodes[2]
@@ -396,8 +445,119 @@ function G.UIDEF.challenge_description_tab(args)
         table.insert(ret.nodes[1].nodes, 1, story_node)
     end
 
+    if args._tab == 'Restrictions' and ch.restrictions then
+        if ch.restrictions.allowed_cards then
+            local banned_nodes = ret.nodes[1].nodes[1].nodes[2].nodes
+
+            -- make sure to remove them to make sure
+            for _, v in ipairs(banned_nodes) do
+                v.nodes[1].config.object:remove()
+            end
+            table.fnwk_clear(banned_nodes)
+
+            table.insert(banned_nodes, {
+                n=G.UIT.R, config={align = "tm", minh = 0.3}, nodes= localize{type = 'text', key = 'fnwk_banned_except', vars = {}}
+            })
+            table.insert(banned_nodes, {n=G.UIT.R, config={align = "cm", minh = 0.1}})
+
+            local row_cards = {}
+            local n_rows = math.max(1, math.floor(#ch.restrictions.allowed_cards/10) + 2 - math.floor(math.log(6, #ch.restrictions.allowed_cards)))
+            local max_width = 1
+            for k, v in ipairs(ch.restrictions.allowed_cards) do
+                local _row = math.floor((k-1)*n_rows/(#ch.restrictions.allowed_cards)+1)
+                row_cards[_row] = row_cards[_row] or {}
+                row_cards[_row][#row_cards[_row]+1] = v
+                if #row_cards[_row] > max_width then max_width = #row_cards[_row] end
+            end
+
+            local card_size = math.max(0.2, 0.65 - 0.01*(max_width*n_rows))
+            for _, row_card in ipairs(row_cards) do
+                local allow_area = CardArea(
+                    0,0,
+                    6,
+                    3/n_rows,
+                    {
+                        card_limit = nil,
+                        type = 'title_2',
+                        view_deck = true,
+                        highlight_limit = 0,
+                        card_w = G.CARD_W*card_size
+                    }
+                )
+
+                for _, v in ipairs(row_card) do
+                    local card = Card(0, 0, G.CARD_W*card_size, G.CARD_H*card_size, nil, G.P_CENTERS[v.id],
+                        {bypass_discovery_center = true, bypass_discovery_ui = true}
+                    )
+                    allow_area:emplace(card)
+                end
+
+                
+                table.insert(banned_nodes,
+                    {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+                        {n=G.UIT.O, config={object = allow_area}}
+                    }}
+                )
+
+            end
+        end
+
+        if ch.restrictions.allowed_other then
+            local banned_nodes = ret.nodes[1].nodes[3].nodes[2].nodes
+            for _, v in ipairs(banned_nodes) do
+                v.nodes[1].config.object:remove()
+            end
+            table.fnwk_clear(banned_nodes)
+
+            table.insert(banned_nodes, {n=G.UIT.R, config={align = "tm", minh = 0.2, maxw = 2}, nodes= localize{type = 'text', key = 'fnwk_blinds_except', vars = {}}})
+            table.insert(banned_nodes, {n=G.UIT.R, config={align = "cm", minh = 0.1, maxw = 2}})
+
+            local allowed_blinds = {}
+            for _, v in pairs(ch.restrictions.allowed_other) do
+                sendDebugMessage('allowing blind: '..v.id)
+                allowed_blinds[#allowed_blinds+1] = G.P_BLINDS[v.id]
+            end
+        
+            table.sort(allowed_blinds, function (a, b) return a.order < b.order end)
+            for _, v in ipairs(allowed_blinds) do
+                local temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos)
+                temp_blind:define_draw_steps({{shader = 'dissolve', shadow_height = 0.05},{shader = 'dissolve'}})
+                temp_blind.float = true
+                temp_blind.states.hover.can = true
+                temp_blind.states.drag.can = false
+                temp_blind.states.collide.can = true
+                temp_blind.config = {blind = v, force_focus = true}
+                temp_blind.hover = function()
+                    if not G.CONTROLLER.dragging.target or G.CONTROLLER.using_touch then
+                        if not temp_blind.hovering and temp_blind.states.visible then
+                        temp_blind.hovering = true
+                        temp_blind.hover_tilt = 3
+                        temp_blind:juice_up(0.05, 0.02)
+                        play_sound('chips1', math.random()*0.1 + 0.55, 0.12)
+                        temp_blind.config.h_popup = create_UIBox_blind_popup(v, true)
+                        temp_blind.config.h_popup_config ={align = 'cl', offset = {x=-0.1,y=0},parent = temp_blind}
+                        Node.hover(temp_blind)
+                        end
+                    end
+                end
+
+                temp_blind.stop_hover = function()
+                    temp_blind.hovering = false
+                    Node.stop_hover(temp_blind)
+                    temp_blind.hover_tilt = 0
+                end
+
+                table.insert(banned_nodes,
+                {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+                    {n=G.UIT.O, config={object = temp_blind}}
+                }})
+            end
+        end
+    end
+
     return ret
 end
+
 
 local ref_ui_button = UIBox_button
 function UIBox_button(args)
@@ -419,6 +579,7 @@ function UIBox_button(args)
         local text_nodes = ret.nodes[1].nodes
         for _, v in ipairs(text_nodes) do
             v.config.minw = math.max(0, v.config.minw - 1.2)
+            v.config.maxw = math.max(v.config.minw, 2)
             v.nodes[1].config.colour = text_colour
         end
 
@@ -450,9 +611,11 @@ end
 ---------------------------
 
 local ref_use_and_sell = G.UIDEF.use_and_sell_buttons
-function G.UIDEF.use_and_sell_buttons(card)
-    local ret = ref_use_and_sell(card)
+function G.UIDEF.use_and_sell_buttons(...)
+    local ret = ref_use_and_sell(...)
 
+    local args = {...}
+    local card = args[1]
     if card.area and card.area == G.jokers and card.ability.set == 'Joker' and G.GAME.blind
     and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
         local inner_nodes = ret.nodes[1].nodes[2].nodes
@@ -520,12 +683,12 @@ end
 
 
 local ref_view_deck = G.UIDEF.view_deck
-function G.UIDEF.view_deck(unplayed_only)
+function G.UIDEF.view_deck(...)
     if not G.GAME.modifiers.fnwk_obscure_suits then
-        return ref_view_deck(unplayed_only)
+        return ref_view_deck(...)
     end
 
-    local ret = {FnwkRandomSuitOrderCall(ref_view_deck, unplayed_only)}
+    local ret = {FnwkRandomSuitOrderCall(ref_view_deck, ...)}
 
     return unpack(ret)
 end
@@ -544,18 +707,127 @@ end
 SMODS.Atlas({ key = 'obscured_ui', path = "obscured_ui.png", px = 18, py = 18})
 
 local ref_tally_sprite = tally_sprite
-function tally_sprite(pos, value, tooltip, suit)
+function tally_sprite(...)
     if not suit or not G.GAME.modifiers.fnwk_obscure_suits then
-        return ref_tally_sprite(pos, value, tooltip, suit)
+        return ref_tally_sprite(...)
     end
 
     value = {{ string = '?', colour = G.C.DARK_EDITION }, { string = '?', colour = G.C.DARK_EDITION }}
-    tooltip = { '?' }
-    local ret = ref_tally_sprite(pos, value, tooltip, suit)
+    local args = { ... }
+    args[3] = { '?' }
+    local ret = ref_tally_sprite(unpack(args))
     local icon_sprite = ret.nodes[1].nodes[1].config.object
     icon_sprite.atlas = G.ASSET_ATLAS['fnwk_obscured_ui']
     icon_sprite.sprite_pos = { x = 0, y = 0 }
     icon_sprite:reset()
 
     return ret
+end
+
+
+
+---------------------------
+--------------------------- Multimedia deck preview fuckery
+---------------------------
+
+local ref_run_setup = G.UIDEF.run_setup_option
+function G.UIDEF.run_setup_option(...)
+    local ret = ref_run_setup(...)
+
+    if G.GAME.viewed_back then
+        local args = {...}
+
+        local credit = {
+            n = G.UIT.R,
+            config = {align = "cm"},
+            nodes = {{
+                n = G.UIT.O,
+                config = {
+                    id = nil,
+                    func = 'RUN_SETUP_fnwk_check_artist',
+                    object = Moveable()
+                }
+            }}
+        }
+
+        if args[1] == 'Continue' then
+            local back_desc_nodes = ret.nodes[1].nodes[1].nodes[1].nodes[2].nodes
+            back_desc_nodes[#back_desc_nodes+1] = credit
+        elseif args[1] == 'New Run' then
+            local back_desc_nodes = ret.nodes[1].nodes[1].nodes[1].nodes[2].nodes[1].nodes[1].nodes[1].nodes[2].nodes
+            back_desc_nodes[#back_desc_nodes+1] = credit
+        end
+    end
+
+    return ret
+end
+
+function G.UIDEF.fnwk_deck_credit(back)
+    -- set the artists
+    local vars = {}
+    if type(G.GAME.viewed_back.effect.center.artist) == 'table' then
+        for i, v in ipairs(G.GAME.viewed_back.effect.center.artist) do
+            vars[i] = G.fnwk_credits[v]
+        end
+    else
+        vars[1] = G.fnwk_credits[G.GAME.viewed_back.effect.center.artist]
+    end
+
+    local name_nodes = localize{type = 'name', key = "fnwk_artist_"..#vars, set = 'Other', nodes = name_nodes, scale = 0.6}
+    local desc_nodes = {}
+    localize{type = 'descriptions', key = "fnwk_artist_"..#vars, set = "Other", vars = vars, nodes = desc_nodes, scale = 0.7}
+    local credit = {
+        n = G.UIT.ROOT,
+        config = {id = back.name, align = "cm", minw = 4, r = 0, colour = G.C.CLEAR },
+        nodes = {
+            name_from_rows(name_nodes, nil),
+            desc_from_rows(desc_nodes, nil),
+        }
+    }
+
+    -- customized measurements
+    credit.nodes[1].config.padding = 0.035
+    credit.nodes[2].config.padding = 0.03
+    credit.nodes[2].config.minh = 0.15
+    credit.nodes[2].config.minw = 4
+    credit.nodes[2].config.r = 0.005
+
+    return credit
+end
+
+local ref_toggle_seeded = G.FUNCS.toggle_seeded_run
+function G.FUNCS.toggle_seeded_run(e)
+    if e.config.object and not G.run_setup_seed then
+        e.config.object:remove()
+        e.config.object = nil
+        e.UIT = G.UIT.R
+        e.UIBox:recalculate()
+    elseif G.run_setup_seed then
+        e.UIT = G.UIT.O
+    end
+
+    return ref_toggle_seeded(e)
+end
+
+
+function G.UIDEF.fnwk_deck_artist_popup(artist)
+    sendDebugMessage('artist: '..tostring(artist))
+    local vars = {}
+    if type(artist) == 'table' then
+        for i, v in ipairs(artist) do
+            vars[i] = G.fnwk_credits[v]
+        end
+    else
+        vars[1] = G.fnwk_credits[artist]
+    end
+
+    local info_nodes = {}
+    localize{type = 'descriptions', key = "fnwk_artist_"..#vars, set = "Other", vars = vars, nodes = info_nodes}
+    info_nodes.name = localize{type = 'name_text', key = "fnwk_artist_"..#vars, set = 'Other'}
+
+    return {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={
+        {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+            info_tip_from_rows(info_nodes, info_nodes.name),
+        }}
+    }}
 end

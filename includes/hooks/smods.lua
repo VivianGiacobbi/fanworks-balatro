@@ -10,7 +10,8 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_extra_discounts = {}
         G.GAME.fnwk_chip_novas = 0
         G.GAME.fnwk_consecutive_hands = 0
-        G.GAME.fnwk_extra_blinds = {}
+        G.GAME.fnwk_extra_blinds = G.GAME.fnwk_extra_blinds or {}
+        G.GAME.modifiers.fnwk_consumable_selection_mod = G.GAME.modifiers.fnwk_consumable_selection_mod or 0
     end
 
     G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback')
@@ -52,6 +53,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.FUNCS.transform_card(v, center, false, true)
+                            save_run()
                             return true
                         end
                     }))
@@ -118,7 +120,7 @@ end
 
 
 local ref_smeared_check = SMODS.smeared_check
-function SMODS.smeared_check(card, suit)
+function SMODS.smeared_check(...)
     local smeared = next(SMODS.find_card('k_smeared'))
     local infidel = next(SMODS.find_card('j_fnwk_rubicon_infidel'))
     if infidel and smeared then
@@ -128,7 +130,11 @@ function SMODS.smeared_check(card, suit)
         end
     end
 
-    local ret = ref_smeared_check(card, suit)
+    local ret = ref_smeared_check(...)
+
+    local args = { ... }
+    local card = args[1]
+    local suit = args[2]
 
     if not ret and infidel then
         local infidelSuits = {}
@@ -136,7 +142,7 @@ function SMODS.smeared_check(card, suit)
             infidelSuits[#infidelSuits+1] = k
         end
         if (card.base.suit == infidelSuits[1] or card.base.suit == infidelSuits[2]) and (suit == infidelSuits[1] or suit == infidelSuits[2]) then
-            ret = true
+            ret = true -- main true/false return
         end
     end
 
@@ -167,9 +173,9 @@ local valid_keys = {
 }
 
 local ref_indv_effect = SMODS.calculate_individual_effect
-SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition, ...)
     if not (G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt') then
-        return ref_indv_effect(effect, scored_card, key, amount, from_edition)
+        return ref_indv_effect(effect, scored_card, key, amount, from_edition, ...)
     end
 
     local old_card = effect.card
@@ -187,7 +193,7 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
         effect.card = nil
     end
 
-    local ret = ref_indv_effect(effect, scored_card, key, amount, from_edition)
+    local ret = ref_indv_effect(effect, scored_card, key, amount, from_edition, ...)
     G.fnwk_message_cancel = nil
     effect.card = old_card
     return ret
@@ -199,11 +205,10 @@ end
 ---------------------------
 
 local ref_no_suit = SMODS.has_no_suit
-function SMODS.has_no_suit(card)
-    return (G.GAME and G.GAME.modifiers.fnwk_no_suits) or ref_no_suit(card)
+function SMODS.has_no_suit(...)
+    return (G.GAME and G.GAME.modifiers.fnwk_no_suits) or ref_no_suit(...)
 end
 
--- bad, evil overwrite
 function SMODS.predict_gradient(grad, delay)
     if #grad.colours < 2 then return end
     local timer = (G.TIMERS.REAL + (delay or 0))%grad.cycle
@@ -220,6 +225,18 @@ function SMODS.predict_gradient(grad, delay)
             ret[i] = start_colour[i] + 0.5*(1-math.cos(partial_timer*math.pi))*(end_colour[i]-start_colour[i])
         end
     end
-    
+
+    return ret
+end
+
+local ref_showman = SMODS.showman
+function SMODS.showman(...)
+    local ret = ref_showman(...)
+    if not next(ret) then
+        local args = {...}
+        local card_key = args[1]
+        ret = (G.GAME and G.GAME.modifiers.fnwk_duplicates_allowed and G.P_CENTERS[card_key].set == 'Joker')
+    end
+
     return ret
 end

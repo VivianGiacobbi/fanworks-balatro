@@ -61,14 +61,14 @@ end
 
 function consumInfo.add_to_deck(self, card, from_debuff)
     if card.ability.extra.target_card then
-       return card.ability.fnwk_disturbia_fake:add_to_deck(from_debuff, true)
+        return card.ability.fnwk_disturbia_fake:add_to_deck_disturbia(from_debuff, true)
     end
 end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
     if card.ability.extra.target_card then
         if from_debuff then
-            return card.ability.fnwk_disturbia_fake:remove_from_deck(from_debuff, true)
+            return card.ability.fnwk_disturbia_fake:remove_from_deck_disturbia(from_debuff, true)
         end
         
         card.ability.fnwk_disturbia_fake:remove()
@@ -78,7 +78,7 @@ end
 
 function consumInfo.calc_dollar_bonus(self, card)
     if card.ability.extra.target_card then
-       return card.ability.fnwk_disturbia_fake:calculate_dollar_bonus(true)
+       return card.ability.fnwk_disturbia_fake:calculate_dollar_bonus_disturbia(true)
     end
 end
 

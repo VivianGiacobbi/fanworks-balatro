@@ -39,7 +39,7 @@ function jokerInfo.set_sprites(self, card, front)
 		scale_bond = 'Strong',
 		draw_major = card
 	}
-    local atlas = G.ASSET_ATLAS['fnwk_banned_jokers']
+    local atlas = G.ASSET_ATLAS['fnwk_banned_commons']
 
     -- second layer
     card.children.under_layer = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 2, y = 0})

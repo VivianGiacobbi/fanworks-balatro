@@ -9,6 +9,7 @@ local deckInfo = {
     unlocked = false,
     unlock_condition = {type = 'fnwk_discovered_card', num = 25},
     fanwork = 'fanworks',
+    artist = 'gote'
 }
 
 function deckInfo.check_for_unlock(self, args)
