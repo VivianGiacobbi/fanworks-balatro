@@ -558,6 +558,7 @@ function G.UIDEF.challenge_description_tab(args)
     return ret
 end
 
+
 local ref_ui_button = UIBox_button
 function UIBox_button(args)
     local ret = ref_ui_button(args)
@@ -733,7 +734,7 @@ local ref_run_setup = G.UIDEF.run_setup_option
 function G.UIDEF.run_setup_option(...)
     local ret = ref_run_setup(...)
 
-    if G.GAME.viewed_back and G.GAME.viewed_back.effect.center.artist then
+    if G.GAME.viewed_back then
         local args = {...}
 
         local credit = {
@@ -742,23 +743,19 @@ function G.UIDEF.run_setup_option(...)
             nodes = {{
                 n = G.UIT.O,
                 config = {
-                    id = G.GAME.viewed_back.name,
+                    id = nil,
                     func = 'RUN_SETUP_fnwk_check_artist',
-                    object = UIBox{definition = G.UIDEF.fnwk_deck_credit(G.GAME.viewed_back), config = {offset = {x=0,y=0}}}
+                    object = Moveable()
                 }
             }}
         }
 
         if args[1] == 'Continue' then
-            local back_desc_nodes = ret.nodes[1].nodes[1].nodes[2].nodes
-            back_desc_nodes[1].config.minh = 0.45
-            back_desc_nodes[2].config.minh = 0.9
-            table.insert(back_desc_nodes, 3, credit)
+            local back_desc_nodes = ret.nodes[1].nodes[1].nodes[1].nodes[2].nodes
+            back_desc_nodes[#back_desc_nodes+1] = credit
         elseif args[1] == 'New Run' then
             local back_desc_nodes = ret.nodes[1].nodes[1].nodes[1].nodes[2].nodes[1].nodes[1].nodes[1].nodes[2].nodes
-            back_desc_nodes[1].config.minh = 0.45
-            back_desc_nodes[2].config.minh = 0.9
-            table.insert(back_desc_nodes, 3, credit)
+            back_desc_nodes[#back_desc_nodes+1] = credit
         end
     end
 
@@ -781,7 +778,7 @@ function G.UIDEF.fnwk_deck_credit(back)
     localize{type = 'descriptions', key = "fnwk_artist_"..#vars, set = "Other", vars = vars, nodes = desc_nodes, scale = 0.7}
     local credit = {
         n = G.UIT.ROOT,
-        config = {id = back.name, align = "cm", minw = 4, r = 0.1, colour = G.C.CLEAR },
+        config = {id = back.name, align = "cm", minw = 4, r = 0, colour = G.C.CLEAR },
         nodes = {
             name_from_rows(name_nodes, nil),
             desc_from_rows(desc_nodes, nil),
@@ -793,7 +790,44 @@ function G.UIDEF.fnwk_deck_credit(back)
     credit.nodes[2].config.padding = 0.03
     credit.nodes[2].config.minh = 0.15
     credit.nodes[2].config.minw = 4
-    credit.nodes[2].config.r = 0.05
+    credit.nodes[2].config.r = 0.005
 
     return credit
+end
+
+local ref_toggle_seeded = G.FUNCS.toggle_seeded_run
+function G.FUNCS.toggle_seeded_run(e)
+    if e.config.object and not G.run_setup_seed then
+        e.config.object:remove()
+        e.config.object = nil
+        e.UIT = G.UIT.R
+        e.UIBox:recalculate()
+    elseif G.run_setup_seed then
+        e.UIT = G.UIT.O
+    end
+
+    return ref_toggle_seeded(e)
+end
+
+
+function G.UIDEF.fnwk_deck_artist_popup(artist)
+    sendDebugMessage('artist: '..tostring(artist))
+    local vars = {}
+    if type(artist) == 'table' then
+        for i, v in ipairs(artist) do
+            vars[i] = G.fnwk_credits[v]
+        end
+    else
+        vars[1] = G.fnwk_credits[artist]
+    end
+
+    local info_nodes = {}
+    localize{type = 'descriptions', key = "fnwk_artist_"..#vars, set = "Other", vars = vars, nodes = info_nodes}
+    info_nodes.name = localize{type = 'name_text', key = "fnwk_artist_"..#vars, set = 'Other'}
+
+    return {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={
+        {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+            info_tip_from_rows(info_nodes, info_nodes.name),
+        }}
+    }}
 end

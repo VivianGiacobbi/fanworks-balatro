@@ -173,13 +173,10 @@ local valid_keys = {
 }
 
 local ref_indv_effect = SMODS.calculate_individual_effect
-SMODS.calculate_individual_effect = function(...)
+SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition, ...)
     if not (G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt') then
-        return ref_indv_effect(...)
+        return ref_indv_effect(effect, scored_card, key, amount, from_edition, ...)
     end
-
-    local args = {...}
-    local effect = args[1]
 
     local old_card = effect.card
     G.fnwk_message_cancel = nil
@@ -196,7 +193,7 @@ SMODS.calculate_individual_effect = function(...)
         effect.card = nil
     end
 
-    local ret = ref_indv_effect(...)
+    local ret = ref_indv_effect(effect, scored_card, key, amount, from_edition, ...)
     G.fnwk_message_cancel = nil
     effect.card = old_card
     return ret

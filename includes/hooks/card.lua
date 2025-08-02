@@ -164,6 +164,13 @@ function Card:hover(...)
     end
 
     local ret = ref_card_hover(self, ...)
+    if self.facing == 'back' and self.area and self.area == G.deck and (not self.states.drag.is or G.CONTROLLER.HID.touch) 
+    and not self.no_ui and not G.debug_tooltip_toggle and G.GAME.selected_back.effect.center.artist then
+        self.config.h_popup = G.UIDEF.fnwk_deck_artist_popup(G.GAME.selected_back.effect.center.artist)
+        self.config.h_popup_config = {align = 'cl', offset = {x=-0.1, y=0}, parent = self}
+        Node.hover(self)
+    end
+
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == 'Booster' then
         SMODS.calculate_context({hovering_booster = true, booster = self})
     end

@@ -589,11 +589,11 @@ local ref_blind_modify = Blind.modify_hand
 function Blind:modify_hand(...)
 	if not self.fnwk_extra_blind then 
 		self.disabled = self.main_blind_disabled
-		local ret = ref_blind_modify(self, ...)
+		local mult, chips, hand_chips = ref_blind_modify(self, ...)
 		if not self.main_play_loop then
 			self.disabled = false
 		end
-		return ret
+		return rmult, chips, hand_chips
 	end
 
 	local old_main_blind = G.GAME.blind
@@ -602,7 +602,7 @@ function Blind:modify_hand(...)
 	self.dollars = old_main_blind.dollars
 	G.GAME.blind = self
 	
-	local ret = ref_blind_modify(self, ...)
+	local mult, chips, hand_chips = ref_blind_modify(self, ...)
 	
 	old_main_blind.chips = self.chips
 	old_main_blind.chip_text = number_format(self.chips)
@@ -631,7 +631,7 @@ function Blind:modify_hand(...)
 		}))
 	end
 
-	return ret
+	return mult, chips, hand_chips
 end
 
 local ref_blind_hand = Blind.debuff_hand

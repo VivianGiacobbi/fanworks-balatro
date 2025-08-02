@@ -221,9 +221,9 @@ function eval_card(...)
     end
 
     G.fnwk_message_cancel = G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_fnwk_bolt'
-    local ret = ref_eval_card(...)
+    local ret, post = ref_eval_card(...)
     G.fnwk_message_cancel = nil
-    return ret
+    return ret, post
 end
 
 

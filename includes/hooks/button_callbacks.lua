@@ -465,30 +465,29 @@ G.FUNCS.RUN_SETUP_fnwk_check_artist = function(e)
     if G.GAME.viewed_back.name ~= e.config.id then
         --removes the UI from the previously selected back and adds the new one
         if G.GAME.viewed_back.effect.center.artist then
-            if e.UIT == G.UIT.O then
-                e.config.object:remove()
-            end
-           
+            if e.config.object then e.config.object:remove() end
             e.UIT = G.UIT.O
             e.config.object = UIBox{
                 definition = G.UIDEF.fnwk_deck_credit(G.GAME.viewed_back),
                 config = {offset = {x=0,y=0}, align = 'cm', parent = e}
             }
+
             e.config.minh = nil
             e.config.maxh = nil
-            e.parent.parent.children[1].config.minh = 0.45
-            e.parent.parent.children[2].config.minh = 0.9
-        else
-            if e.UIT == G.UIT.O then
-                e.config.object:remove()
-                e.config.object = nil
+            if e.parent.parent.children[1] then
+                e.parent.parent.children[1].config.minh = 0.45
+                e.parent.parent.children[2].config.minh = 0.9
             end
-           
+        else
+            if e.config.object then e.config.object:remove() end
             e.UIT = G.UIT.R
+
             e.config.minh = 0
             e.config.maxh = 0
-            e.parent.parent.children[1].config.minh = 0.6
-            e.parent.parent.children[2].config.minh = 1.7
+            if e.parent.parent.children[1] then
+                e.parent.parent.children[1].config.minh = 0.6
+                e.parent.parent.children[2].config.minh = 1.7
+            end
         end
         e.config.id = G.GAME.viewed_back.name
         e.UIBox:recalculate()
