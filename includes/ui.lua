@@ -140,7 +140,7 @@ current_mod.credits_tab = function()
 									{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].gote, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0.1}, nodes={
-									{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].vivi, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
@@ -264,7 +264,7 @@ current_mod.credits_tab = function()
 										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].keku, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].vivi, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},
@@ -280,7 +280,7 @@ current_mod.credits_tab = function()
 									}},
 									{n=G.UIT.R, config={align = "cm", padding = support_padding}, nodes= {
 										{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-											{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.55*shader_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+											{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].vivi, scale = text_scale*0.55*shader_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 										}},
 									}},
 								}},
@@ -326,7 +326,7 @@ SMODS.current_mod.extra_tabs = function()
 				
 				playable_roms = {}
 				local count = 0
-				for s in ArrowAPi.loading.recursive_file_enumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
+				for s in ArrowAPI.loading.recursive_file_enumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
 					if ArrowAPI.string.contains(s, '.nes') then
 						local name = string.gsub(s, path_pattern_replace .. "/includes/LuaNES/roms//", "")
 						name = string.gsub(name, '.nes', '')

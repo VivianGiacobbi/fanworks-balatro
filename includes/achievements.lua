@@ -11,7 +11,7 @@ end
 
 
 G.loadTrophies = true
-for s in ArrowAPi.loading.recursive_file_enumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
+for s in ArrowAPI.loading.recursive_file_enumerate(usable_path .. "/achievements/"):gmatch("[^\r\n]+") do
 	trophiesToLoad[#trophiesToLoad + 1] = s:gsub(path_pattern_replace .. "/achievements/", "")
 end
 

@@ -20,12 +20,11 @@ local consumInfo = {
 		},
         custom_color = 'love',
     },
+    artist = 'coop',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
-
     local main_end = nil
     if card.ability.fnwk_strut_rank_count > 0 then
         local rank_str = ''

@@ -43,7 +43,7 @@ function blindInfo.defeat(self)
     end
 end
 
-function blindInfo.fnwk_blind_save(self, saveTable)
+function blindInfo.save(self, saveTable)
     saveTable.fnwk_works_submitted = G.GAME.blind.fnwk_works_submitted
 	saveTable.fnwk_required_works = G.GAME.blind.fnwk_required_works
     return saveTable

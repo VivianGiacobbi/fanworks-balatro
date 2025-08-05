@@ -130,6 +130,7 @@ ArrowAPI.credits.add_credits(SMODS.current_mod, {
     winter = 'TheWinterComet',
     tos = 'TOS',
     torch = 'torch_dreemurr',
+    vivi = 'Vivian Giacobbi',
     abrams = 'Nico Abrams (LuaNES)',
     araki = 'Hirohiko Araki',
 	luckyland = 'Lucky Land Communications',
