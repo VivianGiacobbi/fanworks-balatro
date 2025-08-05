@@ -12,18 +12,18 @@ SMODS.Atlas({
 
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
-		'enableJokers',
-		'enableStands',
-		'enableConsumables',
-		'enableDecks',
-		'enableTags',
-		'enableVouchers',
-		'enableBlinds',
-		'enableChallenges',
-		'enableQueer',
-		'enableTarotSkins',
-		'enableVanillaTweaks',
-		'enableBlindReskins',
+		'enable_Jokers',
+		'enable_Stands',
+		'enable_Consumables',
+		'enable_Decks',
+		'enable_Tags',
+		'enable_Vouchers',
+		'enable_Blinds',
+		'enable_Challenges',
+		'enable_Queer',
+		'enable_TarotSkins',
+		'enable_VanillaTweaks',
+		'enable_BlindReskins',
 		--[[
 		'enableTrophies',
 		--]]
@@ -47,7 +47,7 @@ SMODS.current_mod.config_tab = function()
 			right_settings.nodes[#right_settings.nodes + 1] = main_node
 			right_count = right_count + 1
 			
-			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
+			if ordered_config[i] == 'enable_Jokers' and fnwk_config['enable_Jokers'] then
 				local art_node = create_toggle({
 					label = localize("fnwk_options_enableAltArt"),
 					w = 1, 
@@ -76,8 +76,8 @@ SMODS.current_mod.config_tab = function()
 
 			if ordered_config[i] == 'enableJokers' and fnwk_config['enableJokers'] then
 				local art_node = create_toggle({
-					label = localize("fnwk_options_enableAltArt"),
-					w = 1, 
+					label = localize("fnwk_options_enable_AltArt"),
+					w = 1,
 					ref_table = fnwk_config,
 					ref_value = 'enableAltArt',
 					callback = G.FUNCS.fnwk_apply_alts
