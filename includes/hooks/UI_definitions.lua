@@ -117,7 +117,7 @@ function G.UIDEF.use_and_sell_buttons(...)
     local args = {...}
     local card = args[1]
     if card.area and card.area == G.jokers and card.ability.set == 'Joker' and G.GAME.blind
-    and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+    and (G.GAME.blind.fnwk_works_submitted or 0) < (G.GAME.blind.fnwk_required_works or 0) then
         local inner_nodes = ret.nodes[1].nodes[2].nodes
         inner_nodes[#inner_nodes+1] = {
             n = G.UIT.C,

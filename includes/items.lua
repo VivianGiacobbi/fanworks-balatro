@@ -409,6 +409,7 @@ ArrowAPI.loading.batch_load({
 			'crimson_manager',
 			'lighted_kriskross',
 			'spirit_creeping',
+			'rubicon_foundation',
 		}
 	},
 
