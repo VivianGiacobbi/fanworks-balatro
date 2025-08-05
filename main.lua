@@ -164,12 +164,7 @@ local includes = {
 	'items',
 	'tarot_reskins',
 	'blind_reskins',
-	'vanilla_tweaks',
-	-- cosmetic
-	'queer',
-
-	--'hooks/scaling_test',
-	--'gpu_joker'
+	'overrides',
 }
 
 for _, module in ipairs(includes) do

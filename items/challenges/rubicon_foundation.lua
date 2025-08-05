@@ -1,7 +1,8 @@
 local chalInfo = {
     rules = {
         custom = {
-            {id = 'rubicon_foundation', alt_win = true, type = 'modify_deck', func = function()
+            {id = 'fnwk_rubicon_foundation', alt_win = true, type = 'modify_deck', func = function()
+                if not G.playing_cards then return end
                 sendDebugMessage('checking win condition')
                 local suits_map = {}
                 for _, v in ipairs(G.playing_cards) do

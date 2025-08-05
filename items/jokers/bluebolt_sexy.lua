@@ -19,10 +19,10 @@ local jokerInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
+    artist = 'mal'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { ArrowAPI.credits[current_mod.id].mal }}
     if not G.jokers then
         return { vars = {card.ability.extra.base_chips, 0, card.ability.extra.chips_mod } }
     end

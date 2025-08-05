@@ -2642,7 +2642,7 @@ return {
 					"{C:attention,E:1}Dummy Text{}"
 				}
 			},
-			c_fnwk_rubicon_foundation_2 = {
+			c_fnwk_rubicon_foundation = {
 				name = "Foundation Building",
 				text = {
 					"{C:attention,E:1}Dummy Text{}"
