@@ -6,6 +6,7 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 4, max = 10},
+    artist = 'gote',
 }
 
 function blindInfo.set_blind(self)
@@ -31,7 +32,7 @@ function blindInfo.defeat(self)
     G.GAME.modifiers.fnwk_no_consumeables = nil
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     G.GAME.modifiers.fnwk_no_consumeables = true
 end
 

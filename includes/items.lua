@@ -1,7 +1,6 @@
 SMODS.ObjectType {
     default = 'j_fnwk_bluebolt_sexy',
     key = 'fnwk_women',
-	prefix_config = false,
 	cards = {
 		['j_lusty_joker'] = true,
         ['j_blueprint'] = true,
@@ -30,6 +29,22 @@ SMODS.ObjectType {
         ['j_fnwk_plancks_ghost'] = true,
         ['j_fnwk_glass_jokestar'] = true,
         ['j_fnwk_love_jokestar'] = true,
+	}
+}
+
+SMODS.ConsumableType {
+    default = 'c_fnwk_spec_mood',
+    key = 'fnwk_stand_world',
+	shop_rate = 0,
+	primary_colour = G.C.SECONDARY_SET.Spectral,
+	secondary_colour = G.C.SECONDARY_SET.Spectral,
+	no_collection = true,
+	no_doe = true,
+	cards = {
+		['c_jojobal_spec_mask'] = not not next(SMODS.find_mod('jojobal')),
+		['c_fnwk_spec_impulse'] = true,
+		['c_fnwk_spec_ichor'] = true,
+		['c_fnwk_spec_mood'] = true,
 	}
 }
 
@@ -388,9 +403,12 @@ ArrowAPI.loading.batch_load({
 			'fanworks_moderated',
 			'fanworks_corpse',
 			'fanworks_invisible',
+			'fanworks_comprehension',
 			'fanworks_breakdown',
 			'crimson_melting',
+			'crimson_manager',
 			'lighted_kriskross',
+			'spirit_creeping',
 		}
 	},
 

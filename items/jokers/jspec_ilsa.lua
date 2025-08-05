@@ -34,7 +34,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS['e_holo']
     info_queue[#info_queue+1] = G.P_CENTERS['e_foil']
     info_queue[#info_queue+1] = G.P_CENTERS['e_polychrome']
-    return { vars = { fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome' } }
+    return { vars = { fnwk_enabled['enable_Queer'] and 'Queer' or 'Polychrome' } }
 end
 
 function jokerInfo.set_sprites(self, card, front)

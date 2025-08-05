@@ -6,6 +6,13 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 1, max = 10},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+        custom_color = 'bluebolt',
+    },
     artist = 'gote',
 }
 
@@ -17,7 +24,7 @@ function blindInfo.disable(self)
     fnwk_reset_blind_proxies()
 end
 
-function blindInfo.fnwk_card_added(self, card)
+function blindInfo.card_added(self, card)
     fnwk_single_blind_proxy(card)
 end
 
@@ -25,7 +32,7 @@ function blindInfo.defeat(self)
     fnwk_reset_blind_proxies()
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     fnwk_set_blind_proxies()
 end
 

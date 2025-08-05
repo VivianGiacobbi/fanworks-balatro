@@ -3,9 +3,10 @@ local chalInfo = {
         custom = {
             {id = "max_stands", value = 2},
             {id = 'fnwk_fanworks_standoff'},
+             {id = 'fnwk_fanworks_standoff_2'},
         }
     },
-    jokers = {
+    consumeables = {
         {id = 'c_fnwk_random_stand', eternal = true},
         {id = 'c_fnwk_random_stand', eternal = true},
     },

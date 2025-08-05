@@ -21,7 +21,7 @@ function blindInfo.defeat(self)
     G.GAME.modifiers.fnwk_no_hand_effects = nil
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     G.GAME.modifiers.fnwk_no_hand_effects = true
 end
 

@@ -424,8 +424,11 @@ return {
 			c_fnwk_fanworks_corpse = "Fanquisite Corpse",
 			c_fnwk_fanworks_invisible = "Invisible Woman",
 			c_fnwk_fanworks_breakdown = "Third-Act Breakdown",
+			c_fnwk_fanworks_comprehension = "Reading Comprehension",
 			c_fnwk_crimson_melting = 'Melting Madness',
+			c_fnwk_crimson_manager = 'Mood Indigo Manager',
 			c_fnwk_lighted_kriskross = "Kris Kross",
+			c_fnwk_spirit_creeping = "Creeping Infection",
 		},
 		v_text = {
 			-- general behavior
@@ -441,7 +444,9 @@ return {
 			ch_c_fnwk_fanworks_standoff = {"One {C:stand}Stand{} {C:attention}randomized{} each round"},
 			ch_c_fnwk_fanworks_standoff_2 = {"(retaining {C:dark_edition}Editions{} and {C:attention}Stickers{})"},
 			ch_c_fnwk_fanworks_reread = {"Only retrigger {C:attention}Jokers{} and {C:stand}Stands{} are allowed"},
-			ch_c_fnwk_fanworks_moderated = {"{X:1,C:white}#1#{} is {C:attention}always active{}"},
+			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, {C:spectral}Ichor{}, and"},
+			ch_c_fnwk_crimson_manager_2 = {"{C:spectral}Mood Indigo{} appear in the {C:attention}shop{}"},
+			ch_c_fnwk_spirit_creeping = {"{C:attention}Rotten Grafts{} are {C:eternal}Eternal{} and {C:dark_edition}Negative{}"}
 		},
 		achievement_names = {
 		},
@@ -2598,6 +2603,12 @@ return {
 					"{s:0.7,C:inactive}Invisibility is a tricky power, isn't it?{}"
 				}
 			},
+			c_fnwk_fanworks_comprehension = {
+				name = "Reading Comprehension",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
 			c_fnwk_fanworks_breakdown = {
 				name = "Third-Act Breakdown",
 				text = {
@@ -2610,8 +2621,20 @@ return {
 					"{C:attention,E:1}Dummy Text{}"
 				}
 			},
+			c_fnwk_crimson_manager = {
+				name = "Mood Indigo Manager",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
 			c_fnwk_lighted_kriskross = {
 				name = "Kris Kross",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_spirit_creeping = {
+				name = "Creeping Infection",
 				text = {
 					"{C:attention,E:1}Dummy Text{}"
 				}

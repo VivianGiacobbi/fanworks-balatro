@@ -210,7 +210,7 @@ end
 local ref_showman = SMODS.showman
 function SMODS.showman(...)
     local ret = ref_showman(...)
-    if not next(ret) then
+    if not ret then
         local args = {...}
         local card_key = args[1]
         ret = (G.GAME and G.GAME.modifiers.fnwk_duplicates_allowed and G.P_CENTERS[card_key].set == 'Joker')

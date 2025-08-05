@@ -4,7 +4,7 @@ local path_pattern_replace = usable_path:gsub("(%W)","%%%1")  -- shoot me in the
 
 local trophiesToLoad = {}
 
-if not fnwk_enabled['enableTrophies'] then
+if not fnwk_enabled['enable_Trophies'] then
 	G.loadTrophies = false
 	return
 end

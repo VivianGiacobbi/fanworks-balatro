@@ -301,7 +301,7 @@ function Card:add_to_deck(...)
         G.GAME.fnwk_owned_jokers[self.config.center.key] = true
     end
 
-    if not from_debuff and G.GAME.blind then G.GAME.blind:fnwk_card_added(self) end
+    if not from_debuff and G.GAME.blind then G.GAME.blind:card_added(self) end
 
     return ret
 end

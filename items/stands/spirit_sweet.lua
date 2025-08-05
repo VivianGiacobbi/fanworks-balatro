@@ -26,6 +26,7 @@ local consumInfo = {
     },
     artist = 'coop',
     blueprint_compat = false,
+    eternal_compat = true
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

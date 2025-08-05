@@ -49,7 +49,7 @@ function blindInfo.fnwk_blind_save(self, saveTable)
     return saveTable
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     G.GAME.blind.fnwk_works_submitted = blindTable.fnwk_works_submitted
 	G.GAME.blind.fnwk_required_works = blindTable.fnwk_required_works
 end

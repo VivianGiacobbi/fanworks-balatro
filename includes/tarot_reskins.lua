@@ -67,7 +67,7 @@ end
 
 
 local fool_table = {}
-if fnwk_enabled['enableTarotSkins'] then 
+if fnwk_enabled['enable_TarotSkins'] then 
     fool_table.atlas = 'fnwk_tarotreskins'
     fool_table.origin = {
         category = 'fanworks',
@@ -233,7 +233,7 @@ SMODS.Consumable:take_ownership('c_emperor', emperor_table)
 ---------------------------
 
 local queer = fnwk_enabled['enableQueer']
-if fnwk_enabled['enableTarotSkins'] or fnwk_enabled['enableQueer'] then
+if fnwk_enabled['enable_TarotSkins'] or fnwk_enabled['enable_Queer'] then
     local wheel_table = {}
 
     if queer then
@@ -251,7 +251,7 @@ if fnwk_enabled['enableTarotSkins'] or fnwk_enabled['enableQueer'] then
         }
     end
 
-    if fnwk_enabled['enableTarotSkins'] then
+    if fnwk_enabled['enable_TarotSkins'] then
         wheel_table.atlas = 'fnwk_tarotreskins'
         wheel_table.origin = {
             category = 'fanworks',
@@ -275,7 +275,7 @@ end
 --------------------------- Remaining reskins
 ---------------------------
 
-if not fnwk_enabled['enableTarotSkins'] then
+if not fnwk_enabled['enable_TarotSkins'] then
     return
 end
 
