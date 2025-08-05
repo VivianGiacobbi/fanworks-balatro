@@ -147,7 +147,7 @@ local function advance_pack_seeds()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {fnwk_enabled['enableSkepticStaticSeed'] and '' or 'This Joker changes seed progression'}}
+	return { vars = {fnwk_enabled['enable_SkepticStaticSeed'] and '' or 'This Joker changes seed progression'}}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -156,7 +156,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if context.ending_shop and not fnwk_enabled['enableSkepticStaticSeed'] then
+	if context.ending_shop and not fnwk_enabled['enable_SkepticStaticSeed'] then
 		card:remove_predict_ui()
 		advance_pack_seeds()
 	end

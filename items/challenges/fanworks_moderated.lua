@@ -2,7 +2,7 @@ local chalInfo = {
     rules = {
         custom = {
             {
-                id = 'fnwk_fanworks_moderated',
+                id = 'extra_blind_active',
                 value = {type = 'name_text', key = 'bl_final_heart', set = 'Blind'},
                 colours = {{ref_table = G.P_BLINDS, ref_key = 'bl_final_heart', ref_value = 'boss_colour'}}
             }

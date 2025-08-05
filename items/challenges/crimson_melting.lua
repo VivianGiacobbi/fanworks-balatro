@@ -4,16 +4,15 @@ local chalInfo = {
     },
     restrictions = {
         banned_cards = function()
-            local hard_set = {
+            local bans = {
                 { id = 'j_marble' },
                 { id = 'j_steel_joker' },
                 { id = 'j_midas_mask' },
                 { id = 'j_stone' },
                 { id = 'j_lucky_cat' },
-                { id = 'j_glass_joker' },
+                { id = 'j_glass' },
                 { id = 'j_golden' },
                 { id = 'j_smeared' },
-                { id = 'j_glass_joker' },
                 { id = 'j_fnwk_bone_samurai' },
                 { id = 'j_fnwk_moscow_mule' },
                 { id = 'j_fnwk_crimson_golden' },
@@ -46,7 +45,7 @@ local chalInfo = {
 
                 for i = #jojobal_bans, 1, -1 do
                     if G.P_CENTERS[jojobal_bans[i].id] then
-                        table.insert(hard_set, 9, jojobal_bans)
+                        table.insert(bans, 9, jojobal_bans[i])
                     end
                 end
             end
@@ -54,18 +53,18 @@ local chalInfo = {
             local enhancement_map = {}
             for _, v in pairs(G.P_CENTER_POOLS.Enhanced) do
                 if v.key ~= 'm_wild' then
-                    hard_set[#hard_set+1] = { id = v.key }
+                    bans[#bans+1] = { id = v.key }
                     enhancement_map[v.key] = true
                 end
             end
 
             for _, v in pairs(G.P_CENTER_POOLS.Consumeables) do
                 if enhancement_map[v.config.mod_conv] and v.config.mod_conv ~= 'm_wild' then
-                    hard_set[#hard_set+1] = { id = v.key }
+                    bans[#bans+1] = { id = v.key }
                 end
             end
-
-            return hard_set
+            
+            return bans
         end,
 
         banned_other = {

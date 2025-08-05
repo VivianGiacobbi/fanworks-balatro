@@ -1,4 +1,4 @@
-if not fnwk_enabled['enableBlindReskins'] then
+if not fnwk_enabled['enable_BlindReskins'] then
     return
 end
 

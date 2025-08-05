@@ -46,7 +46,7 @@ SMODS.Consumable:take_ownership('c_hermit',
     true
 )
 
-if fnwk_enabled['enableQueer'] then
+if fnwk_enabled['enable_Queer'] then
     SMODS.Edition:take_ownership('e_polychrome',
     {
         loc_txt = {

@@ -27,7 +27,7 @@ function blindInfo.defeat(self)
     ArrowAPI.misc.set_fronts()
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     if G.GAME.modifiers.fnwk_no_rank_chips then
         ArrowAPI.misc.set_fronts()
     end

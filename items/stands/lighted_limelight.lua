@@ -25,7 +25,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'}}
+    return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enable_Queer'] and 'Queer' or 'Polychrome'}}
 end
 
 function consumInfo.calculate(self, card, context)

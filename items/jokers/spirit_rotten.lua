@@ -139,6 +139,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	}
 end
 
+function jokerInfo.set_ability(self, card, initial, delay_sprites)
+	if G.GAME.modifiers.fnwk_spirit_creeping then
+		card:set_eternal(true)
+		card:set_edition({negative = true})
+	end
+end
+
 function jokerInfo.add_to_deck(self, card, from_debuff)
 	if from_debuff or not card.ability.blind_type then return end
 

@@ -148,7 +148,7 @@ function blindInfo.defeat(self)
     ArrowAPI.game.remove_extra_blinds(G.GAME.blind)
 end
 
-function blindInfo.fnwk_blind_load(self, blindTable)
+function blindInfo.load(self, blindTable)
     local extra_bosses = {}
     for _, v in ipairs(G.GAME.arrow_extra_blinds) do
 		if v.arrow_extra_blind == G.GAME.blind then

@@ -208,12 +208,12 @@ SMODS.Atlas({ key = 'obscured_ui', path = "obscured_ui.png", px = 18, py = 18})
 
 local ref_tally_sprite = tally_sprite
 function tally_sprite(...)
-    if not suit or not G.GAME.modifiers.fnwk_obscure_suits then
+    local args = {...}
+    if not args[4] or not G.GAME.modifiers.fnwk_obscure_suits then
         return ref_tally_sprite(...)
     end
 
-    value = {{ string = '?', colour = G.C.DARK_EDITION }, { string = '?', colour = G.C.DARK_EDITION }}
-    local args = { ... }
+    args[2] = {{ string = '?', colour = G.C.DARK_EDITION }, { string = '?', colour = G.C.DARK_EDITION }}
     args[3] = { '?' }
     local ret = ref_tally_sprite(unpack(args))
     local icon_sprite = ret.nodes[1].nodes[1].config.object
