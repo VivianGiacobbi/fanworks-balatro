@@ -16,7 +16,6 @@ local voucherInfo = {
 		},
         custom_color = 'spirit',
     },
-    in_progress = true,
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

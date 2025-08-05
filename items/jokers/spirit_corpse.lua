@@ -14,7 +14,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'spirit',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+	artist = 'durandal'
 }
 
 local function get_dollar_digits()
@@ -35,7 +42,6 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.durandal }}
     return { vars = { card.ability.extra.slot_mod, card.ability.extra.cost_mod} }
 end
 
