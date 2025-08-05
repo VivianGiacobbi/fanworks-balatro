@@ -429,6 +429,7 @@ return {
 			c_fnwk_crimson_manager = 'Mood Indigo Manager',
 			c_fnwk_lighted_kriskross = "Kris Kross",
 			c_fnwk_spirit_creeping = "Creeping Infection",
+			c_fnwk_rubicon_foundation = "Foundation Building",
 		},
 		v_text = {
 			-- general behavior
@@ -446,7 +447,9 @@ return {
 			ch_c_fnwk_fanworks_reread = {"Only retrigger {C:attention}Jokers{} and {C:stand}Stands{} are allowed"},
 			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, {C:spectral}Ichor{}, and"},
 			ch_c_fnwk_crimson_manager_2 = {"{C:spectral}Mood Indigo{} appear in the {C:attention}shop{}"},
-			ch_c_fnwk_spirit_creeping = {"{C:attention}Rotten Grafts{} are {C:eternal}Eternal{} and {C:dark_edition}Negative{}"}
+			ch_c_fnwk_spirit_creeping = {"{C:attention}Rotten Grafts{} are {C:eternal}Eternal{} and {C:dark_edition}Negative{}"},
+			ch_c_fnwk_rubicon_foundation = {"{C:dark_edition}Win{} when your deck contains"},
+			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"}
 		},
 		achievement_names = {
 		},
@@ -2639,6 +2642,12 @@ return {
 					"{C:attention,E:1}Dummy Text{}"
 				}
 			},
+			c_fnwk_rubicon_foundation_2 = {
+				name = "Foundation Building",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			}
 		}
 	}
 }
