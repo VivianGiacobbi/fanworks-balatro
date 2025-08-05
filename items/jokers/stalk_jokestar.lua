@@ -40,7 +40,6 @@ local function secret_hands_played()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { ArrowAPI.credits[current_mod.id].gote }}
 	return { vars = {card.ability.extra.mult, card.ability.extra.chips}}
 end
 
