@@ -10,18 +10,22 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'scepter',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'scepter',
+		},
+        custom_color = 'scepter',
+    },
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-    return { vars = {FnwkFormatDisplayNumber(card.ability.extra.num_enhanced), card.ability.extra.draw_size} }
+    return { vars = {ArrowAPI.string.format_number(card.ability.extra.num_enhanced), card.ability.extra.draw_size} }
 end
 
 function consumInfo.calculate(self, card, context)
@@ -31,7 +35,7 @@ function consumInfo.calculate(self, card, context)
 		card.ability.fnwk_lenfer_draw = nil
 		return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,

@@ -11,7 +11,13 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'last',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'last',
+		},
+        custom_color = 'last',
+    },
 	in_progress = true,
 }
 

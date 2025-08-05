@@ -10,12 +10,17 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'gotequest',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'glass',
+		},
+        custom_color = 'glass',
+    },
     in_progress = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

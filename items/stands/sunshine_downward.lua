@@ -9,13 +9,17 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'sunshine',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -27,7 +31,7 @@ function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
     if context.debuff_hand and not context.blueprint and not context.retrigger_joker then
-        local most_played, num_played = fnwk_get_most_played_hand()
+        local most_played, num_played = ArrowAPI.game.get_most_played_hand()
         if num_played > 0 and most_played ~= context.scoring_name then
             return {
                 debuff = true,
@@ -41,7 +45,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 message_card = flare_card,

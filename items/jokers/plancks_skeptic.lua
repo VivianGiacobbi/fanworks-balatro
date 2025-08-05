@@ -8,7 +8,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'plancks',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mania',
+		},
+        custom_color = 'mania',
+    },
+	artist = 'coop',
 	alt_art = true
 }
 
@@ -73,7 +80,7 @@ local function get_pack_ui(card, pack)
 
 	local booster_obj = pack.config.center
 
-	fnwk_psuedoseed_predict(true)
+	ArrowAPI.pseudorandom.set_predict_mode(true)
 	for i = 1, pack.ability.extra do
 		local new_card = nil
 		local _card_to_spawn = booster_obj:create_card(pack, i)
@@ -111,7 +118,7 @@ local function get_pack_ui(card, pack)
 		predict_area:emplace(new_card)
 	end
 	-- make sure to unset predict mode once finished
-	fnwk_psuedoseed_predict(false)
+	ArrowAPI.pseudorandom.set_predict_mode(false)
 	return predict_area
 end
 
@@ -140,7 +147,6 @@ local function advance_pack_seeds()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
 	return { vars = {fnwk_enabled['enableSkepticStaticSeed'] and '' or 'This Joker changes seed progression'}}
 end
 

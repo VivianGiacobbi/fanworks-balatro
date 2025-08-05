@@ -11,14 +11,19 @@ local consumInfo = {
     },
     cost = 4,
     hasSoul = true,
-    rarity = 'arrow_StandRarity',
-    fanwork = 'streetlight',
+    rarity = 'StandRarity',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.piano }}
     return { vars = { card.ability.extra.h_size_mod } }
 end
 
@@ -39,7 +44,7 @@ function consumInfo.calculate(self, card, context)
 		G.hand:change_size(card.ability.extra.h_size_mod)
 		return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message = localize{type='variable',key='a_handsize',vars={card.ability.extra.h_size_mod}},

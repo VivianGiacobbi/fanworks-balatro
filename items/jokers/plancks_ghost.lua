@@ -18,13 +18,16 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = "plancks",
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'plancks',
+		},
+        custom_color = 'plancks',
+    },
+	artist = 'coop',
 	alt_art = true
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
-end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
 	return { vars = {card.ability.extra.unlock_sell_count}}
@@ -69,51 +72,51 @@ end
 
 function jokerInfo.calculate(self, card, context)
 	if not context.cardarea == G.jokers or context.blueprint then return end
-    if context.fnwk_card_removed and context.card ~= card and context.card.config.center.key ~= 'j_fnwk_plancks_ghost' then	
+    if context.removed_card and context.removed_card ~= card and context.removed_card.config.center.key ~= 'j_fnwk_plancks_ghost' then	
 		
 		-- single level compare for valid keys in the main ability table
 		local changed = false
-		for k,v in pairs(context.card.ability) do
-			if G.fnwk_valid_scaling_keys[k] and v ~= context.card.config.center.config[k] then
+		for k,v in pairs(context.removed_card.ability) do
+			if G.fnwk_valid_scaling_keys[k] and v ~= context.removed_card.config.center.config[k] then
 				changed = true
 				break
 			end
 		end
 
 		if not changed then
-			changed = FnwkDeepCompare(context.card.ability.extra, context.card.config.center.config.extra)
-		end	
+			changed = ArrowAPI.table.deep_compare(context.removed_card.ability.extra, context.removed_card.config.center.config.extra)
+		end
 		
 		if not changed then return end
 		
 		-- store relevant ability and extra values
 		local saved_ability = {}
-		for k, v in pairs(context.card.ability) do
+		for k, v in pairs(context.removed_card.ability) do
 			if G.fnwk_valid_scaling_keys[k] then saved_ability[k] = v end
 		end
-		saved_ability.extra = FnwkRecursiveTableMod(context.card.ability.extra)
+		saved_ability.extra = ArrowAPI.table.recursive_mod(context.removed_card.ability.extra)
 
 		-- save this table
-		card.ability.extra.saved_abilities[context.card.config.center.key] = saved_ability
+		card.ability.extra.saved_abilities[context.removed_card.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and context.fnwk_created_card and context.card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
-		for k, v in pairs(card.ability.extra.saved_abilities[context.card.config.center.key]) do
-			context.card.ability[k] = v
+	if context.cardarea == G.jokers and context.created_card and context.created_card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
+		for k, v in pairs(card.ability.extra.saved_abilities[context.created_card.config.center.key]) do
+			context.created_card.ability[k] = v
 		end
 
-		card.ability.extra.saved_abilities[context.card.config.center.key] = nil
-		context.card:set_cost()
+		card.ability.extra.saved_abilities[context.created_card.config.center.key] = nil
+		context.created_card:set_cost()
 
 		G.E_MANAGER:add_event(Event({
 			blockable = false,
 			trigger = 'after', 
 			func = function()
-				context.card.ability.make_vortex = true
+				context.created_card.ability.make_vortex = true
 				
 				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
 				card.dissolve = 0
-				context.card.dissolve_colours = {G.C.WHITE}
+				context.created_card.dissolve_colours = {G.C.WHITE}
 
 				local start_time = G.TIMERS.TOTAL
 				local percent = 0
@@ -132,18 +135,18 @@ function jokerInfo.calculate(self, card, context)
 					scale = 0.2,
 					speed = 2,
 					lifespan = 0.2*explode_time,
-					attach = context.card,
-					colours = context.card.dissolve_colours,
+					attach = context.created_card,
+					colours = context.created_card.dissolve_colours,
 					fill = true
 				})
 
 				G.E_MANAGER:add_event(Event({
 					blockable = false,
 					func = (function()
-							if context.card.juice then 
+							if context.created_card.juice then 
 								percent = (G.TIMERS.TOTAL - start_time)/explode_time
-								context.card.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
-								context.card.juice.scale = percent*0.15
+								context.created_card.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
+								context.created_card.juice.scale = percent*0.15
 							end
 							if G.TIMERS.TOTAL - start_time > 1.5*explode_time then return true end
 						end)
@@ -164,9 +167,9 @@ function jokerInfo.calculate(self, card, context)
 					delay = 1.6*explode_time,
 					func = (function() 
 						if G.TIMERS.TOTAL - start_time > 1.55*explode_time then  
-							context.card.dissolve = 0
+							context.created_card.dissolve = 0
 							percent = 0
-							context.card.juice = {
+							context.created_card.juice = {
 								scale = 0,
 								r = 0,
 								handled_elsewhere = true,
@@ -184,11 +187,11 @@ function jokerInfo.calculate(self, card, context)
 					trigger = 'after', 
 					delay = 1.2, 
 					func = function()
-						context.card.ability.make_vortex = nil
+						context.created_card.ability.make_vortex = nil
 						return true 
 					end
 				}))
-				card_eval_status_text(context.card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
+				card_eval_status_text(context.created_card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
 				return true 
 			end
 		}))
@@ -232,7 +235,7 @@ function jokerInfo.update(self, card, dt)
 		end
 	end
 
-	local ease = FnwkEaseInOutSin(card.ability.extra.lerp)
+	local ease = ArrowAPI.math.ease_funcs.in_out_sin(card.ability.extra.lerp)
 	card.dissolve = ease * card.ability.extra.disRange + card.ability.extra.minDis
 end
 

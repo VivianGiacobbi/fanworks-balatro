@@ -11,8 +11,8 @@
 	"display_name": "Fanworks",
 	"version": "1.0~EXPERIMENTAL",
 	"dependencies": [
-		"Steamodded (>=1.0.0~ALPHA-1317a)",
-		"Lovely (>=0.7)"
+		"Steamodded (>=1.0.0~BETA-0711a)",
+		"ArrowAPI (>=1.0)"
 	],
 	"conflicts": [
 	], 

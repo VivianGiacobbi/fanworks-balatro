@@ -10,8 +10,6 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_extra_discounts = {}
         G.GAME.fnwk_chip_novas = 0
         G.GAME.fnwk_consecutive_hands = 0
-        G.GAME.fnwk_extra_blinds = G.GAME.fnwk_extra_blinds or {}
-        G.GAME.modifiers.fnwk_consumable_selection_mod = G.GAME.modifiers.fnwk_consumable_selection_mod or 0
     end
 
     G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback')
@@ -52,7 +50,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
                     v.ability.evolved = nil
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            G.FUNCS.transform_card(v, center, false, true)
+                            ArrowAPI.game.transform_card(v, center, false, true)
                             save_run()
                             return true
                         end
@@ -207,26 +205,6 @@ end
 local ref_no_suit = SMODS.has_no_suit
 function SMODS.has_no_suit(...)
     return (G.GAME and G.GAME.modifiers.fnwk_no_suits) or ref_no_suit(...)
-end
-
-function SMODS.predict_gradient(grad, delay)
-    if #grad.colours < 2 then return end
-    local timer = (G.TIMERS.REAL + (delay or 0))%grad.cycle
-    local start_index = math.ceil(timer*#grad.colours/grad.cycle)
-    local end_index = start_index == #grad.colours and 1 or start_index+1
-    local start_colour, end_colour = grad.colours[start_index], grad.colours[end_index]
-    local partial_timer = (timer%(grad.cycle/#grad.colours))*#grad.colours/grad.cycle
-
-    local ret = {0, 0, 0, 1}
-    for i = 1, 4 do
-        if grad.interpolation == 'linear' then
-            ret[i] = start_colour[i] + partial_timer*(end_colour[i]-start_colour[i])
-        elseif grad.interpolation == 'trig' then
-            ret[i] = start_colour[i] + 0.5*(1-math.cos(partial_timer*math.pi))*(end_colour[i]-start_colour[i])
-        end
-    end
-
-    return ret
 end
 
 local ref_showman = SMODS.showman

@@ -20,7 +20,14 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rubicon',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rubicon',
+		},
+        custom_color = 'rubicon',
+    },
+	artist = {'cream', 'winter'}
 }
 
 SMODS.Atlas({ key = 'thnks_base', path ='jokers/rubicon_thnks.png', px = 71, py = 95 })
@@ -81,7 +88,6 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_2", set = "Other", vars = { G.fnwk_credits.cream, G.fnwk_credits.winter }}
 	return { vars = {card.ability.extra.chips }}
 end
 

@@ -8,12 +8,18 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'culture',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'culture',
+		},
+        custom_color = 'culture',
+    },
+    artist = 'shaft',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.shaft }}
-    return { vars = {card.ability.extra, fnwk_get_enhanced_tally() * card.ability.extra}}
+    return { vars = {card.ability.extra, ArrowAPI.game.get_enhanced_tally() * card.ability.extra}}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -21,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    local enhanced = fnwk_get_enhanced_tally()
+    local enhanced = ArrowAPI.game.get_enhanced_tally()
     if enhanced > 0 then
         return {
             message = localize { type = 'variable', key = 'a_mult', vars = {enhanced * card.ability.extra} },

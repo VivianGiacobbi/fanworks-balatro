@@ -12,21 +12,26 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'spirit',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+    artist = 'wario',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.wario }}
-    return { 
+    return {
         vars = {
             card.ability.extra.num_facedown,
             card.ability.extra.x_mult,
             card.ability.extra.evolve_hand
-        } 
+        }
     }
 end
 
@@ -48,7 +53,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,
@@ -69,7 +74,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card)
+                ArrowAPI.stands.evolve_stand(card)
                 return true 
             end 
         }))

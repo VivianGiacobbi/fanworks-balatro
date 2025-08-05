@@ -6,7 +6,13 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'mania',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mania',
+		},
+        custom_color = 'mania',
+    },
 	in_progress = true,
 }
 

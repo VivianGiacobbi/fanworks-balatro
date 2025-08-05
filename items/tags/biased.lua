@@ -1,18 +1,22 @@
 local tagInfo = {
     name = 'Biased Tag',
     config = {type = 'store_joker_create'},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'gote'
 }
-
-function tagInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "artistcredit", set = "Other", vars = { G.arrow_team.gote } }
-end
 
 function tagInfo.apply(self, tag, context)
     if context.type == self.config.type and context.area == G.shop_jokers then
         local women_in_possession = {}
         local women_count = 0
         for _, v in ipairs(G.jokers.cards) do
-            local results = FnwkFindWomen(new_item.key)
+            local results = G.fnwk_women.get_from_key(new_item.key)
             if (results.girl or results.trans or results.woman) and not women_in_possession[v.config.center.key] then
                 women_count = women_count + 1
                 women_in_possession[v.config.center.key] = true

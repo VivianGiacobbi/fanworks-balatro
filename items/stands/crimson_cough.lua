@@ -9,16 +9,18 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'crimson',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'crimson',
+		},
+        custom_color = 'crimson',
+    },
+    artist = 'gar',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
-
-function consumInfo.loc_vars(self, info_queue, card)
-
-end
 
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
@@ -53,7 +55,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.fnwk_playing_card_removed and context.removed.fnwk_cough_delete then
+    if context.playing_card_removed and context.individual and context.removed.fnwk_cough_delete then
 
         local find_keep = nil
         for _, v in ipairs(context.scoring_hand) do
@@ -76,7 +78,7 @@ function consumInfo.calculate(self, card, context)
         find_keep.ability.perma_bonus = (find_keep.ability.perma_bonus or 0) + move_chips + perma_chips
 
         local flare_card = context.blueprint_card or card
-        G.FUNCS.flare_stand_aura(flare_card, 0.5)
+        ArrowAPI.stands.flare_aura(flare_card, 0.5)
         G.E_MANAGER:add_event(Event({
             func = function()
                 flare_card:juice_up()
@@ -91,7 +93,7 @@ function consumInfo.calculate(self, card, context)
 
         delay(0.2)
 
-        G.FUNCS.flare_stand_aura(flare_card, 0.5)
+        ArrowAPI.stands.flare_aura(flare_card, 0.5)
         G.E_MANAGER:add_event(Event({
             func = function()
                 flare_card:juice_up()

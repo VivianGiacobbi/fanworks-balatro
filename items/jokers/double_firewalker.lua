@@ -10,12 +10,15 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'double',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'double',
+		},
+        custom_color = 'double',
+    },
+    artist = 'durandal'
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.durandal }}
-end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.after then

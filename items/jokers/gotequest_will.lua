@@ -15,7 +15,14 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = false,
-	fanwork = 'gotequest',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'glass',
+		},
+        custom_color = 'glass',
+    },
+	--artist = 'gote',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

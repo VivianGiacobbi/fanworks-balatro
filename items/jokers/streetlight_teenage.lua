@@ -6,11 +6,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'streetlight',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+	artist = 'leafy'
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.leafy }}
-end
 
 return jokerInfo

@@ -8,13 +8,19 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rockhard',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     alt_art = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_wild
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
 end
 

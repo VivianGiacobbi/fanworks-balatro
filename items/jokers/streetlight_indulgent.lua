@@ -36,14 +36,20 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
-	fanwork = 'streetlight',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+	artist = 'leafy',
 	alt_art = true
 }
 
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.leafy }}
     return { 
 		vars = {
 			card.ability.extra.x_mult_mod,
@@ -93,7 +99,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.fnwk_card_removed and context.card == card then
+	if context.removed_card and context.removed_card == card then
 		update_jokers_glow(card, true)
 	end
 

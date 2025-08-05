@@ -11,11 +11,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
-    fanwork = 'glass',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'glass',
+		},
+        custom_color = 'glass',
+    },
+    artist = 'coop'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult} }
 end
 

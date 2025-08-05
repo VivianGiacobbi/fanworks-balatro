@@ -13,11 +13,17 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'mania',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mania',
+		},
+        custom_color = 'mania',
+    },
+	artist = 'coop'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.chips, card.ability.extra.mult}}
 end
 

@@ -82,7 +82,7 @@ G.FUNCS.draw_from_play_to_discard = function(e)
         local it = 1
         for _, v in ipairs(larrylands) do
             local larry_card = v
-            G.FUNCS.flare_stand_aura(larry_card, 0.5)
+            ArrowAPI.stands.flare_aura(larry_card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 larry_card:juice_up()
                 play_sound('generic1')

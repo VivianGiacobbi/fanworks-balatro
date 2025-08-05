@@ -10,11 +10,17 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'jspec',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'plus',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 local function get_highest_level()
@@ -23,10 +29,6 @@ local function get_highest_level()
         if v.level > highest then highest = v.level end
     end
     return highest
-end
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.plus }}
 end
 
 function consumInfo.calculate(self, card, context)
@@ -44,7 +46,7 @@ function consumInfo.calculate(self, card, context)
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         func = function()
-                            G.FUNCS.evolve_stand(card)
+                            ArrowAPI.stands.evolve_stand(card)
                             return true 
                         end 
                     }))
@@ -59,7 +61,7 @@ function consumInfo.calculate(self, card, context)
         if G.GAME.hands[context.scoring_name].level < highest_level then
             if not context.check then
                 local juice_card = context.blueprint_card or card
-                G.FUNCS.flare_stand_aura(juice_card, 2)
+                ArrowAPI.stands.flare_aura(juice_card, 2)
                 level_up_hand(juice_card, context.scoring_name, nil, 1)
             end
 

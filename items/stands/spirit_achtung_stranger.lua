@@ -12,15 +12,20 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'EvolvedRarity',
     hasSoul = true,
-    fanwork = 'spirit',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+    artist = 'wario',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.wario }}
     return { vars = { card.ability.extra.x_mult, card.ability.extra.non_hand, card.ability.extra.hand_gain }}
 end
 
@@ -39,7 +44,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.38)
+                ArrowAPI.stands.flare_aura(flare_card, 0.38)
             end,
             card = flare_card,
             message = localize{type = 'variable', key = key_var, vars = {card.ability.extra.hand_gain}},
@@ -51,7 +56,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,

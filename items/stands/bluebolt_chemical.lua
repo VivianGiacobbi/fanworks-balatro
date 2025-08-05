@@ -12,19 +12,24 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'bluebolt',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
+    artist = 'coop',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     local num_display = (card.ability.extra.stored_enhance and 1 or 0) + (card.ability.extra.stored_seal and 1 or 0) + (card.ability.extra.stored_edition and 1 or 0)
     
     local stored_enhance = card.ability.extra.stored_enhance and localize({type = 'name_text', key = card.ability.extra.stored_enhance, set = 'Enhanced'}) or nil
-    if stored_enhance and FnwkContainsString(stored_enhance, ' Card') then stored_enhance = string.sub(stored_enhance, 1, #stored_enhance - 5) end
+    if stored_enhance and ArrowAPI.string.contains(stored_enhance, ' Card') then stored_enhance = string.sub(stored_enhance, 1, #stored_enhance - 5) end
     local stored_edition = card.ability.extra.stored_edition and localize({type = 'name_text', key = card.ability.extra.stored_edition, set = 'Edition'}) or nil
 
     local stored_seal = nil
@@ -59,7 +64,7 @@ function consumInfo.calculate(self, card, context)
 
             return {
                 func = function()
-                    G.FUNCS.flare_stand_aura(card, 0.5)
+                    ArrowAPI.stands.flare_aura(card, 0.5)
                     change_card:set_ability('c_base')
                     change_card:set_seal(nil, true, true)
                     change_card:set_edition(nil, true, true)
@@ -89,7 +94,7 @@ function consumInfo.calculate(self, card, context)
         local change_card = context.full_hand[1]
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
 
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     -- apply all saved modifications

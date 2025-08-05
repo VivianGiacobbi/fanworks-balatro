@@ -6,16 +6,18 @@ local consumInfo = {
         aura_colors = { 'E58B6DDC', 'B72F7EDC' },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'sunshine',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    },
+    artist = 'gar',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gar }}
-end
 
 return consumInfo

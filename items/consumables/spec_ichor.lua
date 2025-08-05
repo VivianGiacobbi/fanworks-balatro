@@ -3,13 +3,19 @@ local consumInfo = {
     set = 'Spectral',
     cost = 4,
     alerted = true,
-    fanwork = 'double'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'double',
+		},
+        custom_color = 'double',
+    },
+    artist = 'coop'
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.e_polychrome
     info_queue[#info_queue+1] = {key = 'rental', set = 'Other', vars = {G.GAME.rental_rate or 1}}
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = { fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome' } }
 end
 

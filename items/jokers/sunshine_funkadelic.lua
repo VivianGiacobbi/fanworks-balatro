@@ -10,11 +10,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'sunshine',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    },
+	artist = 'fizzy',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.fizzy }}
 	if G.GAME and not G.GAME.fnwk_current_funky_suits then
 		fnwk_reset_funkadelic()
 	end

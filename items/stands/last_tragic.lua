@@ -10,12 +10,16 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'last',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'last',
+		},
+        custom_color = 'last',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -58,7 +62,7 @@ function consumInfo.calculate(self, card, context)
 
     if #change_cards < 1 then return end
 
-    G.FUNCS.flare_stand_aura(card, 0.5)
+    ArrowAPI.stands.flare_aura(card, 0.5)
     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_tragic_rankdown'), colour = G.C.SUITS[target_key]})
 
     for _, v in ipairs(change_cards) do

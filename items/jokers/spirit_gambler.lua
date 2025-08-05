@@ -6,12 +6,16 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'spirit',
-    in_progress = true,
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.daed }}
     return { vars = { card.ability.extra.blackjack, card.ability.extra.chips} }
 end
 

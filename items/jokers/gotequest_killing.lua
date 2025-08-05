@@ -13,11 +13,17 @@ local jokerInfo = {
     eternal_compat = true,
     perishable_compat = true,
     hasSoul = true,
-    fanwork = 'gotequest',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'glass',
+		},
+        custom_color = 'glass',
+    },
+	artist = 'cejai',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cejai }}
     return { 
         vars = { 
             card.ability.extra.x_mult_mod,

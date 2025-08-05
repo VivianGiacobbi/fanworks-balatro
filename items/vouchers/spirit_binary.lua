@@ -4,8 +4,13 @@ local voucherInfo = {
         extra = 1
     },
     cost = 10,
-    fanwork = 'spirit',
-    dependencies = {'ArrowAPI'},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

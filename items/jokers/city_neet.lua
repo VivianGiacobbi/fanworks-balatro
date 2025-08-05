@@ -18,7 +18,14 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'city'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'city',
+		},
+        custom_color = 'city',
+    },
+    artist = 'mal'
 }
 
 local function joker_name_mod(card)
@@ -40,7 +47,6 @@ local function joker_name_mod(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = { card.ability.extra.x_mult, joker_name_mod(card) } }
 end
 
@@ -156,7 +162,7 @@ function jokerInfo.draw(self, card, layer)
         return
     end
 
-    local lerp_val = FnwkEaseInOutQuart(card.ability.city_lerp)
+    local lerp_val = ArrowAPI.math.ease_funcs.in_out_quart(card.ability.city_lerp)
     local scroll_dist = card.ability.scroll_dist / 2
     if lerp_val > 0.5 then
         scroll_dist = scroll_dist * (lerp_val - 0.5) / 0.5

@@ -6,26 +6,27 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 1, max = 10},
+    artist = 'coop',
 }
 
 function blindInfo.set_blind(self)
     G.GAME.modifiers.fnwk_no_suits = true
-    FnwkSetFronts()
+    ArrowAPI.misc.set_fronts()
 end
 
 function blindInfo.disable(self)
     G.GAME.modifiers.fnwk_no_suits = nil
-    FnwkSetFronts(true)
+    ArrowAPI.misc.set_fronts(true)
 end
 
 function blindInfo.defeat(self)
     G.GAME.modifiers.fnwk_no_suits = nil
-    FnwkSetFronts()
+    ArrowAPI.misc.set_fronts()
 end
 
 function blindInfo.fnwk_blind_load(self, blindTable)
     if G.GAME.modifiers.fnwk_no_suits then
-        FnwkSetFronts()
+        ArrowAPI.misc.set_fronts()
     end
 end
 

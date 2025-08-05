@@ -16,7 +16,14 @@ local voucherInfo = {
     requires = {'v_fnwk_streetlight_waystone'},
     unlocked = false,
     unlock_condition = { type = 'ante_up', ante_count = 4 },
-    fanwork = 'streetlight'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist  = 'leafy',
 }
 
 function voucherInfo.locked_loc_vars(self, info_queue, card)

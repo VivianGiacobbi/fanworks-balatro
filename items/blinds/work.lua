@@ -6,6 +6,7 @@ local blindInfo = {
     mult = 2,
     vars = {1},
     boss = {min = 3, max = 10},
+    artist = 'winter',
 }
 
 function blindInfo.loc_vars(self)
@@ -18,6 +19,7 @@ end
 
 function blindInfo.set_blind(self)
     G.GAME.blind.fnwk_required_works = 1
+    G.GAME.blind.fnwk_works_submitted = 0
 end
 
 function blindInfo.recalc_debuff(self, card, from_blind)

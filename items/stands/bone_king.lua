@@ -11,11 +11,16 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'bone',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bone',
+		},
+		custom_color = 'bone',
+	},
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -38,7 +43,7 @@ function consumInfo.calculate(self, card, context)
             trigger = 'after',
             func = function()
                 if #G.playing_cards <= (G.GAME.starting_deck_size - card.ability.extra.evolve_sub) then
-                    G.FUNCS.evolve_stand(card)
+                    ArrowAPI.stands.evolve_stand(card)
                 end
 
                 return true 
@@ -53,18 +58,18 @@ function consumInfo.calculate(self, card, context)
             trigger = 'after',
             func = function()
                 if #G.playing_cards <= (G.GAME.starting_deck_size - card.ability.extra.evolve_sub) then
-                    G.FUNCS.evolve_stand(card)
+                    ArrowAPI.stands.evolve_stand(card)
                 end
                 return true 
             end 
         }))
     end
 
-    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_kingandcountry then
+    if context.playing_card_removed and context.individual and context.removed.fnwk_removed_by_kingandcountry then
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.48)
+                ArrowAPI.stands.flare_aura(flare_card, 0.48)
             end,
             delay = 0.75,
             extra = {

@@ -11,7 +11,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'fanworks',
+	artist = 'gote'
 }
 
 local function tally_fanworks_jokers()
@@ -22,7 +22,7 @@ local function tally_fanworks_jokers()
 	local tally = 0
 	for k, _ in pairs(G.GAME.fnwk_owned_jokers) do
 		local center = G.P_CENTERS[k]
-		if center and FnwkContainsString(k, 'fnwk_') and (center.set == 'Joker' or center.set == 'Stand') then 
+		if center and center.original_mod and center.original_mod.id == 'fanworks' and (center.set == 'Joker' or center.set == 'Stand') then 
 			tally = tally + 1
 		end
 	end
@@ -31,16 +31,15 @@ local function tally_fanworks_jokers()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult_mod * tally_fanworks_jokers() }}
 end
 
 function jokerInfo.calculate(self, card, context)
 
 	if not context.blueprint then
-		if (context.buying_card and context.card.ability.set == 'Joker') or (context.fnwk_created_card and context.area == G.jokers) then
-			local key = context.card.config.center.key
-			if FnwkStringStartsWith(key, 'j_fnwk') then
+		if (context.buying_card and context.card.ability.set == 'Joker') or (context.created_card and context.area == G.jokers) then
+			local mod = context.card.config.center.original_mod
+			if mod and mod.id == 'fanworks' then
 				return {
 					message = localize('k_upgrade_ex'),
 					card = card,

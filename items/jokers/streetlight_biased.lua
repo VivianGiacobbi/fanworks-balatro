@@ -10,7 +10,14 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'streetlight',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+	artist = 'leafy',
 }
 
 local function debuff_helper(card) 
@@ -31,17 +38,16 @@ local function debuff_helper(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.leafy }}
 	return { vars = {card.ability.extra.dollars}}
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not context.blueprint and not context.retrigger_joker and context.fnwk_created_card then
-		debuff_helper(context.card)
+	if not context.blueprint and not context.retrigger_joker and context.created_card then
+		debuff_helper(context.created_card)
 		return
 	end
 
-	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.fnwk_card_removed or context.remove_playing_cards) then
+	if not context.blueprint and not context.retrigger_joker and (context.card_added or context.playing_card_added or context.removed_card or context.remove_playing_cards) then
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
 			func = function()
@@ -53,7 +59,7 @@ function jokerInfo.calculate(self, card, context)
 	end
 
 	if not context.blueprint and not context.retrigger_joker and context.debuff_card and not card.ability.fnwk_biased_removed then
-		local women = FnwkFindWomen(context.debuff_card.config.center.key)
+		local women = G.fnwk_women.get_from_key(context.debuff_card.config.center.key)
 		if women.trans or women.woman or women.girl or context.debuff_card:get_id() == 12 then
 			return {
 				debuff = true

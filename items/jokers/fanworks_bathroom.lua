@@ -12,7 +12,6 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-    fanwork = 'fanworks',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -20,7 +19,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
-    local discovered, total = FnwkCheckFanworksDiscoveries(self)
+    local discovered, total = ArrowAPI.game.check_mod_discoveries('fanworks', self)
     return { vars = { discovered, total } }
 end
 
@@ -29,7 +28,7 @@ function jokerInfo.check_for_unlock(self, args)
         return false
     end
 
-    local discovered, total = FnwkCheckFanworksDiscoveries(self)
+    local discovered, total = ArrowAPI.game.check_mod_discoveries('fanworks', self)
     return discovered == total
 end
 

@@ -11,15 +11,20 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
     fanwork = 'rebels',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rebels',
+		},
+        custom_color = 'rebels',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.jin }}
     return { vars = {card.ability.extra.chips, card.ability.extra.mult}}
 end
 
@@ -31,7 +36,7 @@ function consumInfo.calculate(self, card, context)
             local flare_card = context.blueprint_card or card
             return {
                 func = function()
-                    G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                    ArrowAPI.stands.flare_aura(flare_card, 0.5)
                 end,
                 extra = {
                     chips = card.ability.extra.chips,
@@ -42,7 +47,7 @@ function consumInfo.calculate(self, card, context)
             local flare_card = context.blueprint_card or card
             return {
                 func = function()
-                    G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                    ArrowAPI.stands.flare_aura(flare_card, 0.5)
                 end,
                 extra = {
                     mult = card.ability.extra.mult,

@@ -1,4 +1,39 @@
-local items_to_load = {
+SMODS.ObjectType {
+    default = 'j_fnwk_bluebolt_sexy',
+    key = 'fnwk_women',
+	prefix_config = false,
+	cards = {
+		['j_lusty_joker'] = true,
+        ['j_blueprint'] = true,
+        ['j_brainstorm'] = true,
+        ['j_shoot_the_moon'] = true,
+        ['j_fnwk_plancks_unsure'] = true,
+        ['j_fnwk_rubicon_moonglass'] = true,
+        ['j_fnwk_streetlight_fledgling'] = true,
+        ['j_fnwk_streetlight_indulgent'] = true,
+        ['j_fnwk_streetlight_industrious'] = true,
+        ['j_fnwk_streetlight_methodical'] = true,
+        ['j_fnwk_rubicon_thnks'] = true,
+        ['j_fnwk_streetlight_resil'] = true,
+        ['j_fnwk_bone_destroyer'] = true,
+        ['j_fnwk_industry_loyal'] = true,
+        ['j_fnwk_mania_jokestar'] = true,
+        ['j_fnwk_gotequest_killing'] = true,
+        ['j_fnwk_jspec_joepie'] = true,
+        ['j_fnwk_jspec_ilsa'] = true,
+        ['j_fnwk_bluebolt_tuned'] = true,
+        ['j_fnwk_love_holy'] = true,
+        ['j_drivers_license'] = true,
+        ['j_fnwk_rockhard_rebirth'] = true,
+        ['j_fnwk_bluebolt_sexy'] = true,
+        ['j_fnwk_bluebolt_secluded'] = true,
+        ['j_fnwk_plancks_ghost'] = true,
+        ['j_fnwk_glass_jokestar'] = true,
+        ['j_fnwk_love_jokestar'] = true,
+	}
+}
+
+ArrowAPI.loading.batch_load({
 	Joker = {
 		items = {
 			-- fanworks
@@ -157,7 +192,7 @@ local items_to_load = {
 			'jojojidai_soldiers',
 
 			-- lipstick_vogue
-			'lipstick_ego',
+			'lipstick_bronx',
 
 			-- jojospectacle,
 			'jspec_sharp',
@@ -165,10 +200,10 @@ local items_to_load = {
 			'jspec_joepie',
 			'jspec_kunst',
 			'jspec_ilsa',
-			
+
 			-- shit realm
 			'fanworks_bathroom',
-			
+
 			-- dummy
 			'banned_jokers',
 			'banned_commons'
@@ -213,7 +248,7 @@ local items_to_load = {
 
 			-- plancks creek
 			'plancks_moon',
-			
+
 			-- last hope army
 			'last_tragic',
 			'last_saturn',
@@ -297,7 +332,7 @@ local items_to_load = {
 			'random_stand'
 		}
 	},
-	
+
 	Deck = {
 		items = {
 			'fanworks_deck',
@@ -326,7 +361,6 @@ local items_to_load = {
 		}
 	},
 
-	
 	Blind = {
 		items = {
 			'venus',
@@ -355,6 +389,7 @@ local items_to_load = {
 			'fanworks_corpse',
 			'fanworks_invisible',
 			'fanworks_breakdown',
+			'crimson_melting',
 			'lighted_kriskross',
 		}
 	},
@@ -364,58 +399,5 @@ local items_to_load = {
 			'biased',
 		}
 	}
-}
-
-SMODS.ObjectType {
-    default = 'j_fnwk_bluebolt_sexy',
-    key = 'fnwk_women',
-	prefix_config = false,
-	cards = {
-		['j_lusty_joker'] = true,
-        ['j_blueprint'] = true,
-        ['j_brainstorm'] = true,
-        ['j_shoot_the_moon'] = true,
-        ['j_fnwk_plancks_unsure'] = true,
-        ['j_fnwk_rubicon_moonglass'] = true,
-        ['j_fnwk_streetlight_fledgling'] = true,
-        ['j_fnwk_streetlight_indulgent'] = true,
-        ['j_fnwk_streetlight_industrious'] = true,
-        ['j_fnwk_streetlight_methodical'] = true,
-        ['j_fnwk_rubicon_thnks'] = true,
-        ['j_fnwk_streetlight_resil'] = true,
-        ['j_fnwk_bone_destroyer'] = true,
-        ['j_fnwk_industry_loyal'] = true,
-        ['j_fnwk_mania_jokestar'] = true,
-        ['j_fnwk_gotequest_killing'] = true,
-        ['j_fnwk_jspec_joepie'] = true,
-        ['j_fnwk_jspec_ilsa'] = true,
-        ['j_fnwk_bluebolt_tuned'] = true,
-        ['j_fnwk_love_holy'] = true,
-        ['j_drivers_license'] = true,
-        ['j_fnwk_rockhard_rebirth'] = true,
-        ['j_fnwk_bluebolt_sexy'] = true,
-        ['j_fnwk_bluebolt_secluded'] = true,
-        ['j_fnwk_plancks_ghost'] = true,
-        ['j_fnwk_glass_jokestar'] = true,
-        ['j_fnwk_love_jokestar'] = true,
-	}
-}
-
-local priority_list = {}
-for k, v in pairs(items_to_load) do
-	priority_list[#priority_list+1] = {
-		key = k,
-		load_priority = v.load_priority or 0,
-		items = v.items
-	}
-end
-table.sort(priority_list, function(a, b) return a.load_priority > b.load_priority end)
-
-for _, v in ipairs(priority_list) do
-	if next(v.items) and fnwk_filter_loading(v.key) then
-		for _, item in ipairs(v.items) do
-			FnwkLoadItem(item, v.key)
-		end
-	end
-end
+})
 

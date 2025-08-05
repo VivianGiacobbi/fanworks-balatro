@@ -10,8 +10,13 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'bluebolt',
-	in_progress = true,
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

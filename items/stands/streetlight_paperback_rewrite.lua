@@ -11,17 +11,21 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'EvolvedRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'streetlight',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = false,
-    in_progress = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {G.GAME.probabilities.normal * card.ability.extra.normal_mod, card.ability.extra.chance} }
 end
 

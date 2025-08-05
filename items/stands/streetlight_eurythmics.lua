@@ -13,14 +13,19 @@ local consumInfo = {
     },
     cost = 4,
     hasSoul = true,
-    rarity = 'arrow_StandRarity',
-    fanwork = 'streetlight',
+    rarity = 'StandRarity',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.piano }}
     return {
         vars = {
             card.ability.extra.rounds_val,
@@ -43,7 +48,7 @@ function consumInfo.calculate(self, card, context)
     if context.setting_blind then
         if card.ability.extra.current_rounds + 1 >= card.ability.extra.rounds_val then		
             local flare_card = context.blueprint_card or card
-            G.FUNCS.flare_stand_aura(flare_card, 0.5)
+            ArrowAPI.stands.flare_aura(flare_card, 0.5)
             card_eval_status_text(flare_card, 'extra', nil, nil, nil, {message = localize('k_method_4')})
             for i=1, card.ability.extra.num_tags do
                 G.E_MANAGER:add_event(Event({

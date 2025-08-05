@@ -11,11 +11,17 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'streetlight',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 local function replace_return_messages(ret_table, replace_target, replace_card)
@@ -29,10 +35,6 @@ local function replace_return_messages(ret_table, replace_target, replace_card)
         recur_tbl.focus = (recur_tbl.focus == replace_target) and replace_card or recur_tbl.focus
         recur_tbl = recur_tbl.extra
     until recur_tbl == nil
-end
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.piano }}
 end
 
 function consumInfo.load(self, card, card_table, other_card)

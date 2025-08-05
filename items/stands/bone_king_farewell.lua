@@ -14,12 +14,16 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'EvolvedRarity',
     soul_pos = {x = 2, y = 0},
-    fanwork = 'bone',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bone',
+		},
+		custom_color = 'bone',
+	},
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -89,11 +93,11 @@ function consumInfo.calculate(self, card, context)
         end
     end
 
-    if context.fnwk_playing_card_removed and context.removed.fnwk_removed_by_farewell then
+    if context.playing_card_removed and context.individual and context.removed.fnwk_removed_by_farewell then
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 message = localize('k_farewell'),

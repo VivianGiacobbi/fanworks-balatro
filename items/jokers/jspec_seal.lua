@@ -8,12 +8,15 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'jspec',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+	artist = 'plus',
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.plus }}
-end
 
 function jokerInfo.check_for_unlock(self, args)
     if args.type ~= self.unlock_condition.type then

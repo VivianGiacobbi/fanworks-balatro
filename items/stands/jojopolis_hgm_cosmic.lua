@@ -8,11 +8,16 @@ local consumInfo = {
         evolved = true,
     },
     cost = 4,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'EvolvedRarity',
     hasSoul = true,
-    fanwork = 'jojopolis',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jojopolis',
+		},
+        custom_color = 'jojopolis',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -28,7 +33,7 @@ function consumInfo.calculate(self, card, context)
 		card.ability.fnwk_cosmic_played_hand = nil
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message = localize('k_hgm_cosmic_draw'),

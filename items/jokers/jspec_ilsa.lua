@@ -11,7 +11,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'jspec'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'mal'
 }
 
 -- update multi-edition status for cards that are already in the deck or joker slots
@@ -27,7 +34,6 @@ function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS['e_holo']
     info_queue[#info_queue+1] = G.P_CENTERS['e_foil']
     info_queue[#info_queue+1] = G.P_CENTERS['e_polychrome']
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = { fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome' } }
 end
 

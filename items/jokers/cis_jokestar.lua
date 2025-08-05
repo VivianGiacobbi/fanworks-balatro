@@ -14,11 +14,17 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = true,
-    fanwork = 'cis',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'cis',
+		},
+        custom_color = 'cis',
+    },
+	artist = 'gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { 
 		vars = { 
 			card.ability.extra.mult,

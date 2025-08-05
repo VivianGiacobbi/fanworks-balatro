@@ -14,12 +14,18 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
-	fanwork = 'rockhard',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     alt_art = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     if not G.GAME.consumeable_usage then
         return { vars = { card.ability.extra.x_mult_mod, 1 } }
     end

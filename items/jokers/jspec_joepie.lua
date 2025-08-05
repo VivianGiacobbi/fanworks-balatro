@@ -13,7 +13,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'jspec'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'mal',
 }
 
 local function get_lowest_planet()
@@ -39,7 +46,6 @@ end
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = { card.ability.extra.h_mod, get_lowest_planet() * card.ability.extra.h_mod }}
 end
 

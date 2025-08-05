@@ -1,22 +1,3 @@
-local ref_game_start = Game.start_run
-function Game:start_run(args)
-    G.GAME.fnwk_gradient_background = nil
-    G.GAME.fnwk_gradient_ui = nil
-    local ret = ref_game_start(self, args)
-
-    if (not args or not args.savetext) and G.GAME.modifiers.fnwk_all_bosses then
-        G.GAME.round_resets.blind_choices.Small = get_new_boss('Small')
-        G.GAME.round_resets.blind_choices.Big = get_new_boss('Big')
-    end
-
-    local obj = G.GAME.blind.config.blind
-    if G.GAME.blind.in_blind and obj.fnwk_post_blind_load and type(obj.fnwk_post_blind_load) == 'function' then
-        obj:fnwk_post_blind_load()
-    end
-
-    return ret
-end
-
 local ref_game_menu = Game.main_menu
 function Game:main_menu(...)
     local ret = ref_game_menu(self, ...)
@@ -35,21 +16,6 @@ function Game:main_menu(...)
     	type = 'cm',
     	offset = {x=0,y=0}
     })
-
-    return ret
-end
-
-local ref_game_delete = Game.delete_run
-function Game:delete_run(...)
-    local ret = ref_game_delete(self, ...)
-
-    -- for the sake of cleanup, I don't want these hanging in the background
-    if G.GAME and G.GAME.fnwk_extra_blinds and next(G.GAME.fnwk_extra_blinds) then
-        for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
-            v:remove()
-        end
-        G.GAME.fnwk_extra_blinds = nil
-    end
 
     return ret
 end

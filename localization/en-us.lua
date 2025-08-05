@@ -1,28 +1,3 @@
-local enhance_text = {
-	singular = {
-		"Enhances {C:attention}#1#{} selected",
-		"card into a {C:attention}#2#{}"
-	},
-	multi = {
-		"Enhances up to {C:attention}#1#{}",
-		"selected cards into",
-		"{C:attention}#2#s{}"
-	}
-}
-
-local seal_text = {
-	singular = {
-		"Add a {C:attention}#1#{} to",
-		"{C:attention}#2#{} selected card",
-		"in your hand"
-	},
-	multi = {
-		"Add {C:attention}#1#s{} to up",
-		"to {C:attention}#2#{} selected cards",
-		"in your hand"
-	}
-}
-
 return {
 	misc = {
 		quips = {
@@ -286,24 +261,23 @@ return {
 			fnwk_credits_thanks = "Special Thanks",
 
 			fnwk_options_sub = "(Restart required to apply)",
-			fnwk_options_enableJokers = "Jokers",
-			fnwk_options_enableStands = "Stands",
-			fnwk_options_enableWipItems = "WIP Items",
-			fnwk_options_enableAltArt = "Alt Joker Art",
-			fnwk_options_enableSkepticStaticSeed = "Skeptic Static Seed",
-			fnwk_options_enableQueer = "Queer Edition",
-			fnwk_options_enableDecks = "Decks",
-			fnwk_options_enableTags = "Tags",
-			fnwk_options_enableVouchers = "Vouchers",
-			fnwk_options_enableConsumables = "Consumables",
-			fnwk_options_enableVanillaTweaks = "Vanilla Tweaks",
-			fnwk_options_enableBlinds = "Boss Blinds",
-			fnwk_options_enableBlindReskins = "Boss Blind Reskins",
-			fnwk_options_enableSkins = "Playing Card Skins",
-			fnwk_options_enableChallenges = "Challenges",
-			fnwk_options_enableTrophies = "Fanworks Achievements",
-			fnwk_options_enableLogo = "Main Menu Logo",
-			fnwk_options_enableTarotSkins = "Tarot Card Reskins",
+			fnwk_options_enable_Jokers = "Jokers",
+			fnwk_options_enable_Stands = "Stands",
+			fnwk_options_enable_AltArt = "Alt Joker Art",
+			fnwk_options_enable_SkepticStaticSeed = "Skeptic Static Seed",
+			fnwk_options_enable_Queer = "Queer Edition",
+			fnwk_options_enable_Decks = "Decks",
+			fnwk_options_enable_Tags = "Tags",
+			fnwk_options_enable_Vouchers = "Vouchers",
+			fnwk_options_enable_Consumables = "Consumables",
+			fnwk_options_enable_VanillaTweaks = "Vanilla Tweaks",
+			fnwk_options_enable_Blinds = "Boss Blinds",
+			fnwk_options_enable_BlindReskins = "Boss Blind Reskins",
+			fnwk_options_enable_Skins = "Playing Card Skins",
+			fnwk_options_enable_Challenges = "Challenges",
+			fnwk_options_enable_Trophies = "Fanworks Achievements",
+			fnwk_options_enable_Logo = "Main Menu Logo",
+			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
 			fnwk_options_resetTrophies_r = "Reset Achievements",
 			fnwk_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
 			
@@ -450,21 +424,16 @@ return {
 			c_fnwk_fanworks_corpse = "Fanquisite Corpse",
 			c_fnwk_fanworks_invisible = "Invisible Woman",
 			c_fnwk_fanworks_breakdown = "Third-Act Breakdown",
+			c_fnwk_crimson_melting = 'Melting Madness',
 			c_fnwk_lighted_kriskross = "Kris Kross",
 		},
 		v_text = {
 			-- general behavior
-			fnwk_banned_except = {"{C:attention}All Jokers{} and {C:stand}all Stands{} {C:attention}banned{} except:"},
-			fnwk_blinds_except = {"{C:attention}All Blinds banned{} except:"},
-			ch_c_max_stands = {"You may have up to {C:attention}#1#{} {C:stand}Stands{}"},
 			ch_c_fnwk_duplicates_allowed = {"{C:attention}Dupliate Jokers{} can spawn"},
 			ch_c_fnwk_pinned_jokers = {"All {C:attention}Jokers{} are {C:gold}Pinned{}"},
             ch_c_fnwk_right_eternal = {"Non-{C:attention}leftmost{} Jokers are {C:attention}Eternal{}"},
 			ch_c_fnwk_consumable_save = {"{C:attention}Using{} consumeables {C:attention}saves the run{}"},
 			ch_c_fnwk_play_save = {"{C:attention}Playing{} a hand {C:attention}saves the run{}"},
-			ch_c_fnwk_all_scores_hidden = {"{C:attention}Blind requirements{} are {C:dark_edition}hidden{}"},
-			ch_c_fnwk_all_bosses = {"{C:attention}Small{} and {C:attention}Big Blinds{} are {C:attention}Boss Blinds{}"},
-			ch_c_fnwk_all_showdown = {"{C:attention}Boss Blinds{} are {C:attention}Final Boss Blinds{}"},
 
 			-- challenge specific strings
 			ch_c_fnwk_fanworks_beyond = {"Non-{C:fanworks}Fanworks{} Jokers are banned"},
@@ -1723,7 +1692,7 @@ return {
 					"{C:inactive}(Currently {}{X:mult,C:white}X#3#{} {C:inactive}Mult){}"
 				}
 			},
-			j_fnwk_lipstick_ego = {
+			j_fnwk_lipstick_bronx = {
 				name = "Joker Von Bronx",
 				text = {
 					"Earn {C:money}$#1#{} each time",
@@ -1808,57 +1777,6 @@ return {
 			},
 		},
 		Tarot = {
-			c_strength = {
-				name = "Strength",
-				text = {
-					"Increases rank of",
-					"up to {C:attention}#1#{} selected",
-					"cards by {C:attention}#2#{}"
-				}
-			},
-			c_strength_multi = {
-				name = "Strength",
-				text = {
-					"Increases rank",
-					"of {C:attention}#1#{} selected",
-					"card by {C:attention}#2#{}"
-				}
-			},
-			c_death = {
-				name = "Death",
-				text = {
-					"Select {C:attention}#1#{} cards,",
-					"convert the {C:attention}left{} card",
-					"into the {C:attention}right{} card",
-					"{C:inactive}(Drag to rearrange)"
-				}
-			},
-			c_death_multi = {
-				name = "Death",
-				text = {
-					"Select {C:attention}#1#{} cards,",
-					"convert the {C:attention}left{} cards",
-					"into the {C:attention}rightmost{} card",
-					"{C:inactive}(Drag to rearrange)"
-				}
-			},
-			c_devil = { name = "The Devil", text = enhance_text.singular },
-			c_devil_multi = { name = "The Devil", text = enhance_text.multi },
-            c_tower = { name = "The Tower", text = enhance_text.singular },
-			c_tower_multi = { name = "The Tower", text = enhance_text.multi },
-			c_magician = { name = "The Magician", text = enhance_text.singular },
-			c_magician_multi = { name = "The Magician", text = enhance_text.multi },
-			c_empress = { name = "The Empress", text = enhance_text.singular },
-			c_empress_multi = { name = "The Empress", text = enhance_text.multi },
-			c_heirophant = { name = "The Hierophant", text = enhance_text.singular },
-			c_heirophant_multi = { name = "The Hierophant", text = enhance_text.multi },
-			c_lovers = { name = "The Lovers", text = enhance_text.singular },
-			c_lovers_multi = { name = "The Lovers", text = enhance_text.multi },
-			c_chariot = { name = "The Chariot", text = enhance_text.singular },
-			c_chariot_multi = { name = "The Chariot", text = enhance_text.multi },
-			c_justice = { name = "Justice", text = enhance_text.singular },
-			c_justice_multi = { name = "Justice", text = enhance_text.multi },
-
 			c_emperor_dead = {
 				name = "The Emperor",
 				text = {
@@ -1885,48 +1803,6 @@ return {
 			},
 		},
 		Spectral = {
-			c_talisman = { name = "Talisman", text = seal_text.singular },
-			c_talisman_multi = { name = "Talisman", text = seal_text.multi },
-			c_deja_vu = { name = "Deja Vu", text = seal_text.singular },
-			c_deja_vu_multi = { name = "Deja Vu", text = seal_text.multi },
-			c_medium = { name = "Medium", text = seal_text.singular },
-			c_medium_multi = { name = "Medium", text = seal_text.multi },
-			c_trance = { name = "Trance", text = seal_text.singular },
-			c_trance_multi = { name = "Trance", text = seal_text.multi },
-
-			c_cryptid = {
-				name = 'Cryptid',
-				text = {
-					"Create {C:attention}#1#{} copies of",
-					"{C:attention}#2#{} selected card",
-					"in your hand"
-				},
-			},
-			c_cryptid_multi = {
-				name = 'Cryptid',
-				text = {
-					"Create {C:attention}#1#{} copies of",
-					"up to {C:attention}#2#{} selected cards",
-					"in your hand"
-				},
-			},
-
-			c_aura = {
-				name = 'Aura',
-				text = {
-					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
-					"{C:dark_edition}#2#{} edition to",
-					"{C:attention}#1#{} selected card in hand"
-				},
-			},
-			c_aura_multi = {
-				name = 'Aura',
-				text = {
-					"Add {C:dark_edition}Foil{}, {C:dark_edition}Holographic{}, or",
-					"{C:dark_edition}#2#{} edition to up to",
-					"{C:attention}#1#{} selected cards in hand"
-				},
-			},
 			c_fnwk_spec_mask = {
 				name = "Stone Mask",
 				text = {
@@ -2724,6 +2600,12 @@ return {
 			},
 			c_fnwk_fanworks_breakdown = {
 				name = "Third-Act Breakdown",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
+				}
+			},
+			c_fnwk_crimson_melting = {
+				name = "Melting Madness",
 				text = {
 					"{C:attention,E:1}Dummy Text{}"
 				}

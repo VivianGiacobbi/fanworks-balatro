@@ -11,7 +11,14 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = false,
 	perishable_compat = false,
-	fanwork = 'streetlight',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+	artist = 'mal',
 	alt_art = true
 }
 
@@ -31,7 +38,6 @@ local function updateSprite(card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
 	return { key = 'j_fnwk_streetlight_resil'..(card.ability.form == 'regen' and '_regen' or '')}
 end
 
@@ -48,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-	if context.cardarea == G.jokers and context.fnwk_card_removed and context.card == card then
+	if context.cardarea == G.jokers and context.removed_card == card then
 		if card.ability.state == 'default' then
 			card.ability.state = 'sacrifice'
 

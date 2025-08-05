@@ -20,7 +20,13 @@ local voucherInfo = {
         extra = 2
     },
     cost = 10,
-    fanwork = 'sunshine'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

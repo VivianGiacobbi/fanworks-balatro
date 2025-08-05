@@ -14,11 +14,33 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'stalk',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'stalk',
+		},
+        custom_color = 'stalk',
+    },
+	artist = 'gote',
 }
 
+local function secret_hands_played()
+	if not G.GAME then
+		return 0
+	end
+
+	local secret = 0
+	for _, key in ipairs(SMODS.PokerHand.obj_buffer) do
+		if not SMODS.PokerHands[key].visible and G.GAME.hands[key].played > 0 then
+			secret = secret + 1
+		end
+	end
+
+	return secret
+end
+
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { ArrowAPI.credits[current_mod.id].gote }}
 	return { vars = {card.ability.extra.mult, card.ability.extra.chips}}
 end
 
@@ -31,11 +53,11 @@ function jokerInfo.check_for_unlock(self, args)
 		return false
 	end
 
-	return FnwkSecretHandsPlayed() >= self.unlock_condition.secret_num
+	return secret_hands_played() >= self.unlock_condition.secret_num
 end
 
 function jokerInfo.in_pool(self, args)
-	return FnwkSecretHandsPlayed() > 0
+	return secret_hands_played() > 0
 end
 
 function jokerInfo.calculate(self, card, context)

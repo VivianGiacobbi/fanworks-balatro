@@ -12,12 +12,18 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
-    fanwork = 'plancks',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mania',
+		},
+        custom_color = 'mania',
+    },
+    artist = 'coop',
     alt_art = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = {card.ability.extra.mult}}
 end
 

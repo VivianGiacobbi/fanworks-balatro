@@ -11,12 +11,15 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'bluebolt'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
+	artist = 'winter'
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.winter }}
-end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
 	return { vars = {self.unlock_condition.facedowns}}

@@ -7,16 +7,18 @@ local consumInfo = {
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC', },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'last',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'last',
+		},
+        custom_color = 'last',
+    },
+    artist = 'gote',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
-end
 
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
@@ -24,7 +26,7 @@ function consumInfo.calculate(self, card, context)
     if context.using_consumeable and context.consumeable.ability.set == 'Planet' then
         local possible_hands = {}
         for k, _ in pairs(G.GAME.hands) do
-            if not G.GAME.fnwk_last_upgraded_hand[k] then
+            if not G.GAME.arrow_last_upgraded_hand[k] then
                 possible_hands[#possible_hands+1] = k
             end
         end
@@ -39,7 +41,7 @@ function consumInfo.calculate(self, card, context)
         local juice_card = context.blueprint_card or card
         return {
             func = function() 
-                G.FUNCS.flare_stand_aura(juice_card, 2)
+                ArrowAPI.stands.flare_aura(juice_card, 2)
             end,
             extra = {
                 level_up = true,

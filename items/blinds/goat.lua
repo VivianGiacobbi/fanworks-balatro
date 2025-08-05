@@ -6,6 +6,14 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 6, max = 10},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'gotequest',
+		},
+        custom_color = 'gotequest',
+    },
+    artist = 'gote',
 }
 
 function blindInfo.debuff_hand(self, cards, hands, handname, check)
