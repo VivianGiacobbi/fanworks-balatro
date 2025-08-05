@@ -10,17 +10,22 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rockhard',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS[card.ability.extra.tarots[1]]
     info_queue[#info_queue+1] = G.P_CENTERS[card.ability.extra.tarots[2]]
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     return { 
         vars = {
             G.P_CENTERS[card.ability.extra.tarots[1]].name,
@@ -44,7 +49,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, random_tarot, 'fnwk_quadro')
                     new_tarot:set_edition({negative = true}, true)

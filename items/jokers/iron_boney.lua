@@ -63,11 +63,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = false,
-	fanwork = 'iron'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'iron',
+		},
+        custom_color = 'iron',
+    },
+    artist = 'shaft'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.shaft }}
     return { vars = { card.ability.extra.x_mult, card.ability.extra.x_mult_mod }}
 end
 
@@ -160,7 +166,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
     
-    if context.cardarea == G.jokers and context.fnwk_card_removed and context.card == card and not card.debuff then
+    if context.cardarea == G.jokers and context.removed_card == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,
@@ -170,7 +176,7 @@ function jokerInfo.calculate(self, card, context)
                 local rand_pos = rand_joker.config.center.pos
 
                 -- immediately replace with boney, forgoing any animation
-                fnwk_transform_card(rand_joker, card.config.center.key)                               
+                ArrowAPI.game.transform_card(rand_joker, card.config.center.key, nil, true)
                 
                 rand_joker.ability.initialized = false
                 rand_joker.ability.boned = false

@@ -1,26 +1,139 @@
 fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
 
-local csau = next(SMODS.find_mod('Cardsauce'))
-local stands = next(SMODS.find_mod('ArrowAPI'))
-
-if csau or stands then
-	G.fnwk_stands_enabled = true
-end
-
--- force set these to false if not enabled
-fnwk_config['standsEnabled'] = G.fnwk_stands_enabled or false
-fnwk_enabled['standsEnabled'] = G.fnwk_stands_enabled or false
-
 SMODS.optional_features.quantum_enhancements = true
 -- SMODS.optional_features.scale_context = true
 
-G.C.FANWORKS = SMODS.current_mod.badge_colour
-G.C.CRYSTAL = HEX('B5FFFF')
+ArrowAPI.misc.add_colors({
+	['FANWORKS'] = copy_table(SMODS.current_mod.badge_colour),
+	['CRYSTAL'] = HEX('B5FFFF')
+})
 
-loc_colour()
-G.ARGS.LOC_COLOURS['fanworks'] = G.C.FANWORKS
-G.ARGS.LOC_COLOURS['crystal'] = G.C.CRYSTAL
+ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
+    co_fanworks = HEX('DD85B4'),
+    te_fanworks = HEX('FFFFFF'),
+    co_plancks = HEX('A2DCB4'),
+    te_plancks = HEX('FFFFFF'),
+    co_streetlight = HEX('139194'),
+    te_streetlight = HEX('FFFFFF'),
+    co_bluebolt = HEX('3BC2EF'),
+    te_bluebolt = HEX('FFFFFF'),
+    co_moscow = HEX('44AA6C'),
+    te_moscow = HEX('FFFFFF'),
+    co_sunshine = HEX('FF3C00'),
+    te_sunshine = HEX('FFFFFF'),
+    co_rockhard = HEX('8DDDEF'),
+    te_rockhard = HEX('FFFFFF'),
+    co_rubicon = HEX('EFD407'),
+    te_rubicon = HEX('FFFFFF'),
+    co_gotequest = HEX('DD638A'),
+    te_gotequest = HEX('FFFFFF'),
+    co_jojopolis = HEX('D56F15'),
+    te_jojopolis = HEX('FFFFFF'),
+    co_spirit = HEX('FF60FF'),
+    te_spirit = HEX('FFFFFF'),
+    co_closer = HEX('D4AF37'),
+    te_closer = HEX('FFFFFF'),
+    co_industry = HEX('CA4ED3'),
+    te_industry = HEX('FFFFFF'),
+    co_double = HEX('1956FF'),
+    te_double = HEX('FFFFFF'),
+    co_love = HEX('E7B2D4'),
+    te_love = HEX('FFFFFF'),
+    co_coi = HEX('FFFFFF'),
+    te_coi = HEX('365156'),
+    co_iron = HEX('FF2828'),
+    te_iron = HEX('FFFFFF'),
+    co_lighted = HEX('90EF58'),
+    te_lighted = HEX('FFFFFF'),
+    co_whiplash = HEX('B982FF'),
+    te_whiplash = HEX('FFFFFF'),
+    co_asap = HEX('9818BD'),
+    te_asap = HEX('FFFFFF'),
+    co_bone = HEX('EEDC99'),
+    te_bone = HEX('FFFFFF'),
+    co_crimson = HEX('FFB74B'),
+    te_crimson = HEX('FFFFFF'),
+    co_culture = HEX('3690FF'),
+    te_culture = HEX('FFFFFF'),
+    co_jspec = HEX('3A5055'),
+    te_jspec = HEX('FFFFFF'),
+    co_noman = HEX('EB9C58'),
+    te_noman = HEX('FFFFFF'),
+    co_last = HEX('E8A686'),
+    te_last = HEX('FFFFFF'),
+    co_mania = HEX('CC3366'),
+    te_mania = HEX('FFFFFF'),
+    co_careless = HEX('BF5532'),
+    te_careless = HEX('FFFFFF'),
+    co_city = HEX('A3AEFF'),
+    te_city = HEX('FFFFFF'),
+    co_glass = HEX('B1FFE6'),
+    te_glass = HEX('FFFFFF'),
+    co_scepter = HEX('E74C3C'),
+    te_scepter = HEX('FFFFFF'),
+    co_apocryphal = HEX('DE0155'),
+    te_apocryphal = HEX('FFFFFF'),
+    co_stalk = HEX('86C09B'),
+    te_stalk = HEX('FFFFFF'),
+    co_neon = HEX('900000'),
+    te_neon = HEX('FFFFFF'),
+    co_thorny = HEX('D4D4D4'),
+    te_thorny = HEX('365156'),
+    co_golden = HEX('BC9E49'),
+    te_golden = HEX('FFFFFF'),
+    co_mdv = HEX('AD3088'),
+    te_mdv = HEX('FFFFFF'),
+    co_jojojidai = HEX('27407C'),
+    te_jojojidai = HEX('FFFFFF'),
+    co_lipstick = HEX('8B2939'),
+    te_lipstick = HEX('FFFFFF'),
+    co_cis = HEX('DEF7FB'),
+    te_cis = HEX('5BA1B2'),
+    co_yym = HEX('0D8640'),
+    te_yym = HEX('FFFFFF'),
+    co_rebels = HEX('FF6DDC'),
+    te_rebels = HEX('FFFFFF'),
+    co_redrising = HEX('7F1010'),
+    te_redrising = HEX('FFFFFF')
+})
+
+ArrowAPI.credits.add_credits(SMODS.current_mod, {
+    algebra = 'AlgebraFalcon',
+    shaft = 'AllShaftsFall',
+    gote = 'BarrierTrio/Gote',
+    coop = 'Cauthen Currie',
+    cody = 'Cody Savoie',
+    cream = 'CreamSodaCrossroads',
+    daed = 'NotDaedalus',
+    doopo = 'Doopo',
+    durandal = 'Durandal',
+    fizzy = 'FizzyWizard',
+    gar = 'GarPlatinum',
+    jester = 'Jester',
+    jin = 'JorgeHernandez',
+    keku = 'Kekulism',
+    leafy = 'Leafgilly',
+    mae = 'MildlyAnxious',
+    monky = 'Monky4Real',
+    piano = 'Pianolote',
+    pink = 'pinkthorne',
+    plus = 'plusgal',
+    polyg = 'polygonate',
+    poul = 'Poul Shmidt',
+    mal = 'qrowscant',
+    reda = 'Redastrin',
+    android = 'sadlyandroid',
+    cejai = 'SagaciousCejai',
+    cringe = 'Stupisms',
+    wario = 'MightyKingWario',
+    winter = 'TheWinterComet',
+    tos = 'TOS',
+    torch = 'torch_dreemurr',
+    abrams = 'Nico Abrams (LuaNES)',
+    araki = 'Hirohiko Araki',
+	luckyland = 'Lucky Land Communications',
+})
 
 local includes = {
 	-- includes utility functions required for following files
@@ -39,7 +152,6 @@ local includes = {
 	'hooks/uielement',
 	'hooks/game',
 	'hooks/card',
-	'hooks/back',
 	'hooks/cardarea',
 	'hooks/blind',
 	'hooks/smods',

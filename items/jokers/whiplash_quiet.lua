@@ -10,7 +10,13 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'whiplash',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'whiplash',
+		},
+        custom_color = 'whiplash',
+    }
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

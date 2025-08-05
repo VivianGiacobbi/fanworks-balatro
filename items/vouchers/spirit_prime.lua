@@ -9,8 +9,14 @@ local voucherInfo = {
     requires = {'v_fnwk_spirit_binary'},
     unlocked = false,
     unlock_condition = { type = 'fnwk_win_deck', deck = 'b_jojobal_disc', stake = 8 },
-    fanwork = 'spirit',
-    dependencies = {'ArrowAPI'},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+    in_progress = true,
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

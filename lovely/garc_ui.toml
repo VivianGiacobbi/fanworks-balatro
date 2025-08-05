@@ -16,7 +16,7 @@ end'''
 position = "at"
 payload = '''for k, v in ipairs(text) do
     local node = v
-    if loc_vars and loc_vars.image and FnwkStringEndsWith(node[1].config.text, '[IMG]') then
+    if loc_vars and loc_vars.image and ArrowAPI.string.ends_with(node[1].config.text, '[IMG]') then
         node[1].config.text = string.sub(node[1].config.text, 1, #node[1].config.text - 5)
         local img_atlas = G.ASSET_ATLAS[loc_vars.image]
         node[2] = {

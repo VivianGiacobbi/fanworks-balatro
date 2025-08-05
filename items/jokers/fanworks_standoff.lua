@@ -15,11 +15,11 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'fanworks',
-    dependencies = {'ArrowAPI'}
+    artist = 'gote'
 }
 
 local function get_stand_state()
-    local has_stand = G.FUNCS.get_leftmost_stand()
+    local has_stand = ArrowAPI.stands.get_leftmost_stand()
 
     if not has_stand then  
         return 'none'
@@ -35,8 +35,6 @@ local function get_stand_state()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
-
     local state = get_stand_state()
     return { 
         vars = {

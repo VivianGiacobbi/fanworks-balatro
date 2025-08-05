@@ -19,16 +19,22 @@ local jokerInfo = {
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
-    fanwork = 'streetlight',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'mal',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
     return { vars = {card.ability.extra.dollars, number_format(G.GAME.round_scores.hand.amt or 0)}}
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
-	return { vars = { FnwkCountGrammar(self.unlock_condition.mod)} }
+	return { vars = { ArrowAPI.string.count_grammar(self.unlock_condition.mod)} }
 end
 
 function jokerInfo.check_for_unlock(self, args)

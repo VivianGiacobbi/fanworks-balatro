@@ -7,7 +7,13 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'industry',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'industry',
+		},
+        custom_color = 'industry',
+    },
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

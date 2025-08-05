@@ -11,18 +11,21 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'streetlight',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-
     local reroll_num = G.GAME.current_round.fnwk_paperback_rerolls or 0
     local paperback_num = 1
     local paperbacks = SMODS.find_card('c_fnwk_streetlight_paperback')
@@ -61,7 +64,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card)
+                ArrowAPI.stands.evolve_stand(card)
                 return true 
             end
         }))

@@ -12,16 +12,21 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'sunshine',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    },
+    artist = 'durandal',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.durandal }}
-    return { 
+    return {
         vars = {
             card.ability.extra.num_scores - card.ability.extra.scored_count,
             localize(card.ability.extra.suits[1], 'suits_plural'),
@@ -54,7 +59,7 @@ function consumInfo.calculate(self, card, context)
     if card.ability.extra.scored_count < card.ability.extra.num_scores then
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message_card = card,
@@ -68,7 +73,7 @@ function consumInfo.calculate(self, card, context)
     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
     return {
         func = function()
-            G.FUNCS.flare_stand_aura(card, 0.5)
+            ArrowAPI.stands.flare_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 local new_tarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'fnwk_damned')
                 new_tarot:add_to_deck()

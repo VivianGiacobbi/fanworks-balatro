@@ -10,13 +10,16 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rockhard',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     alt_art = true
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
-end
 
 function jokerInfo.calculate(self, card, context)
     if context.blueprint then return end

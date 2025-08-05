@@ -6,16 +6,21 @@ local consumInfo = {
         aura_colors = { '68BC9ADC', '5176B0DC' },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rockhard',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
 	info_queue[#info_queue+1] = G.P_CENTERS.m_wild
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
 end
 
 function consumInfo.calculate(self, card, context)

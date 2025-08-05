@@ -10,11 +10,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'jspec',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+	artist = 'tos',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.tos }}
 	return { vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * G.GAME.unused_discards or 0}}
 end
 

@@ -12,12 +12,18 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'jspec'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'mal',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
-    return { vars = { FnwkCountGrammar(card.ability.extra.upgrade_mod) }}
+    return { vars = { ArrowAPI.string.count_grammar(card.ability.extra.upgrade_mod) }}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -64,7 +70,7 @@ function jokerInfo.calculate(self, card, context)
         return true end }))
     update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='+'..card.ability.extra.upgrade_mod})
     delay(1.3)
-    fnwk_batch_level_up(card, SMODS.PokerHands, card.ability.extra.upgrade_mod)
+    ArrowAPI.game.batch_level_up(card, SMODS.PokerHands, card.ability.extra.upgrade_mod)
     update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
 end
 

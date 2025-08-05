@@ -65,7 +65,14 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable_compat = false,
 	no_collection = true,
-	fanwork = 'spirit',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+	artist = 'coop',
 }
 
 local function set_rotten_sprite(card)
@@ -135,7 +142,7 @@ end
 function jokerInfo.add_to_deck(self, card, from_debuff)
 	if from_debuff or not card.ability.blind_type then return end
 
-	local extra_blind = fnwk_create_extra_blind(card, card.ability.blind_type)
+	local extra_blind = ArrowAPI.game.create_extra_blind(card, card.ability.blind_type)
 	set_rotten_sprite(card)
 	if G.GAME.blind.in_blind and next(SMODS.find_card('j_chicot')) then
 		extra_blind:disable()
@@ -169,8 +176,8 @@ function jokerInfo.calculate(self, card, context)
 	if context.cardarea ~= G.jokers or context.blueprint then return end
 
 	if context.blind_disabled then
-		for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
-			if v.fnwk_extra_blind == card and v == G.GAME.blind then
+		for _, v in ipairs(G.GAME.arrow_extra_blinds) do
+			if v.arrow_extra_blind == card and v == G.GAME.blind then
 				card.ability.extra.disabled = true
 				break
 			end
@@ -185,8 +192,8 @@ end
 function jokerInfo.remove_from_deck(self, card, from_debuff)
 	if from_debuff and G.GAME.blind.in_blind then
 		-- disables the blind when debuffed ala Luchador
-		for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
-			if v.fnwk_extra_blind == card then
+		for _, v in ipairs(G.GAME.arrow_extra_blinds) do
+			if v.arrow_extra_blind == card then
 				local old_main_blind = G.GAME.blind
 				v.chips = old_main_blind.chips
 				v.chip_text = number_format(old_main_blind.chips)
@@ -206,7 +213,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 		return
 	end
 
-	fnwk_remove_extra_blinds(card)
+	ArrowAPI.game.remove_extra_blinds(card)
 end
 
 return jokerInfo

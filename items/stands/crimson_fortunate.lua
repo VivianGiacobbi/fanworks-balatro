@@ -9,22 +9,28 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'crimson',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'crimson',
+		},
+        custom_color = 'crimson',
+    },
+    artist = 'gar',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     local main_end = nil
-    if G.GAME.fnwk_last_upgraded_hand then
+    if G.GAME.arrow_last_upgraded_hand then
         local nodes = {}
         local total = 0
         local count = 0
         for _, key in ipairs(G.handlist) do
             total = total + 1
-            if G.GAME.fnwk_last_upgraded_hand[key] then count = count + 1 end
+            if G.GAME.arrow_last_upgraded_hand[key] then count = count + 1 end
         end
 
         local colour = G.C.SECONDARY_SET.Planet
@@ -38,7 +44,7 @@ function consumInfo.loc_vars(self, info_queue, card)
         else
             local dyn_nodes = {}
             for _, key in ipairs(G.handlist) do
-                if G.GAME.fnwk_last_upgraded_hand[key] then
+                if G.GAME.arrow_last_upgraded_hand[key] then
                     dyn_nodes[#dyn_nodes+1] = {string = ' '..localize(key, 'poker_hands')..' ', colour = G.C.UI.TEXT_LIGHT}
                 end             
             end
@@ -72,13 +78,13 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not G.GAME.fnwk_last_upgraded_hand or card.debuff then return end
+    if not G.GAME.arrow_last_upgraded_hand or card.debuff then return end
 
-    if context.joker_main and G.GAME.fnwk_last_upgraded_hand[context.scoring_name] then
+    if context.joker_main and G.GAME.arrow_last_upgraded_hand[context.scoring_name] then
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 mult = card.ability.extra.mult,

@@ -5,7 +5,7 @@ G.FUNCS.reroll_shop = function(e)
     if G.GAME.current_round.fnwk_paperback_rerolls > 0 or (next(rewrites) and not rewrites[1].ability.fnwk_rewrite_destroyed) then
         local juice_cards = next(rewrites) and rewrites or {paperbacks[G.GAME.current_round.fnwk_paperback_rerolls]}
         for _, v in ipairs(juice_cards) do
-            G.FUNCS.flare_stand_aura(v, 0.5)
+            ArrowAPI.stands.flare_aura(v, 0.5)
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()
@@ -112,8 +112,8 @@ end
 --------------------------- Farewell to Kings evolution sprites
 ---------------------------
 
-local ref_transform_card = G.FUNCS.transform_card
-G.FUNCS.transform_card = function(...)
+local ref_transform_card = ArrowAPI.game.transform_card
+ArrowAPI.game.transform_card = function(...)
     local args = {...}
     local to_key = args[2]
     if to_key == 'c_fnwk_bone_king_farewell' then
@@ -133,28 +133,6 @@ end
 
 
 ---------------------------
---------------------------- Update debuff text for bosses
----------------------------
-
-G.FUNCS.update_blind_debuff_text = function(e)
-    if not e.config.object then return end
-
-    local new_str = SMODS.debuff_text or G.GAME.blind:get_loc_debuff_text()
-    if not new_str then return end
-    
-    if new_str ~= e.config.object.config.string[1].string then
-        e.config.object.config.string[1].string = new_str
-        e.config.object.start_pop_in = true
-        e.config.object:update_text(true)
-        e.UIBox:recalculate()
-    end
-end
-
-
-
-
-
----------------------------
 --------------------------- The Work Blind behavior
 ---------------------------
 
@@ -163,8 +141,8 @@ G.FUNCS.can_play = function(e)
     local ret = ref_can_play(e)
 
     -- hopefully preventing a disturbia softlock
-    if G.GAME.blind and #G.jokers.cards > 0
-    and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+    if G.GAME.blind and #G.jokers.cards > 0 and G.GAME.blind.fnwk_works_submitted
+    and G.GAME.blind.fnwk_required_works and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
         local submitted = 0
         local num_cards = 0
         for _, v in ipairs(G.jokers.cards) do
@@ -269,7 +247,7 @@ G.FUNCS.reset_trophies = function(e)
 	else
 		G.FUNCS.wipe_on()
 		for k, v in pairs(SMODS.Achievements) do
-			if FnwkStringStartsWith(k, 'ach_fnwk_') then
+			if ArrowAPI.string.starts_with(k, 'ach_fnwk_') then
 				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
 				G.ACHIEVEMENTS[k].earned = nil
 			end
@@ -334,61 +312,6 @@ function G.FUNCS.fnwk_start_rom(e)
 	}
 	
 	G.EMU:start_nes(rom, nil, nil, start_pos)
-end
-
-
-
-
-
----------------------------
---------------------------- Reset bkg for manga blind
----------------------------
-
-local ref_start_run = G.FUNCS.start_run
-G.FUNCS.start_run = function(...)
-    if G.GAME.blind then
-        G.GAME.blind.in_blind = false
-        G.GAME.blind.fnwk_newrun_flag = true
-    end
-    
-    if G.GAME.fnwk_gradient_background then
-        G.C.BACKGROUND.L = { G.C.BACKGROUND.L[1], G.C.BACKGROUND.L[2], G.C.BACKGROUND.L[3], G.C.BACKGROUND.L[4] }
-        G.C.BACKGROUND.D = { G.C.BACKGROUND.D[1], G.C.BACKGROUND.D[2], G.C.BACKGROUND.D[3], G.C.BACKGROUND.D[4] }
-        G.C.BACKGROUND.C = { G.C.BACKGROUND.C[1], G.C.BACKGROUND.C[2], G.C.BACKGROUND.C[3], G.C.BACKGROUND.C[4] }
-        G.C.BACKGROUND.contrast = G.C.BACKGROUND.contrast
-        G.GAME.fnwk_gradient_background = nil
-    end
-
-    if G.GAME.fnwk_gradient_ui then
-        G.C.DYN_UI.MAIN = { G.C.DYN_UI.MAIN[1], G.C.DYN_UI.MAIN[2], G.C.DYN_UI.MAIN[3], G.C.DYN_UI.MAIN[4] }
-        G.C.DYN_UI.DARK = { G.C.DYN_UI.DARK[1], G.C.DYN_UI.DARK[2], G.C.DYN_UI.DARK[3], G.C.DYN_UI.DARK[4] }
-        G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
-        G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
-        G.GAME.fnwk_gradient_ui = nil
-    end
-
-    return ref_start_run(...)
-end
-
-local ref_go_menu = G.FUNCS.go_to_menu
-G.FUNCS.go_to_menu = function(e)
-    if G.GAME.fnwk_gradient_background then
-        G.C.BACKGROUND.L = { G.C.BACKGROUND.L[1], G.C.BACKGROUND.L[2], G.C.BACKGROUND.L[3], G.C.BACKGROUND.L[4] }
-        G.C.BACKGROUND.D = { G.C.BACKGROUND.D[1], G.C.BACKGROUND.D[2], G.C.BACKGROUND.D[3], G.C.BACKGROUND.D[4] }
-        G.C.BACKGROUND.C = { G.C.BACKGROUND.C[1], G.C.BACKGROUND.C[2], G.C.BACKGROUND.C[3], G.C.BACKGROUND.C[4] }
-        G.C.BACKGROUND.contrast = G.C.BACKGROUND.contrast
-        G.GAME.fnwk_gradient_background = nil
-    end
-
-    if G.GAME.fnwk_gradient_ui then
-        G.C.DYN_UI.MAIN = { G.C.DYN_UI.MAIN[1], G.C.DYN_UI.MAIN[2], G.C.DYN_UI.MAIN[3], G.C.DYN_UI.MAIN[4] }
-        G.C.DYN_UI.DARK = { G.C.DYN_UI.DARK[1], G.C.DYN_UI.DARK[2], G.C.DYN_UI.DARK[3], G.C.DYN_UI.DARK[4] }
-        G.C.DYN_UI.BOSS_MAIN = { G.C.DYN_UI.BOSS_MAIN[1], G.C.DYN_UI.BOSS_MAIN[2], G.C.DYN_UI.BOSS_MAIN[3], G.C.DYN_UI.BOSS_MAIN[4] }
-        G.C.DYN_UI.BOSS_DARK = { G.C.DYN_UI.BOSS_DARK[1], G.C.DYN_UI.BOSS_DARK[2], G.C.DYN_UI.BOSS_DARK[3], G.C.DYN_UI.BOSS_DARK[4] }
-        G.GAME.fnwk_gradient_ui = nil
-    end
-
-    return ref_go_menu(e)
 end
 
 
@@ -459,37 +382,4 @@ G.FUNCS.play_cards_from_highlighted = function(e)
     end
 
     return ref_play_highlighted(e)
-end
-
-G.FUNCS.RUN_SETUP_fnwk_check_artist = function(e)
-    if G.GAME.viewed_back.name ~= e.config.id then
-        --removes the UI from the previously selected back and adds the new one
-        if G.GAME.viewed_back.effect.center.artist then
-            if e.config.object then e.config.object:remove() end
-            e.UIT = G.UIT.O
-            e.config.object = UIBox{
-                definition = G.UIDEF.fnwk_deck_credit(G.GAME.viewed_back),
-                config = {offset = {x=0,y=0}, align = 'cm', parent = e}
-            }
-
-            e.config.minh = nil
-            e.config.maxh = nil
-            if e.parent.parent.children[1] then
-                e.parent.parent.children[1].config.minh = 0.45
-                e.parent.parent.children[2].config.minh = 0.9
-            end
-        else
-            if e.config.object then e.config.object:remove() end
-            e.UIT = G.UIT.R
-
-            e.config.minh = 0
-            e.config.maxh = 0
-            if e.parent.parent.children[1] then
-                e.parent.parent.children[1].config.minh = 0.6
-                e.parent.parent.children[2].config.minh = 1.7
-            end
-        end
-        e.config.id = G.GAME.viewed_back.name
-        e.UIBox:recalculate()
-    end
 end

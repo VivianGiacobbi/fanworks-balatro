@@ -14,7 +14,13 @@ local chalInfo = {
     unlocked = function(self)
         return true --G.FUNCS.discovery_check({ mode = 'set_count', set = 'Stand', count = 5, })
     end,
-    fanwork = 'lighted'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'lighted',
+		},
+        custom_color = 'lighted',
+    }
 }
 
 return chalInfo

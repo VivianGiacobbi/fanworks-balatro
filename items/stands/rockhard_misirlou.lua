@@ -11,30 +11,35 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rockhard',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS[card.ability.extra.enhancement]
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     return { vars = { card.ability.extra.stone_num, localize({type = 'name_text', key = card.ability.extra.enhancement, set = 'Enhanced'})}}
 end
 
 function consumInfo.calculate(self, card, context)
     if context.debuff then return end
 
-    if context.press_play and G.GAME.current_round.hands_played == 0 and fnwk_get_enhanced_tally(card.ability.extra.enhancement) >= card.ability.extra.stone_num then
+    if context.press_play and G.GAME.current_round.hands_played == 0 and ArrowAPI.game.get_enhanced_tally(card.ability.extra.enhancement) >= card.ability.extra.stone_num then
         card.ability.fnwk_misirlou_old_hands_left = G.GAME.current_round.hands_left
         G.GAME.current_round.hands_left = 1
 
         return {
             func = function()
                 delay(0.2)
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message = localize('k_misirlou_final'),

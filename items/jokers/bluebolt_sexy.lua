@@ -12,11 +12,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'bluebolt'
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.mal }}
+    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { ArrowAPI.credits[current_mod.id].mal }}
     if not G.jokers then
         return { vars = {card.ability.extra.base_chips, 0, card.ability.extra.chips_mod } }
     end
@@ -24,7 +30,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
+            local results = G.fnwk_women.get_from_key(G.jokers.cards[i].config.center.key)
             if results.junkie or results.trans or results.woman then
                 count = count + 1
             end
@@ -46,7 +52,7 @@ function jokerInfo.calculate(self, card, context)
             return
         end
 
-        local results = FnwkFindWomen(context.card.config.center.key)
+        local results = G.fnwk_women.get_from_key(context.card.config.center.key)
         if not (results.junkie or results.trans or results.woman) then
             return
         end
@@ -106,7 +112,7 @@ function jokerInfo.calculate(self, card, context)
     local count = 0
     for i=1, #G.jokers.cards do
         if G.jokers.cards[i] ~= card then
-            local results = FnwkFindWomen(G.jokers.cards[i].config.center.key)
+            local results = G.fnwk_women.get_from_key(G.jokers.cards[i].config.center.key)
             if results.junkie or results.trans or results.woman then
                 count = count + 1
             end

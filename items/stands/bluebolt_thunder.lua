@@ -14,16 +14,21 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'bluebolt',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
+    artist = 'coop',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
-    return { 
+    return {
         vars = {
             card.ability.extra.avoid_hand,
             card.ability.extra.x_mult,
@@ -37,7 +42,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card, localize('k_stand_advance'))
+                ArrowAPI.stands.evolve_stand(card, localize('k_stand_advance'))
                 return true 
             end 
         }))
@@ -62,7 +67,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 Xmult = card.ability.extra.x_mult,

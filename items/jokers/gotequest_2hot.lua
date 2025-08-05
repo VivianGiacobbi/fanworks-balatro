@@ -10,16 +10,22 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'gotequest',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'glass',
+		},
+        custom_color = 'glass',
+    },
+	artist = 'gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_steel
-	info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
-	return { vars = {FnwkCountGrammar(self.unlock_condition.count)}}
+	return { vars = {ArrowAPI.string.count_grammar(self.unlock_condition.count)}}
 end
 
 function jokerInfo.check_for_unlock(self, args)

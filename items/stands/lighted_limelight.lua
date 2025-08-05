@@ -11,15 +11,20 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'lighted',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'lighted',
+		},
+        custom_color = 'lighted',
+    },
+    artist = 'gote',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, fnwk_enabled['enableQueer'] and 'Queer' or 'Polychrome'}}
 end
 
@@ -30,7 +35,7 @@ function consumInfo.calculate(self, card, context)
         for _, v in ipairs(context.full_hand) do
             if not v.edition and not SMODS.in_scoring(v, context.scoring_hand) and pseudorandom('limelight') < G.GAME.probabilities.normal / card.ability.extra.chance then
                 local juice_card = context.blueprint_card or card
-                G.FUNCS.flare_stand_aura(juice_card, 0.5)
+                ArrowAPI.stands.flare_aura(juice_card, 0.5)
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                     v:set_edition(card.ability.extra.edition, true)
                     juice_card:juice_up()

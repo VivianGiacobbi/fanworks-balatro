@@ -10,12 +10,16 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'city',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'city',
+		},
+        custom_color = 'city',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -36,7 +40,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 1.5)
+                ArrowAPI.stands.flare_aura(flare_card, 1.5)
             end,
             extra = {
                 level_up = card.ability.extra.levels,

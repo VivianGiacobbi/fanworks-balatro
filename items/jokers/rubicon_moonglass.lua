@@ -8,12 +8,18 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rubicon',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rubicon',
+		},
+        custom_color = 'rubicon',
+    },
+	artist = 'cream',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_glass
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
     return { vars = {G.GAME.probabilities.normal, card.ability.extra}}
 end
 

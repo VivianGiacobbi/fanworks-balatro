@@ -14,14 +14,19 @@ local consumInfo = {
     },
     cost = 4,
     hasSoul = true,
-    rarity = 'arrow_StandRarity',
-    fanwork = 'streetlight',
+    rarity = 'StandRarity',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'piano',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.piano }}
     return { 
         vars = {
             localize{type = 'name_text', set = 'Enhanced', key = card.ability.extra.enhancement},
@@ -38,7 +43,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 message = '+$'..card.ability.extra.h_dollars_mod,
@@ -65,7 +70,7 @@ function consumInfo.calculate(self, card, context)
 			G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = function()
-                    G.FUNCS.evolve_stand(card)
+                    ArrowAPI.stands.evolve_stand(card)
                     return true 
                 end 
             }))

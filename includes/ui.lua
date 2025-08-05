@@ -13,13 +13,13 @@ SMODS.Atlas({
 SMODS.current_mod.config_tab = function()
 	local ordered_config = {
 		'enableJokers',
-		'enableWipItems',
+		'enableStands',
 		'enableConsumables',
 		'enableDecks',
 		'enableTags',
 		'enableVouchers',
 		'enableBlinds',
-		'enableChallenges',	
+		'enableChallenges',
 		'enableQueer',
 		'enableTarotSkins',
 		'enableVanillaTweaks',
@@ -28,7 +28,6 @@ SMODS.current_mod.config_tab = function()
 		'enableTrophies',
 		--]]
 	}
-	if G.fnwk_stands_enabled then table.insert(ordered_config, 2, 'enableStands') end
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local left_count = 0
@@ -121,7 +120,8 @@ local coding_scale = 0.90
 local shader_scale = 0.9
 local text_scale = 0.98
 
-SMODS.current_mod.credits_tab = function()
+local current_mod = SMODS.current_mod
+current_mod.credits_tab = function()
 	chosen = true
 	return {n=G.UIT.ROOT, config={align = "cm", padding = 0.2, colour = G.C.BLACK, r = 0.1, emboss = 0.05, minh = 6, minw = 10}, nodes={
 		{n = G.UIT.C, config = { align = "tm", padding = 0.2 }, nodes = {
@@ -137,10 +137,10 @@ SMODS.current_mod.credits_tab = function()
 							}},
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 								{n=G.UIT.R, config={align = "tm", padding = 0.1}, nodes={
-									{n=G.UIT.T, config={text = G.fnwk_credits.gote, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].gote, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n=G.UIT.R, config={align = "tm", padding = 0.1}, nodes={
-									{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.55, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
@@ -154,93 +154,93 @@ SMODS.current_mod.credits_tab = function()
 						{n=G.UIT.R, config={align = "tm", padding = 0}, nodes={
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.algebra, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].algebra, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.shaft, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].shaft, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.gote, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].gote, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.coop, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].coop, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.cody, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].cody, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.cream, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].cream, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.doopo, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].doopo, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.durandal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].durandal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.fizzy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].fizzy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.gar, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].gar, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.jester, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].jester, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.jin, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].jin, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.leafy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].leafy, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.mae, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].mae, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.monky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].monky, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 							{n=G.UIT.C, config={align = "tl", padding = 0}, nodes={
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.piano, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].piano, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.pink, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].pink, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.plus, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].plus, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.polyg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].polyg, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.poul, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].poul, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.mal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].mal, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.reda, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].reda, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.android, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].android, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.cejai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].cejai, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.cringe, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].cringe, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.wario, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].wario, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.winter, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.torch, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].torch, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 								{n = G.UIT.R, config = {align = "tm", padding = artist_padding}, nodes = {
-									{n = G.UIT.T, config = {text = G.fnwk_credits.tos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+									{n = G.UIT.T, config = {text = ArrowAPI.credits[current_mod.id].tos, scale = text_scale * artist_size, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 								}},
 							}},
 						}},
@@ -255,16 +255,16 @@ SMODS.current_mod.credits_tab = function()
 								}},
 								{n=G.UIT.R, config={align = "cm", padding = 0}, nodes= {
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.gote, scale = text_scale*0.44*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].gote, scale = text_scale*0.44*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.daed, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].daed, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.keku, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].keku, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},
@@ -280,7 +280,7 @@ SMODS.current_mod.credits_tab = function()
 									}},
 									{n=G.UIT.R, config={align = "cm", padding = support_padding}, nodes= {
 										{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-											{n=G.UIT.T, config={text = G.fnwk_credits.winter, scale = text_scale*0.55*shader_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+											{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].winter, scale = text_scale*0.55*shader_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 										}},
 									}},
 								}},
@@ -298,13 +298,13 @@ SMODS.current_mod.credits_tab = function()
 							{n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
 								{n=G.UIT.C, config={align = "cm", padding = 0}, nodes={
 									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.araki, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].araki, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.luckyland, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].luckyland, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "cm", padding = special_thanks_padding}, nodes={
-										{n=G.UIT.T, config={text = G.fnwk_credits.abrams, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
+										{n=G.UIT.T, config={text = ArrowAPI.credits[current_mod.id].abrams, scale = text_scale*0.45*special_thanks_mod, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 								}},
 							}},
@@ -326,8 +326,8 @@ SMODS.current_mod.extra_tabs = function()
 				
 				playable_roms = {}
 				local count = 0
-				for s in FnwkRecursiveEnumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
-					if FnwkContainsString(s, '.nes') then
+				for s in ArrowAPi.loading.recursive_file_enumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do
+					if ArrowAPI.string.contains(s, '.nes') then
 						local name = string.gsub(s, path_pattern_replace .. "/includes/LuaNES/roms//", "")
 						name = string.gsub(name, '.nes', '')
 						playable_roms[name] = true

@@ -10,11 +10,17 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = "moscow",
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'moscow',
+		},
+        custom_color = 'moscow',
+    },
+	artist = 'poul'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.poul }}
 	return { vars = {G.GAME.probabilities.normal, card.ability.extra.enhance_chance} }
 end
 

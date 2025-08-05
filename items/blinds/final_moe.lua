@@ -8,6 +8,7 @@ local blindInfo = {
     mult = 1,
     vars = {},
     boss = {min = 1, max = 10, showdown = true},
+    artist = 'winter',
 }
 
 local function get_moe_bosses(num_bosses)
@@ -111,7 +112,7 @@ function blindInfo.set_blind(self)
     G.GAME.blind.block_play = true
     local delay = 0
     for i, v in ipairs(G.GAME.blind.fnwk_moe_bosses) do
-        local extra_blind = fnwk_create_extra_blind(G.GAME.blind, G.P_BLINDS[v], true)
+        local extra_blind = ArrowAPI.game.create_extra_blind(G.GAME.blind, G.P_BLINDS[v], true)
         delay = delay + (i > 1 and 3.5 or 0)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -140,17 +141,17 @@ function blindInfo.set_blind(self)
 end
 
 function blindInfo.disable(self)
-    fnwk_remove_extra_blinds(G.GAME.blind)
+    ArrowAPI.game.remove_extra_blinds(G.GAME.blind)
 end
 
 function blindInfo.defeat(self)
-    fnwk_remove_extra_blinds(G.GAME.blind)
+    ArrowAPI.game.remove_extra_blinds(G.GAME.blind)
 end
 
 function blindInfo.fnwk_blind_load(self, blindTable)
     local extra_bosses = {}
-    for _, v in ipairs(G.GAME.fnwk_extra_blinds) do
-		if v.fnwk_extra_blind == G.GAME.blind then
+    for _, v in ipairs(G.GAME.arrow_extra_blinds) do
+		if v.arrow_extra_blind == G.GAME.blind then
 			extra_bosses[#extra_bosses+1] = v.config.blind.key
 		end
 	end

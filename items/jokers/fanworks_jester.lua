@@ -6,12 +6,8 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-    fanwork = 'fanworks',
+    artist = 'jester'
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.jester }}
-end
 
 function jokerInfo.calculate(self, card, context)
     if not context.setting_blind or (context.blueprint_card or card).getting_sliced then
@@ -27,7 +23,7 @@ function jokerInfo.calculate(self, card, context)
         func = function() 
             local old_banned = copy_table(G.GAME.banned_keys)
             for k, v in pairs(G.P_CENTERS) do
-                if not FnwkStringStartsWith(k, "j_fnwk_") then
+                if v.set == 'Joker' and v.original_mod and v.original_mod.id == 'fanworks' then
                     G.GAME.banned_keys[k] = true
                 end
             end

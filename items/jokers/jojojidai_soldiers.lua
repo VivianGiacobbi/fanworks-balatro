@@ -11,12 +11,17 @@ local jokerInfo = {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
-    fanwork = 'jojojidai',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jojojidai',
+		},
+        custom_color = 'jojojidai',
+    },
+    artist = 'jester'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.jester }}
-
     if not G.hand then
         return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.hand_compare, 1 }}
     end

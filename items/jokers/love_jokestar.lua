@@ -27,12 +27,18 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
-	fanwork = 'love',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'love',
+		},
+        custom_color = 'love',
+    },
+    artist = 'coop',
     alt_art = true
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = { card.ability.extra.mult, card.ability.extra.mult_mod }}
 end
 
@@ -165,7 +171,7 @@ function jokerInfo.update(self, card, dt)
 	end
 
     
-    local ease = FnwkEaseInOutSin(card.ability.glow_lerp)
+    local ease = ArrowAPI.math.ease_funcs.in_out_sin(card.ability.glow_lerp)
     card.ability.glow_intensity = 4 * (ease * card.ability.glow_range + card.ability.glow_min)
     card.ability.glow_size = 0.95 * (ease * card.ability.glow_range + card.ability.glow_min)
 end

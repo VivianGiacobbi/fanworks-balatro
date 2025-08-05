@@ -10,15 +10,20 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rubicon',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rubicon',
+		},
+        custom_color = 'rubicon',
+    },
+	artist = 'cream',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
     return {vars = {card.ability.extra.chance}}
 end
 

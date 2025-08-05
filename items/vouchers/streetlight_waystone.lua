@@ -2,7 +2,14 @@ local voucherInfo = {
     name = 'Waystone',
     config = {},
     cost = 10,
-    fanwork = 'streetlight'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist  = 'leafy',
 }
 
 function voucherInfo.redeem(self, card, area, copier)

@@ -9,12 +9,15 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'double',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'double',
+		},
+        custom_color = 'double',
+    },
+    artist = 'gote'
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
-end
 
 function jokerInfo.check_for_unlock(self, args)
     if not G.playing_cards then

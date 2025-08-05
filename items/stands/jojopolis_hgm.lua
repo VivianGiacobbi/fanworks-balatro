@@ -15,15 +15,20 @@ local consumInfo = {
         fnwk_hgm_mod = 0
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'jojopolis',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jojopolis',
+		},
+        custom_color = 'jojopolis',
+    },
+    artist = 'gote',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gote }}
     return { vars = {card.ability.extra.big_mod, card.ability.extra.boss_mod, card.ability.extra.evolve_num}}
 end
 
@@ -39,7 +44,7 @@ function consumInfo.add_to_deck(self, card, from_debuff)
         G.hand:change_size(mod)
         card.ability.fnwk_hgm_mod = card.ability.fnwk_hgm_mod + mod
 
-        G.FUNCS.flare_stand_aura(card, 0.5)
+        ArrowAPI.stands.flare_aura(card, 0.5)
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
             func = function()
@@ -67,7 +72,7 @@ function consumInfo.calculate(self, card, context)
 
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message = localize{type='variable',key='a_handsize',vars={mod}},
@@ -82,7 +87,7 @@ function consumInfo.calculate(self, card, context)
 
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
             extra = {
                 message = localize{type='variable',key='a_handsize_minus',vars={mod}},
@@ -96,7 +101,7 @@ function consumInfo.calculate(self, card, context)
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     func = function()
-                        G.FUNCS.evolve_stand(card)
+                        ArrowAPI.stands.evolve_stand(card)
                         return true 
                     end 
                 }))

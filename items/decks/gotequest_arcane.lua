@@ -7,7 +7,13 @@ local deckInfo = {
     },
     unlocked = false,
     unlock_condition = {type = 'use_consumable', set = 'Tarot', num = 22},
-    fanwork = 'gotequest',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'gotequest',
+		},
+        custom_color = 'gotequest',
+    },
     artist = 'winter'
 }
 
@@ -50,7 +56,7 @@ end
 function deckInfo.apply(self, back)
     G.E_MANAGER:add_event(Event({
         func = function()
-            G.GAME.modifiers.consumable_selection_mod = (G.GAME.modifiers.consumable_selection_mod or 0) + back.effect.config.select_limit
+            ArrowAPI.game.consumable_selection_mod(back.effect.config.select_limit)
             G.GAME.modifiers.max_stands = math.max(0, (G.GAME.modifiers.max_stands or 1) - back.effect.config.stand_limit_mod)
             return true
         end

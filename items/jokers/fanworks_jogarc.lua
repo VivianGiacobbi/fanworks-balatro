@@ -26,7 +26,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'fanworks',
+	artist = 'gar'
 }
 
 local function try_transform_sludgemass(card, added_card)
@@ -36,7 +36,8 @@ local function try_transform_sludgemass(card, added_card)
 
 	local transform = false
 	for i=1, #G.jokers.cards do
-		if FnwkStringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
+		local obj = G.jokers.cards[i].config.center
+		if type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
 			transform = true
 			break
 		end
@@ -61,7 +62,8 @@ local function try_revert_sludgemass(card, removed_card)
 
 	local transform = true
 	for i=1, #G.jokers.cards do
-		if G.jokers.cards[i] ~= removed_card and FnwkStringStartsWith(G.jokers.cards[i].config.center.key, 'j_fnwk_crimson_') then
+		local obj = G.jokers.cards[i].config.center
+		if G.jokers.cards[i] ~= removed_card and type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
 			transform = false
 			break
 		end
@@ -80,25 +82,13 @@ local function try_revert_sludgemass(card, removed_card)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.gar}}  
     return {
 		vars = {
 			card.ability.extra.mult,
 			card.ability.extra.x_mult
-		}
+		},
+		key = self.key..(card.ability.form == 'sludge' and '_sludge' or '')
 	}
-end
-
-function jokerInfo.generate_ui(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-	local info_key = 'j_fnwk_fanworks_jogarc'
-	if card.ability.form == 'sludge' then
-		info_key = info_key..'_sludge'
-	end
-	if card.config.center.discovered then
-		-- If statement makes it so that this function doesnt activate in the "Joker Unlocked" UI and cause 'Not Discovered' to be stuck in the corner
-		full_UI_table.name = localize{type = 'name', key = info_key, set = self.set, name_nodes = {}, vars = specific_vars or {}}
-	end
-	localize{type = 'descriptions', key = info_key, set = self.set, nodes = desc_nodes, vars = self.loc_vars(self, info_queue, card).vars}
 end
 
 function jokerInfo.update(self, card, dt)
@@ -141,17 +131,17 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if (context.buying_card or (context.fnwk_created_card and context.area == G.jokers)) and not context.blueprint then
+	if (context.buying_card or (context.created_card and context.area == G.jokers)) and not context.blueprint then
             
-        if context.card == card then
+        if (context.created_card or context.card) == card then
             return
         end
 
 		try_transform_sludgemass(card, context.card)
     end
 
-	if context.selling_card or context.fnwk_card_removed then
-		if context.card == card then
+	if context.selling_card or context.removed_card then
+		if (context.removed_card or context.card) == card then
             return
         end
 

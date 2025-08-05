@@ -4,7 +4,6 @@ local deckInfo = {
     unlocked = false,
     unlock_condition = { type = 'fnwk_win_deck', deck = 'b_fnwk_fanworks_deck', stake = 6 },
     discovered = true,
-    fanwork = 'fanworks',
     artist = 'winter'
 }
 

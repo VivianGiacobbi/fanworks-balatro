@@ -9,12 +9,16 @@ local consumInfo = {
         blueprint_compat_check = nil,
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'closer',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'closer',
+		},
+        custom_color = 'closer',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

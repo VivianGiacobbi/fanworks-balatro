@@ -7,11 +7,17 @@ local consumInfo = {
         aura_colors = { '6DD5FFDC', '89F7FFDC' },
     },
     cost = 4,
-    rarity = 'arrow_EvolvedRarity',
+    rarity = 'EvolvedRarity',
     hasSoul = true,
-    fanwork = 'jspec',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'plus',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

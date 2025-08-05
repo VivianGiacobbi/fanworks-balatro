@@ -6,12 +6,15 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'rubicon',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rubicon',
+		},
+        custom_color = 'rubicon',
+    },
+	artist = 'cream',
 }
-
-function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
-end
 
 function jokerInfo.calculate(self, card, context)
     if not (context.individual and context.cardarea == G.play) then

@@ -6,6 +6,14 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 3, max = 10},
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mdv',
+		},
+        custom_color = 'mdv',
+    },
+    artist = 'winter',
 }
 
 function blindInfo.loc_vars(self)

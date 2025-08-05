@@ -9,13 +9,17 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'whiplash',
-    in_progress = true,
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'whiplash',
+		},
+        custom_color = 'whiplash',
+    },
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

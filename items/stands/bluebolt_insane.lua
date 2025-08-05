@@ -10,27 +10,29 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'bluebolt',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
+    artist = 'coop',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
-end
 
 function consumInfo.add_to_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
-        FnwkSetCenterDiscount(card, card.ability.extra.cost_mod, true, 'Booster')
+        ArrowAPI.game.set_center_discount(card, card.ability.extra.cost_mod, true, 'Booster')
         return true 
     end}))
 end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
-        FnwkClearCenterDiscountSource(card)
+        ArrowAPI.game.clear_discount(card)
         return true 
     end}))
 end

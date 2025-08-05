@@ -17,7 +17,14 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = false,
-	fanwork = 'rockhard',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rockhard',
+		},
+        custom_color = 'rockhard',
+    },
+	artist = 'cringe',
 }
 
 local function levels_over_one()
@@ -31,7 +38,6 @@ local function levels_over_one()
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cringe }}
     return { vars = {card.ability.extra.mult_mod, levels_over_one() * card.ability.extra.mult_mod }}
 end
 

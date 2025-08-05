@@ -9,15 +9,20 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rubicon',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'rubicon',
+		},
+        custom_color = 'rubicon',
+    },
+	artist = 'cream',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.cream }}
     return {vars = {card.ability.extra.chance}}
 end
 
@@ -30,7 +35,7 @@ function consumInfo.calculate(self, card, context)
         if i ~= 1 and scoring_card:is_suit(left_card.base.suit) 
         and pseudorandom(pseudoseed('fnwk_hi_infidelity')) < G.GAME.probabilities.normal/card.ability.extra.chance then
             -- flip first
-            G.FUNCS.flare_stand_aura(card, 0.5)
+            ArrowAPI.stands.flare_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.15,

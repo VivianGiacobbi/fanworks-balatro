@@ -7,7 +7,13 @@ local voucherInfo = {
     requires = {'v_fnwk_sunshine_rapture'},
     unlocked = false,
     unlock_condition = { type = 'modify_jokers', rare_count = 5 },
-    fanwork = 'sunshine'
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'sunshine',
+		},
+        custom_color = 'sunshine',
+    }
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

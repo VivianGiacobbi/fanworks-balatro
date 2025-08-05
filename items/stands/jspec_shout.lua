@@ -7,11 +7,17 @@ local consumInfo = {
         aura_colors = { 'C9DCFFDC', 'A5A5FFDC' },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'jspec',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'jspec',
+		},
+        custom_color = 'jspec',
+    },
+    artist = 'plus',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -29,7 +35,7 @@ function consumInfo.calculate(self, card, context)
         return
     end
 
-    G.FUNCS.flare_stand_aura(card, 0.5)
+    ArrowAPI.stands.flare_aura(card, 0.5)
     local joker_count = G.jokers.config.card_count
     for i=#G.jokers.cards, 1, -1 do
         local check_card = G.jokers.cards[i]

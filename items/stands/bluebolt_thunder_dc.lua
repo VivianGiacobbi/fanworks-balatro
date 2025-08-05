@@ -12,11 +12,17 @@ local consumInfo = {
         }
     },
     cost = 8,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'bluebolt',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bluebolt',
+		},
+		custom_color = 'bluebolt',
+	},
+    artist = 'coop',
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.set_card_type_badge(self, card, badges)
@@ -24,7 +30,6 @@ function consumInfo.set_card_type_badge(self, card, badges)
 end
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.coop }}
     return { vars = {card.ability.extra.destroy_hand, card.ability.extra.x_mult}}
 end
 
@@ -40,7 +45,7 @@ function consumInfo.calculate(self, card, context)
         local flare_card = context.blueprint_card or card
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             extra = {
                 x_mult = card.ability.extra.x_mult,
@@ -52,7 +57,7 @@ function consumInfo.calculate(self, card, context)
     if not context.blueprint and context.remove_playing_cards and context.scoring_hand and not context.joker_retrigger then
         return {
             func = function()
-                G.FUNCS.flare_stand_aura(card, 0.5)
+                ArrowAPI.stands.flare_aura(card, 0.5)
             end,
         }
     end
@@ -61,7 +66,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.FUNCS.evolve_stand(card, localize('k_stand_revert'))
+                ArrowAPI.stands.evolve_stand(card, localize('k_stand_revert'))
                 card.ability.evolved = false
                 return true 
             end 

@@ -6,11 +6,16 @@ local consumInfo = {
         aura_colors = { 'FDD48EDC', 'EEBA64DC' },
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'mania',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'mania',
+		},
+        custom_color = 'mania',
+    },
     in_progress = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

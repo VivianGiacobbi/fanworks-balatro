@@ -11,11 +11,16 @@ local consumInfo = {
         fnwk_strut_rank_count = 0
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'love',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'love',
+		},
+        custom_color = 'love',
+    },
     blueprint_compat = true,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -82,7 +87,7 @@ function consumInfo.calculate(self, card, context)
 		local flare_card = context.blueprint_card or card
         return {
             pre_func = function()
-                G.FUNCS.flare_stand_aura(flare_card, 0.5)
+                ArrowAPI.stands.flare_aura(flare_card, 0.5)
             end,
             message = localize('k_again_ex'),
             repetitions = card.ability.extra.reps_mod,

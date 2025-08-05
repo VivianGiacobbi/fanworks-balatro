@@ -14,16 +14,21 @@ local consumInfo = {
         }
     },
     cost = 4,
-    rarity = 'arrow_StandRarity',
+    rarity = 'StandRarity',
     alerted = true,
     hasSoul = true,
-    fanwork = 'spirit',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'spirit',
+		},
+        custom_color = 'spirit',
+    },
+    artist = 'coop',
     blueprint_compat = false,
-    dependencies = {'ArrowAPI'},
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {G.P_CENTERS[card.ability.extra.create_key].name} }
 end
 
@@ -37,7 +42,7 @@ function consumInfo.calculate(self, card, context)
 
     return {
         func = function()
-            G.FUNCS.flare_stand_aura(card, 0.5)
+            ArrowAPI.stands.flare_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 local new_part = create_card('Joker', G.jokers, nil, nil, nil, nil, card.ability.extra.create_key, 'fnwk_sweet_bod')
                 -- new_part:set_edition({negative = true}, true, true)

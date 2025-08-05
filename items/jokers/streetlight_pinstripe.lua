@@ -8,14 +8,20 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-	fanwork = 'streetlight',
+	origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'streetlight',
+		},
+        custom_color = 'streetlight',
+    },
+    artist = 'leafy',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_lucky
-    info_queue[#info_queue+1] = {key = "fnwk_artist_1", set = "Other", vars = { G.fnwk_credits.leafy }}
-        
-    return { vars = {fnwk_get_enhanced_tally('m_lucky')}}
+
+    return { vars = {ArrowAPI.game.get_enhanced_tally('m_lucky')}}
 end
 
 function jokerInfo.in_pool(self, args)
@@ -35,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
 end
 
 function jokerInfo.calc_dollar_bonus(self, card)
-    local tally = fnwk_get_enhanced_tally('m_lucky')
+    local tally = ArrowAPI.game.get_enhanced_tally('m_lucky')
     if tally > 0 then
         return tally
     end

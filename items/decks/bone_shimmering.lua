@@ -6,7 +6,13 @@ local deckInfo = {
     discovered = true,
     unlocked = false,
     unlock_condition = {type = 'fnwk_shop_rerolled', num = 25},
-    fanwork = 'bone',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'bone',
+		},
+		custom_color = 'bone',
+	},
     artist = 'torch'
 }
 
