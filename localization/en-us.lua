@@ -426,7 +426,7 @@ return {
 			c_fnwk_fanworks_breakdown = "Third-Act Breakdown",
 			c_fnwk_fanworks_comprehension = "Reading Comprehension",
 			c_fnwk_crimson_melting = 'Melting Madness',
-			c_fnwk_crimson_manager = 'Stand World Manager',
+			c_fnwk_crimson_manager = 'Mood Indigo Manager',
 			c_fnwk_lighted_kriskross = "Kris Kross",
 			c_fnwk_spirit_creeping = "Creeping Infection",
 		},
@@ -2622,7 +2622,7 @@ return {
 				}
 			},
 			c_fnwk_crimson_manager = {
-				name = "Stand World Manager",
+				name = "Mood Indigo Manager",
 				text = {
 					"{C:attention,E:1}Dummy Text{}"
 				}
