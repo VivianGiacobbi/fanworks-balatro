@@ -22,7 +22,8 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.mult}}
+    local num, dom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_scepter_card')
+    return { vars = {num, dom, card.ability.extra.mult}}
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -34,7 +35,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    if pseudorandom('scepter_card') >= G.GAME.probabilities.normal/card.ability.extra.chance then 
+    if SMODS.pseudorandom_probability(card, 'fnwk_scepter_card', 1, card.ability.extra.chance, 'fnwk_scepter_card') then
         return
     end
 

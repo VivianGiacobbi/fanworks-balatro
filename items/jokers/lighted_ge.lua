@@ -23,7 +23,8 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.remaining}}
+	local num, dom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_lighted_ge')
+	return { vars = {num, dom, card.ability.extra.remaining}}
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
@@ -53,8 +54,7 @@ function jokerInfo.calculate(self, card, context)
 			return
 		end
 
-		local seed_result = pseudorandom(pseudoseed('ge'))
-		if seed_result < G.GAME.probabilities.normal / card.ability.extra.chance then
+		if SMODS.pseudorandom_probability(card, 'fnwk_lighted_ge', 1, card.ability.extra.chance, 'fnwk_lighted_ge') then
 			if not next(SMODS.find_card('j_csau_bunji')) then
 				card.ability.extra.remaining = card.ability.extra.remaining - 1
 			end

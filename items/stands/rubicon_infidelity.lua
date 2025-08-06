@@ -23,7 +23,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return {vars = {card.ability.extra.chance}}
+    return {vars = {SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_rubicon_infidelity')}}
 end
 
 function consumInfo.calculate(self, card, context)
@@ -32,8 +32,8 @@ function consumInfo.calculate(self, card, context)
     local left_card = context.scoring_hand[1]
     for i, scoring_card in pairs(context.scoring_hand) do
         -- find any cards not of the target transform key to transform
-        if i ~= 1 and scoring_card:is_suit(left_card.base.suit) 
-        and pseudorandom(pseudoseed('fnwk_hi_infidelity')) < G.GAME.probabilities.normal/card.ability.extra.chance then
+        if i ~= 1 and scoring_card:is_suit(left_card.base.suit)
+        and SMODS.pseudorandom_probability(card, 'fnwk_rubicon_infidelity', 1, card.ability.extra.chance, 'fnwk_rubicon_infidelity') then
             -- flip first
             ArrowAPI.stands.flare_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({

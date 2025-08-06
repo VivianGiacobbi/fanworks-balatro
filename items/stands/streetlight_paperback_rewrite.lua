@@ -26,14 +26,13 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { vars = {G.GAME.probabilities.normal * card.ability.extra.normal_mod, card.ability.extra.chance} }
+    return { vars = {SMODS.get_probability_vars(card, card.ability.extra.normal_mod, card.ability.extra.chance, 'fnwk_streetlight_rewrite')} }
 end
 
 function consumInfo.calculate(self, card, context)
     if not context.reroll_shop or context.blueprint or card.debuff or context.joker_retrigger then return end
 
-    local chance = (G.GAME.probabilities.normal * card.ability.extra.normal_mod) / card.ability.extra.chance
-    if pseudorandom(pseudoseed('fnwk_rewrite_sd')) < chance then
+    if SMODS.pseudorandom_probability(card, 'fnwk_streetlight_rewrite', card.ability.extra.normal_mod, card.ability.extra.chance, 'fnwk_streetlight_rewrite') then
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound('tarot1')

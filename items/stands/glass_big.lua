@@ -24,7 +24,8 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { vars = { card.ability.extra.x_mult, G.GAME.probabilities.normal, card.ability.extra.chance }}
+    local num, dom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_glass_big')
+    return { vars = { card.ability.extra.x_mult, num, dom }}
 end
 
 function consumInfo.calculate(self, card, context)
@@ -42,7 +43,8 @@ function consumInfo.calculate(self, card, context)
     end
 
     if not context.blueprint and not context.retrigger_joker and context.destroy_card and context.cardarea == G.play and not context.repetition then
-        if SMODS.has_enhancement(context.destroy_card, 'm_stone') and pseudorandom('bigpoppa') < G.GAME.probabilities.normal / card.ability.extra.chance then
+        if SMODS.has_enhancement(context.destroy_card, 'm_stone')
+        and SMODS.pseudorandom_probability(card, 'fnwk_glass_big', 1, card.ability.extra.chance, 'fnwk_glass_big') then
             return {
                 remove = true
             }

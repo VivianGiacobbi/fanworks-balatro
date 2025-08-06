@@ -24,37 +24,39 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance, card.ability.extra.chips, card.ability.extra.mult}}
+	local num, dom = SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fwnk_mania_cubist')
+	return { vars = {num, dom, card.ability.extra.chips, card.ability.extra.mult}}
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not context.cardarea == G.jokers or card.debuff or context.blueprint then
+	if card.debuff or context.blueprint then
 		return
 	end
 
 	if context.before then
-		local debuffed = {}
+		local to_debuff = {}
 		for k, v in ipairs(context.scoring_hand) do
-			if not v.debuff then
-				if pseudorandom(pseudoseed('cubist_roll')) > G.GAME.probabilities.normal / card.ability.extra.chance then 
+			if not v.debuff and SMODS.has_enhancement(v, 'm_wild') then
+				if SMODS.pseudorandom_probability(card, 'fnwk_mania_cubist', 1, card.ability.extra.chance, 'fwnk_mania_cubist') then 
 					v.cubist_flagged = true
 				else
-					debuffed[#debuffed+1] = v
-					v:set_debuff(true)
+					to_debuff[#to_debuff+1] = v
 				end
 			end
 		end
 
-		for i=1, #debuffed do
-			G.E_MANAGER:add_event(Event({ 
-				trigger = 'before',
+		for _, v in ipairs(to_debuff) do
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
 				delay = 0.2,
-				func = function() 
-					debuffed[i]:juice_up()
-				return true 
-			end })) 
+				func = function()
+					v:set_debuff(true)
+					v:juice_up()
+				return true
+			end }))
 		end
-		if #debuffed < #context.scoring_hand then 
+
+		if #to_debuff > 0 then
 			return {
 				message = localize('k_debuffed'),
 				message_card = card
@@ -62,7 +64,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.individual and context.cardarea == G.play and not context.other_card.debuff and context.other_card.cubist_flagged then
+	if context.individual and context.cardarea == G.play and context.other_card.cubist_flagged then
 		context.other_card.cubist_flagged = nil
 		return {
             chips = card.ability.extra.chips,

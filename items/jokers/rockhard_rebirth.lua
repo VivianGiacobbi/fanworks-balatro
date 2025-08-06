@@ -21,7 +21,7 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_wild
-    return { vars = {G.GAME.probabilities.normal, card.ability.extra} }
+    return { vars = {SMODS.get_probability_vars(card, 1, card.ability.extra, 'fnwk_rockhard_rebirth')} }
 end
 
 function jokerInfo.in_pool(self, args)
@@ -35,10 +35,10 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.before and context.cardarea == G.jokers and not card.debuff then
         local tick_cards = {}
-        for i = 1, #context.scoring_hand do
-            local enhancements = SMODS.get_enhancements(context.scoring_hand[i])
-            if enhancements['m_wild'] and pseudorandom(pseudoseed('rebirth')) < G.GAME.probabilities.normal/card.ability.extra then
-                tick_cards[#tick_cards+1] = context.scoring_hand[i]
+        for _, v in ipairs(context.scoring_hand) do
+            if SMODS.has_enhancement(v, 'm_wild') and
+            SMODS.pseudorandom_probability(card, 'fnwk_rockhard_rebirth', 1, card.ability.extra, 'fnwk_rockhard_rebirth') then
+                tick_cards[#tick_cards+1] = v
             end
         end
 
@@ -48,10 +48,10 @@ function jokerInfo.calculate(self, card, context)
                 G.E_MANAGER:add_event(Event({ 
                     trigger = 'before',
                     delay = 0.2,
-                    func = function() 
+                    func = function()
                         tick_cards[i]:juice_up()
                     return true 
-                end })) 
+                end }))
             end
             return {
                 card = context.blueprint_card or card,

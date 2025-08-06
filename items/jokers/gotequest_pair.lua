@@ -21,7 +21,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {G.GAME.probabilities.normal, card.ability.extra.chance} }
+	return { vars = {SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_gotequest_pair')} }
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -48,8 +48,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    local seed_result = pseudorandom(pseudoseed('gaypeople'))
-	if seed_result < G.GAME.probabilities.normal / card.ability.extra.chance then
+	if SMODS.pseudorandom_probability(card, 'fnwk_gotequest_pair', 1, card.ability.extra.chance, 'fnwk_gotequest_pair') then
 		for i, v in ipairs(context.scoring_hand) do
 			if not v.debuff then
 				v:set_edition({polychrome = true}, nil, true)

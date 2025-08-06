@@ -38,7 +38,8 @@ function jokerInfo.calculate(self, card, context)
 
 	if not context.blueprint then
 		if (context.buying_card and context.card.ability.set == 'Joker') or (context.created_card and context.area == G.jokers) then
-			local mod = context.card.config.center.original_mod
+			local new_card = context.created_card or context.card
+			local mod = new_card.config.center.original_mod
 			if mod and mod.id == 'fanworks' then
 				return {
 					message = localize('k_upgrade_ex'),

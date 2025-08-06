@@ -20,14 +20,14 @@ local jokerInfo = {
 
 function jokerInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.m_glass
-    return { vars = {G.GAME.probabilities.normal, card.ability.extra}}
+    return { vars = {SMODS.get_probability_vars(card, 1, card.ability.extra, 'fnwk_rubicon_bone')}}
 end
 
 function jokerInfo.calculate(self, card, context)
     if context.cardarea == G.jokers and context.before then
         local glassed = 0
         for k, v in ipairs(context.scoring_hand) do
-            if v:is_suit('Spades') and pseudorandom('rubicon_bone') < G.GAME.probabilities.normal/card.ability.extra then 
+            if v:is_suit('Spades') and SMODS.pseudorandom_probability(card, 'fnwk_rubicon_bone', 1, card.ability.extra, 'fnwk_rubicon_bone') then 
                 glassed = glassed + 1
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -35,7 +35,7 @@ function jokerInfo.calculate(self, card, context)
                         v:juice_up()
                         return true
                     end
-                })) 
+                }))
             end
         end
         if glassed > 0 then
