@@ -402,7 +402,7 @@ ArrowAPI.loading.batch_load({
 			'fanworks_reread',
 			'fanworks_moderated',
 			'fanworks_corpse',
-			'fanworks_invisible',
+			--'fanworks_invisible',
 			'fanworks_comprehension',
 			'fanworks_breakdown',
 			'crimson_melting',
