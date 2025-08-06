@@ -8,6 +8,7 @@ local consumInfo = {
         blueprint_compat_ui = '',
         blueprint_compat_check = nil,
     },
+    no_doe = true,
     cost = 4,
     rarity = 'StandRarity',
     hasSoul = true,
@@ -20,6 +21,10 @@ local consumInfo = {
     },
     blueprint_compat = true,
 }
+
+function consumInfo.in_pool(self, args)
+    return false
+end
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
