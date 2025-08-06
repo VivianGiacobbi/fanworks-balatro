@@ -10,9 +10,9 @@ local jokerInfo = {
 	origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'mania',
+			'plancks',
 		},
-        custom_color = 'mania',
+        custom_color = 'plancks',
     },
 	artist = 'coop',
 	alt_art = true

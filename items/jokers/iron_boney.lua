@@ -5,14 +5,13 @@ SMODS.DrawStep {
         if not self.config.center.discovered then
             return
         end
-        
+
         if (not self.children.backing or not self.children.boned_bottom or not self.children.boned_top) or self.ability.boned then
             return
         end
-        self.children.backing:draw_sshader('dissolve')
-    
+        self.children.backing:draw_shader('dissolve')
+
         -- bottom effect values
-        
         G.SHADERS['fnwk_boney_bottom']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_bottom_mask'].image)
         G.SHADERS['fnwk_boney_bottom']:send('mask_mod', self.ability.mask_mod)
         G.SHADERS['fnwk_boney_bottom']:send("texture_details", self.children.boned_bottom:get_pos_pixel())

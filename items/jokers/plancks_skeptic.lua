@@ -11,9 +11,9 @@ local jokerInfo = {
 	origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'mania',
+			'plancks',
 		},
-        custom_color = 'mania',
+        custom_color = 'plancks',
     },
 	artist = 'coop',
 	alt_art = true
@@ -22,35 +22,36 @@ local jokerInfo = {
 local function create_logic(type, legendary, rarity, soulable, forced_key, key_append)
     local center = G.P_CENTERS.b_red
     --should pool be skipped with a forced key
+    --should pool be skipped with a forced key
     if not forced_key and soulable and (not G.GAME.banned_keys['c_soul']) then
         for _, v in ipairs(SMODS.Consumable.legendaries) do
-            if (type == v.type.key or type == v.soul_set) and not (G.GAME.used_jokers[v.key] and not next(find_joker("Showman")) and not v.can_repeat_soul) and (not v.in_pool or (type(v.in_pool) ~= "function") or v:in_pool()) then
-                if pseudorandom('soul_'..v.key..type..G.GAME.round_resets.ante) > (1 - v.soul_rate) then
+            if (_type == v.type.key or _type == v.soul_set) and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key) and not v.can_repeat_soul) and (not v.in_pool or (type(v.in_pool) ~= "function") or v:in_pool()) then
+                if pseudorandom('soul_'..v.key.._type..G.GAME.round_resets.ante) > (1 - v.soul_rate) then
                     forced_key = v.key
                 end
             end
         end
-        if (type == 'Tarot' or type == 'Spectral' or type == 'Tarot_Planet') and
-        not (G.GAME.used_jokers['c_soul'] and not next(find_joker("Showman")))  then
-            if pseudorandom('soul_'..type..G.GAME.round_resets.ante) > 0.997 then
+        if (_type == 'Tarot' or _type == 'Spectral' or _type == 'Tarot_Planet') and
+        not (G.GAME.used_jokers['c_soul'] and not SMODS.showman('c_soul')) then
+            if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.997 then
                 forced_key = 'c_soul'
             end
         end
-        if (type == 'Planet' or type == 'Spectral') and
-        not (G.GAME.used_jokers['c_black_hole'] and not next(find_joker("Showman")))  then 
-            if pseudorandom('soul_'..type..G.GAME.round_resets.ante) > 0.997 then
+        if (_type == 'Planet' or _type == 'Spectral') and
+        not (G.GAME.used_jokers['c_black_hole'] and not SMODS.showman('c_black_hole')) then
+            if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.997 then
                 forced_key = 'c_black_hole'
             end
         end
     end
 
-    if type == 'Base' then 
+    if _type == 'Base' then 
         forced_key = 'c_base'
     end
 
-    if forced_key and not G.GAME.banned_keys[forced_key] then 
-        center = G.P_CENTERS[forced_key]
-        type = (center.set ~= 'Default' and center.set or type)
+    if forced_key and not G.GAME.banned_keys[forced_key] then
+        center = forced_key
+        type = (G.P_CENTERS[forced_key].set ~= 'Default' and G.P_CENTERS[forced_key].set or type)
     else
         local pool, pool_key = get_current_pool(type, rarity, legendary, key_append)
         center = pseudorandom_element(pool, pseudoseed(pool_key))
@@ -109,7 +110,7 @@ local function get_pack_ui(card, pack)
 				{
 					bypass_discovery_center = false,
 					bypass_discovery_ui = false,
-					discover = false, 
+					discover = false,
 					bypass_back = G.GAME.selected_back.pos
 				}
 			)

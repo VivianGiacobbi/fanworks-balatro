@@ -23,7 +23,7 @@ function jokerInfo.calculate(self, card, context)
         func = function() 
             local old_banned = copy_table(G.GAME.banned_keys)
             for k, v in pairs(G.P_CENTERS) do
-                if v.set == 'Joker' and v.original_mod and v.original_mod.id == 'fanworks' then
+                if v.set == 'Joker' and (not v.original_mod or v.original_mod.id ~= 'fanworks') then
                     G.GAME.banned_keys[k] = true
                 end
             end

@@ -24,7 +24,7 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return {vars = {card.ability.extra.chance}}
+    return {vars = {SMODS.get_probability_vars(card, 1, card.ability.extra.chance, 'fnwk_rubicon_mother')}}
 end
 
 function consumInfo.calculate(self, card, context)
@@ -32,8 +32,8 @@ function consumInfo.calculate(self, card, context)
 
     local steels = 0
     for _, v in ipairs(context.scoring_hand) do
-        if v:get_id() == card.ability.extra.rank 
-        and pseudorandom(pseudoseed('fnwk_rubicon_mother')) < G.GAME.probabilities.normal/card.ability.extra.chance then 
+        if v:get_id() == card.ability.extra.rank
+        and SMODS.pseudorandom_probability(card, 'fnwk_rubicon_mother', 1, card.ability.extra.chance, 'fnwk_rubicon_mother') then
             steels = steels + 1
             v:set_ability(G.P_CENTERS.m_steel, nil, true)
             G.E_MANAGER:add_event(Event({

@@ -2163,7 +2163,7 @@ return {
 				text = {
 					"When a hand is {C:attention}played{}, each scoring card",
 					"that shares the {C:attention}leftmost card's suit{} has a",
-					"{C:green}1 in 3{} chance to {C:attention}transform{} into that card"
+					"{C:green}#1# in #2#{} chance to {C:attention}transform{} into that card"
 				},
 			},
 			c_fnwk_rubicon_dance = {
@@ -2278,7 +2278,7 @@ return {
 				},
 			},
 			c_fnwk_streetlight_eurythmics = {
-				name = "Neon Trees",
+				name = "Eurythmics",
 				text = {
 					"Every {C:attention}#1#{} {C:inactive}[#2#]{} {C:attention}consecutive{} rounds,",
 					"gain {C:attention}#3# #4#s{}",

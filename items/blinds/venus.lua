@@ -17,16 +17,16 @@ local blindInfo = {
 }
 
 function blindInfo.loc_vars(self)
-    return {vars = {G.GAME.probabilities.normal, 2} }
+    return {vars = {SMODS.get_probability_vars(card, 1, 2, 'fnwk_bl_venus')} }
 end
 
 function blindInfo.collection_loc_vars(self)
-    return { vars = {G.GAME.probabilities.normal, 2}}
+    return { vars = {SMODS.get_probability_vars(card, 1, 2, 'fnwk_bl_venus')}}
 end
 
 function blindInfo.set_blind(self)
     for _, v in ipairs(G.playing_cards) do
-        v.fnwk_venus_debuff = (pseudorandom(pseudoseed('fnwk_venus')) < G.GAME.probabilities.normal/2) or nil
+        v.fnwk_venus_debuff = SMODS.pseudorandom_probability(G.GAME.blind, 'fnwk_bl_venus', 1, 2, 'fnwk_bl_venus') or nil
         v.fnwk_venus_checked = true
     end
 end
@@ -40,7 +40,7 @@ function blindInfo.recalc_debuff(self, card, from_blind)
         return true
     elseif not card.fnwk_venus_checked then
         card.fnwk_venus_checked = true
-        card.fnwk_venus_debuff = (pseudorandom(pseudoseed('fnwk_venus')) < G.GAME.probabilities.normal/2) or nil
+        card.fnwk_venus_debuff = SMODS.pseudorandom_probability(G.GAME.blind, 'fnwk_bl_venus', 1, 2, 'fnwk_bl_venus') or nil
         
         if card.fnwk_venus_debuff then
             return true
