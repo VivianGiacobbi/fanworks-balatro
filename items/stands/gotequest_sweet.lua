@@ -16,9 +16,9 @@ local consumInfo = {
     origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'glass',
+			'gotequest',
 		},
-        custom_color = 'glass',
+        custom_color = 'gotequest',
     },
     in_progress = true,
 }

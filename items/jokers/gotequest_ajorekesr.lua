@@ -14,9 +14,9 @@ local jokerInfo = {
 	origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'glass',
+			'gotequest',
 		},
-        custom_color = 'glass',
+        custom_color = 'gotequest',
     },
 	artist = 'gote',
 }
