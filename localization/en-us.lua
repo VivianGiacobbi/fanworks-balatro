@@ -1480,7 +1480,7 @@ return {
 			j_fnwk_iron_sanctuary = {
 				name = "Sanctuary City",
 				text = {
-					"if you have a {C:stand}Stand{},",
+					"If you have a {C:stand}Stand{},",
 					"each played {C:attention}#1#{} gives",
 					"{C:mult}+#2#{} Mult when scored"
 				}
