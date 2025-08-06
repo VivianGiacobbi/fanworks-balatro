@@ -17,7 +17,7 @@ function deckInfo.check_for_unlock(self, args)
         return false
     end
 
-    local discovered = ArrowAPI.game.check_mod_discoveries('fanworks', self)
+    local discovered = ArrowAPI.game.check_mod_discoveries('fanworks', nil, self)
     return discovered >= self.unlock_condition.num
 end
 
@@ -26,7 +26,7 @@ function deckInfo.loc_vars(self, info_queue, card)
 end
 
 function deckInfo.locked_loc_vars(self, info_queue, card)
-    local discovered = ArrowAPI.game.check_mod_discoveries('fanworks', self)
+    local discovered = ArrowAPI.game.check_mod_discoveries('fanworks', nil, self)
     return {vars = {discovered, self.unlock_condition.num}}
 end
 

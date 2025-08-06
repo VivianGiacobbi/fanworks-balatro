@@ -27,7 +27,7 @@ function jokerInfo.calculate(self, card, context)
     local return_table = { }
     if context.other_card.ability.bonus > 0 then return_table.chips = context.other_card.ability.bonus end
     if context.other_card.ability.x_chips and context.other_card.ability.x_chips > 1 then return_table.x_chips = context.other_card.ability.x_chips end
-    if context.other_card.ability.mult > 0 then 
+    if context.other_card.ability.mult > 0 then
         if context.other_card.ability.effect == "Lucky Card" and SMODS.pseudorandom_probability(self, 1, 5, 'lucky_mult') then
             context.other_card.lucky_trigger = true
             return_table.mult = context.other_card.ability.mult
