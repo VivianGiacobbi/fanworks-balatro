@@ -41,7 +41,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.fnwk_vasos_mod = card.ability.fnwk_vasos_mod + card.ability.extra.stand_mod
 	end
 
-	if context.removed_card and context.card.ability.set == 'Stand' and card.ability.fnwk_vasos_mod > card.ability.extra.base then
+	if context.removed_card and context.removed_card.ability.set == 'Stand' and card.ability.fnwk_vasos_mod > card.ability.extra.base then
 		if ArrowAPI.stands.get_leftmost_stand() then
 			return
 		end
