@@ -6,7 +6,8 @@ SMODS.optional_features.quantum_enhancements = true
 
 ArrowAPI.misc.add_colors({
 	['FANWORKS'] = copy_table(SMODS.current_mod.badge_colour),
-	['CRYSTAL'] = HEX('B5FFFF')
+	['CRYSTAL'] = HEX('B5FFFF'),
+    ['VALENTINO'] = HEX('61BC4F')
 })
 
 ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {

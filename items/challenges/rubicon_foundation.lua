@@ -1,25 +1,30 @@
 local chalInfo = {
     rules = {
         custom = {
-            {id = 'fnwk_rubicon_foundation', alt_win = true, type = 'modify_deck', func = function()
-                if not G.playing_cards then return end
-                sendDebugMessage('checking win condition')
-                local suits_map = {}
-                for _, v in ipairs(G.playing_cards) do
-                    suits_map[v.base.suit] = (suits_map[v.base.suit] or 0) + 1
-                end
-
-                local num_matches = 0
-                for k, v in pairs(suits_map) do
-                    if v >= 50 then num_matches = num_matches + 1 end
-                    if num_matches > 2 then return true end
-                end
-            end},
+            {id = 'fnwk_rubicon_foundation' },
             {id = 'fnwk_rubicon_foundation_2'}
         },
         modifiers = {
             {id = 'discards', value = 5},
         }
+    },
+    alt_win = {
+        prevent_win = true,
+        condition = {suits = 2, cards = 50},
+        type = 'modify_deck',
+        func = function(challenge)
+            if not G.playing_cards then return end
+            local suits_map = {}
+            for _, v in ipairs(G.playing_cards) do
+                suits_map[v.base.suit] = (suits_map[v.base.suit] or 0) + 1
+            end
+
+            local num_matches = 0
+            for _, v in pairs(suits_map) do
+                if v >= challenge.alt_win.condition.cards then num_matches = num_matches + 1 end
+                if num_matches >= challenge.alt_win.condition.suits then return true end
+            end
+        end
     },
     vouchers = {
         { id = 'v_tarot_merchant' },

@@ -2353,7 +2353,7 @@ return {
 				},
 			},
 			c_fnwk_sunshine_downward = {
-				name = "The Damned",
+				name = "Downward Spiral",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
 					"Only your {C:attention}most played hand{}",
@@ -2591,7 +2591,16 @@ return {
 			c_fnwk_fanworks_corpse = {
 				name = "Fanquisite Corpse",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"It's a muggy day at the beach,",
+					"and you're sitting at your ",
+					"very own {C:red}lifeguard{} perch.",
+					" ",
+					"The {C:gold}sun{} beats down on you.",
+					"The ocean is full of {C:dark_edition}plastic{}.",
+					"{C:attention,E:1}A child is drowning.{}",
+					" ",
+					"You get the feeling it's",
+					"gonna be a {C:attention}looong{} shift."
 				}
 			},
 			c_fnwk_fanworks_invisible = {
@@ -2621,31 +2630,55 @@ return {
 			c_fnwk_crimson_melting = {
 				name = "Melting Madness",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"{s:1.15,E:1,C:gold}KIKIIIIIIIIIIII!!!{}",
+					" ",
+					"{s:1.5,E:1,C:attention}KRIIIIYAAAAAAA!!!!{}",
+					" ",
+					"{s:1.35,E:1,C:red}HISSSS!!!{}"
 				}
 			},
 			c_fnwk_crimson_manager = {
 				name = "Mood Indigo Manager",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"{C:spectral}High Output{}",
+					"{s:1.5,C:attention}Deck Building{}",
+					"{s:2.5,E:1,C:dark_edition}Energy{}"
 				}
 			},
 			c_fnwk_lighted_kriskross = {
 				name = "Kris Kross",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"{C:stand}Stands{} are {C:attention}Jokers{},",
+					"and {C:attention}Jokers{} are {C:stand}Stands{}."
 				}
 			},
 			c_fnwk_spirit_creeping = {
 				name = "Creeping Infection",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"You are {C:valentino}Henry Valentino.{}",
+					"You {C:attention}control{} the underworld.",
+					"{s:1.3}You are{} {s:1.3,C:dark_edition}immortal{}.",
+					"You will {C:attention}rule the world{}.",
+					" ",
+					"And you won't be beaten",
+					"by {C:attention,E:1,s:1.15}that{} {C:attention,E:1,s:1.3}damn{} {C:attention,E:1,s:1.5}clown{}."
 				}
 			},
 			c_fnwk_rubicon_foundation = {
 				name = "Foundation Building",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"{C:inactive,s:0.55}You were there that day, in Egypt. You saw the{}",
+					"{C:inactive,s:0.55}bodies with your own eyes, and you know there's{}",
+					"{C:inactive,s:0.55}only one way to stop it from happening again.{}",
+					"{s:0.5} {}",
+					"{s:0.9}The{} {C:attention,s:0.9}Speedwagon Foundation{}",
+					"{s:1.1}needs to{} {s:1.1,C:attention}change{}",
+					"{s:0.5} {}",
+					"{s:0.9}Choose your{} {C:blue,s:0.9}allies{}.",
+					"{s:0.9}Choose your {C:red,s:0.9}enemies{}.",
+					"{s:0.9}In this{} {C:dark_edition,s:0.9}supernatural war{},",
+					"{s:0.9}the{} {C:attention,s:0.9}winner{} {s:0.9}is whoever holds{}",
+					"{C:attention,s:1.1}all the cards{}",
 				}
 			}
 		}

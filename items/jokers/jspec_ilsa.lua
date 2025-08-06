@@ -22,12 +22,12 @@ local jokerInfo = {
 }
 
 -- update multi-edition status for cards that are already in the deck or joker slots
-local function update_multi_editions(card, enable_multi)
+local function update_multi_editions(card)
     if not card.edition then 
         return
     end
 
-    card:set_edition(card.edition.key, true, true, enable_multi)
+    card:set_edition(card.edition.key, true, true)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -115,22 +115,24 @@ end
 
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
+    G.force_ilsa = true
     for _, v in ipairs(G.playing_cards) do
-        update_multi_editions(v, true)
+        update_multi_editions(v)
     end
 
     for _, v in ipairs(G.jokers.cards) do
-        update_multi_editions(v, true)
+        update_multi_editions(_VERSION)
     end
+    G.force_ilsa = false
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
     for _, v in ipairs(G.playing_cards) do
-        update_multi_editions(v, false)
+        update_multi_editions(v)
     end
 
     for _, v in ipairs(G.jokers.cards) do
-        update_multi_editions(v, false)
+        update_multi_editions(v)
     end
 end
 

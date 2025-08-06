@@ -12,8 +12,8 @@ local chalInfo = {
     config = { 
         world_rate = 6
     },
-    on_apply = function(self)
-        G.GAME.fnwk_stand_world_rate = self.config.world_rate
+    on_apply = function(challenge)
+        G.GAME.fnwk_stand_world_rate = challenge.config.world_rate
     end,
     jokers = {
         { id = 'j_fnwk_fanworks_jogarc', eternal = true },

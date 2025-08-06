@@ -349,7 +349,18 @@ end
 
 local ref_set_edition = Card.set_edition
 function Card:set_edition(edition, immediate, silent, delay, ...)
-    if not next(SMODS.find_card('j_fnwk_jspec_ilsa')) then
+    local valid_ilsa = G.force_ilsa
+    if not valid_ilsa then
+        local ilsas = SMODS.find_card('j_fnwk_jspec_ilsa')
+        for _, v in ipairs(ilsas) do
+            if not v.debuff then 
+                valid_ilsa = true
+                break
+            end
+        end
+    end
+
+    if not valid_ilsa then
         return ref_set_edition(self, edition, immediate, silent, delay, ...)
     end
 
