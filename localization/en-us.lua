@@ -311,10 +311,12 @@ return {
 			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
-			f_hit = 'Hit!',
-			f_bust = "Bust!",
-			f_wp = 'Well Played!',
-			f_nd = "No Dice!",
+
+			k_hit = 'Hit!',
+			k_bust = "Bust!",
+			k_wp = 'Well Played!',
+			k_nd = "No Dice!",
+
 			k_steel="Steel",
 			k_toilet1 = 'poop',
             k_toilet2 = 'peeing ahhhh',
@@ -1354,12 +1356,12 @@ return {
 					"then {X:mult,C:white}X#1#{} Mult"
 				}
 			},
-			j_fnwk_spirit_gambler = {
-				name = "The Gambler",
+			j_fnwk_spirit_raise = {
+				name = "The Raise",
 				text = {
-					"Level up played {C:attention}poker hand{} if",
+					"{C:upgrade}Level up{} played {C:attention}poker hand{} if",
 					"total {C:attention}chip value{} of scored",
-					"cards is {C:attention}#1#{} or fewer",
+					"cards is {C:attention}#1#{}",
 				}
 			},
 			j_fnwk_spirit_corpse = {
@@ -1678,9 +1680,9 @@ return {
 			j_fnwk_golden_generation = {
 				name = "Golden Generation",
 				text = {
-					"Earn {C:money}$#1#{} for each other",
-					"{C:fanworks}Fanworks{} {C:attention}Joker{} and {C:stand}Stand{}",
-					"in your {C:attention}roster{} at",
+					"Earn {C:money}$#1#{} extra for each",
+					"other {C:fanworks}Fanworks{} {C:attention}Joker{} and",
+					"{C:stand}Stand{} in your {C:attention}roster{} at",
 					"end of round",
 					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
 				}

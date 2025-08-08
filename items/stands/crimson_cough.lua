@@ -55,8 +55,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.playing_card_removed and context.individual and context.removed.fnwk_cough_delete then
-
+    if context.post_playing_card_removed and context.removed.fnwk_cough_delete then
         local find_keep = nil
         for _, v in ipairs(context.scoring_hand) do
             if v.fnwk_cough_keep then

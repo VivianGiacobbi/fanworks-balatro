@@ -48,7 +48,7 @@ function consumInfo.calculate(self, card, context)
         end
     end
 
-    if context.playing_card_removed and context.individual and context.removed.glass_trigger
+    if context.post_playing_card_removed and context.removed.glass_trigger
     and SMODS.has_enhancement(context.removed, 'm_glass') then
         return {
             func = function()

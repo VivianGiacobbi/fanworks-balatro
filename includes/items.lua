@@ -126,8 +126,7 @@ ArrowAPI.loading.batch_load({
 
 			-- spirit lines
 			'spirit_halves',
-			-- 'spirit_aquarium',
-			'spirit_gambler',
+			'spirit_raise',
 			'spirit_corpse',
 			'spirit_rotten',
 

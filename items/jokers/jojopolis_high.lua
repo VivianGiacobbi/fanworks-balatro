@@ -16,4 +16,29 @@ local jokerInfo = {
 	artist = 'coop'
 }
 
+function jokerInfo.calculate(self, card, context)
+	if context.mod_handlevel and (context.highlight or context.initial) then
+		local highest = 0
+		for k, v in pairs(G.GAME.hands) do
+			if v.level > highest then highest = v.level end
+		end
+
+		if context.initial then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					card:juice_up()
+					G.hand_text_area.handname:juice_up()
+    				G.hand_text_area.hand_level:juice_up()
+					play_sound('polychrome1')
+				return true
+			end }))
+			delay(0.3)
+		end
+
+		return {
+			numerator = highest
+		}
+	end
+end
+
 return jokerInfo

@@ -35,31 +35,55 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if card.debuff then return end
 
-	if context.debuffed then return end
-
-	if context.before and not card.debuff and #G.hand.cards > 0 then
-        rand_card = pseudorandom_element(G.hand.cards, pseudoseed('standnameisplanetbbtw'))
-        rand_card.steel_flag = true
-    end
-
-    if context.cardarea == G.jokers and context.final_scoring_step then
-        if hand_chips*mult > G.GAME.blind.chips and rand_card and rand_card.steel_flag == true then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					rand_card:set_ability(G.P_CENTERS.m_steel, nil, true)
-					rand_card:juice_up()
-
-					return true
-				end
-			})) 
-			return {
-				message = localize('k_steel'),
-				card = context.blueprint_card or card
-			}
+    if context.after and hand_chips*mult > G.GAME.blind.chips then
+		local valid_targets = {}
+		for _, v in pairs(G.hand.cards) do
+			if v.config.center.key ~= 'm_steel' then
+				valid_targets[#valid_targets+1] = v
+			end
 		end
+
+		local rand_card = pseudorandom_element(valid_targets, 'fnwk_gotequest_2hot')
+		rand_card:set_ability(G.P_CENTERS.m_steel, nil, 'manual')
+
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.15,
+			func = function()
+				rand_card:flip()
+				play_sound('card1')
+				rand_card:juice_up(0.3, 0.3)
+				return true 
+			end 
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.1,
+			func = function()
+				rand_card:set_sprites(rand_card.config.center)
+				rand_card.front_hidden = rand_card:should_hide_front()
+				return true 
+			end
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.35,
+			func = function()
+				rand_card:flip()
+				play_sound('tarot2', 1, 0.6)
+				rand_card:juice_up(0.3, 0.3)
+				return true
+			end
+		}))
+
+		return {
+			delay = 0.75,
+			message = localize('k_steel'),
+			card = context.blueprint_card or card
+		}
     end
-    
 end
 
 return jokerInfo

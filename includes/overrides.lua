@@ -2,6 +2,10 @@
 local ref_glass_calc = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
     calculate = function(self, card, context)
+        if context.fnwk_dummy_flag then
+            sendDebugMessage('dummy flag caught')
+        end
+        
         local ret, post = ref_glass_calc(self, card, context)
         
         if context.destroy_card and context.cardarea == G.play and context.destroy_card == card
