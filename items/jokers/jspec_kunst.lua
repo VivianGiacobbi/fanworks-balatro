@@ -27,7 +27,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.cardarea == G.jokers and context.end_of_round and G.GAME.blind.boss) then
+    if not (context.end_of_round and context.beat_boss) then
         return
     end
 

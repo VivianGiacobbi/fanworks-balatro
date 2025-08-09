@@ -36,7 +36,7 @@ end
 function consumInfo.calculate(self, card, context)
     if context.blueprint or card.debuff or context.joker_retrigger then return end
     
-    if not (context.cardarea == G.consumeables and context.end_of_round and G.GAME.blind:get_type() == 'Boss') then return end
+    if not (context.end_of_round and context.main_eval and G.GAME.blind:get_type() == 'Boss') then return end
 
     -- not gonna bother messing with multicolor moe
     if G.GAME.blind.config.blind.key == 'bl_fnwk_final_moe' then return end

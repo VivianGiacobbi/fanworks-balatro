@@ -38,7 +38,7 @@ end
 
 function consumInfo.calculate(self, card, context)
     local bad_context = context.blueprint or context.retrigger_joker
-    if not bad_context and context.end_of_round and not context.individual and not context.repetition and card.ability.extra.reps > 0 then
+    if not bad_context and context.end_of_round and context.main_eval and card.ability.extra.reps > 0 then
         card.ability.extra.reps = card.ability.extra.reps - 1
         return {
             message = localize{type='variable',key='a_reps_minus',vars={1}},

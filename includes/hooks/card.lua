@@ -5,15 +5,8 @@
 local ref_get_id = Card.get_id
 function Card:get_id(skip_pmk)
     local id = ref_get_id(self, skip_pmk)
-    local crowns = SMODS.find_card('j_fnwk_rubicon_crown')
-    local valid_crown = nil
-    if next(crowns) then
-        for _, v in pairs(crowns) do
-            if not v.debuff then valid_crown = true end
-        end
-    end
 
-    if valid_crown and id then
+    if next(SMODS.find_card('j_fnwk_rubicon_crown')) and id then
         local rank = SMODS.Ranks[self.base.value]
         if (id > 0 and rank and rank.face) or next(find_joker("Pareidolia")) then
             return 12
@@ -349,17 +342,7 @@ end
 
 local ref_set_edition = Card.set_edition
 function Card:set_edition(edition, immediate, silent, delay, ...)
-    local valid_ilsa = G.force_ilsa
-    if not valid_ilsa then
-        local ilsas = SMODS.find_card('j_fnwk_jspec_ilsa')
-        for _, v in ipairs(ilsas) do
-            if not v.debuff then 
-                valid_ilsa = true
-                break
-            end
-        end
-    end
-
+    local valid_ilsa = G.force_ilsa or next(SMODS.find_card('j_fnwk_jspec_ilsa')) or nil
     if not valid_ilsa then
         return ref_set_edition(self, edition, immediate, silent, delay, ...)
     end
@@ -657,18 +640,6 @@ local ref_card_eor = Card.get_end_of_round_effect
 function Card:get_end_of_round_effect(...)
     local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
     if self.seal ~= 'Blue' or not next(togethers) then
-        return ref_card_eor(self, ...)
-    end
-
-    local valid = false
-    for _, v in ipairs(togethers) do
-        if not v.debuff then
-            valid = true
-            break
-        end
-    end
-
-    if not valid then
         return ref_card_eor(self, ...)
     end
 

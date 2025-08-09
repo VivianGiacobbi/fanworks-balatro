@@ -76,20 +76,26 @@ end
 ---------------------------
 
 local ref_current_pool = get_current_pool
-function get_current_pool(...)
-	local ret = {ref_current_pool(...)}
+function get_current_pool(_type, _rarity, _legendary, _append, ...)
+	local pool, key = ref_current_pool(_type, _rarity, _legendary, _append, ...)
 	if G.GAME.starting_params.fnwk_jokers_rate then
 		local new_pool = {}
-		for _, v in ipairs(ret[1]) do
-			local fnwk_rate = ArrowAPI.string.starts_with(v, 'j_fnwk') and G.GAME.starting_params.fnwk_jokers_rate or 1
-			for j=1, fnwk_rate do
+		for _, v in ipairs(pool) do
+			local rate = 1
+			local center = G.P_CENTERS[v]
+			if center and center.ability and center.ability.set == 'Joker' and center.original_mod and center.original_mod.id == 'fanworks' then
+				rate = G.GAME.starting_params.fnwk_jokers_rate
+			end
+
+			for i=1, rate do
 				new_pool[#new_pool+1] = v
 			end
 		end
-		ret[1] = new_pool -- setting the pool arg
+		
+		return new_pool, key
 	end
 
-	return unpack(ret)
+	return pool, key
 end
 
 local name_map = {

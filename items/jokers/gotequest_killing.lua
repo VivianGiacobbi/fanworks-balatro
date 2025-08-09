@@ -39,7 +39,7 @@ function jokerInfo.load(self, card, card_table, other_card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.remove_playing_cards and context.cardarea == G.jokers and not context.debuffed then
+    if context.remove_playing_cards and not card.debuff then
         for i=1, #context.removed do
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
         end
@@ -54,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
         }
     end
 
-    if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+    if context.end_of_round and context.main_eval and not context.blueprint then
         if card.ability.extra.x_mult > 1 then
             card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
             return {
@@ -68,7 +68,7 @@ function jokerInfo.calculate(self, card, context)
         end
 	end
 
-    if not (context.joker_main and context.cardarea == G.jokers) or card.debuff then
+    if not context.joker_main or card.debuff then
         return
     end
 

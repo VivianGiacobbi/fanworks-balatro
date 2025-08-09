@@ -77,7 +77,7 @@ end
 local ref_play_to_discard = G.FUNCS.draw_from_play_to_discard
 G.FUNCS.draw_from_play_to_discard = function(e)
     local larrylands = SMODS.find_card('c_fnwk_sunshine_electric')
-    if (next(larrylands)) and G.GAME.current_round.hands_played == 0 then
+    if next(larrylands) and G.GAME.current_round.hands_played == 0 then
         local play_count = #G.play.cards
         local it = 1
         for _, v in ipairs(larrylands) do

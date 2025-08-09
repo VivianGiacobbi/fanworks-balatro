@@ -113,7 +113,7 @@ function jokerInfo.calculate(self, card, context)
 		}
 	end
 
-	if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+	if context.end_of_round and context.main_eval and not context.blueprint then
 		card.ability.extra.chips = 0
 		return {
 			card = card,

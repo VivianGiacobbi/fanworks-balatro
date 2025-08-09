@@ -45,6 +45,8 @@ function jokerInfo.calculate(self, card, context)
 			end
 		end
 
+		if #valid_targets == 0 then return end
+
 		local rand_card = pseudorandom_element(valid_targets, 'fnwk_gotequest_2hot')
 		rand_card:set_ability(G.P_CENTERS.m_steel, nil, 'manual')
 

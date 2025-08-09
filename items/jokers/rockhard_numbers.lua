@@ -34,9 +34,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
     local deaths = G.GAME.consumeable_usage['c_death'] and G.GAME.consumeable_usage['c_death'].count or 0
     local hung_men = G.GAME.consumeable_usage['c_hanged_man'] and G.GAME.consumeable_usage['c_hanged_man'].count or 0
 
-    return { 
-        vars = { 
-            card.ability.extra.x_mult_mod, 
+    return {
+        vars = {
+            card.ability.extra.x_mult_mod,
             1 + card.ability.extra.x_mult_mod * (cryptids + deaths + hung_men)
         }
     }

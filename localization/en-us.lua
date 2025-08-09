@@ -311,12 +311,10 @@ return {
 			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
 			k_repeat_ex = 'Repeat!',
-
 			k_hit = 'Hit!',
 			k_bust = "Bust!",
 			k_wp = 'Well Played!',
 			k_nd = "No Dice!",
-
 			k_steel="Steel",
 			k_toilet1 = 'poop',
             k_toilet2 = 'peeing ahhhh',
@@ -346,6 +344,7 @@ return {
 				'Parnership!'
 			},
 			k_nowkiss = "Now Kiss!",
+			k_sacrifice = "Sacrifice!",
 
 			-- stand loc strings
 			k_stand_advanced = 'Advanced Stand',
@@ -855,11 +854,19 @@ return {
 					"Streetlit Joker",
 				},
 				text = {
-					"When this Joker is {C:attention}sacrificed{},",
-					"create an {C:attention}Enhancement{}-granting",
-					"{C:purple}Tarot{} card, {C:attention}regenerates{} when",
-					"a {C:attention}Blind{} is defeated",
-					"{C:inactive}(Must have room){}",
+					{
+						"When a {C:attention}Boss Blind{} is defeated,",
+						"{C:dark_edition}sacrifice{} this Joker and create",
+						"an {C:attention}Enhancement{} {C:tarot}Tarot{} card",
+						"{C:inactive}(Must have room){}",
+					},
+					{
+						"When {C:attention}sacrificed{}, this Joker",
+						"gains {C:red}#1#X the ante{} as Mult",
+						"and {C:dark_edition}regenerates{} in the",
+						"next {C:attention}shop{} with {C:gold}+$#2#{} cost",
+						"{C:inactive}(Currently{} {C:red}+#3#{} {C:inactive}Mult){}"
+					},
 				},
 			},
 			j_fnwk_streetlight_resil_regen = {
@@ -1191,7 +1198,7 @@ return {
 			j_fnwk_rockhard_numbers = {
 				name = "High Numbers",
 				text = {
-					"This Joker gains {X:mult,C:white}X#1#{} Mult",
+					"This Joker gives {X:mult,C:white}X#1#{} Mult",
 					"for every {C:tarot}Death{}, {C:tarot}Hanged Man{},",
 					"or {C:spectral}Cryptid{} used this run",
 					"{C:inactive}(Currently {}{X:mult,C:white}X#2#{} {C:inactive}Mult){}"
@@ -2163,9 +2170,10 @@ return {
 			c_fnwk_rubicon_infidelity = {
 				name = "Hi Infidelity",
 				text = {
-					"When a hand is {C:attention}played{}, each scoring card",
-					"that shares the {C:attention}leftmost card's suit{} has a",
-					"{C:green}#1# in #2#{} chance to {C:attention}transform{} into that card"
+					"{C:green}#1# in #2#{} chance to {C:attention}transform{}",
+					"each {C:attention}scoring{} {V:1}#3#{} into the",
+					"{C:attention}rightmost scoring{} {V:1}#3#{}",
+					"{s:0.8}Suit changes every round{}"
 				},
 			},
 			c_fnwk_rubicon_dance = {

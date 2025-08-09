@@ -191,7 +191,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.end_of_round then
+	if context.end_of_round and context.main_eval then
 		card.ability.extra.disabled = nil
 	end
 end

@@ -58,7 +58,7 @@ function jokerInfo.calculate(self, card, context)
         card.ability.last_digits = dollar_digits
     end
 
-    if context.end_of_round and not context.individual and not context.repetition and not card.getting_sliced then
+    if context.end_of_round and context.main_eval and not card.getting_sliced then
         local count = 0
         local other_crimelords = {}
         for _, v in ipairs(G.jokers.cards) do

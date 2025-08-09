@@ -56,7 +56,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.setting_blind or (context.end_of_round and not context.individual and not context.repetition) then
+    if context.setting_blind or (context.end_of_round and context.main_eval) then
         card.ability.fnwk_strut_prev_played = {}
         card.ability.fnwk_strut_rank_count = 0
     end

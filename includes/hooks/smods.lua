@@ -6,10 +6,13 @@ SMODS.current_mod.reset_game_globals = function(run_start)
         G.GAME.fnwk_extra_discounts = {}
         G.GAME.fnwk_chip_novas = 0
         G.GAME.fnwk_consecutive_hands = 0
+        G.GAME.fnwk_saved_resils = {}
+        G.GAME.fnwk_unique_resils = 0
     end
 
     G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback')
     G.GAME.current_round.fnwk_packs_rerolled = 0
+    G.GAME.fnwk_rerolls_this_round = 0
     fnwk_reset_funkadelic()
     fnwk_reset_infidel()
     fnwk_reset_loyal()
@@ -216,24 +219,4 @@ function SMODS.showman(...)
     end
 
     return ret
-end
-
-
-
-
-
----------------------------
---------------------------- Hand level modification behavior
----------------------------
-
-function SMODS.get_effective_hand_level(base_level, optional_contexts)
-    local context = {mod_handlevel = true, numerator = base_level}
-    if optional_contexts and type(optional_contexts) == 'table' then
-        for k, v in pairs(optional_contexts) do
-            context[k] = v
-        end
-    end
-    local mod_level = SMODS.calculate_context(context)
-    mod_level.numerator = mod_level.numerator or base_level
-    return mod_level.numerator
 end

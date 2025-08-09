@@ -24,27 +24,48 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.before then
-        local glassed = 0
-        for k, v in ipairs(context.scoring_hand) do
-            if v:is_suit('Spades') and SMODS.pseudorandom_probability(card, 'fnwk_rubicon_bone', 1, card.ability.extra, 'fnwk_rubicon_bone') then 
-                glassed = glassed + 1
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        v:set_ability(G.P_CENTERS.m_glass, nil, false)
-                        v:juice_up()
-                        return true
-                    end
-                }))
-            end
-        end
-        if glassed > 0 then
-            return {
+    if not context.before or card.debuff then return end
+
+    for _, v in ipairs(context.scoring_hand) do
+        if v:is_suit('Spades') and v.config.center.key ~= 'm_glass' and
+        SMODS.pseudorandom_probability(card, 'fnwk_rubicon_bone', 1, card.ability.extra, 'fnwk_rubicon_bone') then
+            v:set_ability(G.P_CENTERS.m_glass, nil, 'manual')
+
+            -- flip first
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    v:flip()
+                    play_sound('card1')
+                    v:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    v:set_sprites(v.config.center)
+                    return true
+                end
+            }))
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    v:flip()
+                    play_sound('tarot2', 1, 0.6)
+                    v:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+
+            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {
                 message = localize('k_glass_ex'),
-                sound = 'highlight2',
                 colour = G.C.GREY,
-                card = context.blueprint_card or card
-            } 
+                delay = 0.3
+            })
         end
     end
 end

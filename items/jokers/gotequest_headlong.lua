@@ -29,7 +29,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.blueprint or not context.cardarea == G.jokers then return end
+	if context.blueprint then return end
 
 	if context.hand_drawn and card.ability.dzvalin_triggered then
 		G.E_MANAGER:add_event(Event({
@@ -49,7 +49,7 @@ function jokerInfo.calculate(self, card, context)
 		}
 	end
 
-	if context.end_of_round and card.ability.dzvalin_ready then
+	if context.end_of_round and context.main_eval and card.ability.dzvalin_ready then
 		card.ability.dzvalin_triggered = nil
 		card.ability.dzvalin_ready = nil
 	end

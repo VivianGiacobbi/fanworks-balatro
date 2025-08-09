@@ -20,7 +20,6 @@ function fnwk_reset_loyal()
 end
 
 function fnwk_reset_infidel()
-
     local suits = {}
     for _, suit in pairs(SMODS.Suits) do
         suits[#suits+1] = suit.key
@@ -34,7 +33,8 @@ function fnwk_reset_infidel()
 		suits[j] = temp
 	end
 
-    G.GAME.fnwk_infidel_suits= {
+    G.GAME.fnwk_infidel_suits = {
+        main_suit = suits[1],
         [suits[1]] = true,
         [suits[2]] = true,
     }
@@ -86,9 +86,33 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
         end
     end
 
-    local ret = ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
+    if area == G.shop_jokers and next(G.GAME.fnwk_saved_resils) and G.GAME.fnwk_rerolls_this_round == 0
+	and not (G.SETTINGS.tutorial_progress and G.SETTINGS.tutorial_progress.forced_shop
+	and G.SETTINGS.tutorial_progress.forced_shop[#G.SETTINGS.tutorial_progress.forced_shop]) then
+		-- hate doing this
+		local pop_resil = table.remove(G.GAME.fnwk_saved_resils, 1)
+		local card = Card(
+			area.T.x + area.T.w/2,
+			area.T.y,
+			G.CARD_W,
+			G.CARD_H,
+			nil,
+			G.P_CENTERS[pop_resil.key]
+		)
 
-    return ret
+		card.ability.fnwk_resil_id = pop_resil.fnwk_resil_id
+		card.ability.extra.times_sold = pop_resil.times_sold
+        card.ability.extra.mult = pop_resil.mult
+        card.ability.fnwk_resil_form = '_regen'
+		card.cost = card.cost + (card.ability.extra.cost_mod * card.ability.extra.times_sold)
+		card:set_edition(pop_resil.edition)
+        card.children.center:set_sprite_pos({x = 1, y = 0})
+		create_shop_card_ui(card)
+
+		return card
+	end
+    
+    return ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
 end
 
 

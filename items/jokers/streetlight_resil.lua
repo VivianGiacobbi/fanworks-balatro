@@ -1,10 +1,13 @@
 local jokerInfo = {
 	name = 'Resilient Joker',
 	config = {
-		extra = {},
-		form = 'normal',
-		state = 'default',
-		lastEdition = nil,
+		extra = {
+			mult = 0,
+			mult_mod = 3,
+			cost_mod = 1,
+			times_sold = 0,
+			sell_mod = 1
+		},
 	},
 	rarity = 2,
 	cost = 8,
@@ -22,123 +25,118 @@ local jokerInfo = {
 	alt_art = true
 }
 
-SMODS.Atlas({ key = 'streetlight_resil_regen', path ='jokers/streetlight_resil_regen.png', px = 71, py = 95 })
+function jokerInfo.loc_vars(self, info_queue, card)
+	return {
+		vars = {
+			card.ability.extra.mult_mod,
+			card.ability.extra.cost_mod,
+			card.ability.extra.mult,
+		},
+		key = self.key..(card.ability.fnwk_resil_form or '')}
+end
 
-local function updateSprite(card)
-	if card.ability.form then
-		if card.ability.form == 'regen' then
-			local old_atlas = card.config.center.atlas
-			card.config.center.atlas = 'fnwk_streetlight_resil_regen'
-			card:set_sprites(card.config.center)
-			card.config.center.atlas = old_atlas
-		else
-			card:set_sprites(card.config.center)
+function jokerInfo.add_to_deck(self, card, from_debuff)
+	if from_debuff then return end
+	card:set_cost()
+	if card.ability.fnwk_resil_form then
+		FnwkReviveEffect(card)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 1,
+			func = function()
+				card.children.center:set_sprite_pos({x = 0, y = 0})
+				return true
+			end
+		}))
+		
+		card.ability.fnwk_resil_form = nil
+	end
+
+	if not card.ability.fnwk_resil_id then
+		if not G.GAME.fnwk_unique_resils then
+			G.GAME.fnwk_unique_resils = (G.GAME.fnwk_unique_resils or 0) + 1
+		end
+		card.ability.fnwk_resil_id = G.GAME.fnwk_unique_resils
+	else
+		-- handles what occurs on copying
+		local other_resils = SMODS.find_card(self.key)
+		if next(other_resils) then
+			for _, v in ipairs(other_resils) do
+				if v ~= card and v.ability.fnwk_resil_id == card.ability.fnwk_resil_id then
+					G.GAME.fnwk_unique_resils = G.GAME.fnwk_unique_resils + 1
+					card.ability.fnwk_resil_id = G.GAME.fnwk_unique_resils
+					return
+				end
+			end
 		end
 	end
-end
-
-function jokerInfo.loc_vars(self, info_queue, card)
-	return { key = 'j_fnwk_streetlight_resil'..(card.ability.form == 'regen' and '_regen' or '')}
-end
-
-function jokerInfo.add_to_deck(self, card)
-	card.sell_cost = math.max(1, math.floor(card.cost/2))
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.blueprint then return end
+	if card.debuff then return end
 	-- sets this value so it won't regenerate upon being sold
 	-- amanda just lets herself get sold out
-	if (context.selling_self or card.debuff) then
-		card.ability.state = 'selling'
+
+	if context.joker_main and card.ability.extra.mult > 0 then
+		return {
+			mult = card.ability.extra.mult,
+			card = context.blueprint_card or card
+		}
+	end
+
+	if context.blueprint then return end
+	if context.selling_self or card.fnwk_resil_sold then
+		card.fnwk_resil_sold = true
 		return
 	end
 
-	if context.cardarea == G.jokers and context.removed_card == card then
-		if card.ability.state == 'default' then
-			card.ability.state = 'sacrifice'
+	if context.end_of_round and context.main_eval and context.beat_boss then
+		G.E_MANAGER:add_event(Event({func = function()
+			play_sound('slice1', 0.96+math.random()*0.08)
+			card:start_dissolve()
+			return true
+		end}))
 
-			G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-			local new_joker = create_card('Joker', G.jokers, nil, 2, true, nil, 'j_fnwk_streetlight_resil', 'resilient')
-			new_joker:set_edition({negative = true}, true, true)
-
-			new_joker.config.center.eternal_compat = true
-			new_joker:set_eternal(true)
-			new_joker.config.center.eternal_compat = false
-
+		if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+			local tarot_subset = {}
+			for _, v in pairs(G.P_CENTER_POOLS.Tarot) do
+                if v.config.mod_conv then
+                    tarot_subset[#tarot_subset+1] = v.key
+                end
+            end
 			
-			new_joker.ability.state = 'hidden'
-			new_joker.ability.lastEdition = card.edition and card.edition.type or nil
-
-			new_joker.ability.form = 'regen'
-			updateSprite(new_joker)
-
-			new_joker:add_to_deck()
-			new_joker:hard_set_T(card.T.x, card.T.y, card.T.w, card.T.h)
-			G.jokers:emplace(new_joker)
-			G.GAME.joker_buffer = 0
-			-- create specific tarot subset to synergize with vampire
-			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit  then
-				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-				local tarot_subset = {'c_magician', 'c_empress', 'c_heirophant', 'c_lovers', 'c_chariot', 'c_justice', 'c_devil', 'c_tower'}
-				local get_tarot = pseudorandom_element(tarot_subset, pseudoseed('resil'))
-				G.E_MANAGER:add_event(Event({
-					func = function() 
-						local newTarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil, get_tarot, 'car')
-						newTarot:add_to_deck()
-						G.consumeables:emplace(newTarot)
-						G.GAME.consumeable_buffer = 0
-					return true
-				end}))  
-			end
-
-			-- hopefully interrupting the dissolve wont fuck things up?
-			card:remove()
-			new_joker:juice_up()
+			local get_tarot = pseudorandom_element(tarot_subset, pseudoseed('fnwk_streetlight_resil'))
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					SMODS.add_card({area = G.consumables, key = get_tarot})
+					G.GAME.consumeable_buffer = 0
+				return true
+			end}))
 		end
+		return
 	end
 
-	if context.end_of_round and context.individual then	
-		-- avoid regenerating if there's not an available slot
-		-- I.E. the player used Judgement during a run
-		if card.ability.state == 'hidden' then
-			card.ability.state = 'retire'
-			if #G.jokers.cards + G.GAME.joker_buffer >= G.jokers.config.card_limit then
-				G.E_MANAGER:add_event(Event({func = function()
-					card:start_dissolve(nil, false)
-					return true 
-				end}))
-			else
-				-- recreate the resil
-				card.config.center.eternal_compat = true
-				card:set_eternal(false)
-				card.config.center.eternal_compat = false
+	if context.removed_card == card then
+		sendDebugMessage('removed card')
+		card.ability.extra.times_sold = card.ability.extra.times_sold + card.ability.extra.sell_mod
+		card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * G.GAME.round_resets.ante
+		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "times_sold", scalar_value = "sell_mod"})
+		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "mult", scalar_value = "mult_mod"})
+		G.GAME.fnwk_saved_resils[#G.GAME.fnwk_saved_resils+1] = {
+			key = card.config.center.key,
+			id = card.ability.fnwk_resil_id,
+			mult = card.ability.extra.mult,
+			times_sold = card.ability.extra.times_sold,
+			edition = card.edition and 'e_'..card.edition.type or nil
+		}
 
-				local lastEdition = card.ability.lastEdition
-				if not lastEdition then
-					card:set_edition({negative = false}, true, true)
-				else
-					if lastEdition == "foil" then
-						card:set_edition({foil = true}, true, true)
-					elseif lastEdition == "holo" then
-						card:set_edition({holo = true}, true, true)
-					elseif lastEdition == "polychrome" then
-						card:set_edition({polychrome = true}, true, true)
-					elseif lastEdition == "negative" then
-						card:set_edition({negative = true}, true, true)
-					end
-				end			
-
-				card:juice_up()
-				play_sound('tarot2')
-
-				card.ability.state = 'default'
-				card.ability.form = 'normal'
-				updateSprite(card)
-			end
-		end
-	end	
+		card_eval_status_text(card, 'extra', nil, nil, nil, {
+			message = localize('k_sacrifice'),
+			colour = G.C.DARK_EDITION,
+			instant = true
+		})
+	end
 end
 
 return jokerInfo
-	

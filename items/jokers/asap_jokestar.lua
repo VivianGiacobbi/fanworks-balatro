@@ -28,11 +28,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not context.cardarea == G.jokers or context.blueprint then
-		return
-	end
+	if context.blueprint then return end
 
-	if context.end_of_round and card.ability.added_h_size > 0 then
+	if context.end_of_round and context.main_eval and card.ability.added_h_size > 0 then
 		G.hand:change_size(-card.ability.added_h_size)
 		card.ability.added_h_size = 0
 		return {

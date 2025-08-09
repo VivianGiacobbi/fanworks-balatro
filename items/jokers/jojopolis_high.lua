@@ -17,7 +17,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.calculate(self, card, context)
-	if context.mod_handlevel and (context.highlight or context.initial) then
+	if context.mod_handlevel and (context.arrow_highlight_level or context.arrow_initial_level) then
 		local highest = 0
 		for k, v in pairs(G.GAME.hands) do
 			if v.level > highest then highest = v.level end

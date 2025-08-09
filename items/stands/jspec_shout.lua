@@ -25,7 +25,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if not context.end_of_round or context.individual or context.repetition 
+    if not (context.end_of_round and context.main_eval)
     or context.joker_retrigger or context.blueprint or card.debuff then
         return
     end

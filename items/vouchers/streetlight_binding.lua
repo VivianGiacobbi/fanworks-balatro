@@ -39,7 +39,7 @@ function voucherInfo.check_for_unlock(self, args)
 end
 
 function voucherInfo.calculate(self, card, context)
-    if not (context.end_of_round and context.game_over) or card.ability.extra.used then
+    if not (context.end_of_round and context.main_eval and context.game_over) or card.ability.extra.used then
         return
     end
     

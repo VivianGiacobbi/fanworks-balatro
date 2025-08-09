@@ -1,25 +1,12 @@
 
 local ref_glass_calc = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
-    calculate = function(self, card, context)
-        if context.fnwk_dummy_flag then
-            sendDebugMessage('dummy flag caught')
-        end
-        
+    calculate = function(self, card, context)      
         local ret, post = ref_glass_calc(self, card, context)
-        
+
         if context.destroy_card and context.cardarea == G.play and context.destroy_card == card
-        and not context.destroy_card.glass_trigger then
-            local shatter_mes = SMODS.find_card('c_fnwk_iron_shatter')
-            local valid = false
-            for _, v in ipairs(shatter_mes) do
-                if not v.debuff then
-                    valid = true
-                    break
-                end
-            end
-            
-            if valid and SMODS.pseudorandom_probability(card, 'glass', 1, card.ability.extra) then
+        and not context.destroy_card.glass_trigger then     
+            if next(SMODS.find_card('c_fnwk_iron_shatter')) and SMODS.pseudorandom_probability(card, 'glass', 1, card.ability.extra) then
                 card.glass_trigger = true
                 ret = ret or {}
                 ret.remove = true
@@ -30,25 +17,22 @@ SMODS.Enhancement:take_ownership('glass', {
     end,
 }, true)
 
-SMODS.Consumable:take_ownership('c_hermit',
-    {
-        use = function(self, card, area, copier)
-            if card.ability.name == 'The Hermit' then
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-                    play_sound('timpani')
-                    card:juice_up(0.3, 0.5)
-                    if G.GAME.dollars < 0 then
-                        ease_dollars(math.max(-card.ability.extra, G.GAME.dollars), true)
-                    else
-                        ease_dollars(math.min(G.GAME.dollars, card.ability.extra), true)
-                    end
-                    return true end }))
-                delay(0.6)
-            end
-        end,
-    },
-    true
-)
+SMODS.Consumable:take_ownership('c_hermit', {
+    use = function(self, card, area, copier)
+        if card.ability.name == 'The Hermit' then
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                play_sound('timpani')
+                card:juice_up(0.3, 0.5)
+                if G.GAME.dollars < 0 then
+                    ease_dollars(math.max(-card.ability.extra, G.GAME.dollars), true)
+                else
+                    ease_dollars(math.min(G.GAME.dollars, card.ability.extra), true)
+                end
+                return true end }))
+            delay(0.6)
+        end
+    end,
+}, true)
 
 if fnwk_enabled['enable_Queer'] then
     SMODS.Edition:take_ownership('e_polychrome',

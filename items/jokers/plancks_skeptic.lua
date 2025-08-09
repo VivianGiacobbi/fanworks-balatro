@@ -45,7 +45,7 @@ local function create_logic(type, legendary, rarity, soulable, forced_key, key_a
         end
     end
 
-    if _type == 'Base' then 
+    if _type == 'Base' then
         forced_key = 'c_base'
     end
 

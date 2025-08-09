@@ -38,7 +38,7 @@ function jokerInfo.calculate(self, card, context)
 		}
 	end
 
-	if context.end_of_round and not context.blueprint and not context.individual and G.GAME.current_round.discards_left > 0 then
+	if context.end_of_round and not context.blueprint and context.main_eval and G.GAME.current_round.discards_left > 0 then
 		return {
 			message = localize('k_upgrade_ex'),
 			card = card,

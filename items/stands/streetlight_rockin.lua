@@ -30,7 +30,7 @@ end
 function consumInfo.calculate(self, card, context)
     if context.blueprint or context.retrigger_joker then return end
 
-	if context.end_of_round and card.ability.extra.added_h_size > 0 then
+	if context.end_of_round and context.main_eval and card.ability.extra.added_h_size > 0 then
 		G.hand:change_size(-card.ability.extra.added_h_size)
 		card.ability.extra.added_h_size = 0
 		return {

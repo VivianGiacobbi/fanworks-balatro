@@ -43,7 +43,8 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.before and context.cardarea == G.jokers and not card.debuff and not context.blueprint then
         if #context.full_hand <= 3 then
-			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod	
+			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
+			SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "chips", scalar_value = "chips_mod"})
 			return {
 				message = localize('k_upgrade_ex'),
                 colour = G.C.CHIPS,

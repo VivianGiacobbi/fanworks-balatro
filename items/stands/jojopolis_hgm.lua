@@ -80,7 +80,7 @@ function consumInfo.calculate(self, card, context)
         }
     end
 
-    if context.end_of_round and not context.individual and card.ability.fnwk_hgm_mod > 0 then
+    if context.end_of_round and context.main_eval and card.ability.fnwk_hgm_mod > 0 then
         local mod = card.ability.fnwk_hgm_mod
         G.hand:change_size(-mod)
         card.ability.fnwk_hgm_mod = 0

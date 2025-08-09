@@ -26,7 +26,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.mod_handlevel and context.before then
+	if context.mod_handlevel and context.arrow_before_level then
         local tick_cards = {}
 		local hand_level = context.before
         for _, v in ipairs(context.scoring_hand) do
@@ -39,7 +39,7 @@ function jokerInfo.calculate(self, card, context)
 		if #tick_cards == 0 then return end
 
 		for i, v in ipairs(tick_cards) do
-			local fake_level = context.before + i
+			local fake_level = context.arrow_before_level + i
 			local fake_mult = math.max(G.GAME.hands[context.handname].s_mult + G.GAME.hands[context.handname].l_mult*(fake_level - 1), 1)
 			local fake_chips = math.max(G.GAME.hands[context.handname].s_chips + G.GAME.hands[context.handname].l_chips*(fake_level - 1), 0)
 			G.E_MANAGER:add_event(Event({

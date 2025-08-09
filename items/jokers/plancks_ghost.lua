@@ -71,7 +71,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not context.cardarea == G.jokers or context.blueprint then return end
+	if context.blueprint then return end
     if context.removed_card and context.removed_card ~= card and context.removed_card.config.center.key ~= 'j_fnwk_plancks_ghost' then	
 		
 		-- single level compare for valid keys in the main ability table
@@ -100,7 +100,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.extra.saved_abilities[context.removed_card.config.center.key] = saved_ability
 	end
 
-	if context.cardarea == G.jokers and context.created_card and context.created_card ~= card and card.ability.extra.saved_abilities[context.card.config.center.key] then			
+	if context.created_card and context.created_card ~= card and card.ability.extra.saved_abilities[context.created_card.config.center.key] then			
 		for k, v in pairs(card.ability.extra.saved_abilities[context.created_card.config.center.key]) do
 			context.created_card.ability[k] = v
 		end
@@ -108,94 +108,7 @@ function jokerInfo.calculate(self, card, context)
 		card.ability.extra.saved_abilities[context.created_card.config.center.key] = nil
 		context.created_card:set_cost()
 
-		G.E_MANAGER:add_event(Event({
-			blockable = false,
-			trigger = 'after', 
-			func = function()
-				context.created_card.ability.make_vortex = true
-				
-				local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
-				card.dissolve = 0
-				context.created_card.dissolve_colours = {G.C.WHITE}
-
-				local start_time = G.TIMERS.TOTAL
-				local percent = 0
-				play_sound('explosion_buildup1')
-				card.juice = {
-					scale = 0,
-					r = 0,
-					handled_elsewhere = true,
-					start_time = start_time, 
-					end_time = start_time + explode_time
-				}
-
-				local particles = Particles(0, 0, 0,0, {
-					timer_type = 'TOTAL',
-					timer = 0.01*explode_time,
-					scale = 0.2,
-					speed = 2,
-					lifespan = 0.2*explode_time,
-					attach = context.created_card,
-					colours = context.created_card.dissolve_colours,
-					fill = true
-				})
-
-				G.E_MANAGER:add_event(Event({
-					blockable = false,
-					func = (function()
-							if context.created_card.juice then 
-								percent = (G.TIMERS.TOTAL - start_time)/explode_time
-								context.created_card.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
-								context.created_card.juice.scale = percent*0.15
-							end
-							if G.TIMERS.TOTAL - start_time > 1.5*explode_time then return true end
-						end)
-				}))
-
-				G.E_MANAGER:add_event(Event({
-					trigger = 'ease',
-					blockable = false,
-					ref_table = context.card,
-					ref_value = 'dissolve',
-					ease_to = 0.3,
-					delay =  0.9*explode_time,
-					func = (function(t) return t end)
-				}))
-
-				G.E_MANAGER:add_event(Event({
-					blockable = false,
-					delay = 1.6*explode_time,
-					func = (function() 
-						if G.TIMERS.TOTAL - start_time > 1.55*explode_time then  
-							context.created_card.dissolve = 0
-							percent = 0
-							context.created_card.juice = {
-								scale = 0,
-								r = 0,
-								handled_elsewhere = true,
-								start_time = start_time, 
-								end_time = G.TIMERS.TOTAL
-							}
-							return true 
-						end
-					end)
-				}))
-				particles:fade()
-
-				G.E_MANAGER:add_event(Event({
-					blockable = false,
-					trigger = 'after', 
-					delay = 1.2, 
-					func = function()
-						context.created_card.ability.make_vortex = nil
-						return true 
-					end
-				}))
-				card_eval_status_text(context.created_card or card, 'extra', nil, nil, nil, {message = localize('k_revived'), colour = G.C.DARK_EDITION, sound = 'negative', delay = 1.25})
-				return true 
-			end
-		}))
-			
+		FnwkReviveEffect(context.created_card)
 	end
 end
 
