@@ -1,11 +1,11 @@
 
 local ref_glass_calc = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
-    calculate = function(self, card, context)      
+    calculate = function(self, card, context)
         local ret, post = ref_glass_calc(self, card, context)
 
         if context.destroy_card and context.cardarea == G.play and context.destroy_card == card
-        and not context.destroy_card.glass_trigger then     
+        and not context.destroy_card.glass_trigger then
             if next(SMODS.find_card('c_fnwk_iron_shatter')) and SMODS.pseudorandom_probability(card, 'glass', 1, card.ability.extra) then
                 card.glass_trigger = true
                 ret = ret or {}

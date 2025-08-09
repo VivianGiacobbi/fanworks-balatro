@@ -220,3 +220,82 @@ function SMODS.showman(...)
 
     return ret
 end
+
+
+
+
+function SMODS.score_card(card, context)
+    local reps = { 1 }
+    local j = 1
+    while j <= #reps do
+        if reps[j] ~= 1 then
+            local _, eff = next(reps[j])
+            while eff.retrigger_flag do
+                SMODS.calculate_effect(eff, eff.card); j = j+1; _, eff = next(reps[j]) 
+            end
+            SMODS.calculate_effect(eff, eff.card)
+            percent = percent + percent_delta
+        end
+
+        local fishies = SMODS.find_card('j_fnwk_rubicon_fishy')
+        local fishy_reps = #fishies + 1
+
+        local flags = {}
+        for i=1, fishy_reps do
+            context.main_scoring = true
+
+            local effects = {}
+            if i > 1 then
+                card.fnwk_fishy_calc = true
+                if card.config.center.key ~= 'c_base' then
+                    context.extra_enhancement = true
+                    card.ability.extra_enhancement = card.config.center.key
+                    effects = { eval_card(card, context) }
+                    card.ability.extra_enhancement = nil
+                    context.extra_enhancement = nil
+                end
+                SMODS.calculate_quantum_enhancements(card, effects, context)
+
+                for _, v in ipairs(effects) do
+                   for _, eff in pairs(v) do
+                        eff.juice_card = fishies[i-1]
+                        eff.message_card = card
+                   end
+                end
+            else
+                effects = { eval_card(card, context) }
+                SMODS.calculate_quantum_enhancements(card, effects, context)
+                SMODS.fnwk_calculate_quantum_editions(card, effects, context)
+            end
+
+            context.main_scoring = nil
+            context.individual = true
+            context.other_card = card
+
+            if next(effects) then
+                SMODS.calculate_card_areas('jokers', context, effects, { main_scoring = true })
+                SMODS.calculate_card_areas('individual', context, effects, { main_scoring = true })
+            end
+
+            if i == 1 then
+                flags = SMODS.trigger_effects(effects, card)
+            else
+                SMODS.trigger_effects(effects, card)
+                card.fnwk_fishy_calc = nil
+            end
+
+            context.individual = nil
+        end
+
+        if reps[j] == 1 and flags.calculated then
+            context.repetition = true
+            context.card_effects = effects
+            SMODS.calculate_repetitions(card, context, reps)
+            context.repetition = nil
+            context.card_effects = nil
+        end
+        j = j + (flags.calculated and 1 or #reps)
+        context.other_card = nil
+        card.lucky_trigger = nil
+    end
+end

@@ -6,7 +6,7 @@ local jokerInfo = {
 	rarity = 1,
 	cost = 4,
     unlocked = false,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	origin = {
@@ -32,28 +32,38 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.blueprint then
-        return
-    end
-    
+    if card.debuff then return end
+
     if context.first_hand_drawn then
+        local faces = {}
+        for _, rank_key in ipairs(SMODS.Rank.obj_buffer) do
+            local rank = SMODS.Ranks[rank_key]
+            if rank.face then table.insert(faces, rank) end
+        end
+        local new_face = SMODS.create_card({
+            set = "Base",
+            area = G.discard,
+            rank = pseudorandom_element(faces, 'familiar_create').card_key
+        })
+        G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+        new_face.playing_card = G.playing_card
+        table.insert(G.playing_cards, new_face)
+
+        local juice_card = context.blueprint_card or card
         G.E_MANAGER:add_event(Event({
-            func = function() 
-                local _card = create_playing_card({
-                    front = pseudorandom_element(G.P_CARDS, pseudoseed('iluclark')), 
-                    center = G.P_CENTERS.c_base}, G.hand, nil, nil, {G.C.SECONDARY_SET.Enhanced})
-                local _rank = pseudorandom_element({'J','Q','K'}, pseudoseed('clarkbestboy'))
-                local suit_prefix = string.sub(_card.base.suit, 1, 1)..'_'
-                local rank_suffix =_rank
-                _card:set_base(G.P_CARDS[suit_prefix..rank_suffix])
-                G.GAME.blind:debuff_card(_card)
+            func = function()
+                G.hand:emplace(new_face)
+                new_face:start_materialize()
+                G.GAME.blind:debuff_card(new_face)
                 G.hand:sort()
-                local juice_card = context.blueprint_card or card
                 juice_card:juice_up()
                 return true
-            end}))
+            end
+        }))
+        delay(0.6)
+        playing_card_joker_effects({new_face})
 
-        playing_card_joker_effects({true})
+        return nil, true
     end
 end
 

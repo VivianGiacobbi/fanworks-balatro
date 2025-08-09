@@ -35,7 +35,7 @@ end
 function consumInfo.calculate(self, card, context)
     if card.debuff or context.blueprint or context.retrigger_joker then return end
 
-    if context.fix_probability and context.identifier == 'glass' then
+    if context.fix_probability and context.identifier == 'glass' and context.trigger_obj then
         if context.trigger_obj:is_suit(card.ability.extra.suit) then
             return {
                 numerator = 0
