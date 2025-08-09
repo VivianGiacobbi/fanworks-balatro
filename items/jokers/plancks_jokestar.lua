@@ -41,7 +41,8 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.blueprint and not context.retrigger_joker and context.before and context.scoring_name == card.ability.extra.hand then
+    if not context.blueprint and not context.retrigger_joker
+    and context.before and context.scoring_name == card.ability.extra.hand then
         local old_mult = card.ability.extra.mult
         card.ability.extra.mult = card.ability.extra.last_mult + card.ability.extra.mult
         card.ability.extra.last_mult  = old_mult

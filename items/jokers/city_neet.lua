@@ -110,7 +110,7 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not (context.cardarea == G.jokers and context.joker_main) or card.debuff then
+	if not context.joker_main or card.debuff then
 		return
 	end
 

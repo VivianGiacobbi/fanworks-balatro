@@ -25,20 +25,17 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if card.debuff then return end
 
-	if card.debuff then
-		return
-	end
-
-	if context.cardarea == G.jokers and context.joker_main then
+	if context.joker_main then
 		return {
-			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult_mod * G.GAME.unused_discards}},
+			mult = card.ability.extra.mult_mod * G.GAME.unused_discards,
 			card = context.blueprint_card or card,
-			mult_mod = card.ability.extra.mult_mod * G.GAME.unused_discards,
 		}
 	end
 
-	if context.end_of_round and not context.blueprint and context.main_eval and G.GAME.current_round.discards_left > 0 then
+	if context.end_of_round and not context.blueprint
+	and context.main_eval and G.GAME.current_round.discards_left > 0 then
 		return {
 			message = localize('k_upgrade_ex'),
 			card = card,

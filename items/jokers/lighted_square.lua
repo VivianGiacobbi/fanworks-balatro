@@ -38,19 +38,12 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-
-    if context.blueprint then
-        return
-    end
+    if context.blueprint or card.debuff then return end
     
-    if context.destroy_card and not card.debuff and #context.scoring_hand == card.ability.extra.hand_size then
-        local destroy = context.scoring_hand[#context.scoring_hand]
-        if context.destroy_card ~= destroy then
-            return
-        end
-
+    if context.destroy_card and #context.scoring_hand == card.ability.extra.hand_size
+    and context.destroy_card == context.scoring_hand[#context.scoring_hand] then
         return {
-            delay = 0.45, 
+            delay = 0.45,
             remove = true,
         }
     end

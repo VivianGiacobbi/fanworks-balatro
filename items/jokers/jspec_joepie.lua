@@ -58,14 +58,12 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.cardarea == G.jokers and context.fnwk_hand_upgraded) or context.blueprint then
+    if not context.fnwk_hand_upgraded or context.blueprint then
         return
     end
 
     local hand_size = get_lowest_planet() * card.ability.extra.h_mod
-    if hand_size == card.ability.last_size then
-        return
-    end
+    if hand_size == card.ability.last_size then return end
 
     G.hand:change_size(hand_size - card.ability.last_size)
     if hand_size > card.ability.last_size then

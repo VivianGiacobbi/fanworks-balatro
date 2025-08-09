@@ -25,16 +25,11 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if not (context.individual and context.cardarea == G.play) then
-		return
-	end
-    if card.debuff or context.other_card.debuff then
+	if not (context.individual and context.cardarea == G.play)
+	or card.debuff or context.other_card.debuff
+	or context.other_card.config.center.key ~= 'c_base' then
         return
     end
-
-	if context.other_card.config.center.key ~= 'c_base' then
-		return { no_retrigger = true }
-	end
 
 	if SMODS.pseudorandom_probability(card, 'fnwk_moscow_mule', 1, card.ability.extra.chance, 'fnwk_moscow_mule') then
 		local change_card = context.other_card

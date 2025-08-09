@@ -35,6 +35,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if card.debuff then return end
 
 	if not context.blueprint then
 		if (context.buying_card and context.card.ability.set == 'Joker') or (context.created_card and context.area == G.jokers) then
@@ -49,7 +50,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if not (context.cardarea == G.jokers and context.joker_main) or card.debuff then
+	if not context.joker_main then
 		return
 	end
 

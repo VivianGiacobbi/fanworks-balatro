@@ -3,6 +3,7 @@ local jokerInfo = {
 	config = {
 		extra = {
 			hands_count = 7,
+			hands_mod = 1,
 		}
 	},
 	rarity = 2,
@@ -26,19 +27,25 @@ end
 
 
 function jokerInfo.calculate(self, card, context)
-	if not context.cardarea == G.jokers or card.debuff or context.blueprint then
+	if card.debuff or context.blueprint then
         return
     end
 
 	if context.joker_main then
-		card.ability.extra.hands_count = card.ability.extra.hands_count - 1
+		card.ability.extra.hands_count = card.ability.extra.hands_count - card.ability.extra.hands_mod
+		SMODS.scale_card(card, {
+			ref_table = card.ability.extra,
+			ref_value = "hands_count",
+			scalar_value = "hands_mod",
+			operation = "-",
+		})
 		return {
 			balance = true
 		}
 	end
 
 	if context.after then
-		if card.ability.extra.hands_count <= 0 then 
+		if card.ability.extra.hands_count <= 0 then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					play_sound('tarot1')
@@ -51,13 +58,15 @@ function jokerInfo.calculate(self, card, context)
 						delay = 0.3,
 						blockable = false,
 						func = function()
-								G.jokers:remove_card(self)
-								card:remove()
-								card = nil
-							return true; end})) 
+							G.jokers:remove_card(self)
+							card:remove()
+							card = nil
+							return true
+						end
+					}))
 					return true
 				end
-			})) 
+			}))
 			return {
 				message = localize('k_zap_ex'),
 				colour = G.C.PURPLE

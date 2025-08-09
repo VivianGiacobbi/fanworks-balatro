@@ -26,17 +26,17 @@ function jokerInfo.loc_vars(self, info_queue, card)
         return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.hand_compare, 1 }}
     end
 
-    return { 
-        vars = { 
+    return {
+        vars = {
             card.ability.extra.x_mult_mod,
             card.ability.extra.hand_compare,
             1 + (card.ability.extra.hand_compare - G.hand.config.card_limit) * card.ability.extra.x_mult_mod 
-        } 
+        }
     }
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.joker_main and context.cardarea == G.jokers) or card.debuff then
+    if not context.joker_main or card.debuff then
         return
     end
 

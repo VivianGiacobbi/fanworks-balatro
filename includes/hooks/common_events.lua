@@ -150,19 +150,6 @@ function ease_discard(...)
     return ret
 end
 
-local ref_ease_dollars = ease_dollars
-function ease_dollars(...)
-    local ret = ref_ease_dollars(...)
-    G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = function()
-            SMODS.calculate_context({fnwk_change_dollars = true})
-            return true
-        end
-    }))
-    return ret
-end
-
 local ref_ease_ante = ease_ante
 function ease_ante(...)
     local ret = ref_ease_ante(...)

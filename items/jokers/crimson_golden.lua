@@ -36,11 +36,7 @@ function jokerInfo.calculate(self, card, context)
 		return
 	end
 
-    if card.debuff or context.other_card.debuff then
-        return
-    end
-
-    if not SMODS.has_enhancement(context.other_card, 'm_gold') then
+    if card.debuff or context.other_card.debuff  or not SMODS.has_enhancement(context.other_card, 'm_gold') then
         return
     end
 

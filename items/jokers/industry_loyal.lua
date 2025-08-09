@@ -30,7 +30,7 @@ end
 function jokerInfo.calculate(self, card, context)
 	if context.blueprint or card.debuff then return end
 
-    if context.check_enhancement and context.cardarea == G.jokers then
+    if context.check_enhancement then
 		if context.other_card.config.center.key ~= 'm_lucky' and context.other_card.config.center.key ~= 'm_stone' and
 		(context.other_card.config.center.key == 'm_wild' or context.other_card.base.suit == G.GAME.fnwk_current_loyal_suit) then
             return {

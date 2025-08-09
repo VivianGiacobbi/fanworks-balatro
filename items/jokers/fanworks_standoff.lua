@@ -21,7 +21,7 @@ local jokerInfo = {
 local function get_stand_state()
     local has_stand = ArrowAPI.stands.get_leftmost_stand()
 
-    if not has_stand then  
+    if not has_stand then
         return 'none'
     end
 
@@ -48,7 +48,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.joker_main and context.cardarea == G.jokers) then
+    if not context.joker_main then
         return
     end
 

@@ -121,7 +121,7 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    if context.individual and context.cardarea == G.play and not context.other_card.debuff 
+    if context.individual and context.cardarea == G.play and not context.other_card.debuff
     and card.ability.extra.x_mult > 1 and context.other_card:get_id() == 12 then
         return {
             xmult = card.ability.extra.x_mult,
@@ -130,11 +130,16 @@ function jokerInfo.calculate(self, card, context)
     end
 
 
-    if context.blueprint or not (context.reroll_shop and context.cardarea == G.jokers) then
+    if context.blueprint or not context.reroll_shop then
         return
     end
 
     card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+    SMODS.scale_card(card, {
+        ref_table = card.ability.extra,
+        ref_value = "x_mult",
+        scalar_value = "x_mult_mod"
+    })
     return {
         message = localize('k_upgrade_ex'),
         card = card,

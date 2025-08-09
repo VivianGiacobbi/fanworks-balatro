@@ -41,26 +41,20 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-
-	if card.debuff or context.blueprint then
-		return
-	end
-
-	if not (context.cardarea == G.play and context.individual) or context.other_card.debuff then
-		return
-	end
+	if card.debuff or context.blueprint then return end
+	if not (context.cardarea == G.play and context.individual) or context.other_card.debuff then return end
 
 	if context.other_card.seal == "Purple" then
 		context.discard = true
 		context.other_card:calculate_seal(context)
 		for _, v in ipairs(SMODS.find_card('j_csau_shrimp')) do
 			G.E_MANAGER:add_event(Event({
-				trigger = 'after', 
-				delay = 0, 
+				trigger = 'after',
+				delay = 0,
 				func = function()
 					v:juice_up()
-					return true 
-				end 
+					return true
+				end
 			}))
 			card_eval_status_text(context.other_card, 'extra', nil, nil, nil, {message = localize('k_again_ex')})
 			context.other_card:calculate_seal(context)
@@ -72,12 +66,12 @@ function jokerInfo.calculate(self, card, context)
 		context.other_card:get_end_of_round_effect(context)
 		for _, v in ipairs(SMODS.find_card('j_csau_shrimp')) do
 			G.E_MANAGER:add_event(Event({
-				trigger = 'after', 
-				delay = 0, 
+				trigger = 'after',
+				delay = 0,
 				func = function()
 					v:juice_up()
-					return true 
-				end 
+					return true
+				end
 			}))
 			card_eval_status_text(context.other_card, 'extra', nil, nil, nil, {message = localize('k_again_ex')})
 			context.other_card:get_end_of_round_effect(context)

@@ -36,18 +36,13 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.individual and context.cardarea == G.play) or card.debuff then
-        return
-    end
-    if not SMODS.has_enhancement(context.other_card, 'm_lucky') then
-        return
-    end
+    if not (context.individual and context.cardarea == G.play) or card.debuff then return end
+    if not SMODS.has_enhancement(context.other_card, 'm_lucky') then return end
 
-    ease_dollars(card.ability.extra.money)
     return {
-        message = localize('$')..card.ability.extra.money,
+        dollars = card.ability.extra.money,
         colour = G.C.MONEY,
-        card = context.blueprint_card or card
+        card = context.other_card
     }
 end
 

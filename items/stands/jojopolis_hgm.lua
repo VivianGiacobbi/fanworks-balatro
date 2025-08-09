@@ -6,7 +6,6 @@ local consumInfo = {
         stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC', },
         evolve_key = 'c_fnwk_jojopolis_hgm_cosmic',
-        evolved = true,
         extra = {
             big_mod = 1,
             boss_mod = 2,

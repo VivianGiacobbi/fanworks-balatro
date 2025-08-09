@@ -25,10 +25,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    
-    if not (context.remove_playing_cards and context.cardarea == G.jokers) or card.debuff then
-        return
-    end
+    if not context.remove_playing_cards or card.debuff then return end
 
     local dollars = card.ability.extra.dollars * #context.removed
     return {

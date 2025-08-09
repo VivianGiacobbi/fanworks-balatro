@@ -29,9 +29,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if card.debuff or context.blueprint then
-		return
-	end
+	if card.debuff or context.blueprint then return end
 
 	if context.before then
 		local to_debuff = {}

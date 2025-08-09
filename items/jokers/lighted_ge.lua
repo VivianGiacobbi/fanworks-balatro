@@ -5,6 +5,7 @@ local jokerInfo = {
 		extra = {
 			chance = 3,
 			remaining = 5,
+			remain_mod = 1
 		}
 	},
 	rarity = 2,
@@ -44,11 +45,9 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.blueprint or card.debuff then
-		return
-	end
+	if context.blueprint or card.debuff then return end
 
-	if not context.repetition and (context.individual and context.cardarea == G.play) and not context.other_card.debuff then
+	if (context.individual and context.cardarea == G.play) and not context.other_card.debuff then
 		local other_card = context.other_card
 		if not other_card:is_face() or other_card.seal or card.ability.extra.remaining <= 0 then
 			return
@@ -56,7 +55,13 @@ function jokerInfo.calculate(self, card, context)
 
 		if SMODS.pseudorandom_probability(card, 'fnwk_lighted_ge', 1, card.ability.extra.chance, 'fnwk_lighted_ge') then
 			if not next(SMODS.find_card('j_csau_bunji')) then
-				card.ability.extra.remaining = card.ability.extra.remaining - 1
+				card.ability.extra.remaining = card.ability.extra.remaining - card.ability.extra.remain_mod
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "remaining",
+					scalar_value = "remain_mod",
+					operation = "-",
+				})
 			end
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
@@ -93,12 +98,12 @@ function jokerInfo.calculate(self, card, context)
 							G.jokers:remove_card(card)
 							card:remove()
 							card = nil
-						return true 
+						return true
 					end
-				})) 
+				}))
 				return true
 			end
-		})) 
+		}))
 		return {
 			message = localize('k_drank_ex'),
 			colour = G.C.FILTER,

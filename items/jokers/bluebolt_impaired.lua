@@ -24,4 +24,13 @@ function jokerInfo.loc_vars(self, info_queue, card)
 	return {vars = {card.ability.extra.x_mult}}
 end
 
+function jokerInfo.calculate(self, card, context)
+	if context.individual and context.cardarea == G.play and context.other_card.ability.wheel_flipped then
+		return {
+			x_mult = card.ability.extra.x_mult,
+			card = context.other_card
+		}
+    end
+end
+
 return jokerInfo

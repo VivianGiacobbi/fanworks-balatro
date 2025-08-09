@@ -153,7 +153,7 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.joker_main and not card.debuff and card.ability.extra.x_mult > 1 then
+    if context.joker_main and not card.debuff and card.ability.extra.x_mult > 1 then
 		return {
             message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
             card = context.blueprint_card or card,
@@ -161,26 +161,28 @@ function jokerInfo.calculate(self, card, context)
         }
 	end
 
-    if context.blueprint then
-        return
-    end
-    
+    if context.blueprint then return end
+
     if context.cardarea == G.jokers and context.removed_card == card and not card.debuff then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.3,
-            func = function() 
+            func = function()
                 local rand_joker = pseudorandom_element(G.jokers.cards, pseudoseed('boney'))
                 local rand_atlas = rand_joker.config.center.atlas
                 local rand_pos = rand_joker.config.center.pos
 
                 -- immediately replace with boney, forgoing any animation
                 ArrowAPI.game.transform_card(rand_joker, card.config.center.key, nil, true)
-                
+
                 rand_joker.ability.initialized = false
                 rand_joker.ability.boned = false
                 rand_joker.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-                SMODS.scale_card(rand_joker, {ref_table = rand_joker.ability.extra, ref_value = "x_mult", scalar_value = "x_mult_mod"})
+                SMODS.scale_card(rand_joker, {
+                    ref_table = rand_joker.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "x_mult_mod"
+                })
                 rand_joker.ability.perishable_compat = true
                 rand_joker.ability.eternal_compat = true
                 rand_joker.ability.old_scale = card.children.center.scale
@@ -212,10 +214,9 @@ function jokerInfo.calculate(self, card, context)
                 rand_joker.children.backing.custom_draw = true
 
                 -- place boney
-                return true 
-            end 
+                return true
+            end
         }))
-        
 	end
 end
 

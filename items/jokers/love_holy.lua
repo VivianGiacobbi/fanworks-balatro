@@ -32,6 +32,11 @@ function jokerInfo.calculate(self, card, context)
 
     if not context.blueprint and context.reroll_shop then
         card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "chips",
+            scalar_value = "chip_mod",
+        })
         return {
             message = localize('k_upgrade_ex'),
             message_card = card
@@ -40,8 +45,7 @@ function jokerInfo.calculate(self, card, context)
 
     if context.joker_main and card.ability.extra.chips > 0 then
         return {
-            message = localize { type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips} },
-            chip_mod = card.ability.extra.chips,
+            chips = card.ability.extra.chips,
             card = context.blueprint_card or card
         }
     end

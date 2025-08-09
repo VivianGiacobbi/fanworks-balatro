@@ -26,16 +26,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.cardarea == G.jokers or card.debuff then
+    if card.debuff then
         return
     end
 
     if context.joker_main and card.ability.extra.mult > 0 then
         return {
-			message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
+			mult = card.ability.extra.mult,
 			card = context.blueprint_card or card,
-            color = G.C.MULT,
-			mult_mod = card.ability.extra.mult,
 		}
     end
 
@@ -53,6 +51,13 @@ function jokerInfo.calculate(self, card, context)
     end
 
     card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * count
+    local scale_table = { mult_mod = card.ability.extra.mult_mod * count }
+    SMODS.scale_card(card, {
+        ref_table = card.ability.extra,
+        ref_value = "mult",
+        scalar_table = scale_table,
+        scalar_value = "mult_mod"
+    })
     return {
         message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
         card = card,

@@ -48,7 +48,7 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.blueprint or context.retrigger_joker then return end
 
-    if context.fnwk_change_dollars and context.cardarea == G.jokers then
+    if context.money_altered then
         local dollar_digits = get_dollar_digits()
         if card.ability.last_digits == dollar_digits then
             return

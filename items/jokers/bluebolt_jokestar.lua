@@ -36,7 +36,7 @@ function jokerInfo.calculate(self, card, context)
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount')})
     end
 
-    if context.cardarea == G.jokers and context.starting_shop and not context.blueprint then
+    if context.starting_shop then
         G.GAME.inflation = G.GAME.inflation - card.ability.extra.currentDiscount
         if card.ability.extra.currentDiscount ~= 0 then
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount_apply'), colour = G.C.MONEY})
@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
 
-    if context.cardarea == G.jokers and context.ending_shop and not context.blueprint then
+    if context.ending_shop then
         if card.ability.extra.currentDiscount ~= 0 then
             G.GAME.inflation = G.GAME.inflation + card.ability.extra.currentDiscount
             card.ability.extra.currentDiscount = 0

@@ -89,16 +89,10 @@ local ref_check_buy_space = G.FUNCS.check_for_buy_space
 G.FUNCS.check_for_buy_space = function(...)
     local args = {...}
     local card = args[1]
-    local shouts = SMODS.find_card('c_fnwk_jspec_shout')
-    if not next(shouts) or card.ability.set ~= 'Joker' or card.ability.eternal then
-        
-        return ref_check_buy_space(...)
-    end
 
-    for _, v in ipairs(shouts) do
-        if not v.debuff then
-            return true
-        end
+    if card.ability.set == 'Joker' and not card.ability.eternal
+    and next(SMODS.find_card('c_fnwk_jspec_shout')) then
+        return true
     end
 
     return ref_check_buy_space(...)

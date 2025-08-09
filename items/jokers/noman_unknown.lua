@@ -25,24 +25,15 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if card.debuff then
-        return
-    end
+	if card.debuff then return end
 
-    if context.individual and context.cardarea == G.play and context.scoring_name == card.ability.extra.hand_type then
-		if context.other_card.debuff then
-			return {
-				message = localize('k_debuffed'),
-				colour = G.C.RED,
-				card = context.blueprint_card or card,
-			}
-		else
-			local mult = not SMODS.has_no_rank(context.other_card) and context.other_card.base.nominal
-			return {
-				mult = mult,
-				card = context.blueprint_card or card,
-			}
-		end
+    if context.individual and context.cardarea == G.play and
+	context.scoring_name == card.ability.extra.hand_type
+	and not SMODS.has_no_rank(context.other_card) then
+		return {
+			mult =  context.other_card.base.nominal,
+			card = context.blueprint_card or card,
+		}
 	end
 end
 

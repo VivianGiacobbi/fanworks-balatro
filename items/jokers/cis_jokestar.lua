@@ -4,7 +4,8 @@ local jokerInfo = {
     config = {
         extra = {
             mult = 30,
-            remaining = 3
+            remaining = 3,
+			remain_mod = 1,
         }
     },
     rarity = 1,
@@ -25,8 +26,8 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { 
-		vars = { 
+    return {
+		vars = {
 			card.ability.extra.mult,
 			card.ability.extra.remaining,
 			card.ability.extra.remaining > 1 and 's' or ''
@@ -62,7 +63,13 @@ function jokerInfo.calculate(self, card, context)
     end
 
     if context.after and G.GAME.blind.chips <= hand_chips*mult then
-        card.ability.extra.remaining = card.ability.extra.remaining - 1
+        card.ability.extra.remaining = card.ability.extra.remaining - card.ability.extra.remain_mod
+		SMODS.scale_card(card, {
+			ref_table = card.ability.extra,
+			ref_value = "remaining",
+			scalar_value = "remain_mod",
+			operation = "-"
+		})
 		if card.ability.extra.remaining <= 0 then 
 			G.E_MANAGER:add_event(Event({
 				func = function()
@@ -79,10 +86,10 @@ function jokerInfo.calculate(self, card, context)
 								G.jokers:remove_card(self)
 								card:remove()
 								card = nil
-							return true; end})) 
+							return true; end}))
 					return true
 				end
-			})) 
+			}))
 			return {
 				message = localize('k_melted_ex'),
 				colour = G.C.FILTER

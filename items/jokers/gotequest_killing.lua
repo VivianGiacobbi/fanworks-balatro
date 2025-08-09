@@ -39,10 +39,15 @@ function jokerInfo.load(self, card, card_table, other_card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.remove_playing_cards and not card.debuff then
-        for i=1, #context.removed do
-            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-        end
+    if context.remove_playing_cards and not card.debuff  and not context.blueprint then
+        local scale_table = {x_mult_mod = card.ability.extra.x_mult_mod * #context.removed}
+        card.ability.extra.x_mult = card.ability.extra.x_mult + scale_table.x_mult_mod
+        SMODS.scale_card(card, {
+            ref_table = card.ability.extra,
+            ref_value = "x_mult",
+            scalar_table = scale_table,
+            scalar_value = "x_mult_mod"
+        })
         card.ability.extra.x_mult = math.min(card.ability.extra.x_mult_max, card.ability.extra.x_mult)
         return {
             func = function()
@@ -57,6 +62,12 @@ function jokerInfo.calculate(self, card, context)
     if context.end_of_round and context.main_eval and not context.blueprint then
         if card.ability.extra.x_mult > 1 then
             card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                scalar_value = "x_mult_mod",
+                operation = "-",
+            })
             return {
                 func = function()
                     card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
@@ -68,15 +79,12 @@ function jokerInfo.calculate(self, card, context)
         end
 	end
 
-    if not context.joker_main or card.debuff then
-        return
-    end
+    if not context.joker_main or card.debuff then return end
 
     if card.ability.extra.x_mult > 1 then
 		return {
-            message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+            x_mult = card.ability.extra.x_mult,
             card = context.blueprint_card or card,
-            Xmult_mod = card.ability.extra.x_mult,
         }
 	end
 end

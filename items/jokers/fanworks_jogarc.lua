@@ -110,42 +110,40 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if card.debuff then return end
 
-	if card.debuff then
-		return
-	end
-
-	if context.cardarea == G.jokers and context.joker_main then
+	if context.joker_main then
 		if card.ability.form == 'sludge' then
 			return {
-				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+				x_mult = card.ability.extra.x_mult,
 				card = context.blueprint_card or card,
-				Xmult_mod = card.ability.extra.mult,
 			}
 		else
 			return {
-				message = localize{type='variable',key='a_mult',vars={card.ability.extra.x_mult}},
+				mult = card.ability.extra.mult,
 				card = context.blueprint_card or card,
-				mult_mod = card.ability.extra.x_mult,
 			}
 		end
 	end
 
-	if (context.buying_card or (context.created_card and context.area == G.jokers)) and not context.blueprint then
-            
-        if (context.created_card or context.card) == card then
+	if context.blueprint then return end
+
+	if (context.buying_card or context.created_card) then
+        local new_card = context.created_card or context.card
+        if new_card == card then
             return
         end
 
-		try_transform_sludgemass(card, context.card)
+		try_transform_sludgemass(card, new_card)
     end
 
 	if context.selling_card or context.removed_card then
-		if (context.removed_card or context.card) == card then
+		local new_card = context.removed_card or context.card
+        if new_card == card then
             return
         end
 
-		try_revert_sludgemass(card, context.card)
+		try_revert_sludgemass(card, new_card)
 	end
 end
 
