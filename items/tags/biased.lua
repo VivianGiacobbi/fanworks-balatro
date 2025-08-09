@@ -16,7 +16,7 @@ function tagInfo.apply(self, tag, context)
         local women_in_possession = {}
         local women_count = 0
         for _, v in ipairs(G.jokers.cards) do
-            local results = G.fnwk_women.get_from_key(new_item.key)
+            local results = G.fnwk_women.get_from_key(v.key)
             if (results.girl or results.trans or results.woman) and not women_in_possession[v.config.center.key] then
                 women_count = women_count + 1
                 women_in_possession[v.config.center.key] = true

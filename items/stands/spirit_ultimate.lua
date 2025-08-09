@@ -31,20 +31,22 @@ function consumInfo.loc_vars(self, info_queue, card)
         first_grammar = string.sub(first_grammar, 1, #first_grammar - 6)
         second_grammar = ' times'
     end
-    return { 
+    return {
         vars = {
             first_grammar,
             second_grammar,
             card.ability.extra.base_retriggers
-        } 
+        }
     }
 end
 
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
 
-    if context.removed_card and not context.joker_retrigger and context.removed_card ~= card and not context.blueprint then
-        local name = string.lower(context.joker.config.center.name)
+    if not context.joker_retrigger and context.removed_card and context.removed_card ~= card
+    and context.removed_card.ability and context.removed_card.ability.set == 'Joker'
+    and not context.blueprint then
+        local name = string.lower(context.removed_card.config.center.name)
         if ArrowAPI.string.contains(name, 'jokestar') then
             card.ability.extra.retrigger_mod = card.ability.extra.retrigger_mod + 1
             return {

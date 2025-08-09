@@ -25,27 +25,27 @@ local function create_logic(type, legendary, rarity, soulable, forced_key, key_a
     --should pool be skipped with a forced key
     if not forced_key and soulable and (not G.GAME.banned_keys['c_soul']) then
         for _, v in ipairs(SMODS.Consumable.legendaries) do
-            if (_type == v.type.key or _type == v.soul_set) and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key) and not v.can_repeat_soul) and (not v.in_pool or (type(v.in_pool) ~= "function") or v:in_pool()) then
-                if pseudorandom('soul_'..v.key.._type..G.GAME.round_resets.ante) > (1 - v.soul_rate) then
+            if (type == v.type.key or type == v.soul_set) and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key) and not v.can_repeat_soul) and (not v.in_pool or (type(v.in_pool) ~= "function") or v:in_pool()) then
+                if pseudorandom('soul_'..v.key..type..G.GAME.round_resets.ante) > (1 - v.soul_rate) then
                     forced_key = v.key
                 end
             end
         end
-        if (_type == 'Tarot' or _type == 'Spectral' or _type == 'Tarot_Planet') and
+        if (type == 'Tarot' or type == 'Spectral' or type == 'Tarot_Planet') and
         not (G.GAME.used_jokers['c_soul'] and not SMODS.showman('c_soul')) then
-            if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.997 then
+            if pseudorandom('soul_'..type..G.GAME.round_resets.ante) > 0.997 then
                 forced_key = 'c_soul'
             end
         end
-        if (_type == 'Planet' or _type == 'Spectral') and
+        if (type == 'Planet' or type == 'Spectral') and
         not (G.GAME.used_jokers['c_black_hole'] and not SMODS.showman('c_black_hole')) then
-            if pseudorandom('soul_'.._type..G.GAME.round_resets.ante) > 0.997 then
+            if pseudorandom('soul_'..type..G.GAME.round_resets.ante) > 0.997 then
                 forced_key = 'c_black_hole'
             end
         end
     end
 
-    if _type == 'Base' then
+    if type == 'Base' then
         forced_key = 'c_base'
     end
 
@@ -125,10 +125,10 @@ end
 
 local function advance_pack_seeds()
 	for i=1, #G.P_CENTER_POOLS.Booster do
-		local booster_obj = G.P_CENTER_POOLS["Booster"][i]
-		for j = 1, booster_obj.config.extra do
+		local booster = G.P_CENTER_POOLS["Booster"][i]
+		for j = 1, booster.config.extra do
 			local center = nil
-			local _card_to_spawn = booster_obj:create_card(booster_obj, j)
+			local _card_to_spawn = booster:create_card(booster, j)
 			if type((_card_to_spawn or {}).is) == 'function' and _card_to_spawn:is(Card) then
 				center = _card_to_spawn.config.center
 				_card_to_spawn:remove()

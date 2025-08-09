@@ -682,7 +682,7 @@ function Card:get_end_of_round_effect(...)
             return true
         end)}))
     card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
-    ret[1].effect = true
+    ret.effect = true
 
     return ret
 end
