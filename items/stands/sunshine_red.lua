@@ -10,7 +10,7 @@ local consumInfo = {
                 ['Diamonds'] = true
             },
             x_mult = 1,
-            x_mult_mod = 0.5
+            x_mult_mod = 0.2
         }
     },
     cost = 4,
