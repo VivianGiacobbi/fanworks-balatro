@@ -104,6 +104,22 @@ G.FUNCS.check_for_buy_space = function(...)
     return ref_check_buy_space(...)
 end
 
+---------------------------
+--------------------------- Stand/VHS pack select behavior
+---------------------------
+
+local ref_select_card = G.FUNCS.can_select_card
+G.FUNCS.can_select_card = function(e)
+    local card = e.config.ref_table
+    if card.ability.set == 'Joker' and next(SMODS.find_card('c_fnwk_jspec_shout')) then
+        e.config.colour = G.C.GREEN
+        e.config.button = "use_card"
+        return
+    end
+
+    return ref_select_card(e)
+end
+
 
 
 
