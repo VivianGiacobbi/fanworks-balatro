@@ -225,8 +225,8 @@ function jokerInfo.update(self, card, dt)
                     G.jokers:emplace(newJoker)
                     newJoker:start_materialize()
                     G.GAME.joker_buffer = 0
-                    return true 
-                end 
+                    return true
+                end
             }))
         end
 

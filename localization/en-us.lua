@@ -414,7 +414,8 @@ return {
 			a_hand = "+#1# Hand",
 			a_reps = "+#1# Reps",
 			a_reps_minus = "-#1# Reps",
-			fnwk_variable = "#1#"
+			fnwk_variable = "#1#",
+			a_rank = "+#1# Rank"
 		},
 		challenge_names = {
 			c_fnwk_fanworks_beyond = "Beyond Canon",

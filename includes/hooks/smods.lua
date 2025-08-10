@@ -262,29 +262,26 @@ function SMODS.score_card(card, context)
                         eff.message_card = card
                    end
                 end
+
+                SMODS.trigger_effects(effects, card)
+                card.fnwk_fishy_calc = nil
             else
                 effects = { eval_card(card, context) }
                 SMODS.calculate_quantum_enhancements(card, effects, context)
                 SMODS.fnwk_calculate_quantum_editions(card, effects, context)
-            end
 
-            context.main_scoring = nil
-            context.individual = true
-            context.other_card = card
+                context.main_scoring = nil
+                context.individual = true
+                context.other_card = card
 
-            if next(effects) then
-                SMODS.calculate_card_areas('jokers', context, effects, { main_scoring = true })
-                SMODS.calculate_card_areas('individual', context, effects, { main_scoring = true })
-            end
+                if next(effects) then
+                    SMODS.calculate_card_areas('jokers', context, effects, { main_scoring = true })
+                    SMODS.calculate_card_areas('individual', context, effects, { main_scoring = true })
+                end
 
-            if i == 1 then
                 flags = SMODS.trigger_effects(effects, card)
-            else
-                SMODS.trigger_effects(effects, card)
-                card.fnwk_fishy_calc = nil
+                context.individual = nil
             end
-
-            context.individual = nil
         end
 
         if reps[j] == 1 and flags.calculated then
@@ -298,4 +295,15 @@ function SMODS.score_card(card, context)
         context.other_card = nil
         card.lucky_trigger = nil
     end
+end
+
+
+
+local ref_four_fingers = SMODS.four_fingers
+function SMODS.four_fingers(hand_type)
+	local ret = ref_four_fingers(hand_type)
+	if hand_type == 'straight' and ret > 4 and next(SMODS.find_card('c_fnwk_gotequest_born')) then
+		ret = 4
+	end
+	return ret
 end

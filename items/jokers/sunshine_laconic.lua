@@ -41,7 +41,9 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.before and context.cardarea == G.jokers and not card.debuff and not context.blueprint then
+	if card.debuff then return end
+
+	if context.before and not context.blueprint then
         if #context.full_hand <= 3 then
 			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
 			SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "chips", scalar_value = "chips_mod"})
@@ -59,11 +61,9 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
     
-	if context.joker_main and context.cardarea == G.jokers and not card.debuff and card.ability.extra.chips > 0 then
+	if context.joker_main and card.ability.extra.chips > 0 then
 		return {
-			message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
-			chip_mod = card.ability.extra.chips, 
-			colour = G.C.CHIPS,
+			chips = card.ability.extra.chips,
 			card = context.blueprint_card or card
 		}
 	end

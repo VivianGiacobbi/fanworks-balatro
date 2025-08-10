@@ -25,16 +25,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-
-	if card.debuff then
-		return
-	end
-
-	if context.cardarea == G.jokers and context.joker_main then
+	if context.joker_main and not card.debuff then
 		return {
-			message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played}},
+			mult = card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played,
 			card = context.blueprint_card or card,
-			mult_mod = card.ability.extra.mult_mod * G.GAME.hands["Three of a Kind"].played,
 		}
 	end
 

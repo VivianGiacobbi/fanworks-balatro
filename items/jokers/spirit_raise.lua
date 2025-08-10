@@ -35,7 +35,7 @@ function jokerInfo.calculate(self, card, context)
             }
         end
     end
-    if context.cardarea == G.jokers and context.joker_main then
+    if context.joker_main then
         if card.ability.extra.chips == 21 then
             card.ability.extra.chips = 0
             update_hand_text({nopulse = true, delay = 0}, {mult = 0, chips = 0, level = '', handname = ''})

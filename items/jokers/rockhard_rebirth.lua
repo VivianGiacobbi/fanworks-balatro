@@ -33,7 +33,7 @@ function jokerInfo.in_pool(self, args)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.before and context.cardarea == G.jokers and not card.debuff then
+    if context.before and not card.debuff then
         local tick_cards = {}
         for _, v in ipairs(context.scoring_hand) do
             if SMODS.has_enhancement(v, 'm_wild') and

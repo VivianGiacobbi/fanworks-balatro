@@ -117,9 +117,8 @@ function jokerInfo.calculate(self, card, context)
     local mult_mod = joker_name_mod(card)
 	if mult_mod > 1 then
 		return {
-			message = localize{type='variable',key='a_xmult',vars={mult_mod}},
 			card = context.blueprint_card or card,
-			Xmult_mod = mult_mod,
+			x_mult = mult_mod,
 		}
 	end
 end

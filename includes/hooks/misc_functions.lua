@@ -91,7 +91,7 @@ function get_current_pool(_type, _rarity, _legendary, _append, ...)
 				new_pool[#new_pool+1] = v
 			end
 		end
-		
+
 		return new_pool, key
 	end
 
@@ -385,3 +385,20 @@ function get_front_spriteinfo(...)
 
 	return G.ASSET_ATLAS[key], pos
 end
+
+local born_ranks = {
+	[2] = true,
+	[5] = true,
+	[8] = true,
+	[11] = true,
+	[14] = true
+}
+
+--[[
+local ref_get_straight = get_straight
+function get_straight(hand)
+  	local ret = {}
+  	local four_fingers = SMODS.four_fingers('straight')
+
+end
+--]]

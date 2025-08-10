@@ -37,7 +37,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
         end
     end
 
-	return { 
+	return {
         vars = {
             card.ability.extra.base_chips + card.ability.extra.chips_mod * count,
             count,
@@ -47,7 +47,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.card_added and not context.blueprint then 
+    if context.card_added and not context.blueprint then
         if context.card == card then
             return
         end

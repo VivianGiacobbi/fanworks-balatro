@@ -23,7 +23,7 @@ local jokerInfo = {
 
 -- update multi-edition status for cards that are already in the deck or joker slots
 local function update_multi_editions(card)
-    if not card.edition then 
+    if not card.edition then
         return
     end
 
@@ -56,7 +56,7 @@ function jokerInfo.set_sprites(self, card, front)
         card.T.h * (sun_atlas.py / center_atlas.py),
         sun_atlas,
         { x = 0, y = 0 }
-    )	
+    )
 	card.children.ilsa_sun:set_role(role)
     card.children.ilsa_sun:define_draw_steps({
 		{shader = 'dissolve', shadow_height = 0.1},
@@ -71,7 +71,7 @@ function jokerInfo.set_sprites(self, card, front)
         card.T.h * (star_atlas.py / center_atlas.py),
         star_atlas,
         { x = 0, y = 0 }
-    )	
+    )
 	card.children.ilsa_star_1:set_role(role)
     card.children.ilsa_star_1:define_draw_steps({
 		{shader = 'dissolve', shadow_height = 0.1},
@@ -85,7 +85,7 @@ function jokerInfo.set_sprites(self, card, front)
         card.T.h * (star_atlas.py / center_atlas.py),
         star_atlas,
         { x = 0, y = 0 }
-    )	
+    )
 	card.children.ilsa_star_2:set_role(role)
     card.children.ilsa_star_2:define_draw_steps({
 		{shader = 'dissolve', shadow_height = 0.1},

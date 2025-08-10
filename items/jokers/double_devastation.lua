@@ -82,9 +82,7 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.joker_main then
         return {
-            message = localize{type='variable', key='a_mult', vars = {card.ability.extra.a_mult} },
-            mult_mod = card.ability.extra.a_mult,
-            colour = G.C.MULT,
+            mult = card.ability.extra.a_mult,
             card = context.blueprint_card or card
         }
     end

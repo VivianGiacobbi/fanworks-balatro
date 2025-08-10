@@ -18,8 +18,6 @@ SMODS.ObjectType {
         ['j_fnwk_industry_loyal'] = true,
         ['j_fnwk_mania_jokestar'] = true,
         ['j_fnwk_gotequest_killing'] = true,
-        ['j_fnwk_jspec_joepie'] = true,
-        ['j_fnwk_jspec_ilsa'] = true,
         ['j_fnwk_bluebolt_tuned'] = true,
         ['j_fnwk_love_holy'] = true,
         ['j_drivers_license'] = true,

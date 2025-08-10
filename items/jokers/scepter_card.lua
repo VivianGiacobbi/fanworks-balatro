@@ -27,27 +27,17 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.individual and context.cardarea == G.play) then
+    if not (context.individual and context.cardarea == G.play)
+    or card.debuff or not context.other_card:is_face() then
 		return
 	end
 
-    if card.debuff or context.other_card.debuff then
-        return
+    if SMODS.pseudorandom_probability(card, 'fnwk_scepter_card', 1, card.ability.extra.chance) then
+        return {
+            mult = card.ability.extra.mult,
+            card = context.blueprint_card or card
+        }
     end
-
-    if SMODS.pseudorandom_probability(card, 'fnwk_scepter_card', 1, card.ability.extra.chance, 'fnwk_scepter_card') then
-        return
-    end
-
-    if not context.other_card:is_face() then
-        return
-    end
-
-    return {
-        mult = card.ability.extra.mult,
-        colour = G.C.RED,
-        card = context.blueprint_card or card
-    }
 end
 
 return jokerInfo

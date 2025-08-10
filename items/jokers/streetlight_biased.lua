@@ -20,7 +20,7 @@ local jokerInfo = {
 	artist = 'leafy',
 }
 
-local function debuff_helper(card) 
+local function debuff_helper(card)
 	if G.GAME.blind then
 		G.GAME.blind:debuff_card(card)
 		return

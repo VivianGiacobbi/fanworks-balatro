@@ -46,10 +46,9 @@ function jokerInfo.update(self, card, dt)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if context.cardarea == G.jokers and context.joker_main and not card.debuff and (levels_over_one() * card.ability.extra.mult_mod) > 0 then
+    if context.joker_main and not card.debuff and levels_over_one() > 0 then
         return {
-            message = localize{type='variable',key='a_mult',vars={levels_over_one() * card.ability.extra.mult_mod or 0}},
-            mult_mod = levels_over_one() * card.ability.extra.mult_mod,
+            mult = levels_over_one() * card.ability.extra.mult_mod,
             card = context.blueprint_card or card
         }
     end

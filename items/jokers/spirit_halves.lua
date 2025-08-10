@@ -26,14 +26,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.joker_main or context.cardarea ~= G.jokers or card.debuff then
-        return
-    end
-
-    if context.scoring_name ~= 'Pair' then
-        return
-    end
-
+    if not context.joker_main or context.scoring_name ~= 'Pair' or card.debuff then return end
 
     return {
         balance = true,

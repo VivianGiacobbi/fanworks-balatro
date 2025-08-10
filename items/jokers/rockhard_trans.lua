@@ -19,7 +19,7 @@ local jokerInfo = {
 }
 
 function jokerInfo.calculate(self, card, context)
-	if context.after and context.cardarea == G.jokers and G.GAME.current_round.hands_left == 0 then
+	if context.after and G.GAME.current_round.hands_left == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
             trigger = 'before',

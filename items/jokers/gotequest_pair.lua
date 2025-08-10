@@ -25,16 +25,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not (context.before and context.cardarea == G.jokers) or card.debuff then
+    if not context.before or context.scoring_name ~= 'Pair' or card.debuff then
 		return
 	end
-    if card.debuff then
-        return
-    end
-
-    if context.scoring_name ~= 'Pair' then
-        return
-    end
 
 	local valid = false
 	for i, v in ipairs(context.scoring_hand) do
@@ -57,7 +50,7 @@ function jokerInfo.calculate(self, card, context)
 						v:juice_up()
 						return true
 					end
-				})) 
+				}))
 			end
 		end
 

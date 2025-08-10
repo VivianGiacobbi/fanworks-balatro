@@ -30,8 +30,7 @@ function jokerInfo.calculate(self, card, context)
     local enhanced = ArrowAPI.game.get_enhanced_tally()
     if enhanced > 0 then
         return {
-            message = localize { type = 'variable', key = 'a_mult', vars = {enhanced * card.ability.extra} },
-            mult_mod = enhanced * card.ability.extra,
+            mult = enhanced * card.ability.extra,
             card = context.blueprint_card or card
         }
     end

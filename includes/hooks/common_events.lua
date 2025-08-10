@@ -5,14 +5,14 @@
 function fnwk_reset_funkadelic()
     G.GAME.fnwk_current_funky_suits = {}
     local suits = {}
-    for _, suit in pairs(SMODS.Suits) do
-        suits[#suits+1] = suit.key
+    for k, _ in pairs(SMODS.Suits) do
+        suits[#suits+1] = k
     end
 
-    local firstIdx = math.floor(pseudorandom('fnwk_funk'..G.GAME.round_resets.ante) * 4) + 1
-    G.GAME.fnwk_current_funky_suits[1] = suits[firstIdx]
-    table.remove(suits, firstIdx)
-    G.GAME.fnwk_current_funky_suits[2] = pseudorandom_element(suits, pseudoseed('fnwk_funk'..G.GAME.round_resets.ante))
+    for i=1, 2 do
+        local suit = table.remove(suits, pseudorandom('fnwk_funk'..G.GAME.round_resets.ante, 1, #suits))
+        G.GAME.fnwk_current_funky_suits[suit] = true
+    end
 end
 
 function fnwk_reset_loyal()

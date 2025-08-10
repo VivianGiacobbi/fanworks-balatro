@@ -37,11 +37,9 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.debuffed then return end
 
-    if context.cardarea == G.jokers and context.joker_main and card.ability.extra.mult > 0 then
+    if context.joker_main and card.ability.extra.mult > 0 then
         return {
-            message = localize{type='variable', key='a_mult', vars = {card.ability.extra.mult} },
-            mult_mod = card.ability.extra.mult,
-            colour = G.C.MULT,
+            mult = card.ability.extra.mult,
             card = context.blueprint_card or card
         }
     end

@@ -43,9 +43,8 @@ function jokerInfo.calculate(self, card, context)
     if card.ability.extra.hand_compare - G.hand.config.card_limit > 0 then
         local x_mult = 1 + (card.ability.extra.hand_compare - G.hand.config.card_limit) * card.ability.extra.x_mult_mod
 		return {
-            message = localize{type='variable',key='a_xmult',vars={x_mult}},
             card = context.blueprint_card or card,
-            Xmult_mod = x_mult,
+            x_mult = x_mult,
         }
 	end
 end

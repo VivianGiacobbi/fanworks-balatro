@@ -99,26 +99,23 @@ function jokerInfo.set_sprites(self, card, front)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.ending_shop then card.ability.extra.current_spend = 0 end
+
+	if card.debuff then return end
+
 	if context.removed_card and context.removed_card == card then
 		update_jokers_glow(card, true)
 	end
 
-	if context.joker_main and context.cardarea == G.jokers and not card.debuff and card.ability.extra.x_mult > 1 then
+	if context.joker_main and card.ability.extra.x_mult > 1 then
 		return {
-            message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
+            x_mult = card.ability.extra.x_mult,
             card = context.blueprint_card or card,
-            Xmult_mod = card.ability.extra.x_mult,
         }
 	end
 
-	if context.blueprint then return end
-	
-	if context.cardarea == G.jokers and context.ending_shop then
-		card.ability.extra.current_spend = 0
-	end
-
-	if context.cardarea == G.jokers and card.ability.extra.current_spend < card.ability.extra.spend_val then
-		if context.buying_card or context.open_booster then 
+	if card.ability.extra.current_spend < card.ability.extra.spend_val then
+		if context.buying_card or context.open_booster then
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
 		elseif context.reroll_shop then
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.cost
@@ -127,6 +124,11 @@ function jokerInfo.calculate(self, card, context)
 		if card.ability.extra.current_spend >= card.ability.extra.spend_val then
 			card.ability.extra.current_spend = card.ability.extra.spend_val
 			card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+			SMODS.scale_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "x_mult",
+				scalar_value = "x_mult_mod",
+			})
 			return {
 				card = card,
 				message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},

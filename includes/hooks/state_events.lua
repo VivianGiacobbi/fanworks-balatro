@@ -27,6 +27,7 @@ end
 local ref_evaluate_play = G.FUNCS.evaluate_play
 G.FUNCS.evaluate_play = function(e)
     local last_hand = G.GAME.last_hand_played
+    G.fnwk_sweet_dreams_flag = true
     local ret = ref_evaluate_play(e)
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
@@ -103,4 +104,92 @@ G.FUNCS.draw_from_play_to_discard = function(e)
     end
 
     return ref_play_to_discard(e)
+end
+
+
+
+
+
+---------------------------
+--------------------------- Sweet Dreams map
+---------------------------
+
+local rank_map = {
+    [3] = 'Ace',
+    [6] = '2',
+    [9] = '3'
+}
+
+local ref_poker_hand_info = G.FUNCS.get_poker_hand_info
+G.FUNCS.get_poker_hand_info = function(e)
+    local text, disp_text, poker_hands, scoring_hand, non_loc_disp_text = ref_poker_hand_info(e)
+    if G.fnwk_sweet_dreams_flag and #scoring_hand == 1 and next(SMODS.find_card('c_fnwk_gotequest_sweet')) then
+        G.fnwk_sweet_dreams_flag = nil
+        local rank_key = rank_map[scoring_hand[1]:get_id()]
+        if rank_key then
+            local main_card = SMODS.change_base(scoring_hand[1], nil, rank_key, true)
+            local flip_cards = {main_card}
+
+            local new_cards = {}
+            for i=1, 2 do
+                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                local new_copy = copy_card(flip_cards[1], nil, nil, G.playing_card)
+                new_copy:add_to_deck()
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                table.insert(G.playing_cards, new_copy)
+                table.insert(scoring_hand, new_copy)
+                new_copy.states.visible = false
+                G.play:emplace(new_copy)
+
+                new_copy.flipping = nil
+                new_copy.facing = 'back'
+                new_copy.sprite_facing = 'back'
+                new_cards[#new_cards+1] = new_copy
+                flip_cards[#flip_cards+1] = new_copy
+            end
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    flip_cards[1]:flip()
+                    play_sound('card1')
+                    flip_cards[1]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.3,
+                func = function()
+                    flip_cards[1]:set_sprites(nil, flip_cards[1].config.card)
+                    for i, v in ipairs(new_cards) do
+                        v:start_materialize(nil, i==1)
+                        v:juice_up()
+                    end
+                    return true
+                end
+            }))
+
+            delay(0.3)
+
+            for i, v in ipairs(flip_cards) do
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.15,
+                    func = function()
+                        v:flip()
+                        play_sound('tarot2', 1, 0.6)
+                        v:juice_up(0.3, 0.3)
+                        return true
+                    end
+                }))
+            end
+
+            playing_card_joker_effects(new_cards)
+        end
+    end
+
+    return text, disp_text, poker_hands, scoring_hand, non_loc_disp_text
 end

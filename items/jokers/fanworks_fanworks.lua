@@ -57,8 +57,7 @@ function jokerInfo.calculate(self, card, context)
 	local tally = tally_fanworks_jokers()
 	if tally > 0 then
 		return {
-			message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult_mod * tally} },
-			mult_mod = card.ability.extra.mult_mod * tally,
+			mult = card.ability.extra.mult_mod * tally,
 			card = context.blueprint_card or card
 		}
 	end
