@@ -19,7 +19,6 @@ local consumInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
-    artist = 'coop',
     blueprint_compat = false,
 }
 

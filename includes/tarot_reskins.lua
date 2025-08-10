@@ -294,15 +294,8 @@ SMODS.Consumable:take_ownership('c_magician', {
 
 SMODS.Consumable:take_ownership('c_high_priestess', {
     atlas = 'fnwk_tarotreskins',
-    origin = {
-        category = 'fanworks',
-        sub_origins = {
-            'plancks',
-        },
-        custom_color = 'plancks'
-    },
+    origin = 'fanworks',
     no_mod_badges = true,
-    artist = { "coop", 'gote' },
 })
 
 SMODS.Consumable:take_ownership('c_empress', {

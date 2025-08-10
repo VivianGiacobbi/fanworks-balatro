@@ -25,7 +25,6 @@ local jokerInfo = {
 		},
         custom_color = 'double',
     },
-    artist = 'coop'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

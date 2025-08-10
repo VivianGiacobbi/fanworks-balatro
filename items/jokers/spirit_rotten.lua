@@ -72,7 +72,6 @@ local jokerInfo = {
 		},
         custom_color = 'spirit',
     },
-	artist = 'coop',
 }
 
 local function set_rotten_sprite(card)

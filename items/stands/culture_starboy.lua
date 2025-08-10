@@ -18,7 +18,6 @@ local consumInfo = {
 		},
         custom_color = 'culture',
     },
-    artist = 'coop',
     blueprint_compat = false,
 }
 

@@ -6,7 +6,6 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 1, max = 10},
-    artist = 'coop',
 }
 
 function blindInfo.set_blind(self)

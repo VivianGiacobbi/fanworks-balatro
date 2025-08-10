@@ -19,7 +19,6 @@ local consumInfo = {
 		},
         custom_color = 'glass',
     },
-    artist = 'coop',
     blueprint_compat = true,
 }
 

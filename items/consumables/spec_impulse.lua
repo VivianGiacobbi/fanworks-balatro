@@ -10,7 +10,6 @@ local consumInfo = {
 		},
         custom_color = 'last',
     },
-    artist = 'coop'
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

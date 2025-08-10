@@ -363,7 +363,6 @@ return {
 
 			-- badges
 			ba_fanworks = 'Fanworks',
-			ba_plancks = "Planck's Creek",
 			ba_streetlight = 'Streetlight Pursuit',
 			ba_bluebolt = "Bluebolt Incarnation",
 			ba_moscow = 'Moscow Calling',
@@ -775,13 +774,6 @@ return {
 					"be {C:attention}used{}"
                 }
             },
-			bl_fnwk_creek = {
-                name = "The Creek",
-                text = {
-                    "Required score",
-					"is {C:attention}hidden{}"
-                }
-            },
 			bl_fnwk_box = {
                 name = "The Box",
                 text = {
@@ -1064,42 +1056,6 @@ return {
 				text = {
 					"{C:attention}Face down{} cards give",
 					"{X:mult,C:white}X#1#{} Mult when scored"
-				}
-			},
-			j_fnwk_plancks_jokestar = {
-				name = "Creaking Bjokestar",
-				text = {
-					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
-					"This Joker gains Mult along",
-					"the {C:mult}Fibonacci sequence{} when",
-					"a {C:attention}Flush Fib{} is played",
-					"{C:inactive}(Currently {C:mult}+#1#{} {C:inactive}Mult){}"
-				}
-			},
-			j_fnwk_plancks_unsure = {
-				name = "Unsure Joker",
-				text = {
-					"Retrigger all scored",
-					"{C:attention}Enhanced non-face{} cards",
-				}
-			},
-			j_fnwk_plancks_skeptic = {
-				name = "Skeptic Joker",
-				text = {
-					"{C:attention}Predicts{} the cards inside",
-					"a hovered {C:attention}booster pack{}",
-					"{C:inactive,s:0.65}#1#{}"
-				}
-			},
-			j_fnwk_plancks_ghost = {
-				name = "Ghost Girl",
-				text = {
-					"Jokers retain {C:attention}scaling abilities{}",
-					"after being destroyed or sold",
-				},
-				unlock = {
-					"Sell {C:attention,E:1}#1#{} Jokers",
-					"in one run"
 				}
 			},
 			j_fnwk_last_morse= {
@@ -2107,15 +2063,6 @@ return {
 				text = {
 					"Retrigger each {C:attention}rank{} previously",
 					"scored this round"
-				},
-			},
-			c_fnwk_plancks_moon = {
-				name = "Moon River",
-				text = {
-					"{C:dark_edition}Unlocks Fibonacci poker hands{}", 
-					"This Stand gains {X:mult,C:white}X#2#{} Mult if",
-					"played hand contains a {C:attention}Fibonacci{}",
-					"{C:inactive}(Currently{} {X:mult,C:white}X#1#{} {C:inactive}Mult){}"
 				},
 			},
 			c_fnwk_rebels_rebel = {

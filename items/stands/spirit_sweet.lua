@@ -24,7 +24,6 @@ local consumInfo = {
 		},
         custom_color = 'spirit',
     },
-    artist = 'coop',
     blueprint_compat = false,
     eternal_compat = true
 }

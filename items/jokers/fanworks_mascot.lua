@@ -7,7 +7,6 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-    artist = 'coop'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

@@ -13,8 +13,6 @@ ArrowAPI.misc.add_colors({
 ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
     co_fanworks = HEX('DD85B4'),
     te_fanworks = HEX('FFFFFF'),
-    co_plancks = HEX('A2DCB4'),
-    te_plancks = HEX('FFFFFF'),
     co_streetlight = HEX('139194'),
     te_streetlight = HEX('FFFFFF'),
     co_bluebolt = HEX('3BC2EF'),
@@ -103,7 +101,6 @@ ArrowAPI.credits.add_credits(SMODS.current_mod, {
     algebra = 'AlgebraFalcon',
     shaft = 'AllShaftsFall',
     gote = 'BarrierTrio/Gote',
-    coop = 'Cauthen Currie',
     cody = 'Cody Savoie',
     cream = 'CreamSodaCrossroads',
     daed = 'NotDaedalus',

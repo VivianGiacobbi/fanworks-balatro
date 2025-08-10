@@ -1,6 +1,6 @@
-SMODS.Atlas({ key = 'neonsign_1', path = 'jokers/love_jokestar_sign_1.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px = 71, py = 95 })
-SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
+--SMODS.Atlas({ key = 'neonsign_1', path = 'jokers/love_jokestar_sign_1.png', px = 71, py = 95 })
+--SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px = 71, py = 95 })
+--SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
 
 local jokerInfo = {
     key = 'j_fnwk_love_jokestar',
@@ -10,6 +10,7 @@ local jokerInfo = {
             mult = 0,
             mult_mod = 4,
         },
+        --[[
         fizzle_timer = 0,
         fizzle_check = 0.18,
         fizzle_limit = 0.13,
@@ -21,6 +22,7 @@ local jokerInfo = {
         glow_intensity = 4,
         glow_threshold = 0.95,
         glow_size = 0.95,
+        --]]
     },
 	rarity = 2,
 	cost = 6,
@@ -34,7 +36,6 @@ local jokerInfo = {
 		},
         custom_color = 'love',
     },
-    artist = 'coop',
     alt_art = true
 }
 
@@ -66,7 +67,7 @@ function jokerInfo.calculate(self, card, context)
         end
     end
 end
-
+--[[
 function jokerInfo.set_sprites(self, card, front)
     if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
@@ -218,5 +219,6 @@ function jokerInfo.draw(self, card, layer)
     card.children.bloom3:draw_self()
     love.graphics.setShader()
 end
+--]]
 
 return jokerInfo

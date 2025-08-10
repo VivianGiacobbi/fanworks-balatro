@@ -20,7 +20,6 @@ local consumInfo = {
 		},
         custom_color = 'love',
     },
-    artist = 'coop',
     blueprint_compat = true,
 }
 

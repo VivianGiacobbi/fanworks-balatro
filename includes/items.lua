@@ -6,7 +6,6 @@ SMODS.ObjectType {
         ['j_blueprint'] = true,
         ['j_brainstorm'] = true,
         ['j_shoot_the_moon'] = true,
-        ['j_fnwk_plancks_unsure'] = true,
         ['j_fnwk_rubicon_moonglass'] = true,
         ['j_fnwk_streetlight_fledgling'] = true,
         ['j_fnwk_streetlight_indulgent'] = true,
@@ -24,7 +23,6 @@ SMODS.ObjectType {
         ['j_fnwk_rockhard_rebirth'] = true,
         ['j_fnwk_bluebolt_sexy'] = true,
         ['j_fnwk_bluebolt_secluded'] = true,
-        ['j_fnwk_plancks_ghost'] = true,
         ['j_fnwk_glass_jokestar'] = true,
         ['j_fnwk_love_jokestar'] = true,
 	}
@@ -92,12 +90,6 @@ ArrowAPI.loading.batch_load({
 
 			-- glass lariats
 			'glass_jokestar',
-
-			-- planck's creek
-			'plancks_jokestar',
-			'plancks_unsure',
-			'plancks_skeptic',
-			'plancks_ghost',
 
 			-- last hope army
 			'last_morse',
@@ -258,9 +250,6 @@ ArrowAPI.loading.batch_load({
 			-- glass lariats
 			'glass_big',
 
-			-- plancks creek
-			'plancks_moon',
-
 			-- last hope army
 			'last_tragic',
 			'last_saturn',
@@ -379,7 +368,6 @@ ArrowAPI.loading.batch_load({
 			'goat',
 			'bolt',
 			'rot',
-			'creek',
 			'box',
 			'work',
 			'written',
