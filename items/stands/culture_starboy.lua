@@ -19,6 +19,10 @@ local consumInfo = {
         custom_color = 'culture',
     },
     blueprint_compat = false,
+    artist = {
+        'cream',
+        'winter',
+    }
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
