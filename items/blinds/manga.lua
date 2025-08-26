@@ -9,6 +9,7 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 2, max = 10},
+    artist = 'winter',
 }
 
 function blindInfo.set_blind(self)

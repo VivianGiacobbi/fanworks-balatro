@@ -321,11 +321,30 @@ local born_ranks = {
 	[14] = true
 }
 
---[[
 local ref_get_straight = get_straight
 function get_straight(hand)
-  	local ret = {}
-  	local four_fingers = SMODS.four_fingers('straight')
+	if next(SMODS.find_card('c_fnwk_gotequest_born')) then
+		local count = SMODS.four_fingers('straight')
+		if #hand < count then
+			return {}
+		else
+			local temp_ranks = copy_table(born_ranks)
+			local ret = {}
 
+			for i=1, #hand do
+				local id = hand[i]:get_id()
+				if temp_ranks[id] then
+					ret[#ret+1] = hand[i]
+					temp_ranks[id] = nil
+
+					if #ret >= count then
+						ret.fnwk_valid_born_straight = true
+						return {ret}
+					end
+				end
+			end
+		end
+	end
+
+	return ref_get_straight(hand)
 end
---]]

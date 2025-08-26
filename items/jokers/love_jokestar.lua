@@ -1,6 +1,5 @@
---SMODS.Atlas({ key = 'neonsign_1', path = 'jokers/love_jokestar_sign_1.png', px = 71, py = 95 })
---SMODS.Atlas({ key = 'neonsign_2', path = 'jokers/love_jokestar_sign_2.png', px = 71, py = 95 })
---SMODS.Atlas({ key = 'neonsign_3', path = 'jokers/love_jokestar_sign_3.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'love_jokestar_neon', path = 'jokers/love_jokestar_neon.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'love_jokestar_front', path = 'jokers/love_jokestar_front.png', px = 71, py = 95 })
 
 local jokerInfo = {
     key = 'j_fnwk_love_jokestar',
@@ -10,7 +9,6 @@ local jokerInfo = {
             mult = 0,
             mult_mod = 4,
         },
-        --[[
         fizzle_timer = 0,
         fizzle_check = 0.18,
         fizzle_limit = 0.13,
@@ -19,10 +17,9 @@ local jokerInfo = {
         fizzle_chance = 0.025,
         consecutive_limit = 2,
         consecutive_fizzles = 0,
-        glow_intensity = 4,
-        glow_threshold = 0.95,
+        glow_intensity = 2,
+        glow_threshold = 0.96,
         glow_size = 0.95,
-        --]]
     },
 	rarity = 2,
 	cost = 6,
@@ -36,7 +33,7 @@ local jokerInfo = {
 		},
         custom_color = 'love',
     },
-    alt_art = true
+    artist = 'winter'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -67,15 +64,14 @@ function jokerInfo.calculate(self, card, context)
         end
     end
 end
---[[
+
 function jokerInfo.set_sprites(self, card, front)
     if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
 
-    if card.children.bloom1 then card.children.bloom1:remove() end
-    if card.children.bloom2 then card.children.bloom2:remove() end
-    if card.children.bloom3 then card.children.bloom3:remove() end
+    if card.children.fnwk_love_neon then card.children.fnwk_love_neon:remove() end
+    if card.children.fnwk_love_front then card.children.fnwk_love_front:remove() end
 
     local role = {
 		role_type = 'Minor',
@@ -88,23 +84,17 @@ function jokerInfo.set_sprites(self, card, front)
 		draw_major = card,
     } 
 
-    local sign_atlas_1 = G.ASSET_ATLAS['fnwk_neonsign_1']
-	card.children.bloom1 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_1, { x = 0, y = 0 })	
-	card.children.bloom1:set_role(role)
-    card.children.bloom1.glow_color = {1, 0.96, 0}
-    card.children.bloom1.custom_draw = true
+    local atlas_2 = G.ASSET_ATLAS['fnwk_love_jokestar_neon']
+	card.children.fnwk_love_neon = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_2, { x = 0, y = 0 })	
+	card.children.fnwk_love_neon:set_role(role)
+    card.children.fnwk_love_neon.glow_color = {0, 0.92, 1}
+    card.children.fnwk_love_neon.custom_draw = true
 
-    local sign_atlas_2 = G.ASSET_ATLAS['fnwk_neonsign_2']
-    card.children.bloom2 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_2, { x = 0, y = 0 })	
-	card.children.bloom2:set_role(role)
-    card.children.bloom2.glow_color = {0, 0.92, 1}
-    card.children.bloom2.custom_draw = true
+    local atlas_1 = G.ASSET_ATLAS['fnwk_love_jokestar_front']
+    card.children.fnwk_love_front = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_1, { x = 0, y = 0 })	
+	card.children.fnwk_love_front:set_role(role)
+    card.children.fnwk_love_front.custom_draw = true
 
-    local sign_atlas_3 = G.ASSET_ATLAS['fnwk_neonsign_3']
-    card.children.bloom3 = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, sign_atlas_3, { x = 0, y = 0 })	
-	card.children.bloom3:set_role(role)
-    card.children.bloom3.glow_color = {1, 0.07, 0.05}
-    card.children.bloom3.custom_draw = true
     card.late_center_draw = true
 end
 
@@ -146,7 +136,7 @@ function jokerInfo.update(self, card, dt)
             end
             card.ability.fizzle_timer = 0
         end
-    end 
+    end
 
     if not card.ability.glow_initialized then
 		card.ability.glow_direction = 1
@@ -177,25 +167,17 @@ function jokerInfo.update(self, card, dt)
 
     
     local ease = ArrowAPI.math.ease_funcs.in_out_sin(card.ability.glow_lerp)
-    card.ability.glow_intensity = 4 * (ease * card.ability.glow_range + card.ability.glow_min)
-    card.ability.glow_size = 0.95 * (ease * card.ability.glow_range + card.ability.glow_min)
+    card.ability.glow_intensity = 3 * (ease * card.ability.glow_range + card.ability.glow_min)
+    card.ability.glow_size = 0.94 * (ease * card.ability.glow_range + card.ability.glow_min)
 end
 
 function jokerInfo.draw(self, card, layer)
     if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
         return
     end
-    
-    if not (card.children.bloom1 and card.children.bloom2 and card.children.bloom3) then
-        return
-    end
 
-    if card.ability.fizzled then
-        card.ability.glow_size = card.ability.glow_size - G.real_dt * 40
-        card.ability.glow_intensity = card.ability.glow_intensity - G.real_dt * 100
-        if card.ability.glow_size <= 0 and card.ability.glow_intensity <= 0 then
-            return
-        end
+    if not (card.children.fnwk_love_neon and card.children.fnwk_love_front) then
+        return
     end
 
     local cursor_pos = {}
@@ -204,21 +186,27 @@ function jokerInfo.draw(self, card, layer)
     local screen_scale = G.TILESCALE*G.TILESIZE*(card.children.center.mouse_damping or 1)*G.CANV_SCALE
     local hovering = (card.hover_tilt or 0)
 
-    G.SHADERS['fnwk_bloom']:send('bloom_size', card.ability.glow_size)
-    G.SHADERS['fnwk_bloom']:send('bloom_intensity', card.ability.glow_intensity)
-    G.SHADERS['fnwk_bloom']:send('bloom_threshold', card.ability.glow_threshold)
-    G.SHADERS['fnwk_bloom']:send('mouse_screen_pos', cursor_pos)
-    G.SHADERS['fnwk_bloom']:send('screen_scale', screen_scale)
-    G.SHADERS['fnwk_bloom']:send('hovering', hovering)
-    love.graphics.setShader(G.SHADERS['fnwk_bloom'], G.SHADERS['fnwk_bloom'])
-    G.SHADERS['fnwk_bloom']:send('glow_colour', card.children.bloom1.glow_color)
-    card.children.bloom1:draw_self()
-    G.SHADERS['fnwk_bloom']:send('glow_colour', card.children.bloom2.glow_color)
-    card.children.bloom2:draw_self()
-    G.SHADERS['fnwk_bloom']:send('glow_colour', card.children.bloom3.glow_color)
-    card.children.bloom3:draw_self()
-    love.graphics.setShader()
+    if card.ability.fizzled then
+        card.ability.glow_size = card.ability.glow_size - G.real_dt * 40
+        card.ability.glow_intensity = card.ability.glow_intensity - G.real_dt * 100
+        if card.ability.glow_size <= 0 and card.ability.glow_intensity <= 0 then
+            card.children.fnwk_love_front:draw_shader('dissolve')
+            return
+        end
+    else
+        G.SHADERS['fnwk_bloom']:send('glow_colour', card.children.fnwk_love_neon.glow_color)
+        G.SHADERS['fnwk_bloom']:send('bloom_size', card.ability.glow_size)
+        G.SHADERS['fnwk_bloom']:send('bloom_intensity', card.ability.glow_intensity)
+        G.SHADERS['fnwk_bloom']:send('bloom_threshold', card.ability.glow_threshold)
+        G.SHADERS['fnwk_bloom']:send('mouse_screen_pos', cursor_pos)
+        G.SHADERS['fnwk_bloom']:send('screen_scale', screen_scale)
+        G.SHADERS['fnwk_bloom']:send('hovering', hovering)
+        love.graphics.setShader(G.SHADERS['fnwk_bloom'], G.SHADERS['fnwk_bloom'])
+        card.children.fnwk_love_neon:draw_self()
+        love.graphics.setShader()
+    end
+
+    card.children.fnwk_love_front:draw_shader('dissolve')
 end
---]]
 
 return jokerInfo

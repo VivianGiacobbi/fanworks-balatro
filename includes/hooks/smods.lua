@@ -296,14 +296,3 @@ function SMODS.score_card(card, context)
         card.lucky_trigger = nil
     end
 end
-
-
-
-local ref_four_fingers = SMODS.four_fingers
-function SMODS.four_fingers(hand_type)
-	local ret = ref_four_fingers(hand_type)
-	if hand_type == 'straight' and ret > 4 and next(SMODS.find_card('c_fnwk_gotequest_born')) then
-		ret = 4
-	end
-	return ret
-end

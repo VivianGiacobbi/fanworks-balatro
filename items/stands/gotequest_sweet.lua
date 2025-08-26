@@ -23,6 +23,7 @@ local consumInfo = {
 		},
         custom_color = 'gotequest',
     },
+    artist = 'gote',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

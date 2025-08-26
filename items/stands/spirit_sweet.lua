@@ -25,7 +25,8 @@ local consumInfo = {
         custom_color = 'spirit',
     },
     blueprint_compat = false,
-    eternal_compat = true
+    eternal_compat = true,
+    artist = 'winter',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -45,7 +46,6 @@ function consumInfo.calculate(self, card, context)
             ArrowAPI.stands.flare_aura(card, 0.5)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0, func = function()
                 local new_part = create_card('Joker', G.jokers, nil, nil, nil, nil, card.ability.extra.create_key, 'fnwk_sweet_bod')
-                -- new_part:set_edition({negative = true}, true, true)
                 new_part.ability.blind_type = G.GAME.blind.config.blind
                 new_part:add_to_deck()
                 G.jokers:emplace(new_part)

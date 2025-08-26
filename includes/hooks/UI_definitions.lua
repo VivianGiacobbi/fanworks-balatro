@@ -24,6 +24,64 @@ end
 
 
 ---------------------------
+--------------------------- Card Prediction UI
+---------------------------
+
+function G.UIDEF.predict_card_ui(cardarea)
+    return {
+        n = G.UIT.ROOT,
+        config = {align = "cm", minh = 1, r = 0.3, padding = 0.07, minw = 1, colour = G.C.JOKER_GREY, shadow = true},
+        nodes = {{
+            n = G .UIT.C,
+            config = {align = "cm", minh = 1, r = 0.2, padding = 0.1, minw = 1, colour = G.C.L_BLACK},
+            nodes = {{
+                n = G.UIT.O,
+                config = {object = cardarea}
+            }}
+        }}
+    }
+end
+
+
+---------------------------
+--------------------------- The Imaginary score modifiers
+---------------------------
+
+local ref_uibox_blind = create_UIBox_blind_popup
+function create_UIBox_blind_popup(...)
+    local ret = ref_uibox_blind(...)
+
+    local args = { ... }
+    local blind = args[1]
+
+    if blind.key == 'bl_fnwk_imaginary' then
+        local dyn_nodes = {}
+        for i=0, 6 do
+            dyn_nodes[#dyn_nodes+1] = {string = (i*0.25 + 1.75)..localize('k_x_base'), colour = G.C.RED}
+        end
+        ret.nodes[2].nodes[1].nodes[2].nodes[2] = {
+            n=G.UIT.O,
+            config={
+                object = DynaText({
+                    string = dyn_nodes,
+                    colours = {G.C.RED},
+                    pop_in_rate = 9999999,
+                    silent = true,
+                    random_element = true,
+                    random_no_repeat = true,
+                    pop_delay = 0.3,
+                    scale = 0.4,
+                    min_cycle_time = 0,
+                })
+            }
+        }
+    end
+
+    return ret
+end
+
+
+---------------------------
 --------------------------- Fix Disturbia badge
 ---------------------------
 

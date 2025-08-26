@@ -11,6 +11,7 @@ local voucherInfo = {
 		},
         custom_color = 'spirit',
     },
+    artist = 'winter',
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

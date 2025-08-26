@@ -14,6 +14,7 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'iron',
     blueprint_compat = true,
+    artist = 'cream'
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
