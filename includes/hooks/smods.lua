@@ -284,6 +284,7 @@ function SMODS.score_card(card, context)
             end
         end
 
+        context.individual = nil
         if reps[j] == 1 and flags.calculated then
             context.repetition = true
             context.card_effects = effects

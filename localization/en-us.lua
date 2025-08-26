@@ -2206,8 +2206,14 @@ return {
 			c_fnwk_closer_artificial = {
 				name = 'Artificial Stand',
 				text = {
-                    "Copies ability of",
-                    "{C:stand}Stand{} to the right"
+					{
+						"{C:attention}Copies{} ability of",
+                    	"{C:stand}Stand{} to the right"
+					},
+                    {
+						"This Stand does not count",
+						"against the {C:stand}Stand{} {C:attention}limit{}"
+					}
                 },
 			},
 			c_fnwk_double_wine = {
@@ -2404,7 +2410,7 @@ return {
 			v_fnwk_spirit_binary = {
 				name = "Type Binary",
 				text = {
-					"Increases {C:stand}Stand{} limit by {C:attention}1{}"
+					"Increases {C:stand}Stand limit{} by {C:attention}1{}"
 				}
 			},
 			v_fnwk_spirit_prime = {
@@ -2478,7 +2484,7 @@ return {
 				name = "Arcane Deck",
 				text = {
 					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
-					"{C:red}#2#{} {C:stand}Stand{} limit",
+					"{C:red}#2#{} {C:stand}Stand limit{}",
 					"{C:red}#3#{} consumable slot",
 				},
 				unlock = {
