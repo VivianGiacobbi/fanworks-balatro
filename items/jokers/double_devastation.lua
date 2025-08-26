@@ -25,6 +25,7 @@ local jokerInfo = {
 		},
         custom_color = 'double',
     },
+    artist = 'winter',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -65,7 +66,7 @@ function jokerInfo.set_sprites(self, card, front)
 		scale_bond = 'Strong',
 		draw_major = card,
     })
-    card.children.dev_glow.glow_color = {1, 0.17, 0.20}
+    card.children.dev_glow.glow_color = {1, 0.34, 0.38}
     card.children.dev_glow.custom_draw = true
     card.late_center_draw = true
 end

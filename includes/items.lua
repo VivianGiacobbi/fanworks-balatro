@@ -365,6 +365,7 @@ ArrowAPI.loading.batch_load({
 	Blind = {
 		items = {
 			'venus',
+			'imaginary',
 			'goat',
 			'bolt',
 			'rot',

@@ -13,6 +13,7 @@ local jokerInfo = {
 		},
         custom_color = 'jojopolis',
     },
+	artist = 'mal'
 }
 
 function jokerInfo.calculate(self, card, context)

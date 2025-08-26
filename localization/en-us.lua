@@ -375,6 +375,7 @@ return {
 			ba_closer = 'CLOSER 2 GOD',
 			ba_industry = 'Industry Baby',
 			ba_double = 'Double Down',
+			ba_imaginary = 'Imaginary Friends',
 			ba_love = 'Love Once Buried',
 			ba_coi = 'Cost of Information',
 			ba_iron = 'Iron Touch',
@@ -779,6 +780,13 @@ return {
                 text = {
                     "Held in hand effects",
 					"are {C:attention}disabled{}"
+                }
+            },
+			bl_fnwk_imaginary = {
+                name = "The Imaginary",
+                text = {
+                    "Required score",
+					"is {C:attention}hidden{}"
                 }
             },
 			bl_fnwk_work = {

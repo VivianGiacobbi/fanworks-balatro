@@ -130,7 +130,7 @@ SMODS.DrawStep:take_ownership('shadow', {
             
             if self.sprite_facing == 'front' then
                 self.children.noto_layer:draw_shader('fnwk_stand_notorious', self.shadow_height)
-            else 
+            else
                 self.children.back:draw_shader('dissolve', self.shadow_height)
             end
         end
