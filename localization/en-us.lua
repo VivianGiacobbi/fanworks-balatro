@@ -348,6 +348,7 @@ return {
 
 			-- stand loc strings
 			k_stand_advanced = 'Advanced Stand',
+			k_stand_artificial = 'Artificial Stand',
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
 			k_mcr_popped = 'Popped!',
@@ -2212,7 +2213,8 @@ return {
 					},
                     {
 						"This Stand does not count",
-						"against the {C:stand}Stand{} {C:attention}limit{}"
+						"against the {C:stand}Stand limit{}",
+						"and cannot be {C:attention}sold{}"
 					}
                 },
 			},
@@ -2416,8 +2418,8 @@ return {
 			v_fnwk_spirit_prime = {
 				name = "Type Prime",
 				text = {
-					"{C:attention}+1{} consumable slot",
-					"Grants an {C:dark_edition}#1#{}"
+					"Grants a {C:attention}permanent{}",
+					"{C:dark_edition}#1#{}"
 				},
 				unlock = {
 					"Win a run with {C:attention,E:1}#1#{}",
