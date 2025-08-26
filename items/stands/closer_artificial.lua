@@ -7,6 +7,7 @@ local consumInfo = {
         blueprint_compat = 'incompatible',
         blueprint_compat_ui = '',
         blueprint_compat_check = nil,
+        card_limit = 1,
     },
     no_doe = true,
     cost = 4,
@@ -21,6 +22,10 @@ local consumInfo = {
     },
     blueprint_compat = true,
 }
+
+function consumInfo.set_card_type_badge(self, card, badges)
+    badges[1] = create_badge(localize('k_stand_artificial'), G.C.UI.TEXT_LIGHT, G.C.UI.TEXT_DARK, 1)
+end
 
 function consumInfo.in_pool(self, args)
     return false

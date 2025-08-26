@@ -166,3 +166,12 @@ if fnwk_enabled['enable_Queer'] then
     )
 end
 
+local ref_arrow_numstands = ArrowAPI.stands.get_num_stands
+ArrowAPI.stands.get_num_stands = function()
+    local ret = ref_arrow_numstands()
+    if ret > 0 then
+        local artificials = SMODS.find_card('c_fnwk_closer_artificial', true)
+        ret = math.max(0, ret - #artificials)
+    end
+    return ret
+end

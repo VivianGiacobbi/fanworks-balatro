@@ -118,7 +118,6 @@ function jokerInfo.calculate(self, card, context)
 	end
 
 	if context.removed_card == card then
-		sendDebugMessage('removed card')
 		card.ability.extra.times_sold = card.ability.extra.times_sold + card.ability.extra.sell_mod
 		card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * G.GAME.round_resets.ante
 		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "times_sold", scalar_value = "sell_mod"})

@@ -617,6 +617,13 @@ end
 
 local ref_card_cost = Card.set_cost
 function Card:set_cost(...)
+    if self.config.center.key == 'c_fnwk_closer_artificial' then
+        self.cost = 0
+        self.extra_cost = 0
+        self.sell_cost = 0
+        return
+    end
+
     if self.config.center.key == 'c_fnwk_streetlight_disturbia' and self.ability.extra.target_card then
         self.extra_cost = self.ability.fnwk_disturbia_fake.extra_cost
         self.cost = self.ability.fnwk_disturbia_fake.cost

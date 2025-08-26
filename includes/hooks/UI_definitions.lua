@@ -109,10 +109,15 @@ end
 
 local ref_use_and_sell = G.UIDEF.use_and_sell_buttons
 function G.UIDEF.use_and_sell_buttons(...)
-    local ret = ref_use_and_sell(...)
-
     local args = {...}
     local card = args[1]
+
+    if card.area and card.area == G.consumeables and card.ability.set == 'Stand' and card.config.center.key == 'c_fnwk_closer_artificial' then
+        sendDebugMessage('artificial Stand')
+        return {n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={}}
+    end
+
+    local ret = ref_use_and_sell(...)
     if card.area and card.area == G.jokers and card.ability.set == 'Joker' and G.GAME.blind
     and (G.GAME.blind.fnwk_works_submitted or 0) < (G.GAME.blind.fnwk_required_works or 0) then
         local inner_nodes = ret.nodes[1].nodes[2].nodes
