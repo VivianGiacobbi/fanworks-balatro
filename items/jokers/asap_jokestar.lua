@@ -20,6 +20,7 @@ local jokerInfo = {
 		},
 		custom_color = 'asap',
 	},
+	artist = 'winter',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

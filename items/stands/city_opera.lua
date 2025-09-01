@@ -2,7 +2,7 @@ local consumInfo = {
     name = "Opera No. 2",
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'FF3BBADC', '62CCA2DC' },
         extra = {
             levels = 2,
@@ -19,11 +19,11 @@ local consumInfo = {
 		},
         custom_color = 'city',
     },
+    artist = 'gote',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { 
         vars = {
             card.ability.extra.levels,

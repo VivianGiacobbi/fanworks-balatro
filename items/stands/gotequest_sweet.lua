@@ -2,7 +2,7 @@ local consumInfo = {
     name = 'Sweet Dreams',
     set = 'Stand',
     config = {
-        -- stand_mask = true,
+        stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
             rank_map = {
@@ -27,7 +27,6 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = { 3, 6, 9, card.ability.extra.rank_map[3], card.ability.extra.rank_map[6], card.ability.extra.rank_map[9] } }
 end
 
