@@ -18,11 +18,8 @@ local consumInfo = {
         custom_color = 'jojopolis',
     },
     blueprint_compat = true,
+    artist = 'gote',
 }
-
-function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
-end
 
 function consumInfo.calculate(self, card, context)
     if context.before then

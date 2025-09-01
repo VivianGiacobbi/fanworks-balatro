@@ -20,11 +20,11 @@ local consumInfo = {
 		},
 		custom_color = 'bone',
 	},
+    artist = 'gote',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {G.GAME.starting_deck_size - card.ability.extra.evolve_sub}}
 end
 
