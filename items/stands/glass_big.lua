@@ -2,6 +2,7 @@ local consumInfo = {
     name = 'Big Poppa',
     set = 'Stand',
     config = {
+        stand_scale_mod = 0.5,
         stand_mask = true,
         aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
         extra = {
@@ -20,6 +21,7 @@ local consumInfo = {
         custom_color = 'glass',
     },
     blueprint_compat = true,
+    artist = 'winter',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

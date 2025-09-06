@@ -24,6 +24,7 @@ local consumInfo = {
 		custom_color = 'bluebolt',
 	},
     blueprint_compat = true,
+    artist = 'squire',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
