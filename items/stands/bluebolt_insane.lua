@@ -12,6 +12,12 @@ local consumInfo = {
     cost = 4,
     rarity = 'StandRarity',
     hasSoul = true,
+    width = 142,
+    height = 190,
+    display_size = {
+        w = 71,
+        h = 95,
+    },
     origin = {
 		category = 'fanworks',
 		sub_origins = {
@@ -20,6 +26,7 @@ local consumInfo = {
 		custom_color = 'bluebolt',
 	},
     blueprint_compat = false,
+    artist = 'squire',
 }
 
 function consumInfo.add_to_deck(self, card, from_debuff)

@@ -18,10 +18,44 @@ local jokerInfo = {
 		},
         custom_color = 'glass',
     },
+    artist = 'winter',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
     return { vars = { card.ability.extra.mult_mod, card.ability.extra.mult} }
+end
+
+function jokerInfo.set_sprites(self, card, front)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+    card.children.center:set_sprite_pos({x = 1, y = 0})
+    
+    local atlas = G.ASSET_ATLAS[self.atlas]
+    local role = {
+		role_type = 'Minor',
+		major = card,
+		offset = { x = 0, y = 0 },
+		xy_bond = 'Strong',
+		wh_bond = 'Strong',
+		r_bond = 'Strong',
+		scale_bond = 'Strong',
+		draw_major = card
+	}
+    
+    card.children.glass_pipes_back = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas, { x = 2, y = 0})
+	card.children.glass_pipes_back:set_role(role)
+	card.children.glass_pipes_back.custom_draw = true
+
+    card.children.glass_josephine = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas,{ x = 3, y = 0})
+	card.children.glass_josephine:set_role(role)
+	card.children.glass_josephine.custom_draw = true
+
+    card.children.glass_pipes_front = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas,{ x = 4, y = 0})
+	card.children.glass_pipes_front:set_role(role)
+	card.children.glass_pipes_front.custom_draw = true
+    card.late_center_draw = true
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -62,6 +96,28 @@ function jokerInfo.calculate(self, card, context)
         card = card,
         color = G.C.MULT,
     }
+end
+
+function jokerInfo.draw(self, card, layer)
+    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+        return
+    end
+
+    if not card.children.glass_pipes_back or not card.children.glass_josephine or not card.children.glass_pipes_front then
+        return
+    end
+    
+    G.SHADERS['fnwk_wave_warp']:send('wave_time', G.TIMERS.REAL)
+    G.SHADERS['fnwk_wave_warp']:send('wave_t', 1)
+    G.SHADERS['fnwk_wave_warp']:send('mask_offset', 0.5)
+    card.children.glass_pipes_back:draw_shader('fnwk_wave_warp')
+
+    card.children.glass_josephine:draw_shader('dissolve')
+
+    G.SHADERS['fnwk_wave_warp']:send('wave_time', G.TIMERS.REAL + 0.5)
+    G.SHADERS['fnwk_wave_warp']:send('wave_t', 2)
+    G.SHADERS['fnwk_wave_warp']:send('mask_offset', 1/6)
+    card.children.glass_pipes_front:draw_shader('fnwk_wave_warp')
 end
 
 return jokerInfo

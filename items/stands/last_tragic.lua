@@ -19,11 +19,11 @@ local consumInfo = {
 		},
         custom_color = 'last',
     },
+    artist = 'gote',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = {card.ability.extra.contain_rank, -card.ability.extra.rank_mod }}
 end
 
