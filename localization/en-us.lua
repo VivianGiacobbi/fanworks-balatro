@@ -275,11 +275,8 @@ return {
 			fnwk_options_enable_BlindReskins = "Boss Blind Reskins",
 			fnwk_options_enable_Skins = "Playing Card Skins",
 			fnwk_options_enable_Challenges = "Challenges",
-			fnwk_options_enable_Trophies = "Fanworks Achievements",
 			fnwk_options_enable_Logo = "Main Menu Logo",
 			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
-			fnwk_options_resetTrophies_r = "Reset Achievements",
-			fnwk_options_resetTrophies_desc = "Click this button to reset all Fanworks achievements",
 			
 			-- buttons
 			b_fnwk_submit = 'Submit',
@@ -309,11 +306,7 @@ return {
 			k_seal = "Seal!",
 			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
-			k_hit = 'Hit!',
-			k_bust = "Bust!",
-			k_wp = 'Well Played!',
-			k_nd = "No Dice!",
-			k_steel="Steel",
+			k_steel = "Steel",
 			k_toilet1 = 'poop',
             k_toilet2 = 'peeing ahhhh',
             k_toilet3 = {
@@ -336,7 +329,6 @@ return {
 			k_stand_replaced = 'New Challenger!',
 			k_blind_disabled_ex = 'Blind Disabled',
 			k_crystal = 'Changed timelines...',
-			k_valentino = 'Autocannibalized!',
 			k_fnwk_submitted = {
 				'Submitted for',
 				'Parnership!'
@@ -346,7 +338,6 @@ return {
 
 			-- stand loc strings
 			k_stand_advanced = 'Advanced Stand',
-			k_stand_artificial = 'Artificial Stand',
 			k_mcr_bubbled = 'Bubbled!',
 			k_mcr_transmuted = 'Transmuted!',
 			k_mcr_popped = 'Popped!',
@@ -404,7 +395,6 @@ return {
 			k_challenge_story = 'Story'
 		},
 		v_dictionary = {
-			downward_warn_text = "Must play #1#",
 			miracle_warn_text = "#1# will Level Up",
 			a_hand = "+#1# Hand",
 			a_reps = "+#1# Reps",
@@ -438,8 +428,8 @@ return {
 			ch_c_fnwk_fanworks_standoff = {"One {C:stand}Stand{} {C:attention}randomized{} each round"},
 			ch_c_fnwk_fanworks_standoff_2 = {"(retaining {C:dark_edition}Editions{} and {C:attention}Stickers{})"},
 			ch_c_fnwk_fanworks_reread = {"Only retrigger {C:attention}Jokers{} and {C:stand}Stands{} are allowed"},
-			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, {C:spectral}Ichor{}, and"},
-			ch_c_fnwk_crimson_manager_2 = {"{C:spectral}Mood Indigo{} appear in the {C:attention}shop{}"},
+			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, and {C:spectral}Mood Indigo{}"},
+			ch_c_fnwk_crimson_manager_2 = {"appear in the {C:attention}shop{}"},
 			ch_c_fnwk_rubicon_foundation = {"{C:dark_edition}Win{} when your deck contains"},
 			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"}
 		},
@@ -1197,15 +1187,6 @@ return {
 					"played {C:attention}#1#{} in scored hand"
 				}
 			},
-			j_fnwk_gotequest_will = {
-				name = "Will of One",
-				text = {
-					"This Joker gains",
-					"{C:chips}+#1#{} Chip for each",
-					"card {C:attention}discarded{}",
-					"{C:inactive}(Currently {}{C:chips}+#2#{} {C:inactive}Chips){}"
-				}
-			},
 			j_fnwk_gotequest_lambiekins = {
 				name = "Ms. Lambiekins",
 				text = {
@@ -1487,14 +1468,6 @@ return {
 					"Mult equal to its {C:attention}rank{}"
 				}
 			},
-			j_fnwk_scepter_card = {
-				name = "Foundation Card",
-				text = {
-					"Played {C:attention}face{} cards have",
-					"a {C:green}#1# in #2#{} chance to give",
-					"{C:mult}+#3#{} Mult when scored",
-				}
-			},
 			j_fnwk_crimson_golden = {
 				name = "Golden Heart",
 				text = {
@@ -1664,14 +1637,6 @@ return {
 				name = "Impulse",
 				text = {
 					"Add {C:dark_edition}Foil{} and {C:attention}Perishable{}",
-					"to a random Joker, overwriting",
-					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
-				}
-			},
-			c_fnwk_spec_ichor = {
-				name = "Ichor",
-				text = {
-					"Add {C:dark_edition}#1#{} and {C:attention}Rental{}",
 					"to a random Joker, overwriting",
 					"existing {C:dark_edition}editions{} and {C:attention}stickers{}"
 				}
@@ -2011,13 +1976,6 @@ return {
 				text = {
 					"{C:attention}Queens{} have a {C:green}1 in 2{} chance",
 					"to become {C:attention}Steel{} when scored"
-				},
-			},
-			c_fnwk_scepter_lenfer = {
-				name = "L'Enfer",
-				text = {
-					"If discard is {C:attention}#1# Enhanced Card,",
-					"{C:attention}destroy{} it and draw {C:attention}#2#{} cards"
 				},
 			},
 			c_fnwk_streetlight_disturbia = {

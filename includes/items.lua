@@ -14,7 +14,6 @@ SMODS.ObjectType {
         ['j_fnwk_rubicon_thnks'] = true,
         ['j_fnwk_streetlight_resil'] = true,
         ['j_fnwk_bone_destroyer'] = true,
-        ['j_fnwk_industry_loyal'] = true,
         ['j_fnwk_mania_jokestar'] = true,
         ['j_fnwk_gotequest_killing'] = true,
         ['j_fnwk_bluebolt_tuned'] = true,
@@ -39,7 +38,6 @@ SMODS.ConsumableType {
 	cards = {
 		['c_jojobal_spec_mask'] = not not next(SMODS.find_mod('jojobal')),
 		['c_fnwk_spec_impulse'] = true,
-		['c_fnwk_spec_ichor'] = true,
 		['c_fnwk_spec_mood'] = true,
 	}
 }
@@ -81,8 +79,6 @@ ArrowAPI.loading.batch_load({
 			'gotequest_killing',
 			'gotequest_headlong',
 			'gotequest_2hot',
-			'gotequest_ajorekesr',
-			'gotequest_will',
 			'gotequest_lambiekins',
 
 			-- culture shock
@@ -155,9 +151,6 @@ ArrowAPI.loading.batch_load({
 			-- no man's army
 			'noman_unknown',
 
-			-- scepter files
-			'scepter_card',
-
 			-- yo yo ma
 			'yym_sheet',
 
@@ -199,7 +192,6 @@ ArrowAPI.loading.batch_load({
 	Consumable = {
 		items = {
 			'spec_impulse',
-			'spec_ichor',
 			'spec_mood'
 		}
 	},

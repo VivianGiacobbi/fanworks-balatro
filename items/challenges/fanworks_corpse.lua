@@ -10,7 +10,6 @@ local chalInfo = {
             {id = 'j_ceremonial'},
             {id = 'c_jojobal_spec_mask'},
             {id = 'c_fnwk_spec_impulse'},
-            {id = 'c_fnwk_spec_ichor'},
         },
     }
 }

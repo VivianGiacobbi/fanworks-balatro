@@ -1,5 +1,5 @@
 local consumInfo = {
-    name = 'Ichor',
+    name = 'Impulse',
     set = 'Spectral',
     cost = 4,
     alerted = true,

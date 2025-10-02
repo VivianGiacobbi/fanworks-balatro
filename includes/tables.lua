@@ -20,7 +20,6 @@ G.fnwk_women = {
         ['j_fnwk_rubicon_thnks'] = true,
         ['j_fnwk_streetlight_resil'] = true,
         ['j_fnwk_bone_destroyer'] = true,
-        ['j_fnwk_industry_loyal'] = true,
         ['j_fnwk_mania_jokestar'] = true,
         ['j_fnwk_gotequest_killing'] = true,
         ['j_fnwk_jspec_sharp'] = true,
