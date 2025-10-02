@@ -264,7 +264,7 @@ return {
 			fnwk_options_enable_Jokers = "Jokers",
 			fnwk_options_enable_Stands = "Stands",
 			fnwk_options_enable_AltArt = "Alt Joker Art",
-			fnwk_options_enable_SkepticStaticSeed = "Skeptic Static Seed",
+			fnwk_options_enable_InsaneStaticSeed = "Booster Predict Static Seed",
 			fnwk_options_enable_Queer = "Queer Edition",
 			fnwk_options_enable_Decks = "Decks",
 			fnwk_options_enable_Tags = "Tags",
@@ -289,7 +289,6 @@ return {
 			k_discount_apply = "Discounted!",
 			k_nope_ex = "Not God's Plan!",
 			k_plus_fool = "Fool!",
-			k_revived = "Revived!",
 			k_glass_ex = "Glass!",
 			k_method_1 = "One Step!",
 			k_method_2 = "Two Step!",
@@ -310,7 +309,6 @@ return {
 			k_seal = "Seal!",
 			k_ge = 'Awakened!',
 			k_zap_ex = 'Zap!',
-			k_repeat_ex = 'Repeat!',
 			k_hit = 'Hit!',
 			k_bust = "Bust!",
 			k_wp = 'Well Played!',
@@ -458,19 +456,6 @@ return {
 		},
 		achievement_descriptions = {
 		},
-		poker_hands = {
-			jojobal_Fibonacci = 'Fibonacci',
-			jojobal_FlushFibonacci = 'Flush Fib',
-		},
-		poker_hand_descriptions = {
-			jojobal_Fibonacci = {
-				'5 cards that follow the Fibonacci sequence',
-			},
-			jojobal_FlushFibonacci = {
-				"5 cards that follow the Fibonacci sequence",
-				"with all cards sharing the same suit",
-			}
-		},
 		fnwk_suits_plural = {
             Arrows = '\'Arrows\'',
             Masks = '\'Masks\'',
@@ -525,27 +510,6 @@ return {
 					"disable it in mod config",
 					"when testing runs"
 				}
-			},
-			fnwk_artist_1 = {
-				name = "Artist",
-				text = {
-					"{E:1}#1#{}",
-				},
-			},
-			fnwk_artist_2 = {
-				name = "Artists",
-				text = {
-					"{E:1}#1#{}",
-					"{E:1}#2#{}"
-				},
-			},
-			fnwk_artist_3 = {
-				name = "Artists",
-				text = {
-					"{E:1}#1#{}",
-					"{E:1}#2#{}",
-					"{E:1}#3#{}"
-				},
 			},
 		},
 		Blind = {
@@ -786,8 +750,7 @@ return {
 			bl_fnwk_imaginary = {
                 name = "The Imaginary",
                 text = {
-                    "Required score",
-					"is {C:attention}hidden{}"
+                    "DEFEAT BOSS"
                 }
             },
 			bl_fnwk_work = {
@@ -1492,8 +1455,8 @@ return {
 					"trigger when {C:attention}scored{}"
 				},
 				unlock = {
-					"Have one of each",
-					"{C:attention,E:1}seal{} in your deck"
+					"Have {C:attention,E:1}4 unique Seals{}",
+					"in your deck"
 				}
 			},
 			j_fnwk_jspec_joepie = {

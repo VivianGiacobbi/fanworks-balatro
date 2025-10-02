@@ -3,7 +3,7 @@ local blindInfo = {
     boss_colour = HEX('F98F32'),
     score_invisible = true,
     pos = {x = 0, y = 0},
-    dollars = 5,
+    dollars = 0,
     mult = 2,
     vars = {},
     boss = {min = 2, max = 10},

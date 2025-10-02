@@ -8,7 +8,7 @@ local voucherInfo = {
     cost = 10,
     requires = {'v_fnwk_spirit_binary'},
     unlocked = false,
-    unlock_condition = { type = 'fnwk_win_deck', deck = 'b_fnwk_fanworks_deck', stake = 8 },
+    unlock_condition = { type = 'fnwk_win_deck', deck = 'b_fnwk_fanworks_deck', stake = 4 },
     origin = {
 		category = 'fanworks',
 		sub_origins = {
