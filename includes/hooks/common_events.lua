@@ -52,14 +52,9 @@ local main_card = nil
 local ref_card_ui = generate_card_ui
 function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...) 
     if not full_UI_table then main_card = card
-    else
-        if full_UI_table.name and main_card and main_card.config and main_card.config.center and main_card.config.center.key == 'c_fnwk_double_geometrical' then
-            full_UI_table.name[1].nodes[2].config.ref_table = main_card
-            main_card = nil
-        elseif main_card and main_card.fnwk_disturbia_joker then
-            if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] and _c.key ~= "fnwk_artist_1" then
-                return full_UI_table
-            end
+    elseif main_card and main_card.fnwk_disturbia_joker then
+        if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] and _c.key ~= "fnwk_artist_1" then
+            return full_UI_table
         end
     end
 

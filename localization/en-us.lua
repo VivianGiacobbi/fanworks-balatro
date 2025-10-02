@@ -372,14 +372,10 @@ return {
 			ba_jojopolis = 'JoJopolis',
 			ba_spirit = 'Spirit Lines',
 			ba_closer = 'CLOSER 2 GOD',
-			ba_industry = 'Industry Baby',
-			ba_double = 'Double Down',
-			ba_imaginary = 'Imaginary Friends',
 			ba_love = 'Love Once Buried',
 			ba_coi = 'Cost of Information',
 			ba_iron = 'Iron Touch',
 			ba_lighted = 'The Lighted Stage',
-			ba_whiplash = 'Whiplash Riot',
 			ba_asap = 'A$AP Mob Feedback',
 			ba_bone = 'Bone to Blades',
 			ba_crimson = 'Crimson Jungle',
@@ -423,13 +419,11 @@ return {
 			c_fnwk_fanworks_reread = "Annual Re-Read",
 			c_fnwk_fanworks_moderated = "Closely Moderated",
 			c_fnwk_fanworks_corpse = "Fanquisite Corpse",
-			c_fnwk_fanworks_invisible = "Invisible Woman",
 			c_fnwk_fanworks_breakdown = "Third-Act Breakdown",
 			c_fnwk_fanworks_comprehension = "Reading Comprehension",
 			c_fnwk_crimson_melting = 'Melting Madness',
 			c_fnwk_crimson_manager = 'Mood Indigo Manager',
 			c_fnwk_lighted_kriskross = "Kris Kross",
-			c_fnwk_spirit_creeping = "Creeping Infection",
 			c_fnwk_rubicon_foundation = "Foundation Building",
 		},
 		v_text = {
@@ -437,8 +431,6 @@ return {
 			ch_c_fnwk_duplicates_allowed = {"{C:attention}Dupliate Jokers{} can spawn"},
 			ch_c_fnwk_pinned_jokers = {"All {C:attention}Jokers{} are {C:gold}Pinned{}"},
             ch_c_fnwk_right_eternal = {"Non-{C:attention}leftmost{} Jokers are {C:attention}Eternal{}"},
-			ch_c_fnwk_consumable_save = {"{C:attention}Using{} consumeables {C:attention}saves the run{}"},
-			ch_c_fnwk_play_save = {"{C:attention}Playing{} a hand {C:attention}saves the run{}"},
 
 			-- challenge specific strings
 			ch_c_fnwk_fanworks_beyond = {"Non-{C:fanworks}Fanworks{} Jokers are banned"},
@@ -448,7 +440,6 @@ return {
 			ch_c_fnwk_fanworks_reread = {"Only retrigger {C:attention}Jokers{} and {C:stand}Stands{} are allowed"},
 			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, {C:spectral}Ichor{}, and"},
 			ch_c_fnwk_crimson_manager_2 = {"{C:spectral}Mood Indigo{} appear in the {C:attention}shop{}"},
-			ch_c_fnwk_spirit_creeping = {"{C:attention}Rotten Grafts{} are {C:eternal}Eternal{} and {C:dark_edition}Negative{}"},
 			ch_c_fnwk_rubicon_foundation = {"{C:dark_edition}Win{} when your deck contains"},
 			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"}
 		},
@@ -747,12 +738,6 @@ return {
 					"are {C:attention}disabled{}"
                 }
             },
-			bl_fnwk_imaginary = {
-                name = "The Imaginary",
-                text = {
-                    "DEFEAT BOSS"
-                }
-            },
 			bl_fnwk_work = {
                 name = "The Work",
                 text = {
@@ -940,15 +925,6 @@ return {
 				text = {
 					"No cards are considered",
 					"{C:attention}face{} cards",
-				},
-			},
-			j_fnwk_whiplash_quiet = {
-				name = "Quiet Riot",
-				text = {
-					"{C:mult}+#1#{} Mult for each",
-					"{C:attention}Three of a Kind{}",
-					"played this run",
-					"{C:inactive}(Currently {}{C:mult}+#2#{} {C:inactive}Mult){}",
 				},
 			},
 			j_fnwk_bluebolt_jokestar = {
@@ -1282,79 +1258,6 @@ return {
 					"Turn every {C:attention,E:1}Queen{}",
 					"in your deck into",
 					"a {C:attention,E:1}Steel{} card"
-				}
-			},
-			j_fnwk_spirit_halves = {
-				name = "The Halves",
-				text = {
-					"If played hand is a {C:attention}Pair{},",
-					"{C:attention}balance{} {C:chips}Chips{} and {C:mult}Mult{},",
-					"then {X:mult,C:white}X#1#{} Mult"
-				}
-			},
-			j_fnwk_spirit_raise = {
-				name = "The Raise",
-				text = {
-					"{C:upgrade}Level up{} played {C:attention}poker hand{} if",
-					"total {C:attention}chip value{} of scored",
-					"cards is {C:attention}#1#{}",
-				}
-			},
-			j_fnwk_spirit_corpse = {
-				name = "Corpse Crimelord",
-				text = {
-					{
-						"{C:dark_edition}+#1#{} Joker slot for every",
-						"digit of {C:money}money{} you have",
-					},
-					{
-						"Lose {C:money}$#2#{} for each {C:attention}Joker{} you",
-						"own at end of round"
-					}
-				},
-				unlock = {
-					"Survive {C:attention,E:1}death{}"
-				}
-			},
-			j_fnwk_spirit_rotten = {
-				name = "Rotten Graft",
-				text = {
-					"{X:mult,C:white}X#1#{} Mult",
-				},
-			},
-			j_fnwk_industry_loyal = {
-				name = "Loyal Gambler",
-				text = {
-					"{V:1}#1#{} count as {C:attention}Lucky Cards{}",
-                    "in addition to current {C:attention}Enhancement{}",
-                    "{s:0.8}suit changes at end of round",
-				},
-			},
-			j_fnwk_double_clark = {
-				name = "Acerbic Fencer",
-				text = {
-					"When round begins, add ",
-					"a random {C:attention}Face Card{}",
-					"to your hand"
-				},
-				unlock = {
-					"Turn a {C:attention,E:1}Queen{}",
-					"into a {C:attention,E:1}King{}"
-				}
-			},
-			j_fnwk_double_firewalker = {
-				name = "The Firewalker",
-				text = {
-					"Creates a {C:dark_edition}Negative{}",
-					"{C:attention}Popcorn{} or {C:attention}Ice Cream{}",
-					"when score {C:attention}catches fire{}"
-				},
-			},
-			j_fnwk_double_devastation = {
-				name = "The Devastation",
-				text = {
-                    "{C:mult}+#2#{} Mult",
-                    "{C:attention}-#1#{} hand size",
 				}
 			},
 			j_fnwk_love_jokestar = {
@@ -2117,96 +2020,6 @@ return {
 					"{C:attention}destroy{} it and draw {C:attention}#2#{} cards"
 				},
 			},
-			c_fnwk_spirit_achtung = {
-				name = "Achtung Baby",
-				text = {
-					{
-						"{C:attention}#1#{} card each draw is drawn {C:attention}face down{}",
-						"{C:attention}Face down{} cards give {X:mult,C:white}X#2#{} Mult",
-					},
-					{
-						"{C:stand}Evolves{} when a {C:attention}#3#{}",
-						"is played",
-					}
-				},
-			},
-			c_fnwk_spirit_achtung_stranger = {
-				name = "A Stranger I Remain",
-				text = {
-					{
-						"{C:attention}All{} cards are drawn {C:attention}face down{}",
-						"{C:attention}Face down{} cards give {X:mult,C:white}X#1#{} Mult",
-					},
-					{
-						"When you play a hand that isn't a",
-						"{C:attention}#2#{}, gain {C:blue}+#3#{} Hand",
-					}
-				},
-			},
-			c_fnwk_spirit_sweet = {
-				name = "Sweet Bod",
-				text = {
-					"When a {C:attention}Boss Blind{} is defeated,",
-					"create a {C:dark_edition}#1#{} with",
-					"its {C:attention}Blind{} effect",
-				},
-			},
-			c_fnwk_spirit_ultimate = {
-				name = {
-					"Ultimate Showdown",
-					"of Ultimate Destiny",
-				},
-				text = {
-					{
-						"{C:attention}Lucky Cards{} retrigger {C:attention}#1#{}#2# for",
-						"each {C:attention}Gold Card{} held in hand",
-					},
-					{
-						"Increase by {C:attention}#3#{} for each {C:attention}Jokestar{}",
-						"{C:attention}sold{} or {C:attention}destroyed{}",
-					}
-				},
-			},
-			c_fnwk_closer_artificial = {
-				name = 'Artificial Stand',
-				text = {
-					{
-						"{C:attention}Copies{} ability of",
-                    	"{C:stand}Stand{} to the right"
-					},
-                    {
-						"This Stand does not count",
-						"against the {C:stand}Stand limit{}",
-						"and cannot be {C:attention}sold{}"
-					}
-                },
-			},
-			c_fnwk_double_wine = {
-				name = "Wine Song",
-				text = {
-					"{V:1}#1#{} and {V:2}#2#{}",
-					"in hand give",
-				},
-			},
-			c_fnwk_double_geometrical = {
-				name = {
-					'GEOMETRICAL DOMINATOR',
-					'FINGERBANG',
-					'STEREO MADNESS',
-					'CLUTTERFUNK',
-					'STAY INSIDE ME',
-					'ELECTRODYNAMIX',
-					'HEXAGON FORCE',
-					'ELECTROMAN ADVENTURES',
-					'TIME MACHINE',
-				},
-				text = {
-					"This Stand gives {C:chips}#1#^{}{s:0.6,C:chips}x{} Chips for each",
-					"{C:attention}unique word{} in the names of your",
-					"other {C:attention}Jokers{} and {C:attention}Consumables{}",
-					"{C:inactive}(Currently {C:chips}+#2#{} {C:inactive}Chips){}"
-				},
-			},
 			c_fnwk_streetlight_disturbia = {
 				name = "Disturbia",
 				text = {
@@ -2314,12 +2127,6 @@ return {
 					"{C:inactive}(Currently{} {X:mult,C:white}X#2#{} {C:inactive}Mult){}"
 				},
 			},
-			c_fnwk_whiplash_never = {
-				name = "Never Enough",
-				text = {
-					"{C:attention}+#1#{} Consumable Slots"
-				},
-			},
 			c_fnwk_random_stand = {
 				name = "Random Stand",
 				text = {
@@ -2370,41 +2177,6 @@ return {
 				unlock = {
 					"Carry {E:1,C:dark_edition}Waystone{}",
 					"for {E:1,C:attention}#1#{} Antes"
-				}
-			},
-			v_fnwk_spirit_binary = {
-				name = "Type Binary",
-				text = {
-					"Increases {C:stand}Stand limit{} by {C:attention}1{}"
-				}
-			},
-			v_fnwk_spirit_prime = {
-				name = "Type Prime",
-				text = {
-					"Grants a {C:attention}permanent{}",
-					"{C:dark_edition}#1#{}"
-				},
-				unlock = {
-					"Win a run with {C:attention,E:1}#1#{}",
-					"on {V:1,E:1}#2#{} difficulty"
-				}
-			},
-			v_fnwk_sunshine_rapture = {
-				name = "Rapture",
-				text = {
-					"{C:green}Uncommon{} and {C:red}Rare{} {C:attention}Jokers{}",
-					"appear {C:attention}#1#X{} more often"
-				}
-			},
-			v_fnwk_sunshine_totality = {
-				name = "Totality",
-				text = {
-                    "{C:green}Uncommon{} and {C:red}Rare{} {C:attention}Jokers{}",
-					"appear {C:attention}#1#X{} more often"
-                },
-				unlock = {
-					"Have at least",
-					"{C:attention,E:1}#1#{} {C:red,E:1}Rare{} Jokers",
 				}
 			},
 		},
@@ -2540,18 +2312,6 @@ return {
 					"gonna be a {C:attention}looong{} shift."
 				}
 			},
-			c_fnwk_fanworks_invisible = {
-				name = "Invisible Woman",
-				text = {
-					"Time to write a {C:dark_edition}Shizuka{} part!",
-					"She was barely a character in",
-					"{C:stand}Part 4{}, so it only seems like",
-					"the {C:attention}right thing to do{}. Now we",
-					"just have to... hmmm... hold on...",
-					" ",
-					"{s:0.7,C:inactive}Invisibility is a tricky power, isn't it?{}"
-				}
-			},
 			c_fnwk_fanworks_comprehension = {
 				name = "Reading Comprehension",
 				text = {
@@ -2587,18 +2347,6 @@ return {
 				text = {
 					"{C:stand}Stands{} are {C:attention}Jokers{},",
 					"and {C:attention}Jokers{} are {C:stand}Stands{}."
-				}
-			},
-			c_fnwk_spirit_creeping = {
-				name = "Creeping Infection",
-				text = {
-					"You are {C:valentino}Henry Valentino.{}",
-					"You {C:attention}control{} the underworld.",
-					"{s:1.3}You are{} {s:1.3,C:dark_edition}immortal{}.",
-					"You will {C:attention}rule the world{}.",
-					" ",
-					"And you won't be beaten",
-					"by {C:attention,E:1,s:1.15}that{} {C:attention,E:1,s:1.3}damn{} {C:attention,E:1,s:1.5}clown{}."
 				}
 			},
 			c_fnwk_rubicon_foundation = {

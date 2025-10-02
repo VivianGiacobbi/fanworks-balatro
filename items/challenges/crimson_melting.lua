@@ -17,7 +17,6 @@ local chalInfo = {
                 { id = 'j_fnwk_moscow_mule' },
                 { id = 'j_fnwk_crimson_golden' },
                 { id = 'j_fnwk_gotequest_lambiekins' },
-                { id = 'j_fnwk_mania_fragile' },
                 { id = 'j_fnwk_rubicon_moonglass' },
                 { id = 'j_fnwk_streetlight_pinstripe' },
                 { id = 'c_fnwk_bone_king' },
@@ -25,7 +24,6 @@ local chalInfo = {
                 { id = 'c_fnwk_glass_big' },
                 { id = 'c_fnwk_iron_shatter' },
                 { id = 'c_fnwk_lighted_money' },
-                { id = 'c_fnwk_spirit_ultimate' },
             }
 
             if next(SMODS.find_mod('jojobal')) then

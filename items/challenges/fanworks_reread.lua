@@ -23,7 +23,6 @@ local chalInfo = {
                     {id = 'c_jojobal_stone_white'},
                     {id = 'c_jojobal_stone_white_moon'},
                     {id = 'c_fnwk_iron_shatter'},
-                    {id = 'c_fnwk_spirit_ultimate'},
                     {id = 'c_fnwk_streetlight_neon_favorite'},
                     {id = 'c_fnwk_love_super'},
                     {id = 'c_fnwk_redrising_invisible'}

@@ -112,21 +112,6 @@ ArrowAPI.loading.batch_load({
 
 			-- jojomania
 			'mania_jokestar',
-			'mania_fragile',
-
-			-- spirit lines
-			'spirit_halves',
-			'spirit_raise',
-			'spirit_corpse',
-			'spirit_rotten',
-
-			-- industry baby
-			'industry_loyal',
-
-			-- double down
-			'double_clark',
-			'double_firewalker',
-			'double_devastation',
 
 			-- careless cargo
 			'careless_jokestar',
@@ -152,9 +137,6 @@ ArrowAPI.loading.batch_load({
 			'streetlight_biased',
 			'streetlight_teenage',
 			'streetlight_cabinet',
-
-			-- whiplash riot
-			'whiplash_quiet',
 
 			-- bluebolt incarnation
 			'bluebolt_jokestar',
@@ -266,22 +248,6 @@ ArrowAPI.loading.batch_load({
 			'lighted_limelight',
 			'lighted_money',
 
-			-- jojomania
-			'mania_moving',
-
-			-- spirit lines
-			'spirit_achtung',
-			'spirit_achtung_stranger',
-			'spirit_sweet',
-			'spirit_ultimate',
-
-			-- closer 2 god
-			'closer_artificial',
-
-			-- double down
-			'double_wine',
-			'double_geometrical',
-
 			-- rubicon crossroads
 			'rubicon_infidelity',
 			'rubicon_dance',
@@ -297,9 +263,6 @@ ArrowAPI.loading.batch_load({
 			'streetlight_paperback_rewrite',
 			'streetlight_notorious',
 
-			-- whiplash riot
-			'whiplash_never',
-
 			-- bluebolt incarnation
 			'bluebolt_thunder',
 			'bluebolt_thunder_dc',
@@ -309,11 +272,6 @@ ArrowAPI.loading.batch_load({
 			-- sunshine deluxe
 			'sunshine_electric',
 			'sunshine_damned',
-			'sunshine_downward',
-			'sunshine_red',
-
-			-- scepter files
-			'scepter_lenfer',
 
 			-- JJ29: Stardust Rebels
 			'rebels_rebel',
@@ -355,17 +313,12 @@ ArrowAPI.loading.batch_load({
 			'rubicon_parade',
 			'streetlight_waystone',
 			'streetlight_binding',
-			'spirit_binary',
-			'spirit_prime',
-			'sunshine_rapture',
-			'sunshine_totality'
 		}
 	},
 
 	Blind = {
 		items = {
 			'venus',
-			'imaginary',
 			'goat',
 			'bolt',
 			'rot',
@@ -388,13 +341,11 @@ ArrowAPI.loading.batch_load({
 			'fanworks_reread',
 			'fanworks_moderated',
 			'fanworks_corpse',
-			--'fanworks_invisible',
 			'fanworks_comprehension',
 			'fanworks_breakdown',
 			'crimson_melting',
 			'crimson_manager',
 			'lighted_kriskross',
-			'spirit_creeping',
 			'rubicon_foundation',
 		}
 	},

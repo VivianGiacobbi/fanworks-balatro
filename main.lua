@@ -2,12 +2,10 @@ fnwk_config = SMODS.current_mod.config
 fnwk_enabled = copy_table(fnwk_config)
 
 SMODS.optional_features.quantum_enhancements = true
--- SMODS.optional_features.scale_context = true
 
 ArrowAPI.misc.add_colors({
 	['FANWORKS'] = copy_table(SMODS.current_mod.badge_colour),
 	['CRYSTAL'] = HEX('B5FFFF'),
-    ['VALENTINO'] = HEX('61BC4F')
 })
 
 ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
@@ -35,10 +33,6 @@ ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
     te_closer = HEX('FFFFFF'),
     co_industry = HEX('CA4ED3'),
     te_industry = HEX('FFFFFF'),
-    co_double = HEX('1956FF'),
-    te_double = HEX('FFFFFF'),
-    co_imaginary = HEX('F98F32'),
-    te_imaginary = HEX('FFFFFF'),
     co_love = HEX('E7B2D4'),
     te_love = HEX('FFFFFF'),
     co_coi = HEX('FFFFFF'),
@@ -47,8 +41,6 @@ ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
     te_iron = HEX('FFFFFF'),
     co_lighted = HEX('90EF58'),
     te_lighted = HEX('FFFFFF'),
-    co_whiplash = HEX('B982FF'),
-    te_whiplash = HEX('FFFFFF'),
     co_asap = HEX('9818BD'),
     te_asap = HEX('FFFFFF'),
     co_bone = HEX('EEDC99'),
@@ -105,7 +97,6 @@ ArrowAPI.credits.add_credits(SMODS.current_mod, {
     gote = 'BarrierTrio/Gote',
     cody = 'Cody Savoie',
     cream = 'CreamSodaCrossroads',
-    daed = 'NotDaedalus',
     doopo = 'Doopo',
     durandal = 'Durandal',
     fizzy = 'FizzyWizard',
@@ -161,7 +152,6 @@ local includes = {
 	-- option files
 	--- jokers are required for some following files so include them first
 	'ui',
-	'poker_hands',
 	'items',
 	'tarot_reskins',
 	'blind_reskins',

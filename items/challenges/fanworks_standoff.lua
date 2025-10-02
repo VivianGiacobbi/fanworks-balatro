@@ -14,18 +14,14 @@ local chalInfo = {
         banned_cards = function()
             local bans = {
                 {id = 'j_fnwk_rockhard_vasos'},
-                {id = 'c_fnwk_whiplash_never'},
                 { id = 'c_arrow_tarot_arrow' },
                 { id = 'c_arrow_spec_diary' },
                 {id = 'v_crystal_ball'},
                 {id = 'v_omen_globe'},
                 {id = 'v_arrow_foo'},
                 {id = 'v_arrow_plant'},
-                {id = 'v_fnwk_spirit_binary'},
-                {id = 'v_fnwk_spirit_prime'},
                 {id = 'v_omen_globe'},
                 {id = 'p_arrow_spirit_reg'},
-                {id = 'p_arrow_spirit_jumbo'}
             }
 
             return bans

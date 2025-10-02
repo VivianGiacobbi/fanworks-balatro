@@ -1,5 +1,4 @@
 return {
-	['resetTrophies'] = nil,
 	['enable_Jokers'] = true,
 	['enable_Stands'] = true,
 	['enable_Consumables'] = true,
@@ -8,9 +7,8 @@ return {
 	['enable_Blinds'] = true,
 	['enable_BlindReskins'] = true,
 	['enable_Challenges'] = true,
-	['enable_Achievements'] = false,
 	['enable_AltArt'] = false,
-	['enable_SkepticStaticSeed'] = false,
+	['enable_InsaneStaticSeed'] = false,
 	['enable_Queer'] = true,
 	['enable_VanillaTweaks'] = true,
 	['enable_TarotSkins'] = true,
