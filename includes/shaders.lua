@@ -13,7 +13,7 @@ SMODS.Shader({ key = 'stand_disturbia', path = 'stand_disturbia.fs'})
 SMODS.Shader({ key = 'stand_insane', path = 'stand_insane.fs'})
 SMODS.Shader({ key = 'blind_multimedia', path = 'multimedia.fs'})
 SMODS.Shader({ key = 'wave_warp', path = 'wave_warp.fs'})
-
+SMODS.Shader({ key = 'title_sub', path = 'fnwk_title_sub.fs'})
 
 
 

@@ -67,7 +67,7 @@ end
 
 
 local fool_table = {}
-if fnwk_enabled['enable_TarotSkins'] then 
+if JoJoFanworks.current_config['enable_TarotSkins'] then 
     fool_table.atlas = 'fnwk_tarotreskins'
     fool_table.origin = {
         category = 'fanworks',
@@ -145,7 +145,7 @@ SMODS.Consumable:take_ownership('c_fool', fool_table)
 ---------------------------
 
 local emperor_table = {}
-if fnwk_enabled['enableTarotSkins'] then 
+if JoJoFanworks.current_config['enableTarotSkins'] then 
     emperor_table.atlas = 'fnwk_tarotreskins'
     emperor_table.origin = {
         category = 'fanworks',
@@ -232,8 +232,8 @@ SMODS.Consumable:take_ownership('c_emperor', emperor_table)
 --------------------------- Queer edition support for Wheel
 ---------------------------
 
-local queer = fnwk_enabled['enableQueer']
-if fnwk_enabled['enable_TarotSkins'] or fnwk_enabled['enable_Queer'] then
+local queer = JoJoFanworks.current_config['enableQueer']
+if JoJoFanworks.current_config['enable_TarotSkins'] or JoJoFanworks.current_config['enable_Queer'] then
     local wheel_table = {}
 
     if queer then
@@ -251,7 +251,7 @@ if fnwk_enabled['enable_TarotSkins'] or fnwk_enabled['enable_Queer'] then
         }
     end
 
-    if fnwk_enabled['enable_TarotSkins'] then
+    if JoJoFanworks.current_config['enable_TarotSkins'] then
         wheel_table.atlas = 'fnwk_tarotreskins'
         wheel_table.origin = {
             category = 'fanworks',
@@ -275,7 +275,7 @@ end
 --------------------------- Remaining reskins
 ---------------------------
 
-if not fnwk_enabled['enable_TarotSkins'] then
+if not JoJoFanworks.current_config['enable_TarotSkins'] then
     return
 end
 
@@ -294,8 +294,15 @@ SMODS.Consumable:take_ownership('c_magician', {
 
 SMODS.Consumable:take_ownership('c_high_priestess', {
     atlas = 'fnwk_tarotreskins',
-    origin = 'fanworks',
+    origin = {
+        category = 'fanworks',
+        sub_origins = {
+            'rockn',
+        },
+        custom_color = 'rockn'
+    },
     no_mod_badges = true,
+    artist = "gote",
 })
 
 SMODS.Consumable:take_ownership('c_empress', {

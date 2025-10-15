@@ -3,7 +3,7 @@ local chalInfo = {
         custom = {
             {id = "max_stands", value = 2},
             {id = 'fnwk_fanworks_standoff'},
-             {id = 'fnwk_fanworks_standoff_2'},
+            {id = 'fnwk_fanworks_standoff_2'},
         }
     },
     consumeables = {

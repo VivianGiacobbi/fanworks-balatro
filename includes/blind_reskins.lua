@@ -1,4 +1,4 @@
-if not fnwk_enabled['enable_BlindReskins'] then
+if not JoJoFanworks.current_config['enable_BlindReskins'] then
     return
 end
 

@@ -35,36 +35,3 @@ payload = '''for k, v in ipairs(text) do
 end'''
 match_indent = true
 times = 1
-
-
-# win_game()
-[[patches]]
-[patches.pattern]
-target = "functions/state_events.lua"
-pattern = '''Jimbo:add_speech_bubble('wq_'..math.random(1,7), nil, {quip = true})'''
-position = "at"
-payload = '''if next(SMODS.find_card('j_fnwk_fanworks_jogarc', true)) then
-    Jimbo.children.card.config.center.atlas = 'fnwk_fanworks_jogarc'
-    Jimbo.children.card:set_sprites(Jimbo.children.card.config.center)
-    Jimbo:add_speech_bubble('gwq_'..math.random(1,12), nil, {quip = true, image = 'fnwk_100'})
-else
-    Jimbo:add_speech_bubble('wq_'..math.random(1,7), nil, {quip = true})
-end'''
-match_indent = true
-times = 1
-
-# Game:update_game_over(dt)
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})'''
-position = "at"
-payload = '''if next(SMODS.find_card('j_fnwk_fanworks_jogarc', true)) then
-    Jimbo.children.card.config.center.atlas = 'fnwk_fanworks_jogarc'
-    Jimbo.children.card:set_sprites(Jimbo.children.card.config.center)
-    Jimbo:add_speech_bubble('glq_16', nil, {quip = true})
-else
-    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
-end'''
-match_indent = true
-times = 1

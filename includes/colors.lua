@@ -43,6 +43,54 @@ SMODS.Gradient({
 })
 
 SMODS.Gradient({
+    key = 'all_fan_colors',
+    colours = {
+        HEX('8B2939'),
+        HEX('7F1010'),
+        HEX('900000'),
+        HEX('FF2828'),
+        HEX('FF8989'),
+        HEX('E74C3C'),
+        HEX('FF3C00'),
+        HEX('BF5532'),
+        HEX('D56F15'),
+        HEX('E8A686'),
+        HEX('EB9C58'),
+        HEX('FFB74B'),
+        HEX('D4AF37'),
+        HEX('BC9E49'),
+        HEX('EFD407'),
+        HEX('EEDC99'),
+        HEX('90EF58'),
+        HEX('86C09B'), 
+        HEX('44AA6C'),
+        HEX('0D8640'),
+        HEX('139194'),
+        HEX('B1FFE6'),
+        HEX('08DDDE'),
+        HEX('3BC2EF'),
+        HEX('3690FF'),
+        HEX('27407C'),
+        HEX('A3AEFF'),
+        HEX('9818BD'),
+        HEX('CA4ED3'),
+        HEX('FF60FF'),
+        HEX('AD3088'),
+        HEX('FF6DDC'),
+        HEX('FFFFFF'),
+        HEX('D4D4D4'),
+        HEX('DEF7FB'),
+        HEX('E7B2D4'),
+        HEX('DD638A'),
+        HEX('CC3366'),
+        HEX('DE0155'),
+    },
+    cycle = 20
+})
+
+
+
+SMODS.Gradient({
     key = 'blind_rainbow_dark',
     colours = {
         HEX('6B3434'),

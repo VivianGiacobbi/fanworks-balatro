@@ -1,4 +1,4 @@
-SMODS.current_mod.reset_game_globals = function(run_start)
+JoJoFanworks.reset_game_globals = function(run_start)
     if run_start then
         G.GAME.fnwk_glass_shatters = 0
         G.GAME.fnwk_patsy_jokers_sold = 0

@@ -241,62 +241,28 @@ end
 --------------------------- Main Menu UI callbacks
 ---------------------------
 
---[[
-G.FUNCS.reset_trophies = function(e)
-	local warning_text = e.UIBox:get_UIE_by_ID('warn')
-	if warning_text.config.colour ~= G.C.WHITE then
-		warning_text:juice_up()
-		warning_text.config.colour = G.C.WHITE
-		warning_text.config.shadow = true
-		e.config.disable_button = true
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
-			play_sound('tarot2', 0.76, 0.4);return true end}))
-		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
-			e.config.disable_button = nil;return true end}))
-		play_sound('tarot2', 1, 0.4)
-	else
-		G.FUNCS.wipe_on()
-		for k, v in pairs(SMODS.Achievements) do
-			if ArrowAPI.string.starts_with(k, 'ach_fnwk_') then
-				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
-				G.ACHIEVEMENTS[k].earned = nil
-			end
-		end
-		G:save_settings()
-		G.E_MANAGER:add_event(Event({
-			delay = 1,
-			func = function()
-				G.FUNCS.wipe_off()
-				return true
-			end
-		}))
-	end
-end
---]]
-
 function G.FUNCS.fnwk_apply_alts()
-	fnwk_enabled = copy_table(fnwk_config)
+	JoJoFanworks.current_config = copy_table(JoJoFanworks.config)
     for k, v in pairs(G.P_CENTERS) do
 		if v.alt_art then
-			v.atlas = string.sub(k, 3, #k)..(fnwk_enabled['enable_AltArt'] and '_alt' or '')
+			v.atlas = string.sub(k, 3, #k)..(JoJoFanworks.current_config['enable_AltArt'] and '_alt' or '')
 		end
     end
 end
 
-function G.FUNCS.fnwk_set_skeptic()
-	fnwk_enabled = copy_table(fnwk_config)
+function G.FUNCS.fnwk_set_insane()
+	JoJoFanworks.current_config = copy_table(JoJoFanworks.config)
 end
 
 function G.FUNCS.fnwk_restart()
-
-	local settingsMatch = true
-	for k, v in pairs(fnwk_enabled) do
-		if v ~= fnwk_config[k] then
-			settingsMatch = false
+	local match = true
+	for k, v in pairs(JoJoFanworks.current_config) do
+		if v ~= JoJoFanworks.config[k] then
+			match = false
 		end
 	end
 	
-	if settingsMatch then
+	if match then
 		sendDebugMessage('Settings match')
 		SMODS.full_restart = 0
 	else
@@ -345,51 +311,4 @@ G.FUNCS.customize_deck = function(e)
     local ret = ref_customize_deck(e)
     G.OVERLAY_MENU.config.id = 'customize_deck'
     return ret
-end
-
-
-
-
-
-local ref_use_card = G.FUNCS.use_card
-G.FUNCS.use_card = function(...)
-    local args = {...}
-    local card = args[1].config.ref_table
-
-    -- do this early just in case anybody hooks this
-    if card:check_use() then 
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                e.disable_button = nil
-                e.config.button = 'use_card'
-                return true
-            end
-        }))
-        return
-    end
-
-    if G.GAME.modifiers.fnwk_consumable_save and card.ability.set ~= 'Booster' and card.ability.consumeable and not SMODS.action_nosave then
-        save_with_action({
-            type = 'use_card',
-            card = card.sort_id,
-            args = {mute},
-            highlights = SMODS.save_action_highights()
-        })
-    end
-
-    return ref_use_card(...)
-end
-
-local ref_play_highlighted = G.FUNCS.play_cards_from_highlighted
-G.FUNCS.play_cards_from_highlighted = function(e)
-    if G.play and G.play.cards[1] then return end
-
-    if G.GAME.modifiers.fnwk_plays_save and not SMODS.action_nosave then
-        save_with_action({
-            type = 'play_cards_from_highlighted',
-            highlights = SMODS.save_action_highights({['hand'] = true})
-        })
-    end
-
-    return ref_play_highlighted(e)
 end

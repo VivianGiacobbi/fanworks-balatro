@@ -22,6 +22,7 @@ local consumInfo = {
     },
     artist = 'piano',
     blueprint_compat = true,
+    eternal_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

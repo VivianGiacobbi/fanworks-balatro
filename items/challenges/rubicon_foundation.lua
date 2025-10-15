@@ -8,11 +8,11 @@ local chalInfo = {
             {id = 'discards', value = 5},
         }
     },
-    alt_win = {
-        prevent_win = true,
+    gameover = {
+        endgame = 'prevent',
         condition = {suits = 2, cards = 50},
         type = 'modify_deck',
-        func = function(challenge)
+        func = function(ch, endgame)
             if not G.playing_cards then return end
             local suits_map = {}
             for _, v in ipairs(G.playing_cards) do
@@ -21,8 +21,8 @@ local chalInfo = {
 
             local num_matches = 0
             for _, v in pairs(suits_map) do
-                if v >= challenge.alt_win.condition.cards then num_matches = num_matches + 1 end
-                if num_matches >= challenge.alt_win.condition.suits then return true end
+                if v >= ch.gameover.condition.cards then num_matches = num_matches + 1 end
+                if num_matches >= ch.gameover.condition.suits then return true end
             end
         end
     },

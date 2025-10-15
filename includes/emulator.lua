@@ -5,7 +5,6 @@ SMODS.Atlas({ key = 'cabinet_button_left', path = 'cabinet_button_left.png', px 
 SMODS.Atlas({ key = 'cabinet_button_right', path = 'cabinet_button_right.png', px = 25, py = 14 })
 SMODS.Atlas({ key = 'cabinet_button_up', path = 'cabinet_button_up.png', px = 25, py = 14 })
 SMODS.Atlas({ key = 'cabinet_button_down', path = 'cabinet_button_down.png', px = 25, py = 14 })
-local mod = SMODS.current_mod
 
 local joy_poses = {
     ['up'] = 1,
@@ -103,7 +102,7 @@ G.EMU = {
             self:stop_nes()
         end
         local start_args = {
-            file = mod.path .. 'includes/LuaNES/roms/'..game_str..'.nes',
+            file = JoJoFanworks.path .. 'includes/LuaNES/roms/'..game_str..'.nes',
             loglevel = 0,
             pc = nil,
             palette = UTILS.map(

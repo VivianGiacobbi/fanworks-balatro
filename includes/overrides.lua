@@ -34,7 +34,7 @@ SMODS.Consumable:take_ownership('c_hermit', {
     end,
 }, true)
 
-if fnwk_enabled['enable_Queer'] then
+if JoJoFanworks.current_config['enable_Queer'] then
     SMODS.Edition:take_ownership('e_polychrome',
     {
         loc_txt = {

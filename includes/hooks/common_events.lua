@@ -110,8 +110,32 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
     return ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
 end
 
+local ref_shop_card = create_card_for_shop
+function create_card_for_shop(area)
+    if G.GAME.starting_params.fnwk_act_force_legend and not G.GAME.modifiers.fnwk_used_act_legend then
+        local legend_key = get_first_legendary(G.GAME.pseudorandom.seed)
+        G.GAME.banned_keys[legend_key] = nil
+        local force_legend = create_card('Joker', area, nil, nil, nil, nil, legend_key, 'fnwk_act_force_legend')
+        create_shop_card_ui(force_legend, 'Joker', area)
+        G.GAME.banned_keys[legend_key] = true
+        force_legend.states.visible = false
+        G.E_MANAGER:add_event(Event({
+            delay = 0.4,
+            trigger = 'after',
+            func = (function()
+                force_legend:start_materialize()
+                play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+                play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                return true
+            end)
+        }))
+        
+        G.GAME.modifiers.fnwk_used_act_legend = true
+        return force_legend
+    end
 
-
+    return ref_shop_card(area)
+end
 
 
 ---------------------------
@@ -145,19 +169,11 @@ function ease_discard(...)
     return ret
 end
 
-local ref_ease_ante = ease_ante
-function ease_ante(...)
-    local ret = ref_ease_ante(...)
-    G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = function()
-            SMODS.calculate_context({fnwk_change_ante = true})
-            return true
-        end
-    }))
-    return ret
+local ease_dollar_ref = ease_dollars
+function ease_dollars(mod, instant)
+    if mod >= 0 and G.GAME.modifiers.fnwk_no_money then return end
+    return ease_dollar_ref(mod, instant)
 end
-
 
 
 

@@ -1,70 +1,71 @@
 local chalInfo = {
     rules = {
         custom = {
-            {id = 'fnwk_crimson_manager'},
-            {id = 'fnwk_crimson_manager_2'},
-            {id = 'no_shop_jokers'},
+            {id = 'fnwk_no_money'},
+            {id = 'fnwk_no_sell'},
+            {id = 'no_reward'},
+            {id = 'no_extra_hand_money'},
+            {id = 'no_interest'}
         },
         modifiers = {
-            {id = 'joker_slots', value = 0},
+            {id = 'dollars', value = 200},
         }
     },
-    config = { 
-        world_rate = 6
-    },
-    on_apply = function(challenge)
-        G.GAME.fnwk_stand_world_rate = challenge.config.world_rate
-    end,
     jokers = {
-        { id = 'j_fnwk_fanworks_jogarc', eternal = true },
-        { id = 'j_fnwk_fanworks_jogarc', eternal = true },
-        { id = 'j_diet_cola'},
-        { id = 'j_diet_cola'},
-        { id = 'j_fnwk_streetlight_arrow' },
+        { id = 'j_fnwk_streetlight_indulgent', eternal = true },
     },
     consumeables = {
-        { id = 'c_fnwk_spec_mood' },
-        { id = 'c_fnwk_spec_mood' }
+        { id = 'c_fnwk_streetlight_neon_favorite', eternal = true },
     },
     vouchers = {
-        { id = 'v_crystal_ball' }
+        { id = 'v_overstock_norm' },
+        { id = 'v_overstock_norm' },
+        { id = 'v_clearance_sale' },
+        { id = 'v_liquidation' },
+        { id = 'v_reroll_surplus' },
+        { id = 'v_reroll_glut' }
     },
     restrictions = {
         banned_cards = {
-            {id = 'j_riff_raff' },
-            {id = 'j_invisible' },
-            {id = 'j_fnwk_fanworks_jester' },
-            {id = 'c_judgement' },
-            {id = 'c_wraith' },
-            {id = 'c_soul' },
-            {id = 'v_blank' },
-            {id = 'v_antimatter'},
-            {id = 'v_fnwk_rubicon_kitty'},
-            {id = 'v_fnwk_rubicon_parade'},
-            {id = 'v_fnwk_streetlight_waystone'},
-            {id = 'v_fnwk_streetlight_binding'},
-            {id = 'p_buffoon_normal_1', ids = {
-                'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
-            }},
+            {id = 'j_business' },
+            {id = 'j_egg' },
+            {id = 'j_faceless' },
+            {id = 'j_todo_list' },
+            {id = 'j_cloud_9' },
+            {id = 'j_rocket' },
+            {id = 'j_gift' },
+            {id = 'j_reserved_parking'},
+            {id = 'j_mail'},
+            {id = 'j_to_the_moon'},
+            {id = 'j_golden'},
+            {id = 'j_ticket'},
+            {id = 'j_swashbuckler'},
+            {id = 'j_rough_gem'},
+            {id = 'j_satellite'},
+            {id = 'j_fnwk_gotequest_lambiekins'},
+            {id = 'j_fnwk_streetlight_cabinet'},
+            {id = 'j_fnwk_golden_generation'},
+            {id = 'c_hermit'},
+            {id = 'c_temperance'},
+            {id = 'c_talisman'},
+            {id = 'c_immolate'},
+            {id = 'gold_seal'},
         },
         banned_tags = {
-            {id = 'tag_rare'},
-            {id = 'tag_uncommon'},
-            {id = 'tag_holo'},
-            {id = 'tag_polychrome'},
-            {id = 'tag_negative'},
-            {id = 'tag_foil'},
-            {id = 'tag_buffoon'},
-            {id = 'tag_top_up'},
-            {id = 'tag_fnwk_biased'}
+            {id = 'tag_investment'},
+            {id = 'tag_skip'},
+            {id = 'tag_economy'},
+        },
+        banned_other = {
+            {id = 'bl_ox', type = 'blind'}
         }
     },
     origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'crimson',
+			'streetlight',
 		},
-        custom_color = 'crimson',
+        custom_color = 'streetlight',
     }
 }
 

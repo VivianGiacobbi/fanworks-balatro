@@ -617,9 +617,7 @@ end
 
 local ref_card_cost = Card.set_cost
 function Card:set_cost(...)
-    if self.config.center.key == 'c_fnwk_closer_artificial' then
-        self.cost = 0
-        self.extra_cost = 0
+    if self.config.center.key == 'c_fnwk_closer_artificial' or G.GAME.modifiers.fnwk_no_sell then
         self.sell_cost = 0
         return
     end

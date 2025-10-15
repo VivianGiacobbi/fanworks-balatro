@@ -1,6 +1,111 @@
 return {
 	misc = {
 		quips = {
+			splash = {
+				"Support the troops!",
+				"Also try Cardsauce!",
+				"Do you guys even have IFunny or TikTok!?",
+				"We're ok with the Gay...",
+				"So there's this hamon part....",
+				"Wiggity wiggity wazzup!",
+				"It's dippy fresh!",
+				"Unchussy!",
+				"Sloshy lizard husband!",
+				"Feat. Tony from Streetlight!",
+				"Screwing some toads!",
+				"Now with malunin!",
+				"Just sucked dick!",
+				"Biased and womanly!",
+				"Working on yur fanpart!",
+				"Missing rectum...",
+				"Old ass man!",
+				"Smonktastic",
+				"Fan part in 3 years!",
+				"JOOOOOOOOOOOOOOOOOO",
+				"That guy sucks!",
+				"Too many Jordans!",
+				"Mrghghh... yummy!",
+				"It's probably bad!",
+				"It's probably great!",
+				"Not God's Plan!",
+				"A Jojopolis all along...",
+				"Moss. Cow. Calling.",
+				"Thinking about JoJoHeavy...",
+				"...relatable!",
+				"Yoh-lo!",
+				"It will return...",
+				"Tesla speedrun any%!",
+				"✧･ﾟ ✧･ﾟ: Shimmer! ･ﾟ✧:･ﾟ✧",
+				"Too angry to die!",
+				"Pleas...",
+				"Cannoli squeaking!",
+				":goat emoji:",
+				"Being gay, doing crime!",
+				"How high are we?",
+				"︳|〡 || |_",
+				"Booting up cringe!",
+				"Not Fan Part Run!",
+				"Oi!",
+				"*glass shattering sounds*",
+				"Patrolling the stand workshops!",
+				"It's home of phobic!",
+				":clown emoji:",
+				"3D modeling your death!",
+				"It's a hit!",
+				"*stand creation noises*",
+				"Needing more flavor!",
+				"YESSSSSSSS!",
+				"Our argument is flawed!",
+				"Actually well written!",
+				"Currently under your bed!",
+				"*onion peeling sounds*",
+				"To bad :-)",
+				"To bad ;D",
+				"To bad >:)",
+				"To bad :3",
+				"To bad (✿◠‿◠)",
+				"To bad :'P",
+				"Oo oo aa aa!",
+				":monkey emoji:",
+				"We secretly fear Glass!",
+				"Slapping that Balatrussy!",
+				"Short answer: Homestuck!",
+				"Getting two strikes!",
+				"Please refer to Rule #4!",
+				"*programming noises!",
+				"Get in loser, we're going to Stand World!",
+				"Application denied!",
+				"Application accepted!",
+				"Tips naturally frosted!",
+				"Our humor is objective!",
+				"Don't are worth your time!",
+				"Pluscoin stocks!",
+				"We're now cursed!",
+				"Everybody gets a knife!",
+				"Joeri seething...",
+				"We got shrimp, prawns, octopusses...",
+				"Horny mob rules!",
+				"Eat!",
+				"Information... but at what cost?",
+				"Reviving Mr. Kite...",
+				"Garisma!",
+				"Addicted to Propel!",
+				"Neutrally chaotic!",
+				"Professionally moderated kpop!",
+				"Choosing to hurt people!",
+				"*drawing sounds*",
+				"HONK!!!",
+				"Honk...",
+				"Honk!",
+				"So there's this Jojospectacle sequel part.... ",
+				"So there's this Part 5 remaster part....",
+				"Escalating word count!",
+				"Clash attack!",
+				"Managing chronic alcoholism!",
+				"The new Angelos!",
+				"JosiahShitting.png",
+				"We have a suggestion!",
+			},
 			mqt_1 = {
 				"Always nice to meet",
 				"another doll~",
@@ -125,115 +230,115 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
-			gwq_1 = {
+			fnwk_gwq_1 = {
 				"Burunyu~~!"
 			},
-            gwq_2 = {
+            fnwk_gwq_2 = {
 				"Dori dori",
 				"dori~~ :3"
 			},
-            gwq_3 = {
+            fnwk_gwq_3 = {
 				"Janjanjan~~!"
 			},
-            gwq_4 = {
+            fnwk_gwq_4 = {
 				"Gyahoo!!"
 			},
-			gwq_5 = {
+			fnwk_gwq_5 = {
 				"Gyahahoo!!"
 			},
-            gwq_6 = {
+            fnwk_gwq_6 = {
 				"Nyah nyah!"
 			},
-            gwq_7 = {
+            fnwk_gwq_7 = {
 				"Just shuffled deck [IMG]"
 			},
-            gwq_8 = {
+            fnwk_gwq_8 = {
 				"Your prize is",
 				"the gyood feeling",
 				"associated with",
 				"winning!"
 			},
-			gwq_9 = {
+			fnwk_gwq_9 = {
 				"I LOVE MY WIFE!!"
 			},
-			gwq_10 = {
+			fnwk_gwq_10 = {
 				"Jimbo, get",
 				"the hon-nya."
 			},
-			gwq_11 = {
+			fnwk_gwq_11 = {
 				"IM GYOING INTO",
 				"LABOOOOOOOOOOOR!"
 			},
-			gwq_12 = {
+			fnwk_gwq_12 = {
 				"Nya, that wasn't",
 				"gar-d at all!"
 			},
-            glq_1 = {
+            fnwk_glq_1 = {
 				"NYAAAA?!"
 			},
-            glq_2 = {
+            fnwk_glq_2 = {
 				"Behnueh..."
 			},
-            glq_3 = {
+            fnwk_glq_3 = {
 				"Gyafuugh..."
 			},
-            glq_4 = {
+            fnwk_glq_4 = {
 				"You ca~nyat kill",
 				"me in a way that",
 				"matters!",
 			},
-            glq_5 = {
+            fnwk_glq_5 = {
 				"Pipe bomb! Nyah!"
 			},
-            glq_6 = {
+            fnwk_glq_6 = {
 				"[This quote has",
 				"been canceled for",
 				"racial sensitivity",
 				"reasons]"
 			},
-            glq_7 = {
+            fnwk_glq_7 = {
 				"Looks like it",
 				"wasn't in the",
 				"gards for us."
 			},
-            glq_8 = {
+            fnwk_glq_8 = {
 				"Aw sludge..."
 			},
-            glq_9 = {
+            fnwk_glq_9 = {
 				"To bad!"
 			},
-            glq_10 = {
+            fnwk_glq_10 = {
 				"ALRIGHT, YOU WANNA",
 				"KNOW FINE?! I ADMIT",
 				"IT, I DON'T KNOW",
 				"BALATRO WORKS!"
 			},
-			glq_11 = {
+			fnwk_glq_11 = {
 				"143.765.266.779",
 				"+955 0533 701 91 61",
 				"VISA, 4485811442881930, 5/24, 690"
 			},
-			glq_12 = {
+			fnwk_glq_12 = {
 				"Yes, she's biased!",
 				"And a boss blind!"
 			},
-			glq_13 = {
+			fnwk_glq_13 = {
 				"Hey man in my",
 				"defence, Balatro",
 				"has a lot of jokers"
 			},
-			glq_14 = {
+			fnwk_glq_14 = {
 				"I have so many",
 				"dunnies but this",
 				"gets added?"
 			},
-			glq_15 = {
+			fnwk_glq_15 = {
 				"Get in the metal",
 				"box, the sumo",
 				"wrestlers will",
 				"arrive shortly."
 			},
-			glq_16 = {
+			fnwk_glq_16 = {
 				"Get it twisted. If you wock in you can do anything.",
 				"Youw actions impact nothing. Youw fate is pwedetewmined.",
 				"The onwy thing you can change is youw weaction to it",
@@ -277,6 +382,7 @@ return {
 			fnwk_options_enable_Challenges = "Challenges",
 			fnwk_options_enable_Logo = "Main Menu Logo",
 			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
+			fnwk_options_enable_Title = "Title Screen Art",
 			
 			-- buttons
 			b_fnwk_submit = 'Submit',
@@ -391,6 +497,7 @@ return {
 			ba_yym = "Yo-Yo Ma's Bizarre RPG",
 			ba_rebels = 'JJ29: Stardust Rebels',
 			ba_redrising = 'Red Rising Sun',
+			ba_rockn = "Rock N' Star",
 
 			k_challenge_story = 'Story'
 		},
@@ -415,6 +522,9 @@ return {
 			c_fnwk_crimson_manager = 'Mood Indigo Manager',
 			c_fnwk_lighted_kriskross = "Kris Kross",
 			c_fnwk_rubicon_foundation = "Foundation Building",
+			c_fnwk_streetlight_shopping = "Becquerel Shopping Spree",
+			c_fnwk_bluebolt_suggestion = "The Suggestion",
+			c_fnwk_redrising_pyrrhic = "Pyrrhic Victory"
 		},
 		v_text = {
 			-- general behavior
@@ -431,7 +541,13 @@ return {
 			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, and {C:spectral}Mood Indigo{}"},
 			ch_c_fnwk_crimson_manager_2 = {"appear in the {C:attention}shop{}"},
 			ch_c_fnwk_rubicon_foundation = {"{C:dark_edition}Win{} when your deck contains"},
-			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"}
+			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"},
+			ch_c_fnwk_no_money = {"{C:money}Money{} cannot be {C:attention}earned{}"},
+			ch_c_fnwk_no_sell = {"{C:attention}All{} cards have {C:money}$0{} sell value"},
+			ch_c_fnwk_bluebolt_suggestion = {"{C:dark_edition}Win{} by turning all {C:attention}Jacks{}"},
+			ch_c_fnwk_bluebolt_suggestion_2 = {"to {C:attention}Queens{} before {C:attention}Ante 9"},
+			ch_c_fnwk_redrising_pyrrhic = {"{C:dark_edition}Lose{} if {C:stand}Invisible Sun's{}"},
+			ch_c_fnwk_redrising_pyrrhic_2 = {"repetitions hit {C:attention}0{}"}
 		},
 		achievement_names = {
 		},
@@ -1187,6 +1303,15 @@ return {
 					"played {C:attention}#1#{} in scored hand"
 				}
 			},
+			j_fnwk_gotequest_will = {
+				name = "Will of One",
+				text = {
+					"This Joker gains",
+					"{C:chips}+#1#{} Chip for each",
+					"card {C:attention}discarded{}",
+					"{C:inactive}(Currently {}{C:chips}+#2#{} {C:inactive}Chips){}"
+				}
+			},
 			j_fnwk_gotequest_lambiekins = {
 				name = "Ms. Lambiekins",
 				text = {
@@ -1497,6 +1622,14 @@ return {
 					"{C:stand}Stand{} in your {C:attention}roster{} at",
 					"end of round",
 					"{C:inactive}(Currently {}{C:money}$#2#{}{C:inactive}){}"
+				}
+			},
+			j_fnwk_mdv_surface = {
+				name = "Surface-Level Joker",
+				text = {
+					"Each {C:attention}scoring{} card that is not",
+					"the highest or lowest {C:attention}rank{} in",
+					"played poker hand gives {C:mult}+#1#{} Mult"
 				}
 			},
 			j_fnwk_mdv_shock = {
@@ -2207,6 +2340,22 @@ return {
 					"{C:attention}#2#X{} more often",
 				},
 			},
+			sleeve_fnwk_sleeve_fanworks_act = {
+				name = "ACT Sleeve",
+				text = {
+					"{C:attention}Small Blind{} shops have {C:blue}common{} Jokers",
+					"{C:attention}Big Blind{} shops have {C:green}uncommon{} Jokers",
+					"{C:attention}Boss Blind{} shops have {C:red}rare{} Jokers",
+				},
+			},
+			sleeve_fnwk_sleeve_fanworks_act_alt = {
+				name = "ACT Sleeve",
+				text = {
+					"One {C:purple}Legendary{} Joker",
+					"appears in the {C:attention}shop{}",
+					"after {C:attention}Ante 4{}"
+				},
+			},
 		},
 		Challenge = {
 			c_fnwk_fanworks_beyond = {
@@ -2322,6 +2471,35 @@ return {
 					"{s:0.9}In this{} {C:dark_edition,s:0.9}supernatural war{},",
 					"{s:0.9}the{} {C:attention,s:0.9}winner{} {s:0.9}is whoever holds{}",
 					"{C:attention,s:1.1}all the cards{}",
+				}
+			},
+			c_fnwk_streetlight_shopping = {
+				name = "Becquerel Shopping Spree",
+				text = {
+					"Wow! Your first {C:money}paycheck{}",
+					"from {C:streetlight}Brienne!{} You've never",
+					"had to worry about {C:money}money{},",
+					"but being rewarded for",
+					"effort {C:attention,E:1}sure feels great!{}",
+					"Go {C:attention}spend it{} at the arcade!",
+					"It's a nice change of pace to",
+					"not think about the {C:attention}family",
+					"{C:attention}credit card{}, just the fun of",
+					"spending your {C:money}quarters!{}",
+					"{s:0.85}...er, {C:money,s:0.85}dollars{}."
+				}
+			},
+			c_fnwk_bluebolt_suggestion = {
+				name = "Becquerel Shopping Spree",
+				text = {
+					"{C:red}Maggie Richter{} has a",
+					"{s:1.75,C:fanworks,E:1}suggestion.{}"
+				}
+			},
+			c_fnwk_redrising_pyrrhic = {
+				name = "Pyrrhic Victory",
+				text = {
+					"{C:attention,E:1}Dummy Text{}"
 				}
 			}
 		}

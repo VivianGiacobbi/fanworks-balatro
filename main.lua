@@ -1,14 +1,15 @@
-fnwk_config = SMODS.current_mod.config
-fnwk_enabled = copy_table(fnwk_config)
+JoJoFanworks = SMODS.current_mod
+JoJoFanworks.current_config = copy_table(JoJoFanworks.config)
 
 SMODS.optional_features.quantum_enhancements = true
 
 ArrowAPI.misc.add_colors({
-	['FANWORKS'] = copy_table(SMODS.current_mod.badge_colour),
+	['FANWORKS'] = copy_table(JoJoFanworks.badge_colour),
 	['CRYSTAL'] = HEX('B5FFFF'),
+    ['STREETLIGHT'] = HEX('139194')
 })
 
-ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
+ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     co_fanworks = HEX('DD85B4'),
     te_fanworks = HEX('FFFFFF'),
     co_streetlight = HEX('139194'),
@@ -88,10 +89,12 @@ ArrowAPI.ui.add_badge_colors(SMODS.current_mod, {
     co_rebels = HEX('FF6DDC'),
     te_rebels = HEX('FFFFFF'),
     co_redrising = HEX('7F1010'),
-    te_redrising = HEX('FFFFFF')
+    te_redrising = HEX('FFFFFF'),
+    co_rockn = HEX('FF8989'),
+    te_rockn = HEX('FFFFFF'),
 })
 
-ArrowAPI.credits.add_credits(SMODS.current_mod, {
+ArrowAPI.credits.add_credits(JoJoFanworks, {
     algebra = 'AlgebraFalcon',
     shaft = 'AllShaftsFall',
     gote = 'BarrierTrio/Gote',
@@ -159,7 +162,7 @@ local includes = {
 }
 
 for _, module in ipairs(includes) do
-	local init, error = NFS.load(SMODS.current_mod.path .. "includes/" .. module ..".lua")
+	local init, error = NFS.load(JoJoFanworks.path .. "includes/" .. module ..".lua")
 	if error then sendErrorMessage("[Fanworks] Failed to load "..module.." with error "..error) else
 		local data = init()
 		sendDebugMessage("[Fanworks] Loaded module: " .. module)

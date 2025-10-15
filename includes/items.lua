@@ -79,6 +79,7 @@ ArrowAPI.loading.batch_load({
 			'gotequest_killing',
 			'gotequest_headlong',
 			'gotequest_2hot',
+			'gotequest_will',
 			'gotequest_lambiekins',
 
 			-- culture shock
@@ -165,6 +166,7 @@ ArrowAPI.loading.batch_load({
 			'love_holy',
 
 			-- my digital venus
+			'mdv_surface',
 			'mdv_shock',
 
 			-- jojojidai
@@ -295,7 +297,8 @@ ArrowAPI.loading.batch_load({
 
 	Sleeve = {
 		items = {
-			'sleeve_fanworks_deck'
+			'sleeve_fanworks_deck',
+			'sleeve_fanworks_act'
 		}
 	},
 
@@ -339,6 +342,9 @@ ArrowAPI.loading.batch_load({
 			'crimson_manager',
 			'lighted_kriskross',
 			'rubicon_foundation',
+			'streetlight_shopping',
+			'bluebolt_suggestion',
+			'redrising_pyrrhic'
 		}
 	},
 
