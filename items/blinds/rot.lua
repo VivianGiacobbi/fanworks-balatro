@@ -24,6 +24,10 @@ function blindInfo.press_play(self)
     G.GAME.blind.triggered = false
 end
 
+function blindInfo.recalc_debuff(self, card, from_blind)
+    return card.ability.set == 'Stand' or card.ability.set == 'VHS'
+end
+
 function blindInfo.disable(self)
     G.GAME.modifiers.fnwk_no_consumeables = nil
 end

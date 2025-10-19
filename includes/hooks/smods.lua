@@ -1,7 +1,6 @@
 JoJoFanworks.reset_game_globals = function(run_start)
     if run_start then
         G.GAME.fnwk_glass_shatters = 0
-        G.GAME.fnwk_patsy_jokers_sold = 0
         G.GAME.fnwk_owned_jokers = {}
         G.GAME.fnwk_extra_discounts = {}
         G.GAME.fnwk_chip_novas = 0
@@ -221,9 +220,6 @@ function SMODS.showman(...)
     return ret
 end
 
-
-
-
 function SMODS.score_card(card, context)
     local reps = { 1 }
     local j = 1
@@ -296,4 +292,19 @@ function SMODS.score_card(card, context)
         context.other_card = nil
         card.lucky_trigger = nil
     end
+end
+
+local ret_smods_calc_effect = SMODS.calculate_effect
+SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
+    local ret = ret_smods_calc_effect(effect, scored_card, from_edition, pre_jokers)
+
+    if scored_card and scored_card.config.center.original_mod 
+    and scored_card.config.center.original_mod.id == 'fanworks' then
+        local obj = scored_card.config.center
+        if obj.set == 'Joker' and type(obj.origin) == 'table' then
+             check_for_unlock({type = 'fanworks_triggered', triggered = obj})
+        end
+    end
+
+    return ret
 end

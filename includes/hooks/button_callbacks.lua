@@ -23,7 +23,7 @@ G.FUNCS.reroll_shop = function(e)
                 offset = {x = 0, y = 0.05*v.T.h}
             })
         end
-        
+
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
             func = function()
@@ -45,7 +45,7 @@ G.FUNCS.reroll_shop = function(e)
                 if G.GAME.current_round.fnwk_paperback_rerolls <= 0 then
                     G.GAME.current_round.fnwk_paperback_rerolls = 0
                 end
-                
+
                 G.GAME.current_round.used_packs = {}
                 for i=1, G.GAME.starting_params.boosters_in_shop + (G.GAME.modifiers.extra_boosters or 0) do
                     G.GAME.current_round.used_packs[i] = get_pack('shop_pack').key
@@ -73,7 +73,7 @@ G.FUNCS.reroll_shop = function(e)
     end
 
     local ret = ref_reroll_shop(e)
-    check_for_unlock({type = 'fnwk_shop_rerolled', amt = G.GAME.round_scores.times_rerolled.amt})
+    check_for_unlock({type = 'fnwk_shop_rerolled', amt = G.GAME.round_scores.times_rerolled.amt, cost = G.GAME.current_round.reroll_cost})
     return ret
 end
 
@@ -151,24 +151,33 @@ G.FUNCS.can_play = function(e)
     local ret = ref_can_play(e)
 
     -- hopefully preventing a disturbia softlock
-    if G.GAME.blind and #G.jokers.cards > 0 and G.GAME.blind.fnwk_works_submitted
-    and G.GAME.blind.fnwk_required_works and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+    if G.GAME.blind and (#G.jokers.cards > 0 or ArrowAPI.stands.get_leftmost_stand())
+    and G.GAME.blind.fnwk_works_submitted and G.GAME.blind.fnwk_required_works
+    and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
         local submitted = 0
         local num_cards = 0
         for _, v in ipairs(G.jokers.cards) do
-            if v.ability.set == 'Joker' or v.ability.set == 'Stand' then num_cards = num_cards + 1 end
+            if v.ability.set == 'Joker' then num_cards = num_cards + 1 end
+            if v.fnwk_work_submitted then submitted = submitted + 1 end
+        end
+
+        for _, v in ipairs(G.consumeables.cards) do
+            if v.ability.set == 'Stand' then num_cards = num_cards + 1 end
             if v.fnwk_work_submitted then submitted = submitted + 1 end
         end
 
         if G.GAME.blind.fnwk_works_submitted ~= submitted then
             for _, v in ipairs(G.jokers.cards) do
-                if v.ability.set == 'Joker' or v.ability.set == 'Stand' then G.GAME.blind:debuff_card(v, true) end
+                if v.ability.set == 'Joker' then G.GAME.blind:debuff_card(v, true) end
+            end
+            for _, v in ipairs(G.consumeables.cards) do
+                if v.ability.set == 'Stand' then G.GAME.blind:debuff_card(v, true) end
             end
             G.GAME.blind.fnwk_works_submitted = submitted
         end
-        
-        
-        if num_cards > 1 and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
+
+
+        if num_cards >= 1 and G.GAME.blind.fnwk_works_submitted < G.GAME.blind.fnwk_required_works then
             e.states.click.can = false
             e.states.visible = false
             local discard = e.parent.children[G.SETTINGS.play_button_pos == 1 and 1 or 3]
@@ -193,7 +202,9 @@ end
 G.FUNCS.fnwk_submit_to_blind = function(e)
     local card = e.config.ref_table
     card.fnwk_work_submitted = true
+
     G.jokers:unhighlight_all()
+    G.consumeables:unhighlight_all()
 
     if G.GAME.blind.fnwk_works_submitted >= G.GAME.blind.fnwk_required_works - 1 then
         -- juice the button if it should otherwise be active when this is submitted and
@@ -226,7 +237,7 @@ G.FUNCS.can_reroll = function(e)
         return ref_can_reroll(e)
     end
 
-    if G.GAME.current_round.free_rerolls <= 0 then 
+    if G.GAME.current_round.free_rerolls <= 0 then
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
     else
@@ -261,7 +272,7 @@ function G.FUNCS.fnwk_restart()
 			match = false
 		end
 	end
-	
+
 	if match then
 		sendDebugMessage('Settings match')
 		SMODS.full_restart = 0
@@ -286,7 +297,7 @@ function G.FUNCS.fnwk_start_rom(e)
 		x = 0,
 		y = 0,
 	}
-	
+
 	G.EMU:start_nes(rom, nil, nil, start_pos)
 end
 
@@ -310,5 +321,50 @@ local ref_customize_deck = G.FUNCS.customize_deck
 G.FUNCS.customize_deck = function(e)
     local ret = ref_customize_deck(e)
     G.OVERLAY_MENU.config.id = 'customize_deck'
+    return ret
+end
+
+G.FUNCS.fnwk_reset_achievements = function(e)
+	local warning_text = e.UIBox:get_UIE_by_ID('warn')
+	if warning_text.config.colour ~= G.C.WHITE then
+		warning_text:juice_up()
+		warning_text.config.colour = G.C.WHITE
+		warning_text.config.shadow = true
+		e.config.disable_button = true
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
+			play_sound('tarot2', 0.76, 0.4);return true end}))
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
+			e.config.disable_button = nil; return true end}))
+		play_sound('tarot2', 1, 0.4)
+	else
+        warning_text.config.colour = G.C.CLEAR
+		G.FUNCS.wipe_on()
+		for k, v in pairs(SMODS.Achievements) do
+			if v.original_mod and v.original_mod.id == 'fanworks' then
+				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
+				G.ACHIEVEMENTS[k].earned = nil
+			end
+		end
+		G:save_settings()
+		G.E_MANAGER:add_event(Event({
+			delay = 1,
+			func = function()
+				G.FUNCS.wipe_off()
+				return true
+			end
+		}))
+	end
+end
+
+
+local ref_unlock_all = G.FUNCS.unlock_all
+G.FUNCS.unlock_all = function(e)
+    local ret = ref_unlock_all(e)
+
+    -- show bathroom
+    if G.PROFILES[G.SETTINGS.profile].all_unlocked then
+        G.P_CENTERS.j_fnwk_fanworks_bathroom.no_collection = nil
+    end
+
     return ret
 end

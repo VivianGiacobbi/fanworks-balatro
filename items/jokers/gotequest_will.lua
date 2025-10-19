@@ -37,16 +37,25 @@ function jokerInfo.calculate(self, card, context)
 
     if context.blueprint then return end
 
-	if context.discard and not context.other_card.debuff then
-		card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+	if context.pre_discard then
+		local scale_table = {chip_mod = card.ability.extra.chip_mod * #context.full_hand}
 		SMODS.scale_card(card, {
 			ref_table = card.ability.extra,
 			ref_value = "chips",
+			scalar_table = scale_table,
 			scalar_value = "chip_mod",
+			no_message = true,
 		})
+
+		if card.ability.extra.chips >= 300 then
+			check_for_unlock({type = 'gotequest_city'})
+		end
+
 		return {
-			extra = {focus = card, message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
-			card = card
+			message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
+			colour = G.C.CHIPS,
+			card = card,
+			delay = 0.48,
 		}
 	end
 end

@@ -21,6 +21,8 @@ local consumInfo = {
 		},
         custom_color = 'redrising',
     },
+    unlocked = false,
+    discovered = false,
     artist = 'wario',
     blueprint_compat = true,
     eternal_compat = true,
@@ -81,7 +83,7 @@ function consumInfo.calculate(self, card, context)
                 card = flare_card,
             }
         end
-	end 
+	end
 end
 
 return consumInfo

@@ -198,11 +198,11 @@ return {
 				"Don't be a",
 				"stranger~",
 			},
-			mq_j_fnwk_gq_lambiekins_1 = {
+			mq_j_fnwk_gotequest_lambiekins_1 = {
 				"What a cute",
 				"little plushie!",
 			},
-			mq_j_fnwk_gq_lambiekins_2 = {
+			mq_j_fnwk_gotequest_lambiekins_2 = {
 				"I'm not doing anything",
 				"that could be considered",
 				"problematic with this.",
@@ -359,6 +359,11 @@ return {
 			},
 		},
 		dictionary = {
+			fnwk_ach_rare_1 = "Fan",
+			fnwk_ach_rare_2 = "Creator",
+			fnwk_ach_rare_3 = "Partner",
+			fnwk_ach_rare_4 = "Legacy",
+
 			fnwk_credits_direct = "Direction",
 			fnwk_credits_artists = "Art",
 			fnwk_credits_coding = "Programming",
@@ -383,7 +388,9 @@ return {
 			fnwk_options_enable_Logo = "Main Menu Logo",
 			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
 			fnwk_options_enable_Title = "Title Screen Art",
-			
+			fnwk_options_enable_Achievements = "Achievements",
+			fnwk_options_reset_achievements = "Reset Fanworks Achievements",
+
 			-- buttons
 			b_fnwk_submit = 'Submit',
 
@@ -441,6 +448,7 @@ return {
 			},
 			k_nowkiss = "Now Kiss!",
 			k_sacrifice = "Sacrifice!",
+			k_cured = "Cured!",
 
 			-- stand loc strings
 			k_stand_advanced = 'Advanced Stand',
@@ -498,6 +506,9 @@ return {
 			ba_rebels = 'JJ29: Stardust Rebels',
 			ba_redrising = 'Red Rising Sun',
 			ba_rockn = "Rock N' Star",
+			ba_dark = "Dark Things",
+			ba_voodoo = 'Voodoo Kingdom',
+			ba_upto0 = 'Up to 0',
 
 			k_challenge_story = 'Story'
 		},
@@ -549,10 +560,6 @@ return {
 			ch_c_fnwk_redrising_pyrrhic = {"{C:dark_edition}Lose{} if {C:stand}Invisible Sun's{}"},
 			ch_c_fnwk_redrising_pyrrhic_2 = {"repetitions hit {C:attention}0{}"}
 		},
-		achievement_names = {
-		},
-		achievement_descriptions = {
-		},
 		fnwk_suits_plural = {
             Arrows = '\'Arrows\'',
             Masks = '\'Masks\'',
@@ -561,6 +568,215 @@ return {
         },
 	},
 	descriptions = {
+		Achievements = {
+			ach_fnwk_fanworks_gyahoo = {
+				name = "Gyahoo...?",
+				text = {
+					"Transform {C:attention}Garc{}",
+					"into {C:attention}Sludgemass!{}",
+				}
+			},
+			ach_fnwk_fanworks_gyahoo_hidden = {
+				name = "Gyahoo...?",
+				text = {
+					"{C:attention}Garc{} has",
+					"a {C:attention}secret...?{}",
+				}
+			},
+			ach_fnwk_fanworks_yur = {
+				name = "Work on Yur Fanpart",
+				text = {
+					"{C:attention}Lose a run{} by",
+					"playing a hand",
+					"containing only",
+					"{C:attention}2 Queens{}"
+				}
+			},
+			ach_fnwk_fanworks_property = {
+				name = "Property Stand Detected",
+				text = {
+					"Have {C:attention}8{} different",
+					"{C:attention}enhancements{}",
+					"in your deck"
+				}
+			},
+			ach_fnwk_fanworks_sumo = {
+				name = "Get the Sumo Wrestlers",
+				text = {
+					"Play a hand of",
+					"{C:attention}5 Steel Cards{}"
+				}
+			},
+			ach_fnwk_fanworks_tobad = {
+				name = "To Bad :P",
+				text = {
+					"Fail {C:attention}20{} {C:green}Chance Rolls{}",
+					"in a row"
+				}
+			},
+			ach_fnwk_fanworks_nopowers = {
+				name = "No Powers AU",
+				text = {
+					"Play a hand of",
+					"{C:attention}2{}, {C:attention}3{}, {C:attention}5{}, {C:attention}8{}, and {C:attention}Ace{}",
+					"without {C:stand}JoJo's Balatro{}",
+					"{C:stand}Adventure{} installed"
+				}
+			},
+			ach_fnwk_fanworks_redacted = {
+				name = "[ACHIEVEMENT REDACTED]",
+				text = {
+					"Pair {C:attention}Sexy Joker{} with",
+					"an {C:attention}unconventional",
+					"{C:attention}woman{}"
+				}
+			},
+			ach_fnwk_fanworks_foty= {
+				name = "Fanpart of the Year",
+				text = {
+					"Trigger Jokers from",
+					"{C:attention}10{} different fanparts",
+					"in a {C:attention}single run{}"
+				}
+			},
+			ach_fnwk_fanworks_50= {
+				name = "ACT 50",
+				text = {
+					"{C:attention}Win a run{} by",
+					"only picking up",
+					"{C:red}Rare{} Jokers"
+				}
+			},
+			ach_fnwk_bone_smells = {
+				name = "Smells Like Nirvana",
+				text = {
+					"Use {C:attention}20{} {C:green}Free",
+					"{C:green}Rerolls{} in a",
+					"{C:attention}single run{}"
+				}
+			},
+			ach_fnwk_city_illiteracy = {
+				name = "Illiteracy",
+				text = {
+					"Make a {C:attention}careless{}",
+					"{C:attention}mistake{} while you",
+					"have {C:attention}NEET Jokestar{}",
+				}
+			},
+			ach_fnwk_gotequest_itgoes = {
+				name = "IT GOES",
+				text = {
+					"Scale {C:attention}Feel Like",
+					"{C:attention}Killing It{} to",
+					"its {C:attention}maximum{}"
+				}
+			},
+			ach_fnwk_last_frances = {
+				name = "Frances the Mute",
+				text = {
+					"Trigger {C:attention}Morse",
+					"{C:attention}Tapping 10{} hands",
+					"in a row"
+				}
+			},
+			ach_fnwk_gotequest_city = {
+				name = "This City Made Us",
+				text = {
+					"Scale {C:attention}Will of One{}",
+					"to {C:chips}+300{} Chips"
+				}
+			},
+			ach_fnwk_gotequest_meet = {
+				name = "Meet your Master",
+				text = {
+					"Modify {C:attention}5{} cards",
+					"with a single",
+					"{C:tarot}Tarot Card{}"
+				}
+			},
+			ach_fnwk_rockhard_welcome = {
+				name = "Welcome to Rock District",
+				text = {
+					"Make your score",
+					"{C:attention}catch fire{} against",
+					"{C:attention}Sky Stupisms{}"
+				}
+			},
+			ach_fnwk_rockhard_gremmie = {
+				name = "Death of a Gremmie",
+				text = {
+					"Make {C:attention}every card{}",
+					"in your deck have",
+					"{C:attention}all suits{} or",
+					"{C:attention}no suit{}"
+				}
+			},
+			ach_fnwk_rubicon_princess = {
+				name = "Princess Power Move",
+				text = {
+					"Play a {C:attention}Five of a Kind{}",
+					"using {C:attention}unmodified Queens{}",
+					"while you have",
+					"{C:attention}Crown of Thorns{}"
+				}
+			},
+			ach_fnwk_streetlight_criminals = {
+				name = "Criminals-in-Law",
+				text = {
+					"Have {C:attention}Teenage",
+					"Gangster{} and {C:stand}NOTORIOUS{}",
+					"at the same time"
+				}
+			},
+			ach_fnwk_streetlight_salary = {
+				name = "Salary Cutting Noises",
+				text = {
+					"Obtain {C:attention}Industrious",
+					"{C:attention}Streetlit Joker{} via",
+					"{C:attention}systemic misogyny{}"
+				}
+			},
+			ach_fnwk_upto0_unnamed = {
+				name = "Dummy Name",
+				text = {
+					"Discover {C:attention}12{} {C:stand}Stands{}",
+				}
+			},
+			ach_fnwk_voodoo_trinity = {
+				name = "The Trinity",
+				text = {
+					"Play {C:attention}3 Royal",
+					"Flushes{} in a row",
+				}
+			},
+			ach_fnwk_jojojidai_1000 = {
+				name = "1000 Cuts",
+				text = {
+					"Scale {C:attention}Soldiers of{}",
+					"{C:attention}Fortune{} to {X:mult,C:white}X6{} Mult"
+				}
+			},
+			ach_fnwk_redrising_damn = {
+				name = "God Damn the Sun",
+				text = {
+					"Have a {C:attention}standard",
+					"deck{} minus {C:attention}Kings{}",
+					"and {C:attention}Jacks{}"
+				}
+			},
+			ach_fnwk_redrising_found = {
+				name = "So You Found Me",
+				text = {
+					"Discover {C:stand}Invisible Sun{}",
+				}
+			},
+			ach_fnwk_redrising_found_hidden = {
+				name = "?????",
+				text = {
+					"{C:attention,E:1}?????{}",
+				}
+			},
+		},
 		Enhanced = {
 			m_glass_fnwk_dance_spades = {
                 name = "Glass Card",
@@ -847,7 +1063,8 @@ return {
 			bl_fnwk_work = {
                 name = "The Work",
                 text = {
-                    "Submit {C:attention}#1# Joker{} to play"
+                    "Submit {C:attention}#1# Joker{}",
+					"or {C:stand}Stand{} to play"
                 }
             },
 			bl_fnwk_written = {
@@ -1716,6 +1933,21 @@ return {
 					"in one run"
 				}
 			},
+			j_fnwk_dark_foxglove = {
+				name = "Foxglove Joker",
+				text = {
+					{
+						"{C:mult}+#1#{} Mult",
+						"{C:mult}-#2#{} Mult at end of round",
+					},
+					{
+						"This Joker removes its",
+						"{C:attention}Eternal{} sticker when a",
+						"{C:attention}Straight Flush{} is played"
+					}
+
+				}
+			},
 			j_fnwk_banned_jokers = {
 				name = "Non-Fanworks Jokers",
 				text = {
@@ -1724,7 +1956,7 @@ return {
 				}
 			},
 			j_fnwk_banned_commons = {
-				name = "Non-Common Jokrs",
+				name = "Non-Common Jokers",
 				text = {
 					"This challenge bans all",
 					"non-{C:blue}Common{} {C:attention}Jokers{}",
@@ -1856,7 +2088,7 @@ return {
 						"{C:stand}Evolves{} when your deck has",
 						"{C:attention}#1# or fewer{} cards",
 					}
-					
+
 				}
 			},
 			c_fnwk_bone_king_farewell = {
@@ -1978,7 +2210,7 @@ return {
 						"contains {C:attention}four different seals{}"
 					}
 				},
-				
+
 			},
 			c_fnwk_jspec_miracle_together = {
 				name = "Togetherland",
@@ -2058,6 +2290,11 @@ return {
 						"{C:attention}#4#{} retrigger at end of round"
 					}
 				},
+				unlock = {
+					"Purchase this card in",
+					"an unseeded run to",
+                    "learn what it does"
+				}
 			},
 			c_fnwk_rockhard_peppers = {
 				name = "Sgt Pepper's",

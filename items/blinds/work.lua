@@ -23,7 +23,7 @@ function blindInfo.set_blind(self)
 end
 
 function blindInfo.recalc_debuff(self, card, from_blind)
-    if card.area ~= G.jokers then
+    if card.area ~= G.jokers and card.area ~= G.consumeables then
         return false
     end
 
@@ -35,10 +35,16 @@ function blindInfo.disable(self)
     for _, v in ipairs(G.jokers.cards) do
         v.fnwk_work_submitted = nil
     end
+    for _, v in ipairs(G.consumeables.cards) do
+        v.fnwk_work_submitted = nil
+    end
 end
 
 function blindInfo.defeat(self)
     for _, v in ipairs(G.jokers.cards) do
+        v.fnwk_work_submitted = nil
+    end
+    for _, v in ipairs(G.consumeables.cards) do
         v.fnwk_work_submitted = nil
     end
 end

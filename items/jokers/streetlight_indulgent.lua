@@ -123,11 +123,11 @@ function jokerInfo.calculate(self, card, context)
 
 		if card.ability.extra.current_spend >= card.ability.extra.spend_val then
 			card.ability.extra.current_spend = card.ability.extra.spend_val
-			card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
 			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "x_mult",
 				scalar_value = "x_mult_mod",
+				no_message = true,
 			})
 			return {
 				card = card,

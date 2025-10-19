@@ -34,6 +34,7 @@ function tagInfo.apply(self, tag, context)
                 return true
             end)
             tag.triggered = true
+            check_for_unlock({type = 'fnwk_biased_woman', new_card = new_woman})
             return new_woman
         else
             tag:nope()

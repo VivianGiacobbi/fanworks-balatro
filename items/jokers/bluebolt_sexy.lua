@@ -65,16 +65,13 @@ function jokerInfo.calculate(self, card, context)
             if results.junkie > 1 then
                 speech_key = speech_key..'_'..results.junkie
             end
-        end
-
-        -- find trans women quotes
-        if results.trans and not results.junkie then
-            speech_key = speech_key..'t_'..math.random(1, 3)
-        end
-
-        -- find women quotes
-        if results.woman and not results.junkie then
-            speech_key = speech_key..'_'..math.random(1,19)
+        else
+            -- find trans women quotes
+            if results.trans then
+                speech_key = speech_key..'t_'..math.random(1, 3)
+            elseif results.woman then
+                speech_key = speech_key..'_'..math.random(1,19)
+            end
         end
 
         -- maggie says some shit

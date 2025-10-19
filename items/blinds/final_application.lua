@@ -45,11 +45,17 @@ function blindInfo.disable(self)
     for _, v in ipairs(G.jokers.cards) do
         v.fnwk_work_submitted = nil
     end
+    for _, v in ipairs(G.consumeables.cards) do
+        v.fnwk_work_submitted = nil
+    end
 end
 
 function blindInfo.defeat(self)
     G.GAME.blind.fnwk_application_hand = nil
     for _, v in ipairs(G.jokers.cards) do
+        v.fnwk_work_submitted = nil
+    end
+    for _, v in ipairs(G.consumeables.cards) do
         v.fnwk_work_submitted = nil
     end
 end

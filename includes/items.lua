@@ -1,3 +1,5 @@
+SMODS.Atlas({ key = 'achievements', path = "achievements.png", px = 66, py = 66})
+
 SMODS.ObjectType {
     default = 'j_fnwk_bluebolt_sexy',
     key = 'fnwk_women',
@@ -73,7 +75,7 @@ ArrowAPI.loading.batch_load({
 			-- crimson jungle
 			'crimson_golden',
 			'crimson_bloodletting',
-				
+
 			-- gotequest
 			'gotequest_pair',
 			'gotequest_killing',
@@ -141,7 +143,7 @@ ArrowAPI.loading.batch_load({
 			'bluebolt_impaired',
 			'bluebolt_sexy',
 			'bluebolt_tuned',
-			
+
 
 			-- sunshine deluxe
 			'sunshine_duo',
@@ -174,6 +176,9 @@ ArrowAPI.loading.batch_load({
 
 			-- lipstick_vogue
 			'lipstick_bronx',
+
+			-- dark things
+			'dark_foxglove',
 
 			-- jojospectacle,
 			'jspec_sharp',
@@ -262,7 +267,7 @@ ArrowAPI.loading.batch_load({
 			'bluebolt_thunder_dc',
 			'bluebolt_chemical',
 			'bluebolt_insane',
-			
+
 			-- sunshine deluxe
 			'sunshine_electric',
 			'sunshine_damned',
@@ -352,6 +357,38 @@ ArrowAPI.loading.batch_load({
 		items = {
 			'biased',
 		}
+	},
+
+	Achievement = {
+		items = {
+			-- fan
+			'fanworks_gyahoo',
+			'fanworks_yur',
+			'fanworks_property',
+			'fanworks_sumo',
+			'fanworks_tobad',
+			'fanworks_nopowers',
+			'fanworks_redacted',
+			'city_illiteracy',
+			'gotequest_itgoes',
+			'gotequest_city',
+			'last_frances',
+			'rockhard_welcome',
+			'rockhard_gremmie',
+			'rubicon_princess',
+			'streetlight_criminals',
+			'streetlight_salary',
+			'upto0_unnamed',
+			'voodoo_trinity',
+			'jojojidai_1000',
+			'redrising_damn',
+			'redrising_found',
+
+			--creator
+			'fanworks_foty',
+			'fanworks_50',
+			'gotequest_meet',
+			'bone_smells'
+		}
 	}
 })
-

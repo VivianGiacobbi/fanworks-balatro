@@ -41,19 +41,27 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.remove_playing_cards and not card.debuff  and not context.blueprint then
         local scale_table = {x_mult_mod = card.ability.extra.x_mult_mod * #context.removed}
-        card.ability.extra.x_mult = card.ability.extra.x_mult + scale_table.x_mult_mod
         SMODS.scale_card(card, {
             ref_table = card.ability.extra,
             ref_value = "x_mult",
             scalar_table = scale_table,
-            scalar_value = "x_mult_mod"
+            scalar_value = "x_mult_mod",
+            no_message = true,
         })
         card.ability.extra.x_mult = math.min(card.ability.extra.x_mult_max, card.ability.extra.x_mult)
-        return {
-            func = function()
+        if card.ability.extra.x_mult == card.ability.extra.x_mult_max then
+            check_for_unlock({type = 'gotequest_itgoes'})
+        end
+
+        G.E_MANAGER:add_event(Event({
+            func = function() 
                 card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
                 card:set_sprites(card.config.center)
-            end,
+                return true
+            end
+        }))
+
+        return {
             message = localize{type='variable',key='a_xmult',vars={card.ability.extra.x_mult}},
             card = card,
         }
@@ -61,18 +69,23 @@ function jokerInfo.calculate(self, card, context)
 
     if context.end_of_round and context.main_eval and not context.blueprint then
         if card.ability.extra.x_mult > 1 then
-            card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "x_mult",
                 scalar_value = "x_mult_mod",
                 operation = "-",
+                no_message = true,
             })
-            return {
+
+            G.E_MANAGER:add_event(Event({
                 func = function()
                     card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
                     card:set_sprites(card.config.center)
-                end,
+                    return true
+                end
+            }))
+
+            return {
                 card = card,
                 message = localize{type='variable',key='a_xmult_minus',vars={card.ability.extra.x_mult_mod}},
             }

@@ -31,13 +31,8 @@ function deckInfo.locked_loc_vars(self, info_queue, card)
 end
 
 function deckInfo.apply(self, back)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate or 1
-            G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate * self.config.extra
-            return true
-        end
-    }))
+    G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate or 1
+    G.GAME.starting_params.fnwk_jokers_rate = G.GAME.starting_params.fnwk_jokers_rate * self.config.extra
 end
 
 return deckInfo

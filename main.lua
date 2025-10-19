@@ -1,12 +1,25 @@
 JoJoFanworks = SMODS.current_mod
 JoJoFanworks.current_config = copy_table(JoJoFanworks.config)
+JoJoFanworks.calculate = function(self, context)
+    if context.pseudorandom_result then
+        check_for_unlock({type = 'fnwk_rand_result', result = context.result})
+        return
+    elseif context.card_added then
+        check_for_unlock({type = 'fnwk_card_added', card = context.card})
+    end
+end
+
 
 SMODS.optional_features.quantum_enhancements = true
 
 ArrowAPI.misc.add_colors({
 	['FANWORKS'] = copy_table(JoJoFanworks.badge_colour),
 	['CRYSTAL'] = HEX('B5FFFF'),
-    ['STREETLIGHT'] = HEX('139194')
+    ['STREETLIGHT'] = HEX('139194'),
+    ['FNWK_ACH_RARE_1'] = HEX('6FDCB0'),
+    ['FNWK_ACH_RARE_2'] = HEX('FFA551'),
+    ['FNWK_ACH_RARE_3'] = HEX('FFD654'),
+    ['FNWK_ACH_RARE_4'] = HEX('E096F2'),
 })
 
 ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
@@ -92,6 +105,12 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_redrising = HEX('FFFFFF'),
     co_rockn = HEX('FF8989'),
     te_rockn = HEX('FFFFFF'),
+    co_dark = HEX('5A4385'),
+    te_dark = HEX('FFFFFF'),
+    co_voodoo = HEX('CDCBE4'),
+    te_voodoo = HEX('EAA812'),
+    co_upto0 = HEX('475641'),
+    te_upto0 = HEX('FF3C38'),
 })
 
 ArrowAPI.credits.add_credits(JoJoFanworks, {

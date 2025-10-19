@@ -32,12 +32,12 @@ function jokerInfo.calculate(self, card, context)
     end
 
 	if context.joker_main then
-		card.ability.extra.hands_count = card.ability.extra.hands_count - card.ability.extra.hands_mod
 		SMODS.scale_card(card, {
 			ref_table = card.ability.extra,
 			ref_value = "hands_count",
 			scalar_value = "hands_mod",
 			operation = "-",
+			no_message = true,
 		})
 		return {
 			balance = true

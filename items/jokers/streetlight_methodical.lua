@@ -32,12 +32,13 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.before then
 		if not context.blueprint and not context.retrigger_joker then
-			card.ability.extra.current_hands = card.ability.extra.current_hands + card.ability.extra.hands_mod
+			local scale_table = { hands_mod = card.ability.extra.current_hands }
 			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "current_hands",
 				scalar_table = scale_table,
 				scalar_value = "hands_mod",
+				no_message = true,
 			})
 		end
 		
@@ -50,6 +51,7 @@ function jokerInfo.calculate(self, card, context)
 					ref_value = "current_hands",
 					scalar_table = scale_table,
 					scalar_value = "hands_mod",
+					no_message = true,
 				})
 			end
 			return {
@@ -68,12 +70,12 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.pre_discard and card.ability.extra.current_hands > 0 then
 		local scale_table = { hands_mod = card.ability.extra.current_hands }
-		card.ability.extra.current_hands = card.ability.extra.current_hands - scale_table.hands_mod
 		SMODS.scale_card(card, {
 			ref_table = card.ability.extra,
 			ref_value = "current_hands",
 			scalar_table = scale_table,
 			scalar_value = "hands_mod",
+			no_message = true,
 		})
 		return {
 			card = card,
@@ -82,11 +84,11 @@ function jokerInfo.calculate(self, card, context)
 	end
 
 	if context.after then
-		
 		SMODS.scale_card(card, {
 			ref_table = card.ability.extra,
 			ref_value = "current_hands",
 			scalar_value = "hands_mod",
+			no_message = true,
 		})
 		if card.ability.extra.current_hands >= card.ability.extra.hands_val then
 			card.ability.extra.current_hands = 0

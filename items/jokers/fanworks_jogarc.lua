@@ -7,7 +7,6 @@ SMODS.Sound({
 	path = "sludge.ogg",
 })
 
-SMODS.Atlas({ key = 'fanworks_jogarc_dark', path = 'jokers/fanworks_jogarc_dark.png', px = 71, py = 95 })
 SMODS.Atlas({ key = 'fanworks_jogarc_mask', path = 'jokers/fanworks_jogarc_mask.png', px = 71, py = 95 })
 SMODS.Atlas({ key = '100', path = '100.png', px = 64, py = 64 })
 
@@ -29,56 +28,21 @@ local jokerInfo = {
 	artist = 'gar'
 }
 
-local function try_transform_sludgemass(card, added_card)
-	if card.ability.form == 'sludge' or not G.jokers then
-		return
+local function transform_sludgemass(card, to_sludge)
+	card.ability.form = to_sludge and 'sludge' or 'garc'
+
+	if to_sludge then
+		card.children.center:set_sprite_pos({x = 1, y = 0})
+		card.ability.water_time = 0
+		card:juice_up(0.8)
+		play_sound('fnwk_sludge', 1, 0.5)
+		check_for_unlock({type = 'fanworks_gyahoo'})
+	else
+		card.children.center:set_sprite_pos({x = 0, y = 0})
+		card.ability.water_time = nil
+		card:juice_up(0.4)
+		play_sound('fnwk_gyahoo', 1, 0.5)
 	end
-
-	local transform = false
-	for i=1, #G.jokers.cards do
-		local obj = G.jokers.cards[i].config.center
-		if type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
-			transform = true
-			break
-		end
-	end
-
-	if not transform then
-		return
-	end
-
-	card.config.center.atlas = 'fnwk_fanworks_jogarc_dark'
-    card:set_sprites(card.config.center)
-	card.ability.water_time = 0
-	card.ability.form = 'sludge'
-	card:juice_up(0.8)
-	play_sound('fnwk_sludge', 1, 0.5)
-end
-
-local function try_revert_sludgemass(card, removed_card)
-	if card.ability.form == 'garc' then
-		return
-	end
-
-	local transform = true
-	for i=1, #G.jokers.cards do
-		local obj = G.jokers.cards[i].config.center
-		if G.jokers.cards[i] ~= removed_card and type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
-			transform = false
-			break
-		end
-	end
-
-	if not transform then 
-		return
-	end
-
-	card.config.center.atlas = 'fnwk_fanworks_jogarc'
-    card:set_sprites(card.config.center)
-	card.ability.form = 'garc'
-	card.ability.water_time = nil
-	card:juice_up(0.4)
-	play_sound('fnwk_gyahoo', 1, 0.5)
 end
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -97,53 +61,55 @@ function jokerInfo.update(self, card, dt)
 	end
 end
 
-function jokerInfo.add_to_deck(self, card, from_debuff)
-	try_transform_sludgemass(card, card)
+function jokerInfo.set_sprites(self, card, front)
+	if card.ability and card.ability.form == 'sludge' then
+		sendDebugMessage('transforming to sludge')
+		card.children.center:set_sprite_pos({x = 1, y = 0})
+		card.ability.water_time = 0
+	end
 end
 
-function jokerInfo.remove_from_deck(self, card, from_debuff)
-	if from_debuff then
-		return
+function jokerInfo.add_to_deck(self, card, from_debuff)
+	for i=1, #G.jokers.cards do
+		local obj = G.jokers.cards[i].config.center
+		if type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
+			transform_sludgemass(card, true)
+			return
+		end
 	end
-
-	try_transform_sludgemass(card, card)
 end
 
 function jokerInfo.calculate(self, card, context)
 	if card.debuff then return end
 
 	if context.joker_main then
-		if card.ability.form == 'sludge' then
-			return {
-				x_mult = card.ability.extra.x_mult,
-				card = context.blueprint_card or card,
-			}
-		else
-			return {
-				mult = card.ability.extra.mult,
-				card = context.blueprint_card or card,
-			}
-		end
+		local sludge = card.ability.form == 'sludge'
+		return {
+			x_mult = sludge and card.ability.extra.x_mult,
+			mult = not sludge and card.ability.extra.mult,
+			card = context.blueprint_card or card,
+		}
 	end
 
 	if context.blueprint then return end
 
-	if (context.buying_card or context.created_card) then
-        local new_card = context.created_card or context.card
-        if new_card == card then
-            return
-        end
-
-		try_transform_sludgemass(card, new_card)
+	if context.card_added and context.card ~= card and card.ability.form == 'garc' then
+		local obj = context.card.config.center
+		if type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
+			transform_sludgemass(card, true)
+		end
     end
 
-	if context.selling_card or context.removed_card then
-		local new_card = context.removed_card or context.card
-        if new_card == card then
-            return
-        end
+	if context.removed_card and context.removed_card ~= card and card.ability.form == 'sludge' then
+		for _, v in ipairs(G.jokers.cards) do
+			local obj = v.config.center
+			if v ~= context.removed_card and type(obj.origin) == 'table'
+			and obj.origin.sub_origins[1] == 'crimson' then
+				return
+			end
+		end
 
-		try_revert_sludgemass(card, new_card)
+		transform_sludgemass(card, false)
 	end
 end
 

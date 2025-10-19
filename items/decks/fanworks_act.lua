@@ -26,12 +26,7 @@ function deckInfo.check_for_unlock(self, args)
 end
 
 function deckInfo.apply(self, back)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            G.GAME.starting_params.fnwk_act_rarity = true
-            return true
-        end
-    }))
+    G.GAME.starting_params.fnwk_act_rarity = true
 end
 
 return deckInfo

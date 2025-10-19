@@ -55,12 +55,12 @@ function jokerInfo.calculate(self, card, context)
 
 		if SMODS.pseudorandom_probability(card, 'fnwk_lighted_ge', 1, card.ability.extra.chance, 'fnwk_lighted_ge') then
 			if not next(SMODS.find_card('j_csau_bunji')) then
-				card.ability.extra.remaining = card.ability.extra.remaining - card.ability.extra.remain_mod
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
 					ref_value = "remaining",
 					scalar_value = "remain_mod",
 					operation = "-",
+					no_message = true,
 				})
 			end
 			G.E_MANAGER:add_event(Event({

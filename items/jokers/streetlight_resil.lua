@@ -119,9 +119,9 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.removed_card == card then
 		card.ability.extra.times_sold = card.ability.extra.times_sold + card.ability.extra.sell_mod
-		card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * G.GAME.round_resets.ante
-		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "times_sold", scalar_value = "sell_mod"})
-		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "mult", scalar_value = "mult_mod"})
+		scale_table = { mult_mod = card.ability.extra.mult_mod * G.GAME.round_resets.ante }
+		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "times_sold", scalar_value = "sell_mod", no_message = true,})
+		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "mult", scalar_table = scale_table, scalar_value = "mult_mod", no_message = true,})
 		G.GAME.fnwk_saved_resils[#G.GAME.fnwk_saved_resils+1] = {
 			key = card.config.center.key,
 			id = card.ability.fnwk_resil_id,

@@ -77,9 +77,7 @@ JoJoFanworks.config_tab = function()
 		'enable_VanillaTweaks',
 		'enable_BlindReskins',
 		'enable_Title',
-		--[[
-		'enableTrophies',
-		--]]
+		'enable_Achievements'
 	}
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
@@ -157,7 +155,15 @@ JoJoFanworks.config_tab = function()
 			colour = G.C.BLACK,
 		},
 		nodes = {
-			fnwk_config_ui
+			fnwk_config_ui,
+			{n=G.UIT.R, config={align = "cm", padding = 0.1, minw = 3, maxw = 5 }, nodes={
+				{n=G.UIT.R, config={align = "cm", minh = 0.6, padding = 0.1, r = 0.1, hover = true, colour = G.C.RED, button = "fnwk_reset_achievements", shadow = true, focus_args = {nav = 'wide'}}, nodes={
+					{n=G.UIT.T, config={text = localize("fnwk_options_reset_achievements"), scale = 0.45, colour = G.C.UI.TEXT_LIGHT}}
+				}},
+			}},
+			{n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+				{n=G.UIT.T, config={id = 'warn', text = localize('ph_click_confirm'), scale = 0.4, colour = G.C.CLEAR}}
+			}}
 		}
 	}
 end

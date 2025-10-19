@@ -134,16 +134,11 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
     SMODS.scale_card(card, {
         ref_table = card.ability.extra,
         ref_value = "x_mult",
-        scalar_value = "x_mult_mod"
+        scalar_value = "x_mult_mod",
     })
-    return {
-        message = localize('k_upgrade_ex'),
-        card = card,
-    }
 end
 
 function jokerInfo.draw(self, card, layer)

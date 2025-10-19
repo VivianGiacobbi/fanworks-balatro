@@ -63,12 +63,16 @@ function jokerInfo.calculate(self, card, context)
     end
 
     if context.after and G.GAME.blind.chips <= hand_chips*mult then
-        card.ability.extra.remaining = card.ability.extra.remaining - card.ability.extra.remain_mod
-		SMODS.scale_card(card, {
+        SMODS.scale_card(card, {
 			ref_table = card.ability.extra,
 			ref_value = "remaining",
 			scalar_value = "remain_mod",
-			operation = "-"
+			operation = "-",
+			scale_message = {
+				message = localize{type='variable',key='a_remaining',vars={card.ability.extra.remaining}},
+				colour = G.C.BLUE
+			},
+			no_message = (card.ability.extra.remaining - card.ability.extra.remain_mod <= 0)
 		})
 		if card.ability.extra.remaining <= 0 then 
 			G.E_MANAGER:add_event(Event({
@@ -93,11 +97,6 @@ function jokerInfo.calculate(self, card, context)
 			return {
 				message = localize('k_melted_ex'),
 				colour = G.C.FILTER
-			}
-		else
-			return {
-				message = localize{type='variable',key='a_remaining',vars={card.ability.extra.remaining}},
-				colour = G.C.BLUE
 			}
 		end
 	end

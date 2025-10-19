@@ -4,7 +4,9 @@
 
 function G.UIDEF.jok_speech_bubble(text_key, loc_vars, extra)
     local text = {}
-    local extra = extra or {}
+    extra = extra or {}
+
+    sendDebugMessage('quip key: '..text_key)
 
     localize{type = 'quips', key = text_key, vars = loc_vars or {}, nodes = text}
     local row = {}
@@ -74,16 +76,21 @@ function G.UIDEF.use_and_sell_buttons(...)
     local card = args[1]
 
     if card.area and card.area == G.consumeables and card.ability.set == 'Stand' and card.config.center.key == 'c_fnwk_closer_artificial' then
-        sendDebugMessage('artificial Stand')
         return {n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={}}
     end
 
     local ret = ref_use_and_sell(...)
-    if card.area and card.area == G.jokers and card.ability.set == 'Joker' and G.GAME.blind
+    if card.area and ((card.area == G.jokers and card.ability.set == 'Joker')
+    or (card.area == G.consumeables and card.ability.set == 'Stand')) and G.GAME.blind
     and (G.GAME.blind.fnwk_works_submitted or 0) < (G.GAME.blind.fnwk_required_works or 0) then
-        local inner_nodes = ret.nodes[1].nodes[2].nodes
+        local inner_nodes = nil
+        if card.ability.set == 'Joker' then
+            inner_nodes = ret.nodes[1].nodes[2].nodes
+        else
+            inner_nodes = ret.nodes[1].nodes
+        end
         inner_nodes[#inner_nodes+1] = {
-            n = G.UIT.C,
+            n = G.UIT.R,
             config = { align = 'cr' },
             nodes = {{
                 n = G.UIT.C,
@@ -110,7 +117,7 @@ end
 local ref_deck_preview = G.UIDEF.deck_preview
 function G.UIDEF.deck_preview(args)
     local ret = ref_deck_preview(args)
-    
+
     if G.GAME.modifiers.fnwk_obscure_suits then
         local suit_labels = ret.nodes[1].nodes[1].nodes[1].nodes
         for i, v in ipairs(suit_labels) do

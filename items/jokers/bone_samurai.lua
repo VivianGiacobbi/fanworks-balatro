@@ -54,16 +54,11 @@ function jokerInfo.calculate(self, card, context)
     end
 
     if context.individual and not context.other_card.debuff and SMODS.has_enhancement(context.other_card, 'm_stone') then
-        card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod
         SMODS.scale_card(card, {
             ref_table = card.ability.extra,
             ref_value = "mult",
             scalar_value = "mult_mod"
         })
-        return {
-            message = localize('k_upgrade_ex'),
-            card = card,
-        }
     end
 end
 

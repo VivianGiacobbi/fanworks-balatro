@@ -50,12 +50,17 @@ end
 local main_card = nil
 
 local ref_card_ui = generate_card_ui
-function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...) 
+function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
     if not full_UI_table then main_card = card
     elseif main_card and main_card.fnwk_disturbia_joker then
         if _c ~= G.P_CENTERS['c_fnwk_streetlight_disturbia'] and _c.key ~= "fnwk_artist_1" then
             return full_UI_table
         end
+    end
+
+    if _c == G.P_CENTERS['c_fnwk_redrising_invisible'] and card_type == 'Locked' then
+        card_type = 'Undiscovered'
+        hide_desc = true
     end
 
     return ref_card_ui(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card, ...)
@@ -106,18 +111,16 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
 
 		return card
 	end
-    
+
     return ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
 end
 
 local ref_shop_card = create_card_for_shop
 function create_card_for_shop(area)
-    if G.GAME.starting_params.fnwk_act_force_legend and not G.GAME.modifiers.fnwk_used_act_legend then
-        local legend_key = get_first_legendary(G.GAME.pseudorandom.seed)
-        G.GAME.banned_keys[legend_key] = nil
-        local force_legend = create_card('Joker', area, nil, nil, nil, nil, legend_key, 'fnwk_act_force_legend')
-        create_shop_card_ui(force_legend, 'Joker', area)
-        G.GAME.banned_keys[legend_key] = true
+    if G.GAME.starting_params.fnwk_act_force_legend_ante and not G.GAME.modifiers.fnwk_used_act_legend
+    and G.GAME.round_resets.ante >= G.GAME.starting_params.fnwk_act_force_legend_ante then
+        local legend = pseudorandom_element(G.P_JOKER_RARITY_POOLS[4], pseudoseed('Joker4'))
+        local force_legend = create_card('Joker', area, nil, nil, nil, nil, legend.key, 'fnwk_act_force_legend')
         force_legend.states.visible = false
         G.E_MANAGER:add_event(Event({
             delay = 0.4,
@@ -125,12 +128,14 @@ function create_card_for_shop(area)
             func = (function()
                 force_legend:start_materialize()
                 play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
-                play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                play_sound('polychrome1', 1.2 + math.random()*0.1, 0.4)
+                force_legend:juice_up()
                 return true
             end)
         }))
-        
+
         G.GAME.modifiers.fnwk_used_act_legend = true
+        create_shop_card_ui(force_legend)
         return force_legend
     end
 
@@ -225,4 +230,21 @@ function calculate_reroll_cost(...)
     end
 
     return ref_reroll_cost(...)
+end
+
+
+
+
+
+---------------------------
+--------------------------- showing The Bathroom when unlocked
+---------------------------
+
+local ref_init_items = Game.init_item_prototypes
+function Game:init_item_prototypes()
+    local ret = ref_init_items(self)
+
+    if G.P_CENTERS.j_fnwk_fanworks_bathroom.unlocked then
+        G.P_CENTERS.j_fnwk_fanworks_bathroom.no_collection = nil
+    end
 end

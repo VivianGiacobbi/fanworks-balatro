@@ -13,4 +13,5 @@ return {
 	['enable_VanillaTweaks'] = true,
 	['enable_TarotSkins'] = true,
 	['enable_Title'] = true,
+	['enable_Achievements'] = true
 }

@@ -177,11 +177,11 @@ function jokerInfo.calculate(self, card, context)
 
                 rand_joker.ability.initialized = false
                 rand_joker.ability.boned = false
-                rand_joker.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
                 SMODS.scale_card(rand_joker, {
                     ref_table = rand_joker.ability.extra,
                     ref_value = "x_mult",
-                    scalar_value = "x_mult_mod"
+                    scalar_value = "x_mult_mod",
+                    no_message = true,
                 })
                 rand_joker.ability.perishable_compat = true
                 rand_joker.ability.eternal_compat = true

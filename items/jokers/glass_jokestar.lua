@@ -83,19 +83,18 @@ function jokerInfo.calculate(self, card, context)
         return
     end
 
-    card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_mod * count
     local scale_table = { mult_mod = card.ability.extra.mult_mod * count }
     SMODS.scale_card(card, {
         ref_table = card.ability.extra,
         ref_value = "mult",
         scalar_table = scale_table,
-        scalar_value = "mult_mod"
+        scalar_value = "mult_mod",
+        scaling_message = {
+            message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
+            card = card,
+            color = G.C.MULT,
+        }
     })
-    return {
-        message = localize { type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult} },
-        card = card,
-        color = G.C.MULT,
-    }
 end
 
 function jokerInfo.draw(self, card, layer)

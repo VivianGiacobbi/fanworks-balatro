@@ -54,13 +54,8 @@ function deckInfo.loc_vars(self, info_queue, card)
 end
 
 function deckInfo.apply(self, back)
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            ArrowAPI.game.consumable_selection_mod(back.effect.config.select_limit)
-            G.GAME.modifiers.max_stands = math.max(0, (G.GAME.modifiers.max_stands or 1) - back.effect.config.stand_limit_mod)
-            return true
-        end
-    }))
+    ArrowAPI.game.consumable_selection_mod(back.effect.config.select_limit)
+    G.GAME.modifiers.max_stands = math.max(0, (G.GAME.modifiers.max_stands or 1) - back.effect.config.stand_limit_mod)
 end
 
 return deckInfo

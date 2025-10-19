@@ -134,3 +134,14 @@ function Game:delete_run(...)
 
     return ref_game_delete(self, ...)
 end
+
+local ref_game_update_go = Game.update_game_over
+function Game:update_game_over(dt)
+    local check_loss = false
+    if not G.STATE_COMPLETE then check_loss = true end
+
+    local ret = ref_game_update_go(self, delay)
+
+    if G.STATE_COMPLETE and check_loss then check_for_unlock({type = 'fnwk_run_loss'}) end
+    return ret
+end

@@ -12,7 +12,7 @@ function Card:get_id(skip_pmk)
             return 12
         end
     end
-    
+
     return id
 end
 
@@ -25,8 +25,8 @@ end
 ---------------------------
 
 function Card:add_quip(text_key, align, loc_vars, extra)
-    if self.children.quip then 
-        self.children.quip:remove()     
+    if self.children.quip then
+        self.children.quip:remove()
     end
 
     self.children.quip = UIBox{
@@ -43,29 +43,29 @@ function Card:add_quip(text_key, align, loc_vars, extra)
 end
 
 function Card:remove_quip()
-    if self.children.quip then 
+    if self.children.quip then
         self.children.quip:remove()
-        self.children.quip = nil 
+        self.children.quip = nil
     end
 end
 
 function Card:say_quip(iter, not_first, def_speed)
     -- cancel this quip once the iteration ends
-    if iter <= 0 then 
+    if iter <= 0 then
         self.talking = false
-        return 
+        return
     end
-    
+
     local speed = (not def_speed and G.SPEEDFACTOR) or 1
     local delay_mult = def_speed and G.SPEEDFACTOR or 1
     self.talking = true
 
-    if not not_first then 
+    if not not_first then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.1 * delay_mult,
             func = function()
-                if self.children.quip then 
+                if self.children.quip then
                     self.children.quip.states.visible = true
                 end
                 self:say_quip(iter, true, def_speed)
@@ -89,7 +89,7 @@ function Card:say_quip(iter, not_first, def_speed)
         delay = 0.13 * delay_mult,
         func = function()
             self:say_quip(iter-1, true, def_speed)
-        return true  
+        return true
     end}), 'tutorial')
 end
 
@@ -105,8 +105,8 @@ end
 --- @param cardarea CardArea A Balatro cardarea table containing cards to display
 --- @param align string Shorthand alignment string ('bm' for bottom middle)
 function Card:show_predict_ui(cardarea, align)
-    if self.children.predict_ui then 
-        self.children.predict_ui:remove()     
+    if self.children.predict_ui then
+        self.children.predict_ui:remove()
     end
 
     self.children.predict_ui = UIBox{
@@ -123,11 +123,11 @@ end
 
 --- Removes the predict_card_ui as a child from this card
 function Card:remove_predict_ui()
-    if not self.children.predict_ui then 
+    if not self.children.predict_ui then
         return
     end
 
-    self.children.predict_ui:remove()     
+    self.children.predict_ui:remove()
     self.children.predict_ui = nil
 end
 
@@ -140,7 +140,7 @@ function Card:hover(...)
                 v.ability.stand_activated = nil
             end
         end
-        
+
         G.fnwk_peppers_hovers = nil
     end
 
@@ -153,7 +153,7 @@ function Card:hover(...)
                 G.fnwk_peppers_hovers[i] = v
             end
         end
-        
+
     end
 
     local ret = ref_card_hover(self, ...)
@@ -185,7 +185,7 @@ function Card:stop_hover(...)
             end
         end
     end
-    
+
 
     local ret = ref_card_stop_hover(self, ...)
     if (self.config.center.discovered and not G.OVERLAY_MENU) and self.ability.set == "Booster" then
@@ -206,7 +206,7 @@ function love.focus(f)
                 v.ability.stand_activated = nil
             end
         end
-        
+
         G.fnwk_peppers_hovers = nil
     end
 end
@@ -246,20 +246,8 @@ function Card:set_base(...)
 
     local args = {...}
     local initial = args[2]
-    if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then 
+    if self.playing_card and not initial and old_id == 12 and self.base.id == 13 then
         check_for_unlock({type = 'queen_to_king'})
-    end
-
-    return ret
-end
-
-local ref_sell_card = Card.sell_card
-function Card:sell_card(...)
-    local ret = ref_sell_card(self, ...)
-
-    if self.ability.set == 'Joker' then 
-        G.GAME.fnwk_patsy_jokers_sold = G.GAME.fnwk_patsy_jokers_sold + 1
-        check_for_unlock({type = 'patsy_jokers_sold', amount = G.GAME.fnwk_patsy_jokers_sold})
     end
 
     return ret
@@ -471,7 +459,7 @@ function Card:set_edition(edition, immediate, silent, delay, ...)
             for k, v in pairs(edition_table) do
                 self.edition[k] = v
             end
-        else 
+        else
             local other_edition = {
                 [ed_key] = true,
                 type = ed_key,
@@ -619,6 +607,7 @@ local ref_card_cost = Card.set_cost
 function Card:set_cost(...)
     if self.config.center.key == 'c_fnwk_closer_artificial' or G.GAME.modifiers.fnwk_no_sell then
         self.sell_cost = 0
+        self.sell_cost_label = 0
         return
     end
 
@@ -635,6 +624,9 @@ function Card:set_cost(...)
         self.fnwk_disturbia_joker.cost = self.cost
         self.fnwk_disturbia_joker.sell_cost = self.sell_cost
         self.fnwk_disturbia_joker.sell_cost_label = self.sell_cost_label
+    elseif self.config.center.key == 'j_fnwk_dark_foxglove' then
+        self.sell_cost = self.ability.extra.sell_value + self.ability.extra_value
+        self.sell_cost_label = self.sell_cost
     end
 
     return ret
@@ -786,7 +778,7 @@ function Card:update(dt)
         self.hfpx_current_area = self.area
         self.hfpx_current_cards = {}
     end
-    
+
     local joker_idx = 1
     local size_changed = #self.area.cards ~= #self.hfpx_current_cards
     local order_changed = false
@@ -803,7 +795,7 @@ function Card:update(dt)
             order_changed = true
         end
     end
-    
+
     -- don't do potentially expensive sprite creation if nothing has changed
     if not size_changed and not order_changed and self.hfpx_current_area == self.area and joker_idx == self.hfpx_last_index then
         return
@@ -820,4 +812,23 @@ function Card:update(dt)
     self.hfpx_last_index = joker_idx
 
     return ret
+end
+
+local ref_card_click = Card.click
+function Card:click()
+    if self.config and self.config.center and self.config.center.key == 'c_fnwk_redrising_invisible' then
+        if self.config.center.unlocked then
+            sendDebugMessage('already unlocked')
+            return ref_card_click(self)
+        end
+
+        unlock_card(self.config.center)
+        discover_card(self.config.center)
+        self:set_sprites(self.config.center)
+        self:juice_up()
+        play_sound('polychrome1')
+        check_for_unlock({type = 'redrising_found'})
+    end
+
+    return ref_card_click(self)
 end

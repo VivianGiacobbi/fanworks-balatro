@@ -9,6 +9,7 @@ local jokerInfo = {
 	cost = 6,
     unlocked = false,
     unlock_condition = {type = 'fnwk_discovered_card'},
+    no_collection = true,
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
@@ -29,7 +30,11 @@ function jokerInfo.check_for_unlock(self, args)
     end
 
     local discovered, total = ArrowAPI.game.check_mod_discoveries('fanworks', nil, self)
-    return discovered == total
+
+    if discovered >= total then
+        self.no_collection = nil
+        return true
+    end
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -58,16 +63,16 @@ function jokerInfo.calculate(self, card, context)
             func = function()
                 play_sound('fnwk_fart_reverb', 1, 0.75)
                 return true
-            end 
+            end
         }))
         return {
-            delay = 0.5, 
+            delay = 0.5,
             remove = true,
             card = context.destroy_card,
             message = localize('k_flush'),
             sound = 'fnwk_flush',
         }
-    end    
+    end
 end
 
 return jokerInfo
