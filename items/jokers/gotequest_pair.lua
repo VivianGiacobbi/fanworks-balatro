@@ -44,7 +44,7 @@ function jokerInfo.calculate(self, card, context)
 	if SMODS.pseudorandom_probability(card, 'fnwk_gotequest_pair', 1, card.ability.extra.chance, 'fnwk_gotequest_pair') then
 		for i, v in ipairs(context.scoring_hand) do
 			if not v.debuff then
-				v:set_edition({polychrome = true}, nil, true)
+				v:set_edition({polychrome = true}, nil, true, true)
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						v:juice_up()
@@ -54,13 +54,18 @@ function jokerInfo.calculate(self, card, context)
 			end
 		end
 
+		check_for_unlock({type = 'fnwk_pair_activate'})
+
 		return {
 			message = localize('k_nowkiss'),
 			card = context.blueprint_card or card,
+			sound = 'polychrome1',
+			pitch = 1.2,
+			volume = 0.7,
 		}
 	end
 
-	
+
 end
 
 return jokerInfo

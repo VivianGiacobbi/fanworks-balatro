@@ -51,6 +51,8 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_closer = HEX('FFFFFF'),
     co_industry = HEX('CA4ED3'),
     te_industry = HEX('FFFFFF'),
+    co_double = HEX('1956FF'),
+    te_double = HEX('FFFFFF'),
     co_love = HEX('E7B2D4'),
     te_love = HEX('FFFFFF'),
     co_coi = HEX('FFFFFF'),

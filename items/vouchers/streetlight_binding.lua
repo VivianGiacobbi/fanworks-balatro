@@ -1,12 +1,3 @@
-local timer_mod = 2
-G.TIMERS.FNWK_CRYSTAL_REAL = 0
-
-local ref_game_update = Game.update
-function Game:update(dt)
-    G.TIMERS.FNWK_CRYSTAL_REAL = G.TIMERS.FNWK_CRYSTAL_REAL + dt * timer_mod
-    return ref_game_update(self, dt)
-end
-
 local voucherInfo = {
     name = 'Waystone',
     config = {
@@ -34,7 +25,7 @@ function voucherInfo.check_for_unlock(self, args)
     if not G.jokers or args.type ~= self.unlock_condition.type or not G.GAME.fnwk_waystone_ante then
         return false
     end
-    
+
     return args.ante >= G.GAME.fnwk_waystone_ante
 end
 
@@ -42,7 +33,9 @@ function voucherInfo.calculate(self, card, context)
     if not (context.end_of_round and context.main_eval and context.game_over) or card.ability.extra.used then
         return
     end
-    
+
+    check_for_unlock({type = 'fnwk_binding_band'})
+
     card.ability.extra.used = true
 
     G.E_MANAGER:add_event(Event({
@@ -154,7 +147,7 @@ function voucherInfo.calculate(self, card, context)
                     G.VIBRATION = G.VIBRATION + 2
                     play_sound('whoosh1', 0.7, 0.2)
                     play_sound('introPad1', 1.4, 0.6)
-                    return true 
+                    return true
                 end
             }))
 
@@ -196,10 +189,10 @@ function voucherInfo.calculate(self, card, context)
                         real = 0,
                         eased = 0
                     }
-                    
+
                     local splash_args = {mid_flash = 1.6}
                     ease_value(splash_args, 'mid_flash', -1.6, nil, nil, nil, 4)
-                    
+
                     G.SPLASH_BACK:define_draw_steps({{
                         shader = 'fnwk_mod_background',
                         send = {

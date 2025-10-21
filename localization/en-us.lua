@@ -478,6 +478,7 @@ return {
 			ba_spirit = 'Spirit Lines',
 			ba_industry = 'Industry Baby',
 			ba_closer = 'CLOSER 2 GOD',
+			ba_double = 'Double Down',
 			ba_love = 'Love Once Buried',
 			ba_coi = 'Cost of Information',
 			ba_iron = 'Iron Touch',
@@ -666,12 +667,101 @@ return {
 					"{V:1}#1#{} Jokers"
 				}
 			},
+			ach_fnwk_fanworks_original = {
+				name = "Going Original",
+				text = {
+					"Transform a {C:attention}specific{}",
+					"{C:attention}Jokestar{} into a",
+					"{C:attention}non{}-{C:fanworks}Fanworks{} Joker"
+				}
+			},
+			ach_fnwk_fanworks_hyperfixation = {
+				name = "Current Hyperfixation",
+				text = {
+					"Defeat {C:attention}#1#{}",
+					"while your deck is",
+					"{C:attention}unaffected{}"
+				}
+			},
+			ach_fnwk_fanworks_rejection = {
+				name = "Rejection Feedback",
+				text = {
+					"Defeat {C:attention}#1#{}",
+					"on the {C:attention}last possible hand{}"
+				}
+			},
+			ach_fnwk_fanworks_casual = {
+				name = "Casual 50k Chapter",
+				text = {
+					"Defeat {C:attention}#1#{}",
+					"while it is at its",
+					"{C:attention}most powerful{}"
+				}
+			},
+			ach_fnwk_fanworks_average = {
+				name = "Average Fanpart Escalation",
+				text = {
+					"Earn a Chip Score",
+					"in {C:attention}scientific notation{}",
+					"before {C:attention}Ante #1#{}"
+				}
+			},
+			ach_fnwk_fanworks_conclusion = {
+				name = "In Conclusion...",
+				text = {
+					"Complete all",
+					"{C:fanworks}Fanworks{} {C:attention}Decks{}",
+					"on {V:1}#1#{}"
+				}
+			},
+			ach_fnwk_fanworks_inked = {
+				name = "Inked and Colored",
+				text = {
+					"Earn {V:1}#1# Stickers{}",
+					"on all {C:fanworks}Fanworks{} {C:attention}Jokers{}",
+				}
+			},
+			ach_fnwk_fanworks_newgame = {
+				name = "New Game+",
+				text = {
+					"Complete all",
+					"{C:fanworks}Fanworks{} {C:attention}Challenges{}",
+				}
+			},
+			ach_fnwk_fanworks_superfan = {
+				name = "Superfan",
+				text = {
+					"Earn all other",
+					"{C:fanworks}Fanworks{} {C:attention}Achievements{}",
+				}
+			},
+			ach_fnwk_fanworks_superfan_hidden = {
+				name = "?????",
+				text = {
+					"{C:attention}?????{}",
+				}
+			},
+			ach_fnwk_jojopolis_change = {
+				name = "Change Your Fate",
+				text = {
+					"{C:attention}Destroy{} or {C:attention}transform{}",
+					"every card from your",
+					"{C:attention}initial deck{}"
+				}
+			},
 			ach_fnwk_bone_smells = {
 				name = "Smells Like Nirvana",
 				text = {
 					"Use {C:attention}20{} {C:green}Free",
 					"{C:green}Rerolls{} in a",
 					"{C:attention}single run{}"
+				}
+			},
+			ach_fnwk_bone_type = {
+				name = "TYPE 2",
+				text = {
+					"Scale {C:stand}#1#{}",
+					"to {X:mult,C:white}X2{} Mult",
 				}
 			},
 			ach_fnwk_city_illiteracy = {
@@ -682,18 +772,27 @@ return {
 					"have {C:attention}#1#{}",
 				}
 			},
+			ach_fnwk_moscow_mixed = {
+				name = "Mixed Drink",
+				text = {
+					"Enhance {C:attention}#1# cards{}",
+					"at once using",
+					"{C:attention}#2#{}"
+				}
+			},
+			ach_fnwk_crimson_american = {
+				name = "The American Dream",
+				text = {
+					"Have {C:stand}#1#{}",
+					"be {C:attention}debuffed{} by",
+					"a {C:attention}Boss Blind{}"
+				}
+			},
 			ach_fnwk_gotequest_itgoes = {
 				name = "IT GOES",
 				text = {
 					"Scale {C:attention}#1#{} to",
 					"its {C:attention}maximum{}"
-				}
-			},
-			ach_fnwk_last_frances = {
-				name = "Frances the Mute",
-				text = {
-					"Trigger {C:attention}#1#{}",
-					"{C:attention}#2# hands{} in a row"
 				}
 			},
 			ach_fnwk_gotequest_city = {
@@ -709,6 +808,28 @@ return {
 					"Modify {C:attention}#1#{} cards",
 					"with a single",
 					"{C:tarot}Tarot Card{}"
+				}
+			},
+			ach_fnwk_gotequest_two = {
+				name = "Just the Two of Us",
+				text = {
+					"Activate {C:attention}#1#{}",
+					"{C:attention}#2# times{} in one round",
+				}
+			},
+			ach_fnwk_culture_adapted = {
+				name = "Adapted Population",
+				text = {
+					"Have a {C:attention}standard deck{}",
+					"without a single",
+					"{C:attention}unenhanced card{}"
+				}
+			},
+			ach_fnwk_last_frances = {
+				name = "Frances the Mute",
+				text = {
+					"Trigger {C:attention}#1#{}",
+					"{C:attention}#2# hands{} in a row"
 				}
 			},
 			ach_fnwk_glass_break = {
@@ -753,11 +874,41 @@ return {
 					"with {C:attention}#2#{}"
 				}
 			},
+			ach_fnwk_spirit_empire = {
+				name = "Building an Empire",
+				text = {
+					"Survive {C:red}death{}",
+					"{C:attention}3 times{} in",
+					"one run"
+				}
+			},
+			ach_fnwk_spirit_reset = {
+				name = "After the Reset",
+				text = {
+					"{C:attention}Win a run{} using",
+					"{C:attention}the same jokers{}",
+					"as the {C:attention}previous win{}"
+				}
+			},
+			ach_fnwk_double_down = {
+				name = "Double Down",
+				text = {
+					"Beat {C:attention}Ante #1#{} with",
+					"{C:attention}any{} {C:fanworks}Fanworks{} deck",
+				}
+			},
+			ach_fnwk_mania_white = {
+				name = "White Satin",
+				text = {
+					"Score a {C:attention}Flush{}",
+					"against {C:attention}#1#{}",
+				}
+			},
 			ach_fnwk_lighted_herring = {
 				name = "Red Herring",
 				text = {
-					"Obtain a {C:attention}#1#{}",
-					"{C:attention}sell{} or {C:attention}destroy{} it",
+					"Obtain {C:attention}#1#{},",
+					"{C:attention}sell{} or {C:attention}destroy{} it,",
 					"then obtain a second",
 					"{C:attention}#1#{}"
 				}
@@ -769,6 +920,13 @@ return {
 					"using {C:attention}unmodified Queens{}",
 					"while you have",
 					"{C:attention}#1#{}"
+				}
+			},
+			ach_fnwk_rubicon_picture = {
+				name = "Picture's Worth",
+				text = {
+					"Scale {C:attention}#1#{}",
+					"to {C:chips}+#2#{} Chips",
 				}
 			},
 			ach_fnwk_streetlight_criminals = {
@@ -809,6 +967,20 @@ return {
 					"and {C:attention}#2# other women{}"
 				}
 			},
+			ach_fnwk_bluebolt_again = {
+				name = "Let's Try This Again",
+				text = {
+					"Activate {C:attention}#1#{}",
+					"while you have",
+					"{C:attention}every Rusted Joker{}"
+				}
+			},
+			ach_fnwk_bluebolt_again_hidden = {
+				name = "?????",
+				text = {
+					"{C:attention}?????{}"
+				}
+			},
 			ach_fnwk_sunshine_down = {
 				name = "Down the Drain",
 				text = {
@@ -817,11 +989,26 @@ return {
 					"or more",
 				}
 			},
+			ach_fnwk_sunshine_poly = {
+				name = "Polycephaly",
+				text = {
+					"Defeat {C:attention}The Eye{}",
+					"by playing a {C:attention}Pair{}",
+					"of {C:attention}identical cards{}",
+				}
+			},
 			ach_fnwk_mdv_birth = {
 				name = "Birth of Venus",
 				text = {
 					"Create {C:attention}2 Wild Cards{}",
 					"with a single {C:tarot}Lovers{}",
+				}
+			},
+			ach_fnwk_love_nevada = {
+				name = "Nevada Road Trip",
+				text = {
+					"Scale {C:attention}#1#{} for",
+					"{C:attention}10 consecutive rounds{}"
 				}
 			},
 			ach_fnwk_upto0_mad = {
@@ -841,7 +1028,7 @@ return {
 				name = "1000 Cuts",
 				text = {
 					"Scale {C:attention}#1#{}",
-					"{X:mult,C:white}X6{} Mult"
+					"to {X:mult,C:white}X6{} Mult"
 				}
 			},
 			ach_fnwk_redrising_damn = {
@@ -870,6 +1057,27 @@ return {
 					"{C:attention}Lose a run{} with",
 					"{C:blue}Hands{} and {C:red}Discards{}",
 					"remaining"
+				}
+			},
+			ach_fnwk_jspec_clown = {
+				name = "Not Just a Clown",
+				text = {
+					"Unlock {C:attention}#1#{},",
+					"{C:attention}#2#{}, and {C:attention}#3#{}"
+				}
+			},
+			ach_fnwk_jspec_clown_hidden = {
+				name = "Not Just a Clown",
+				text = {
+					"{C:attention}?????{},",
+				}
+			},
+			ach_fnwk_jspec_generated = {
+				name = "Clown-Generated Content",
+				text = {
+					"Create {C:attention}#1#{} {C:planet}Planet Cards",
+					"from {C:attention}Blue Seals{} in",
+					"a single hand"
 				}
 			},
 		},

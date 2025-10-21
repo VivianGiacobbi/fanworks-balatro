@@ -25,6 +25,14 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
+	if context.after then
+		if G.GAME.fnwk_moscow_changes and G.GAME.fnwk_moscow_changes >= 5 then
+			check_for_unlock({type = 'fnwk_moscow_mixed'})
+		end
+
+		G.GAME.fnwk_moscow_changes = nil
+	end
+
 	if not (context.individual and context.cardarea == G.play)
 	or card.debuff or context.other_card.debuff
 	or context.other_card.config.center.key ~= 'c_base' then
@@ -44,6 +52,8 @@ function jokerInfo.calculate(self, card, context)
 				return true
 			end
 		}))
+
+		G.GAME.fnwk_moscow_changes = (G.GAME.fnwk_moscow_changes or 0) + 1
 
 		return {
 			message = localize('k_enhanced'),

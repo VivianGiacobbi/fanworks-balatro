@@ -10,7 +10,7 @@ local jokerInfo = {
         },
         action_time = 0,
     },
-    
+
 	rarity = 3,
 	cost = 8,
     discovered = false,
@@ -37,7 +37,7 @@ function jokerInfo.check_for_unlock(self, args)
     if args.type ~= self.unlock_condition.type then
         return false
     end
-    
+
     local num_queens = 0
     for _, card in ipairs(G.playing_cards) do
         if card:get_id() == 12 then
@@ -60,8 +60,8 @@ function jokerInfo.set_sprites(self, card, front)
         return
     end
 
-    card.children.center:set_sprite_pos({x = 1, y = 0})  
-    
+    card.children.center:set_sprite_pos({x = 1, y = 0})
+
     local role = {
 		role_type = 'Minor',
 		major = card,
@@ -72,7 +72,7 @@ function jokerInfo.set_sprites(self, card, front)
 		scale_bond = 'Strong',
 		draw_major = card
 	}
-    
+
     card.children.action_lines = Sprite(
         card.T.x,
         card.T.y,
@@ -139,6 +139,10 @@ function jokerInfo.calculate(self, card, context)
         ref_value = "x_mult",
         scalar_value = "x_mult_mod",
     })
+
+    if card.ability.extra.x_mult >= 2 then
+        check_for_unlock({type = 'fnwk_bone_type'})
+    end
 end
 
 function jokerInfo.draw(self, card, layer)
@@ -162,7 +166,7 @@ function jokerInfo.draw(self, card, layer)
 
     card.ability.action_time = card.ability.action_time + G.real_dt
 
-    G.SHADERS['fnwk_speed_lines']:send('color', HEX('23B2DC30'))  
+    G.SHADERS['fnwk_speed_lines']:send('color', HEX('23B2DC30'))
     G.SHADERS['fnwk_speed_lines']:send('time', card.ability.action_time)
     G.SHADERS['fnwk_speed_lines']:send('texture_details', card.children.action_lines:get_pos_pixel())
     G.SHADERS['fnwk_speed_lines']:send('image_details', card.children.action_lines:get_image_dims())
@@ -178,7 +182,7 @@ function jokerInfo.draw(self, card, layer)
     card.children.action_lines:draw_self()
 
     -- action lines 2
-    G.SHADERS['fnwk_speed_lines']:send('color', HEX('23B2DCBC'))  
+    G.SHADERS['fnwk_speed_lines']:send('color', HEX('23B2DCBC'))
     G.SHADERS['fnwk_speed_lines']:send('time', card.ability.action_time + math.random(1, 3))
     G.SHADERS['fnwk_speed_lines']:send('texture_details', card.children.action_lines_2:get_pos_pixel())
     G.SHADERS['fnwk_speed_lines']:send('image_details', card.children.action_lines_2:get_image_dims())
@@ -191,7 +195,7 @@ function jokerInfo.draw(self, card, layer)
     G.SHADERS['fnwk_speed_lines']:send('speed', 8)
 
     card.children.action_lines_2:draw_self()
-    
+
     card.children.yoko_fore:draw_shader('dissolve')
 end
 

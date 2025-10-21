@@ -243,8 +243,12 @@ function Card:set_base(...)
 
     -- base function call
     local ret = ref_set_base(self, ...)
-    G.GAME.fnwk_id = (G.GAME.fnwk_id or 0) + 1
-    self.fnwk_id = G.GAME.fnwk_id
+
+    if self.playing_card then
+        G.GAME.fnwk_id = G.GAME.fnwk_id or 1
+        self.fnwk_id = G.GAME.fnwk_id
+        G.GAME.fnwk_id = G.GAME.fnwk_id + 1
+    end
 
     local args = {...}
     local initial = args[2]
@@ -643,7 +647,12 @@ function Card:get_end_of_round_effect(...)
 
     local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
     if self.seal ~= 'Blue' or not next(togethers) then
-        return ref_card_eor(self, ...)
+        local ret = ref_card_eor(self, ...)
+        if ret.effect then
+            check_for_unlock({type = 'fnwk_seal_planet'})
+        end
+
+        return ret
     end
 
     local old_extra = self.extra_enhancement
@@ -686,6 +695,10 @@ function Card:get_end_of_round_effect(...)
         end)}))
     card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize('k_plus_planet'), colour = G.C.SECONDARY_SET.Planet})
     ret.effect = true
+
+    if ret.effect then
+        check_for_unlock({type = 'fnwk_seal_planet'})
+    end
 
     return ret
 end
@@ -826,7 +839,6 @@ local ref_card_click = Card.click
 function Card:click()
     if self.config and self.config.center and self.config.center.key == 'c_fnwk_redrising_invisible' then
         if self.config.center.unlocked then
-            sendDebugMessage('already unlocked')
             return ref_card_click(self)
         end
 

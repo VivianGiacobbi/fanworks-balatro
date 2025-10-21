@@ -83,14 +83,14 @@ function fnwk_single_blind_proxy(joker)
             __newindex = function (t,k,v) end,
 
             __index = function (t,k)
-                return extra_orig[k] 
+                return extra_orig[k]
             end
         })
     end
 
     setmetatable(joker.ability, {
-        __newindex = function (t,k,v) 
-            if (k == 'extra' and type(ability_orig[k]) == 'table') or not G.fnwk_valid_scaling_keys[k] then 
+        __newindex = function (t,k,v)
+            if (k == 'extra' and type(ability_orig[k]) == 'table') or not G.fnwk_valid_scaling_keys[k] then
 				ability_orig[k] = v
 			end
         end,
@@ -239,4 +239,26 @@ function get_straight(hand)
 	end
 
 	return ref_get_straight(hand)
+end
+
+
+
+
+
+---------------------------
+--------------------------- After the Reset achievements
+---------------------------
+
+local ref_joker_win = set_joker_win
+function set_joker_win()
+	check_for_unlock({type = 'fnwk_won_with_jokers'})
+
+	G.PROFILES[G.SETTINGS.profile].last_win_jokers = {}
+	for i, v in ipairs(G.jokers.cards) do
+		if v.config.center_key and v.ability.set == 'Joker' then
+			G.PROFILES[G.SETTINGS.profile].last_win_jokers[v.config.center_key] = true
+		end
+	end
+
+	return ref_joker_win()
 end

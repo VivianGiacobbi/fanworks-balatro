@@ -63,7 +63,6 @@ end
 
 function jokerInfo.set_sprites(self, card, front)
 	if card.ability and card.ability.form == 'sludge' then
-		sendDebugMessage('transforming to sludge')
 		card.children.center:set_sprite_pos({x = 1, y = 0})
 		card.ability.water_time = 0
 	end

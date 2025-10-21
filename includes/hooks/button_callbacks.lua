@@ -286,8 +286,8 @@ function G.FUNCS.fnwk_start_rom(e)
 	local rom = e.config.choice
 
 	G.FUNCS:exit_overlay_menu()
+    G.EMU.last_music_vol = G.SETTINGS.SOUND.music_volume
     G.SETTINGS.SOUND.music_volume = 0
-    G.SETTINGS.SOUND.game_sounds_volume = 100
     G.CONTROLLER.locks.frame = true
 
 	G.EMU:init_video()
@@ -298,6 +298,7 @@ function G.FUNCS.fnwk_start_rom(e)
 		y = 0,
 	}
 
+    G.EMU.menu_run = true
 	G.EMU:start_nes(rom, nil, nil, start_pos)
 end
 

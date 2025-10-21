@@ -51,11 +51,23 @@ function jokerInfo.calculate(self, card, context)
 
     if context.after and not context.blueprint then
         if hand_chips*mult > G.GAME.blind.chips then
+            G.GAME.fnwk_love_scale_round = true
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "mult",
                 scalar_value = "mult_mod",
             })
+        end
+    end
+
+    if context.end_of_round and context.main_eval then
+        if G.GAME.fnwk_love_scale_round then
+            G.GAME.fnwk_love_consec_scales = (G.GAME.fnwk_love_consec_scales or 0) + 1
+            if G.GAME.fnwk_love_consec_scales >= 10 then
+                check_for_unlock({type = 'fnwk_love_nevada'})
+            end
+        else
+            G.GAME.fnwk_love_scale_round  = nil
         end
     end
 end
@@ -77,16 +89,16 @@ function jokerInfo.set_sprites(self, card, front)
 		r_bond = 'Strong',
 		scale_bond = 'Strong',
 		draw_major = card,
-    } 
+    }
 
     local atlas_2 = G.ASSET_ATLAS['fnwk_love_jokestar_neon']
-	card.children.fnwk_love_neon = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_2, { x = 0, y = 0 })	
+	card.children.fnwk_love_neon = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_2, { x = 0, y = 0 })
 	card.children.fnwk_love_neon:set_role(role)
     card.children.fnwk_love_neon.glow_color = {0, 0.92, 1}
     card.children.fnwk_love_neon.custom_draw = true
 
     local atlas_1 = G.ASSET_ATLAS['fnwk_love_jokestar_front']
-    card.children.fnwk_love_front = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_1, { x = 0, y = 0 })	
+    card.children.fnwk_love_front = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas_1, { x = 0, y = 0 })
 	card.children.fnwk_love_front:set_role(role)
     card.children.fnwk_love_front.custom_draw = true
 
@@ -99,7 +111,7 @@ function jokerInfo.update(self, card, dt)
     end
 
     if card.ability.fizzled then
-        if card.ability.fizzle_timer < card.ability.fizzle_limit then 
+        if card.ability.fizzle_timer < card.ability.fizzle_limit then
             card.ability.fizzle_timer = card.ability.fizzle_timer + G.real_dt
             if card.ability.fizzle_timer >= card.ability.fizzle_limit then
                 card.ability.fizzled = false
@@ -160,7 +172,7 @@ function jokerInfo.update(self, card, dt)
 		end
 	end
 
-    
+
     local ease = ArrowAPI.math.ease_funcs.in_out_sin(card.ability.glow_lerp)
     card.ability.glow_intensity = 3 * (ease * card.ability.glow_range + card.ability.glow_min)
     card.ability.glow_size = 0.94 * (ease * card.ability.glow_range + card.ability.glow_min)

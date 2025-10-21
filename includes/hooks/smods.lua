@@ -237,10 +237,10 @@ function SMODS.score_card(card, context)
         local fishy_reps = #fishies + 1
 
         local flags = {}
+        local effects = {}
         for i=1, fishy_reps do
             context.main_scoring = true
 
-            local effects = {}
             if i > 1 then
                 card.fnwk_fishy_calc = true
                 if card.config.center.key ~= 'c_base' then

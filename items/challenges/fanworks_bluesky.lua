@@ -21,8 +21,6 @@ local chalInfo = {
                 { id = 'j_fnwk_streetlight_arrow' },
                 { id = 'c_arrow_spec_diary' },
                 { id = 'v_arrow_plant' },
-                { id = 'v_fnwk_sunshine_rapture' },
-                { id = 'v_fnwk_sunshine_totality' },
             }
         end,
     },

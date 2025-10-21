@@ -25,7 +25,7 @@ function consumInfo.use(self, card, area, copier)
                 'moodindigo'
             )
             local center = pseudorandom_element(_pool, pseudoseed(_pool_key))
-            
+
             -- iteration for unavailable jokers (exactly the same as the create_card function)
             local it = 1
             while center == 'UNAVAILABLE' or center == replace.config.center.key do
@@ -39,6 +39,7 @@ function consumInfo.use(self, card, area, copier)
             new_joker:add_to_deck()
             new_joker:set_edition(replace.edition)
             G.jokers:emplace(new_joker, 'front')
+            check_for_unlock({type = 'fnwk_mood_replace', old = replace.config.center.key, new = new_joker.config.center.key})
 
             replace:remove()
             G.GAME.joker_buffer = 0

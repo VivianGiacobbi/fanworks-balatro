@@ -7,7 +7,7 @@ local achInfo = {
 function achInfo.loc_vars(self)
     return {vars = {
         self.config.num,
-        self.config.enhancement,
+        localize{type = 'name_text', set = 'Enhanced', key = self.config.enhancement},
         G.P_BLINDS[self.config.blind].discovered and localize{type = 'name_text', set = 'Blind', key = self.config.blind} or '?????',
     }}
 end

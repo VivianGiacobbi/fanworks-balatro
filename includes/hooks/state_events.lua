@@ -7,7 +7,7 @@ function end_round(...)
     local ret = ref_end_round(...)
     G.E_MANAGER:add_event(Event({
         func = function()
-            if SMODS.saved then 
+            if SMODS.saved then
                 check_for_unlock({type = 'saved_from_death'})
             end
             return true

@@ -1,3 +1,37 @@
+local timer_mod = 2
+G.TIMERS.FNWK_CRYSTAL_REAL = 0
+
+local ref_game_update = Game.update
+function Game:update(dt)
+    if G.EMU.menu_run and G.EMU.esc_pressed and G.EMU.game.run_state ~= 'shutdown' then
+        G.EMU.game.run_state = 'shutdown'
+        G.EMU.esc_pressed = nil
+        G.EMU:stop_nes()
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.25,
+            func = function()
+                G.CONTROLLER.locks.frame = nil
+                G.CONTROLLER.locks.frame_set = nil
+                G.EMU.menu_run = nil
+                G.SETTINGS.SOUND.music_volume = G.EMU.last_music_vol or 50
+                return true
+            end
+        }))
+    end
+
+    G.TIMERS.FNWK_CRYSTAL_REAL = G.TIMERS.FNWK_CRYSTAL_REAL + dt * timer_mod
+    return ref_game_update(self, dt)
+end
+
+local ref_controller_keypress = Controller.key_press_update
+function Controller:key_press_update(key, dt)
+    if key == 'escape' and G.EMU.menu_run then return end
+
+    return ref_controller_keypress(self, key, dt)
+end
+
 local ref_game_menu = Game.main_menu
 function Game:main_menu(change_context, ...)
     local ret = ref_game_menu(self, change_context, ...)
@@ -41,7 +75,7 @@ function Game:main_menu(change_context, ...)
             end
         }))
     end
-    
+
     G.NEON_FLASH = Sprite(0,0, G.ROOM.T.w*2, G.ROOM.T.h*4, G.ASSET_ATLAS['fnwk_screen'], {x = 0, y = 0})
     G.NEON_VALS = { AMT = 0, MAX = 1000 }
     G.NEON_FLASH:define_draw_steps({{
@@ -87,7 +121,7 @@ function Game:main_menu(change_context, ...)
                             G.fnwk_splash.direction = 1
                         end
                     end
-                    
+
                     local lerp = ArrowAPI.math.ease_funcs.in_out_sin(G.fnwk_splash.value)
                     return lerp * (G.fnwk_splash.max_scale - G.fnwk_splash.min_scale) + G.fnwk_splash.min_scale
                 end,

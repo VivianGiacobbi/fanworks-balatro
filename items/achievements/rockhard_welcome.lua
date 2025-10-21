@@ -10,7 +10,7 @@ local achInfo = {
 }
 
 function achInfo.unlock_condition(self, args)
-    if args.type ~= 'chip_score' or not JoJoFanworks.current_config['enable_BlindReskins'] then return end
+    if args.type ~= 'chip_score' or not JoJoFanworks.current_config['enable_BlindReskins'] then return false end
 
     return G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_final_bell' and args.chips >= G.GAME.blind.chips
 end

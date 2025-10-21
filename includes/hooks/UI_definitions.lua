@@ -6,8 +6,6 @@ function G.UIDEF.jok_speech_bubble(text_key, loc_vars, extra)
     local text = {}
     extra = extra or {}
 
-    sendDebugMessage('quip key: '..text_key)
-
     localize{type = 'quips', key = text_key, vars = loc_vars or {}, nodes = text}
     local row = {}
     for k, v in ipairs(text) do

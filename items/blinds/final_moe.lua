@@ -20,11 +20,11 @@ local function get_moe_bosses(num_bosses)
         local valid_num = 0
         local min_use = 1000
         for k, v in pairs(G.P_BLINDS) do
-            if v.boss and not G.GAME.banned_keys[k] and G.GAME.bosses_used[k] <= min_use then
+            if v.boss and not G.GAME.banned_keys[k] and bosses_used[k] <= min_use then
                 local valid = (v.in_pool and type(v.in_pool) == 'function' and v:in_pool()) or true
                 if valid and not v.boss.showdown and v.boss.min <= math.max(1, G.GAME.round_resets.ante) then
-                    if G.GAME.bosses_used[k] < min_use then
-                        min_use = G.GAME.bosses_used[k]
+                    if bosses_used[k] < min_use then
+                        min_use = bosses_used[k]
                         eligible_bosses = {}
                     end
                     eligible_bosses[k] = true
@@ -41,7 +41,7 @@ local function get_moe_bosses(num_bosses)
             return chosen_bosses
         end
     end
-    
+
     return chosen_bosses
 end
 
@@ -60,7 +60,7 @@ local function moe_debuff_text(blind, string, first)
                 if first then play_sound('cancel', 0.7 + 0.05*i, 0.7) end
                 return true
             end
-        }))  
+        }))
     end
     local hold_time = G.SETTINGS.GAMESPEED * 1.2
     attention_text({ scale = 0.7, text = string, maxw = 12, hold = hold_time, align = 'cm', offset = {x = 0,y = -1}, major = G.play })
@@ -70,7 +70,7 @@ function blindInfo.loc_vars(self)
     if not G.GAME.blind.fnwk_moe_bosses then
         return {vars = {3} }
     end
-    
+
     loc_descs = {}
     for _, blind_key in ipairs(G.GAME.blind.fnwk_moe_bosses) do
         local obj = G.P_BLINDS[blind_key]
@@ -91,7 +91,7 @@ function blindInfo.loc_vars(self)
             end
             loc_descs[#loc_descs+1] = debuff_text
         end
-        
+
     end
 
     return { vars = loc_descs, key = G.GAME.blind.config.blind.key..'_alt'}
@@ -112,6 +112,7 @@ function blindInfo.set_blind(self)
     G.GAME.blind.block_play = true
     local delay = 0
     for i, v in ipairs(G.GAME.blind.fnwk_moe_bosses) do
+        sendDebugMessage('boss: '..v)
         local extra_blind = ArrowAPI.game.create_extra_blind(G.GAME.blind, G.P_BLINDS[v], true)
         delay = delay + (i > 1 and 3.5 or 0)
         G.E_MANAGER:add_event(Event({

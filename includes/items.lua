@@ -382,7 +382,6 @@ ArrowAPI.loading.batch_load({
 			'streetlight_salary',
 			'mdv_birth',
 			'upto0_mad',
-			'voodoo_trinity',
 			'jojojidai_1000',
 			'redrising_damn',
 			'redrising_found',
@@ -392,18 +391,46 @@ ArrowAPI.loading.batch_load({
 			-- creator
 			'fanworks_foty',
 			'fanworks_50',
+			'fanworks_original',
+			'fanworks_hyperfixation',
+			'fanworks_rejection',
+			'fanworks_casual',
+			'jojopolis_change',
 			'bone_smells',
+			'bone_type',
+			'moscow_mixed',
+			'crimson_american',
 			'gotequest_meet',
+			'culture_adapted',
 			'glass_break',
 			'rockhard_higher',
 			'iron_strangers',
+			'mania_white',
 			'lighted_herring',
 			'streetlight_daddy',
 			'streetlight_everything',
 			'sunshine_down',
+			'sunshine_poly',
+			'love_nevada',
+			'voodoo_trinity',
 
 			-- partner
+			'fanworks_average',
+			'gotequest_two',
+			'spirit_empire',
+			'spirit_reset',
+			'double_down',
+			'rubicon_picture',
+			'bluebolt_again',
 			'bluebolt_groupie',
+			'jspec_clown',
+			'jspec_generated',
+
+			-- legacy
+			'fanworks_conclusion',
+			'fanworks_inked',
+			'fanworks_newgame',
+			'fanworks_superfan'
 		}
 	}
 })

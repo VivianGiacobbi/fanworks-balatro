@@ -92,7 +92,9 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.calculate(self, card, context)
-	if context.cardarea == G.play and context.individual and not context.debuff and not not context.blueprint then
+	if card.debuff then return end
+
+	if context.cardarea == G.play and context.individual and not context.blueprint then
 		local scale_table = {
 			chip_mod = context.other_card.base.nominal + context.other_card.ability.bonus + context.other_card.ability.perma_bonus
 		}
@@ -103,7 +105,12 @@ function jokerInfo.calculate(self, card, context)
 			scalar_value = "chip_mod",
 			no_message = true,
 		})
-		if individual_chips > 0 then
+
+		if card.ability.extra.chips >= 1000 then
+			check_for_unlock({type = 'fnwk_rubicon_picture'})
+		end
+
+		if card.ability.extra.chips > 0 then
 			return {
 				message = localize{ type='variable', key='a_chips', vars = {card.ability.extra.chips} },
 				message_card = card,
@@ -112,7 +119,7 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.joker_main and not card.debuff then
+	if context.joker_main then
 		return {
 			chips = card.ability.extra.chips,
 			card = context.blueprint_card or card
@@ -133,8 +140,8 @@ function jokerInfo.update(self, card, dt)
         return
     end
 
-	if not card.children.thnks_underlay or not card.children.thnks_underlay.sprite_pos then 
-		return 
+	if not card.children.thnks_underlay or not card.children.thnks_underlay.sprite_pos then
+		return
 	end
 
 	card.ability.scroll.update_timer = card.ability.scroll.update_timer + G.real_dt
@@ -143,7 +150,7 @@ function jokerInfo.update(self, card, dt)
 		card.ability.scroll.update_timer = card.ability.scroll.update_timer % card.ability.scroll.update_rate
 		return
 	end
-	
+
 	local scroll_val = card.ability.scroll.current_frame * card.ability.scroll.mod
 	scroll_val = scroll_val + 0.005 * (math.random() * 2 - 1)
 	local jitter = 0 + 0.002 * (math.random() * 2 - 1)
@@ -174,7 +181,7 @@ function jokerInfo.draw(self, card, layer)
 				end
 			end
 		end
-	else 
+	else
 		card.children.thnks_underlay:draw_shader('dissolve')
 	end
 	card.children.thnks_overlay:draw_shader('dissolve')

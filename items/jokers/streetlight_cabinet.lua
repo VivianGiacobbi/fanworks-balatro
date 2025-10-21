@@ -51,7 +51,7 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
     end
 
     G.FUNCS:exit_overlay_menu()
-    card.ability.last_music_vol = G.SETTINGS.SOUND.music_volume
+    G.EMU.last_music_vol = G.SETTINGS.SOUND.music_volume
     G.SETTINGS.SOUND.music_volume = 0
     card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_cabinet_start'), colour = G.C.MONEY, delay = 0.8})
     G.E_MANAGER:add_event(Event({
@@ -73,7 +73,7 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 
             G.EMU:start_nes(game.key, card, game.fps, start_pos)
             return true
-        end 
+        end
     }))
 end
 
@@ -104,11 +104,11 @@ end
 
 function jokerInfo.update(self, card, dt)
     if not G.EMU.running or G.EMU.control_card ~= card then
-        return 
+        return
     end
 
     -- early close
-    if G.EMU.esc_pressed and G.EMU.game.run_state ~= 'shutdown' then
+    if G.EMU.esc_pressed and G.EMU.game.run_state == 'shutdown' then
         G.EMU.game.run_state = 'shutdown'
         G.EMU.esc_pressed = nil
         G.EMU:stop_nes()
@@ -119,19 +119,19 @@ function jokerInfo.update(self, card, dt)
             func = function()
                 G.CONTROLLER.locks.frame = nil
                 G.CONTROLLER.locks.frame_set = nil
-                G.SETTINGS.SOUND.music_volume = card.ability.last_music_vol or 50
+                G.SETTINGS.SOUND.music_volume = G.EMU.last_music_vol or 50
                 card.ability.last_music_vol = nil
                 card.ability.game_over_delay = nil
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_cabinet_lose'), colour = G.C.MONEY, delay = 0.8})
-                return true 
-            end 
+                return true
+            end
         }))
     end
 
     if G.EMU.game.run_state == 'shutdown' then
         return
     end
-    
+
     -- individual win states for games
     if G.EMU.game.id == 'Donkey Kong (1986)' then
         -- forces demo to never start
@@ -145,9 +145,9 @@ function jokerInfo.update(self, card, dt)
         elseif G.EMU.nes.cpu.ram[0x0400] == 1 and G.EMU.nes.cpu.ram[0x0096] == 255 then
             G.EMU.game.game_state = 'lose'
         end
-        
+
     end
-       
+
     if G.EMU.game.id == "Dragon's Lair (E) [no-dim]" then
         -- setting lives to 3
         if G.EMU.nes.cpu.ram[0x05A6] > 249 and G.EMU.nes.cpu.ram[0x05A6] < 255 then
@@ -210,8 +210,8 @@ function jokerInfo.update(self, card, dt)
                 card.ability.game_over_delay = nil
                 G.EMU:stop_nes()
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize(finish_state), colour = G.C.MONEY, delay = 0.8})
-                return true 
-            end 
+                return true
+            end
         }))
         if G.EMU.game.game_state == 'win' then
             G.E_MANAGER:add_event(Event({

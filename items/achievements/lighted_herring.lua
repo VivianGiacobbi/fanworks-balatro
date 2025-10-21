@@ -18,7 +18,6 @@ function achInfo.unlock_condition(self, args)
     if args.type == 'fnwk_card_added' and args.card.config.center.key == self.config.key then
         if not G.GAME.fnwk_herring_flag then
             G.GAME.fnwk_herring_flag = 1
-            sendDebugMessage('herring flag 1')
             return false
         end
 
@@ -28,7 +27,6 @@ function achInfo.unlock_condition(self, args)
     if args.type == 'fnwk_card_removed' and G.GAME.fnwk_herring_flag == 1
     and args.card.config.center.key == self.config.key then
         G.GAME.fnwk_herring_flag = 2
-        sendDebugMessage('herring flag 2')
         return false
     end
 end
