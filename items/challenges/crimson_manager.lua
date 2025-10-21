@@ -9,7 +9,7 @@ local chalInfo = {
             {id = 'joker_slots', value = 0},
         }
     },
-    config = { 
+    config = {
         world_rate = 6
     },
     on_apply = function(self)
@@ -22,6 +22,11 @@ local chalInfo = {
         { id = 'j_diet_cola'},
         { id = 'j_fnwk_streetlight_arrow' },
     },
+    unlocked = function(self)
+        return G.P_CENTERS['j_fnwk_fanworks_jogarc'].discovered
+        and G.P_CENTERS['j_fnwk_streetlight_arrow'].discovered
+        and G.P_CENTERS['c_fnwk_spec_mood'].discovered
+    end,
     consumeables = {
         { id = 'c_fnwk_spec_mood' },
         { id = 'c_fnwk_spec_mood' }

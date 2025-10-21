@@ -462,7 +462,7 @@ return {
 			k_hgm_cosmic_draw = 'Draw!',
 			k_misirlou_final = 'Final Hand?',
 			k_tragic_rankdown = 'Rank Down!',
-			k_insane = 'Doubled!',
+			k_insane = 'Insane in the Brain!',
 			k_shout = 'Chomp!',
 
 			-- badges
@@ -2252,6 +2252,30 @@ return {
 
 				}
 			},
+			j_fnwk_redrising_oblivious = {
+				name = "Oblivious Jokestar",
+				text = {
+					{
+						"If {C:attention}scoring hand{} doesn't contain",
+						"a {C:attention}Queen{}, this Joker gains {X:mult,C:white}X#1#{} Mult",
+					},
+					{
+						"If {C:attention}scoring hand{} contains a {C:attention}Queen{},",
+						"this Joker gives {X:mult,C:white}X#2#{} Mult",
+						"and resets Mult after scoring",
+					}
+
+				}
+			},
+			j_fnwk_rebels_drowning = {
+				name = "Drowning Jokestar",
+				text = {
+					"Retriggers all {C:attention}scoring{} cards",
+					"if poker hand contains",
+					"a {C:attention}Bonus Card{} and a {C:attention}Mult Card{}",
+
+				}
+			},
 			j_fnwk_banned_jokers = {
 				name = "Non-Fanworks Jokers",
 				text = {
@@ -2375,9 +2399,30 @@ return {
 			c_fnwk_bluebolt_insane = {
 				name = "Insane in the Brain",
 				text = {
-					"{C:attention}Doubles{} the cards inside",
-					"{C:attention}Booster Packs{}, but also",
-					"doubles their {C:attention}base costs{}"
+					{
+						"{C:attention}+#1#{} cards inside",
+						"{C:attention}Booster Packs{},",
+						"but {C:attention}triples{} Booster Pack cost",
+					},
+					{
+						"{C:attention}Predicts{} the cards inside",
+						"a hovered {C:attention}booster pack{}",
+						"{C:inactive,s:0.65}This card changes seed progression{}"
+					}
+
+				}
+			},
+			c_fnwk_bluebolt_insane_alt = {
+				name = "Insane in the Brain",
+				text = {
+					{
+						"{C:attention}+#1#{} cards in {C:attention}Booster Packs{},",
+						"but {C:attention}triples{} Booster Pack cost",
+					},
+					{
+						"{C:attention}Predicts{} the cards inside",
+						"a hovered {C:attention}booster pack{}",
+					}
 				}
 			},
 			c_fnwk_bone_king = {

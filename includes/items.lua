@@ -151,6 +151,10 @@ ArrowAPI.loading.batch_load({
 			'sunshine_funkadelic',
 			'sunshine_reliable',
 
+			-- my digital venus
+			'mdv_surface',
+			'mdv_shock',
+
 			-- no man's army
 			'noman_unknown',
 
@@ -163,13 +167,14 @@ ArrowAPI.loading.batch_load({
 			-- cold iron streets,
 			'cis_jokestar',
 
+			-- jj29: stardust rebels
+			'rebels_drowning',
+
 			-- love once buried
 			'love_jokestar',
 			'love_holy',
 
-			-- my digital venus
-			'mdv_surface',
-			'mdv_shock',
+			'redrising_oblivious',
 
 			-- jojojidai
 			'jojojidai_soldiers',

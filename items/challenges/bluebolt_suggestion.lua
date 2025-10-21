@@ -15,10 +15,10 @@ local chalInfo = {
         func = function(ch, endgame)
             if not G.playing_cards then return end
 
-            if #G.playing_cards < ch.gameover.condition.start_num and not G.fnwk_suggestion_startup_flag then 
+            if #G.playing_cards < ch.gameover.condition.start_num and not G.fnwk_suggestion_startup_flag then
                 return false
             elseif G.fnwk_suggestion_startup_flag then
-                if #G.playing_cards ~= ch.gameover.condition.start_num then return end   
+                if #G.playing_cards ~= ch.gameover.condition.start_num then return end
                 G.fnwk_suggestion_startup_flag = nil
             end
 
@@ -37,6 +37,9 @@ local chalInfo = {
     jokers = {
         {id = 'j_fnwk_bluebolt_sexy', eternal = true },
     },
+    unlocked = function(self)
+        return G.P_CENTERS['j_fnwk_bluebolt_sexy'].discovered
+    end,
     restrictions = {
         banned_cards = {
             {id = 'j_trading' },

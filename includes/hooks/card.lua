@@ -98,7 +98,7 @@ end
 
 
 ---------------------------
---------------------------- Skeptic Joker predict UI
+--------------------------- Insane in the Brain predict UI
 ---------------------------
 
 --- Creates a UI box appended as a child to the card, self.children.predict_ui
@@ -547,16 +547,10 @@ end
 
 local ref_card_open = Card.open
 function Card:open(...)
-    local insanes = nil
-    if self.ability.set == 'Booster' and self.ability.extra and type(self.ability.extra) ~= 'table' then
-        insanes = SMODS.find_card('c_fnwk_bluebolt_insane')
-        local card_mod = G.P_CENTERS['c_fnwk_bluebolt_insane'].config.extra.card_mod
-        self.ability.extra = self.ability.extra * card_mod^#insanes
-    end
-
     local ret = ref_card_open(self, ...)
 
-    if insanes then
+    local insanes = SMODS.find_card('c_fnwk_bluebolt_insane')
+    if next(insanes) then
         for _, v in ipairs(insanes) do
             ArrowAPI.stands.flare_aura(v, 0.5)
             G.E_MANAGER:add_event(Event({

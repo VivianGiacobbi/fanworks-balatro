@@ -2,6 +2,9 @@ local chalInfo = {
     consumables = {
         { id = 'c_fnwk_crimson_cough', eternal = true}
     },
+    unlocked = function(self)
+        return G.P_CENTERS['c_fnwk_crimson_cough'].discovered
+    end,
     restrictions = {
         banned_cards = function()
             local bans = {
@@ -38,7 +41,7 @@ local chalInfo = {
                     { id = 'c_jojobal_lion_soft' },
                     { id = 'c_jojobal_lion_soft_beyond' },
                     { id = 'c_jojobal_lion_rock' },
-                    
+
                 }
 
                 for i = #jojobal_bans, 1, -1 do
@@ -61,7 +64,7 @@ local chalInfo = {
                     bans[#bans+1] = { id = v.key }
                 end
             end
-            
+
             return bans
         end,
 

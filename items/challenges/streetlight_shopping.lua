@@ -17,6 +17,9 @@ local chalInfo = {
     consumeables = {
         { id = 'c_fnwk_streetlight_neon_favorite', eternal = true },
     },
+    unlocked = function(self)
+        return G.P_CENTERS['j_fnwk_streetlight_indulgent'].discovered and G.P_CENTERS['c_fnwk_streetlight_neon_favorite'].discovered
+    end,
     vouchers = {
         { id = 'v_overstock_norm' },
         { id = 'v_overstock_norm' },

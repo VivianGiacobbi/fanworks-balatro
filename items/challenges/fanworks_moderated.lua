@@ -12,6 +12,9 @@ local chalInfo = {
         { id = 'v_fnwk_rubicon_kitty'},
         { id = 'v_fnwk_rubicon_parade'}
     },
+    unlocked = function(self)
+        return G.P_CENTERS['v_fnwk_rubicon_kitty'].discovered and G.P_CENTERS['v_fnwk_rubicon_parade'].discovered
+    end,
     extra_blinds = {
         'bl_final_heart',
     },
