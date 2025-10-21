@@ -11,6 +11,13 @@ SMODS.DrawStep {
         end
         self.children.backing:draw_shader('dissolve')
 
+        local cursor_pos = {}
+        cursor_pos[1] = self.tilt_var and self.tilt_var.mx*G.CANV_SCALE or G.CONTROLLER.cursor_position.x*G.CANV_SCALE
+        cursor_pos[2] = self.tilt_var and self.tilt_var.my*G.CANV_SCALE or G.CONTROLLER.cursor_position.y*G.CANV_SCALE
+        local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
+        local shader_args = {}
+        local hovering = (self.hover_tilt or 0)
+
         -- bottom effect values
         G.SHADERS['fnwk_boney_bottom']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_bottom_mask'].image)
         G.SHADERS['fnwk_boney_bottom']:send('mask_mod', self.ability.mask_mod)
@@ -21,11 +28,11 @@ SMODS.DrawStep {
         G.SHADERS['fnwk_boney_bottom']:send('hovering', hovering)
         love.graphics.setShader(G.SHADERS['fnwk_boney_bottom'], G.SHADERS['fnwk_boney_bottom'])
         self.children.boned_bottom:draw_self()
-    
+
         -- top effect values
         G.SHADERS['fnwk_boney_top']:send('mask_tex', G.ASSET_ATLAS['fnwk_boney_top_mask'].image)
         G.SHADERS['fnwk_boney_top']:send('stencil', G.ASSET_ATLAS['fnwk_boney_stencil'].image)
-        G.SHADERS['fnwk_boney_top']:send('mask_mod', 1) 
+        G.SHADERS['fnwk_boney_top']:send('mask_mod', 1)
         G.SHADERS['fnwk_boney_top']:send("texture_details", self.children.boned_top:get_pos_pixel())
         G.SHADERS['fnwk_boney_top']:send("image_details", self.children.boned_top:get_image_dims())
         G.SHADERS['fnwk_boney_top']:send('mouse_screen_pos', cursor_pos)
@@ -33,7 +40,7 @@ SMODS.DrawStep {
         G.SHADERS['fnwk_boney_top']:send('hovering', hovering)
         love.graphics.setShader(G.SHADERS['fnwk_boney_top'], G.SHADERS['fnwk_boney_top'])
         self.children.boned_top:draw_self()
-    
+
         love.graphics.setShader()
     end,
 }
@@ -101,12 +108,12 @@ function jokerInfo.update(self, card, dt)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.6,
-            func = function() 
+            func = function()
                 play_sound('slice1')
                 card:juice_up(0.5)
                 card.ability.mask_target = 0.45
-                return true 
-            end 
+                return true
+            end
         }))
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -115,19 +122,19 @@ function jokerInfo.update(self, card, dt)
                 play_sound('slice1')
                 card:juice_up(1)
                 card.ability.mask_target = 1
-                return true 
-            end 
+                return true
+            end
         }))
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 1.8,
-            func = function() 
+            func = function()
                 play_sound('slice1')
                 -- destroy the animation sprites
                 if card.children.boned_bottom then card.children.boned_bottom:remove() end
                 if card.children.boned_top then card.children.boned_top:remove() end
                 if card.children.backing then card.children.backing:remove() end
-                
+
                 card.children.boned_bottom = nil
                 card.children.boned_top = nil
                 card.children.backing = nil
@@ -146,8 +153,8 @@ function jokerInfo.update(self, card, dt)
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_boney'), colour = G.C.DARK_EDITION, sound = 'fnwk_bad_to_the_bone', delay = 1.3, no_juice = true})
                 card:juice_up(1.4)
                 G.ROOM.jiggle = G.ROOM.jiggle + 6
-                return true    
-            end 
+                return true
+            end
         }))
     end
 end
@@ -169,10 +176,14 @@ function jokerInfo.calculate(self, card, context)
             delay = 0.3,
             func = function()
                 local rand_joker = pseudorandom_element(G.jokers.cards, pseudoseed('boney'))
+                if not rand_joker then return true end
                 local rand_atlas = rand_joker.config.center.atlas
                 local rand_pos = rand_joker.config.center.pos
 
                 -- immediately replace with boney, forgoing any animation
+                if rand_joker.config.center.key == 'j_fnwk_iron_sanctuary' then
+                    check_for_unlock({type = 'fnwk_iron_strangers'})
+                end
                 ArrowAPI.game.transform_card(rand_joker, card.config.center.key, nil, true)
 
                 rand_joker.ability.initialized = false

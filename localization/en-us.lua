@@ -417,7 +417,7 @@ return {
 			k_kunst_acceptable = '...Acceptable',
 			k_enhanced = 'Enhanced!',
 			k_seal = "Seal!",
-			k_ge = 'Awakened!',
+			k_stolen = 'Awakened!',
 			k_zap_ex = 'Zap!',
 			k_steel = "Steel",
 			k_toilet1 = 'poop',
@@ -476,6 +476,7 @@ return {
 			ba_gotequest = 'Gotequest',
 			ba_jojopolis = 'JoJopolis',
 			ba_spirit = 'Spirit Lines',
+			ba_industry = 'Industry Baby',
 			ba_closer = 'CLOSER 2 GOD',
 			ba_love = 'Love Once Buried',
 			ba_coi = 'Cost of Information',
@@ -572,14 +573,14 @@ return {
 			ach_fnwk_fanworks_gyahoo = {
 				name = "Gyahoo...?",
 				text = {
-					"Transform {C:attention}Garc{}",
+					"Transform {C:attention}#1#{}",
 					"into {C:attention}Sludgemass!{}",
 				}
 			},
 			ach_fnwk_fanworks_gyahoo_hidden = {
 				name = "Gyahoo...?",
 				text = {
-					"{C:attention}Garc{} has",
+					"{C:attention}#1#{} has",
 					"a {C:attention}secret...?{}",
 				}
 			},
@@ -604,7 +605,8 @@ return {
 				name = "Get the Sumo Wrestlers",
 				text = {
 					"Play a hand of",
-					"{C:attention}5 Steel Cards{}"
+					"{C:attention}#1# #2#s{}",
+					"against {C:attention}#3#{}"
 				}
 			},
 			ach_fnwk_fanworks_tobad = {
@@ -626,9 +628,26 @@ return {
 			ach_fnwk_fanworks_redacted = {
 				name = "[ACHIEVEMENT REDACTED]",
 				text = {
-					"Pair {C:attention}Sexy Joker{} with",
+					"Pair {C:attention}#1#{} with",
 					"an {C:attention}unconventional",
 					"{C:attention}woman{}"
+				}
+			},
+			ach_fnwk_fanworks_scan = {
+				name = "Scan the Page",
+				text = {
+					"Play the {C:attention}same card{}",
+					"in {C:attention}5{} different {C:attention}hand{}",
+					"{C:attention}positions{} in one game"
+				}
+			},
+			ach_fnwk_fanworks_artistic = {
+				name = "Artistic License",
+				text = {
+					"Use a {C:tarot}Tarot Card{}",
+					"representing a",
+					"{C:attention}character{} on a {C:attention}Joker{}",
+					"or {C:stand}Stand{} you own"
 				}
 			},
 			ach_fnwk_fanworks_foty= {
@@ -639,12 +658,12 @@ return {
 					"in a {C:attention}single run{}"
 				}
 			},
-			ach_fnwk_fanworks_50= {
+			ach_fnwk_fanworks_50 = {
 				name = "ACT 50",
 				text = {
 					"{C:attention}Win a run{} by",
 					"only picking up",
-					"{C:red}Rare{} Jokers"
+					"{V:1}#1#{} Jokers"
 				}
 			},
 			ach_fnwk_bone_smells = {
@@ -660,38 +679,45 @@ return {
 				text = {
 					"Make a {C:attention}careless{}",
 					"{C:attention}mistake{} while you",
-					"have {C:attention}NEET Jokestar{}",
+					"have {C:attention}#1#{}",
 				}
 			},
 			ach_fnwk_gotequest_itgoes = {
 				name = "IT GOES",
 				text = {
-					"Scale {C:attention}Feel Like",
-					"{C:attention}Killing It{} to",
+					"Scale {C:attention}#1#{} to",
 					"its {C:attention}maximum{}"
 				}
 			},
 			ach_fnwk_last_frances = {
 				name = "Frances the Mute",
 				text = {
-					"Trigger {C:attention}Morse",
-					"{C:attention}Tapping 10{} hands",
-					"in a row"
+					"Trigger {C:attention}#1#{}",
+					"{C:attention}#2# hands{} in a row"
 				}
 			},
 			ach_fnwk_gotequest_city = {
 				name = "This City Made Us",
 				text = {
-					"Scale {C:attention}Will of One{}",
+					"Scale {C:attention}#1#{}",
 					"to {C:chips}+300{} Chips"
 				}
 			},
 			ach_fnwk_gotequest_meet = {
 				name = "Meet your Master",
 				text = {
-					"Modify {C:attention}5{} cards",
+					"Modify {C:attention}#1#{} cards",
 					"with a single",
 					"{C:tarot}Tarot Card{}"
+				}
+			},
+			ach_fnwk_glass_break = {
+				name = "Break Stuff",
+				text = {
+					"Defeat a {C:attention}Boss Blind{}",
+					"with a hand that has",
+					"a {C:attention}#1#{} and a",
+					"{C:attention}#2#{} {V:1}#3#{} {C:attention}Card{}"
 				}
 			},
 			ach_fnwk_rockhard_welcome = {
@@ -711,33 +737,95 @@ return {
 					"{C:attention}no suit{}"
 				}
 			},
+			ach_fnwk_rockhard_higher = {
+				name = "Higher Numbers",
+				text = {
+					"Scale {C:attention}#1#{}",
+					"to {X:mult,C:white}X4{} Mult using",
+					"only {C:tarot}Death{}"
+				}
+			},
+			ach_fnwk_iron_strangers = {
+				name = "Don't Talk to Strangers",
+				text = {
+					"Take over",
+					"{C:attention}#1#{}",
+					"with {C:attention}#2#{}"
+				}
+			},
+			ach_fnwk_lighted_herring = {
+				name = "Red Herring",
+				text = {
+					"Obtain a {C:attention}#1#{}",
+					"{C:attention}sell{} or {C:attention}destroy{} it",
+					"then obtain a second",
+					"{C:attention}#1#{}"
+				}
+			},
 			ach_fnwk_rubicon_princess = {
 				name = "Princess Power Move",
 				text = {
 					"Play a {C:attention}Five of a Kind{}",
 					"using {C:attention}unmodified Queens{}",
 					"while you have",
-					"{C:attention}Crown of Thorns{}"
+					"{C:attention}#1#{}"
 				}
 			},
 			ach_fnwk_streetlight_criminals = {
 				name = "Criminals-in-Law",
 				text = {
-					"Have {C:attention}Teenage",
-					"Gangster{} and {C:stand}NOTORIOUS{}",
-					"at the same time"
+					"Have {C:attention}#1#",
+					"and {C:stand}#2#{} at",
+					"the same time"
 				}
 			},
 			ach_fnwk_streetlight_salary = {
 				name = "Salary Cutting Noises",
 				text = {
-					"Obtain {C:attention}Industrious",
-					"{C:attention}Streetlit Joker{} via",
-					"{C:attention}systemic misogyny{}"
+					"Obtain {C:attention}#1#{}",
+					"via {C:attention}systemic misogyny{}"
 				}
 			},
-			ach_fnwk_upto0_unnamed = {
-				name = "Dummy Name",
+			ach_fnwk_streetlight_daddy = {
+				name = "Daddy's Money",
+				text = {
+					"Score a {C:attention}Gold Card{}",
+					"with a payout of",
+					"{C:money}$20{} or more"
+				}
+			},
+			ach_fnwk_streetlight_everything = {
+				name = "Everything She Thinks",
+				text = {
+					"Use {C:attention}#1#{}",
+					"to evolve your",
+					"{C:stand}#2#{}"
+				}
+			},
+			ach_fnwk_bluebolt_groupie = {
+				name = "Groupie Roadrip",
+				text = {
+					"Have {C:attention}#1#{}",
+					"and {C:attention}#2# other women{}"
+				}
+			},
+			ach_fnwk_sunshine_down = {
+				name = "Down the Drain",
+				text = {
+					"Reset {C:attention}#1#{}",
+					"while it has {C:chips}+300{} Chips",
+					"or more",
+				}
+			},
+			ach_fnwk_mdv_birth = {
+				name = "Birth of Venus",
+				text = {
+					"Create {C:attention}2 Wild Cards{}",
+					"with a single {C:tarot}Lovers{}",
+				}
+			},
+			ach_fnwk_upto0_mad = {
+				name = "Mad Villain Collector",
 				text = {
 					"Discover {C:attention}12{} {C:stand}Stands{}",
 				}
@@ -752,8 +840,8 @@ return {
 			ach_fnwk_jojojidai_1000 = {
 				name = "1000 Cuts",
 				text = {
-					"Scale {C:attention}Soldiers of{}",
-					"{C:attention}Fortune{} to {X:mult,C:white}X6{} Mult"
+					"Scale {C:attention}#1#{}",
+					"{X:mult,C:white}X6{} Mult"
 				}
 			},
 			ach_fnwk_redrising_damn = {
@@ -774,6 +862,14 @@ return {
 				name = "?????",
 				text = {
 					"{C:attention,E:1}?????{}",
+				}
+			},
+			ach_fnwk_jspec_entrance = {
+				name = "Entrance of the Gladiators",
+				text = {
+					"{C:attention}Lose a run{} with",
+					"{C:blue}Hands{} and {C:red}Discards{}",
+					"remaining"
 				}
 			},
 		},
@@ -1600,8 +1696,8 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
 				}
 			},
-			j_fnwk_lighted_ge = {
-				name = "Gypsy Eyes",
+			j_fnwk_lighted_stolen = {
+				name = "Stolen Solvent",
 				text = {
 					"Played {C:attention}face{} cards have",
 					"a {C:green}#1# in #2#{} chance to gain",

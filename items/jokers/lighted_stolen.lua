@@ -1,6 +1,5 @@
 local jokerInfo = {
-	key = 'j_fnwk_lighted_ge',
-	name = 'Gypsy Eyes', -- set to gypsy eyes after inheriting photograph's effects
+	name = 'Stolen Solvent', -- set to stolen solvent after inheriting photograph's effects
 	config = {
 		extra = {
 			chance = 3,
@@ -75,7 +74,7 @@ function jokerInfo.calculate(self, card, context)
 			}))
 
 			return {
-				message = localize('k_ge'),
+				message = localize('k_stolen'),
 				message_card = card,
 			}
 		end

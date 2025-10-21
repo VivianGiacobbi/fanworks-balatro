@@ -8,6 +8,7 @@ local tagInfo = {
 		},
         custom_color = 'streetlight',
     },
+    min_ante = 3,
     artist = 'gote'
 }
 
@@ -23,7 +24,7 @@ function tagInfo.apply(self, tag, context)
             end
         end
 
-        if #G.P_CENTER_POOLS['fnwk_women'] > women_count then 
+        if #G.P_CENTER_POOLS['fnwk_women'] > women_count then
             local new_woman = create_card('fnwk_women', context.area, nil, nil, nil, nil, nil, 'fnwk_biased_tag')
             create_shop_card_ui(new_woman, 'Joker', context.area)
             new_woman.states.visible = false

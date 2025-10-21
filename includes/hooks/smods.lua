@@ -86,10 +86,10 @@ function SMODS.fnwk_calculate_quantum_editions(card, effects, context)
     end
     local old_edition = copy_table(card.edition)
 
-    
+
     for i, v in ipairs(extra_editions) do
         if G.P_CENTERS[v.key] then
-            
+
             card.edition = v
             local eval = {edition = card:calculate_edition(context)}
             if eval then
@@ -97,7 +97,7 @@ function SMODS.fnwk_calculate_quantum_editions(card, effects, context)
             end
         end
     end
-    
+
     card.edition = old_edition
     context.extra_edition = nil
     return true
@@ -183,7 +183,7 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
             break
         end
     end
-    
+
     if cancel and (not effect.card or (effect.card and not effect.card.playing_card)) then
         G.fnwk_message_cancel = true
         effect.card = nil
@@ -227,7 +227,7 @@ function SMODS.score_card(card, context)
         if reps[j] ~= 1 then
             local _, eff = next(reps[j])
             while eff.retrigger_flag do
-                SMODS.calculate_effect(eff, eff.card); j = j+1; _, eff = next(reps[j]) 
+                SMODS.calculate_effect(eff, eff.card); j = j+1; _, eff = next(reps[j])
             end
             SMODS.calculate_effect(eff, eff.card)
             percent = percent + percent_delta
@@ -298,7 +298,7 @@ local ret_smods_calc_effect = SMODS.calculate_effect
 SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     local ret = ret_smods_calc_effect(effect, scored_card, from_edition, pre_jokers)
 
-    if scored_card and scored_card.config.center.original_mod 
+    if scored_card and scored_card.config.center.original_mod
     and scored_card.config.center.original_mod.id == 'fanworks' then
         local obj = scored_card.config.center
         if obj.set == 'Joker' and type(obj.origin) == 'table' then

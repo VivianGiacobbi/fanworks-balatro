@@ -38,14 +38,14 @@ end
 
 JoJoFanworks.quip_filter = function(quip, quip_type)
 	local mod = quip.original_mod
-    return (SMODS.find_card('j_fnwk_fanworks_jogarc', true) and mod and mod.id == 'fanworks') or (not mod or mod.id ~= 'fanworks')
+    return (next(SMODS.find_card('j_fnwk_fanworks_jogarc', true)) and mod and mod.id == 'fanworks') or (not mod or mod.id ~= 'fanworks')
 end
 
 for i=1, 12 do
 	SMODS.JimboQuip({
 		key = 'gwq_'..i,
 		type = 'win',
-		extra = {center = 'j_fnwk_fanworks_jogarc'}
+		extra = {center = 'j_fnwk_fanworks_jogarc'},
 	})
 end
 
@@ -53,7 +53,7 @@ for i=1, 16 do
 	SMODS.JimboQuip({
 		key = 'glq_'..i,
 		type = 'loss',
-		extra = {center = 'j_fnwk_fanworks_jogarc'}
+		extra = {center = 'j_fnwk_fanworks_jogarc'},
 	})
 end
 
@@ -97,11 +97,11 @@ JoJoFanworks.config_tab = function()
 			main_node.nodes[#main_node.nodes+1] = { n = G.UIT.C, config = { minw = 0.25, align = "cm" } }
 			right_settings.nodes[#right_settings.nodes + 1] = main_node
 			right_count = right_count + 1
-			
+
 			if ordered_config[i] == 'enable_Jokers' and JoJoFanworks.config['enable_Jokers'] then
 				local art_node = create_toggle({
 					label = localize("fnwk_options_enableAltArt"),
-					w = 1, 
+					w = 1,
 					ref_table = JoJoFanworks.config,
 					ref_value = 'enableAltArt',
 					callback = G.FUNCS.fnwk_apply_alts
@@ -134,7 +134,7 @@ JoJoFanworks.config_tab = function()
 					callback = G.FUNCS.fnwk_apply_alts
 				})
 				art_node.config.align = 'tr'
-				left_settings.nodes[#left_settings.nodes + 1] = art_node				
+				left_settings.nodes[#left_settings.nodes + 1] = art_node
 				left_count = left_count + 1
 
 				left_settings.nodes[#left_settings.nodes + 1] = { n = G.UIT.R, config = { h = 1, align = "tr", padding = 0.25 } }
@@ -378,7 +378,7 @@ JoJoFanworks.extra_tabs = function()
 			tab_definition_function = function()
 				-- works in the same way as mod.config_tab
 				local button_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
-				
+
 				playable_roms = {}
 				local count = 0
 				for s in ArrowAPI.loading.recursive_file_enumerate(usable_path .. "/includes/LuaNES/roms/"):gmatch("[^\r\n]+") do

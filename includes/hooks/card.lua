@@ -243,6 +243,8 @@ function Card:set_base(...)
 
     -- base function call
     local ret = ref_set_base(self, ...)
+    G.GAME.fnwk_id = (G.GAME.fnwk_id or 0) + 1
+    self.fnwk_id = G.GAME.fnwk_id
 
     local args = {...}
     local initial = args[2]
@@ -635,6 +637,10 @@ end
 
 local ref_card_eor = Card.get_end_of_round_effect
 function Card:get_end_of_round_effect(...)
+    if self.config.center.key == 'm_gold' and self:get_h_dollars() > 5 then
+        check_for_unlock({type = 'fnwk_streetlight_daddy'})
+    end
+
     local togethers = SMODS.find_card('c_fnwk_jspec_miracle_together')
     if self.seal ~= 'Blue' or not next(togethers) then
         return ref_card_eor(self, ...)
@@ -737,6 +743,7 @@ local ref_card_save = Card.save
 function Card:save(...)
     local ret = ref_card_save(self, ...)
     ret.fnwk_work_submitted = self.fnwk_work_submitted
+    ret.fnwk_id = self.fnwk_id
     return ret
 end
 
@@ -747,6 +754,7 @@ function Card:load(...)
     local args = {...}
     local cardTable = args[1]
     self.fnwk_work_submitted = cardTable.fnwk_work_submitted
+    self.fnwk_id = cardTable.fnwk_id
     return ret
 end
 

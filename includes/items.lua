@@ -106,7 +106,7 @@ ArrowAPI.loading.batch_load({
 			'iron_boney',
 
 			-- lighted stage
-			'lighted_ge',
+			'lighted_stolen',
 			'lighted_square',
 
 			-- jojomania
@@ -369,6 +369,8 @@ ArrowAPI.loading.batch_load({
 			'fanworks_tobad',
 			'fanworks_nopowers',
 			'fanworks_redacted',
+			'fanworks_scan',
+			'fanworks_artistic',
 			'city_illiteracy',
 			'gotequest_itgoes',
 			'gotequest_city',
@@ -378,17 +380,30 @@ ArrowAPI.loading.batch_load({
 			'rubicon_princess',
 			'streetlight_criminals',
 			'streetlight_salary',
-			'upto0_unnamed',
+			'mdv_birth',
+			'upto0_mad',
 			'voodoo_trinity',
 			'jojojidai_1000',
 			'redrising_damn',
 			'redrising_found',
+			'jspec_entrance',
 
-			--creator
+
+			-- creator
 			'fanworks_foty',
 			'fanworks_50',
+			'bone_smells',
 			'gotequest_meet',
-			'bone_smells'
+			'glass_break',
+			'rockhard_higher',
+			'iron_strangers',
+			'lighted_herring',
+			'streetlight_daddy',
+			'streetlight_everything',
+			'sunshine_down',
+
+			-- partner
+			'bluebolt_groupie',
 		}
 	}
 })

@@ -1,6 +1,6 @@
 local achInfo = {
     rarity = 1,
-    config = { consec_triggers = 2 },
+    config = { key = 'j_fnwk_last_morse', consec_triggers = 2 },
     origin = {
 		category = 'fanworks',
 		sub_origins = {
@@ -11,7 +11,10 @@ local achInfo = {
 }
 
 function achInfo.loc_vars(self)
-    return {vars = {self.config.consec_triggers}}
+    return {vars = {
+        G.P_CENTERS[self.config.key].discovered and localize{type = 'name_text', set = 'Joker', key = self.config.key} or '?????',
+        self.config.consec_triggers
+    }}
 end
 
 function achInfo.unlock_condition(self, args)

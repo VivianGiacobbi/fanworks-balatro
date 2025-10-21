@@ -17,16 +17,18 @@ function achInfo.loc_vars(self)
 end
 
 function achInfo.unlock_condition(self, args)
-    if G.GAME.fnwk_50_ineligible then return end
+    if G.GAME.fnwk_50_ineligible then
+        return false
+    end
 
-    if args.type == 'have_edition' then
-        for _, v in ipairs(G.jokers.cards) do
-            if v.config.center.rarity ~= self.config.rarity then
-                G.GAME.fnwk_50_ineligible = true
-                return false
-            end
+    if args.type == 'fnwk_card_added' then
+        if args.card.config.center.rarity ~= self.config.rarity then
+            G.GAME.fnwk_50_ineligible = true
+            return false
+        elseif not G.GAME.fnwk_50_first_rare then
+            G.GAME.fnwk_50_first_rare = true
         end
-    elseif args.type == 'win_custom' then
+    elseif args.type == 'win_custom' and G.GAME.fnwk_50_first_rare then
         for _, v in ipairs(G.jokers.cards) do
             if v.config.center.rarity ~= self.config.rarity then
                 return false

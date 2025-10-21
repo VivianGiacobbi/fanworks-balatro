@@ -47,14 +47,15 @@ function jokerInfo.calculate(self, card, context)
         if #context.full_hand <= 3 then
 			SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "chips", scalar_value = "chips_mod"})
 		elseif card.ability.extra.chips > 0 then
-            card.ability.extra.chips = 0
+            check_for_unlock({type = 'fnwk_laconic_reset', chips = card.ability.extra.chips})
+			card.ability.extra.chips = 0
             return {
                 card = card,
                 message = localize('k_reset')
             }
 		end
 	end
-    
+
 	if context.joker_main and card.ability.extra.chips > 0 then
 		return {
 			chips = card.ability.extra.chips,

@@ -60,7 +60,7 @@ if JoJoFanworks.current_config['enable_Queer'] then
                 vars = {
                     self.config.extra
                 }
-            } 	
+            }
         end,
         loc_txt = {
             ['en-us'] = {
@@ -81,8 +81,8 @@ if JoJoFanworks.current_config['enable_Queer'] then
         config = {
             extra = 4,
         },
-        unlock_condition = 
-        {	
+        unlock_condition =
+        {
             type = 'have_edition',
             extra = 5
         },
@@ -91,7 +91,7 @@ if JoJoFanworks.current_config['enable_Queer'] then
                 vars = {
                     self.config.extra
                 }
-            } 	
+            }
         end,
         loc_txt = {
             ['en-us'] = {

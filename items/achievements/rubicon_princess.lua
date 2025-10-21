@@ -1,6 +1,6 @@
 local achInfo = {
     rarity = 1,
-    config = {require_card = 'j_fnwk_rubicon_crown', rank = 'Queen', num = 5},
+    config = {key = 'j_fnwk_rubicon_crown', rank = 'Queen', num = 5},
     origin = {
 		category = 'fanworks',
 		sub_origins = {
@@ -10,8 +10,16 @@ local achInfo = {
     },
 }
 
+function achInfo.loc_vars(self)
+    return {
+        vars = {
+            G.P_CENTERS[self.config.key].discovered and localize{type = 'name_text', set = 'Joker', key = self.config.key} or '?????',
+        }
+    }
+end
+
 function achInfo.unlock_condition(self, args)
-    if args.type ~= 'hand_contents' or not next(SMODS.find_card(self.config.require_card, true))
+    if args.type ~= 'hand_contents' or not next(SMODS.find_card(self.config.key, true))
     or #args.cards ~= self.config.num then return false end
 
     local text = G.FUNCS.get_poker_hand_info(args.cards)

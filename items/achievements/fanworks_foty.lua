@@ -9,7 +9,8 @@ function achInfo.loc_vars(self)
 end
 
 function achInfo.unlock_condition(self, args)
-    if args.type ~= 'fanworks_triggered' then return false end
+    if args.type ~= 'fanworks_triggered'
+    or not args.triggered.origin.sub_origins then return false end
 
     if not G.GAME.fnwk_foty_triggers then
         G.GAME.fnwk_foty_triggers = { count = 0 }

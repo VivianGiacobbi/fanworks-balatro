@@ -34,6 +34,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
     local deaths = G.GAME.consumeable_usage['c_death'] and G.GAME.consumeable_usage['c_death'].count or 0
     local hung_men = G.GAME.consumeable_usage['c_hanged_man'] and G.GAME.consumeable_usage['c_hanged_man'].count or 0
 
+    if cryptids <= 0 and hung_men <= 0 and (1 + card.ability.extra.x_mult_mod * deaths >= 2) then
+        check_for_unlock({type = 'fnwk_rockhard_higher'})
+    end
+
     return {
         vars = {
             card.ability.extra.x_mult_mod,
@@ -50,7 +54,7 @@ function jokerInfo.check_for_unlock(self, args)
     if args.type ~= self.unlock_condition.type then
         return false
     end
-    
+
     local card_identity_table = {}
     for _, card in ipairs(G.playing_cards) do
         local key = card.config.card_key
@@ -74,7 +78,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.using_consumeable and not context.blueprint then
-        if context.consumeable.ability.name == 'Cryptid' 
+        if context.consumeable.ability.name == 'Cryptid'
         or context.consumeable.ability.name == 'Death'
         or context.consumeable.ability.name == 'The Hanged Man' then
             return {

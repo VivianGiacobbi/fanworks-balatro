@@ -6,6 +6,10 @@ JoJoFanworks.calculate = function(self, context)
         return
     elseif context.card_added then
         check_for_unlock({type = 'fnwk_card_added', card = context.card})
+    elseif context.removed_card then
+        check_for_unlock({type = 'fnwk_card_removed', card = context.removed_card})
+    elseif context.selling_card then
+        check_for_unlock({type = 'fnwk_card_sold', card = context.card})
     end
 end
 
