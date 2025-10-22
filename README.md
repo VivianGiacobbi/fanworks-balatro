@@ -1,6 +1,4 @@
 # JoJo's Balatro Fanworks
-A Balatro mod made for Vinesauce!
-
 ![Fanworks Title](https://i.imgur.com/aWsskLr.png)
 
 **JoJo's Balatro Fanworks** is a vanilla-like Balatro expansion mod inspired by the fanworks created by members of the [JoJo's Bizarre Fanworks]([https://discord.gg/evwdM4Tvc5](https://discord.gg/GKtmxA4Myv)) Discord server!
