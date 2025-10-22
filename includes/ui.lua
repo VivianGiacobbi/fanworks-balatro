@@ -10,14 +10,18 @@ SMODS.Atlas({
 	py = 32
 })
 
-if JoJoFanworks.config['enable_Title'] then
+if JoJoFanworks.current_config['enable_Title'] then
+	local file_data = assert(NFS.newFileData(JoJoFanworks.path..'assets/'..G.SETTINGS.GRAPHICS.texture_scaling.."x/fnwk_title.png"),
+		('Failed to collect file data for Atlas %s'):format('fnwk_title'))
+	local image_data = assert(love.image.newImageData(file_data),
+		('Failed to initialize image data for Atlas %s'):format('fnwk_title'))
+	sendDebugMessage('fanworks title replacement')
 	-- Title Screen Replacements
-	SMODS.Atlas {
-		key = 'balatro',
-		path = 'fnwk_title.png',
+	G.ASSET_ATLAS['balatro'] = {
+		name = 'balatro',
+		image = love.graphics.newImage(image_data, {mipmaps = true, dpiscale = G.SETTINGS.GRAPHICS.texture_scaling}),
 		px = 591,
 		py = 216,
-		prefix_config = { key = false }
 	}
 
 	SMODS.Atlas {
@@ -74,10 +78,9 @@ JoJoFanworks.config_tab = function()
 		'enable_Challenges',
 		'enable_Queer',
 		'enable_TarotSkins',
-		'enable_VanillaTweaks',
 		'enable_BlindReskins',
 		'enable_Title',
-		'enable_Achievements'
+
 	}
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }

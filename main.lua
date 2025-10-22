@@ -181,6 +181,7 @@ local includes = {
 	--- jokers are required for some following files so include them first
 	'ui',
 	'items',
+    'deckskins',
 	'tarot_reskins',
 	'blind_reskins',
 	'overrides',

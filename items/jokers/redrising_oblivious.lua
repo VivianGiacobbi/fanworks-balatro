@@ -1,3 +1,5 @@
+SMODS.Atlas({ key = 'redrising_oblivious_water', path = 'jokers/redrising_oblivious_water.png', px = 71, py = 95 })
+
 local jokerInfo = {
     name = 'Oblivious Jokestar',
     config = {
@@ -5,7 +7,9 @@ local jokerInfo = {
             rank = 'Queen',
             x_mult = 1,
             x_mult_mod = 0.25
-        }
+        },
+        water_time = 0,
+        water_atlas = 'fnwk_redrising_oblivious_water'
     },
     rarity = 2,
     cost = 6,
@@ -15,10 +19,11 @@ local jokerInfo = {
     origin = {
 		category = 'fanworks',
 		sub_origins = {
-			'rebels',
+			'redrising',
 		},
-        custom_color = 'rebels',
+        custom_color = 'redrising',
     },
+    artist = 'winter',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -26,6 +31,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
         card.ability.extra.x_mult_mod,
         card.ability.extra.x_mult
     } }
+end
+
+function jokerInfo.update(self, card, dt)
+    card.ability.water_time = card.ability.water_time + G.real_dt
 end
 
 function jokerInfo.calculate(self, card, context)

@@ -4,7 +4,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC', },
+        aura_colors = { 'C92A42DC', '801336DC', },
         evolved = true,
     },
     cost = 4,

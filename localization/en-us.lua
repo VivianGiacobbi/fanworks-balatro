@@ -380,7 +380,6 @@ return {
 			fnwk_options_enable_Tags = "Tags",
 			fnwk_options_enable_Vouchers = "Vouchers",
 			fnwk_options_enable_Consumables = "Consumables",
-			fnwk_options_enable_VanillaTweaks = "Vanilla Tweaks",
 			fnwk_options_enable_Blinds = "Boss Blinds",
 			fnwk_options_enable_BlindReskins = "Boss Blind Reskins",
 			fnwk_options_enable_Skins = "Playing Card Skins",
@@ -388,7 +387,6 @@ return {
 			fnwk_options_enable_Logo = "Main Menu Logo",
 			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
 			fnwk_options_enable_Title = "Title Screen Art",
-			fnwk_options_enable_Achievements = "Achievements",
 			fnwk_options_reset_achievements = "Reset Fanworks Achievements",
 
 			-- buttons
@@ -2940,6 +2938,34 @@ return {
 					"One {C:purple}Legendary{} Joker",
 					"appears in the {C:attention}shop{}",
 					"after {C:attention}Ante 4{}"
+				},
+			},
+			sleeve_fnwk_sleeve_gotequest_arcane = {
+				name = "Arcane Sleeve",
+				text = {
+					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
+					"{C:red}#2#{} {C:stand}Stand limit{}",
+					"{C:red}#3#{} consumable slot",
+				},
+			},
+			sleeve_fnwk_sleeve_gotequest_arcane_alt = {
+				name = "Arcane Sleeve",
+				text = {
+					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
+				},
+			},
+			sleeve_fnwk_sleeve_bone_shimmering = {
+				name = "Shimmering Sleeve",
+				text = {
+					"{C:attention}#1#{} free {C:green}Rerolls{} per shop",
+					"but no additional {C:green}Rerolls{}",
+				},
+			},
+			sleeve_fnwk_sleeve_bone_shimmering_alt = {
+				name = "ACT Sleeve",
+				text = {
+					"{C:attention}#1#{} {C:attention}Booster Pack{}",
+					"{C:green}Reroll{} per shop"
 				},
 			},
 		},

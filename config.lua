@@ -10,7 +10,6 @@ return {
 	['enable_AltArt'] = false,
 	['enable_InsaneStaticSeed'] = false,
 	['enable_Queer'] = true,
-	['enable_VanillaTweaks'] = true,
 	['enable_TarotSkins'] = true,
 	['enable_Title'] = true,
 	['enable_Achievements'] = true

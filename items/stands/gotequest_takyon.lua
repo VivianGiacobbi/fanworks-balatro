@@ -1,3 +1,7 @@
+SMODS.Atlas({ key = 'gotequest_takyon_alt1', path = 'stands/gotequest_takyon_alt1.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'gotequest_takyon_alt2', path = 'stands/gotequest_takyon_alt2.png', px = 71, py = 95 })
+SMODS.Atlas({ key = 'gotequest_takyon_alt3', path = 'stands/gotequest_takyon_alt3.png', px = 71, py = 95 })
+
 local rank_switches = {
     [2] = 0,
     [6] = 1,
@@ -10,7 +14,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
+        aura_colors = { 'F88888DC', 'F13133DC' },
         extra = {
             current_rank = 2,
             x_mult = 2
@@ -31,7 +35,6 @@ local consumInfo = {
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     local rank_key = '2'
     for k, v in pairs(SMODS.Ranks) do
         if v.id == card.ability.extra.current_rank then
@@ -51,9 +54,8 @@ function consumInfo.load(self, card, card_table, other_card)
         rank_pos = 1
     end
 
-    card.config.center.pos = { x = card.config.center.pos.x, y = rank_pos}
-    card.config.center.soul_pos = { x = card.config.center.soul_pos.x, y = rank_pos}
-    card:set_sprites(card.config.center)
+    card.config.center.atlas = G.ASSET_ATLAS['fnwk_gotequest_takyon'..(rank_pos > 0 and ('_alt'..rank_pos) or '')]
+    card:set_sprites()
 end
 
 function consumInfo.calculate(self, card, context)
@@ -80,9 +82,8 @@ function consumInfo.calculate(self, card, context)
         if rank_switch then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    card.config.center.pos = { x = card.config.center.pos.x, y = rank_switch}
-                    card.config.center.soul_pos = { x = card.config.center.soul_pos.x, y = rank_switch}
-                    card:set_sprites(card.config.center)
+                    card.config.center.atlas = G.ASSET_ATLAS['fnwk_gotequest_takyon'..(rank_switch > 0 and ('_alt'..rank_switch) or '')]
+                    card:set_sprites()
                     return true
                 end
             }))

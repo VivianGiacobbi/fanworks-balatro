@@ -9,7 +9,7 @@ JoJoFanworks.reset_game_globals = function(run_start)
         G.GAME.fnwk_unique_resils = 0
     end
 
-    G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback')
+    G.GAME.current_round.fnwk_paperback_rerolls = #SMODS.find_card('c_fnwk_streetlight_paperback') + (G.GAME.starting_params.fnwk_pack_rerolls or 0)
     G.GAME.current_round.fnwk_packs_rerolled = 0
     G.GAME.fnwk_rerolls_this_round = 0
     fnwk_reset_funkadelic()

@@ -227,9 +227,10 @@ ArrowAPI.loading.batch_load({
 			'crimson_cough',
 
 			-- gotequest
+			'gotequest_takyon',
 			'gotequest_born',
 			'gotequest_sweet',
-			'gotequest_takyon',
+
 
 			'culture_starboy',
 
@@ -299,16 +300,18 @@ ArrowAPI.loading.batch_load({
 	Deck = {
 		items = {
 			'fanworks_deck',
+			'fanworks_act',
 			'bone_shimmering',
 			'gotequest_arcane',
-			'fanworks_act',
 		}
 	},
 
 	Sleeve = {
 		items = {
 			'sleeve_fanworks_deck',
-			'sleeve_fanworks_act'
+			'sleeve_fanworks_act',
+			'sleeve_bone_shimmering',
+			'sleeve_gotequest_arcane',
 		}
 	},
 

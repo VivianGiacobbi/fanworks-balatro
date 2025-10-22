@@ -3,7 +3,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC' },
+        aura_colors = { '9F6BF1DC', '5D48CADC' },
         extra = {
             select_mod = 1,
         }

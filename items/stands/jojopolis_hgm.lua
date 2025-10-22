@@ -4,7 +4,7 @@ local consumInfo = {
     set = 'Stand',
     config = {
         stand_mask = true,
-        aura_colors = { 'FFFFFFDC', 'DCDCDCDC', },
+        aura_colors = { 'C92A42DC', '801336DC', },
         evolve_key = 'c_fnwk_jojopolis_hgm_cosmic',
         extra = {
             big_mod = 1,
@@ -36,9 +36,9 @@ function consumInfo.add_to_deck(self, card, from_debuff)
     if G.GAME.blind then
         blind_type = G.GAME.blind:get_type()
     end
-	
+
 	local mod = (blind_type == 'Boss' and card.ability.extra.boss_mod) or (blind_type == 'Big' and card.ability.extra.big_mod) or 0
-	
+
     if mod > 0 then
         G.hand:change_size(mod)
         card.ability.fnwk_hgm_mod = card.ability.fnwk_hgm_mod + mod
@@ -101,8 +101,8 @@ function consumInfo.calculate(self, card, context)
                     trigger = 'after',
                     func = function()
                         ArrowAPI.stands.evolve_stand(card)
-                        return true 
-                    end 
+                        return true
+                    end
                 }))
                 break;
             end
@@ -114,7 +114,7 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
     if card.ability.fnwk_hgm_mod > 0 then
         G.hand:change_size(-card.ability.fnwk_hgm_mod)
 	    card.ability.fnwk_hgm_mod = 0
-    end	
+    end
 end
 
 return consumInfo
