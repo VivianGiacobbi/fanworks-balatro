@@ -22,7 +22,7 @@ This mod features a plethora of additions to the base game, including:
 3. Once all dependencies are installed, download the latest release and extract the `fanworks` folder into your mods directory. You're all set!
 
 ## Credits
-Created by **BarrierTrio/Gote** and **Vivian Giacobbi** in collaboration with JoJo's Bizarre Fanworks
+Created by [BarrierTrio](https://github.com/BarrierTrio) and **Vivian Giacobbi** in collaboration with JoJo's Bizarre Fanworks
 
 Logo by [Redastrin](https://gamejolt.com/@Redastrin)
 
