@@ -19,7 +19,7 @@ This mod features a plethora of additions to the base game, including:
 
 2. This mod also requires [Arrow (**V1.0.0 or later**)](https://github.com/Kekulism/Arrow)
 
-Once all dependencies are installed, download the latest release and extract the `fanworks` folder into your mods directory. You're all set!
+3. Once all dependencies are installed, download the latest release and extract the `fanworks` folder into your mods directory. You're all set!
 
 ## Credits
 Created by **BarrierTrio/Gote** and **Vivian Giacobbi** in collaboration with JoJo's Bizarre Fanworks
