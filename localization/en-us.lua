@@ -3002,7 +3002,7 @@ return {
 				name = "Stand-Off",
 				text = {
 					"The battleboard sheet may have",
-					"{C:attention}broken{} all those those numbers",
+					"{C:attention}broken{} all those numbers",
 					"but in this game, we can give",
 					"you {C:red}+4s{} till the end of time.",
 					"{s:0.5} {}",
