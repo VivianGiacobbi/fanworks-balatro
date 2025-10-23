@@ -312,9 +312,6 @@ JoJoFanworks.credits_tab = function()
 										{n=G.UIT.T, config={text = ArrowAPI.credits[JoJoFanworks.id].gote, scale = text_scale*0.44*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
-										{n=G.UIT.T, config={text = ArrowAPI.credits[JoJoFanworks.id].daed, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
-									}},
-									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={
 										{n=G.UIT.T, config={text = ArrowAPI.credits[JoJoFanworks.id].keku, scale = text_scale*0.45*coding_scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}},
 									}},
 									{n=G.UIT.R, config={align = "tm", padding = 0.05}, nodes={

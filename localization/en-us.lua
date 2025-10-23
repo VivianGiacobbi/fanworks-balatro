@@ -3001,19 +3001,38 @@ return {
 			c_fnwk_fanworks_standoff = {
 				name = "Stand-Off",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"The battleboard sheet may have",
+					"{C:attention}broken{} all those those numbers",
+					"but in this game, we can give",
+					"you {C:red}+4s{} till the end of time.",
+					"{s:0.5} {}",
+					"Prep your stands! Get your cards ready,",
+					"and board the {C:fanworks}unbiased{} {C:attention}cruise ship!{}",
+					"It's time to {C:attention,s:0.7}d-{C:attention,s:0.8}d-{C:attention,s:0.9}d-{C:attention,s:1}d-{C:attention,s:1.05}d-{C:attention,s:1.1}d-{C:attention,s:1.15}d-{C:attention,s:1.2}d-{C:attention,s:1.25}duel!"
 				}
 			},
 			c_fnwk_fanworks_reread = {
 				name = "Annual Re-Read",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"You've finally finished reading",
+					"your {C:red}favorite fic{}. An all time",
+					"classic! Now, onto {C:attention}something else{}!",
+					"{s:0.5} {}",
+					"{s:0.7,C:inactive}You're not going to read the{}",
+					"{s:0.7,C:inactive}whole thing again... right?{}",
+					"{s:0.5} {}",
+					"Ah, who are you kidding?",
+					"Take us back to {C:attention}Chapter 1!{}",
+					"It ends when we say so!",
+					"{C:attention,s:1.15,E:1}Annual reread{}, baby! Wahoo!"
 				}
 			},
 			c_fnwk_fanworks_moderated = {
 				name = "Closely Moderated",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"I heard you were supposed to",
+					"{C:red}suck up{} to authority figures",
+					"but this is {C:attention,E:1}ridiculous!{}"
 				}
 			},
 			c_fnwk_fanworks_corpse = {
@@ -3022,11 +3041,11 @@ return {
 					"It's a muggy day at the beach,",
 					"and you're sitting at your ",
 					"very own {C:red}lifeguard{} perch.",
-					" ",
+					"{s:0.5} {}",
 					"The {C:gold}sun{} beats down on you.",
 					"The ocean is full of {C:dark_edition}plastic{}.",
 					"{C:attention,E:1}A child is drowning.{}",
-					" ",
+					"{s:0.5} {}",
 					"You get the feeling it's",
 					"gonna be a {C:attention}looong{} shift."
 				}
@@ -3034,13 +3053,25 @@ return {
 			c_fnwk_fanworks_comprehension = {
 				name = "Reading Comprehension",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"We expect a {C:attention}10 page report{}",
+					"on viewing this challenge",
+					"through a {C:fanworks,E:1}feminist{} lens by",
+					"{s:1.5,C:attention,E:1}Monday{}."
 				}
 			},
 			c_fnwk_fanworks_breakdown = {
 				name = "Third-Act Breakdown",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"It's the {C:attention}final arc{} and you've",
+					"got the {C:red}main villain{} {C:attention}cornered{}.",
+					"The end is in your grasp and",
+					"{C:attention}nothing{} is going to stop you",
+					"from seeing that {C:dark_edition,E:1}credits roll{}.",
+					"{s:0.5} {}",
+					"But...",
+					"{s:0.5} {}",
+					"You didn't think they'd make",
+					"it {s:1.15,C:red,E:1}easy{}, did you?"
 				}
 			},
 			c_fnwk_crimson_melting = {
@@ -3111,7 +3142,17 @@ return {
 			c_fnwk_redrising_pyrrhic = {
 				name = "Pyrrhic Victory",
 				text = {
-					"{C:attention,E:1}Dummy Text{}"
+					"You did it. You {C:attention}won{}. Every problem",
+					"in your life has been {C:attention,E:1}solved{}.",
+					"{s:0.5} {}",
+					"{s:0.7,C:inactive}...Why don't you feel like it?{}",
+					"{s:0.5} {}",
+					"There's still more who would",
+					"{C:attention}wrong{} you out there. You still",
+					"have {C:attention}work to do{}.",
+					"{s:0.5} {}",
+					"Go forth.",
+					"They're all yours, {C:attention,E:1}Doctor{}."
 				}
 			}
 		}
