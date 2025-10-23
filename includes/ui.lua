@@ -76,7 +76,7 @@ JoJoFanworks.config_tab = function()
 		'enable_TarotSkins',
 		'enable_BlindReskins',
 		'enable_Title',
-
+		'enable_Achievements',
 	}
 	local left_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }
 	local right_settings = { n = G.UIT.C, config = { align = "tm" }, nodes = {} }

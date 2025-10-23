@@ -308,3 +308,21 @@ SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
 
     return ret
 end
+
+function SMODS.challenge_is_unlocked(challenge, k)
+    local challenge_unlocked
+    if type(challenge.unlocked) == 'function' then
+        challenge_unlocked = challenge:unlocked()
+    elseif type(challenge.unlocked) == 'boolean' then
+        challenge_unlocked = challenge.unlocked
+    else
+        -- vanilla condition, only for non-smods challenges
+        challenge_unlocked = G.PROFILES[G.SETTINGS.profile].challenges_unlocked and (G.PROFILES[G.SETTINGS.profile].challenges_unlocked >= (k or 0))
+    end
+
+    if not challenge.original_mod or challenge.original_mod.id ~= 'fanworks' then
+        challenge_unlocked = challenge_unlocked or G.PROFILES[G.SETTINGS.profile].all_unlocked
+    end
+
+    return challenge_unlocked
+end

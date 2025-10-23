@@ -2811,7 +2811,7 @@ return {
 		},
 		Tag = {
             tag_fnwk_biased = {
-                name = "Biased tag",
+                name = "Biased Tag",
                 text = {
                     "Next shop Joker is",
                     "{C:attention}free{} and is {C:attention}a woman{}"
