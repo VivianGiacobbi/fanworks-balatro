@@ -12,7 +12,7 @@ local chalInfo = {
         banned_cards = function()
             local banned = {}
             for k, v in pairs(G.P_CENTERS) do
-                if (v.set == 'Joker' and v.rarity == 1) or (v.set == 'Stand' and v.config.evolved) then
+                if (v.set == 'Joker' and v.rarity ~= 1) or (v.set == 'Stand' and v.config.evolved) then
                     banned[#banned+1] = k
                 end
             end
@@ -23,6 +23,9 @@ local chalInfo = {
                 { id = 'v_arrow_plant' },
             }
         end,
+    },
+    banned_tags = {
+        {id = 'tag_rare'}
     },
     fanwork = 'fanworks'
 }
