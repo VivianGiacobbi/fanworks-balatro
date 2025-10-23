@@ -387,6 +387,7 @@ return {
 			fnwk_options_enable_Logo = "Main Menu Logo",
 			fnwk_options_enable_TarotSkins = "Tarot Card Reskins",
 			fnwk_options_enable_Title = "Title Screen Art",
+			fnwk_options_enable_Achievements = "Achievements",
 			fnwk_options_reset_achievements = "Reset Fanworks Achievements",
 
 			-- buttons

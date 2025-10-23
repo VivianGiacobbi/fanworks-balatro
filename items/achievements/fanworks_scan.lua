@@ -11,7 +11,7 @@ end
 function achInfo.unlock_condition(self, args)
     if args.type ~= 'hand_contents' then return false end
 
-    G.GAME.fnwk_hand_positions = G.GAME.fnwk_hand_positions or {}
+    G.GAME.fnwk_hand_positions = G.GAME.fnwk_hand_positions or {{}, {}, {}, {}, {}}
     for i, v in ipairs(args.cards) do
         if not G.GAME.fnwk_hand_positions[i] then
             G.GAME.fnwk_hand_positions[i] = {}

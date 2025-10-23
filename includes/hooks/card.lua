@@ -244,7 +244,7 @@ function Card:set_base(...)
     -- base function call
     local ret = ref_set_base(self, ...)
 
-    if self.playing_card then
+    if self.config.card then
         G.GAME.fnwk_id = G.GAME.fnwk_id or 1
         self.fnwk_id = G.GAME.fnwk_id
         G.GAME.fnwk_id = G.GAME.fnwk_id + 1
