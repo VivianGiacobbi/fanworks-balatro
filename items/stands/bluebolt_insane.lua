@@ -173,7 +173,7 @@ function consumInfo.calculate(self, card, context)
 		return
 	end
 
-	if context.ending_shop and not fnwk_enabled['enable_InsaneStaticSeed'] then
+	if context.ending_shop and not JoJoFanworks.current_config['enable_InsaneStaticSeed'] then
 		card:remove_predict_ui()
 		advance_pack_seeds()
 	end

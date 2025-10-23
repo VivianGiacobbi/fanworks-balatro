@@ -2,14 +2,14 @@ local deckInfo = {
     name = 'ACT Deck',
     config = {},
     unlocked = false,
-    unlock_condition = { type = 'fnwk_win_deck', deck = 'b_fnwk_fanworks_deck', stake = 6 },
+    unlock_condition = { type = 'win_deck', deck = 'b_fnwk_fanworks_deck', stake = 6 },
     discovered = true,
     artist = 'winter'
 }
 
 function deckInfo.locked_loc_vars(self, info_queue, card)
     local other_name = localize('k_unknown')
-    if G.P_CENTERS[self.unlock_condition.deck].unlocked then 
+    if G.P_CENTERS[self.unlock_condition.deck].unlocked then
         other_name = localize{type = 'name_text', key = self.unlock_condition.deck, set = 'Back'}
     end
     return {
