@@ -1,3 +1,12 @@
+local function rom_exists(name)
+   local f = io.open(JoJoFanworks.path..'includes/LuaNES/roms/'..name, "rb")
+   if f ~= nil then io.close(f) return true else return false end
+end
+
+G.FNWK_CABINET_ACTIVE = rom_exists('Donkey Kong (1986).nes') and rom_exists('Teenage Mutant Ninja Turtles II (1989).nes') and rom_exists("Dragon's Lair (E) [no-dim].nes")
+
+sendDebugMessage('cabinet active: '..tostring(G.FNWK_CABINET_ACTIVE))
+
 local jokerInfo = {
     name = "Cabinet Man",
     config = {
@@ -7,7 +16,7 @@ local jokerInfo = {
                 {key = 'Teenage Mutant Ninja Turtles II (1989)', fps = 59.94},
                 {key = "Dragon's Lair (E) [no-dim]", fps = 50},
             },
-            dollars = 8
+            dollars = G.FNWK_CABINET_ACTIVE and 8 or 12
         },
         last_music_vol = 0,
         last_sounds_vol = 0,
@@ -30,7 +39,10 @@ local jokerInfo = {
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { vars = {card.ability.extra.dollars, number_format(G.GAME.round_scores.hand.amt or 0)}}
+    return {
+        vars = {card.ability.extra.dollars, number_format(G.GAME.round_scores.hand.amt or 0)},
+        key = self.key..(G.FNWK_CABINET_ACTIVE and '' or '_alt')
+    }
 end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -46,7 +58,7 @@ function jokerInfo.check_for_unlock(self, args)
 end
 
 function jokerInfo.add_to_deck(self, card, from_debuff)
-    if G.EMULATOR_RUNNING or from_debuff then
+    if G.EMULATOR_RUNNING or from_debuff or not G.FNWK_CABINET_ACTIVE then
         return
     end
 

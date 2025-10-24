@@ -1534,6 +1534,20 @@ return {
 					"a blind requirement"
 				}
 			},
+			j_fnwk_streetlight_cabinet_alt = {
+				name = "Cabinet Man",
+				text = {
+					{
+						"Earn {C:money}$#1#{} if played hand",
+						"beats your {C:attention}high score{}",
+						"{C:inactive}(Currently{} {C:attention}#2#{} {C:inactive}Chips){}"
+					}
+				},
+				unlock = {
+					"Score {C:attention,E:1}#1#{}",
+					"a blind requirement"
+				}
+			},
 			j_fnwk_streetlight_biased = {
 				name = "Biased Joker",
 				text = {
