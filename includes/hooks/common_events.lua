@@ -112,7 +112,21 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
 		return card
 	end
 
-    return ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
+    local ret = ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
+
+    if G.GAME.modifiers.fnwk_completed_stakes_in_shop and (area == G.shop_jokers or area == G.pack_cards) then
+        local sticker_opts = {}
+        if not SMODS.Stickers['eternal'].should_apply then sticker_opts[#sticker_opts+1] = 'eternal' end
+        if not SMODS.Stickers['perishable'].should_apply then sticker_opts[#sticker_opts+1] = 'perishable' end
+        if not SMODS.Stickers['rental'].should_apply then sticker_opts[#sticker_opts+1] = 'rental' end
+
+        if #sticker_opts > 0 then
+            local sticker = pseudorandom_element(sticker_opts, 'fnwk_complted_stake'..G.GAME.round_resets.ante)
+            card['set_'..sticker](self, true)
+        end
+    end
+
+    return ret
 end
 
 

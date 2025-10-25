@@ -341,6 +341,12 @@ ArrowAPI.loading.batch_load({
 		}
 	},
 
+	Stake = {
+		items = {
+			'fanworks_completed'
+		}
+	},
+
 	Challenge = {
 		load_priority = -1,
 		items = {
