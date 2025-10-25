@@ -2951,7 +2951,8 @@ return {
 				text = {
 					"One {C:purple}Legendary{} Joker",
 					"appears in the {C:attention}shop{}",
-					"after {C:attention}Ante 4{}"
+					"after {C:attention}Ante 4{}",
+					"{s:0.5,C:inactive}Legendaries cannot be unlocked or stickered{}"
 				},
 			},
 			sleeve_fnwk_sleeve_gotequest_arcane = {

@@ -249,7 +249,6 @@ end
 --------------------------- After the Reset achievements
 ---------------------------
 
-local ref_joker_win = set_joker_win
 function set_joker_win()
 	check_for_unlock({type = 'fnwk_won_with_jokers'})
 
@@ -260,5 +259,15 @@ function set_joker_win()
 		end
 	end
 
-	return ref_joker_win()
+	for _, v in pairs(G.jokers.cards) do
+		if v.config.center_key and v.ability.set == 'Joker' and not (v.config.center.rarity == 4 and G.GAME.starting_params.fnwk_act_force_legend_ante) then
+			G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key] = G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key] or {count = 1, order = v.config.center.order, wins = {}, losses = {}, wins_by_key = {}, losses_by_key = {}}
+			if G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key] then
+				G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins = G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins or {}
+				G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins[G.GAME.stake] = (G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins[G.GAME.stake] or 0) + 1
+				G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins_by_key[SMODS.stake_from_index(G.GAME.stake)] = (G.PROFILES[G.SETTINGS.profile].joker_usage[v.config.center_key].wins_by_key[SMODS.stake_from_index(G.GAME.stake)] or 0) + 1
+			end
+		end
+	end
+	G:save_settings()
 end
