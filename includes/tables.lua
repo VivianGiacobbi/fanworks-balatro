@@ -18,6 +18,7 @@ G.fnwk_women = {
         ['j_fnwk_streetlight_industrious'] = true,
         ['j_fnwk_streetlight_methodical'] = true,
         ['j_fnwk_rubicon_thnks'] = true,
+        ['j_fnwk_rubicon_crown'] = true,
         ['j_fnwk_streetlight_resil'] = true,
         ['j_fnwk_bone_destroyer'] = true,
         ['j_fnwk_mania_jokestar'] = true,

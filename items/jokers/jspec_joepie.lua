@@ -58,7 +58,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.calculate(self, card, context)
-    if not context.fnwk_hand_upgraded or context.blueprint then
+    if not context.hand_upgraded or context.blueprint then
         return
     end
 

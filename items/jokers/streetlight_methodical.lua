@@ -51,7 +51,7 @@ function jokerInfo.calculate(self, card, context)
 			}
 		elseif not context.blueprint and not context.retrigger_joker then
 			return {
-				message = localize('k_method_'..card.ability.extra.current_hands+1)
+				message = localize('k_method_'..card.ability.extra.current_hands)
 			}
 		end
 	end

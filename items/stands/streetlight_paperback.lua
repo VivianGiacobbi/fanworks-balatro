@@ -36,7 +36,7 @@ function consumInfo.loc_vars(self, info_queue, card)
         end
     end
 
-    return { 
+    return {
         vars = {
             card.ability.extra.spec_rerolls,
             reroll_num >= paperback_num and 1 or 0,
@@ -60,12 +60,12 @@ end
 function consumInfo.calculate(self, card, context)
     if context.blueprint or context.joker_retrigger or card.debuff then return end
 
-    if context.ante_change and context.ante_end >= card.ability.extra.evolve_ante then
+    if context.ante_change and G.GAME.round_resets.ante >= card.ability.extra.evolve_ante then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
                 ArrowAPI.stands.evolve_stand(card)
-                return true 
+                return true
             end
         }))
     end
