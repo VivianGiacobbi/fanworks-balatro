@@ -1,5 +1,5 @@
 local chalInfo = {
-    consumables = {
+    consumeables = {
         { id = 'c_fnwk_crimson_cough', eternal = true}
     },
     unlocked = function(self)

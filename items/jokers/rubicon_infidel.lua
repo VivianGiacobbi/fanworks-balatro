@@ -25,10 +25,12 @@ function jokerInfo.loc_vars(self, info_queue, card)
 
     local suits = {}
     for k, v in pairs(G.GAME.fnwk_infidel_suits) do
-        suits[#suits+1] = k
+		if k ~= 'main_suit' then
+			suits[#suits+1] = k
+		end
     end
 
-	return {  vars = { suits[1],suits[2], colours = {G.C.SUITS[suits[1]], G.C.SUITS[suits[2]]}} }
+	return {  vars = { suits[1], suits[2], colours = {G.C.SUITS[suits[1]], G.C.SUITS[suits[2]]}} }
 end
 
 return jokerInfo

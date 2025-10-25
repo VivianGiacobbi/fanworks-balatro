@@ -5,8 +5,6 @@ end
 
 G.FNWK_CABINET_ACTIVE = rom_exists('Donkey Kong (1986).nes') and rom_exists('Teenage Mutant Ninja Turtles II (1989).nes') and rom_exists("Dragon's Lair (E) [no-dim].nes")
 
-sendDebugMessage('cabinet active: '..tostring(G.FNWK_CABINET_ACTIVE))
-
 local jokerInfo = {
     name = "Cabinet Man",
     config = {

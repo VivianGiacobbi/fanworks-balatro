@@ -2,7 +2,6 @@ local deckInfo = {
     name = 'Arcane Deck',
     config = {
         select_limit = 1,
-        stand_limit_mod = -1,
         consumable_slot = -1
     },
     unlocked = false,
@@ -47,7 +46,6 @@ function deckInfo.loc_vars(self, info_queue, card)
     return {
         vars = {
             self.config.select_limit,
-            self.config.stand_limit_mod,
             self.config.consumable_slot
         }
     }
@@ -55,7 +53,6 @@ end
 
 function deckInfo.apply(self, back)
     ArrowAPI.game.consumable_selection_mod(back.effect.config.select_limit)
-    G.GAME.modifiers.max_stands = math.max(0, (G.GAME.modifiers.max_stands or 1) - back.effect.config.stand_limit_mod)
 end
 
 return deckInfo

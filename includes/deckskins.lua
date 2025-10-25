@@ -2,19 +2,19 @@ SMODS.Atlas({ key = 'jojo_deck_lc', path = 'fnwk_jojo_deck_lc.png', px = 71, py 
 SMODS.Atlas({ key = 'jojo_deck_hc', path = 'fnwk_jojo_deck_hc.png', px = 71, py = 95 })
 
 local suits = {'Hearts', 'Diamonds', 'Clubs', 'Spades'}
-local faces = {"Jack", "Queen", "King"}
+local ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"}
 for _, v in ipairs(suits) do
     SMODS.DeckSkin{
         key = "fnwk_jojo_"..v:lower(),
         suit = v,
-        ranks = faces,
-        display_ranks = faces,
+        ranks = ranks,
+        display_ranks = {"Ace", "Jack", "Queen", "King"},
         palettes = {
             {
                 key = 'lc',
-                ranks = faces,
+                ranks = ranks,
                 atlas = 'fnwk_jojo_deck_lc',
-                display_ranks = faces,
+                display_ranks = {"Ace", "Jack", "Queen", "King"},
                 pos_style = 'deck',
                 colour = G.C.SUITS[v],
                 suit_icon = {
@@ -24,9 +24,9 @@ for _, v in ipairs(suits) do
             },
             {
                 key = 'hc',
-                ranks = faces,
+                ranks = ranks,
                 atlas = 'fnwk_jojo_deck_hc',
-                display_ranks = faces,
+                display_ranks = {"Ace", "Jack", "Queen", "King"},
                 pos_style = 'deck',
                 colour = G.C.SUITS[v],
                 suit_icon = {

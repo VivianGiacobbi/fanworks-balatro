@@ -1595,8 +1595,8 @@ return {
 				text = {
 					"Cards with {C:diamonds}Diamond{} suit",
 					"are retriggered when",
-					"scored but stay",
-					"{C:attention}face down{}"
+					"scored but are",
+					"drawn {C:attention}face down{}"
 				},
 				unlock = {
 					"Play a hand of {C:attention,E:1}5{}",
@@ -2911,8 +2911,7 @@ return {
 				name = "Arcane Deck",
 				text = {
 					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
-					"{C:red}#2#{} {C:stand}Stand limit{}",
-					"{C:red}#3#{} consumable slot",
+					"{C:red}#2#{} consumable slot",
 				},
 				unlock = {
 					"Use {C:attention,E:1}#1#{} unique {V:1,E:1}#2#{}",
@@ -2959,8 +2958,7 @@ return {
 				name = "Arcane Sleeve",
 				text = {
 					"{C:attention}+#1#{} consumable {C:attention}selection limit{}",
-					"{C:red}#2#{} {C:stand}Stand limit{}",
-					"{C:red}#3#{} consumable slot",
+					"{C:red}#2#{} consumable slot",
 				},
 			},
 			sleeve_fnwk_sleeve_gotequest_arcane_alt = {

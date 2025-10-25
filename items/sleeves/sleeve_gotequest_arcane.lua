@@ -1,6 +1,6 @@
 local sleeveInfo = {
     name = 'Arcane Sleeve',
-    config = { select_limit = 1, stand_limit_mod = 1 },
+    config = { select_limit = 1 },
     unlocked = false,
     unlock_condition = { deck = "b_fnwk_gotequest_arcane", stake = "stake_green" },
     origin = {
@@ -27,9 +27,6 @@ end
 sleeveInfo.apply = function(self, sleeve)
     ArrowAPI.game.consumable_selection_mod(self.config.select_limit)
 
-    if self.get_current_deck_key() == "b_fnwk_gotequest_arcane" then
-        G.GAME.modifiers.max_stands = math.max(0, (G.GAME.modifiers.max_stands or 1) - self.config.stand_limit_mod)
-    end
     CardSleeves.Sleeve.apply(sleeve)
 end
 

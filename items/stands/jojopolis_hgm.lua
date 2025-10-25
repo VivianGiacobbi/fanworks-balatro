@@ -95,7 +95,6 @@ function consumInfo.calculate(self, card, context)
     end
 
     if context.hand_upgraded then
-        sendDebugMessage('hand upgraded')
         for k, _ in pairs(context.upgraded) do
             if G.GAME.hands[k].level >= card.ability.extra.evolve_num then
                 G.E_MANAGER:add_event(Event({

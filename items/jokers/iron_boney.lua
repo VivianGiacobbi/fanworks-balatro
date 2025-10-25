@@ -188,12 +188,16 @@ function jokerInfo.calculate(self, card, context)
 
                 rand_joker.ability.initialized = false
                 rand_joker.ability.boned = false
+                local dummy_table = { x_mult = card.ability.extra.x_mult, x_mult_mod = card.ability.extra.x_mult_mod }
                 SMODS.scale_card(rand_joker, {
-                    ref_table = rand_joker.ability.extra,
+                    ref_table = dummy_table,
                     ref_value = "x_mult",
                     scalar_value = "x_mult_mod",
                     no_message = true,
                 })
+                rand_joker.ability.extra.x_mult = dummy_table.x_mult
+                rand_joker.ability.extra.x_mult_mod = dummy_table.x_mult_mod
+
                 rand_joker.ability.perishable_compat = true
                 rand_joker.ability.eternal_compat = true
                 rand_joker.ability.old_scale = card.children.center.scale

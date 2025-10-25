@@ -1,4 +1,10 @@
 
+SMODS.Blind:take_ownership('bl_final_leaf', {
+    recalc_debuff = function(self, card, from_blind)
+        return not self.disabled and card.area ~= G.jokers and card.area ~= G.consumeables
+    end
+}, true)
+
 local ref_glass_calc = SMODS.Centers.m_glass.calculate
 SMODS.Enhancement:take_ownership('glass', {
     calculate = function(self, card, context)

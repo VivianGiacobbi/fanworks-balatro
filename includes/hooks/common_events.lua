@@ -115,6 +115,14 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
     return ref_create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append, ...)
 end
 
+
+
+
+
+---------------------------
+--------------------------- act sleeve legendary force
+---------------------------
+
 local ref_shop_card = create_card_for_shop
 function create_card_for_shop(area)
     if G.GAME.starting_params.fnwk_act_force_legend_ante and not G.GAME.modifiers.fnwk_used_act_legend
@@ -140,6 +148,14 @@ function create_card_for_shop(area)
     end
 
     return ref_shop_card(area)
+end
+
+-- forces legendaries obtained via other means to not be unlocked normally
+local ref_discover_card = discover_card
+function discover_card(card)
+    card = card or {}
+    if not card.unlocked then return end
+    return ref_discover_card(card)
 end
 
 

@@ -14,7 +14,6 @@ local chalInfo = {
                     {id = 'j_dusk'},
                     {id = 'j_selzer'},
                     {id = 'j_sock_and_buskin'},
-                    {id = 'j_fnwk_mania_fragile'},
                     {id = 'j_fnwk_rubicon_fishy'},
                     {id = 'j_fnwk_bluebolt_secluded'},
                 },

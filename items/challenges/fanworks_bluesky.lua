@@ -23,9 +23,9 @@ local chalInfo = {
                 { id = 'v_arrow_plant' },
             }
         end,
-    },
-    banned_tags = {
-        {id = 'tag_rare'}
+        banned_tags = {
+            {id = 'tag_rare'}
+        },
     },
     fanwork = 'fanworks'
 }

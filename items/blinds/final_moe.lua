@@ -112,7 +112,6 @@ function blindInfo.set_blind(self)
     G.GAME.blind.block_play = true
     local delay = 0
     for i, v in ipairs(G.GAME.blind.fnwk_moe_bosses) do
-        sendDebugMessage('boss: '..v)
         local extra_blind = ArrowAPI.game.create_extra_blind(G.GAME.blind, G.P_BLINDS[v], true)
         delay = delay + (i > 1 and 3.5 or 0)
         G.E_MANAGER:add_event(Event({
