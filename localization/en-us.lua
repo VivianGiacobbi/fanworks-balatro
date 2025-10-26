@@ -1127,6 +1127,14 @@ return {
 					"when testing runs"
 				}
 			},
+			fnwk_fanworks_completed_sticker = {
+				name = "Completed Sticker",
+                text = {
+                    "Used this Joker",
+                    "to win on {X:black,C:gold}Completed",
+                    "{C:attention}Stake{} difficulty"
+                }
+			}
 		},
 		Blind = {
             bl_small = {
@@ -2918,6 +2926,16 @@ return {
 					"in one run"
 				}
 			},
+		},
+		Stake = {
+			stake_fnwk_fanworks_completed = {
+				name = 'Completed Stake',
+				text = {
+					"{C:attention}Non{}-{C:fanworks}Fanworks{} Jokers have",
+                    "{C:money}$0{} base sell value",
+                    "{s:0.8}Applies all previous Stakes"
+				}
+			}
 		},
 		Sleeve = {
 			sleeve_fnwk_sleeve_fanworks_deck = {

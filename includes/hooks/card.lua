@@ -627,6 +627,10 @@ function Card:set_cost(...)
     elseif self.config.center.key == 'j_fnwk_dark_foxglove' then
         self.sell_cost = self.ability.extra.sell_value + self.ability.extra_value
         self.sell_cost_label = self.sell_cost
+    elseif (G.GAME.modifiers.fnwk_vanilla_zero_sell and self.ability.set == 'Joker'
+    and (not self.config.center.original_mod or self.config.center.original_mod.id ~= 'fanworks')) then
+        self.sell_cost = self.ability.extra_value
+        self.sell_cost_label = self.sell_cost
     end
 
     return ret
