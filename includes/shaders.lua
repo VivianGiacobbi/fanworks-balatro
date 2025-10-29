@@ -15,11 +15,12 @@ SMODS.Shader({ key = 'blind_multimedia', path = 'multimedia.fs'})
 SMODS.Shader({ key = 'wave_warp', path = 'wave_warp.fs'})
 SMODS.Shader({ key = 'title_sub', path = 'fnwk_title_sub.fs'})
 
+SMODS.Shader({key = 'test', path = 'test.fs'})
 
 
 
 ---------------------------
---------------------------- Ghost Girl revival effect
+--------------------------- revival effect
 ---------------------------
 
 SMODS.DrawStep {
@@ -52,7 +53,7 @@ SMODS.DrawStep {
             local screen_scale = G.TILESCALE*G.TILESIZE*(self.children.center.mouse_damping or 1)*G.CANV_SCALE
             local shader_args = {}
             local hovering = (self.hover_tilt or 0)
-        
+
             shader_args[1] = { name = 'time', val = self.ability.water_time}
             shader_args[2] = { name = 'water', val = G.ASSET_ATLAS[self.ability.water_atlas].image}
             shader_args[3] = { name = 'mouse_screen_pos', val = cursor_pos }
@@ -127,7 +128,7 @@ SMODS.DrawStep:take_ownership('shadow', {
 
         if not self.no_shadow and G.SETTINGS.GRAPHICS.shadows == 'On' and self:should_draw_shadow() then
             self.shadow_height = self.states.drag.is and 0.35 or 0.1
-            
+
             if self.sprite_facing == 'front' then
                 self.children.noto_layer:draw_shader('fnwk_stand_notorious', self.shadow_height)
             else
@@ -170,7 +171,7 @@ SMODS.DrawStep:take_ownership('center', {
             local rotate_mod = 0.03*math.sin(1.219*G.TIMERS.REAL)
 
             shared_sprite.role.draw_major = self
-            if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then 
+            if (self.config.center.undiscovered and not self.config.center.undiscovered.no_overlay) or not( SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].no_overlay) then
                 shared_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
             else
                 if SMODS.UndiscoveredSprites[self.ability.set] and SMODS.UndiscoveredSprites[self.ability.set].overlay_sprite then
@@ -252,7 +253,7 @@ SMODS.DrawStep:take_ownership('arrow_stand_mask', {
         if key == 'c_fnwk_streetlight_notorious' then return end
 
         if key ~= 'c_fnwk_bone_king_farewell'
-        and (key ~= 'c_fnwk_streetlight_disturbia' or not self.ability.fnwk_disturbia_fake) then           
+        and (key ~= 'c_fnwk_streetlight_disturbia' or not self.ability.fnwk_disturbia_fake) then
             return old_stand_ds(self, layer)
         end
 
@@ -265,7 +266,7 @@ SMODS.DrawStep:take_ownership('arrow_stand_mask', {
                 G.SHADERS['arrow_stand_mask']:send("rotate_mod",rotate_mod)
                 G.SHADERS['arrow_stand_mask']:send("output_scale", 1)
                 G.SHADERS['arrow_stand_mask']:send("vertex_scale_mod", self.config.center.config.vertex_scale_mod or 1.0)
-                
+
                 self.children.floating_sprite:draw_shader('arrow_stand_mask')
             elseif self.ability.fnwk_disturbia_fake then
                 local fake = self.ability.fnwk_disturbia_fake
@@ -438,7 +439,7 @@ SMODS.DrawStep:take_ownership('greyed', {
                 b[4] = b[4] * 0.5
                 G.SHADERS['fnwk_blind_multimedia']:send("b_replace", b)
             end
-            
+
             self.children.front:draw_shader('fnwk_blind_multimedia')
         end
     end

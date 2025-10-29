@@ -1,8 +1,8 @@
 local chalInfo = {
     rules = {
         custom = {
-            {id = "fnwk_all_bosses"},
-            {id = "fnwk_all_showdown"}
+            {id = "all_bosses"},
+            {id = "all_showdown"}
         },
         modifiers = {
             {id = 'hands', value = 6},

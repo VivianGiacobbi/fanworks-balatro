@@ -27,7 +27,9 @@ end
 local ref_evaluate_play = G.FUNCS.evaluate_play
 G.FUNCS.evaluate_play = function(e)
     local last_hand = G.GAME.last_hand_played
-    G.fnwk_sweet_dreams_flag = true
+    if G.GAME.current_round.hands_played == 0 and next(SMODS.find_card('c_fnwk_gotequest_sweet')) then
+        G.fnwk_sweet_dreams_flag = true
+    end
     local ret = ref_evaluate_play(e)
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
@@ -123,8 +125,7 @@ local rank_map = {
 local ref_poker_hand_info = G.FUNCS.get_poker_hand_info
 G.FUNCS.get_poker_hand_info = function(e)
     local text, disp_text, poker_hands, scoring_hand, non_loc_disp_text = ref_poker_hand_info(e)
-    if G.fnwk_sweet_dreams_flag and #scoring_hand == 1 and next(SMODS.find_card('c_fnwk_gotequest_sweet')) then
-        G.fnwk_sweet_dreams_flag = nil
+    if G.fnwk_sweet_dreams_flag and #scoring_hand == 1 then
         local rank_key = rank_map[scoring_hand[1]:get_id()]
         if rank_key then
             local main_card = SMODS.change_base(scoring_hand[1], nil, rank_key, true)
@@ -190,6 +191,7 @@ G.FUNCS.get_poker_hand_info = function(e)
             playing_card_joker_effects(new_cards)
         end
     end
+    G.fnwk_sweet_dreams_flag = nil
 
     return text, disp_text, poker_hands, scoring_hand, non_loc_disp_text
 end

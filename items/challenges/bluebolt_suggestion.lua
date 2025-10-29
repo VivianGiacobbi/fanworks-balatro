@@ -16,6 +16,7 @@ local chalInfo = {
             if not G.playing_cards then return end
 
             if #G.playing_cards < ch.gameover.condition.start_num and not G.fnwk_suggestion_startup_flag then
+                sendDebugMessage('less than start num?')
                 return false
             elseif G.fnwk_suggestion_startup_flag then
                 if #G.playing_cards ~= ch.gameover.condition.start_num then return end
@@ -27,11 +28,14 @@ local chalInfo = {
                 if v.base.value == ch.gameover.condition.win_rank then
                     queens = queens + 1
                 elseif v.base.value ~= ch.gameover.condition.start_rank then
+                    sendDebugMessage('not start rank or queen')
                     return false
                 end
             end
 
             if queens >= ch.gameover.condition.start_num then return true end
+            sendDebugMessage('fall through')
+            return nil
         end
     },
     jokers = {

@@ -4,7 +4,7 @@ local voucherInfo = {
     cost = 10,
     requires = {'v_fnwk_rubicon_kitty'},
     unlocked = false,
-    unlock_condition = { type = 'have_edition', edition = 'negative', count = 3 },
+    unlock_condition = { edition = 'negative', count = 3 },
     origin = {
 		category = 'fanworks',
 		sub_origins = {
@@ -26,15 +26,13 @@ function voucherInfo.locked_loc_vars(self, info_queue, card)
 end
 
 function voucherInfo.check_for_unlock(self, args)
-    if not G.jokers or args.type ~= self.unlock_condition.type then
-        return false
-    end
+    if args.type ~= 'modify_jokers' and args.type ~= 'fnwk_card_added' then return false end
 
     local ed_jokers = 0
-    for k, v in ipairs(G.jokers.cards) do
+    for _, v in ipairs(G.jokers.cards) do
         if v.edition and v.edition[self.unlock_condition.edition] then ed_jokers = ed_jokers + 1 end
     end
-    
+
     return ed_jokers >= self.unlock_condition.count
 end
 

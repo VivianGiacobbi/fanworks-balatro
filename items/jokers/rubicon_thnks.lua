@@ -106,7 +106,7 @@ function jokerInfo.calculate(self, card, context)
 			no_message = true,
 		})
 
-		if card.ability.extra.chips >= 1000 then
+		if card.ability.extra.chips >= 2000 then
 			check_for_unlock({type = 'fnwk_rubicon_picture'})
 		end
 

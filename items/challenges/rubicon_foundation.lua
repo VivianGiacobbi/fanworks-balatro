@@ -9,7 +9,7 @@ local chalInfo = {
         }
     },
     gameover = {
-        endgame = 'prevent',
+        endgame_type = 'prevent',
         condition = {suits = 2, cards = 50},
         type = 'modify_deck',
         func = function(ch, endgame)
@@ -71,7 +71,7 @@ local chalInfo = {
                     { id = 'c_jojobal_steel_tusk_4' },
                     { id = 'c_jojobal_steel_d4c' },
                     { id = 'c_jojobal_lion_rock' },
-                    
+
                 }
 
                 for i = #jojobal_bans, 1, -1 do
@@ -80,7 +80,7 @@ local chalInfo = {
                     end
                 end
             end
-            
+
             return bans
         end,
     },

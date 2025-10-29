@@ -17,7 +17,7 @@ local blindInfo = {
 }
 
 function blindInfo.debuff_hand(self, cards, hands, handname, check)
-    if check then return end
+    if check or self.disabled then return end
 
     local ranks = {}
     for _, v in ipairs(cards) do

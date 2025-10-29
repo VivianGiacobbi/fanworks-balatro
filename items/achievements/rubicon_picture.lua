@@ -1,6 +1,6 @@
 local achInfo = {
     rarity = 3,
-    config = {key = 'j_fnwk_rubicon_thnks', chips = 1000},
+    config = {key = 'j_fnwk_rubicon_thnks', chips = 2000},
     origin = {
 		category = 'fanworks',
 		sub_origins = {

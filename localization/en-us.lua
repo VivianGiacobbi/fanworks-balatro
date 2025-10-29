@@ -922,7 +922,7 @@ return {
 				}
 			},
 			ach_fnwk_rubicon_picture = {
-				name = "Picture's Worth",
+				name = "American Beauty",
 				text = {
 					"Scale {C:attention}#1#{}",
 					"to {C:chips}+#2#{} Chips",

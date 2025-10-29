@@ -214,14 +214,17 @@ local born_ranks = {
 }
 
 local ref_get_straight = get_straight
-function get_straight(hand)
+function get_straight(hand, min_length, skip, wrap)
+	local ret = ref_get_straight(hand, min_length, skip, wrap)
+
 	if next(SMODS.find_card('c_fnwk_gotequest_born')) then
+		sendDebugMessage('born 2 be wild')
 		local count = SMODS.four_fingers('straight')
 		if #hand < count then
 			return {}
 		else
 			local temp_ranks = copy_table(born_ranks)
-			local ret = {}
+			ret = {}
 
 			for i=1, #hand do
 				local id = hand[i]:get_id()
@@ -238,11 +241,8 @@ function get_straight(hand)
 		end
 	end
 
-	return ref_get_straight(hand)
+	return ret
 end
-
-
-
 
 
 ---------------------------

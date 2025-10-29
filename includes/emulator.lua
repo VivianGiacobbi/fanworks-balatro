@@ -60,7 +60,7 @@ G.EMU = {
             ['right'] = Pad.RIGHT,
         }
     },
-    
+
     -- frame data to renders, expects NTSC framerate
     frames = {
         waiting = 0,
@@ -86,7 +86,7 @@ G.EMU = {
     -- sets up audio roughly equal to the NES's mono sound samples
     audio = {},
     init_audio = function(self, samplerate, bits, channels, framerate)
-        
+
         if not samplerate then samplerate = 44100 end
         if not bits then bits = 16 end
         if not channels then channels = 1 end
@@ -285,6 +285,13 @@ end
 
 local ref_update = love.update
 function love.update(dt)
+    local args = {
+        G.TIMERS.REAL/(28),
+        G.TIMERS.REAL
+    }
+    G.SHADERS['fnwk_test']:send('polychrome', args)
+    G.SHADERS['fnwk_test']:send("time", 123.33412*12.5123152%3000)
+
     local mod_dt = G.real_dt and G.real_dt or dt
 
     if G.EMU.running then
@@ -312,7 +319,7 @@ function love.update(dt)
                         if v.sub_time >= v.sub_limit then
                             v.sub_time = 0
                             v.sub_count = v.sub_count + 1
-                        end 
+                        end
                     -- or use the sub timer to increment the delay
                     elseif v.sub_count > v.delay_count then
                         v.delay_time = v.delay_time + mod_dt
@@ -324,8 +331,8 @@ function love.update(dt)
                 else
                     v.time = v.time + mod_dt
                 end
-                
-                if v.time >= v.timer_limit then 
+
+                if v.time >= v.timer_limit then
                     if k == 'startup_timer' then
                         G.EMU.game.run_state = 'run'
                     end
@@ -338,7 +345,7 @@ function love.update(dt)
             G.EMU.drawn = nil
             return
         end
-        
+
         G.EMU.frames.waiting = G.EMU.frames.waiting + (mod_dt * G.EMU.frames.fps)
         while G.EMU.frames.waiting > 1 do
             if G.EMU.game.run_state == 'shutdown' then
@@ -365,6 +372,6 @@ function love.update(dt)
 
         G.EMU.drawn = nil
     end
-    
+
     ref_update(dt)
 end

@@ -20,6 +20,7 @@ local consumInfo = {
     },
     artist = 'gar',
     blueprint_compat = false,
+    eternal_compat = true
 }
 
 function consumInfo.calculate(self, card, context)
@@ -73,7 +74,7 @@ function consumInfo.calculate(self, card, context)
         if move_chips + perma_chips <= 0 then
             return
         end
-        
+
         find_keep.ability.perma_bonus = (find_keep.ability.perma_bonus or 0) + move_chips + perma_chips
 
         local flare_card = context.blueprint_card or card
@@ -81,10 +82,10 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             func = function()
                 flare_card:juice_up()
-                return true 
+                return true
             end
         }))
-        
+
         card_eval_status_text(context.removed, 'extra', nil, nil, nil, {
 			message = localize{type='variable',key='a_chips_minus',vars={move_chips + perma_chips}},
             colour = G.C.CHIPS
@@ -96,7 +97,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             func = function()
                 flare_card:juice_up()
-                return true 
+                return true
             end
         }))
         card_eval_status_text(find_keep, 'extra', nil, nil, nil, {

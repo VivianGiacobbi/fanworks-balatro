@@ -15,6 +15,7 @@ local function get_moe_bosses(num_bosses)
     local bosses_used = copy_table(G.GAME.bosses_used)
     local chosen_bosses = {}
 
+    local has_manacle = false
     for i=1, num_bosses do
         local eligible_bosses = {}
         local valid_num = 0
@@ -37,9 +38,16 @@ local function get_moe_bosses(num_bosses)
             local _, boss = pseudorandom_element(eligible_bosses, pseudoseed('boss'))
             bosses_used[boss] = bosses_used[boss] + 1
             chosen_bosses[#chosen_bosses+1] = boss
+            if boss == 'bl_manacle' then
+                has_manacle = true
+            end
         else
             return chosen_bosses
         end
+    end
+
+    if not has_manacle then
+        chosen_bosses[1] = 'bl_manacle'
     end
 
     return chosen_bosses
@@ -145,7 +153,9 @@ function blindInfo.disable(self)
 end
 
 function blindInfo.defeat(self)
+    G.GAME.blind.in_blind = true
     ArrowAPI.game.remove_extra_blinds(G.GAME.blind)
+    G.GAME.blind.in_blind = nil
 end
 
 function blindInfo.load(self, blindTable)

@@ -72,15 +72,17 @@ function voucherInfo.calculate(self, card, context)
 
             G.GAME.round_resets.ante = G.GAME.fnwk_waystone_ante or 1
 
+            local old_editions = {}
             local old_joker_count = #G.jokers.cards
             for i = #G.jokers.cards,1, -1 do
+                old_editions[i] = G.jokers.cards[i].edition and ('e_'..G.jokers.cards[i].edition.type)
                 local c = G.jokers:remove_card(G.jokers.cards[i])
                 c:remove()
                 c = nil
             end
 
             for i=1, old_joker_count do
-                SMODS.add_card({set = 'Joker', area = G.jokers, no_edition = true, key_append = 'fnwk_binding'})
+                SMODS.add_card({set = 'Joker', area = G.jokers, edition = old_editions[i], key_append = 'fnwk_binding'})
             end
 
             local old_consumable_count = #G.consumeables.cards

@@ -12,7 +12,7 @@ local chalInfo = {
     config = {
         world_rate = 6
     },
-    on_apply = function(self)
+    apply = function(self)
         G.GAME.fnwk_stand_world_rate = self.config.world_rate
     end,
     jokers = {
