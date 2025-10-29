@@ -54,12 +54,18 @@ function consumInfo.load(self, card, card_table, other_card)
         rank_pos = 1
     end
 
-    card.config.center.atlas = G.ASSET_ATLAS['fnwk_gotequest_takyon'..(rank_pos > 0 and ('_alt'..rank_pos) or '')]
-    card:set_sprites()
+    local key = 'fnwk_gotequest_takyon'..(rank_pos > 0 and ('_alt'..rank_pos) or '')
+    card.config.center.atlas = key
+    card:set_sprites(card.config.center)
 end
 
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
+
+    if context.before and card.ability.extra.fnwk_takyon_this_hand then
+        -- in case this is not reset
+        card.ability.extra.fnwk_takyon_this_hand = nil
+    end
 
     if context.individual and context.cardarea == G.play
     and context.other_card:get_id() == card.ability.extra.current_rank then
@@ -82,8 +88,9 @@ function consumInfo.calculate(self, card, context)
         if rank_switch then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    card.config.center.atlas = G.ASSET_ATLAS['fnwk_gotequest_takyon'..(rank_switch > 0 and ('_alt'..rank_switch) or '')]
-                    card:set_sprites()
+                    local key = 'fnwk_gotequest_takyon'..(rank_switch > 0 and ('_alt'..rank_switch) or '')
+                    card.config.center.atlas = key
+                    card:set_sprites(card.config.center)
                     return true
                 end
             }))

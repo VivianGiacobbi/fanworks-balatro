@@ -82,7 +82,8 @@ function voucherInfo.calculate(self, card, context)
             end
 
             for i=1, old_joker_count do
-                SMODS.add_card({set = 'Joker', area = G.jokers, edition = old_editions[i], key_append = 'fnwk_binding'})
+                local transformed = SMODS.add_card({set = 'Joker', area = G.jokers, no_edition = true, key_append = 'fnwk_binding'})
+                transformed:set_edition(old_editions[i], true, true)
             end
 
             local old_consumable_count = #G.consumeables.cards
