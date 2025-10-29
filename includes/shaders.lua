@@ -15,8 +15,6 @@ SMODS.Shader({ key = 'blind_multimedia', path = 'multimedia.fs'})
 SMODS.Shader({ key = 'wave_warp', path = 'wave_warp.fs'})
 SMODS.Shader({ key = 'title_sub', path = 'fnwk_title_sub.fs'})
 
-SMODS.Shader({key = 'test', path = 'test.fs'})
-
 
 
 ---------------------------

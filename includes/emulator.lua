@@ -285,13 +285,6 @@ end
 
 local ref_update = love.update
 function love.update(dt)
-    local args = {
-        G.TIMERS.REAL/(28),
-        G.TIMERS.REAL
-    }
-    G.SHADERS['fnwk_test']:send('polychrome', args)
-    G.SHADERS['fnwk_test']:send("time", 123.33412*12.5123152%3000)
-
     local mod_dt = G.real_dt and G.real_dt or dt
 
     if G.EMU.running then
