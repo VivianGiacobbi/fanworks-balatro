@@ -72,7 +72,7 @@ function consumInfo.remove_from_deck(self, card, from_debuff)
         if from_debuff then
             return card.ability.fnwk_disturbia_fake:remove_from_deck_disturbia(from_debuff, true)
         end
-        
+
         card.ability.fnwk_disturbia_fake:remove()
         card.ability.fnwk_disturbia_fake = nil
     end
@@ -93,12 +93,12 @@ function consumInfo.update(self, card, dt)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.setting_blind and not card.getting_sliced and not card.debuff and not context.blueprint or context.retrigger_joker then
+    if not context.blueprint or context.retrigger_joker then
         if context.before or context.setting_blind then
             card.ability.fnwk_disturbia_played_hand = true
         end
 
-        if context.drawing_cards and card.ability.fnwk_disturbia_played_hand then
+        if context.hand_drawn and card.ability.fnwk_disturbia_played_hand then
             card.ability.fnwk_disturbia_played_hand = nil
 
             if not G.jokers or G.jokers.config.visible_card_count < 1 then
@@ -110,7 +110,7 @@ function consumInfo.calculate(self, card, context)
                 card:set_cost()
                 return
             end
-            
+
             local jokers = {}
             for _, v in ipairs(G.jokers.cards) do
                 if not v.fnwk_disturbia_joker then
@@ -141,7 +141,7 @@ function consumInfo.calculate(self, card, context)
             new_fake:add_to_deck()
             G.jokers:emplace(new_fake)
             card.ability.fnwk_disturbia_fake = new_fake
-            
+
             card.ability.extra.target_card = {
                 key = copy_target.config.center.key,
                 unique_val = copy_target.unique_val
@@ -156,7 +156,7 @@ function consumInfo.calculate(self, card, context)
             })
         end
     end
-    
+
     if card.ability.extra.target_card then
         local ret, triggered = card.ability.fnwk_disturbia_fake:calculate_joker(context)
 
