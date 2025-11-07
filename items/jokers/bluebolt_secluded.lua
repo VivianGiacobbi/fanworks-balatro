@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
-	artist = 'winter'
+	artist = 'Vivian Giacobbi',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
@@ -53,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
 	if context.other_card:is_suit('Diamonds') then
 		retriggers = card.ability.extra
 	end
-	
+
 	if retriggers > 0 then
 		return {
 			message = localize('k_again_ex'),

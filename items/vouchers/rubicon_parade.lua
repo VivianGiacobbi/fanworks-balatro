@@ -12,7 +12,8 @@ local voucherInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream'
+	artist = 'CreamSodaCrossroads',
+    programmer = 'Vivian Giacobbi',
 }
 
 function voucherInfo.loc_vars(self, info_queue, card)

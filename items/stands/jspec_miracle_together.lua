@@ -17,7 +17,8 @@ local consumInfo = {
 		},
         custom_color = 'jspec',
     },
-    artist = 'plus',
+    artist = 'Plusgal',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

@@ -19,7 +19,8 @@ local consumInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'piano',
+    artist = 'Pianolote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 
@@ -50,7 +51,7 @@ function consumInfo.calculate(self, card, context)
                 message = localize{type='variable',key='a_handsize',vars={card.ability.extra.h_size_mod}},
                 colour = G.C.STAND,
             }
-			
+
 		}
 	end
 end

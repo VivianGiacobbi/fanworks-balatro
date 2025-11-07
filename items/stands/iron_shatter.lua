@@ -14,11 +14,11 @@ local consumInfo = {
     hasSoul = true,
     fanwork = 'iron',
     blueprint_compat = true,
-    artist = 'cream'
+    artist = 'CreamSodaCrossroads',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
     return { vars = { card.ability.extra.x_mult, G.GAME.probabilities.normal, card.ability.extra.chance }}
 end
 
@@ -34,7 +34,7 @@ function consumInfo.calculate(self, card, context)
             repetitions = card.ability.extra.reps,
             card = flare_card,
         }
-	end 
+	end
 end
 
 return consumInfo

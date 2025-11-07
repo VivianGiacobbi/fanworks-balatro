@@ -16,6 +16,8 @@ local jokerInfo = {
 		},
         custom_color = 'careless',
     },
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -25,14 +27,14 @@ end
 function jokerInfo.add_to_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
         ArrowAPI.game.set_center_discount(card, card.ability.extra, true, 'Booster')
-        return true 
+        return true
     end}))
 end
 
 function jokerInfo.remove_from_deck(self, card, from_debuff)
     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
         ArrowAPI.game.clear_discount(card)
-        return true 
+        return true
     end}))
 end
 

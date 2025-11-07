@@ -12,6 +12,7 @@ local chalInfo = {
             {id = 'dollars', value = 19},
         }
     },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

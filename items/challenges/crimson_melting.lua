@@ -84,7 +84,8 @@ local chalInfo = {
 			'crimson',
 		},
         custom_color = 'crimson',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

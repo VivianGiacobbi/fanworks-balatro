@@ -69,7 +69,8 @@ local chalInfo = {
 			'streetlight',
 		},
         custom_color = 'streetlight',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

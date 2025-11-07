@@ -26,7 +26,8 @@ local jokerInfo = {
 		},
 		custom_color = 'bone',
 	},
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

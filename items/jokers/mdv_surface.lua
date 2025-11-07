@@ -17,7 +17,8 @@ local jokerInfo = {
 		},
         custom_color = 'mdv',
     },
-	artist = 'durandal',
+	artist = 'Durandal',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

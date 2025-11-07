@@ -13,7 +13,8 @@ local jokerInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream',
+	artist = 'CreamSodaCrossroads',
+	programmer = 'Vivian Giacobbi',
 }
 
 return jokerInfo

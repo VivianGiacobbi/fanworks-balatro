@@ -17,7 +17,8 @@ local jokerInfo = {
 		},
         custom_color = 'gotequest',
     },
-	artist = 'gote'
+	artist = 'BarrierTrio/Gote',
+	programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -57,8 +58,8 @@ function jokerInfo.calculate(self, card, context)
 				rand_card:flip()
 				play_sound('card1')
 				rand_card:juice_up(0.3, 0.3)
-				return true 
-			end 
+				return true
+			end
 		}))
 		G.E_MANAGER:add_event(Event({
 			trigger = 'after',
@@ -66,7 +67,7 @@ function jokerInfo.calculate(self, card, context)
 			func = function()
 				rand_card:set_sprites(rand_card.config.center)
 				rand_card.front_hidden = rand_card:should_hide_front()
-				return true 
+				return true
 			end
 		}))
 		G.E_MANAGER:add_event(Event({

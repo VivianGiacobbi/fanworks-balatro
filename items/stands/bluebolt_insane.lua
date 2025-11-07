@@ -26,7 +26,8 @@ local consumInfo = {
 		custom_color = 'bluebolt',
 	},
     blueprint_compat = false,
-    artist = 'squire',
+    artist = 'SquireTilde',
+	programmer = 'Vivian Giacobbi',
 }
 
 local function create_logic(type, legendary, rarity, soulable, forced_key, key_append)

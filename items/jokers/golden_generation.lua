@@ -16,7 +16,8 @@ local jokerInfo = {
 		},
         custom_color = 'golden',
     },
-    artist = 'reda'
+    artist = 'Redastrin',
+    programmer = 'Vivian Giacobbi'
 }
 
 local function fanworks_cards(card)

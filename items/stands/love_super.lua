@@ -21,7 +21,8 @@ local consumInfo = {
         custom_color = 'love',
     },
     blueprint_compat = true,
-    artist = 'winter',
+    programmer = 'Vivian Giacobbi',
+    artist = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -37,7 +38,7 @@ function consumInfo.loc_vars(self, info_queue, card)
         main_end = {{
             n=G.UIT.C,
             config={align = "bm", padding = 0.1},
-            nodes={{ 
+            nodes={{
                 n=G.UIT.O, config={object = DynaText({
                     string = {rank_str},
                     colours = {G.C.DARK_EDITION},
@@ -49,7 +50,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 			}}
 		}}
     end
-    
+
     return {
         main_end = main_end
     }

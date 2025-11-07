@@ -23,7 +23,8 @@ local consumInfo = {
     },
     unlocked = false,
     discovered = false,
-    artist = 'wario',
+    artist = 'MightyKingWario',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
     eternal_compat = true,
 }

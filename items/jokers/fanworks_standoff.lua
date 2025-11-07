@@ -15,7 +15,8 @@ local jokerInfo = {
 	eternal_compat = true,
 	perishable = true,
 	fanwork = 'fanworks',
-    artist = 'gote'
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi'
 }
 
 local function get_stand_state()
@@ -36,7 +37,7 @@ end
 
 function jokerInfo.loc_vars(self, info_queue, card)
     local state = get_stand_state()
-    return { 
+    return {
         vars = {
             card.ability.extra.states.none.value,
             card.ability.extra.states.stand.value,

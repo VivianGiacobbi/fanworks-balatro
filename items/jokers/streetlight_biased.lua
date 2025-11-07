@@ -17,7 +17,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy',
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 }
 
 local function debuff_helper(card)
@@ -28,7 +29,7 @@ local function debuff_helper(card)
 
 	SMODS.calculate_context({ debuff_card = card, ignore_debuff = true })
 	local flags = SMODS.calculate_context({ debuff_card = card, ignore_debuff = true })
-	if flags.prevent_debuff then 
+	if flags.prevent_debuff then
 		if card.debuff then card:set_debuff(false) end
 		return
 	elseif flags.debuff then
@@ -53,7 +54,7 @@ function jokerInfo.calculate(self, card, context)
 			func = function()
 				for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
 				for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
-				return true 
+				return true
 			end
 		}))
 	end
@@ -77,11 +78,11 @@ end
 function jokerInfo.add_to_deck(self, card, from_debuff)
 	card.ability.fnwk_biased_removed = nil
 	G.E_MANAGER:add_event(Event({
-		trigger = 'after', 
+		trigger = 'after',
 		func = function()
 			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
     		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
-        	return true 
+        	return true
     	end
 	}))
 end
@@ -93,7 +94,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 		func = function()
 			for _, v in ipairs(G.playing_cards) do debuff_helper(v) end
     		for _, v in ipairs(G.jokers.cards) do debuff_helper(v) end
-        	return true 
+        	return true
     	end
 	}))
 end

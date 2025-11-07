@@ -21,7 +21,8 @@ local consumInfo = {
 		},
         custom_color = 'sunshine',
     },
-    artist = 'durandal',
+    artist = 'Durandal',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

@@ -25,7 +25,8 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
-	artist = 'gar'
+	artist = 'GarPlatinum',
+	programmer = 'Vivian Giacobbi'
 }
 
 local function transform_sludgemass(card, to_sludge)

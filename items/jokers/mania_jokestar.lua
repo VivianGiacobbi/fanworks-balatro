@@ -20,7 +20,8 @@ local jokerInfo = {
 		},
         custom_color = 'mania',
     },
-	artist = 'winter',
+	artist = 'Vivian Giacobbi',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -35,7 +36,7 @@ function jokerInfo.calculate(self, card, context)
 		local to_debuff = {}
 		for k, v in ipairs(context.scoring_hand) do
 			if not v.debuff and SMODS.has_enhancement(v, 'm_wild') then
-				if SMODS.pseudorandom_probability(card, 'fnwk_mania_cubist', 1, card.ability.extra.chance, 'fwnk_mania_cubist') then 
+				if SMODS.pseudorandom_probability(card, 'fnwk_mania_cubist', 1, card.ability.extra.chance, 'fwnk_mania_cubist') then
 					v.cubist_flagged = true
 				else
 					to_debuff[#to_debuff+1] = v

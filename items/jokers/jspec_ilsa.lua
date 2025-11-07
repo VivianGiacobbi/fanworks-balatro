@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
         custom_color = 'jspec',
     },
-    artist = 'mal'
+    artist = 'Qrowscant',
+    programmer = 'Vivian Giacobbi'
 }
 
 -- update multi-edition status for cards that are already in the deck or joker slots
@@ -94,10 +95,10 @@ function jokerInfo.set_sprites(self, card, front)
 
     --[[
     card.children.particles = Particles(
-        card.T.x, 
-        card.T.y, 
-        0, 
-        0, 
+        card.T.x,
+        card.T.y,
+        0,
+        0,
         {
             timer_type = 'TOTAL',
             timer = 0.1,
@@ -161,7 +162,7 @@ function jokerInfo.draw(self, card, layer)
     star_2.T.y = card_offset_y + (math.sin(star_2_alpha) * card.T.h / 2 * 0.9) - star_2.T.h / 2
 
     sun.T.x = card_offset_x + (math.cos(sun_alpha) * card.T.w / 2 * 0.8) - sun.T.w / 2
-    sun.T.y = card_offset_y + (math.sin(sun_alpha) * card.T.h / 2 * 0.8) - sun.T.h / 2 
+    sun.T.y = card_offset_y + (math.sin(sun_alpha) * card.T.h / 2 * 0.8) - sun.T.h / 2
 end
 
 return jokerInfo

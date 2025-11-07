@@ -3,6 +3,8 @@ local sleeveInfo = {
     config = { fnwk_jokers_rate = 2, fnwk_jokers_rate_alt = 1.5, },
     unlocked = false,
     unlock_condition = { deck = "b_fnwk_fanworks_deck", stake = "stake_green" },
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Kekulism',
 }
 
 sleeveInfo.loc_vars = function(self, info_queue)

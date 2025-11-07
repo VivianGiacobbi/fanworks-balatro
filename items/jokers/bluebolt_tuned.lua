@@ -33,7 +33,8 @@ local jokerInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
-	artist = 'winter',
+	artist = 'Vivian Giacobbi',
+	programmer = 'Vivian Giacobbi'
 }
 
 local function update_tuned_mode(card)
@@ -63,7 +64,7 @@ local function update_tuned_mode(card)
 				instant = true
 			}
 		})
-	
+
 	elseif card.ability.last_idx == #card.area.cards then
 		if card.ability.tuned_mode == 'mult' then
 			return

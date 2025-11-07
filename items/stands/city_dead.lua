@@ -18,7 +18,8 @@ local consumInfo = {
 		},
         custom_color = 'city',
     },
-    artist = 'jester',
+    artist = 'Jester',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

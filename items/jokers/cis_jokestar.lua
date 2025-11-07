@@ -22,7 +22,8 @@ local jokerInfo = {
 		},
         custom_color = 'cis',
     },
-	artist = 'gote'
+	artist = 'BarrierTrio/Gote',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -74,7 +75,7 @@ function jokerInfo.calculate(self, card, context)
 			},
 			no_message = (card.ability.extra.remaining - card.ability.extra.remain_mod <= 0)
 		})
-		if card.ability.extra.remaining <= 0 then 
+		if card.ability.extra.remaining <= 0 then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					play_sound('tarot1')

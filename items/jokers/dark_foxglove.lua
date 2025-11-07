@@ -19,11 +19,15 @@ local jokerInfo = {
 		},
         custom_color = 'dark',
     },
-    artist = 'winter'
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue + 1] = { set = "Other", key = "eternal" }
+    if not card.ability.eternal then
+        info_queue[#info_queue + 1] = { set = "Other", key = "eternal" }
+    end
+
     return { vars = { card.ability.extra.mult, card.ability.extra.mult_mod } }
 end
 

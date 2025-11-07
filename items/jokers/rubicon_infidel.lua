@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream',
+	artist = 'CreamSodaCrossroads',
+	programmer = 'Vivian Giacobbi',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

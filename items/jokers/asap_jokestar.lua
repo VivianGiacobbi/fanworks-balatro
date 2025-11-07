@@ -20,7 +20,8 @@ local jokerInfo = {
 		},
 		custom_color = 'asap',
 	},
-	artist = 'winter',
+	artist = 'Vivian Giacobbi',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

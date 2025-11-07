@@ -25,7 +25,8 @@ local jokerInfo = {
 		},
         custom_color = 'city',
     },
-    artist = 'mal'
+    artist = 'Qrowscant',
+    programmer = 'Vivian Giacobbi'
 }
 
 local function joker_name_mod(card)
@@ -92,7 +93,7 @@ function jokerInfo.set_sprites(self, card, front)
     card.children.city_layer3 = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 6, y = 0})
 	card.children.city_layer3:set_role(major_role)
 	card.children.city_layer3.custom_draw = true
-    
+
     -- foreground
     card.children.city_fg = Sprite(t.x, t.y, t.w, t.h, atlas, {x = 7, y = 0})
 	card.children.city_fg:set_role({
@@ -135,7 +136,7 @@ function jokerInfo.update(self, card, dt)
     -- lerping right
 	if card.ability.city_dir > 0 and card.ability.city_lerp < 1 then
 		card.ability.city_lerp = card.ability.city_lerp + G.real_dt * card.ability.scroll_mod
-		
+
 		if (card.ability.city_lerp >= 1) then
 			card.ability.city_lerp = 1
 			card.ability.city_dir = -1
@@ -149,7 +150,7 @@ function jokerInfo.update(self, card, dt)
 			card.ability.city_lerp = 0
 			card.ability.city_dir = 1
 		end
-	end    
+	end
 end
 
 function jokerInfo.draw(self, card, layer)
@@ -168,7 +169,7 @@ function jokerInfo.draw(self, card, layer)
     else
         scroll_dist = -1 * scroll_dist * (0.5 - lerp_val) / 0.5
     end
-    
+
     -- first layer
     card.children.city_layer1.T = copy_table(card.T)
     card.children.city_layer1.VT = copy_table(card.VT)
@@ -185,7 +186,7 @@ function jokerInfo.draw(self, card, layer)
     card.children.city_layer3.VT = copy_table(card.VT)
     card.children.city_layer3.VT.x = card.VT.x + scroll_dist * card.ability.layer3_mod
     card.children.city_layer3:draw_shader('dissolve')
-    
+
     -- foreground
     -- function Sprite:draw_shader(_shader, _shadow_height, _send, _no_tilt, other_obj, ms, mr, mx, my, custom_shader, tilt_shadow)
     card.children.city_fg:draw_shader('dissolve')

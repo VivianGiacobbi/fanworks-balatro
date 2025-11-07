@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'crimson',
     },
-    artist = 'gar'
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

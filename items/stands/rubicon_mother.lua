@@ -19,7 +19,8 @@ local consumInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream',
+	artist = 'CreamSodaCrossroads',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -41,10 +42,10 @@ function consumInfo.calculate(self, card, context)
                     v:juice_up()
                     return true
                 end
-            })) 
+            }))
         end
     end
-    if steels > 0 then 
+    if steels > 0 then
         return {
             message = localize('k_steel'),
             colour = G.C.STAND,

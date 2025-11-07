@@ -21,7 +21,8 @@ local consumInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'piano',
+    artist = 'Pianolote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -46,7 +47,7 @@ function consumInfo.calculate(self, card, context)
     end
 
     if context.setting_blind then
-        if card.ability.extra.current_rounds + 1 >= card.ability.extra.rounds_val then		
+        if card.ability.extra.current_rounds + 1 >= card.ability.extra.rounds_val then
             local flare_card = context.blueprint_card or card
             ArrowAPI.stands.flare_aura(flare_card, 0.5)
             card_eval_status_text(flare_card, 'extra', nil, nil, nil, {message = localize('k_method_4')})

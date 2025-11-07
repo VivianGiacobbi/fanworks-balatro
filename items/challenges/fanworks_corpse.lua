@@ -11,7 +11,8 @@ local chalInfo = {
             {id = 'c_jojobal_spec_mask'},
             {id = 'c_fnwk_spec_impulse'},
         },
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

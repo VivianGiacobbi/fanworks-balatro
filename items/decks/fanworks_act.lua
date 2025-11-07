@@ -4,7 +4,8 @@ local deckInfo = {
     unlocked = false,
     unlock_condition = { type = 'win_deck', deck = 'b_fnwk_fanworks_deck', stake = 6 },
     discovered = true,
-    artist = 'winter'
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 function deckInfo.locked_loc_vars(self, info_queue, card)

@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'leafy',
+    artist = 'Leafgilly',
+    programmer = 'Vivian Giacobbi',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

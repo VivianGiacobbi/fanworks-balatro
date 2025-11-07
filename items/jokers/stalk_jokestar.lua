@@ -21,7 +21,8 @@ local jokerInfo = {
 		},
         custom_color = 'stalk',
     },
-	artist = 'gote',
+	artist = 'BarrierTrio/Gote',
+	programmer = 'BarrierTrio/Gote'
 }
 
 local function secret_hands_played()

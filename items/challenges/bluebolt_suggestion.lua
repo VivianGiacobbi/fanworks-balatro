@@ -111,7 +111,8 @@ local chalInfo = {
 			'bluebolt',
 		},
         custom_color = 'bluebolt',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

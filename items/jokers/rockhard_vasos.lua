@@ -19,7 +19,8 @@ local jokerInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+	programmer = 'Vivian Giacobbi',
 	alt_art = true,
 }
 

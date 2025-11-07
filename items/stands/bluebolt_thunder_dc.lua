@@ -21,6 +21,8 @@ local consumInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
+    artist = 'SquireTilde',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -49,7 +51,7 @@ function consumInfo.calculate(self, card, context)
             extra = {
                 x_mult = card.ability.extra.x_mult,
                 message_card = context.other_card
-            }    
+            }
         }
     end
 
@@ -67,8 +69,8 @@ function consumInfo.calculate(self, card, context)
             func = function()
                 ArrowAPI.stands.evolve_stand(card, localize('k_stand_revert'))
                 card.ability.evolved = false
-                return true 
-            end 
+                return true
+            end
         }))
     end
 end

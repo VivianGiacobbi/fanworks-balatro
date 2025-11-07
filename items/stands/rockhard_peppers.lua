@@ -15,7 +15,8 @@ local consumInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 
@@ -24,7 +25,7 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.calculate(self, card, context)
-    if context.blueprint or context.retrigger_joker or context.debuff then return end 
+    if context.blueprint or context.retrigger_joker or context.debuff then return end
 
     if context.check_enhancement and not (context.other_card.area == G.deck or context.other_card.area == G.discard) then
 		if context.other_card.config.center.key ~= 'c_base' then
@@ -32,7 +33,7 @@ function consumInfo.calculate(self, card, context)
                 ['m_wild'] = true,
             }
         end
-	end 
+	end
 end
 
 return consumInfo

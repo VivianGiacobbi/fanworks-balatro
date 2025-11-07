@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
 }
 
 function jokerInfo.calculate(self, card, context)
@@ -24,7 +25,7 @@ function jokerInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'before',
             delay = 0.0,
-            func = function() 
+            func = function()
                 local newTarot = create_card('Tarot', G.consumeables, nil, nil, nil, nil,'c_fool', 'car')
                 newTarot:set_edition({negative = true}, true)
                 newTarot:add_to_deck()

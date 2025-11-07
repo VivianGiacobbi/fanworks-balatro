@@ -20,16 +20,17 @@ local jokerInfo = {
 		},
         custom_color = 'gotequest',
     },
-	artist = 'cejai',
+	artist = 'SegaciousCejai',
+    programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { 
-        vars = { 
+    return {
+        vars = {
             card.ability.extra.x_mult_mod,
             card.ability.extra.x_mult_max,
             card.ability.extra.x_mult
-        } 
+        }
     }
 end
 
@@ -54,7 +55,7 @@ function jokerInfo.calculate(self, card, context)
         end
 
         G.E_MANAGER:add_event(Event({
-            func = function() 
+            func = function()
                 card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
                 card:set_sprites(card.config.center)
                 return true

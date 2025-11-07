@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
         custom_color = 'glass',
     },
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -31,7 +32,7 @@ function jokerInfo.set_sprites(self, card, front)
     end
 
     card.children.center:set_sprite_pos({x = 1, y = 0})
-    
+
     local atlas = G.ASSET_ATLAS[self.atlas]
     local role = {
 		role_type = 'Minor',
@@ -43,7 +44,7 @@ function jokerInfo.set_sprites(self, card, front)
 		scale_bond = 'Strong',
 		draw_major = card
 	}
-    
+
     card.children.glass_pipes_back = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, atlas, { x = 2, y = 0})
 	card.children.glass_pipes_back:set_role(role)
 	card.children.glass_pipes_back.custom_draw = true
@@ -105,7 +106,7 @@ function jokerInfo.draw(self, card, layer)
     if not card.children.glass_pipes_back or not card.children.glass_josephine or not card.children.glass_pipes_front then
         return
     end
-    
+
     G.SHADERS['fnwk_wave_warp']:send('wave_time', G.TIMERS.REAL)
     G.SHADERS['fnwk_wave_warp']:send('wave_t', 1)
     G.SHADERS['fnwk_wave_warp']:send('mask_offset', 0.5)

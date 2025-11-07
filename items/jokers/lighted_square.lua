@@ -20,7 +20,7 @@ local jokerInfo = {
 		},
         custom_color = 'lighted',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -39,7 +39,7 @@ end
 
 function jokerInfo.calculate(self, card, context)
     if context.blueprint or card.debuff then return end
-    
+
     if context.destroy_card and #context.scoring_hand == card.ability.extra.hand_size
     and context.destroy_card == context.scoring_hand[#context.scoring_hand] then
         return {

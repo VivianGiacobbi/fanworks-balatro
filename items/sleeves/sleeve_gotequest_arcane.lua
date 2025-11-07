@@ -10,6 +10,8 @@ local sleeveInfo = {
 		},
         custom_color = 'gotequest',
     },
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 sleeveInfo.loc_vars = function(self, info_queue)

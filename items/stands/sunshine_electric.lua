@@ -16,7 +16,8 @@ local consumInfo = {
 		},
         custom_color = 'sunshine',
     },
-    artist = 'gar',
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

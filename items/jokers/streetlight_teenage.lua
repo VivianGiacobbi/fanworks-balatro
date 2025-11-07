@@ -13,7 +13,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy'
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 }
 
 return jokerInfo

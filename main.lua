@@ -119,41 +119,50 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_upto0 = HEX('FF3C38'),
 })
 
-ArrowAPI.credits.add_credits(JoJoFanworks, {
-    algebra = 'AlgebraFalcon',
-    shaft = 'AllShaftsFall',
-    gote = 'BarrierTrio/Gote',
-    cody = 'Cody Savoie',
-    cream = 'CreamSodaCrossroads',
-    doopo = 'Doopo',
-    durandal = 'Durandal',
-    fizzy = 'FizzyWizard',
-    gar = 'GarPlatinum',
-    jester = 'Jester',
-    jin = 'JorgeHernandez',
-    keku = 'Kekulism',
-    leafy = 'Leafgilly',
-    mae = 'MildlyAnxious',
-    monky = 'Monky4Real',
-    piano = 'Pianolote',
-    pink = 'pinkthorne',
-    plus = 'plusgal',
-    polyg = 'polygonate',
-    poul = 'Poul Shmidt',
-    mal = 'qrowscant',
-    reda = 'Redastrin',
-    android = 'sadlyandroid',
-    cejai = 'SagaciousCejai',
-    cringe = 'Stupisms',
-    wario = 'MightyKingWario',
-    winter = 'TheWinterComet',
-    tos = 'TOS',
-    torch = 'torch_dreemurr',
-    vivi = 'Vivian Giacobbi',
-    squire = 'SquireTilde',
-    abrams = 'Nico Abrams (LuaNES)',
-    araki = 'Hirohiko Araki',
-	luckyland = 'Lucky Land Communications',
+ArrowAPI.credits.use_credits(JoJoFanworks, {
+    matrix = {col = 20, row = 10},
+    {
+        key = 'direction',
+        title_colour = G.C.YELLOW,
+        pos_start = {col = 0, row = 0},
+        pos_end = {col = 5, row = 10},
+        contributors = {
+            ["BarrierTrio/Gote"] = true,
+            ["Vivian Giacobbi"] = true,
+        }
+    },
+    {
+        key = 'artist',
+        title_colour = G.C.ETERNAL,
+        pos_start = {col = 5, row = 0},
+        pos_end = {col = 12, row = 10}
+    },
+    {
+        key = 'programmer',
+        title_colour = G.C.GOLD,
+        pos_start = {col = 12, row = 0},
+        pos_end = {col = 16, row = 6},
+    },
+    {
+        key = 'shader',
+        title_colour = G.C.DARK_EDITION,
+        pos_start = {col = 16, row = 0},
+        pos_end = {col = 20, row = 6},
+        contributors = {
+            ["Vivian Giacobbi"] = true,
+        }
+    },
+    {
+        key = 'special',
+        title_colour = G.C.GREEN,
+        pos_start = {col = 12, row = 6},
+        pos_end = {col = 20, row = 10},
+        contributors = {
+            ["Hirohiko Araki"] = true,
+            ["LuckyLand Communications"] = true,
+            ["Nico Abrams (LuaNES)"] = true,
+        }
+    },
 })
 
 local includes = {

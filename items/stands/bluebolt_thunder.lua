@@ -24,7 +24,8 @@ local consumInfo = {
 		custom_color = 'bluebolt',
 	},
     blueprint_compat = true,
-    artist = 'squire',
+    artist = 'SquireTilde',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
@@ -37,14 +38,14 @@ function consumInfo.loc_vars(self, info_queue, card)
     }
 end
 
-function consumInfo.calculate(self, card, context)    
+function consumInfo.calculate(self, card, context)
     if not context.blueprint and not context.joker_retrigger and context.after and card.ability.extra.evolve_procs >= card.ability.extra.evolve_num then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
                 ArrowAPI.stands.evolve_stand(card, localize('k_stand_advance'))
-                return true 
-            end 
+                return true
+            end
         }))
     end
 
@@ -63,7 +64,7 @@ function consumInfo.calculate(self, card, context)
         if not context.blueprint then
             card.ability.extra.evolve_procs = card.ability.extra.evolve_procs + 1
         end
-        
+
         local flare_card = context.blueprint_card or card
         return {
             func = function()
@@ -72,7 +73,7 @@ function consumInfo.calculate(self, card, context)
             extra = {
                 Xmult = card.ability.extra.x_mult,
                 message_card = context.other_card
-            }    
+            }
         }
     end
 end

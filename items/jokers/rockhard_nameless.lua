@@ -24,7 +24,8 @@ local jokerInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
 }
 
 local function levels_over_one()
@@ -54,7 +55,7 @@ function jokerInfo.calculate(self, card, context)
     end
 
     if context.blueprint then return end
-    
+
 end
 
 return jokerInfo

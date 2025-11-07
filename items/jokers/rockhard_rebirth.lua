@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
     alt_art = true
 }
 
@@ -45,12 +46,12 @@ function jokerInfo.calculate(self, card, context)
         local levels = #tick_cards
         if levels > 0 then
             for i = 1, levels do
-                G.E_MANAGER:add_event(Event({ 
+                G.E_MANAGER:add_event(Event({
                     trigger = 'before',
                     delay = 0.2,
                     func = function()
                         tick_cards[i]:juice_up()
-                    return true 
+                    return true
                 end }))
             end
             return {

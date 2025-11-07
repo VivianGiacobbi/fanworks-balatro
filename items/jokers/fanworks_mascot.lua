@@ -7,7 +7,8 @@ local jokerInfo = {
 	blueprint_compat = false,
 	eternal_compat = true,
 	perishable_compat = true,
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -19,7 +20,7 @@ function jokerInfo.calculate(self, card, context)
     if context.blueprint then
         return
     end
-    
+
     if context.check_enhancement and not (context.other_card.area == G.deck or context.other_card.area == G.discard) then
 		if context.other_card.config.center.key == 'm_lucky' then
             return {
@@ -30,7 +31,7 @@ function jokerInfo.calculate(self, card, context)
                 ['m_lucky'] = true,
             }
         end
-	end 
+	end
 end
 
 return jokerInfo

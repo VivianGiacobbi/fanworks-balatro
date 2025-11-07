@@ -13,7 +13,8 @@ local blindInfo = {
 		},
         custom_color = 'bluebolt',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function blindInfo.set_blind(self)

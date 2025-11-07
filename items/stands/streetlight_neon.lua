@@ -22,12 +22,13 @@ local consumInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'piano',
+    artist = 'Pianolote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { 
+    return {
         vars = {
             localize{type = 'name_text', set = 'Enhanced', key = card.ability.extra.enhancement},
             card.ability.extra.h_dollars_mod,
@@ -54,13 +55,13 @@ function consumInfo.calculate(self, card, context)
     end
 
     if context.blueprint or context.retrigger_joker then return end
-	
+
 	if context.ending_shop then
 		card.ability.extra.current_spend = 0
 	end
 
 	if card.ability.extra.current_spend < card.ability.extra.evolve_num then
-		if context.buying_card or context.open_booster then 
+		if context.buying_card or context.open_booster then
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.card.cost
 		elseif context.reroll_shop then
 			card.ability.extra.current_spend = card.ability.extra.current_spend + context.cost
@@ -71,8 +72,8 @@ function consumInfo.calculate(self, card, context)
                 trigger = 'after',
                 func = function()
                     ArrowAPI.stands.evolve_stand(card)
-                    return true 
-                end 
+                    return true
+                end
             }))
 		end
 	end

@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
         custom_color = 'jojojidai',
     },
-    artist = 'jester'
+    artist = 'Jester',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -30,7 +31,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
         vars = {
             card.ability.extra.x_mult_mod,
             card.ability.extra.hand_compare,
-            1 + (card.ability.extra.hand_compare - G.hand.config.card_limit) * card.ability.extra.x_mult_mod 
+            1 + (card.ability.extra.hand_compare - G.hand.config.card_limit) * card.ability.extra.x_mult_mod
         }
     }
 end

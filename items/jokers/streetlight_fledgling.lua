@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy',
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 	alt_art = true
 }
 

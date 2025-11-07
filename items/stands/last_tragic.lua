@@ -19,7 +19,8 @@ local consumInfo = {
 		},
         custom_color = 'last',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -44,7 +45,7 @@ function consumInfo.calculate(self, card, context)
     end
 
     local change_cards = {}
-    for _, v in ipairs(context.full_hand) do     
+    for _, v in ipairs(context.full_hand) do
         if v.base.value ~= card.ability.extra.contain_rank then
             change_cards[#change_cards+1] = v
             G.E_MANAGER:add_event(Event({
@@ -54,8 +55,8 @@ function consumInfo.calculate(self, card, context)
                     v:flip()
                     play_sound('card1')
                     v:juice_up(0.3, 0.3)
-                    return true 
-                end 
+                    return true
+                end
             }))
         end
     end
@@ -71,22 +72,22 @@ function consumInfo.calculate(self, card, context)
             delay = 0.1,
             func = function()
                 SMODS.modify_rank(v, card.ability.extra.rank_mod)
-                return true 
+                return true
             end
         }))
     end
-    
+
     -- do flip back over
     for _, v in ipairs(change_cards) do
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.25,
-            func = function() 
+            func = function()
                 v:flip()
                 play_sound('tarot2', 1, 0.6)
                 v:juice_up(0.3, 0.3)
-                return true 
-            end 
+                return true
+            end
         }))
     end
 end

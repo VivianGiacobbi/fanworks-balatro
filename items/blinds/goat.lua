@@ -13,7 +13,8 @@ local blindInfo = {
 		},
         custom_color = 'gotequest',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function blindInfo.debuff_hand(self, cards, hands, handname, check)

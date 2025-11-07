@@ -20,7 +20,8 @@ local jokerInfo = {
 		},
         custom_color = 'jspec',
     },
-    artist = 'mal',
+    artist = 'Qrowscant',
+    programmer = 'Vivian Giacobbi'
 }
 
 local function get_lowest_planet()

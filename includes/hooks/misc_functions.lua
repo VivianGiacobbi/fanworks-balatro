@@ -218,22 +218,21 @@ function get_straight(hand, min_length, skip, wrap)
 	local ret = ref_get_straight(hand, min_length, skip, wrap)
 
 	if next(SMODS.find_card('c_fnwk_gotequest_born')) then
-		local count = SMODS.four_fingers('straight')
-		if #hand < count then
+		if #hand < min_length then
 			return {}
 		else
 			local temp_ranks = copy_table(born_ranks)
-			ret = {}
+			local born_ret = {}
 
 			for i=1, #hand do
 				local id = hand[i]:get_id()
 				if temp_ranks[id] then
-					ret[#ret+1] = hand[i]
+					born_ret[#born_ret+1] = hand[i]
 					temp_ranks[id] = nil
 
-					if #ret >= count then
-						ret.fnwk_valid_born_straight = true
-						return {ret}
+					if #born_ret >= min_length then
+						born_ret.fnwk_valid_born_straight = true
+						return {born_ret}
 					end
 				end
 			end

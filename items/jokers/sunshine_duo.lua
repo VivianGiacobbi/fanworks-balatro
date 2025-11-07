@@ -17,14 +17,15 @@ local jokerInfo = {
 		},
         custom_color = 'sunshine',
     },
-	artist = 'fizzy',
+	artist = 'FizzyWizard',
+	programmer = 'Vivian Giacobbi',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
 	return { vars = { card.ability.extra.x_mult }}
 end
 
-function jokerInfo.calculate(self, card, context)  
+function jokerInfo.calculate(self, card, context)
 	if context.joker_main and not card.debuff then
 		local kings = 0
 		local queens = 0

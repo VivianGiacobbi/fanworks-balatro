@@ -16,7 +16,8 @@ local consumInfo = {
 		},
         custom_color = 'last',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -40,7 +41,7 @@ function consumInfo.calculate(self, card, context)
         local rand_hand = pseudorandom_element(possible_hands, pseudoseed('fnwk_saturn'))
         local juice_card = context.blueprint_card or card
         return {
-            func = function() 
+            func = function()
                 ArrowAPI.stands.flare_aura(juice_card, 2)
             end,
             extra = {

@@ -13,7 +13,8 @@ local jokerInfo = {
 		},
         custom_color = 'jojopolis',
     },
-	artist = 'mal'
+	artist = 'Qrowscant',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.calculate(self, card, context)

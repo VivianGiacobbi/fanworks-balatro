@@ -17,7 +17,8 @@ local jokerInfo = {
 		},
         custom_color = 'moscow',
     },
-	artist = 'poul'
+	artist = 'Poul Shmidt',
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

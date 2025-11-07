@@ -23,7 +23,8 @@ local consumInfo = {
 		},
         custom_color = 'gotequest',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

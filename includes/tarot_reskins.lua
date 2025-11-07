@@ -67,7 +67,7 @@ end
 
 
 local fool_table = {}
-if JoJoFanworks.current_config['enable_TarotSkins'] then 
+if JoJoFanworks.current_config['enable_TarotSkins'] then
     fool_table.atlas = 'fnwk_tarotreskins'
     fool_table.origin = {
         category = 'fanworks',
@@ -77,7 +77,7 @@ if JoJoFanworks.current_config['enable_TarotSkins'] then
         custom_color = 'jspec'
     }
     fool_table.no_mod_badges = true
-    fool_table.artist = { "plus", "gote" }
+    fool_table.artist = { "Plusgal", "BarrierTrio/Gote" }
 end
 
 fool_table.loc_vars = function(self, info_queue, card)
@@ -85,7 +85,7 @@ fool_table.loc_vars = function(self, info_queue, card)
 
     local force_card = force_fool_card()
     if force_card then fool_c = G.P_CENTERS[force_card] end
-    
+
     -- imported cardsauce logic
     local last_tarot_planet = localize('k_none')
     if fool_c and fool_c.key == 'c_arrow_arrow' then
@@ -145,7 +145,7 @@ SMODS.Consumable:take_ownership('c_fool', fool_table)
 ---------------------------
 
 local emperor_table = {}
-if JoJoFanworks.current_config['enableTarotSkins'] then 
+if JoJoFanworks.current_config['enableTarotSkins'] then
     emperor_table.atlas = 'fnwk_tarotreskins'
     emperor_table.origin = {
         category = 'fanworks',
@@ -155,7 +155,7 @@ if JoJoFanworks.current_config['enableTarotSkins'] then
         custom_color = 'last'
     }
     emperor_table.no_mod_badges = true
-    emperor_table.artist = { "monky", 'gote' }
+    emperor_table.artist = { "Monky4Real", 'BarrierTrio/Gote' }
 end
 
 emperor_table.loc_vars = function (self, info_queue, card)
@@ -170,8 +170,8 @@ emperor_table.loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS[k]
     end
     tarot_count = math.max(0, tarot_count)
-    
-    return { 
+
+    return {
         vars = { tarot_count },
         key = self.key..(force_options.c_hermit and '_dead' or '')..(force_options.c_hanged_man and '_civil' or '')
     }
@@ -196,7 +196,7 @@ emperor_table.use = function(self, card, area, copier)
                     G.consumeables:emplace(new_tarot)
                     card:juice_up(0.3, 0.5)
                 end
-                return true    
+                return true
             end
         }))
         tarot_count = tarot_count - 1
@@ -215,7 +215,7 @@ emperor_table.use = function(self, card, area, copier)
                     G.consumeables:emplace(new_tarot)
                     card:juice_up(0.3, 0.5)
                 end
-                return true    
+                return true
             end
         }))
     end
@@ -261,7 +261,7 @@ if JoJoFanworks.current_config['enable_TarotSkins'] or JoJoFanworks.current_conf
             custom_color = 'jojopolis'
         }
         wheel_table.no_mod_badges = true
-        wheel_table.artist = { "algebra", 'gote' }
+        wheel_table.artist = { "AlgebraFalcon", 'BarrierTrio/Gote' }
     end
 
     SMODS.Consumable:take_ownership('c_wheel_of_fortune', wheel_table)
@@ -279,7 +279,7 @@ if not JoJoFanworks.current_config['enable_TarotSkins'] then
     return
 end
 
-SMODS.Consumable:take_ownership('c_magician', { 
+SMODS.Consumable:take_ownership('c_magician', {
     atlas = 'fnwk_tarotreskins',
     origin = {
         category = 'fanworks',
@@ -289,7 +289,7 @@ SMODS.Consumable:take_ownership('c_magician', {
         custom_color = 'asap'
     },
     no_mod_badges = true,
-    artist = { "doopo", 'gote' },
+    artist = { "Doopo", 'BarrierTrio/Gote' },
 })
 
 SMODS.Consumable:take_ownership('c_high_priestess', {
@@ -302,7 +302,7 @@ SMODS.Consumable:take_ownership('c_high_priestess', {
         custom_color = 'rockn'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_empress', {
@@ -315,7 +315,7 @@ SMODS.Consumable:take_ownership('c_empress', {
         custom_color = 'sunshine'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_heirophant', {
@@ -328,7 +328,7 @@ SMODS.Consumable:take_ownership('c_heirophant', {
         custom_color = 'moscow'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_lovers', {
@@ -341,7 +341,7 @@ SMODS.Consumable:take_ownership('c_lovers', {
         custom_color = 'gotequest'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_chariot', {
@@ -354,7 +354,7 @@ SMODS.Consumable:take_ownership('c_chariot', {
         custom_color = 'crimson'
     },
     no_mod_badges = true,
-    artist = { "gar", "gote" },
+    artist = { "GarPlatinum", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_justice', {
@@ -367,7 +367,7 @@ SMODS.Consumable:take_ownership('c_justice', {
         custom_color = 'rubicon'
     },
     no_mod_badges = true,
-    artist = { "cream", "gote" },
+    artist = { "CreamSodaCrossroads", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_hermit', {
@@ -380,7 +380,7 @@ SMODS.Consumable:take_ownership('c_hermit', {
         custom_color = 'city'
     },
     no_mod_badges = true,
-    artist = { "mae", "gote" },
+    artist = { "Mae", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_strength', {
@@ -393,7 +393,7 @@ SMODS.Consumable:take_ownership('c_strength', {
         custom_color = 'neon'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_hanged_man', {
@@ -406,7 +406,7 @@ SMODS.Consumable:take_ownership('c_hanged_man', {
         custom_color = 'lighted'
     },
     no_mod_badges = true,
-    artist = { "cody", "gote" },
+    artist = { "Cody Savoie", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_death', {
@@ -419,7 +419,7 @@ SMODS.Consumable:take_ownership('c_death', {
         custom_color = 'rockhard'
     },
     no_mod_badges = true,
-    artist = { "cringe", "gote" },
+    artist = { "Stupisms", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_temperance', {
@@ -432,7 +432,7 @@ SMODS.Consumable:take_ownership('c_temperance', {
         custom_color = 'coi'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_devil', {
@@ -445,7 +445,7 @@ SMODS.Consumable:take_ownership('c_devil', {
         custom_color = 'spirit'
     },
     no_mod_badges = true,
-    artist = { "polyg", "gote" },
+    artist = { "Polygonate", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_tower', {
@@ -458,7 +458,7 @@ SMODS.Consumable:take_ownership('c_tower', {
         custom_color = 'mania'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_star', {
@@ -471,7 +471,7 @@ SMODS.Consumable:take_ownership('c_star', {
         custom_color = 'culture'
     },
     no_mod_badges = true,
-    artist = { "shaft", "gote" },
+    artist = { "AllShaftsFall", "BarrierTrio/Gote" },
 })
 
 SMODS.Consumable:take_ownership('c_moon', {
@@ -484,7 +484,7 @@ SMODS.Consumable:take_ownership('c_moon', {
         custom_color = 'iron'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_sun', {
@@ -497,7 +497,7 @@ SMODS.Consumable:take_ownership('c_sun', {
         custom_color = 'streetlight'
     },
     no_mod_badges = true,
-    artist = { "piano", "leafy", "gote"},
+    artist = { "Pianolote", "Leafgilly", "BarrierTrio/Gote"},
 })
 
 SMODS.Consumable:take_ownership('c_judgement', {
@@ -510,7 +510,7 @@ SMODS.Consumable:take_ownership('c_judgement', {
         custom_color = 'industry'
     },
     no_mod_badges = true,
-    artist = "gote",
+    artist = "BarrierTrio/Gote",
 })
 
 SMODS.Consumable:take_ownership('c_world', {
@@ -523,5 +523,5 @@ SMODS.Consumable:take_ownership('c_world', {
         custom_color = 'thorny'
     },
     no_mod_badges = true,
-    artist = { "android", "gote" },
+    artist = { "SadlyAndroid", "BarrierTrio/Gote" },
 })

@@ -27,7 +27,8 @@ local jokerInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = {'cream', 'winter'}
+	artist = {'CreamSodaCrossroads', 'Vivian Giacobbi'},
+	programmer = 'Vivian Giacobbi',
 }
 
 SMODS.Atlas({ key = 'thnks_base', path ='jokers/rubicon_thnks.png', px = 71, py = 95 })

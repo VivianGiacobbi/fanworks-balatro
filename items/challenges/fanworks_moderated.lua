@@ -32,7 +32,8 @@ local chalInfo = {
         banned_other = {
             {id = 'bl_final_heart', type = 'blind'}
         }
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

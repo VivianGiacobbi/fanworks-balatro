@@ -20,9 +20,10 @@ local consumInfo = {
     },
     blueprint_compat = false,
     artist = {
-        'cream',
-        'winter',
-    }
+        'CreamSodaCrossroads',
+        'VivianGiacobbi',
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

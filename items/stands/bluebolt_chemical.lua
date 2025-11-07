@@ -22,12 +22,13 @@ local consumInfo = {
 		custom_color = 'bluebolt',
 	},
     blueprint_compat = false,
-    artist = 'squire'
+    artist = 'SquireTilde',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     local num_display = (card.ability.extra.stored_enhance and 1 or 0) + (card.ability.extra.stored_seal and 1 or 0) + (card.ability.extra.stored_edition and 1 or 0)
-    
+
     local stored_enhance = card.ability.extra.stored_enhance and localize({type = 'name_text', key = card.ability.extra.stored_enhance, set = 'Enhanced'}) or nil
     if stored_enhance and ArrowAPI.string.contains(stored_enhance, ' Card') then stored_enhance = string.sub(stored_enhance, 1, #stored_enhance - 5) end
     local stored_edition = card.ability.extra.stored_edition and localize({type = 'name_text', key = card.ability.extra.stored_edition, set = 'Edition'}) or nil
@@ -37,7 +38,7 @@ function consumInfo.loc_vars(self, info_queue, card)
         local seal_key = G.localization.descriptions.Other[card.ability.extra.stored_seal] and card.ability.extra.stored_seal or (string.lower(card.ability.extra.stored_seal)..'_seal')
         stored_seal = card.ability.extra.stored_seal and localize({type = 'name_text', key = seal_key, set = 'Other'}) or nil
     end
-    
+
     return { vars = {
             stored_enhance or (num_display == 0 and 'those') or '',
             stored_enhance and (num_display > 2 and ', ' or (num_display == 2 and ' and '..(stored_seal and 'a ' or '') or '')) or '',
@@ -57,7 +58,7 @@ function consumInfo.calculate(self, card, context)
         local change_card = context.full_hand[1]
         card.ability.extra.stored_enhance = change_card.config.center.key ~= 'c_base' and change_card.config.center.key or nil
         card.ability.extra.stored_seal = change_card.seal or nil
-        card.ability.extra.stored_edition = change_card.edition and change_card.edition.key or nil        
+        card.ability.extra.stored_edition = change_card.edition and change_card.edition.key or nil
 
         if card.ability.extra.stored_enhance or card.ability.extra.stored_seal or card.ability.extra.stored_edition then
             card.ability.extra.mcr_transmute_ready = true
@@ -102,12 +103,12 @@ function consumInfo.calculate(self, card, context)
                         change_card:set_ability(G.P_CENTERS[card.ability.extra.stored_enhance])
                         card.ability.extra.stored_enhance = nil
                     end
-            
+
                     if card.ability.extra.stored_seal then
                         change_card:set_seal(card.ability.extra.stored_seal, true)
                         card.ability.extra.stored_seal = nil
                     end
-            
+
                     if card.ability.extra.stored_edition then
                         change_card:set_edition(card.ability.extra.stored_edition, true)
                         card.ability.extra.stored_edition = nil

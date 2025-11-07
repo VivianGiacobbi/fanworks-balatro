@@ -14,7 +14,8 @@ local voucherInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist  = 'leafy',
+    artist  = 'Leafgilly',
+    programmer = 'Vivian Giacobbi',
 }
 
 function voucherInfo.locked_loc_vars(self, info_queue, card)

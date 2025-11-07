@@ -13,7 +13,8 @@ local deckInfo = {
 		},
         custom_color = 'gotequest',
     },
-    artist = 'winter'
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 function deckInfo.check_for_unlock(self, args)

@@ -18,7 +18,8 @@ local jokerInfo = {
 		},
 		custom_color = 'bone',
 	},
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -48,7 +49,7 @@ function jokerInfo.calculate(self, card, context)
 
     if context.destroy_card and SMODS.has_enhancement(context.destroy_card, 'm_stone') and not card.debuff and not context.destroy_card.debuff then
         return {
-            delay = 0.45, 
+            delay = 0.45,
             remove = true,
         }
     end

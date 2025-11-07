@@ -23,6 +23,7 @@ local chalInfo = {
         'bl_fnwk_manga',
         'bl_fnwk_final_multimedia'
     },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

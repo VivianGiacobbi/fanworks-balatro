@@ -21,7 +21,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'mal',
+	artist = 'Qrowscant',
+	programmer = 'Vivian Giacobbi',
 	alt_art = true
 }
 
@@ -48,7 +49,7 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 				return true
 			end
 		}))
-		
+
 		card.ability.fnwk_resil_form = nil
 	end
 
@@ -104,7 +105,7 @@ function jokerInfo.calculate(self, card, context)
                     tarot_subset[#tarot_subset+1] = v.key
                 end
             end
-			
+
 			local get_tarot = pseudorandom_element(tarot_subset, pseudoseed('fnwk_streetlight_resil'))
 			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 			G.E_MANAGER:add_event(Event({

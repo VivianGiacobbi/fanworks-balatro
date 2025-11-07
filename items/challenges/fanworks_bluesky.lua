@@ -27,7 +27,8 @@ local chalInfo = {
             {id = 'tag_rare'}
         },
     },
-    fanwork = 'fanworks'
+    fanwork = 'fanworks',
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

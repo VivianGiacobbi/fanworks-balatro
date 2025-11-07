@@ -20,7 +20,8 @@ local consumInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -64,7 +65,7 @@ function consumInfo.calculate(self, card, context)
         for _, area in ipairs(SMODS.get_card_areas('jokers')) do
             for _, _card in ipairs(area.cards) do
                 local ret = _card:calculate_dollar_bonus()
-        
+
                 -- TARGET: calc_dollar_bonus per card
                 if ret then
                     dollar_bonus = dollar_bonus + ret
@@ -84,7 +85,7 @@ function consumInfo.calculate(self, card, context)
                             return true
                         end
                     }))
-                            
+
                     for i=0, ret do
                         G.E_MANAGER:add_event(Event({
                             trigger = 'before',

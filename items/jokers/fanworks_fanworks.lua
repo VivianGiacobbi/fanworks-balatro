@@ -11,7 +11,8 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	artist = 'gote'
+	artist = 'BarrierTrio/Gote',
+	programmer = 'Vivian Giacobbi'
 }
 
 local function tally_fanworks_jokers()
@@ -22,7 +23,7 @@ local function tally_fanworks_jokers()
 	local tally = 0
 	for k, _ in pairs(G.GAME.fnwk_owned_jokers) do
 		local center = G.P_CENTERS[k]
-		if center and center.original_mod and center.original_mod.id == 'fanworks' and (center.set == 'Joker' or center.set == 'Stand') then 
+		if center and center.original_mod and center.original_mod.id == 'fanworks' and (center.set == 'Joker' or center.set == 'Stand') then
 			tally = tally + 1
 		end
 	end

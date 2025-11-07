@@ -31,7 +31,8 @@ local chalInfo = {
         banned_tags = {
             {id = 'tag_rare'}
         }
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

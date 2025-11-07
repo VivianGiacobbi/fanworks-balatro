@@ -15,19 +15,20 @@ local jokerInfo = {
 		},
         custom_color = 'jspec',
     },
-	artist = 'plus',
+	artist = 'Plusgal',
+	programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.check_for_unlock(self, args)
     if args.type ~= self.unlock_condition.type then
         return false
     end
-    
+
 	local num_seals = #G.P_CENTER_POOLS['Seal']
 	local unique_seals = {}
 	local unique_tally = 0
     for _, card in ipairs(G.playing_cards) do
-        if card.seal and not unique_seals[card.seal] then 
+        if card.seal and not unique_seals[card.seal] then
 			unique_seals[card.seal] = true
 			unique_tally = unique_tally + 1
 		end

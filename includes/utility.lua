@@ -52,10 +52,10 @@ end
 function FnwkReviveEffect(revive_card)
     G.E_MANAGER:add_event(Event({
         blockable = false,
-        trigger = 'after', 
+        trigger = 'after',
         func = function()
             revive_card.ability.make_vortex = true
-            
+
             local explode_time = 1.3*(0.6 or 1)*(math.sqrt(G.SETTINGS.GAMESPEED))
             revive_card.dissolve = 0
             revive_card.dissolve_colours = {G.C.WHITE}
@@ -85,7 +85,7 @@ function FnwkReviveEffect(revive_card)
             G.E_MANAGER:add_event(Event({
                 blockable = false,
                 func = (function()
-                        if revive_card.juice then 
+                        if revive_card.juice then
                             percent = (G.TIMERS.TOTAL - start_time)/explode_time
                             revive_card.juice.r = 0.05*(math.sin(5*G.TIMERS.TOTAL) + math.cos(0.33 + 41.15332*G.TIMERS.TOTAL) + math.cos(67.12*G.TIMERS.TOTAL))*percent
                             revive_card.juice.scale = percent*0.15
@@ -142,4 +142,9 @@ function FnwkReviveEffect(revive_card)
             return true
         end
     }))
+end
+
+function FnwkRomExists(name)
+   local f = io.open(JoJoFanworks.path..'includes/LuaNES/roms/'..name, "rb")
+   if f ~= nil then io.close(f) return true else return false end
 end

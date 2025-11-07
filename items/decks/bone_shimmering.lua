@@ -13,7 +13,8 @@ local deckInfo = {
 		},
 		custom_color = 'bone',
 	},
-    artist = 'torch'
+    artist = 'TorchDreemurr',
+    programmer = 'Vivian Giacobbi',
 }
 
 function deckInfo.check_for_unlock(self, args)

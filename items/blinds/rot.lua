@@ -6,7 +6,8 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 4, max = 10},
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function blindInfo.set_blind(self)

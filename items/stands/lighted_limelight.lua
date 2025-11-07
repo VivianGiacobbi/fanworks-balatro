@@ -20,7 +20,8 @@ local consumInfo = {
 		},
         custom_color = 'lighted',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 

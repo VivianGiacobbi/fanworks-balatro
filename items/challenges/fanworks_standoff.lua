@@ -29,7 +29,8 @@ local chalInfo = {
         banned_tags = {
             {id = 'tag_arrow_spirit'}
         }
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

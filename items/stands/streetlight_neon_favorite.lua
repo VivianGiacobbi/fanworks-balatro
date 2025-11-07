@@ -20,13 +20,14 @@ local consumInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'piano',
+    artist = 'Pianolote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
     eternal_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { 
+    return {
         vars = {
             localize{type = 'name_text', set = 'Enhanced', key = card.ability.extra.enhancement},
             card.ability.extra.h_dollars_mod,
@@ -44,7 +45,7 @@ function consumInfo.calculate(self, card, context)
         }
 	end
 
-    if context.repetition and context.end_of_round and context.cardarea == G.hand and not context.other_card.debuff 
+    if context.repetition and context.end_of_round and context.cardarea == G.hand and not context.other_card.debuff
     and SMODS.has_enhancement(context.other_card, card.ability.extra.enhancement) then
 		local flare_card = context.blueprint_card or card
         return {

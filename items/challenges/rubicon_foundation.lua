@@ -90,7 +90,8 @@ local chalInfo = {
 			'rubicon',
 		},
         custom_color = 'rubicon',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

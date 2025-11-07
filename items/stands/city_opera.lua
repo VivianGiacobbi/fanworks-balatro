@@ -19,12 +19,13 @@ local consumInfo = {
 		},
         custom_color = 'city',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
-    return { 
+    return {
         vars = {
             card.ability.extra.levels,
             card.ability.extra.levels > 1 and 's' or '',

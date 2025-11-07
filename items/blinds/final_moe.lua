@@ -8,7 +8,8 @@ local blindInfo = {
     mult = 1,
     vars = {},
     boss = {min = 1, max = 10, showdown = true},
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 local function get_moe_bosses(num_bosses)

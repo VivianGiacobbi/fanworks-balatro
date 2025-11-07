@@ -21,7 +21,8 @@ local consumInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist = 'piano',
+    artist = 'Pianolote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

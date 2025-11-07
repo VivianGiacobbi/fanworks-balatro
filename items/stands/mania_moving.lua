@@ -15,7 +15,6 @@ local consumInfo = {
 		},
         custom_color = 'mania',
     },
-    in_progress = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)

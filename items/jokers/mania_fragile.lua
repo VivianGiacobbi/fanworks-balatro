@@ -13,6 +13,7 @@ local jokerInfo = {
 		},
         custom_color = 'mania',
     },
+	programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

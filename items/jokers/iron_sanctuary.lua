@@ -18,10 +18,11 @@ local jokerInfo = {
 		},
         custom_color = 'iron',
     },
+	artist = 'CreamSodaCrossroads',
+	programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    info_queue[#info_queue+1] = {key = "incomplete", set = "Other"}
 	return { vars = { card.ability.extra.rank_id, card.ability.extra.mult}}
 end
 

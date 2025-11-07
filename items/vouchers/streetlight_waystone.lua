@@ -9,7 +9,8 @@ local voucherInfo = {
 		},
         custom_color = 'streetlight',
     },
-    artist  = 'leafy',
+    artist  = 'Leafgilly',
+    programmer = 'Vivian Giacobbi',
 }
 
 function voucherInfo.redeem(self, card, area, copier)

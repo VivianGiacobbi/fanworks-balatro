@@ -13,7 +13,8 @@ local blindInfo = {
 		},
         custom_color = 'mdv',
     },
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 function blindInfo.loc_vars(self)
@@ -41,7 +42,7 @@ function blindInfo.recalc_debuff(self, card, from_blind)
     elseif not card.fnwk_venus_checked then
         card.fnwk_venus_checked = true
         card.fnwk_venus_debuff = SMODS.pseudorandom_probability(G.GAME.blind, 'fnwk_bl_venus', 1, 2, 'fnwk_bl_venus') or nil
-        
+
         if card.fnwk_venus_debuff then
             return true
         end

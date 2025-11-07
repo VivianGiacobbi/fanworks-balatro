@@ -10,6 +10,8 @@ local sleeveInfo = {
 		},
         custom_color = 'bone',
     },
+    artist = 'TorchDreemurr',
+    programmer = 'Vivian Giacobbi',
 }
 
 sleeveInfo.loc_vars = function(self, info_queue)

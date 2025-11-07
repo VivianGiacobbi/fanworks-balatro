@@ -18,7 +18,8 @@ local consumInfo = {
 		},
         custom_color = 'crimson',
     },
-    artist = 'gar',
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
     eternal_compat = true
 }

@@ -21,6 +21,8 @@ local consumInfo = {
 		},
         custom_color = 'rebels',
     },
+    artist = 'Jorge Hernandez',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 

@@ -17,7 +17,8 @@ local jokerInfo = {
 		},
 		custom_color = 'bluebolt',
 	},
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -40,13 +41,13 @@ function jokerInfo.calculate(self, card, context)
         G.GAME.inflation = G.GAME.inflation - card.ability.extra.currentDiscount
         if card.ability.extra.currentDiscount ~= 0 then
         card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_discount_apply'), colour = G.C.MONEY})
-        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, 
-            
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4,
+
             func = function()
                 for k, v in pairs(G.I.CARD) do
                     if v.set_cost then v:set_cost() end
                 end
-                return true 
+                return true
             end}))
         end
     end
@@ -59,7 +60,7 @@ function jokerInfo.calculate(self, card, context)
                 for k, v in pairs(G.I.CARD) do
                     if v.set_cost then v:set_cost() end
                 end
-                return true 
+                return true
             end}))
             return {
                 card = card,
@@ -77,7 +78,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
             for k, v in pairs(G.I.CARD) do
                 if v.set_cost then v:set_cost() end
             end
-            return true 
+            return true
         end}))
     end
 end

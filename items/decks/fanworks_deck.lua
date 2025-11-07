@@ -1,7 +1,7 @@
 local deckInfo = {
     name = 'Fanworks Deck',
     config = {
-        extra = 2, 
+        extra = 2,
         vouchers = {
             'v_overstock_norm',
         },
@@ -9,7 +9,8 @@ local deckInfo = {
     unlocked = false,
     unlock_condition = {type = 'fnwk_discovered_card', num = 25},
     fanwork = 'fanworks',
-    artist = 'gote'
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Kekulism',
 }
 
 function deckInfo.check_for_unlock(self, args)

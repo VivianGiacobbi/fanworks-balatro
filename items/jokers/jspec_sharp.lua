@@ -17,11 +17,12 @@ local jokerInfo = {
 		},
         custom_color = 'jspec',
     },
-	artist = 'tos',
+	artist = 'TOS',
+	programmer = 'BarrierTrio/Gote',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
-	return { vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * G.GAME.unused_discards or 0}}
+	return { vars = {card.ability.extra.mult_mod, card.ability.extra.mult_mod * (G.GAME.unused_discards or 0)}}
 end
 
 function jokerInfo.calculate(self, card, context)

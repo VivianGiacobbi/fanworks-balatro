@@ -23,7 +23,8 @@ local consumInfo = {
 		},
 		custom_color = 'bone',
 	},
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -34,7 +35,7 @@ end
 function consumInfo.set_sprites(self, card, initial, delay_sprites)
     card.ignore_base_shader = card.ignore_base_shader or {}
     card.ignore_base_shader['fnwk_farewell'] = true
-    
+
     local atlas = G.ASSET_ATLAS['fnwk_bone_king_farewell_overlay']
     local w_scale = atlas.px / 71
 
@@ -57,7 +58,7 @@ function consumInfo.set_sprites(self, card, initial, delay_sprites)
     card.children.bone_king_base:set_role(role)
     card.children.bone_king_base.custom_draw = true
 
-    if card.children.floating_sprite then 
+    if card.children.floating_sprite then
         card.children.floating_sprite:remove()
         card.children.floating_sprite = nil
     end
@@ -110,8 +111,8 @@ function consumInfo.calculate(self, card, context)
                             G.GAME.blind.chips = math.floor(G.GAME.blind.chips * card.ability.extra.blind_mod)
                             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                             G.hand_text_area.blind_chips:juice_up()
-                            return true 
-                        end 
+                            return true
+                        end
                     }))
                     delay(1)
                 end

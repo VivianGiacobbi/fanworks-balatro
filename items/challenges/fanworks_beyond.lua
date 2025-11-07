@@ -15,7 +15,8 @@ local chalInfo = {
             return {{id = 'j_fnwk_banned_jokers', ids = banned}}
         end,
     },
-    fanwork = 'fanworks'
+    fanwork = 'fanworks',
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

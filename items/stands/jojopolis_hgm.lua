@@ -23,7 +23,8 @@ local consumInfo = {
 		},
         custom_color = 'jojopolis',
     },
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -104,7 +105,7 @@ function consumInfo.calculate(self, card, context)
                         return true
                     end
                 }))
-                break;
+                break
             end
         end
     end

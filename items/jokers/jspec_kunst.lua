@@ -19,7 +19,8 @@ local jokerInfo = {
 		},
         custom_color = 'jspec',
     },
-    artist = 'mal',
+    artist = 'Qrowscant',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -39,7 +40,7 @@ function jokerInfo.calculate(self, card, context)
         juice_card:juice_up(0.8, 0.1)
         attention_text({
             text = localize('k_kunst_hm'),
-            scale = 1, 
+            scale = 1,
             hold = 0.7,
             backdrop_colour = G.C.FILTER,
             align = 'bm',
@@ -59,7 +60,7 @@ function jokerInfo.calculate(self, card, context)
         juice_card:juice_up(0.8, 0.1)
         attention_text({
             text = localize('k_kunst_acceptable'),
-            scale = 1, 
+            scale = 1,
             hold = 0.7,
             backdrop_colour = G.C.FILTER,
             align = 'bm',

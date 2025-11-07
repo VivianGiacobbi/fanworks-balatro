@@ -10,7 +10,8 @@ local consumInfo = {
 		},
         custom_color = 'crimson',
     },
-    artist = 'gar'
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.use(self, card, area, copier)

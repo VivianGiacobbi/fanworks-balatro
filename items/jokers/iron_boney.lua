@@ -76,7 +76,8 @@ local jokerInfo = {
 		},
         custom_color = 'iron',
     },
-    artist = 'shaft'
+    artist = 'AllShaftsFall',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

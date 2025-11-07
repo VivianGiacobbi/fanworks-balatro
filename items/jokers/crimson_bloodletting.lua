@@ -21,7 +21,8 @@ local jokerInfo = {
 		},
         custom_color = 'crimson',
     },
-    artist = 'gar'
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -30,7 +31,7 @@ end
 
 function jokerInfo.locked_loc_vars(self, info_queue, card)
     local display_card = G.P_CARDS[self.unlock_condition.card_key]
-    return { 
+    return {
         vars = {
             self.unlock_condition.amount,
             display_card.value,
@@ -62,7 +63,7 @@ function jokerInfo.calculate(self, card, context)
     if card.debuff or context.blueprint then
         return
     end
-    
+
     if context.cardarea == G.jokers and context.remove_playing_cards then
         card.ability.extra.destroy_count = card.ability.extra.destroy_count + #context.removed
         local num_reps = math.floor(card.ability.extra.destroy_count /card.ability.extra.destroy)
@@ -103,7 +104,7 @@ function jokerInfo.calculate(self, card, context)
             playing_card_joker_effects({new_card})
         end
 
-        
+
     end
 end
 

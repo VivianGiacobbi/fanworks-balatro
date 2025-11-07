@@ -18,7 +18,8 @@ local consumInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream',
+	artist = 'CreamSodaCrossroads',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 

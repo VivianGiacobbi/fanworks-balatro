@@ -19,7 +19,8 @@ local consumInfo = {
 		},
         custom_color = 'jspec',
     },
-    artist = 'plus',
+    artist = 'Plusgal',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = false,
 }
 
@@ -38,7 +39,7 @@ function consumInfo.calculate(self, card, context)
         local seals_map = {}
         seal_count = 0
         for _, v in ipairs(context.full_hand) do
-            if v.seal and not seals_map[v.seal] then 
+            if v.seal and not seals_map[v.seal] then
                 seals_map[v.seal] = true
                 seal_count = seal_count + 1
 
@@ -47,8 +48,8 @@ function consumInfo.calculate(self, card, context)
                         trigger = 'after',
                         func = function()
                             ArrowAPI.stands.evolve_stand(card)
-                            return true 
-                        end 
+                            return true
+                        end
                     }))
                     break
                 end

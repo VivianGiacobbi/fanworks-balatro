@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy'
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)
@@ -24,8 +25,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
     if has_stand and has_stand.ability.evolve_key then
         compat = 'compatible'
     end
-	
-	
+
+
     local main_end = (card.area and card.area == G.jokers) and {
         {n=G.UIT.C, config={align = "bm", minh = 0.4}, nodes={
             {n=G.UIT.C, config={ align = "m", colour = mix_colours(compat == 'compatible' and G.C.GREEN or G.C.RED, G.C.JOKER_GREY, 0.8), r = 0.05, padding = 0.06 }, nodes={
@@ -59,7 +60,7 @@ function jokerInfo.calculate(self, card, context)
 				end
 				ArrowAPI.stands.evolve_stand(has_stand)
 				return true
-			end 
+			end
 		}))
 	end
 end

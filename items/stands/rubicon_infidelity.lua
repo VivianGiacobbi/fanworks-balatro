@@ -18,7 +18,8 @@ local consumInfo = {
 		},
         custom_color = 'rubicon',
     },
-	artist = 'cream',
+	artist = 'CreamSodaCrossroads',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -49,7 +50,7 @@ function consumInfo.calculate(self, card, context)
                 end
             }))
 
-            
+
             scoring_card:set_ability(right_card.config.center, nil, 'manual')
             scoring_card.ability.type = right_card.ability.type
             SMODS.change_base(scoring_card, right_card.base.suit, right_card.base.value, true)

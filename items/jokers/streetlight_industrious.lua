@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy',
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 	alt_art = true
 }
 
@@ -51,8 +52,8 @@ function jokerInfo.calculate(self, card, context)
 						context.scoring_hand[i]:flip()
 						play_sound('card1')
 						context.scoring_hand[i]:juice_up(0.3, 0.3)
-						return true 
-					end 
+						return true
+					end
 				}))
 			end
 		end
@@ -63,7 +64,7 @@ function jokerInfo.calculate(self, card, context)
 				func = function()
 					local suit_prefix = string.sub(context.scoring_hand[i].base.suit, 1, 1)..'_'
 					change_cards[i]:set_base(G.P_CARDS[suit_prefix..rank_suffix])
-					return true 
+					return true
 				end
 			}))
 		end
@@ -71,12 +72,12 @@ function jokerInfo.calculate(self, card, context)
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
 				delay = 0.15,
-				func = function() 
+				func = function()
 					change_cards[i]:flip()
 					play_sound('tarot2', 1, 0.6)
 					change_cards[i]:juice_up(0.3, 0.3)
-					return true 
-				end 
+					return true
+				end
 			}))
 		end
 		delay(0.2)

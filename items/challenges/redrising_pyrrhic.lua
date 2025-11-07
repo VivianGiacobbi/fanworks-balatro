@@ -51,7 +51,8 @@ local chalInfo = {
 			'redrising',
 		},
         custom_color = 'redrising',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

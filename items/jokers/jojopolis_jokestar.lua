@@ -15,7 +15,8 @@ local jokerInfo = {
 		},
         custom_color = 'jojopolis',
     },
-    artist = 'gote'
+    artist = 'BarrierTrio/Gote',
+    programmer = 'BarrierTrio/Gote'
 }
 
 function jokerInfo.loc_vars(self, info_queue, card)

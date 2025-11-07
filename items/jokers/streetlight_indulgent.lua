@@ -43,14 +43,15 @@ local jokerInfo = {
 		},
         custom_color = 'streetlight',
     },
-	artist = 'leafy',
+	artist = 'Leafgilly',
+	programmer = 'Vivian Giacobbi',
 	alt_art = true
 }
 
 
 
 function jokerInfo.loc_vars(self, info_queue, card)
-    return { 
+    return {
 		vars = {
 			card.ability.extra.x_mult_mod,
 			card.ability.extra.spend_val,
@@ -148,10 +149,10 @@ function jokerInfo.update(self, card, dt)
 	end
 
 	if not G.NEON_VALS then
-		G.NEON_VALS = { AMT = 0, MAX = 1000 } 
+		G.NEON_VALS = { AMT = 0, MAX = 1000 }
 	end
 
-	G.NEON_VALS.AMT = G.NEON_VALS.AMT + 0.0001	
+	G.NEON_VALS.AMT = G.NEON_VALS.AMT + 0.0001
 	update_jokers_glow(card)
 end
 
@@ -184,7 +185,7 @@ function update_jokers_glow(card, removed)
 		card.ability.glow_area = nil
 		return
 	end
-	
+
 	local joker_idx = 1
 	local area_changed = #card.area.cards ~= (card.ability.old_glow_cards and #card.ability.old_glow_cards or -1)
 	for i=1, #card.area.cards do
@@ -193,7 +194,7 @@ function update_jokers_glow(card, removed)
 			area_changed = true
 		end
 	end
-	
+
 	-- don't do potentially expensive sprite creation if nothing has changed
 	if not area_changed and card.ability.glow_area == card.area and joker_idx == card.ability.glow_idx then
 		return
@@ -224,7 +225,7 @@ function update_jokers_glow(card, removed)
 			card.ability.old_glow_cards[#card.ability.old_glow_cards+1] = card.ability.glow_area.cards[i]
 		end
 	end
-	
+
 
 	for i=1, #card.ability.glow_area.cards do
 		local dist = math.abs(card.ability.glow_idx - i)
@@ -232,7 +233,7 @@ function update_jokers_glow(card, removed)
 		local glow_card = card.ability.glow_area.cards[i]
 		if i ~= card.ability.glow_idx and dist <= card.ability.extra.max_dist then
 			if glow_card.children.glow_sprite then glow_card.children.glow_sprite:remove() end
-			
+
 			local glow = math.max(0, math.min(1, dist_mod * 0.2))
 			glow_card.ability.glow = glow
 			glow_card.no_shadow = true
@@ -245,7 +246,7 @@ function update_jokers_glow(card, removed)
 			local glow_height = glow_card.T.h * scale_y
 			local x_offset = (glow_width - glow_card.T.w) / 2
 			local y_offset = (glow_height - glow_card.T.h) / 2
-			
+
 			glow_card.children.glow_sprite = Sprite(
 				glow_card.T.x - x_offset,
 				glow_card.T.y - y_offset,

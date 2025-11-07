@@ -9,7 +9,8 @@ local tagInfo = {
         custom_color = 'streetlight',
     },
     min_ante = 3,
-    artist = 'gote'
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function tagInfo.apply(self, tag, context)

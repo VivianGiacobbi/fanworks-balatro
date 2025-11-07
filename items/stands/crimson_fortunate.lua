@@ -18,7 +18,8 @@ local consumInfo = {
 		},
         custom_color = 'crimson',
     },
-    artist = 'gar',
+    artist = 'GarPlatinum',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -34,7 +35,7 @@ function consumInfo.loc_vars(self, info_queue, card)
         local colour = G.C.SECONDARY_SET.Planet
         if #list_hands == #G.handlist then
             colour = G.C.SECONDARY_SET.Spectral
-            
+
             nodes[1] = {
                 n=G.UIT.T,
                 config={text = ' '..localize('k_all_hands')..' ', colour = G.C.UI.TEXT_LIGHT, scale = 0.3, shadow = true}

@@ -20,7 +20,8 @@ local chalInfo = {
 			'lighted',
 		},
         custom_color = 'lighted',
-    }
+    },
+    programmer = 'Vivian Giacobbi',
 }
 
 return chalInfo

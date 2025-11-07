@@ -17,13 +17,14 @@ local jokerInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
     alt_art = true
 }
 
 function jokerInfo.calculate(self, card, context)
     if context.blueprint then return end
-    if G.GAME.current_round.fnwk_packs_rerolled == 0 and context.cardarea == G.jokers and context.open_booster then         
+    if G.GAME.current_round.fnwk_packs_rerolled == 0 and context.cardarea == G.jokers and context.open_booster then
         card.ability.last_booster_cost = context.card.cost
         card.ability.last_booster_pos = context.card.ability.booster_pos
 
@@ -41,7 +42,7 @@ function jokerInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             blocking = false,
             blockable = false,
-            trigger = 'after', 
+            trigger = 'after',
             delay = 1.25,
             func = function()
                 local new_booster = Card(
@@ -58,12 +59,12 @@ function jokerInfo.calculate(self, card, context)
                 G.E_MANAGER:add_event(Event({
                     blocking = false,
                     blockable = false,
-                    trigger = 'after', 
+                    trigger = 'after',
                     delay = 0.2,
                     func = function()
                         attention_text({
                             text = localize('k_pack_replaced'),
-                            scale = 1, 
+                            scale = 1,
                             hold = 0.8,
                             backdrop_colour = G.C.DARK_EDITION,
                             align = 'tm',

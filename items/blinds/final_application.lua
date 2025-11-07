@@ -6,7 +6,8 @@ local blindInfo = {
     mult = 2,
     vars = {},
     boss = {min = 1, max = 10, showdown = true},
-    artist = 'winter',
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 function blindInfo.press_play(self)

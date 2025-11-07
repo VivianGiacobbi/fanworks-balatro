@@ -20,7 +20,8 @@ local consumInfo = {
 		},
 		custom_color = 'bone',
 	},
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
@@ -30,7 +31,7 @@ end
 
 function consumInfo.calculate(self, card, context)
     if card.debuff then return end
-    
+
     if not context.blueprint and not context.retrigger_joker and context.destroy_card and context.cardarea == G.play and SMODS.has_enhancement(context.destroy_card, 'm_steel') and SMODS.in_scoring(context.destroy_card, context.scoring_hand) then
         context.destroy_card.fnwk_removed_by_kingandcountry = true
         return {
@@ -46,8 +47,8 @@ function consumInfo.calculate(self, card, context)
                     ArrowAPI.stands.evolve_stand(card)
                 end
 
-                return true 
-            end 
+                return true
+            end
         }))
     end
 
@@ -60,8 +61,8 @@ function consumInfo.calculate(self, card, context)
                 if #G.playing_cards <= (G.GAME.starting_deck_size - card.ability.extra.evolve_sub) then
                     ArrowAPI.stands.evolve_stand(card)
                 end
-                return true 
-            end 
+                return true
+            end
         }))
     end
 
@@ -76,16 +77,16 @@ function consumInfo.calculate(self, card, context)
                 func = function()
                     local juice_card = context.blueprint_card or card
                     local available_indices = {}
-                    for i, hand_card in ipairs(G.hand.cards) do 
+                    for i, hand_card in ipairs(G.hand.cards) do
                         if hand_card.config.center.key ~= 'm_steel' then
                             available_indices[#available_indices+1] = i
                         end
                     end
-        
+
                     if #available_indices == 0 then return end
                     local rand_idx = pseudorandom_element(available_indices, pseudoseed('kingandcountry'))
                     local rand_card = G.hand.cards[rand_idx]
-                    
+
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         delay = 0.15,
@@ -94,18 +95,18 @@ function consumInfo.calculate(self, card, context)
                             rand_card:flip()
                             rand_card:juice_up(0.3, 0.3)
                             play_sound('card1')
-                            return true 
-                        end 
+                            return true
+                        end
                     }))
 
                     if not rand_card then return end
-        
+
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         delay = 0.5,
                         func = function()
                             rand_card:set_ability('m_steel')
-                            return true 
+                            return true
                         end
                     }))
 
@@ -116,8 +117,8 @@ function consumInfo.calculate(self, card, context)
                             play_sound('tarot2', 1, 0.6)
                             rand_card:flip()
                             rand_card:juice_up(0.3, 0.3)
-                            return true 
-                        end 
+                            return true
+                        end
                     }))
                 end
             }

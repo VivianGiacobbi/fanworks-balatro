@@ -3,6 +3,8 @@ local sleeveInfo = {
     config = {legend_ante = 6},
     unlocked = false,
     unlock_condition = { deck = 'b_fnwk_fanworks_act', stake = "stake_gold" },
+    artist = 'Vivian Giacobbi',
+    programmer = 'Vivian Giacobbi',
 }
 
 function sleeveInfo.loc_vars(self, info_queue)

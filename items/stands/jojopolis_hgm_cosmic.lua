@@ -18,7 +18,8 @@ local consumInfo = {
         custom_color = 'jojopolis',
     },
     blueprint_compat = true,
-    artist = 'gote',
+    artist = 'BarrierTrio/Gote',
+    programmer = 'Vivian Giacobbi',
 }
 
 function consumInfo.calculate(self, card, context)

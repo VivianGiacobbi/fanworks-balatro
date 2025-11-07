@@ -19,14 +19,15 @@ local consumInfo = {
 		},
         custom_color = 'rockhard',
     },
-	artist = 'cringe',
+	artist = 'Stupisms',
+    programmer = 'Vivian Giacobbi',
     blueprint_compat = true,
 }
 
 function consumInfo.loc_vars(self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS[card.ability.extra.tarots[1]]
     info_queue[#info_queue+1] = G.P_CENTERS[card.ability.extra.tarots[2]]
-    return { 
+    return {
         vars = {
             G.P_CENTERS[card.ability.extra.tarots[1]].name,
             G.P_CENTERS[card.ability.extra.tarots[2]].name,
@@ -45,7 +46,7 @@ function consumInfo.calculate(self, card, context)
     if context.after and context.scoring_name == card.ability.extra.hand and G.GAME.current_round.hands_played == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         local random_tarot = pseudorandom_element(card.ability.extra.tarots, pseudoseed('fnwk_quadro'))
-        
+
         local flare_card = context.blueprint_card or card
         return {
             func = function()
