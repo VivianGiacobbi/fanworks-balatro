@@ -553,7 +553,7 @@ return {
 			ch_c_fnwk_crimson_manager = {"{C:spectral}Stone Mask{}, {C:spectral}Impulse{}, and {C:spectral}Mood Indigo{}"},
 			ch_c_fnwk_crimson_manager_2 = {"appear in the {C:attention}shop{}"},
 			ch_c_fnwk_rubicon_foundation = {"{C:dark_edition}Win{} when your deck contains"},
-			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}50 cards{}"},
+			ch_c_fnwk_rubicon_foundation_2 = {"{C:attention}2 suits{} with {C:attention}40 cards{}"},
 			ch_c_fnwk_no_money = {"{C:money}Money{} cannot be {C:attention}earned{}"},
 			ch_c_fnwk_no_sell = {"{C:attention}All{} cards have {C:money}$0{} sell value"},
 			ch_c_fnwk_bluebolt_suggestion = {"{C:dark_edition}Win{} by turning all {C:attention}Jacks{}"},

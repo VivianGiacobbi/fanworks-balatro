@@ -43,12 +43,12 @@ local function add_disturbia_cards(disturbia_cards, cards_list)
 end
 
 local ref_cardarea_init = CardArea.init
-function CardArea:init(...)
-    local ret = ref_cardarea_init(self, ...)
-    self.config.visible_card_limit = self.config.card_limit
-    self.config.visible_card_count = 0
-    self.config.disturbia_count = 0
-    return ret
+function CardArea:init(X, Y, W, H, config)
+    config = config or {}
+    config.visible_card_limit = config.card_limit
+    config.visible_card_count = 0
+    config.disturbia_count = 0
+    return ref_cardarea_init(self, X, Y, W, H, config)
 end
 
 local ref_cardarea_emplace = CardArea.emplace
@@ -93,7 +93,7 @@ function CardArea:draw(...)
 
     if not self.states.visible then return end
 
-    if not self.children.area_uibox then 
+    if not self.children.area_uibox then
         local card_count = self ~= G.shop_vouchers and {n=G.UIT.R, config={align = self == G.jokers and 'cl' or self == G.hand and 'cm' or 'cr', padding = 0.03, no_fill = true}, nodes={
             {n=G.UIT.B, config={w = 0.1,h=0.1}},
             {n=G.UIT.T, config={ref_table = self.config, ref_value = 'visible_card_count', scale = 0.3, colour = G.C.WHITE}},

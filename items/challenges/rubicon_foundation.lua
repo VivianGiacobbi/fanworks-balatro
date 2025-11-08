@@ -10,7 +10,7 @@ local chalInfo = {
     },
     gameover = {
         endgame_type = 'prevent',
-        condition = {suits = 2, cards = 50},
+        condition = {suits = 2, cards = 40},
         type = 'modify_deck',
         func = function(ch, endgame)
             if not G.playing_cards then return end
