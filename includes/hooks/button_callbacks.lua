@@ -321,3 +321,53 @@ G.FUNCS.unlock_all = function(e)
 
     return ret
 end
+
+
+function G.FUNCS.fnwk_restart()
+	local match = true
+	for k, v in pairs(JoJoFanworks.current_config) do
+		if v ~= JoJoFanworks.config[k] then
+			match = false
+		end
+	end
+
+	if match then
+		sendDebugMessage('Settings match')
+		SMODS.full_restart = 0
+	else
+		sendDebugMessage('Settings mismatch, restart required')
+		SMODS.full_restart = 1
+	end
+end
+
+G.FUNCS.fnwk_reset_achievements = function(e)
+	local warning_text = e.UIBox:get_UIE_by_ID('warn')
+	if warning_text.config.colour ~= G.C.WHITE then
+		warning_text:juice_up()
+		warning_text.config.colour = G.C.WHITE
+		warning_text.config.shadow = true
+		e.config.disable_button = true
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06, blockable = false, blocking = false, func = function()
+			play_sound('tarot2', 0.76, 0.4);return true end}))
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.35, blockable = false, blocking = false, func = function()
+			e.config.disable_button = nil; return true end}))
+		play_sound('tarot2', 1, 0.4)
+	else
+        warning_text.config.colour = G.C.CLEAR
+		G.FUNCS.wipe_on()
+		for k, v in pairs(SMODS.Achievements) do
+			if v.original_mod and v.original_mod.id == 'fanworks' then
+				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
+				G.ACHIEVEMENTS[k].earned = nil
+			end
+		end
+		G:save_settings()
+		G.E_MANAGER:add_event(Event({
+			delay = 1,
+			func = function()
+				G.FUNCS.wipe_off()
+				return true
+			end
+		}))
+	end
+end
