@@ -17,9 +17,9 @@ This mod features a plethora of additions to the base game, including:
 ## Installation
 1. This mod requires [Lovely (**V0.8.0 or later**)](https://github.com/ethangreen-dev/lovely-injector) and [Steammodded **V1.0.0-beta-1016c or later**](https://github.com/Steamodded/smods). Follow these links to install these respective mods, which will create a Mods directory (`%APPDATA%/Balatro/Mods`)
 
-2. This mod also requires [Arrow (**V1.0.0 or later**)](https://github.com/Kekulism/Arrow)
+2. This mod also requires [Arrow (**V1.0.4 or later**)](https://github.com/Kekulism/Arrow/releases/tag/v1.0.4)
 
-3. Once all dependencies are installed, download the [latest release](https://github.com/VivianGiacobbi/fanworks-balatro/releases/tag/v1.0.3) and extract the `fanworks-1.0.3` folder into your mods directory. You're all set!
+3. Once all dependencies are installed, download the [latest release](https://github.com/VivianGiacobbi/fanworks-balatro/releases/tag/v1.0.4) and extract the `fanworks-1.0.4` folder into your mods directory. You're all set!
 
 ## Credits
 Created by [BarrierTrio](https://github.com/BarrierTrio) and **Vivian Giacobbi** in collaboration with JoJo's Bizarre Fanworks
