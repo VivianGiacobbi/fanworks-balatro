@@ -151,14 +151,16 @@ function blindInfo.defeat(self)
     G.GAME.blind.in_blind = nil
 end
 
-function blindInfo.load(self, blindTable)
+function blindInfo.post_load(self)
     local extra_bosses = {}
     for _, v in ipairs(G.GAME.arrow_extra_blinds) do
+        sendDebugMessage('extra blind source: '..tostring(v.arrow_extra_blind))
 		if v.arrow_extra_blind == G.GAME.blind then
+            sendDebugMessage('found extra moe blind')
 			extra_bosses[#extra_bosses+1] = v.config.blind.key
 		end
 	end
-    G.GAME.blind.fnwk_moe_bosses = #extra_bosses > 0 and extra_bosses or nil
+    G.GAME.blind.fnwk_moe_bosses = #extra_bosses > 0 and extra_bosses or {}
     G.GAME.blind:set_text()
 end
 
