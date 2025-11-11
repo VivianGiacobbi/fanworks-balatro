@@ -7,7 +7,7 @@ local consumInfo = {
         aura_colors = { 'C92A42DC', '801336DC', },
         evolved = true,
     },
-    cost = 4,
+    cost = 10,
     rarity = 'EvolvedRarity',
     hasSoul = true,
     origin = {

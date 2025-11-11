@@ -39,7 +39,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_sprites(self, card, front)
-    if (not card.config.center.discovered and card.area ~= G.shop_jokers) then
+    if not self.discovered and not card.bypass_discovery_center then
         return
     end
 
@@ -138,7 +138,7 @@ function jokerInfo.remove_from_deck(self, card, from_debuff)
 end
 
 function jokerInfo.draw(self, card, layer)
-    if not (card.config.center.discovered or card.bypass_discovery_center) then
+    if not self.discovered and not card.bypass_discovery_center then
         return
     end
 

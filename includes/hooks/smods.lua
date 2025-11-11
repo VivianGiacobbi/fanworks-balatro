@@ -116,7 +116,7 @@ end
 
 
 local ref_smeared_check = SMODS.smeared_check
-function SMODS.smeared_check(...)
+function SMODS.smeared_check(card, suit)
     local smeared = next(SMODS.find_card('k_smeared'))
     local infidel = next(SMODS.find_card('j_fnwk_rubicon_infidel'))
     if infidel and smeared then
@@ -126,18 +126,16 @@ function SMODS.smeared_check(...)
         end
     end
 
-    local ret = ref_smeared_check(...)
-
-    local args = { ... }
-    local card = args[1]
-    local suit = args[2]
+    local ret = ref_smeared_check(card, suit)
 
     if not ret and infidel then
-        local infidelSuits = {}
-        for k, _ in pairs(G.GAME.fnwk_infidel_suits) do
-            infidelSuits[#infidelSuits+1] = k
+        local suits = {}
+        for k, v in pairs(G.GAME.fnwk_infidel_suits) do
+            if k ~= 'main_suit' then
+                suits[#suits+1] = k
+            end
         end
-        if (card.base.suit == infidelSuits[1] or card.base.suit == infidelSuits[2]) and (suit == infidelSuits[1] or suit == infidelSuits[2]) then
+        if (card.base.suit == suits[1] or card.base.suit == suits[2]) and (suit == suits[1] or suit == suits[2]) then
             ret = true -- main true/false return
         end
     end

@@ -13,7 +13,7 @@ local consumInfo = {
             blind_mod = 0.5
         }
     },
-    cost = 4,
+    cost = 10,
     rarity = 'EvolvedRarity',
     soul_pos = {x = 2, y = 0},
     origin = {
@@ -33,6 +33,10 @@ function consumInfo.loc_vars(self, info_queue, card)
 end
 
 function consumInfo.set_sprites(self, card, initial, delay_sprites)
+    if not self.discovered and not card.bypass_discovery_center then
+        return
+    end
+
     card.ignore_base_shader = card.ignore_base_shader or {}
     card.ignore_base_shader['fnwk_farewell'] = true
 
@@ -122,11 +126,11 @@ function consumInfo.calculate(self, card, context)
 end
 
 function consumInfo.draw(self, card, layer)
-    if not card.config.center.discovered and (G.OVERLAY_MENU or G.STAGE == G.STAGES.MAIN_MENU) then
+    if not self.discovered and not card.bypass_discovery_center then
         return
     end
 
-    G.SHADERS['fnwk_basic']:send("vertex_scale_mod", card.config.center.config.vertex_scale_mod)
+    G.SHADERS['fnwk_basic']:send("vertex_scale_mod", self.config.vertex_scale_mod)
     card.children.bone_king_base:draw_shader('fnwk_basic')
 end
 

@@ -10,7 +10,7 @@ local consumInfo = {
             reps = 1,
         }
     },
-    cost = 4,
+    cost = 10,
     hasSoul = true,
     rarity = 'EvolvedRarity',
     origin = {

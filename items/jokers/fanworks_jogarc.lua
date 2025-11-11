@@ -77,6 +77,15 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 			return
 		end
 	end
+
+	for _, v in ipairs(G.consumeables.cards) do
+		local obj = v.config.center
+		if v ~= context.removed_card and type(obj.origin) == 'table'
+		and obj.origin.sub_origins[1] == 'crimson' then
+			transform_sludgemass(card, true)
+			return
+		end
+	end
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -102,6 +111,14 @@ function jokerInfo.calculate(self, card, context)
 
 	if context.removed_card and context.removed_card ~= card and card.ability.form == 'sludge' then
 		for _, v in ipairs(G.jokers.cards) do
+			local obj = v.config.center
+			if v ~= context.removed_card and type(obj.origin) == 'table'
+			and obj.origin.sub_origins[1] == 'crimson' then
+				return
+			end
+		end
+
+		for _, v in ipairs(G.consumeables.cards) do
 			local obj = v.config.center
 			if v ~= context.removed_card and type(obj.origin) == 'table'
 			and obj.origin.sub_origins[1] == 'crimson' then

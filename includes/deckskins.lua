@@ -21,6 +21,7 @@ for _, v in ipairs(suits) do
                     atlas = 'ui_1',
                     pos = 1
                 },
+                artist = 'CreamSodaCrossroads'
             },
             {
                 key = 'hc',
@@ -33,11 +34,13 @@ for _, v in ipairs(suits) do
                     atlas = 'ui_2',
                     pos = 1
                 },
+                artist = 'CreamSodaCrossroads'
             },
         },
         loc_txt = {
             ['en-us'] = 'JoJo '..v
         },
         prefix_config = { key = false },
+        artist = 'CreamSodaCrossroads'
     }
 end

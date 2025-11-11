@@ -124,7 +124,7 @@ function jokerInfo.calculate(self, card, context)
 		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "times_sold", scalar_value = "sell_mod", no_message = true,})
 		SMODS.scale_card(card, {ref_table = card.ability.extra, ref_value = "mult", scalar_table = scale_table, scalar_value = "mult_mod", no_message = true,})
 		G.GAME.fnwk_saved_resils[#G.GAME.fnwk_saved_resils+1] = {
-			key = card.config.center.key,
+			key = self.key,
 			id = card.ability.fnwk_resil_id,
 			mult = card.ability.extra.mult,
 			times_sold = card.ability.extra.times_sold,

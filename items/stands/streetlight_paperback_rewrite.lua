@@ -10,7 +10,7 @@ local consumInfo = {
             chance = 1000
         }
     },
-    cost = 4,
+    cost = 10,
     rarity = 'EvolvedRarity',
     alerted = true,
     hasSoul = true,

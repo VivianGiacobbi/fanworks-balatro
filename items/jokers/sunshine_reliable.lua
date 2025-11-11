@@ -30,7 +30,7 @@ end
 function jokerInfo.calculate(self, card, context)
     if context.joker_main and not card.debuff then
 		local hands_this_round = G.GAME.hands[context.scoring_name].played_this_round > 1 and G.GAME.hands[context.scoring_name].played_this_round or 0
-        local mult_val = card.ability.extra.mult_mod * hands_this_round
+        local mult_val = card.ability.extra.mult_mod * (hands_this_round - 1)
 
 		if mult_val > 0 then
 			return {

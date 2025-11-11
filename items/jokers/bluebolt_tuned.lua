@@ -107,7 +107,7 @@ function jokerInfo.loc_vars(self, info_queue, card)
 			card.ability.extra.mult,
 			card.ability.extra.x_mult,
 		},
-		key = card.config.center.key..(card.ability.tuned_mode == 'none' and '' or '_'..card.ability.tuned_mode)
+		key = self.key..(card.ability.tuned_mode == 'none' and '' or '_'..card.ability.tuned_mode)
 	}
 end
 

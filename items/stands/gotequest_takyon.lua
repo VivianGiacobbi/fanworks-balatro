@@ -56,8 +56,8 @@ function consumInfo.load(self, card, card_table, other_card)
     end
 
     local key = 'fnwk_gotequest_takyon'..(rank_pos > 0 and ('_alt'..rank_pos) or '')
-    card.config.center.atlas = key
-    card:set_sprites(card.config.center)
+    self.atlas = key
+    card:set_sprites(self)
 end
 
 function consumInfo.calculate(self, card, context)
@@ -90,8 +90,8 @@ function consumInfo.calculate(self, card, context)
             G.E_MANAGER:add_event(Event({
                 func = function()
                     local key = 'fnwk_gotequest_takyon'..(rank_switch > 0 and ('_alt'..rank_switch) or '')
-                    card.config.center.atlas = key
-                    card:set_sprites(card.config.center)
+                    self.atlas = key
+                    card:set_sprites(self)
                     return true
                 end
             }))

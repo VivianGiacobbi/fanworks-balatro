@@ -35,8 +35,8 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.load(self, card, card_table, other_card)
-    card.config.center.soul_pos = { x = card_table.ability.extra.x_mult + 1, y = 0}
-    card:set_sprites(card.config.center)
+    self.soul_pos = { x = card_table.ability.extra.x_mult + 1, y = 0}
+    card:set_sprites(self)
 end
 
 function jokerInfo.calculate(self, card, context)
@@ -56,8 +56,8 @@ function jokerInfo.calculate(self, card, context)
 
         G.E_MANAGER:add_event(Event({
             func = function()
-                card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
-                card:set_sprites(card.config.center)
+                self.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
+                card:set_sprites(self)
                 return true
             end
         }))
@@ -80,8 +80,8 @@ function jokerInfo.calculate(self, card, context)
 
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    card.config.center.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
-                    card:set_sprites(card.config.center)
+                    self.soul_pos = { x = card.ability.extra.x_mult + 1, y = 0}
+                    card:set_sprites(self)
                     return true
                 end
             }))

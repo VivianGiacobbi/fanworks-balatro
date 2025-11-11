@@ -32,6 +32,10 @@ function jokerInfo.loc_vars(self, info_queue, card)
 end
 
 function jokerInfo.set_ability(self, card, initial, delay_sprites)
+    if not self.discovered and not card.bypass_discovery_center then
+        return
+    end
+
     card:set_eternal(true)
 end
 

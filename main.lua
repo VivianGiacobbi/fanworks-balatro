@@ -119,7 +119,7 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_upto0 = HEX('FF3C38'),
 })
 
-ArrowAPI.credits.use_credits(JoJoFanworks, {
+ArrowAPI.config.use_credits(JoJoFanworks, {
     matrix = {col = 20, row = 10},
     {
         key = 'direction',

@@ -15,7 +15,7 @@ if AltTexture and TexturePack then
     AltTexture({
         key = 'tarot',
         set = 'Tarot',
-        path = 'tarotreskins.png',
+        path = 'consumables/tarotreskins.png',
         loc_txt = {
             name = 'Tarot'
         },

@@ -35,6 +35,7 @@ function consumInfo.use(self, card, area, copier)
             end
 
             G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+            G.P_CENTERS[center].discovered = true
             local new_joker = Card(replace.T.x, replace.T.y, G.CARD_W, G.CARD_H, nil, G.P_CENTERS[center])
 
             new_joker:add_to_deck()
