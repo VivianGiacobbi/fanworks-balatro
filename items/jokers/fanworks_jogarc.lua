@@ -80,8 +80,7 @@ function jokerInfo.add_to_deck(self, card, from_debuff)
 
 	for _, v in ipairs(G.consumeables.cards) do
 		local obj = v.config.center
-		if v ~= context.removed_card and type(obj.origin) == 'table'
-		and obj.origin.sub_origins[1] == 'crimson' then
+		if type(obj.origin) == 'table' and obj.origin.sub_origins[1] == 'crimson' then
 			transform_sludgemass(card, true)
 			return
 		end

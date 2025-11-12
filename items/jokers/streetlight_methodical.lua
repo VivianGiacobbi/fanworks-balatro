@@ -9,7 +9,7 @@ local jokerInfo = {
 	},
 	rarity = 1,
 	cost = 5,
-	blueprint_compat = false,
+	blueprint_compat = true,
 	eternal_compat = true,
 	perishable_compat = true,
 	origin = {
@@ -43,8 +43,9 @@ function jokerInfo.calculate(self, card, context)
 
 		if card.ability.extra.current_hands >= card.ability.extra.hands_val then
 			if not context.blueprint and not context.retrigger_joker then
-				card.ability.extra.current_hands = 0
+				card.ability.extra.method_this_hand = true
 			end
+			sendDebugMessage('calling for level up')
 			return {
 				card = context.blueprint_card or card,
 				level_up = true,
@@ -57,7 +58,12 @@ function jokerInfo.calculate(self, card, context)
 		end
 	end
 
-	if context.blueprint or not context.retrigger_joker then return end
+	if context.blueprint or context.retrigger_joker then return end
+
+	if context.after and card.ability.extra.method_this_hand then
+		card.ability.extra.method_this_hand = false
+		card.ability.extra.current_hands = 0
+	end
 
 	if context.pre_discard and card.ability.extra.current_hands > 0 then
 		card.ability.extra.current_hands = 0

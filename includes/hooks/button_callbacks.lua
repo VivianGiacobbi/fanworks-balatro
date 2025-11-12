@@ -355,8 +355,11 @@ G.FUNCS.fnwk_reset_achievements = function(e)
 	else
         warning_text.config.colour = G.C.CLEAR
 		G.FUNCS.wipe_on()
+        sendDebugMessage('resetting')
 		for k, v in pairs(SMODS.Achievements) do
-			if v.original_mod and v.original_mod.id == 'fanworks' then
+            sendDebugMessage('achievement: '..k..' with mod :'..tostring(v.original_mod and v.original_mod.id or 'none'))
+			if v.mod and v.mod.id == 'fanworks' then
+                sendDebugMessage('resetting achievement')
 				G.SETTINGS.ACHIEVEMENTS_EARNED[k] = nil
 				G.ACHIEVEMENTS[k].earned = nil
 			end
