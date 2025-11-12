@@ -3,6 +3,7 @@ return {
 	['enable_Stands'] = true,
 	['enable_Consumables'] = true,
 	['enable_Decks'] = true,
+	['enable_Sleeves'] = true,
 	['enable_Tags'] = true,
 	['enable_Blinds'] = true,
 	['enable_BlindReskins'] = true,

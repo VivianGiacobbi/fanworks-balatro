@@ -12,7 +12,6 @@ G.fnwk_women = {
         ['j_blueprint'] = true,
         ['j_brainstorm'] = true,
         ['j_shoot_the_moon'] = true,
-        ['j_fnwk_rubicon_moonglass'] = true,
         ['j_fnwk_streetlight_fledgling'] = true,
         ['j_fnwk_streetlight_indulgent'] = true,
         ['j_fnwk_streetlight_industrious'] = true,

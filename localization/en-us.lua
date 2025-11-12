@@ -377,6 +377,7 @@ return {
 			fnwk_options_enable_InsaneStaticSeed = "Booster Predict Static Seed",
 			fnwk_options_enable_Queer = "Queer Edition",
 			fnwk_options_enable_Decks = "Decks",
+			fnwk_options_enable_Sleeves = "Sleeves",
 			fnwk_options_enable_Tags = "Tags",
 			fnwk_options_enable_Vouchers = "Vouchers",
 			fnwk_options_enable_Consumables = "Consumables",

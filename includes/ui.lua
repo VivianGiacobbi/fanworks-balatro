@@ -67,6 +67,7 @@ JoJoFanworks.config_tab = function()
 		'enable_Stands',
 		'enable_Consumables',
 		'enable_Decks',
+		CardSleeves and 'enable_Sleeves' or nil,
 		'enable_Tags',
 		'enable_Vouchers',
 		'enable_Blinds',

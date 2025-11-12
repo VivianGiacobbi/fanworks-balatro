@@ -8,7 +8,6 @@ SMODS.ObjectType {
         ['j_blueprint'] = true,
         ['j_brainstorm'] = true,
         ['j_shoot_the_moon'] = true,
-        ['j_fnwk_rubicon_moonglass'] = true,
         ['j_fnwk_streetlight_fledgling'] = true,
         ['j_fnwk_streetlight_indulgent'] = true,
         ['j_fnwk_streetlight_industrious'] = true,
@@ -27,6 +26,9 @@ SMODS.ObjectType {
         ['j_fnwk_bluebolt_secluded'] = true,
         ['j_fnwk_glass_jokestar'] = true,
         ['j_fnwk_love_jokestar'] = true,
+		['j_fnwk_dark_foxglove'] = true,
+		['j_fnwk_rebels_drowning'] = true,
+		['j_fnwk_redrising_oblivious'] = true
 	}
 }
 
