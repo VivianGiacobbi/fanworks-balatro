@@ -45,7 +45,6 @@ function jokerInfo.calculate(self, card, context)
 			if not context.blueprint and not context.retrigger_joker then
 				card.ability.extra.method_this_hand = true
 			end
-			sendDebugMessage('calling for level up')
 			return {
 				card = context.blueprint_card or card,
 				level_up = true,

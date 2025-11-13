@@ -41,7 +41,7 @@ function consumInfo.set_sprites(self, card, front)
         return
     end
 
-	card.children.noto_layer = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[card.config.center.atlas], {x = 2, y = 0})
+	card.children.noto_layer = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[self.atlas], {x = 2, y = 0})
 	card.children.noto_layer:set_role({
 		role_type = 'Minor',
 		major = card,

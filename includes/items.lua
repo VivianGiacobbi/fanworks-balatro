@@ -258,6 +258,8 @@ ArrowAPI.loading.batch_load({
 
 			-- rubicon crossroads
 			'rubicon_infidelity',
+			'rubicon_mmrs',
+			'rubicon_mmrs_play',
 			'rubicon_dance',
 			'rubicon_mother',
 

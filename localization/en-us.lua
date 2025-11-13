@@ -2705,6 +2705,43 @@ return {
 					"{s:0.8}Suit changes every round{}"
 				},
 			},
+			c_fnwk_rubicon_mmrs = {
+				name = {
+					"Thnks fr th Mmrs",
+					"{s:1.2}R E C{}"
+				},
+				text = {
+					{
+						"{X:mult,C:white}X#1#{} Mult if {C:attention}played hand{}",
+						"has been played previously",
+						"this round"
+					},
+					{
+						"{C:stand}Converts{} when {C:attention}Boss Blind{} is",
+						"selected if {C:attention}only one hand type{}",
+						"was played this {C:attention}Ante{}"
+					}
+
+				},
+			},
+			c_fnwk_rubicon_mmrs_play = {
+				name = {
+					"Thnks fr th Mmrs",
+					"{s:1.2}P L A Y{}"
+				},
+				text = {
+					{
+						"If played hand is a",
+						"{C:attention}#1#{}, cards are",
+						"retriggered and give",
+						"{X:mult,C:white}X#2#{} Mult"
+					},
+					{
+						"{C:stand}Reverts{} at end of round"
+					}
+
+				},
+			},
 			c_fnwk_rubicon_dance = {
 				name = "Dance Macabre",
 				text = {

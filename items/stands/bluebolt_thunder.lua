@@ -43,7 +43,7 @@ function consumInfo.calculate(self, card, context)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                ArrowAPI.stands.evolve_stand(card, localize('k_stand_advance'))
+                ArrowAPI.stands.evolve_stand(card, 'k_stand_advance')
                 return true
             end
         }))

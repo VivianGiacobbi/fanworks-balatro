@@ -185,7 +185,7 @@ function jokerInfo.calculate(self, card, context)
                 if rand_joker.config.center.key == 'j_fnwk_iron_sanctuary' then
                     check_for_unlock({type = 'fnwk_iron_strangers'})
                 end
-                ArrowAPI.game.transform_card(rand_joker, card.config.center.key, nil, true)
+                ArrowAPI.game.transform_card(rand_joker, self.key, nil, true)
 
                 rand_joker.ability.initialized = false
                 rand_joker.ability.boned = false

@@ -26,6 +26,9 @@ G.fnwk_women = {
         ['j_fnwk_jspec_ilsa'] = true,
         ['j_fnwk_bluebolt_tuned'] = true,
         ['j_fnwk_love_holy'] = true,
+        ['j_fnwk_dark_foxglove'] = true,
+		['j_fnwk_rebels_drowning'] = true,
+		['j_fnwk_redrising_oblivious'] = true
     },
     trans = {
         ['j_drivers_license'] = true,

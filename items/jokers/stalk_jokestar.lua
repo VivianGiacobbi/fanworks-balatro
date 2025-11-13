@@ -32,7 +32,8 @@ local function secret_hands_played()
 
 	local secret = 0
 	for _, key in ipairs(SMODS.PokerHand.obj_buffer) do
-		if SMODS.PokerHands[key].visible == false and G.GAME.hands[key].played > 0 then
+		if type(SMODS.PokerHands[key].visible) ~= 'function'
+			and SMODS.PokerHands[key].visible == false and G.GAME.hands[key].played > 0 then
 			secret = secret + 1
 		end
 	end
