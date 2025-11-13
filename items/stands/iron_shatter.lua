@@ -12,7 +12,13 @@ local consumInfo = {
     cost = 4,
     rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'iron',
+    origin = {
+		category = 'fanworks',
+		sub_origins = {
+			'iron',
+		},
+        custom_color = 'iron',
+    },
     blueprint_compat = true,
     artist = 'CreamSodaCrossroads',
     programmer = 'Vivian Giacobbi',

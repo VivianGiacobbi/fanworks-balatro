@@ -10,6 +10,8 @@ assets/2x/stakes
 assets/2x/stickers
 assets/1x/jokers/mania_fragile.png
 assets/2x/jokers/mania_fragile.png
+assets/1x/jokers/paper_inhuman.png
+assets/2x/jokers/paper_inhuman.png
 assets/1x/stands/rubicon_mmrs.png
 assets/1x/stands/rubicon_mmrs_play.png
 assets/2x/stands/rubicon_mmrs.png
@@ -17,3 +19,4 @@ assets/2x/stands/rubicon_mmrs_play.png
 items/stands/rubicon_mmrs.lua
 items/stands/rubicon_mmrs_play.lua
 items/jokers/mania_fragile.lua
+items/jokers/paper_inhuman.lua

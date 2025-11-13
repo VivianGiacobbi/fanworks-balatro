@@ -2422,8 +2422,7 @@ return {
 				name = "Insane in the Brain",
 				text = {
 					{
-						"{C:attention}+#1#{} cards inside",
-						"{C:attention}Booster Packs{},",
+						"{C:attention}+#1#{} cards inside th{C:attention}Booster Packs{},",
 						"but {C:attention}triples{} Booster Pack cost",
 					},
 					{

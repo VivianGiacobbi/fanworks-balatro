@@ -14,7 +14,7 @@ local jokerInfo = {
 	blueprint_compat = true,
 	eternal_compat = true,
 	perishable = true,
-	fanwork = 'fanworks',
+	origin = 'fanworks',
     artist = 'BarrierTrio/Gote',
     programmer = 'Vivian Giacobbi'
 }

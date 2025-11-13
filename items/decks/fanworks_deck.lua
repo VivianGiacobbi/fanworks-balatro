@@ -8,7 +8,7 @@ local deckInfo = {
     },
     unlocked = false,
     unlock_condition = {type = 'fnwk_discovered_card', num = 25},
-    fanwork = 'fanworks',
+    origin = 'fanworks',
     artist = 'BarrierTrio/Gote',
     programmer = 'Kekulism',
 }

@@ -13,7 +13,6 @@ local consumInfo = {
     cost = 4,
     rarity = 'StandRarity',
     hasSoul = true,
-    fanwork = 'rebels',
     origin = {
 		category = 'fanworks',
 		sub_origins = {

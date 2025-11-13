@@ -27,7 +27,7 @@ local chalInfo = {
             {id = 'tag_rare'}
         },
     },
-    fanwork = 'fanworks',
+    origin = 'fanworks',
     programmer = 'Vivian Giacobbi',
 }
 
