@@ -511,6 +511,7 @@ return {
 			ba_dark = "Dark Things",
 			ba_voodoo = 'Voodoo Kingdom',
 			ba_upto0 = 'Up to 0',
+			ba_paper = 'Paper Kingdom',
 
 			k_challenge_story = 'Story'
 		},
@@ -559,6 +560,7 @@ return {
 			ch_c_fnwk_no_sell = {"{C:attention}All{} cards have {C:money}$0{} sell value"},
 			ch_c_fnwk_bluebolt_suggestion = {"{C:dark_edition}Win{} by turning all {C:attention}Jacks{}"},
 			ch_c_fnwk_bluebolt_suggestion_2 = {"to {C:attention}Queens{} before {C:attention}Ante 9"},
+			ch_c_fnwk_bluebolt_suggestion_3 = {"{s:0.8}Destroying any card{} {C:red,E:2,s:0.8}loses the run{}"},
 			ch_c_fnwk_redrising_pyrrhic = {"{C:dark_edition}Lose{} if {C:stand}Invisible Sun's{}"},
 			ch_c_fnwk_redrising_pyrrhic_2 = {"repetitions hit {C:attention}0{}"}
 		},
@@ -940,7 +942,15 @@ return {
 			ach_fnwk_streetlight_salary = {
 				name = "Salary Cutting Noises",
 				text = {
-					"Obtain {C:attention}#1#{}",
+					"Obtain {C:attention}Industrious{}",
+					"{C:attention}Streetlit Joker{}",
+					"via {C:attention}systemic misogyny{}"
+				}
+			},
+			ach_fnwk_streetlight_salary_alt = {
+				name = "Salary Cutting Noises",
+				text = {
+					"Obtain {C:attention}??????????{}",
 					"via {C:attention}systemic misogyny{}"
 				}
 			},
@@ -1007,8 +1017,9 @@ return {
 			ach_fnwk_love_nevada = {
 				name = "Nevada Road Trip",
 				text = {
-					"Scale {C:attention}#1#{} for",
-					"{C:attention}10 consecutive rounds{}"
+					"Scale {C:attention}#1#{}",
+					"for {C:attention}10 consecutive{}",
+					"{C:attention}rounds{}"
 				}
 			},
 			ach_fnwk_upto0_mad = {
@@ -2296,6 +2307,15 @@ return {
 					"if poker hand contains",
 					"a {C:attention}Bonus Card{} and a {C:attention}Mult Card{}",
 
+				}
+			},
+			j_fnwk_paper_inhuman = {
+				name = "Inhuman Joker",
+				text = {
+					"If played hand is a",
+					"{C:attention}#1#{}, create a",
+					"{C:dark_edition}#2#{}",
+					"{S:1.1,C:red,E:2}destroys itself{}"
 				}
 			},
 			j_fnwk_banned_jokers = {

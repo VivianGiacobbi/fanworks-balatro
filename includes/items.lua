@@ -188,6 +188,9 @@ ArrowAPI.loading.batch_load({
 			-- dark things
 			'dark_foxglove',
 
+			-- paper kingdom
+			'paper_inhuman',
+
 			-- jojospectacle,
 			'jspec_sharp',
 			'jspec_seal',

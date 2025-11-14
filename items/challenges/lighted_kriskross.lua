@@ -12,7 +12,7 @@ local chalInfo = {
         { id = 'v_arrow_foo'}
     },
     unlocked = function(self)
-        return true --G.FUNCS.discovery_check({ mode = 'set_count', set = 'Stand', count = 5, })
+        return ArrowAPI.game.check_mod_discoveries(nil, 'Stand', self) >= 5
     end,
     origin = {
 		category = 'fanworks',

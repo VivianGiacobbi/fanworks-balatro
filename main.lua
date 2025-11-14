@@ -117,6 +117,8 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_voodoo = HEX('EAA812'),
     co_upto0 = HEX('475641'),
     te_upto0 = HEX('FF3C38'),
+    co_paper = HEX('FFFFFF'),
+    te_paper = HEX('F75F64'),
 })
 
 ArrowAPI.config.use_credits(JoJoFanworks, {

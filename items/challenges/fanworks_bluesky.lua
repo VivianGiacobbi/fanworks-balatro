@@ -24,6 +24,7 @@ local chalInfo = {
             }
         end,
         banned_tags = {
+            {id = 'tag_uncommon'},
             {id = 'tag_rare'}
         },
     },

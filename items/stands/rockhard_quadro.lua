@@ -45,8 +45,17 @@ function consumInfo.calculate(self, card, context)
 
     if context.after and context.scoring_name == card.ability.extra.hand and G.GAME.current_round.hands_played == 0 then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-        local random_tarot = pseudorandom_element(card.ability.extra.tarots, pseudoseed('fnwk_quadro'))
 
+        local tarots = {}
+        for i, v in ipairs(card.ability.extra.tarots) do
+            if not G.GAME.banned_keys[v] then
+                tarots[#tarots+1] = v
+            end
+        end
+
+        if #tarots == 0 then return end
+
+        local random_tarot = pseudorandom_element(tarots, pseudoseed('fnwk_quadro'))
         local flare_card = context.blueprint_card or card
         return {
             func = function()

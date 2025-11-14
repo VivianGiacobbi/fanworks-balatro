@@ -16,11 +16,10 @@ local chalInfo = {
         G.GAME.fnwk_stand_world_rate = self.config.world_rate
     end,
     jokers = {
-        { id = 'j_fnwk_fanworks_jogarc', eternal = true },
-        { id = 'j_fnwk_fanworks_jogarc', eternal = true },
-        { id = 'j_diet_cola'},
-        { id = 'j_diet_cola'},
-        { id = 'j_fnwk_streetlight_arrow' },
+        { id = 'j_joker', eternal = true },
+        { id = 'j_diet_cola', eternal = true},
+        { id = 'j_diet_cola', eternal = true},
+        { id = 'j_invisible', eternal = true },
     },
     unlocked = function(self)
         return G.P_CENTERS['j_fnwk_fanworks_jogarc'].discovered

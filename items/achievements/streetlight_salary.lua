@@ -11,7 +11,7 @@ local achInfo = {
 }
 
 function achInfo.loc_vars(self)
-    return {vars = {G.P_CENTERS[self.config.key].discovered and localize{type = 'name_text', set = 'Joker', key = self.config.key} or '?????'}}
+    return {key = self.key..(G.P_CENTERS[self.config.key].discovered and '_alt' or '')}
 end
 
 function achInfo.unlock_condition(self, args)
