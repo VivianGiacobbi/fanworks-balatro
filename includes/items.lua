@@ -114,6 +114,7 @@ ArrowAPI.loading.batch_load({
 
 			-- jojomania
 			'mania_jokestar',
+			-- 'mania_fragile',
 
 			-- careless cargo
 			'careless_jokestar',
@@ -189,7 +190,7 @@ ArrowAPI.loading.batch_load({
 			'dark_foxglove',
 
 			-- paper kingdom
-			'paper_inhuman',
+			-- 'paper_inhuman',
 
 			-- jojospectacle,
 			'jspec_sharp',
@@ -261,8 +262,8 @@ ArrowAPI.loading.batch_load({
 
 			-- rubicon crossroads
 			'rubicon_infidelity',
-			'rubicon_mmrs',
-			'rubicon_mmrs_play',
+			--'rubicon_mmrs',
+			--'rubicon_mmrs_play',
 			'rubicon_dance',
 			'rubicon_mother',
 
