@@ -53,6 +53,8 @@ function jokerInfo.calculate(self, card, context)
             return
         end
 
+        -- look up the key of the added card in the G.fnwk_women table
+        --- returns all valid results (a card can be a junkie, trans, and a woman)
         local results = G.fnwk_women.get_from_key(context.card.config.center.key)
         if not (results.junkie or results.trans or results.woman) then
             return
@@ -60,14 +62,15 @@ function jokerInfo.calculate(self, card, context)
 
         local speech_key = 'mq'
 
-        -- find specific quotes
+        -- keys correspond to entries in G.localization.misc.quips
+        -- junkie quotes have priority, are listed per key
         if results.junkie then
             speech_key = speech_key..'_'..context.card.config.center.key
             if results.junkie > 1 then
                 speech_key = speech_key..'_'..results.junkie
             end
         else
-            -- find trans women quotes
+            --  
             if results.trans then
                 speech_key = speech_key..'t_'..math.random(1, 3)
             elseif results.woman then
@@ -75,7 +78,7 @@ function jokerInfo.calculate(self, card, context)
             end
         end
 
-        -- maggie says some shit
+        --- say_quip() function is found in `includes > hooks > card.lua`
         card:say_quip(2, nil, true)
         G.E_MANAGER:add_event(Event({
             trigger = 'before',

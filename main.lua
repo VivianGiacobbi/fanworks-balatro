@@ -121,7 +121,7 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
     te_paper = HEX('F75F64'),
 })
 
-ArrowAPI.config.use_credits(JoJoFanworks, {
+ArrowAPI.config_tools.use_credits(JoJoFanworks, {
     matrix = {col = 20, row = 10},
     {
         key = 'direction',

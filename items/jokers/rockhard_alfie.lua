@@ -29,14 +29,14 @@ function jokerInfo.calculate(self, card, context)
         card.ability.last_booster_pos = context.card.ability.booster_pos
 
         local eval = function(booster)
-            return G.GAME.current_round.fnwk_packs_rerolled == 0
+            return G.GAME.current_round.fnwk_packs_rerolled > 0
         end
         juice_card_until(card, eval, true, 0.6)
     end
 
     if G.GAME.current_round.fnwk_packs_rerolled == 0 and context.cardarea == G.jokers and context.skipping_booster then
         G.GAME.current_round.used_packs[card.ability.last_booster_pos] = get_pack('shop_pack').key
-        G.GAME.current_round.fnwk_packs_rerolled = G.GAME.current_round.fnwk_packs_rerolled and G.GAME.current_round.fnwk_packs_rerolled + 1 or 1
+        G.GAME.current_round.fnwk_packs_rerolled = G.GAME.current_round.fnwk_packs_rerolled + 1
         ease_dollars(card.ability.last_booster_cost, true)
         card_eval_status_text(card, 'dollars', card.ability.last_booster_cost)
         G.E_MANAGER:add_event(Event({

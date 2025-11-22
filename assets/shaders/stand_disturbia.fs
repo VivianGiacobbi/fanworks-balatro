@@ -1,5 +1,3 @@
-#pragma language glsl3
-
 #if defined(VERTEX) || __VERSION__ > 100 || defined(GL_FRAGMENT_PRECISION_HIGH)
     #define MY_HIGHP_OR_MEDIUMP highp
 #else
@@ -36,14 +34,30 @@ varying MY_HIGHP_OR_MEDIUMP mat3 t_invert;
 #define MASK_OFFSET vec2(0.4, 0.0) // mask frame is 0.4 units away from the soul frame (normalised)
 #define BASE_OFFSET vec2(-0.2, 0.0) // base frame is -0.2 units away from the soul frame (normalised)
 
-mat3 get_perspective_trans(vec2[4] poly) { 
+mat3 custom_inverse(mat3 m) {
+  float a00 = m[0][0], a01 = m[0][1], a02 = m[0][2];
+  float a10 = m[1][0], a11 = m[1][1], a12 = m[1][2];
+  float a20 = m[2][0], a21 = m[2][1], a22 = m[2][2];
+
+  float b01 = a22 * a11 - a12 * a21;
+  float b11 = -a22 * a10 + a12 * a20;
+  float b21 = a21 * a10 - a11 * a20;
+
+  float det = a00 * b01 + a01 * b11 + a02 * b21;
+
+  return mat3(b01, (-a22 * a01 + a02 * a21), (a12 * a01 - a02 * a11),
+              b11, (a22 * a00 - a02 * a20), (-a12 * a00 + a02 * a10),
+              b21, (-a21 * a00 + a01 * a20), (a11 * a00 - a01 * a10)) / det;
+}
+
+mat3 get_perspective_trans(vec2[4] poly) {
 	float dx1 = poly[1].x - poly[2].x;
 	float dx2 = poly[3].x - poly[2].x;
 	float dx3 = poly[0].x - poly[1].x + poly[2].x - poly[3].x;
 	float dy1 = poly[1].y - poly[2].y;
 	float dy2 = poly[3].y - poly[2].y;
 	float dy3 = poly[0].y - poly[1].y + poly[2].y - poly[3].y;
- 
+
 	float a13 = (dx3 * dy2 - dy3 * dx2) / (dx1 * dy2 - dy1 * dx2);
 	float a23 = (dx1 * dy3 - dy1 * dx3) / (dx1 * dy2 - dy1 * dx2);
 	float a11 = poly[1].x - poly[0].x + a13 * poly[1].x;
@@ -52,14 +66,14 @@ mat3 get_perspective_trans(vec2[4] poly) {
 	float a12 = poly[1].y - poly[0].y + a13 * poly[1].y;
 	float a22 = poly[3].y - poly[0].y + a23 * poly[3].y;
 	float a32 = poly[0].y;
- 
+
 	mat3 transform_mat = mat3(
 		vec3(a11, a12, a13),
 		vec3(a21, a22, a23),
 		vec3(a31, a32, 1)
 	);
-	
-	return inverse(transform_mat);
+
+	return custom_inverse(transform_mat);
 }
 
 vec2 mult_mat_inv_point(mat3 mat_inv, vec2 point) {
@@ -83,7 +97,7 @@ vec4 dissolve_mask(vec4 tex, vec2 uv)
     float t = time * 10.0 + 2003.;
     vec2 floored_uv = (floor((uv*texture_details.ba)))/max(texture_details.b, texture_details.a);
     vec2 uv_scaled_centered = (floored_uv - 0.5) * 2.3 * max(texture_details.b, texture_details.a);
-    
+
     vec2 field_part1 = uv_scaled_centered + 50.*vec2(sin(-t / 143.6340), cos(-t / 99.4324));
     vec2 field_part2 = uv_scaled_centered + 50.*vec2(cos( t / 53.1532),  cos( t / 61.4532));
     vec2 field_part3 = uv_scaled_centered + 50.*vec2(sin(-t / 87.53218), sin(-t / 49.0000));
@@ -129,7 +143,7 @@ vec4 soul_move(Image tex, vec2 uv, vec2 uv_min, vec2 uv_max) {
     // apply rotation
     float cos_angle = cos(rotate_mod);
     float sin_angle = sin(rotate_mod);
-    mat2 rotation_matrix = mat2(cos_angle, -sin_angle, 
+    mat2 rotation_matrix = mat2(cos_angle, -sin_angle,
                                 sin_angle, cos_angle);
     centred_normalized_uv *= rotation_matrix;
 
@@ -152,7 +166,7 @@ vec4 draw_shadow(Image tex, vec2 uv,  vec2 uv_min, vec2 uv_max, vec2 screen_coor
     vec2 light_screen_pos = vec2(0.5, 2.0) * love_ScreenSize.xy; // light origin, seems to be top-middle off screen a bit (but need to invert y because shadow length is inverted for some reason)
     vec2 screen_offset = (screen_coords - light_screen_pos) * vec2(-1.0); // mirror shadow because Balatro shadows work weird
     vec2 uv_offset = screen_offset / love_ScreenSize.xy;
-    vec2 shadow_uv_offset = uv_offset * scale_mod * 0.33; // controls shadow length 
+    vec2 shadow_uv_offset = uv_offset * scale_mod * 0.33; // controls shadow length
     vec2 shadow_origin_uv = uv - shadow_uv_offset; // soul uv with shadow offset
 
     vec4 shadow_caster_color = soul_move(tex, shadow_origin_uv, uv_min, uv_max); // move shadow with the soul layer
@@ -166,6 +180,8 @@ vec4 draw_shadow(Image tex, vec2 uv,  vec2 uv_min, vec2 uv_max, vec2 screen_coor
 
 vec4 effect(vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
+
+
     // COORDINATES FOR STAND TEXTURE
     vec2 centre = vec2(0.5, 0.5);
     vec2 scaled_texture_coords = (texture_coords - centre) / output_scale + centre; // scale the entire uv to counter edge clipping
@@ -195,10 +211,10 @@ vec4 effect(vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords)
         soul = blend_normal(under_color, soul);
     }
 
-    float shadow_strength = 0.33; 
+    float shadow_strength = 0.33;
     vec4 shadow_layer = draw_shadow(
-        tex, 
-        scaled_texture_coords, 
+        tex,
+        scaled_texture_coords,
         soul_min,
         soul_max,
         screen_coords,
@@ -209,16 +225,16 @@ vec4 effect(vec4 colour, Image tex, vec2 texture_coords, vec2 screen_coords)
     // this is because it would overlap with the default card shadow and make a darker double-shadow
     shadow_layer = vec4(shadow_layer.rgb, min(shadow_layer.a, base_color.a));
 
-    // factor for mixing the shadow and soul layers 
+    // factor for mixing the shadow and soul layers
     // we want it to ramp up quickly as the soul alpha gets higher, thus squaring the alpha
     // any soul alpha value above √2 - 1 will cause the shadow to not be drawn underneath
     float blend_alpha = min(pow(1. + soul.a, 2) - 1., 1.);
     vec3 soul_with_shadow = mix(shadow_layer.rgb, soul.rgb, blend_alpha);
     soul = vec4(soul_with_shadow, max(soul.a, shadow_layer.a));
     soul = mask_layer(soul, mask.r);
-    
+
     // required for dissolve fx
-    return dissolve_mask(soul*colour, dissolve_uv);;
+    return dissolve_mask(soul*colour, dissolve_uv);
 }
 
 // --- below are all required functions --- //

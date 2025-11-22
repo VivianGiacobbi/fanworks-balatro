@@ -202,6 +202,7 @@ function jokerInfo.draw(self, card, layer)
             return
         end
     else
+        G.SHADERS['fnwk_bloom']:send('texture_details', card.children.fnwk_love_neon:get_pos_pixel())
         G.SHADERS['fnwk_bloom']:send('glow_colour', card.children.fnwk_love_neon.glow_color)
         G.SHADERS['fnwk_bloom']:send('bloom_size', card.ability.glow_size)
         G.SHADERS['fnwk_bloom']:send('bloom_intensity', card.ability.glow_intensity)

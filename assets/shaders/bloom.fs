@@ -1,39 +1,41 @@
-#pragma language glsl3
-
 #if defined(VERTEX) || __VERSION__ > 100 || defined(GL_FRAGMENT_PRECISION_HIGH)
 	#define MY_HIGHP_OR_MEDIUMP highp
 #else
 	#define MY_HIGHP_OR_MEDIUMP mediump
 #endif
 
+extern MY_HIGHP_OR_MEDIUMP vec4 texture_details = vec4(0, 0, 71, 95);
 extern MY_HIGHP_OR_MEDIUMP float bloom_size = 0.5;
 extern MY_HIGHP_OR_MEDIUMP float bloom_intensity = 1;
 extern MY_HIGHP_OR_MEDIUMP float bloom_threshold = 0.5;
 extern MY_HIGHP_OR_MEDIUMP vec3 glow_colour = vec3(1, 1, 1);
 
+vec4 custom_texelFetch(Image tex, ivec2 coord, int lod) {
+    return Texel(tex, vec2(float(coord.x) / float(texture_details.b), float(coord.y) / float(texture_details.a)));
+}
+
 vec4 effect(vec4 color, Image tex, vec2 tex_coords, vec2 screen_coords) {
-    
+
     vec4 pixel = Texel(tex, tex_coords);
-    ivec2 size = textureSize(tex, 0);
-    vec2 uv = vec2(tex_coords.x * size.x, tex_coords.y * size.y);
+    vec2 uv = vec2(tex_coords.x * texture_details.b, tex_coords.y * texture_details.a);
 
     if (pixel.a > bloom_threshold) {
         return pixel;
-    }  
+    }
 
     float sum = 0.0;
     for (int n = 0; n < 9; ++n) {
-        uv.y = (tex_coords.y * size.y) + (bloom_size * float(n - 4.5));
+        uv.y = (tex_coords.y * texture_details.a) + (bloom_size * float(n - 4.5));
         float h_sum = 0.0;
-        h_sum += texelFetch(tex, ivec2(uv.x - (4.0 * bloom_size), uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x - (3.0 * bloom_size), uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x - (2.0 * bloom_size), uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x - bloom_size, uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x, uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x + bloom_size, uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x + (2.0 * bloom_size), uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x + (3.0 * bloom_size), uv.y), 0).a;
-        h_sum += texelFetch(tex, ivec2(uv.x + (4.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x - (4.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x - (3.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x - (2.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x - bloom_size, uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x, uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x + bloom_size, uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x + (2.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x + (3.0 * bloom_size), uv.y), 0).a;
+        h_sum += custom_texelFetch(tex, ivec2(uv.x + (4.0 * bloom_size), uv.y), 0).a;
         sum += h_sum / 9.0;
     }
 
