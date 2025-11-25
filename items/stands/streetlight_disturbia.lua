@@ -58,7 +58,6 @@ function consumInfo.load(self, card, card_table, other_card)
         find_target.states.visible = false
         card_table.ability.fnwk_disturbia_fake = find_target
         card_table.ability.name = find_target.ability.name or find_target.center.key
-        card:set_cost()
     end
 end
 
