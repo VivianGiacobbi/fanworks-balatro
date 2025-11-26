@@ -34,7 +34,7 @@ function localize(...)
 		return ref_localize(...)
 	end
 
-	if args.type == 'other' and args.key == 'playing_card' and args.set == 'Other' then
+	if G.GAME and args.type == 'other' and args.key == 'playing_card' and args.set == 'Other' then
 		if G.GAME.modifiers.fnwk_no_suits then
 			args.key = 'fnwk_playing_card_nosuit'
 		elseif G.GAME.modifiers.fnwk_obscure_suits then
@@ -43,7 +43,7 @@ function localize(...)
 			args.vars[2] = localize(obscure_suit.key, 'fnwk_suits_plural')
 			args.vars.colours[1] = obscure_suit.r_replace
 		end
-	elseif G.GAME.modifiers.fnwk_no_rank_chips and args.type == 'other' and args.key == 'card_chips' then
+	elseif G.GAME and G.GAME.modifiers.fnwk_no_rank_chips and args.type == 'other' and args.key == 'card_chips' then
 		args.key = 'fnwk_card_chips_none'
 	end
 
