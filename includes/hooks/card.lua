@@ -611,7 +611,7 @@ function Card:set_cost(...)
         return
     end
 
-    if self.config.center.key == 'c_fnwk_streetlight_disturbia' and self.ability.extra.target_card then
+    if self.config.center.key == 'c_fnwk_streetlight_disturbia' and self.ability.extra and self.ability.extra.target_card then
         self.extra_cost = self.ability.fnwk_disturbia_fake.extra_cost
         self.cost = self.ability.fnwk_disturbia_fake.cost
         self.sell_cost = self.ability.fnwk_disturbia_fake.sell_cost
