@@ -58,8 +58,8 @@ end
 
 function consumInfo.remove_from_deck(self, card, from_debuff)
 	if card.ability.extra.added_h_size > 0 then
-		card.ability.extra.added_h_size = 0
-		G.hand:change_size(-card.ability.extra.extra.h_size)
+		G.hand:change_size(-card.ability.extra.h_size)
+        card.ability.extra.added_h_size = 0
 	end
 end
 

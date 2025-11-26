@@ -61,7 +61,7 @@ end
 function consumInfo.calculate(self, card, context)
     if context.blueprint or context.joker_retrigger or card.debuff then return end
 
-    if context.ante_change and G.GAME.round_resets.ante >= card.ability.extra.evolve_ante then
+    if context.ante_change and G.GAME.round_resets.ante + context.ante_change >= card.ability.extra.evolve_ante then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()

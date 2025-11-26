@@ -122,47 +122,52 @@ ArrowAPI.ui.add_badge_colors(JoJoFanworks, {
 })
 
 ArrowAPI.config.use_credits(JoJoFanworks, {
-    matrix = {col = 20, row = 10},
+    matrix = {col = 21, row = 10},
     {
         key = 'direction',
         title_colour = G.C.YELLOW,
         pos_start = {col = 0, row = 0},
-        pos_end = {col = 5, row = 10},
+        pos_end = {col = 4.5, row = 10},
         contributors = {
-            ["BarrierTrio/Gote"] = true,
-            ["Vivian Giacobbi"] = true,
+            {name = "BarrierTrio/Gote", name_scale = 1.1},
+            {name = "Vivian Giacobbi", name_scale = 1.1},
         }
     },
     {
         key = 'artist',
         title_colour = G.C.ETERNAL,
-        pos_start = {col = 5, row = 0},
+        pos_start = {col = 4.5, row = 0},
         pos_end = {col = 12, row = 10}
     },
     {
         key = 'programmer',
         title_colour = G.C.GOLD,
         pos_start = {col = 12, row = 0},
-        pos_end = {col = 16, row = 6},
+        pos_end = {col = 16.5, row = 6},
+        contributors = {
+            {name = "BarrierTrio/Gote", name_scale = 0.85},
+            {name = "Kekulism", name_scale = 0.85},
+            {name = "Vivian Giacobbi", name_scale = 0.85},
+        }
     },
     {
-        key = 'shader',
+        key = 'graphics',
         title_colour = G.C.DARK_EDITION,
-        pos_start = {col = 16, row = 0},
-        pos_end = {col = 20, row = 6},
+        pos_start = {col = 16.5, row = 0},
+        pos_end = {col = 21, row = 6},
         contributors = {
-            ["Vivian Giacobbi"] = true,
+            {name = "Vivian Giacobbi"},
         }
     },
     {
         key = 'special',
         title_colour = G.C.GREEN,
         pos_start = {col = 12, row = 6},
-        pos_end = {col = 20, row = 10},
+        pos_end = {col = 21, row = 10},
         contributors = {
-            ["Hirohiko Araki"] = true,
-            ["LuckyLand Communications"] = true,
-            ["Nico Abrams (LuaNES)"] = true,
+            {name = "Hirohiko Araki", name_scale = 1.75},
+            {name = "LuckyLand Communications", name_scale = 1.75},
+            {name = "Nico Abrams (LuaNES)", name_scale = 1.75},
         }
     },
 })

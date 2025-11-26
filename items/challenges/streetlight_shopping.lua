@@ -8,7 +8,7 @@ local chalInfo = {
             {id = 'no_interest'}
         },
         modifiers = {
-            {id = 'dollars', value = 200},
+            {id = 'dollars', value = 130},
         }
     },
     jokers = {
@@ -48,6 +48,7 @@ local chalInfo = {
             {id = 'j_fnwk_gotequest_lambiekins'},
             {id = 'j_fnwk_streetlight_cabinet'},
             {id = 'j_fnwk_golden_generation'},
+            {id = 'j_fnwk_dark_foxglove'},
             {id = 'c_hermit'},
             {id = 'c_temperance'},
             {id = 'c_talisman'},
